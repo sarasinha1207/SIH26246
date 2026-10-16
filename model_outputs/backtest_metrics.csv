@@ -1,0 +1,133 @@
+target,model,slice,n,WAPE_pct,sMAPE_pct,MedAPE_pct,Bias_pct
+employed,LightGBM,all,62160,0.921,1.12,0.575,0.289
+employed,LightGBM,h=1,6720,0.731,0.952,0.494,0.073
+employed,LightGBM,h=3,6160,0.828,1.037,0.529,0.219
+employed,LightGBM,h=6,5320,0.937,1.137,0.608,0.295
+employed,LightGBM,h=9,4480,1.015,1.208,0.6,0.421
+employed,LightGBM,h=12,3640,1.158,1.346,0.766,0.49
+employed,LightGBM,sector=Construction,12432,1.063,1.284,0.685,0.598
+employed,LightGBM,sector=Healthcare,12432,1.344,1.377,1.14,-0.378
+employed,LightGBM,sector=IT-ITeS,12432,0.9,1.161,0.43,0.537
+employed,LightGBM,sector=Manufacturing,12432,0.221,0.434,0.128,0.03
+employed,LightGBM,sector=Textiles and Apparel,12432,1.303,1.345,0.992,0.603
+employed,Seasonal naive,all,62160,3.761,4.939,4.276,-3.761
+employed,Seasonal naive,h=1,6720,3.827,5.025,4.524,-3.827
+employed,Seasonal naive,h=3,6160,3.809,4.993,4.457,-3.809
+employed,Seasonal naive,h=6,5320,3.797,4.97,4.392,-3.797
+employed,Seasonal naive,h=9,4480,3.696,4.862,3.968,-3.696
+employed,Seasonal naive,h=12,3640,3.664,4.828,3.782,-3.664
+employed,Seasonal naive,sector=Construction,12432,3.206,4.358,2.426,-3.206
+employed,Seasonal naive,sector=Healthcare,12432,6.589,7.19,7.34,-6.589
+employed,Seasonal naive,sector=IT-ITeS,12432,3.341,5.396,2.967,-3.341
+employed,Seasonal naive,sector=Manufacturing,12432,1.852,2.478,1.556,-1.852
+employed,Seasonal naive,sector=Textiles and Apparel,12432,4.827,5.271,5.359,-4.827
+employed,Seasonal naive + drift,all,62160,1.228,1.612,0.703,0.224
+employed,Seasonal naive + drift,h=1,6720,0.983,1.405,0.537,0.042
+employed,Seasonal naive + drift,h=3,6160,1.212,1.597,0.693,0.145
+employed,Seasonal naive + drift,h=6,5320,1.291,1.658,0.734,0.173
+employed,Seasonal naive + drift,h=9,4480,1.258,1.606,0.701,0.341
+employed,Seasonal naive + drift,h=12,3640,1.393,1.864,0.8,0.466
+employed,Seasonal naive + drift,sector=Construction,12432,1.572,1.903,0.541,0.332
+employed,Seasonal naive + drift,sector=Healthcare,12432,2.012,2.2,1.815,0.072
+employed,Seasonal naive + drift,sector=IT-ITeS,12432,0.877,1.44,0.421,0.384
+employed,Seasonal naive + drift,sector=Manufacturing,12432,0.132,0.438,0.005,0.03
+employed,Seasonal naive + drift,sector=Textiles and Apparel,12432,1.926,2.082,1.64,0.31
+employed,Last value,all,62160,3.413,4.431,2.188,-1.605
+employed,Last value,h=1,6720,1.537,2.038,0.797,-0.308
+employed,Last value,h=3,6160,3.199,4.096,1.882,-0.892
+employed,Last value,h=6,5320,4.03,5.115,2.499,-1.313
+employed,Last value,h=9,4480,3.834,5.11,3.017,-2.523
+employed,Last value,h=12,3640,3.664,4.828,3.782,-3.664
+employed,Last value,sector=Construction,12432,5.157,7.745,2.193,-0.691
+employed,Last value,sector=Healthcare,12432,4.214,4.51,3.821,-3.223
+employed,Last value,sector=IT-ITeS,12432,2.023,2.915,1.848,-1.314
+employed,Last value,sector=Manufacturing,12432,1.516,1.933,1.394,-0.649
+employed,Last value,sector=Textiles and Apparel,12432,4.581,5.054,3.275,-2.867
+vacancies,LightGBM,all,62160,5.511,5.565,4.679,0.841
+vacancies,LightGBM,h=1,6720,5.37,5.438,4.584,0.601
+vacancies,LightGBM,h=3,6160,5.426,5.513,4.626,0.669
+vacancies,LightGBM,h=6,5320,5.52,5.592,4.689,0.881
+vacancies,LightGBM,h=9,4480,5.616,5.633,4.705,1.026
+vacancies,LightGBM,h=12,3640,5.682,5.685,4.807,1.191
+vacancies,LightGBM,sector=Construction,12432,5.683,6.011,5.017,1.663
+vacancies,LightGBM,sector=Healthcare,12432,5.385,5.316,4.605,-0.534
+vacancies,LightGBM,sector=IT-ITeS,12432,5.64,5.538,4.672,1.038
+vacancies,LightGBM,sector=Manufacturing,12432,5.281,5.255,4.478,0.916
+vacancies,LightGBM,sector=Textiles and Apparel,12432,5.57,5.702,4.651,0.995
+vacancies,Seasonal naive,all,62160,8.216,8.941,7.559,-4.761
+vacancies,Seasonal naive,h=1,6720,8.273,8.982,7.608,-4.873
+vacancies,Seasonal naive,h=3,6160,8.225,8.959,7.591,-4.801
+vacancies,Seasonal naive,h=6,5320,8.221,8.944,7.559,-4.766
+vacancies,Seasonal naive,h=9,4480,8.199,8.912,7.53,-4.721
+vacancies,Seasonal naive,h=12,3640,8.149,8.867,7.459,-4.596
+vacancies,Seasonal naive,sector=Construction,12432,8.52,9.366,8.02,-5.66
+vacancies,Seasonal naive,sector=Healthcare,12432,9.012,9.311,8.164,-6.971
+vacancies,Seasonal naive,sector=IT-ITeS,12432,7.937,8.918,7.504,-2.852
+vacancies,Seasonal naive,sector=Manufacturing,12432,7.336,7.769,6.475,-3.971
+vacancies,Seasonal naive,sector=Textiles and Apparel,12432,8.991,9.34,7.91,-6.459
+vacancies,Seasonal naive + drift,all,62160,10.28,10.085,8.54,0.815
+vacancies,Seasonal naive + drift,h=1,6720,9.961,9.798,8.257,0.491
+vacancies,Seasonal naive + drift,h=3,6160,10.089,9.999,8.551,0.684
+vacancies,Seasonal naive + drift,h=6,5320,10.067,9.983,8.592,0.826
+vacancies,Seasonal naive + drift,h=9,4480,10.359,9.988,8.468,0.962
+vacancies,Seasonal naive + drift,h=12,3640,12.651,12.306,10.398,1.549
+vacancies,Seasonal naive + drift,sector=Construction,12432,10.238,10.075,8.553,0.791
+vacancies,Seasonal naive + drift,sector=Healthcare,12432,10.119,9.951,8.38,0.379
+vacancies,Seasonal naive + drift,sector=IT-ITeS,12432,10.668,10.407,8.845,1.327
+vacancies,Seasonal naive + drift,sector=Manufacturing,12432,9.817,9.683,8.239,0.608
+vacancies,Seasonal naive + drift,sector=Textiles and Apparel,12432,10.49,10.307,8.731,0.627
+vacancies,Last value,all,62160,8.03,8.798,6.977,-2.032
+vacancies,Last value,h=1,6720,7.2,7.46,6.099,-0.36
+vacancies,Last value,h=3,6160,7.941,8.671,6.946,-1.043
+vacancies,Last value,h=6,5320,8.259,9.197,7.145,-1.769
+vacancies,Last value,h=9,4480,8.35,9.237,7.432,-3.132
+vacancies,Last value,h=12,3640,8.149,8.867,7.459,-4.596
+vacancies,Last value,sector=Construction,12432,9.562,11.747,8.334,-1.847
+vacancies,Last value,sector=Healthcare,12432,7.901,8.082,6.776,-3.472
+vacancies,Last value,sector=IT-ITeS,12432,7.469,7.66,6.46,-0.931
+vacancies,Last value,sector=Manufacturing,12432,7.204,7.252,6.089,-1.561
+vacancies,Last value,sector=Textiles and Apparel,12432,8.979,9.249,7.634,-3.731
+seekers,LightGBM,all,62160,4.554,4.604,3.86,0.627
+seekers,LightGBM,h=1,6720,4.455,4.459,3.76,0.304
+seekers,LightGBM,h=3,6160,4.495,4.522,3.808,0.414
+seekers,LightGBM,h=6,5320,4.605,4.614,3.823,0.607
+seekers,LightGBM,h=9,4480,4.604,4.697,3.935,0.827
+seekers,LightGBM,h=12,3640,4.582,4.79,3.991,0.958
+seekers,LightGBM,sector=Construction,12432,4.566,4.689,3.793,0.931
+seekers,LightGBM,sector=Healthcare,12432,4.827,4.726,4.114,-0.087
+seekers,LightGBM,sector=IT-ITeS,12432,4.44,4.596,3.85,0.335
+seekers,LightGBM,sector=Manufacturing,12432,4.303,4.284,3.606,0.417
+seekers,LightGBM,sector=Textiles and Apparel,12432,4.652,4.727,3.925,0.548
+seekers,Seasonal naive,all,62160,6.701,7.492,6.288,-3.596
+seekers,Seasonal naive,h=1,6720,6.773,7.536,6.352,-3.648
+seekers,Seasonal naive,h=3,6160,6.768,7.541,6.352,-3.684
+seekers,Seasonal naive,h=6,5320,6.731,7.494,6.297,-3.646
+seekers,Seasonal naive,h=9,4480,6.602,7.444,6.231,-3.508
+seekers,Seasonal naive,h=12,3640,6.527,7.407,6.197,-3.474
+seekers,Seasonal naive,sector=Construction,12432,6.518,7.166,5.918,-3.156
+seekers,Seasonal naive,sector=Healthcare,12432,8.478,8.757,7.427,-6.591
+seekers,Seasonal naive,sector=IT-ITeS,12432,6.455,7.784,6.673,-2.993
+seekers,Seasonal naive,sector=Manufacturing,12432,5.629,6.12,5.101,-1.666
+seekers,Seasonal naive,sector=Textiles and Apparel,12432,7.293,7.635,6.573,-4.973
+seekers,Seasonal naive + drift,all,62160,8.544,8.439,7.151,0.414
+seekers,Seasonal naive + drift,h=1,6720,8.435,8.279,7.049,0.251
+seekers,Seasonal naive + drift,h=3,6160,8.296,8.29,6.948,0.288
+seekers,Seasonal naive + drift,h=6,5320,8.566,8.378,7.104,0.293
+seekers,Seasonal naive + drift,h=9,4480,8.512,8.352,7.108,0.556
+seekers,Seasonal naive + drift,h=12,3640,10.38,10.258,8.665,0.965
+seekers,Seasonal naive + drift,sector=Construction,12432,8.66,8.53,7.203,0.412
+seekers,Seasonal naive + drift,sector=Healthcare,12432,8.864,8.68,7.436,0.504
+seekers,Seasonal naive + drift,sector=IT-ITeS,12432,8.271,8.317,7.067,0.916
+seekers,Seasonal naive + drift,sector=Manufacturing,12432,7.888,7.979,6.719,0.32
+seekers,Seasonal naive + drift,sector=Textiles and Apparel,12432,8.791,8.689,7.348,0.395
+seekers,Last value,all,62160,7.452,7.614,5.81,-1.499
+seekers,Last value,h=1,6720,6.313,6.318,5.069,-0.317
+seekers,Last value,h=3,6160,7.503,7.441,5.526,-0.963
+seekers,Last value,h=6,5320,8.151,8.079,6.126,-1.007
+seekers,Last value,h=9,4480,7.597,8.009,6.138,-2.392
+seekers,Last value,h=12,3640,6.527,7.407,6.197,-3.474
+seekers,Last value,sector=Construction,12432,8.476,10.713,6.877,-0.803
+seekers,Last value,sector=Healthcare,12432,6.993,7.191,6.012,-3.156
+seekers,Last value,sector=IT-ITeS,12432,5.74,6.357,5.231,-1.181
+seekers,Last value,sector=Manufacturing,12432,5.667,5.891,4.951,-0.583
+seekers,Last value,sector=Textiles and Apparel,12432,7.442,7.917,6.444,-2.987

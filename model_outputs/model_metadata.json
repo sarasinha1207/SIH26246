@@ -1,0 +1,46 @@
+{
+  "data": "lmis_district_monthly_2011_2026.csv",
+  "best_iterations": {
+    "employed": 897,
+    "vacancies": 286,
+    "seekers": 388
+  },
+  "horizons": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "train_cutoffs": {
+    "fold_A_last_target": "2023-12",
+    "fold_B_last_target": "2024-12",
+    "final_last_target": "2026-12"
+  },
+  "thresholds": {
+    "acute_shortage": 1.0,
+    "oversupply_watch": 0.2,
+    "saturation": 0.1,
+    "trend_alert": 0.08
+  },
+  "lightgbm_params": {
+    "objective": "regression",
+    "learning_rate": 0.05,
+    "num_leaves": 63,
+    "min_child_samples": 200,
+    "feature_fraction": 0.8,
+    "bagging_fraction": 0.8,
+    "bagging_freq": 1,
+    "lambda_l2": 5.0,
+    "n_estimators": 3000,
+    "verbose": -1,
+    "random_state": 42
+  }
+}

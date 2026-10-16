@@ -1,0 +1,50 @@
+
+=== employed (Total_Employed_Workers) ===
+C:\Users\saras\AppData\Roaming\Python\Python313\site-packages\lightgbm\sklearn.py:1106: LGBMDeprecationWarning: The argument 'eval_set' is deprecated, use 'eval_X' and 'eval_y' instead.
+  eval_set = _validate_eval_set_Xy(eval_set=eval_set, eval_X=eval_X, eval_y=eval_y)
+fold A: best_iteration=897, rows train=320,040 val=21,840
+fold A val L1(log) =0.01194
+fold B (test 2025-01..2026-12): LightGBM WAPE=0.92%
+
+=== vacancies (Active_Job_Vacancies) ===
+C:\Users\saras\AppData\Roaming\Python\Python313\site-packages\lightgbm\sklearn.py:1106: LGBMDeprecationWarning: The argument 'eval_set' is deprecated, use 'eval_X' and 'eval_y' instead.
+  eval_set = _validate_eval_set_Xy(eval_set=eval_set, eval_X=eval_X, eval_y=eval_y)
+fold A: best_iteration=286, rows train=320,040 val=21,840
+fold A val L1(log) =0.05673
+fold B (test 2025-01..2026-12): LightGBM WAPE=5.51%
+
+=== seekers (eShram_Registered_Seekers) ===
+C:\Users\saras\AppData\Roaming\Python\Python313\site-packages\lightgbm\sklearn.py:1106: LGBMDeprecationWarning: The argument 'eval_set' is deprecated, use 'eval_X' and 'eval_y' instead.
+  eval_set = _validate_eval_set_Xy(eval_set=eval_set, eval_X=eval_X, eval_y=eval_y)
+fold A: best_iteration=388, rows train=320,040 val=21,840
+fold A val L1(log) =0.04886
+fold B (test 2025-01..2026-12): LightGBM WAPE=4.55%
+
+BACKTEST (test fold, all horizons)
+   target                  model  WAPE_pct  sMAPE_pct  Bias_pct
+ employed               LightGBM     0.921      1.120     0.289
+ employed         Seasonal naive     3.761      4.939    -3.761
+ employed Seasonal naive + drift     1.228      1.612     0.224
+ employed             Last value     3.413      4.431    -1.605
+vacancies               LightGBM     5.511      5.565     0.841
+vacancies         Seasonal naive     8.216      8.941    -4.761
+vacancies Seasonal naive + drift    10.280     10.085     0.815
+vacancies             Last value     8.030      8.798    -2.032
+  seekers               LightGBM     4.554      4.604     0.627
+  seekers         Seasonal naive     6.701      7.492    -3.596
+  seekers Seasonal naive + drift     8.544      8.439     0.414
+  seekers             Last value     7.452      7.614    -1.499
+
+Interval coverage on test fold:
+    target  nominal  empirical
+ employed      0.9      0.913
+vacancies      0.9      0.905
+  seekers      0.9      0.919
+
+Status flags:
+ Sector_Name           Status_Flag     
+Construction          Saturation Risk     56
+Healthcare            Balanced            56
+IT-ITeS               Acute Shortage      56
+Manufacturing         Oversupply Watch    56
+Textiles and Apparel  Saturation Risk     56
