@@ -1,9 +1,9 @@
 {
   "data": "lmis_district_monthly_2011_2026.csv",
   "best_iterations": {
-    "employed": 897,
-    "vacancies": 286,
-    "seekers": 388
+    "employed": 433,
+    "vacancies": 155,
+    "seekers": 706
   },
   "horizons": [
     1,

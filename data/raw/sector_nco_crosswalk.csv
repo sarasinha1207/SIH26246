@@ -1,0 +1,26 @@
+Sector_Name,NIC_Code,Is_Anchor_Code,NCO_2015_Family,NCO_2015_Title
+Manufacturing,"Division 10-12, 15-33",True,7223,Metal Working Machine Tool Setters and Operators
+Manufacturing,"Division 10-12, 15-33",False,8212,Electrical and Electronic Equipment Assemblers
+Manufacturing,"Division 10-12, 15-33",False,8131,Chemical Products Plant and Machine Operators
+Manufacturing,"Division 10-12, 15-33",False,7233,Agricultural and Industrial Machinery Mechanics and Repairers
+Manufacturing,"Division 10-12, 15-33",False,7212,Welders and Flame Cutters
+Construction,Division 41-43,True,7111,House Builders
+Construction,Division 41-43,False,7112,Bricklayers and Related Workers
+Construction,Division 41-43,False,7115,Carpenters and Joiners
+Construction,Division 41-43,False,7126,Plumbers and Pipe Fitters
+Construction,Division 41-43,False,9313,Building Construction Labourers
+IT-ITeS,Division 62-63,True,2511,System Analysts
+IT-ITeS,Division 62-63,False,2512,Software Developers
+IT-ITeS,Division 62-63,False,2513,Web and Multimedia Developers
+IT-ITeS,Division 62-63,False,2514,Applications Programmers
+IT-ITeS,Division 62-63,False,3512,Information and Communication Technology User Support Technicians
+Healthcare,Division 86,True,2211,Generalist Medical Practitioners
+Healthcare,Division 86,False,2212,Specialist Medical Practitioners
+Healthcare,Division 86,False,2221,Nursing Professionals
+Healthcare,Division 86,False,3221,Nursing Associate Professionals
+Healthcare,Division 86,False,3212,Medical and Pathology Laboratory Technicians
+Textiles and Apparel,Division 13-14,True,8153,Sewing Machine Operators
+Textiles and Apparel,Division 13-14,False,8152,Weaving and Knitting Machine Operators
+Textiles and Apparel,Division 13-14,False,8151,"Fibre Preparing, Spinning and Winding Machine Operators"
+Textiles and Apparel,Division 13-14,False,7531,"Tailors, Dressmakers, Furriers and Hatters"
+Textiles and Apparel,Division 13-14,False,7533,"Sewing, Embroiderers and Related Workers"

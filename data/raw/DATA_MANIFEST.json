@@ -1,25 +1,35 @@
 {
   "generated_on": "2026-10-18",
-  "source": "synthetic - src/data_generation/generate_lmis_master_dataset.py (seed 42)",
+  "source": "synthetic - src/data_generation/generate_lmis_master_dataset.py v2 (seed 42)",
   "files": {
     "lmis_district_monthly_2011_2026.csv": {
       "path": "data/raw/lmis_district_monthly_2011_2026.csv",
-      "bytes": 13406035,
-      "sha256": "d33387d1e0a9c0c93c9c30d60ad7c226cadd9a43d3278f491c7d3456e611b712",
+      "bytes": 13374091,
+      "sha256": "352691dcc4499abe2cb33c2b7e61f9e3798319869fc3477ca063b7e1cc0d5000",
       "rows": 53760,
-      "columns": 39
+      "columns": 41
     },
     "lmis_district_quarterly_2011_2026.csv": {
       "path": "data/raw/lmis_district_quarterly_2011_2026.csv",
-      "bytes": 4325524,
-      "sha256": "84ea1b53ced8b989f560187ad3c24d626a4ef776a5f7d1010bc674a58998548b",
+      "bytes": 4320321,
+      "sha256": "915898d3ac39d6c2f9c715797a20ce8fd56e6b9a2c982d7f9ded01061da26c00",
       "rows": 17920,
-      "columns": 38
+      "columns": 40
     },
     "NCO-Codes.xlsx": {
       "path": "data/raw/NCO-Codes.xlsx",
       "bytes": 221902,
       "sha256": "02a321dd551eacb45f6ffd7c0bee86c62645066499a6f53768cf25aa6082c5c5"
+    },
+    "district_catalog.csv": {
+      "path": "data/raw/district_catalog.csv",
+      "bytes": 8054,
+      "sha256": "3789392987ede731828e6eecd2140ccee341160e69d4ecf64961aa600c1c07f4"
+    },
+    "sector_nco_crosswalk.csv": {
+      "path": "data/raw/sector_nco_crosswalk.csv",
+      "bytes": 1993,
+      "sha256": "ea11bbc188cd794f9180bd27149c5b663d5199690cac49db0f7492ebc9726ff4"
     }
   }
 }

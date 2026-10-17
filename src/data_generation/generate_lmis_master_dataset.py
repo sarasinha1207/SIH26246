@@ -1,600 +1,519 @@
 #!/usr/bin/env python3
 """
-====================================================================================================
-AI-Enabled Labour Market Intelligence System (LMIS) - Master Longitudinal Dataset Engine
-====================================================================================================
-Project Reference : SIH26246 / Ministry of Skill Development and Entrepreneurship (MSDE)
-Role              : Lead Data Engineer & Demographer (Indian Labour Economics & Microdata Synthesis)
-Temporal Horizon  : 15-Year Continuous Longitudinal Panel (2011 to 2026 | 192 Months | 64 Quarters)
-Geographic Scope  : 56 Districts across 4 States/UTs (Maharashtra, Tamil Nadu, Delhi NCT, West Bengal)
-Target Sectors    : Manufacturing, Construction, IT-ITeS, Healthcare, Textiles and Apparel
-Methodology       : Grounded in MoSPI PLFS, Census of India 2011, e-Shram, NCO-2015, and NSQF standards.
-====================================================================================================
-"""
+LMIS synthetic labour-market panel generator - v2 (recalibrated to Indian statistics)
+=====================================================================================
+Project  : SIH26246 / MSDE - AI-Enabled Labour Market Intelligence & Skill Demand-Supply Forecasting
+Output   : data/raw/lmis_district_monthly_2011_2026.csv       (56 districts x 5 sectors x 192 months)
+           data/raw/lmis_district_quarterly_2011_2026.csv     (64 quarters)
+           data/raw/district_catalog.csv                      (district dimension table: LGD code, tier, population)
+           data/raw/sector_nco_crosswalk.csv                  (sector -> NCO-2015 families)
+Seed     : 42 (fully reproducible)
 
+What changed from v1 (see docs/phases/PHASE_2_DATA_COLLECTION.md for the audit that motivated each item)
+  * Employment is a SHARE OF DISTRICT WORKERS (tier-specific) x national sector index, not labour force x density
+    multiplier with a 42% clip.  No clipping anywhere, so the COVID shocks and district disparity are not distorted.
+  * Manufacturing excludes textiles/apparel (v1 double-counted NIC 13-14).
+  * District LGD codes are the real ones (Maharashtra: state land-records LGD directory; Delhi/Tamil Nadu/West
+    Bengal: LGD district export; all 56 cross-checked); Nandurbar's invalid '497A' is gone.  Census-2011 populations corrected for
+    Chennai, Kanchipuram/Chengalpattu and Delhi (v1 double counted).
+  * NCO codes are valid NCO-2015 families (v1's 8110 and 8261 do not exist).
+  * Vacancies/seekers are driven by hiring-climate, unemployment and registry dynamics with persistent district
+    effects (v1 used fixed ratios of employment).  e-Shram launch (Aug-2021) is modelled as a logistic ramp.
+  * New supply-side columns: Training_Seats_Sanctioned and Trainees_Certified_Monthly (ITI/skilling capacity).
+  * Demographic splits are smooth (persistent district profile + small Dirichlet noise), integer-conserving.
+
+IMPORTANT: this is still SIMULATED data.  Level calibrations are approximate anchors (listed in the Phase 2 doc), not
+observed district statistics.
+"""
 import os
-import sys
+
 import numpy as np
 import pandas as pd
-from scipy import stats
 
-# Set deterministic random seed for strict empirical reproducibility
-np.random.seed(42)
+SEED = 42
+ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
+OUTPUT_DIR = os.path.join(ROOT, "data", "raw")
+N = 192                                     # 2011-01 .. 2026-12
+MONTHS = pd.date_range("2011-01-01", periods=N, freq="MS")
+T = np.arange(N)
+YEAR, MONTH = MONTHS.year.to_numpy(), MONTHS.month.to_numpy()
 
-OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "data", "raw")
-os.makedirs(OUTPUT_DIR, exist_ok=True)
-
-MONTHLY_CSV = os.path.join(OUTPUT_DIR, "lmis_district_monthly_2011_2026.csv")
-QUARTERLY_CSV = os.path.join(OUTPUT_DIR, "lmis_district_quarterly_2011_2026.csv")
-
-# ==================================================================================================
-# 1. GEOGRAPHIC MASTER CATALOG (56 Districts across 4 Key Regions)
-# ==================================================================================================
-# Sourced from Ministry of Panchayati Raj - Local Government Directory (LGD) & Census 2011
-DISTRICT_CATALOG = [
-    # ----------------------------------------------------------------------------------------------
-    # Maharashtra (State LGD Code: 27) - ALL 36 Official Districts
-    # ----------------------------------------------------------------------------------------------
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Mumbai City", "district_lgd": "495", "pop_2011": 3085411, "growth_rate": 0.003, "econ_tier": "metro_core"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Mumbai Suburban", "district_lgd": "496", "pop_2011": 9356962, "growth_rate": 0.009, "econ_tier": "metro_core"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Thane", "district_lgd": "517", "pop_2011": 8070032, "growth_rate": 0.019, "econ_tier": "industrial_hub"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Palghar", "district_lgd": "665", "pop_2011": 2990116, "growth_rate": 0.018, "econ_tier": "industrial_msme"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Pune", "district_lgd": "521", "pop_2011": 9429408, "growth_rate": 0.017, "econ_tier": "industrial_it_hub"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Nashik", "district_lgd": "516", "pop_2011": 6107187, "growth_rate": 0.015, "econ_tier": "industrial_hub"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Chhatrapati Sambhajinagar", "district_lgd": "515", "pop_2011": 3701282, "growth_rate": 0.014, "econ_tier": "industrial_hub"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Nagpur", "district_lgd": "505", "pop_2011": 4653570, "growth_rate": 0.012, "econ_tier": "logistics_hub"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Kolhapur", "district_lgd": "530", "pop_2011": 3876001, "growth_rate": 0.010, "econ_tier": "industrial_msme"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Solapur", "district_lgd": "526", "pop_2011": 4317756, "growth_rate": 0.011, "econ_tier": "textile_cluster"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Raigad", "district_lgd": "520", "pop_2011": 2634200, "growth_rate": 0.014, "econ_tier": "industrial_port"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Ahilyanagar", "district_lgd": "498", "pop_2011": 4543159, "growth_rate": 0.011, "econ_tier": "semi_industrial"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Jalgaon", "district_lgd": "499", "pop_2011": 4229917, "growth_rate": 0.012, "econ_tier": "semi_industrial"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Satara", "district_lgd": "527", "pop_2011": 3003741, "growth_rate": 0.009, "econ_tier": "semi_industrial"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Sangli", "district_lgd": "531", "pop_2011": 2822143, "growth_rate": 0.009, "econ_tier": "semi_industrial"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Amravati", "district_lgd": "503", "pop_2011": 2888445, "growth_rate": 0.010, "econ_tier": "textile_cluster"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Nanded", "district_lgd": "511", "pop_2011": 3361292, "growth_rate": 0.012, "econ_tier": "agrarian_developing"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Latur", "district_lgd": "524", "pop_2011": 2455543, "growth_rate": 0.011, "econ_tier": "semi_industrial"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Dhule", "district_lgd": "497", "pop_2011": 2050862, "growth_rate": 0.011, "econ_tier": "textile_cluster"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Chandrapur", "district_lgd": "509", "pop_2011": 2204307, "growth_rate": 0.008, "econ_tier": "industrial_mining"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Buldhana", "district_lgd": "500", "pop_2011": 2586258, "growth_rate": 0.010, "econ_tier": "agrarian_developing"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Yavatmal", "district_lgd": "508", "pop_2011": 2772348, "growth_rate": 0.010, "econ_tier": "agrarian_developing"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Beed", "district_lgd": "523", "pop_2011": 2585049, "growth_rate": 0.011, "econ_tier": "agrarian_migrant"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Parbhani", "district_lgd": "513", "pop_2011": 1836086, "growth_rate": 0.011, "econ_tier": "agrarian_developing"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Jalna", "district_lgd": "514", "pop_2011": 1959046, "growth_rate": 0.012, "econ_tier": "industrial_msme"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Akola", "district_lgd": "501", "pop_2011": 1813906, "growth_rate": 0.010, "econ_tier": "semi_industrial"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Dharashiv", "district_lgd": "525", "pop_2011": 1657576, "growth_rate": 0.009, "econ_tier": "agrarian_developing"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Nandurbar", "district_lgd": "497A", "pop_2011": 1648295, "growth_rate": 0.013, "econ_tier": "peripheral_tribal"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Ratnagiri", "district_lgd": "528", "pop_2011": 1615069, "growth_rate": 0.004, "econ_tier": "peripheral_coastal"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Gondia", "district_lgd": "507", "pop_2011": 1322507, "growth_rate": 0.008, "econ_tier": "peripheral_agrarian"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Wardha", "district_lgd": "504", "pop_2011": 1300774, "growth_rate": 0.006, "econ_tier": "semi_industrial"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Bhandara", "district_lgd": "506", "pop_2011": 1200334, "growth_rate": 0.006, "econ_tier": "peripheral_agrarian"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Washim", "district_lgd": "502", "pop_2011": 1197160, "growth_rate": 0.009, "econ_tier": "peripheral_agrarian"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Hingoli", "district_lgd": "512", "pop_2011": 1177345, "growth_rate": 0.010, "econ_tier": "peripheral_agrarian"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Gadchiroli", "district_lgd": "510", "pop_2011": 1072942, "growth_rate": 0.008, "econ_tier": "peripheral_tribal"},
-    {"state_name": "Maharashtra", "state_lgd": "27", "district_name": "Sindhudurg", "district_lgd": "529", "pop_2011": 849651, "growth_rate": -0.002, "econ_tier": "peripheral_coastal"},
-
-    # ----------------------------------------------------------------------------------------------
-    # Tamil Nadu - Chennai Metro Corridor (State LGD Code: 33) - 4 Districts
-    # ----------------------------------------------------------------------------------------------
-    {"state_name": "Tamil Nadu", "state_lgd": "33", "district_name": "Chennai", "district_lgd": "603", "pop_2011": 7088000, "growth_rate": 0.011, "econ_tier": "metro_core"},
-    {"state_name": "Tamil Nadu", "state_lgd": "33", "district_name": "Tiruvallur", "district_lgd": "602", "pop_2011": 3728104, "growth_rate": 0.023, "econ_tier": "industrial_hub"},
-    {"state_name": "Tamil Nadu", "state_lgd": "33", "district_name": "Kanchipuram", "district_lgd": "604", "pop_2011": 2690000, "growth_rate": 0.021, "econ_tier": "industrial_hub"},
-    {"state_name": "Tamil Nadu", "state_lgd": "33", "district_name": "Chengalpattu", "district_lgd": "668", "pop_2011": 1308000, "growth_rate": 0.024, "econ_tier": "industrial_it_hub"},
-
-    # ----------------------------------------------------------------------------------------------
-    # Delhi NCT (State LGD Code: 07) - ALL 11 Official Districts
-    # ----------------------------------------------------------------------------------------------
-    {"state_name": "Delhi", "state_lgd": "07", "district_name": "Central Delhi", "district_lgd": "090", "pop_2011": 582320, "growth_rate": 0.007, "econ_tier": "metro_core"},
-    {"state_name": "Delhi", "state_lgd": "07", "district_name": "East Delhi", "district_lgd": "093", "pop_2011": 1709346, "growth_rate": 0.011, "econ_tier": "metro_residential"},
-    {"state_name": "Delhi", "state_lgd": "07", "district_name": "New Delhi", "district_lgd": "094", "pop_2011": 142004, "growth_rate": 0.005, "econ_tier": "metro_administrative"},
-    {"state_name": "Delhi", "state_lgd": "07", "district_name": "North Delhi", "district_lgd": "091", "pop_2011": 887978, "growth_rate": 0.009, "econ_tier": "industrial_msme"},
-    {"state_name": "Delhi", "state_lgd": "07", "district_name": "North East Delhi", "district_lgd": "092", "pop_2011": 2241624, "growth_rate": 0.015, "econ_tier": "metro_residential"},
-    {"state_name": "Delhi", "state_lgd": "07", "district_name": "North West Delhi", "district_lgd": "095", "pop_2011": 3656539, "growth_rate": 0.016, "econ_tier": "industrial_msme"},
-    {"state_name": "Delhi", "state_lgd": "07", "district_name": "South Delhi", "district_lgd": "098", "pop_2011": 2731929, "growth_rate": 0.013, "econ_tier": "metro_core"},
-    {"state_name": "Delhi", "state_lgd": "07", "district_name": "South East Delhi", "district_lgd": "099", "pop_2011": 1420000, "growth_rate": 0.014, "econ_tier": "industrial_hub"},
-    {"state_name": "Delhi", "state_lgd": "07", "district_name": "South West Delhi", "district_lgd": "097", "pop_2011": 2292958, "growth_rate": 0.015, "econ_tier": "metro_residential"},
-    {"state_name": "Delhi", "state_lgd": "07", "district_name": "West Delhi", "district_lgd": "096", "pop_2011": 2543243, "growth_rate": 0.012, "econ_tier": "industrial_hub"},
-    {"state_name": "Delhi", "state_lgd": "07", "district_name": "Shahdara", "district_lgd": "100", "pop_2011": 1520000, "growth_rate": 0.013, "econ_tier": "industrial_msme"},
-
-    # ----------------------------------------------------------------------------------------------
-    # West Bengal - Kolkata Metro Corridor (State LGD Code: 19) - 5 Districts
-    # ----------------------------------------------------------------------------------------------
-    {"state_name": "West Bengal", "state_lgd": "19", "district_name": "Kolkata", "district_lgd": "342", "pop_2011": 4496694, "growth_rate": 0.004, "econ_tier": "metro_core"},
-    {"state_name": "West Bengal", "state_lgd": "19", "district_name": "North 24 Parganas", "district_lgd": "337", "pop_2011": 10009781, "growth_rate": 0.012, "econ_tier": "industrial_it_hub"},
-    {"state_name": "West Bengal", "state_lgd": "19", "district_name": "South 24 Parganas", "district_lgd": "338", "pop_2011": 8161961, "growth_rate": 0.014, "econ_tier": "industrial_msme"},
-    {"state_name": "West Bengal", "state_lgd": "19", "district_name": "Howrah", "district_lgd": "341", "pop_2011": 4850029, "growth_rate": 0.009, "econ_tier": "industrial_hub"},
-    {"state_name": "West Bengal", "state_lgd": "19", "district_name": "Hooghly", "district_lgd": "339", "pop_2011": 5519145, "growth_rate": 0.008, "econ_tier": "industrial_hub"}
+# ==================================================================================================================
+# 1. GEOGRAPHY  (LGD codes verified; see lgd_source)
+# ==================================================================================================================
+SRC_MH = "Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in)"
+SRC_EXP = "LGD district export (gist planemad/cd6b5237...); Kolkata also West Bengal State Health Society LGD list"
+STATES = {"Maharashtra": "27", "Tamil Nadu": "33", "Delhi": "07", "West Bengal": "19"}
+# (state, district, lgd, source, pop_2011, annual_growth, tier)
+DISTRICTS = [
+    ("Maharashtra", "Mumbai City", 482, SRC_MH, 3085411, 0.003, "metro_core"),
+    ("Maharashtra", "Mumbai Suburban", 483, SRC_MH, 9356962, 0.009, "metro_core"),
+    ("Maharashtra", "Thane", 497, SRC_MH, 8070032, 0.019, "industrial_hub"),
+    ("Maharashtra", "Palghar", 665, SRC_MH, 2990116, 0.018, "industrial_msme"),
+    ("Maharashtra", "Pune", 490, SRC_MH, 9429408, 0.017, "industrial_it_hub"),
+    ("Maharashtra", "Nashik", 487, SRC_MH, 6107187, 0.015, "industrial_hub"),
+    ("Maharashtra", "Chhatrapati Sambhajinagar", 469, SRC_MH, 3701282, 0.014, "industrial_hub"),
+    ("Maharashtra", "Nagpur", 484, SRC_MH, 4653570, 0.012, "logistics_hub"),
+    ("Maharashtra", "Kolhapur", 480, SRC_MH, 3876001, 0.010, "industrial_msme"),
+    ("Maharashtra", "Solapur", 496, SRC_MH, 4317756, 0.011, "textile_cluster"),
+    ("Maharashtra", "Raigad", 491, SRC_MH, 2634200, 0.014, "industrial_port"),
+    ("Maharashtra", "Ahilyanagar", 466, SRC_MH, 4543159, 0.011, "semi_industrial"),
+    ("Maharashtra", "Jalgaon", 478, SRC_MH, 4229917, 0.012, "semi_industrial"),
+    ("Maharashtra", "Satara", 494, SRC_MH, 3003741, 0.009, "semi_industrial"),
+    ("Maharashtra", "Sangli", 493, SRC_MH, 2822143, 0.009, "semi_industrial"),
+    ("Maharashtra", "Amravati", 468, SRC_MH, 2888445, 0.010, "textile_cluster"),
+    ("Maharashtra", "Nanded", 485, SRC_MH, 3361292, 0.012, "agrarian_developing"),
+    ("Maharashtra", "Latur", 481, SRC_MH, 2455543, 0.011, "semi_industrial"),
+    ("Maharashtra", "Dhule", 474, SRC_MH, 2050862, 0.011, "textile_cluster"),
+    ("Maharashtra", "Chandrapur", 473, SRC_MH, 2204307, 0.008, "industrial_mining"),
+    ("Maharashtra", "Buldhana", 472, SRC_MH, 2586258, 0.010, "agrarian_developing"),
+    ("Maharashtra", "Yavatmal", 500, SRC_MH, 2772348, 0.010, "agrarian_developing"),
+    ("Maharashtra", "Beed", 470, SRC_MH, 2585049, 0.011, "agrarian_migrant"),
+    ("Maharashtra", "Parbhani", 489, SRC_MH, 1836086, 0.011, "agrarian_developing"),
+    ("Maharashtra", "Jalna", 479, SRC_MH, 1959046, 0.012, "industrial_msme"),
+    ("Maharashtra", "Akola", 467, SRC_MH, 1813906, 0.010, "semi_industrial"),
+    ("Maharashtra", "Dharashiv", 488, SRC_MH, 1657576, 0.009, "agrarian_developing"),
+    ("Maharashtra", "Nandurbar", 486, SRC_MH, 1648295, 0.013, "peripheral_tribal"),
+    ("Maharashtra", "Ratnagiri", 492, SRC_MH, 1615069, 0.004, "peripheral_coastal"),
+    ("Maharashtra", "Gondia", 476, SRC_MH, 1322507, 0.008, "peripheral_agrarian"),
+    ("Maharashtra", "Wardha", 498, SRC_MH, 1300774, 0.006, "semi_industrial"),
+    ("Maharashtra", "Bhandara", 471, SRC_MH, 1200334, 0.006, "peripheral_agrarian"),
+    ("Maharashtra", "Washim", 499, SRC_MH, 1197160, 0.009, "peripheral_agrarian"),
+    ("Maharashtra", "Hingoli", 477, SRC_MH, 1177345, 0.010, "peripheral_agrarian"),
+    ("Maharashtra", "Gadchiroli", 475, SRC_MH, 1072942, 0.008, "peripheral_tribal"),
+    ("Maharashtra", "Sindhudurg", 495, SRC_MH, 849651, -0.002, "peripheral_coastal"),
+    ("Tamil Nadu", "Chennai", 568, SRC_EXP, 4646732, 0.011, "metro_core"),
+    ("Tamil Nadu", "Tiruvallur", 589, SRC_EXP, 3728104, 0.023, "industrial_hub"),
+    ("Tamil Nadu", "Kanchipuram", 574, SRC_EXP, 1442008, 0.021, "industrial_hub"),
+    ("Tamil Nadu", "Chengalpattu", 730, SRC_EXP, 2556244, 0.024, "industrial_it_hub"),
+    ("Delhi", "Central Delhi", 77, SRC_EXP, 582320, 0.007, "metro_core"),
+    ("Delhi", "East Delhi", 78, SRC_EXP, 1709346, 0.011, "metro_residential"),
+    ("Delhi", "New Delhi", 79, SRC_EXP, 142004, 0.005, "metro_administrative"),
+    ("Delhi", "North Delhi", 80, SRC_EXP, 887978, 0.009, "industrial_msme"),
+    ("Delhi", "North East Delhi", 81, SRC_EXP, 2241624, 0.015, "metro_residential"),
+    ("Delhi", "North West Delhi", 82, SRC_EXP, 3656539, 0.016, "industrial_msme"),
+    ("Delhi", "South Delhi", 83, SRC_EXP, 2731929, 0.013, "metro_core"),
+    ("Delhi", "South East Delhi", 670, SRC_EXP, 1420000, 0.014, "industrial_hub"),
+    ("Delhi", "South West Delhi", 84, SRC_EXP, 2292958, 0.015, "metro_residential"),
+    ("Delhi", "West Delhi", 85, SRC_EXP, 2543243, 0.012, "industrial_hub"),
+    ("Delhi", "Shahdara", 671, SRC_EXP, 1520000, 0.013, "industrial_msme"),
+    ("West Bengal", "Kolkata", 315, SRC_EXP, 4496694, 0.004, "metro_core"),
+    ("West Bengal", "North 24 Parganas", 303, SRC_EXP, 10009781, 0.012, "industrial_it_hub"),
+    ("West Bengal", "South 24 Parganas", 304, SRC_EXP, 8161961, 0.014, "industrial_msme"),
+    ("West Bengal", "Howrah", 313, SRC_EXP, 4850029, 0.009, "industrial_hub"),
+    ("West Bengal", "Hooghly", 312, SRC_EXP, 5519145, 0.008, "industrial_hub"),
 ]
+DELHI_CENSUS_TOTAL = 16787941   # Census 2011 was on 9 districts; the 11 post-2012 districts are re-apportioned to it
 
-# ==================================================================================================
-# 2. SECTOR & OCCUPATIONAL RIGID TAXONOMY (NIC-2008 & NCO-2015 Standards)
-# ==================================================================================================
-SECTOR_TAXONOMY = [
-    {
-        "sector_name": "Manufacturing",
-        "nic_code": "Division 10-32",
-        "nco_code": "8110",
-        "nsqf_level": "3-6",
-        "base_wage_2011": 12500,
-        "base_ur": 6.8,
-        "structural_growth": 0.046,
-        "female_share_base": 0.165,
-        "transgender_share": 0.0012,
-        "age_weights": [0.24, 0.64, 0.12],      # [15-24, 25-54, 55+]
-        "edu_weights": [0.22, 0.32, 0.34, 0.12], # [Below Primary, Sec/HrSec, Vocational/ITI, Grad+]
-        "covid_shock": -0.38,
-        "covid_recovery_speed": 0.14
-    },
-    {
-        "sector_name": "Construction",
-        "nic_code": "Division 41-43",
-        "nco_code": "7111",
-        "nsqf_level": "2-5",
-        "base_wage_2011": 10200,
-        "base_ur": 8.9,
-        "structural_growth": 0.042,
-        "female_share_base": 0.125,
-        "transgender_share": 0.0008,
-        "age_weights": [0.28, 0.62, 0.10],
-        "edu_weights": [0.58, 0.16, 0.23, 0.03], # Heavy on Below Primary and Vocational
-        "covid_shock": -0.52,
-        "covid_recovery_speed": 0.18
-    },
-    {
-        "sector_name": "IT-ITeS",
-        "nic_code": "Division 62-63",
-        "nco_code": "2511",
-        "nsqf_level": "5-8",
-        "base_wage_2011": 28500,
-        "base_ur": 4.8,
-        "structural_growth": 0.086,
-        "female_share_base": 0.345,
-        "transgender_share": 0.0018,
-        "age_weights": [0.32, 0.65, 0.03],
-        "edu_weights": [0.005, 0.045, 0.11, 0.84], # >80% Graduate and Above
-        "covid_shock": 0.12, # Positive digital surge
-        "covid_recovery_speed": 0.08
-    },
-    {
-        "sector_name": "Healthcare",
-        "nic_code": "Division 86",
-        "nco_code": "2211",
-        "nsqf_level": "4-8",
-        "base_wage_2011": 18200,
-        "base_ur": 4.2,
-        "structural_growth": 0.068,
-        "female_share_base": 0.485, # High female participation
-        "transgender_share": 0.0015,
-        "age_weights": [0.22, 0.66, 0.12],
-        "edu_weights": [0.03, 0.15, 0.46, 0.36], # Significant Vocational/Nursing & Graduate Doctors
-        "covid_shock": 0.44, # Acute pandemic demand spike
-        "covid_recovery_speed": -0.05
-    },
-    {
-        "sector_name": "Textiles and Apparel",
-        "nic_code": "Division 13-14",
-        "nco_code": "8261",
-        "nsqf_level": "2-5",
-        "base_wage_2011": 9800,
-        "base_ur": 7.6,
-        "structural_growth": 0.032,
-        "female_share_base": 0.425, # High female participation
-        "transgender_share": 0.0010,
-        "age_weights": [0.29, 0.61, 0.10],
-        "edu_weights": [0.48, 0.18, 0.31, 0.03], # Heavy Below Primary & ITI sewing
-        "covid_shock": -0.42,
-        "covid_recovery_speed": 0.11
-    }
-]
+# state-level multipliers: labour-force participation, wage level, training capacity, covid stringency, female share
+STATE_LFPR = {"Maharashtra": 1.02, "Tamil Nadu": 1.03, "Delhi": 0.93, "West Bengal": 0.97}
+STATE_WAGE = {"Maharashtra": 1.00, "Tamil Nadu": 0.97, "Delhi": 1.05, "West Bengal": 0.88}
+STATE_SEATS = {"Maharashtra": 1.00, "Tamil Nadu": 1.35, "Delhi": 0.80, "West Bengal": 0.70}
+STATE_COVID = {"Maharashtra": 1.00, "Tamil Nadu": 0.95, "Delhi": 1.00, "West Bengal": 0.90}
+STATE_FEMALE = {"Maharashtra": 0.0, "Tamil Nadu": 0.015, "Delhi": -0.015, "West Bengal": -0.01}
+STATE_UR = {"Maharashtra": 0.0, "Tamil Nadu": -0.3, "Delhi": 0.5, "West Bengal": 0.8}
 
-# Economic Density Coefficients across Economic Tiers (Ensures 4x to 8x industrial disparity)
-DENSITY_MULTIPLIERS = {
-    "metro_core":           {"Manufacturing": 1.2, "Construction": 1.4, "IT-ITeS": 6.8, "Healthcare": 2.2, "Textiles and Apparel": 1.1},
-    "industrial_it_hub":    {"Manufacturing": 4.8, "Construction": 2.0, "IT-ITeS": 6.2, "Healthcare": 1.8, "Textiles and Apparel": 1.4},
-    "industrial_hub":       {"Manufacturing": 5.4, "Construction": 1.8, "IT-ITeS": 1.8, "Healthcare": 1.4, "Textiles and Apparel": 2.2},
-    "industrial_msme":      {"Manufacturing": 4.2, "Construction": 1.6, "IT-ITeS": 1.2, "Healthcare": 1.2, "Textiles and Apparel": 3.6},
-    "textile_cluster":      {"Manufacturing": 2.8, "Construction": 1.3, "IT-ITeS": 0.8, "Healthcare": 1.1, "Textiles and Apparel": 5.8},
-    "industrial_port":      {"Manufacturing": 4.5, "Construction": 1.9, "IT-ITeS": 1.1, "Healthcare": 1.2, "Textiles and Apparel": 1.5},
-    "logistics_hub":        {"Manufacturing": 3.2, "Construction": 1.7, "IT-ITeS": 1.6, "Healthcare": 1.5, "Textiles and Apparel": 1.2},
-    "metro_residential":    {"Manufacturing": 1.1, "Construction": 1.8, "IT-ITeS": 2.8, "Healthcare": 1.6, "Textiles and Apparel": 1.4},
-    "metro_administrative": {"Manufacturing": 0.4, "Construction": 0.8, "IT-ITeS": 3.2, "Healthcare": 2.5, "Textiles and Apparel": 0.5},
-    "industrial_mining":    {"Manufacturing": 3.8, "Construction": 1.5, "IT-ITeS": 0.6, "Healthcare": 1.0, "Textiles and Apparel": 0.8},
-    "semi_industrial":      {"Manufacturing": 2.4, "Construction": 1.2, "IT-ITeS": 0.7, "Healthcare": 1.0, "Textiles and Apparel": 1.8},
-    "agrarian_developing":  {"Manufacturing": 1.4, "Construction": 1.0, "IT-ITeS": 0.4, "Healthcare": 0.8, "Textiles and Apparel": 1.4},
-    "agrarian_migrant":     {"Manufacturing": 1.1, "Construction": 1.1, "IT-ITeS": 0.3, "Healthcare": 0.7, "Textiles and Apparel": 1.2},
-    "peripheral_tribal":    {"Manufacturing": 0.7, "Construction": 0.7, "IT-ITeS": 0.2, "Healthcare": 0.5, "Textiles and Apparel": 0.6},
-    "peripheral_agrarian":  {"Manufacturing": 0.8, "Construction": 0.8, "IT-ITeS": 0.3, "Healthcare": 0.6, "Textiles and Apparel": 0.8},
-    "peripheral_coastal":   {"Manufacturing": 0.9, "Construction": 0.8, "IT-ITeS": 0.4, "Healthcare": 0.7, "Textiles and Apparel": 0.7}
+# ==================================================================================================================
+# 2. SECTORS
+# ==================================================================================================================
+SECTORS = ["Manufacturing", "Construction", "IT-ITeS", "Healthcare", "Textiles and Apparel"]
+SECTOR = {
+    "Manufacturing": dict(nic="Division 10-12, 15-33", nco=7223, nsqf="3-6", base_wage=12500, ur_off=0.0,
+                          female=0.165, trans=0.0012, age=[0.24, 0.64, 0.12], edu=[0.22, 0.32, 0.34, 0.12],
+                          informal=0.35, vac_rate=0.022, covid_emp=-0.38, covid_vac=-0.35, rec_beta=0.28,
+                          dist_sigma=0.18, seat_rate=3.2, demon=-0.025, gst=-0.020),
+    "Construction": dict(nic="Division 41-43", nco=7111, nsqf="2-5", base_wage=10200, ur_off=1.2,
+                         female=0.125, trans=0.0008, age=[0.28, 0.62, 0.10], edu=[0.58, 0.16, 0.23, 0.03],
+                         informal=0.90, vac_rate=0.012, covid_emp=-0.52, covid_vac=-0.45, rec_beta=0.33,
+                         dist_sigma=0.12, seat_rate=0.8, demon=-0.040, gst=-0.010),
+    "IT-ITeS": dict(nic="Division 62-63", nco=2511, nsqf="5-8", base_wage=28500, ur_off=-0.5,
+                    female=0.345, trans=0.0018, age=[0.32, 0.65, 0.03], edu=[0.005, 0.045, 0.11, 0.84],
+                    informal=0.03, vac_rate=0.045, covid_emp=0.03, covid_vac=0.09, rec_beta=0.0,
+                    dist_sigma=0.30, seat_rate=1.2, demon=0.0, gst=0.0),
+    "Healthcare": dict(nic="Division 86", nco=2211, nsqf="4-8", base_wage=18200, ur_off=-0.7,
+                       female=0.485, trans=0.0015, age=[0.22, 0.66, 0.12], edu=[0.03, 0.15, 0.46, 0.36],
+                       informal=0.40, vac_rate=0.030, covid_emp=0.08, covid_vac=0.36, rec_beta=0.0,
+                       dist_sigma=0.12, seat_rate=1.6, demon=0.0, gst=0.0),
+    "Textiles and Apparel": dict(nic="Division 13-14", nco=8153, nsqf="2-5", base_wage=9800, ur_off=0.6,
+                                 female=0.425, trans=0.0010, age=[0.29, 0.61, 0.10], edu=[0.48, 0.18, 0.31, 0.03],
+                                 informal=0.65, vac_rate=0.018, covid_emp=-0.42, covid_vac=-0.40, rec_beta=0.25,
+                                 dist_sigma=0.25, seat_rate=0.7, demon=-0.040, gst=-0.020),
+}
+# national employment index by sector (2011 = 1.00, calendar-year anchors; trend only, COVID dip added separately)
+IDX = {
+    "Manufacturing": [1.00, 1.03, 1.06, 1.09, 1.12, 1.15, 1.17, 1.20, 1.23, 1.26, 1.28, 1.31, 1.35, 1.40, 1.45, 1.49],
+    "Construction": [1.00, 1.05, 1.10, 1.15, 1.19, 1.23, 1.28, 1.33, 1.38, 1.42, 1.45, 1.52, 1.60, 1.68, 1.75, 1.81],
+    "IT-ITeS": [1.00, 1.12, 1.20, 1.28, 1.40, 1.48, 1.55, 1.64, 1.66, 1.74, 1.80, 2.00, 2.16, 2.17, 2.30, 2.40],
+    "Healthcare": [1.00, 1.05, 1.10, 1.16, 1.22, 1.28, 1.34, 1.40, 1.47, 1.54, 1.60, 1.68, 1.77, 1.86, 1.95, 2.04],
+    "Textiles and Apparel": [1.00, 1.02, 1.04, 1.06, 1.07, 1.08, 1.08, 1.09, 1.10, 1.10, 1.10, 1.13, 1.16, 1.18, 1.20, 1.22],
+}
+# employer hiring climate (multiplier on the vacancy rate)
+HIRING = {s: [1.0] * 16 for s in SECTORS}
+HIRING["IT-ITeS"] = [1.0] * 10 + [1.15, 1.35, 1.00, 0.80, 0.90, 0.98]
+HIRING["Construction"] = [1.0] * 11 + [1.10, 1.12, 1.10, 1.05, 1.00]
+# macro paths (calendar-year anchors 2011..2026)
+LFPR_WAP = [0.535, 0.530, 0.525, 0.520, 0.515, 0.512, 0.510, 0.515, 0.520, 0.520, 0.530, 0.545, 0.560, 0.570, 0.575, 0.580]
+URBAN_UR = [4.8, 4.7, 4.6, 4.7, 4.8, 5.0, 7.2, 7.7, 7.0, 6.3, 6.7, 6.3, 5.4, 5.1, 5.0, 4.9]
+SEATS_PATH = [0.50, 0.58, 0.66, 0.74, 0.82, 0.90, 0.96, 1.00, 1.02, 1.03, 1.02, 1.03, 1.04, 1.05, 1.06, 1.07]
+
+# share of district workers (%) in 2011 by tier: Manufacturing(ex textiles), Construction, IT-ITeS, Healthcare, Textiles.
+# IT-ITeS and Healthcare baselines are set so that 2025 sector totals across the 56 districts stay plausible against national
+# totals (IT-BPM workforce ~5.8M nationally; these districts hold roughly 40%).
+TIER_SHARE = {
+    "metro_core":           [11.0, 9.0, 3.5, 3.3, 3.5],
+    "industrial_it_hub":    [18.0, 8.0, 7.5, 2.7, 3.5],
+    "industrial_hub":       [21.0, 8.0, 1.2, 2.4, 5.0],
+    "industrial_msme":      [17.0, 8.0, 0.8, 2.1, 7.0],
+    "textile_cluster":      [11.0, 7.0, 0.5, 1.8, 14.0],
+    "industrial_port":      [18.0, 8.0, 0.8, 2.1, 3.0],
+    "logistics_hub":        [12.0, 9.0, 1.4, 3.0, 2.5],
+    "metro_residential":    [8.0, 8.0, 1.6, 3.0, 5.5],
+    "metro_administrative": [3.0, 5.0, 3.5, 3.6, 1.0],
+    "industrial_mining":    [11.0, 9.0, 0.5, 1.8, 1.0],
+    "semi_industrial":      [9.0, 7.0, 0.6, 2.1, 3.0],
+    "agrarian_developing":  [4.0, 6.0, 0.35, 1.6, 2.5],
+    "agrarian_migrant":     [3.0, 6.0, 0.3, 1.3, 2.0],
+    "peripheral_tribal":    [2.5, 5.0, 0.2, 1.1, 1.2],
+    "peripheral_agrarian":  [3.0, 5.0, 0.25, 1.2, 1.5],
+    "peripheral_coastal":   [4.0, 6.5, 0.35, 1.6, 1.5],
+}
+# known IT-ITeS concentrations that the tier averages miss (Hinjewadi/Pune, OMR/Chennai; Kolkata IT sits mostly in
+# Bidhannagar/Rajarhat so North 24 Parganas is below its tier average).  Multipliers on the 2011 baseline share.
+DISTRICT_SECTOR_ADJ = {("Pune", "IT-ITeS"): 1.25, ("Chennai", "IT-ITeS"): 1.50, ("North 24 Parganas", "IT-ITeS"): 0.45}
+
+# sector -> NCO-2015 families (all verified present in data/raw/NCO-Codes.xlsx; the first is the anchor code)
+CROSSWALK = {
+    "Manufacturing": [(7223, "Metal Working Machine Tool Setters and Operators"), (8212, "Electrical and Electronic Equipment Assemblers"),
+                      (8131, "Chemical Products Plant and Machine Operators"), (7233, "Agricultural and Industrial Machinery Mechanics and Repairers"),
+                      (7212, "Welders and Flame Cutters")],
+    "Construction": [(7111, "House Builders"), (7112, "Bricklayers and Related Workers"), (7115, "Carpenters and Joiners"),
+                     (7126, "Plumbers and Pipe Fitters"), (9313, "Building Construction Labourers")],
+    "IT-ITeS": [(2511, "System Analysts"), (2512, "Software Developers"), (2513, "Web and Multimedia Developers"),
+                (2514, "Applications Programmers"), (3512, "Information and Communication Technology User Support Technicians")],
+    "Healthcare": [(2211, "Generalist Medical Practitioners"), (2212, "Specialist Medical Practitioners"), (2221, "Nursing Professionals"),
+                   (3221, "Nursing Associate Professionals"), (3212, "Medical and Pathology Laboratory Technicians")],
+    "Textiles and Apparel": [(8153, "Sewing Machine Operators"), (8152, "Weaving and Knitting Machine Operators"),
+                             (8151, "Fibre Preparing, Spinning and Winding Machine Operators"),
+                             (7531, "Tailors, Dressmakers, Furriers and Hatters"), (7533, "Sewing, Embroiderers and Related Workers")],
 }
 
-# ==================================================================================================
-# 3. STATISTICAL SIMULATION & MICRODATA GENERATION ENGINE
-# ==================================================================================================
-def generate_master_dataset():
-    """Generates the 15-year continuous monthly microdata panel and derives the quarterly series."""
-    print("=" * 100)
-    print("AI-ENABLED LABOUR MARKET INTELLIGENCE SYSTEM (LMIS) - GENERATION ENGINE")
-    print("Target: 15-Year Longitudinal Continuous Panel (2011 to 2026)")
-    print(f"Districts: {len(DISTRICT_CATALOG)} | Sectors: {len(SECTOR_TAXONOMY)}")
-    print("=" * 100)
+# COVID-19 monthly intensity (1.0 = April/May 2020 national lockdown); the 2021 Delta wave hit employment far less
+COVID = {(2020, 3): .35, (2020, 4): 1.0, (2020, 5): 1.0, (2020, 6): .70, (2020, 7): .55, (2020, 8): .45, (2020, 9): .35,
+         (2020, 10): .25, (2020, 11): .20, (2020, 12): .15, (2021, 1): .10, (2021, 2): .08, (2021, 3): .12, (2021, 4): .25,
+         (2021, 5): .35, (2021, 6): .20, (2021, 7): .08, (2021, 8): .05, (2021, 9): .04, (2021, 10): .03, (2022, 1): .08,
+         (2022, 2): .05}
+COVID_I = np.array([COVID.get((y, m), 0.0) for y, m in zip(YEAR, MONTH)])
+IDX_RECOVERY_START = 126                     # 2021-07: post-wave recovery clock starts
+IDX_ESHRAM_LAUNCH = 127                      # 2021-08
 
-    # Generate complete timeline: 2011-01 to 2026-12 (192 continuous months)
-    dates = pd.date_range(start="2011-01-01", end="2026-12-01", freq="MS")
-    total_months = len(dates)
-    total_expected_rows = len(DISTRICT_CATALOG) * len(SECTOR_TAXONOMY) * total_months
-    print(f"Generating {total_months} continuous months ({total_expected_rows:,} records)...")
 
-    monthly_records = []
+# ==================================================================================================================
+# 3. HELPERS
+# ==================================================================================================================
+def path(anchors):
+    """Monthly series from calendar-year anchors placed at mid-year (flat beyond the ends)."""
+    return np.interp((T + 0.5) / 12 - 0.5, np.arange(len(anchors)), anchors)
 
-    for t_idx, dt in enumerate(dates):
-        year = dt.year
-        month = dt.month
-        quarter = (month - 1) // 3 + 1
-        timestamp_month = dt.strftime("%Y-%m")
-        timestamp_quarter = f"{year}-Q{quarter}"
-        
-        # 1. Macroeconomic Shock Modeling
-        # A. Demonetisation (Nov 2016 - Jan 2017)
-        demonetisation_factor = -0.06 if (year == 2016 and month in [11, 12]) or (year == 2017 and month == 1) else 0.0
-        
-        # B. GST Structural Transition (Jul 2017 - Oct 2017)
-        gst_transition_factor = -0.03 if (year == 2017 and month in [7, 8, 9, 10]) else 0.0
 
-        # C. COVID-19 Pandemic Dynamics (2020 Q1 - 2021 Q1)
-        # Smooth non-linear pandemic infection wave curve
-        covid_intensity = 0.0
-        if year == 2020:
-            if month in [3, 4, 5]:    # National Lockdown Phase
-                covid_intensity = 1.0
-            elif month in [6, 7, 8]:  # Unlock Phase 1-2
-                covid_intensity = 0.70
-            elif month in [9, 10, 11, 12]:
-                covid_intensity = 0.40
-        elif year == 2021:
-            if month in [4, 5, 6]:    # Delta Wave Peak
-                covid_intensity = 0.85
-            elif month in [7, 8, 9]:
-                covid_intensity = 0.35
-            else:
-                covid_intensity = 0.15
-        elif year == 2022 and month <= 2: # Omicron transient dip
-            covid_intensity = 0.10
-            
-        # D. Post-2021 Non-linear Economic Recovery Multiplier
-        recovery_phase = max(0.0, (t_idx - 120) / 12.0) if year >= 2021 else 0.0
-        
-        # Seasonal cycles
-        is_monsoon = 1.0 if month in [6, 7, 8, 9] else 0.0
-        is_festive = 1.0 if month in [10, 11] else 0.0
+def ar1(rng, n, phi, sigma_innov):
+    """(n x N) stationary AR(1) paths."""
+    x = np.zeros((n, N))
+    x[:, 0] = rng.normal(0, sigma_innov / np.sqrt(1 - phi ** 2), n)
+    eps = rng.normal(0, sigma_innov, (n, N))
+    for i in range(1, N):
+        x[:, i] = phi * x[:, i - 1] + eps[:, i]
+    return x
 
-        # 5.5% Compounded Annual Wage Inflation Index from 2011 Base
-        wage_inflation_idx = (1.0 + 0.055) ** (t_idx / 12.0)
 
-        for dist in DISTRICT_CATALOG:
-            d_name = dist["district_name"]
-            s_name = dist["state_name"]
-            s_lgd = dist["state_lgd"]
-            d_lgd = dist["district_lgd"]
-            tier = dist["econ_tier"]
-            
-            # Project District Total Population to Current Timestamp
-            years_since_2011 = t_idx / 12.0
-            pop_current = int(dist["pop_2011"] * ((1.0 + dist["growth_rate"]) ** years_since_2011))
-            
-            # Working-age population (15-64 years) is ~66.5% in urban/semi-urban India (Census/PLFS)
-            working_age_pop = int(pop_current * 0.665)
-            
-            # District aggregate Labour Force Participation Rate (LFPR ~48% to 54%)
-            base_lfpr = 0.505 + (0.002 * years_since_2011) + 0.008 * np.sin(2 * np.pi * t_idx / 12.0)
-            district_labour_force = int(working_age_pop * base_lfpr)
+def seasonal(sector, state):
+    s = np.zeros(12)
+    m = np.arange(1, 13)
+    if sector == "Construction":
+        monsoon = {"Maharashtra": (6, 9, .10), "West Bengal": (6, 9, .10), "Delhi": (7, 9, .07), "Tamil Nadu": (10, 12, .05)}[state]
+        s += np.where((m >= monsoon[0]) & (m <= monsoon[1]), -monsoon[2], 0.03)
+    elif sector == "Textiles and Apparel":
+        s += np.where((m >= 9) & (m <= 11), 0.09 if state == "West Bengal" else 0.07, 0.0)
+        s += np.where((m >= 4) & (m <= 5), -0.03, 0.0)
+    elif sector == "Manufacturing":
+        s += np.where((m >= 10) | (m <= 3), 0.02, 0.0) + np.where((m >= 6) & (m <= 8), -0.015, 0.0)
+    elif sector == "Healthcare":
+        s += np.where((m >= 7) & (m <= 10), 0.015, 0.0)
+    else:
+        s += np.where((m >= 7) & (m <= 9), 0.012, 0.0) + np.where(m <= 3, -0.005, 0.0)
+    f = 1.0 + s
+    return (f / f.mean())[MONTH - 1]
 
-            for sec in SECTOR_TAXONOMY:
-                sec_name = sec["sector_name"]
-                
-                # Baseline Sector Share in total labour force
-                base_share = {
-                    "Manufacturing": 0.18,
-                    "Construction": 0.14,
-                    "IT-ITeS": 0.11,
-                    "Healthcare": 0.08,
-                    "Textiles and Apparel": 0.09
-                }[sec_name]
-                
-                # Apply District Economic Density Multiplier (4x to 8x variation guaranteed)
-                density_mult = DENSITY_MULTIPLIERS[tier][sec_name]
-                
-                # Sector Secular Trend Growth
-                secular_growth = (1.0 + sec["structural_growth"]) ** years_since_2011
-                
-                # Seasonal Factor
-                seasonal_factor = 1.0
-                if sec_name == "Construction":
-                    seasonal_factor += (-0.22 * is_monsoon) + (0.05 * (1.0 - is_monsoon))
-                elif sec_name == "Textiles and Apparel":
-                    seasonal_factor += (0.15 * is_festive)
-                elif sec_name == "Manufacturing":
-                    seasonal_factor += (0.05 * is_festive) - (0.04 * is_monsoon)
-                elif sec_name == "Healthcare":
-                    seasonal_factor += (0.05 * is_monsoon) # Monsoon vector diseases spike clinical admissions
-                
-                # COVID Shock and Non-linear Recovery Curve
-                covid_mult = 1.0 + (sec["covid_shock"] * covid_intensity)
-                if year >= 2021 and sec["covid_shock"] < 0:
-                    covid_mult += sec["covid_recovery_speed"] * np.log1p(recovery_phase)
 
-                # Policy Shocks
-                macro_policy_mult = 1.0 + demonetisation_factor + gst_transition_factor
-                
-                # Stochastic microdata variation (Gaussian noise +/- 1.5%)
-                noise = np.random.normal(1.0, 0.015)
-                
-                # Total Employed Workforce Stock
-                effective_rate = base_share * density_mult * secular_growth * seasonal_factor * covid_mult * macro_policy_mult * noise
-                # Normalize so it does not exceed district capacity
-                effective_rate = np.clip(effective_rate, 0.005, 0.42)
-                employed_total = int(district_labour_force * effective_rate)
-                employed_total = max(150, employed_total)
+def largest_remainder(total, props):
+    """Integer counts per category that sum exactly to `total` (rows)."""
+    raw = props * total[:, None]
+    base = np.floor(raw).astype(np.int64)
+    rem = (total - base.sum(axis=1)).astype(int)
+    order = np.argsort(-(raw - base), axis=1)
+    rank = np.argsort(order, axis=1)
+    return base + (rank < rem[:, None])
 
-                # Sector-Specific Unemployment Rate (%) (Constrained strictly between 3.5% and 12.0%)
-                ur_covid_spike = 4.5 * covid_intensity if sec["covid_shock"] < 0 else -0.8 * covid_intensity
-                ur_pct = float(np.clip(sec["base_ur"] + ur_covid_spike + np.random.normal(0, 0.35), 3.5, 12.0))
-                ur_pct = round(ur_pct, 2)
 
-                # Active Job Vacancies (Demand Signal)
-                # Derived from employment velocity, labor turnover, and economic cycle
-                vac_intensity = {"Manufacturing": 0.035, "Construction": 0.025, "IT-ITeS": 0.065, "Healthcare": 0.045, "Textiles and Apparel": 0.028}[sec_name]
-                active_vacancies = int(employed_total * vac_intensity * covid_mult * np.random.normal(1.0, 0.06))
-                active_vacancies = max(10, active_vacancies)
+def dirichlet_rows(rng, p, conc):
+    g = rng.gamma(np.maximum(p * conc, 1e-3))
+    return g / g.sum(axis=1, keepdims=True)
 
-                # e-Shram Registered Job Seekers (Supply Signal)
-                # e-Shram portal was rolled out in Aug 2021. For pre-2021, represents the registered informal talent pool.
-                eshram_base_ratio = {"Manufacturing": 0.28, "Construction": 0.65, "IT-ITeS": 0.05, "Healthcare": 0.18, "Textiles and Apparel": 0.45}[sec_name]
-                eshram_uptake = 1.0 if year >= 2022 else (0.75 if year == 2021 else 0.20)
-                eshram_seekers = int(employed_total * eshram_base_ratio * eshram_uptake * np.random.normal(1.0, 0.05))
 
-                # Average Monthly Wage in INR (Indexed to 5.5% annual inflation + district metro premium)
-                metro_premium = 1.25 if tier in ["metro_core", "metro_administrative"] else (1.15 if "hub" in tier else 1.0)
-                avg_wage_inr = int(sec["base_wage_2011"] * wage_inflation_idx * metro_premium * np.random.normal(1.0, 0.012))
+# ==================================================================================================================
+# 4. GENERATION
+# ==================================================================================================================
+def build_catalog():
+    cat = pd.DataFrame(DISTRICTS, columns=["State_Name", "District_Name", "District_LGD_Code", "LGD_Code_Source",
+                                           "Pop_2011", "Pop_Growth_Annual", "Econ_Tier"])
+    cat["State_LGD_Code"] = cat["State_Name"].map(STATES)
+    d = cat["State_Name"] == "Delhi"
+    cat.loc[d, "Pop_2011"] = (cat.loc[d, "Pop_2011"] * DELHI_CENSUS_TOTAL / cat.loc[d, "Pop_2011"].sum()).round().astype(int)
+    assert cat["District_LGD_Code"].is_unique and len(cat) == 56
+    return cat
 
-                # GENDER BREAKDOWN (Strict sum consistency: Male + Female + Transgender == Total)
-                female_trend = sec["female_share_base"] + (0.003 * years_since_2011) # Rising female participation trend
-                f_share = np.clip(female_trend + np.random.normal(0, 0.008), 0.08, 0.58)
-                t_share = sec["transgender_share"]
-                m_share = 1.0 - (f_share + t_share)
 
-                female_count = int(employed_total * f_share)
-                trans_count = int(employed_total * t_share)
-                male_count = employed_total - (female_count + trans_count)
+def generate():
+    rng = np.random.default_rng(SEED)
+    cat = build_catalog()
+    nd = len(cat)
+    yrs = T / 12.0
+    pop = cat["Pop_2011"].to_numpy()[:, None] * (1 + cat["Pop_Growth_Annual"].to_numpy()[:, None]) ** yrs
+    wap = pop * 0.665
+    st = cat["State_Name"].to_numpy()
+    lfpr = path(LFPR_WAP)[None, :] * np.array([STATE_LFPR[s] for s in st])[:, None]
+    nat_ur = path(URBAN_UR)
+    workers = wap * lfpr * (1 - nat_ur[None, :] / 100)                         # employed persons, all sectors
+    idx_total = 1.015 ** yrs
+    stringency = np.array([STATE_COVID[s] for s in st])[:, None]
+    wage_idx = 1.055 ** yrs
+    tier_prem = np.array([1.25 if t in ("metro_core", "metro_administrative") else 1.15 if "hub" in t else 1.0
+                          for t in cat["Econ_Tier"]])[:, None]
+    fy = np.where(MONTH >= 4, YEAR, YEAR - 1)                                   # financial year (Apr-Mar)
+    fy_idx = fy - 2011
+    cert_w = np.array([.06, .04, .05, .04, .05, .10, .26, .14, .07, .07, .06, .06])[MONTH - 1]
+    util = np.where(fy == 2020, 0.55, np.where(fy == 2021, 0.85, 0.72))
+    seat_mult = np.array(SEATS_PATH)[np.clip(fy_idx, 0, 15)]
 
-                male_share_pct = round((male_count / employed_total) * 100.0, 2)
-                female_share_pct = round((female_count / employed_total) * 100.0, 2)
-                trans_share_pct = round((trans_count / employed_total) * 100.0, 2)
+    out = {}
+    emp_density_ref = {}
+    for sector in SECTORS:
+        sp = SECTOR[sector]
+        k = SECTORS.index(sector)
+        share0 = np.array([TIER_SHARE[t][k] for t in cat["Econ_Tier"]])[:, None] / 100.0
+        share0 = share0 * np.array([DISTRICT_SECTOR_ADJ.get((d, sector), 1.0) for d in cat["District_Name"]])[:, None]
+        dist_eff = np.exp(rng.normal(0, sp["dist_sigma"], (nd, 1)))
+        dist_eff /= dist_eff.mean()
+        seas = np.vstack([seasonal(sector, s) for s in st])
+        # ---- employment ------------------------------------------------------------------------------------------
+        trend = path(IDX[sector])[None, :] / idx_total[None, :]
+        shock = 1 + sp["covid_emp"] * COVID_I[None, :] * stringency
+        tau = np.maximum(T - IDX_RECOVERY_START, 0)
+        scar = np.zeros(N)
+        if sp["covid_emp"] < 0:     # residual scar closing as beta * ln(1 + months since 2021-07)
+            scar = np.where(T >= IDX_RECOVERY_START,
+                            sp["covid_emp"] * 0.20 * np.clip(1 - sp["rec_beta"] * np.log1p(tau), 0, 1), 0.0)
+        policy = 1 + sp["demon"] * ((YEAR == 2016) & (MONTH >= 11) | (YEAR == 2017) & (MONTH == 1)) \
+                   + sp["gst"] * ((YEAR == 2017) & (MONTH >= 7) & (MONTH <= 10))
+        noise = np.exp(ar1(rng, nd, 0.90, 0.006) + rng.normal(0, 0.008, (nd, N)))
+        emp = workers * share0 * trend * dist_eff * seas * (shock + scar[None, :] * stringency) * policy[None, :] * noise
+        emp = np.maximum(np.rint(emp), 1).astype(np.int64)
 
-                # AGE GROUP BREAKDOWN (Strict sum consistency: 15-24 + 25-54 + 55+ == Total)
-                # Using Dirichlet distribution to guarantee non-negative, calibrated random proportions
-                age_weights = sec["age_weights"]
-                age_props = np.random.dirichlet([age_weights[0] * 120, age_weights[1] * 120, age_weights[2] * 120])
-                c_age_youth = int(employed_total * age_props[0])
-                c_age_prime = int(employed_total * age_props[1])
-                c_age_senior = employed_total - (c_age_youth + c_age_prime)
+        # ---- unemployment rate -----------------------------------------------------------------------------------
+        spike = (4.5 if sp["covid_emp"] < 0 else -0.8) * COVID_I[None, :]
+        ur = (nat_ur[None, :] + sp["ur_off"] + np.array([STATE_UR[s] for s in st])[:, None] + spike
+              + ar1(rng, nd, 0.90, 0.12) + rng.normal(0, 0.15, (nd, N)))
+        ur = np.round(np.clip(ur, 3.5, 12.0), 2)
 
-                age_youth_pct = round((c_age_youth / employed_total) * 100.0, 2)
-                age_prime_pct = round((c_age_prime / employed_total) * 100.0, 2)
-                age_senior_pct = round((c_age_senior / employed_total) * 100.0, 2)
+        # ---- vacancies (demand) ----------------------------------------------------------------------------------
+        idx_path = path(IDX[sector])
+        yoy = np.r_[np.full(12, idx_path[12] / idx_path[0] - 1), idx_path[12:] / idx_path[:-12] - 1]
+        gbar = yoy[:120].mean()
+        tight = np.clip(1 + 2.0 * (yoy - gbar), 0.5, 1.8)[None, :]
+        covid_v = np.clip(1 + sp["covid_vac"] * COVID_I[None, :] * stringency, 0.1, None)
+        vac_dist = np.exp(rng.normal(0, 0.20, (nd, 1)))
+        vac = emp * sp["vac_rate"] * path(HIRING[sector])[None, :] * tight * covid_v * vac_dist \
+            * np.exp(ar1(rng, nd, 0.93, 0.035) + rng.normal(0, 0.04, (nd, N)))
+        vac = np.maximum(np.rint(vac), 1).astype(np.int64)
 
-                # EDUCATION BREAKDOWN (Strict sum consistency: Below Pri + Sec + ITI + Grad == Total)
-                edu_weights = sec["edu_weights"]
-                edu_props = np.random.dirichlet([
-                    max(1, edu_weights[0] * 100), max(1, edu_weights[1] * 100),
-                    max(1, edu_weights[2] * 100), max(1, edu_weights[3] * 100)
-                ])
-                c_edu_below = int(employed_total * edu_props[0])
-                c_edu_sec = int(employed_total * edu_props[1])
-                c_edu_iti = int(employed_total * edu_props[2])
-                c_edu_grad = employed_total - (c_edu_below + c_edu_sec + c_edu_iti)
+        # ---- training capacity (supply side) --------------------------------------------------------------------
+        lag = np.clip(T - 36, 0, None)
+        dens = emp[:, lag] / wap[:, lag]
+        alloc = 0.5 * dens / dens.mean(axis=0, keepdims=True) + 0.5
+        alloc_dist = np.exp(rng.normal(0, 0.25, (nd, 1)))
+        seats_year = (wap / 1000.0) * sp["seat_rate"] * np.array([STATE_SEATS[s] for s in st])[:, None] \
+            * seat_mult[None, :] * alloc * alloc_dist
+        # seat capacity is a stock fixed for the financial year: take the April value of each FY
+        seats = seats_year[:, np.clip((fy - 2011) * 12 + 3, 0, N - 1)]
+        seats = np.maximum(np.rint(seats), 1).astype(np.int64)
+        cert = seats * util[None, :] * 0.82 * cert_w[None, :] * np.exp(rng.normal(0, 0.06, (nd, N)))
+        cert = np.rint(cert).astype(np.int64)
+        # trailing-12-month outturn; months before 2011-01 are filled with a copy of 2011 so there is no start-up ramp
+        cert_ext = np.hstack([cert[:, :12], cert])
+        cert_12m = pd.DataFrame(cert_ext.T).rolling(12).sum().to_numpy().T[:, 12:]
 
-                edu_below_pct = round((c_edu_below / employed_total) * 100.0, 2)
-                edu_sec_pct = round((c_edu_sec / employed_total) * 100.0, 2)
-                edu_iti_pct = round((c_edu_iti / employed_total) * 100.0, 2)
-                edu_grad_pct = round((c_edu_grad / employed_total) * 100.0, 2)
+        # ---- registered seekers (supply proxy) -------------------------------------------------------------------
+        m = T - IDX_ESHRAM_LAUNCH
+        reg = 0.02 + 0.33 / (1 + np.exp(-(m - 8) / 6.0))                        # e-Shram ramp-up from Aug-2021
+        unemployed = emp * ur / (100 - ur)
+        seek = (0.6 * unemployed + sp["informal"] * emp * reg[None, :] + 0.4 * cert_12m) * np.exp(rng.normal(0, 0.15, (nd, 1))) \
+            * np.exp(ar1(rng, nd, 0.95, 0.02) + rng.normal(0, 0.035, (nd, N)))
+        seek = np.maximum(np.rint(seek), 1).astype(np.int64)
 
-                # Append Record
-                monthly_records.append({
-                    # 1. Identification Keys
-                    "State_Name": s_name,
-                    "State_LGD_Code": s_lgd,
-                    "District_Name": d_name,
-                    "District_LGD_Code": d_lgd,
-                    "District_Total_Population_Est": pop_current,
-                    "Timestamp": timestamp_month,
-                    "Timestamp_Month": timestamp_month,
-                    "Timestamp_Quarter": timestamp_quarter,
-                    "Year": year,
-                    "Month": month,
-                    "Sector_Name": sec_name,
-                    "NIC_Code": sec["nic_code"],
-                    "NCO_Code": sec["nco_code"],
-                    "NSQF_Level": sec["nsqf_level"],
+        # ---- wage -----------------------------------------------------------------------------------------------
+        wage = sp["base_wage"] * wage_idx[None, :] * tier_prem * np.array([STATE_WAGE[s] for s in st])[:, None] \
+            * np.exp(rng.normal(0, 0.012, (nd, N)))
+        wage = np.rint(wage).astype(np.int64)
 
-                    # 2. Gender Breakdown
-                    "Male_Employed_Count": male_count,
-                    "Female_Employed_Count": female_count,
-                    "Transgender_Employed_Count": trans_count,
-                    "Male_Share_Pct": male_share_pct,
-                    "Female_Share_Pct": female_share_pct,
-                    "Transgender_Share_Pct": trans_share_pct,
+        # ---- demographics (integer-conserving) -------------------------------------------------------------------
+        tot = emp.ravel()
+        f_share = np.clip(sp["female"] + 0.0015 * yrs[None, :] + np.array([STATE_FEMALE[s] for s in st])[:, None]
+                          + rng.normal(0, 0.004, (nd, 1)) + rng.normal(0, 0.006, (nd, N)), 0.05, 0.60).ravel()
+        tr_share = np.full(tot.shape, sp["trans"])
+        gender_p = np.column_stack([1 - f_share - tr_share, f_share, tr_share])
+        gender = largest_remainder(tot, gender_p)
 
-                    # 3. Age Group Breakdown
-                    "Age_15_24_Count": c_age_youth,
-                    "Age_25_54_Count": c_age_prime,
-                    "Age_55_Plus_Count": c_age_senior,
-                    "Age_15_24_Pct": age_youth_pct,
-                    "Age_25_54_Pct": age_prime_pct,
-                    "Age_55_Plus_Pct": age_senior_pct,
+        def smooth_group(weights, tilt=None, floor_last=None):
+            base = np.tile(np.array(weights, float), (nd, 1))
+            if tilt is not None:
+                base = base * tilt
+            base /= base.sum(axis=1, keepdims=True)
+            persistent = dirichlet_rows(rng, base, 250.0)                     # district profile (fixed over time)
+            rows = np.repeat(persistent, N, axis=0)
+            p = dirichlet_rows(rng, rows, 1500.0)                              # small monthly sampling noise
+            if floor_last is not None:                                         # hard floor on the last category
+                last = np.maximum(p[:, -1], floor_last)
+                p = np.column_stack([p[:, :-1] * ((1 - last) / p[:, :-1].sum(axis=1))[:, None], last])
+            return p
 
-                    # 4. Education & Qualification Levels
-                    "Edu_Below_Primary_Count": c_edu_below,
-                    "Edu_Secondary_HigherSecondary_Count": c_edu_sec,
-                    "Qualification_Vocational_ITI_Certified_Count": c_edu_iti,
-                    "Edu_Graduate_and_Above_Count": c_edu_grad,
-                    "Edu_Below_Primary_Pct": edu_below_pct,
-                    "Edu_Secondary_HigherSecondary_Pct": edu_sec_pct,
-                    "Qualification_Vocational_ITI_Certified_Pct": edu_iti_pct,
-                    "Edu_Graduate_and_Above_Pct": edu_grad_pct,
+        metro = np.array([1.0 if t.startswith("metro") or "it_hub" in t else 0.0 for t in cat["Econ_Tier"]])[:, None]
+        periph = np.array([1.0 if t.startswith(("peripheral", "agrarian")) else 0.0 for t in cat["Econ_Tier"]])[:, None]
+        edu_tilt = np.hstack([1 - 0.10 * metro + 0.10 * periph, np.ones((nd, 2)), 1 + 0.10 * metro - 0.10 * periph])
+        age = largest_remainder(tot, smooth_group(sp["age"]))
+        edu = largest_remainder(tot, smooth_group(sp["edu"], edu_tilt, floor_last=0.805 if sector == "IT-ITeS" else None))
 
-                    # 5. Economic & Labour Metrics
-                    "Active_Job_Vacancies": active_vacancies,
-                    "Total_Employed_Workers": employed_total,
-                    "eShram_Registered_Seekers": eshram_seekers,
-                    "Avg_Monthly_Wage_INR": avg_wage_inr,
-                    "Unemployment_Rate_Pct": ur_pct
-                })
+        out[sector] = dict(emp=emp, ur=ur, vac=vac, seats=seats, cert=cert, seek=seek, wage=wage,
+                           gender=gender, age=age, edu=edu)
+    return cat, pop.astype(np.int64), out
 
-    df_monthly = pd.DataFrame(monthly_records)
-    print(f"\n[OK] Monthly Panel Created Successfully: {df_monthly.shape[0]:,} rows × {df_monthly.shape[1]} columns.")
-    
-    # Save Master Monthly Dataset
-    print(f"Exporting to: {MONTHLY_CSV} ...")
-    df_monthly.to_csv(MONTHLY_CSV, index=False)
-    print(f"[OK] Saved {MONTHLY_CSV} ({os.path.getsize(MONTHLY_CSV) / (1024*1024):.2f} MB)")
 
-    # ==============================================================================================
-    # 4. DERIVE THE QUARTERLY AGGREGATED DATASET
-    # ==============================================================================================
-    print("\nDeriving Quarterly Aggregation Panel (64 Continuous Quarters: 2011-Q1 to 2026-Q4)...")
-    q_group_keys = [
-        "State_Name", "State_LGD_Code", "District_Name", "District_LGD_Code",
-        "Timestamp_Quarter", "Year", "Sector_Name", "NIC_Code", "NCO_Code", "NSQF_Level"
-    ]
-
-    quarterly_records = []
-    for keys, grp in df_monthly.groupby(q_group_keys):
-        s_name, s_lgd, d_name, d_lgd, ts_q, yr, sec_name, nic, nco, nsqf = keys
-        quarter_num = int(ts_q.split("-Q")[1])
-
-        emp_avg = int(grp["Total_Employed_Workers"].mean())
-        male_avg = int(grp["Male_Employed_Count"].mean())
-        trans_avg = int(grp["Transgender_Employed_Count"].mean())
-        female_avg = emp_avg - (male_avg + trans_avg)
-
-        y_avg = int(grp["Age_15_24_Count"].mean())
-        p_avg = int(grp["Age_25_54_Count"].mean())
-        s_avg = emp_avg - (y_avg + p_avg)
-
-        e_bel_avg = int(grp["Edu_Below_Primary_Count"].mean())
-        e_sec_avg = int(grp["Edu_Secondary_HigherSecondary_Count"].mean())
-        e_iti_avg = int(grp["Qualification_Vocational_ITI_Certified_Count"].mean())
-        e_grad_avg = emp_avg - (e_bel_avg + e_sec_avg + e_iti_avg)
-
-        quarterly_records.append({
-            # 1. Identification Keys
-            "State_Name": s_name,
-            "State_LGD_Code": s_lgd,
-            "District_Name": d_name,
-            "District_LGD_Code": d_lgd,
-            "District_Total_Population_Est": int(grp["District_Total_Population_Est"].mean()),
-            "Timestamp": ts_q,
-            "Timestamp_Quarter": ts_q,
-            "Year": yr,
-            "Quarter": quarter_num,
-            "Sector_Name": sec_name,
-            "NIC_Code": nic,
-            "NCO_Code": nco,
-            "NSQF_Level": nsqf,
-
-            # 2. Gender Breakdown
-            "Male_Employed_Count": male_avg,
-            "Female_Employed_Count": female_avg,
-            "Transgender_Employed_Count": trans_avg,
-            "Male_Share_Pct": round((male_avg / emp_avg) * 100.0, 2),
-            "Female_Share_Pct": round((female_avg / emp_avg) * 100.0, 2),
-            "Transgender_Share_Pct": round((trans_avg / emp_avg) * 100.0, 2),
-
-            # 3. Age Group Breakdown
-            "Age_15_24_Count": y_avg,
-            "Age_25_54_Count": p_avg,
-            "Age_55_Plus_Count": s_avg,
-            "Age_15_24_Pct": round((y_avg / emp_avg) * 100.0, 2),
-            "Age_25_54_Pct": round((p_avg / emp_avg) * 100.0, 2),
-            "Age_55_Plus_Pct": round((s_avg / emp_avg) * 100.0, 2),
-
-            # 4. Education & Qualification Levels
-            "Edu_Below_Primary_Count": e_bel_avg,
-            "Edu_Secondary_HigherSecondary_Count": e_sec_avg,
-            "Qualification_Vocational_ITI_Certified_Count": e_iti_avg,
-            "Edu_Graduate_and_Above_Count": e_grad_avg,
-            "Edu_Below_Primary_Pct": round((e_bel_avg / emp_avg) * 100.0, 2),
-            "Edu_Secondary_HigherSecondary_Pct": round((e_sec_avg / emp_avg) * 100.0, 2),
-            "Qualification_Vocational_ITI_Certified_Pct": round((e_iti_avg / emp_avg) * 100.0, 2),
-            "Edu_Graduate_and_Above_Pct": round((e_grad_avg / emp_avg) * 100.0, 2),
-
-            # 5. Economic & Labour Metrics
-            "Active_Job_Vacancies": int(grp["Active_Job_Vacancies"].mean()),
-            "Total_Employed_Workers": emp_avg,
-            "eShram_Registered_Seekers": int(grp["eShram_Registered_Seekers"].mean()),
-            "Avg_Monthly_Wage_INR": int(grp["Avg_Monthly_Wage_INR"].mean()),
-            "Unemployment_Rate_Pct": round(float(grp["Unemployment_Rate_Pct"].mean()), 2)
+def to_long(cat, pop, out):
+    nd = len(cat)
+    frames = []
+    for sector in SECTORS:
+        sp, o = SECTOR[sector], out[sector]
+        n = nd * N
+        tot = o["emp"].ravel()
+        pct = lambda c: np.round(c / tot * 100.0, 2)
+        df = pd.DataFrame({
+            "State_Name": np.repeat(cat["State_Name"].to_numpy(), N),
+            "State_LGD_Code": np.repeat(cat["State_LGD_Code"].to_numpy(), N),
+            "District_Name": np.repeat(cat["District_Name"].to_numpy(), N),
+            "District_LGD_Code": np.repeat(cat["District_LGD_Code"].astype(str).to_numpy(), N),
+            "District_Total_Population_Est": pop.ravel(),
+            "Timestamp": np.tile(MONTHS.strftime("%Y-%m"), nd),
+            "Year": np.tile(YEAR, nd), "Month": np.tile(MONTH, nd),
+            "Sector_Name": sector, "NIC_Code": sp["nic"], "NCO_Code": sp["nco"], "NSQF_Level": sp["nsqf"],
         })
+        df["Timestamp_Month"] = df["Timestamp"]
+        df["Timestamp_Quarter"] = df["Year"].astype(str) + "-Q" + ((df["Month"] - 1) // 3 + 1).astype(str)
+        g, a, e = o["gender"], o["age"], o["edu"]
+        cols = {
+            "Male_Employed_Count": g[:, 0], "Female_Employed_Count": g[:, 1], "Transgender_Employed_Count": g[:, 2],
+            "Male_Share_Pct": pct(g[:, 0]), "Female_Share_Pct": pct(g[:, 1]), "Transgender_Share_Pct": pct(g[:, 2]),
+            "Age_15_24_Count": a[:, 0], "Age_25_54_Count": a[:, 1], "Age_55_Plus_Count": a[:, 2],
+            "Age_15_24_Pct": pct(a[:, 0]), "Age_25_54_Pct": pct(a[:, 1]), "Age_55_Plus_Pct": pct(a[:, 2]),
+            "Edu_Below_Primary_Count": e[:, 0], "Edu_Secondary_HigherSecondary_Count": e[:, 1],
+            "Qualification_Vocational_ITI_Certified_Count": e[:, 2], "Edu_Graduate_and_Above_Count": e[:, 3],
+            "Edu_Below_Primary_Pct": pct(e[:, 0]), "Edu_Secondary_HigherSecondary_Pct": pct(e[:, 1]),
+            "Qualification_Vocational_ITI_Certified_Pct": pct(e[:, 2]), "Edu_Graduate_and_Above_Pct": pct(e[:, 3]),
+            "Active_Job_Vacancies": o["vac"].ravel(), "Total_Employed_Workers": tot,
+            "eShram_Registered_Seekers": o["seek"].ravel(), "Avg_Monthly_Wage_INR": o["wage"].ravel(),
+            "Unemployment_Rate_Pct": o["ur"].ravel(),
+            "Training_Seats_Sanctioned": o["seats"].ravel(), "Trainees_Certified_Monthly": o["cert"].ravel(),
+        }
+        frames.append(pd.concat([df, pd.DataFrame(cols)], axis=1))
+    long = pd.concat(frames, ignore_index=True)
+    long["_d"] = long["District_Name"].map({d: i for i, d in enumerate(cat["District_Name"])})
+    long["_s"] = long["Sector_Name"].map({s: i for i, s in enumerate(SECTORS)})
+    long = long.sort_values(["Timestamp", "_d", "_s"]).drop(columns=["_d", "_s"]).reset_index(drop=True)
+    order = ["State_Name", "State_LGD_Code", "District_Name", "District_LGD_Code", "District_Total_Population_Est", "Timestamp",
+             "Timestamp_Month", "Timestamp_Quarter", "Year", "Month", "Sector_Name", "NIC_Code", "NCO_Code", "NSQF_Level"]
+    return long[order + [c for c in long.columns if c not in order]]
 
-    df_quarterly = pd.DataFrame(quarterly_records)
-    df_quarterly.sort_values(by=["Year", "Quarter", "State_Name", "District_Name", "Sector_Name"], inplace=True)
-    print(f"[OK] Quarterly Panel Created Successfully: {df_quarterly.shape[0]:,} rows × {df_quarterly.shape[1]} columns.")
-    
-    print(f"Exporting to: {QUARTERLY_CSV} ...")
-    df_quarterly.to_csv(QUARTERLY_CSV, index=False)
-    print(f"[OK] Saved {QUARTERLY_CSV} ({os.path.getsize(QUARTERLY_CSV) / (1024*1024):.2f} MB)")
 
-    # ==============================================================================================
-    # 5. DATASET INTEGRITY VALIDATION SUITE
-    # ==============================================================================================
-    print("\n" + "=" * 100)
-    print("EXECUTING STATISTICAL & DATA INTEGRITY TESTS")
-    print("=" * 100)
-    
-    # Check 1: Zero Nulls
-    null_counts = df_monthly.isnull().sum().sum()
-    assert null_counts == 0, f"Integrity Failure: Found {null_counts} null values in monthly dataset!"
-    print("[PASS] Check 1: Zero Null Values across all 38 columns.")
+def to_quarterly(monthly):
+    keys = ["State_Name", "State_LGD_Code", "District_Name", "District_LGD_Code", "Timestamp_Quarter", "Year", "Sector_Name",
+            "NIC_Code", "NCO_Code", "NSQF_Level"]
+    mean_cols = [c for c in monthly.columns if c.endswith("_Count") or c in (
+        "District_Total_Population_Est", "Active_Job_Vacancies", "Total_Employed_Workers", "eShram_Registered_Seekers",
+        "Avg_Monthly_Wage_INR", "Training_Seats_Sanctioned")]
+    g = monthly.groupby(keys, sort=False)
+    q = g[mean_cols].mean().astype(np.int64)
+    q["Unemployment_Rate_Pct"] = g["Unemployment_Rate_Pct"].mean().round(2)
+    q["Trainees_Certified_Quarterly"] = g["Trainees_Certified_Monthly"].sum()
+    q = q.reset_index()
+    emp = q["Total_Employed_Workers"]
+    # keep the exact-sum identities after truncating the monthly means
+    q["Female_Employed_Count"] = emp - q["Male_Employed_Count"] - q["Transgender_Employed_Count"]
+    q["Age_55_Plus_Count"] = emp - q["Age_15_24_Count"] - q["Age_25_54_Count"]
+    q["Edu_Graduate_and_Above_Count"] = emp - q["Edu_Below_Primary_Count"] - q["Edu_Secondary_HigherSecondary_Count"] \
+        - q["Qualification_Vocational_ITI_Certified_Count"]
+    pct_of = {"Male_Employed_Count": "Male_Share_Pct", "Female_Employed_Count": "Female_Share_Pct",
+              "Transgender_Employed_Count": "Transgender_Share_Pct", "Age_15_24_Count": "Age_15_24_Pct",
+              "Age_25_54_Count": "Age_25_54_Pct", "Age_55_Plus_Count": "Age_55_Plus_Pct",
+              "Edu_Below_Primary_Count": "Edu_Below_Primary_Pct",
+              "Edu_Secondary_HigherSecondary_Count": "Edu_Secondary_HigherSecondary_Pct",
+              "Qualification_Vocational_ITI_Certified_Count": "Qualification_Vocational_ITI_Certified_Pct",
+              "Edu_Graduate_and_Above_Count": "Edu_Graduate_and_Above_Pct"}
+    for c, pc in pct_of.items():
+        q[pc] = np.round(q[c] / emp * 100.0, 2)
+    q["Timestamp"] = q["Timestamp_Quarter"]
+    q["Quarter"] = q["Timestamp_Quarter"].str[-1].astype(int)
+    cols = ["State_Name", "State_LGD_Code", "District_Name", "District_LGD_Code", "District_Total_Population_Est", "Timestamp",
+            "Timestamp_Quarter", "Year", "Quarter", "Sector_Name", "NIC_Code", "NCO_Code", "NSQF_Level"]
+    cols += [c for c in monthly.columns if c in q.columns and c not in cols] + ["Trainees_Certified_Quarterly"]
+    return q.sort_values(["Year", "Quarter", "State_Name", "District_Name", "Sector_Name"])[cols].reset_index(drop=True)
 
-    # Check 2: Sum Consistency on Counts
-    diff_gender = (df_monthly["Total_Employed_Workers"] - (df_monthly["Male_Employed_Count"] + df_monthly["Female_Employed_Count"] + df_monthly["Transgender_Employed_Count"])).abs().max()
-    assert diff_gender == 0, "Integrity Failure: Gender counts do not sum to total employed!"
-    print("[PASS] Check 2: Gender Counts sum exactly to Total_Employed_Workers.")
 
-    diff_age = (df_monthly["Total_Employed_Workers"] - (df_monthly["Age_15_24_Count"] + df_monthly["Age_25_54_Count"] + df_monthly["Age_55_Plus_Count"])).abs().max()
-    assert diff_age == 0, "Integrity Failure: Age counts do not sum to total employed!"
-    print("[PASS] Check 3: Age Counts sum exactly to Total_Employed_Workers.")
+def self_check(m, cat):
+    """Quick generation-time sanity report (the formal audit is src/data_collection/validate_raw_data.py)."""
+    print("\n--- generation-time sanity report ---")
+    nat = m.groupby(["Sector_Name", "Timestamp"])["Total_Employed_Workers"].sum().unstack(0)
+    print("National employment, Apr-2020 vs Feb-2020 (%):")
+    print(((nat.loc["2020-04"] / nat.loc["2020-02"] - 1) * 100).round(1).to_string())
+    vac = m.groupby(["Sector_Name", "Timestamp"])["Active_Job_Vacancies"].sum().unstack(0)
+    print("National vacancies, Apr-2020 vs Feb-2020 (%):")
+    print(((vac.loc["2020-04"] / vac.loc["2020-02"] - 1) * 100).round(1).to_string())
+    last = m[m.Timestamp.between("2025-01", "2025-12")]
+    dens = (last.assign(d=last.Total_Employed_Workers / last.District_Total_Population_Est)
+            .groupby(["Sector_Name", "District_Name"])["d"].mean().unstack(0))
+    hubs = ["Pune", "Mumbai Suburban", "Chennai", "South Delhi", "North 24 Parganas"]
+    peri = ["Gadchiroli", "Nandurbar", "Washim"]
+    print("Hub / peripheral per-capita employment density ratio (2025):")
+    print((dens.loc[hubs].mean() / dens.loc[peri].mean()).round(1).to_string())
+    print("Female share (%) by sector:", m.groupby("Sector_Name")["Female_Share_Pct"].mean().round(1).to_dict())
+    print("IT-ITeS graduate share (%):", round(m[m.Sector_Name == "IT-ITeS"]["Edu_Graduate_and_Above_Pct"].mean(), 2))
+    print("Unemployment range:", m["Unemployment_Rate_Pct"].min(), "-", m["Unemployment_Rate_Pct"].max(),
+          "| share of rows at the 3.5/12.0 bounds:",
+          round(float(m["Unemployment_Rate_Pct"].isin([3.5, 12.0]).mean()), 3))
 
-    diff_edu = (df_monthly["Total_Employed_Workers"] - (df_monthly["Edu_Below_Primary_Count"] + df_monthly["Edu_Secondary_HigherSecondary_Count"] + df_monthly["Qualification_Vocational_ITI_Certified_Count"] + df_monthly["Edu_Graduate_and_Above_Count"])).abs().max()
-    assert diff_edu == 0, "Integrity Failure: Education counts do not sum to total employed!"
-    print("[PASS] Check 4: Education Counts sum exactly to Total_Employed_Workers.")
 
-    # Check 5: Sector Education Constraint (>80% Graduate in IT-ITeS)
-    it_grad_mean = df_monthly[df_monthly["Sector_Name"] == "IT-ITeS"]["Edu_Graduate_and_Above_Pct"].mean()
-    assert it_grad_mean > 80.0, f"Constraint Failure: IT Graduate share is {it_grad_mean:.2f}%, expected >80%!"
-    print(f"[PASS] Check 5: IT-ITeS Graduate Share is {it_grad_mean:.2f}% (>80% requirement verified).")
+def main():
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    print(f"Generating {len(DISTRICTS)} districts x {len(SECTORS)} sectors x {N} months (seed {SEED})...")
+    cat, pop, out = generate()
+    monthly = to_long(cat, pop, out)
+    quarterly = to_quarterly(monthly)
+    monthly.to_csv(os.path.join(OUTPUT_DIR, "lmis_district_monthly_2011_2026.csv"), index=False)
+    quarterly.to_csv(os.path.join(OUTPUT_DIR, "lmis_district_quarterly_2011_2026.csv"), index=False)
+    cat.to_csv(os.path.join(OUTPUT_DIR, "district_catalog.csv"), index=False)
+    cw = pd.DataFrame([(s, SECTOR[s]["nic"], i == 0, code, title) for s, fams in CROSSWALK.items()
+                       for i, (code, title) in enumerate(fams)],
+                      columns=["Sector_Name", "NIC_Code", "Is_Anchor_Code", "NCO_2015_Family", "NCO_2015_Title"])
+    cw.to_csv(os.path.join(OUTPUT_DIR, "sector_nco_crosswalk.csv"), index=False)
+    print(f"monthly {monthly.shape}, quarterly {quarterly.shape}")
+    self_check(monthly, cat)
 
-    # Check 6: Gender Participation Constraint (Healthcare > Textiles > Construction)
-    hc_fem = df_monthly[df_monthly["Sector_Name"] == "Healthcare"]["Female_Share_Pct"].mean()
-    tex_fem = df_monthly[df_monthly["Sector_Name"] == "Textiles and Apparel"]["Female_Share_Pct"].mean()
-    con_fem = df_monthly[df_monthly["Sector_Name"] == "Construction"]["Female_Share_Pct"].mean()
-    assert hc_fem > 40.0 and tex_fem > 35.0 and con_fem < 18.0, "Constraint Failure on gender realism!"
-    print(f"[PASS] Check 6: Female Participation: Healthcare={hc_fem:.2f}%, Textiles={tex_fem:.2f}%, Construction={con_fem:.2f}%.")
-
-    # Check 7: Pandemic Drop Constraint
-    mfg_2019_emp = df_monthly[(df_monthly["Sector_Name"] == "Manufacturing") & (df_monthly["Timestamp"] == "2019-04")]["Total_Employed_Workers"].sum()
-    mfg_2020_emp = df_monthly[(df_monthly["Sector_Name"] == "Manufacturing") & (df_monthly["Timestamp"] == "2020-04")]["Total_Employed_Workers"].sum()
-    drop_mfg = (mfg_2019_emp - mfg_2020_emp) / mfg_2019_emp * 100.0
-    print(f"[PASS] Check 7: COVID-19 Shock Impact on Manufacturing: {drop_mfg:.2f}% drop observed in April 2020.")
-
-    # Check 8: District Economic Density Constraint (Pune vs Gadchiroli IT volume)
-    pune_it = df_monthly[(df_monthly["District_Name"] == "Pune") & (df_monthly["Sector_Name"] == "IT-ITeS") & (df_monthly["Timestamp"] == "2025-01")]["Total_Employed_Workers"].iloc[0]
-    gad_it = df_monthly[(df_monthly["District_Name"] == "Gadchiroli") & (df_monthly["Sector_Name"] == "IT-ITeS") & (df_monthly["Timestamp"] == "2025-01")]["Total_Employed_Workers"].iloc[0]
-    ratio = pune_it / gad_it
-    print(f"[PASS] Check 8: Metro Density Ratio (Pune IT / Gadchiroli IT): {ratio:.2f}x (satisfies 4x-8x constraint).")
-
-    print("=" * 100)
-    print("ALL INTEGRITY CHECKS PASSED. DATASETS ARE PRODUCTION-READY.")
-    print("=" * 100)
 
 if __name__ == "__main__":
-    generate_master_dataset()
+    main()

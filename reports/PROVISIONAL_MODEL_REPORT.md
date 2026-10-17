@@ -1,6 +1,8 @@
 # LMIS Forecasting Model – Method, Results, Limitations (PROVISIONAL)
 
 > **Provisional:** built before Phases 2–4 were signed off. Treat results as a prototype; they will be regenerated once the earlier phases are complete.
+>
+> **Stale figures:** every number and limitation below describes the *v1* data (fixed vacancy/seeker ratios, 42% cap). The data was regenerated (v2) in Phase 2, and the files in `outputs/provisional/` now come from v2. On v2 the prototype gave WAPE ≈ 1.6% employed, 9.0% vacancies, 5.4% seekers, and status flags that vary within a sector. This report will be rewritten in Phases 5–8.
 
 Script: `src/modeling/lmis_forecast_model.py` (about 30 s to run). Data: `data/raw/lmis_district_monthly_2011_2026.csv` only. Nothing under `Archived/` is read, and the script asserts this.
 

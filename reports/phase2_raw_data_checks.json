@@ -1,22 +1,22 @@
 {
   "as_of": "2026-10-18",
   "summary": {
-    "PASS": 12,
-    "WARN": 4,
-    "FAIL": 1
+    "PASS": 22,
+    "WARN": 3,
+    "FAIL": 0
   },
   "checks": [
     {
       "id": "C00",
       "check": "raw files match recorded checksums",
       "status": "PASS",
-      "detail": "all 3 files unchanged since manifest"
+      "detail": "all 5 files unchanged since manifest"
     },
     {
       "id": "C01-m",
       "check": "monthly shape",
       "status": "PASS",
-      "detail": "(53760, 39) (expected (53760, 39))"
+      "detail": "(53760, 41) (expected (53760, 41))"
     },
     {
       "id": "C02-m",
@@ -34,7 +34,7 @@
       "id": "C01-q",
       "check": "quarterly shape",
       "status": "PASS",
-      "detail": "(17920, 38) (expected (17920, 38))"
+      "detail": "(17920, 40) (expected (17920, 40))"
     },
     {
       "id": "C02-q",
@@ -56,9 +56,9 @@
     },
     {
       "id": "C05",
-      "check": "district LGD codes unique and numeric",
-      "status": "WARN",
-      "detail": "unique=True; non-numeric: {'Nandurbar': '497A'}"
+      "check": "district LGD codes unique, numeric and match the catalog",
+      "status": "PASS",
+      "detail": "unique=True; non-numeric=0; sources: {'Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in)': 36, 'LGD district export (gist planemad/cd6b5237...); Kolkata also West Bengal State Health Society LGD list': 20}"
     },
     {
       "id": "C06",
@@ -92,18 +92,66 @@
     },
     {
       "id": "C11",
-      "check": "sector NCO codes exist in NCO-2015 workbook",
-      "status": "FAIL",
-      "detail": "3/5 found; not in NCO-2015: {'Manufacturing': '8110', 'Textiles and Apparel': '8261'}"
+      "check": "NCO codes exist in NCO-2015 workbook (anchor + crosswalk)",
+      "status": "PASS",
+      "detail": "25/25 crosswalk families found; title mismatches=0; anchors match data=True"
     },
     {
       "id": "C12",
-      "check": "employment-rate cap not binding",
-      "status": "WARN",
-      "detail": "25.0% of rows sit at the 42% generator cap; by sector: {'Construction': 0.151, 'Healthcare': 0.036, 'IT-ITeS': 0.31, 'Manufacturing': 0.641, 'Textiles and Apparel': 0.113}"
+      "check": "COVID shock matches spec",
+      "status": "PASS",
+      "detail": "employment {'Construction': -50.4, 'Manufacturing': -37.8, 'Textiles and Apparel': -42.9} (spec {'Construction': -52, 'Manufacturing': -38, 'Textiles and Apparel': -42}); vacancies Healthcare +47.5% (spec +44), IT-ITeS +12.5% (spec +12)"
     },
     {
       "id": "C13",
+      "check": "hub / peripheral per-capita density 4-8x (Manufacturing)",
+      "status": "PASS",
+      "detail": "Manufacturing 4.2x; others {'Construction': 1.7, 'Healthcare': 2.9, 'IT-ITeS': 20.3, 'Textiles and Apparel': 2.1}"
+    },
+    {
+      "id": "C13b",
+      "check": "IT-ITeS disparity vs the 4-8x spec",
+      "status": "WARN",
+      "detail": "20.3x - documented deviation: real IT concentration is far steeper than 8x"
+    },
+    {
+      "id": "C14",
+      "check": "female share bands; IT-ITeS graduate share > 80% in every row",
+      "status": "PASS",
+      "detail": "female {'Construction': 13.4, 'Healthcare': 49.5, 'IT-ITeS': 35.4, 'Manufacturing': 17.4, 'Textiles and Apparel': 43.5}; IT graduates mean 83.6%, row minimum 80.4%"
+    },
+    {
+      "id": "C15",
+      "check": "no clipping artefacts",
+      "status": "PASS",
+      "detail": "max five-sector employment = 32.4% of working-age population; 0.7% of unemployment values at the 3.5/12.0 bounds; 0 count values on the generator's minimum of 1"
+    },
+    {
+      "id": "C16",
+      "check": "district-level variation in vacancy/seeker coverage within each sector",
+      "status": "PASS",
+      "detail": "std of log coverage across districts: {'Construction': 0.27, 'Healthcare': 0.26, 'IT-ITeS': 0.41, 'Manufacturing': 0.29, 'Textiles and Apparel': 0.27}"
+    },
+    {
+      "id": "C17",
+      "check": "training capacity columns coherent",
+      "status": "PASS",
+      "detail": "seats constant within financial year=True; certified <= seats in every full FY=True"
+    },
+    {
+      "id": "C18",
+      "check": "quarterly certified = sum of monthly",
+      "status": "PASS",
+      "detail": "exact match"
+    },
+    {
+      "id": "C20",
+      "check": "no start-up transient in 2011 (seekers month-on-month jumps > 25%)",
+      "status": "PASS",
+      "detail": "0 jumps in 2011 vs 4.5 per year in 2012-2019"
+    },
+    {
+      "id": "C19",
       "check": "legacy dataset kept out of the pipeline",
       "status": "WARN",
       "detail": "lmis_employment_monthly_2016_2025.csv still in repo root (identical to Archived copy); not read by any script"

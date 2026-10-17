@@ -2,40 +2,43 @@ column,dtype,role,unit,description,in_monthly,in_quarterly,nulls,min,max,n_uniqu
 State_Name,object,key,text,State / UT name,True,True,0,,,4
 State_LGD_Code,object,key,text,"State LGD code (27, 33, 07, 19)",True,True,0,,,4
 District_Name,object,key,text,District name,True,True,0,,,56
-District_LGD_Code,object,key,text,District LGD code as supplied by the generator,True,True,0,,,56
-District_Total_Population_Est,int64,covariate,persons,Census-2011 population projected at the district growth rate,True,True,0,142004,12331320,10741
+District_LGD_Code,object,key,text,Official LGD district code (source in district_catalog.csv),True,True,0,,,56
+District_Total_Population_Est,int64,covariate,persons,Census-2011 population projected at the district growth rate,True,True,0,120842,12331320,10741
 Timestamp,object,key,YYYY-MM or YYYY-Qn,Period identifier,True,True,0,,,192
 Timestamp_Month,object,key,YYYY-MM,Month identifier (monthly file only),True,False,0,,,192
 Timestamp_Quarter,object,key,YYYY-Qn,Quarter identifier,True,True,0,,,64
 Year,int64,key,year,Calendar year,True,True,0,2011,2026,16
 Month,int64,key,1-12,Calendar month (monthly file only),True,False,0,1,12,12
 Sector_Name,object,key,text,One of 5 target sectors,True,True,0,,,5
-NIC_Code,object,key,text,NIC-2008 division range of the sector,True,True,0,,,5
-NCO_Code,int64,key,NCO-2015 family,Single NCO-2015 4-digit family assigned to the sector,True,True,0,2211,8261,5
+NIC_Code,object,key,text,NIC-2008 division range of the sector (Manufacturing excludes textiles/apparel),True,True,0,,,5
+NCO_Code,int64,key,NCO-2015 family,Anchor NCO-2015 4-digit family of the sector; full list in sector_nco_crosswalk.csv,True,True,0,2211,8153,5
 NSQF_Level,object,key,text,NSQF level band of the sector,True,True,0,,,4
-Male_Employed_Count,int64,covariate,persons,Employed males,True,True,0,991,1546231,50568
-Female_Employed_Count,int64,covariate,persons,Employed females,True,True,0,516,986617,47038
-Transgender_Employed_Count,int64,covariate,persons,Employed transgender persons,True,True,0,1,3331,2704
-Male_Share_Pct,float64,covariate,%,Male share of employment,True,True,0,43.75,89.82,3362
-Female_Share_Pct,float64,covariate,%,Female share of employment,True,True,0,10.1,56.1,3353
-Transgender_Share_Pct,float64,covariate,%,Transgender share of employment,True,True,0,0.05,0.18,12
-Age_15_24_Count,int64,covariate,persons,Employed aged 15-24,True,True,0,406,763556,46540
-Age_25_54_Count,int64,covariate,persons,Employed aged 25-54,True,True,0,1087,1422860,50447
-Age_55_Plus_Count,int64,covariate,persons,Employed aged 55+,True,True,0,20,419190,36732
-Age_15_24_Pct,float64,covariate,%,Share aged 15-24,True,True,0,8.9,46.96,2951
-Age_25_54_Pct,float64,covariate,%,Share aged 25-54,True,True,0,43.33,81.49,2744
-Age_55_Plus_Pct,float64,covariate,%,Share aged 55+,True,True,0,0.05,26.97,2096
-Edu_Below_Primary_Count,int64,covariate,persons,Employed with below-primary education,True,True,0,0,1235099,39394
-Edu_Secondary_HigherSecondary_Count,int64,covariate,persons,Employed with secondary / higher secondary,True,True,0,81,806536,42422
-Qualification_Vocational_ITI_Certified_Count,int64,covariate,persons,Employed with vocational / ITI certification,True,True,0,437,971475,46680
-Edu_Graduate_and_Above_Count,int64,covariate,persons,Employed graduates and above,True,True,0,9,1716210,40383
-Edu_Below_Primary_Pct,float64,covariate,%,Share with below-primary education,True,True,0,0.0,74.76,6023
-Edu_Secondary_HigherSecondary_Pct,float64,covariate,%,Share with secondary / higher secondary,True,True,0,0.34,50.1,4246
-Qualification_Vocational_ITI_Certified_Pct,float64,covariate,%,Share with vocational / ITI certification,True,True,0,2.88,66.26,5300
-Edu_Graduate_and_Above_Pct,float64,covariate,%,Share graduate and above,True,True,0,0.05,93.75,6013
-Active_Job_Vacancies,int64,target,openings,Open job vacancies (demand signal),True,True,0,28,133432,26059
-Total_Employed_Workers,int64,target,persons,Employed stock in the sector (demand outlook),True,True,0,1798,1850969,46667
-eShram_Registered_Seekers,int64,target,persons,e-Shram registered seekers (supply proxy),True,True,0,76,1351000,37605
-Avg_Monthly_Wage_INR,int64,covariate,INR / month,Nominal average monthly wage,True,True,0,9495,85470,29403
-Unemployment_Rate_Pct,float64,covariate,%,Sector unemployment rate (bounded 3.5-12),True,True,0,3.5,12.0,851
+Male_Employed_Count,int64,covariate,persons,Employed males,True,True,0,126,957595,39460
+Female_Employed_Count,int64,covariate,persons,Employed females,True,True,0,90,222390,29301
+Transgender_Employed_Count,int64,covariate,persons,Employed transgender persons,True,True,0,0,1408,909
+Male_Share_Pct,float64,covariate,%,Male share of employment,True,True,0,46.29,90.45,3113
+Female_Share_Pct,float64,covariate,%,Female share of employment,True,True,0,9.47,53.56,3110
+Transgender_Share_Pct,float64,covariate,%,Transgender share of employment,True,True,0,0.0,0.26,23
+Age_15_24_Count,int64,covariate,persons,Employed aged 15-24,True,True,0,46,285216,29297
+Age_25_54_Count,int64,covariate,persons,Employed aged 25-54,True,True,0,147,757638,39037
+Age_55_Plus_Count,int64,covariate,persons,Employed aged 55+,True,True,0,6,140644,19046
+Age_15_24_Pct,float64,covariate,%,Share aged 15-24,True,True,0,11.84,44.48,2625
+Age_25_54_Pct,float64,covariate,%,Share aged 25-54,True,True,0,50.45,76.74,2179
+Age_55_Plus_Pct,float64,covariate,%,Share aged 55+,True,True,0,0.57,21.35,1782
+Edu_Below_Primary_Count,int64,covariate,persons,Employed with below-primary education,True,True,0,0,355445,27722
+Edu_Secondary_HigherSecondary_Count,int64,covariate,persons,Employed with secondary / higher secondary,True,True,0,19,334218,24896
+Qualification_Vocational_ITI_Certified_Count,int64,covariate,persons,Employed with vocational / ITI certification,True,True,0,49,455165,30532
+Edu_Graduate_and_Above_Count,int64,covariate,persons,Employed graduates and above,True,True,0,10,464686,22087
+Edu_Below_Primary_Pct,float64,covariate,%,Share with below-primary education,True,True,0,0.0,68.23,4820
+Edu_Secondary_HigherSecondary_Pct,float64,covariate,%,Share with secondary / higher secondary,True,True,0,1.11,42.51,3671
+Qualification_Vocational_ITI_Certified_Pct,float64,covariate,%,Share with vocational / ITI certification,True,True,0,5.68,54.71,4512
+Edu_Graduate_and_Above_Pct,float64,covariate,%,Share graduate and above,True,True,0,0.26,91.73,4510
+Active_Job_Vacancies,int64,target,openings,Open job vacancies (demand signal),True,True,0,2,33650,7815
+Total_Employed_Workers,int64,target,persons,Employed stock in the sector (demand outlook),True,True,0,216,1173128,43151
+eShram_Registered_Seekers,int64,target,persons,Registered job-seeker / worker pool (supply proxy). Structural break at the Aug-2021 e-Shram launch,True,True,0,18,254156,19067
+Avg_Monthly_Wage_INR,int64,covariate,INR / month,Nominal average monthly wage,True,True,0,8561,90031,29345
+Unemployment_Rate_Pct,float64,covariate,%,Sector unemployment rate (bounded 3.5-12),True,True,0,3.5,12.0,826
+Training_Seats_Sanctioned,int64,supply-capacity,seats / year,"Annual sanctioned formal skilling seats (ITI, diploma, short-term NSQF centres) for the sector in the district; constant within a financial year",True,True,0,12,44676,3210
+Trainees_Certified_Monthly,int64,supply-capacity,persons / month,Candidates certified in the month (training outturn),True,False,0,0,7305,1676
 Quarter,int64,key,1-4,Calendar quarter (quarterly file only),False,True,0,1,4,4
+Trainees_Certified_Quarterly,int64,supply-capacity,persons / quarter,Candidates certified in the quarter (quarterly file only),False,True,0,0,12868,2301
