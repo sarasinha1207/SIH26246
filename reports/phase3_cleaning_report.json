@@ -1,0 +1,83 @@
+{
+  "as_of": "2026-10",
+  "steps": [
+    {
+      "step": "integrity",
+      "action": "checked",
+      "missing": 0,
+      "duplicate_keys": 0,
+      "negative_values": 0,
+      "count_identity_errors": 0
+    },
+    {
+      "step": "typing/keys",
+      "action": "built Series_ID, Date, Sector_Code, Quarter_ID; joined Econ_Tier from district catalog",
+      "rows_before": 53760,
+      "rows_after": 53760,
+      "series": 280
+    },
+    {
+      "step": "structural breaks",
+      "action": "flagged (not smoothed)",
+      "covid": "2020-03..2022-02",
+      "policy": "2016-11..2017-01, 2017-07..2017-10",
+      "eshram_ramp": "2021-08..2023-02 (data-driven end)",
+      "simulated_future_months": 2
+    },
+    {
+      "step": "anomaly scan",
+      "action": "flagged, retained (no winsorising/imputation)",
+      "rule": "|robust z|>6 vs 13-month median, outside covid/policy windows",
+      "rows_flagged": 29,
+      "share_pct": 0.054,
+      "by_measure": {
+        "Active_Job_Vacancies": 1,
+        "Avg_Monthly_Wage_INR": 6,
+        "Total_Employed_Workers": 14,
+        "Unemployment_Rate_Pct": 7,
+        "eShram_Registered_Seekers": 1
+      }
+    },
+    {
+      "step": "split",
+      "action": "assigned time-ordered roles",
+      "train": "<=2023-12",
+      "validation": "2024",
+      "test": "2025-01..2026-12",
+      "counts": {
+        "train": 43680,
+        "test": 6720,
+        "validation": 3360
+      }
+    },
+    {
+      "step": "value preservation",
+      "action": "compared every retained measure with raw",
+      "values_modified": 0,
+      "columns_compared": 28
+    },
+    {
+      "step": "quarterly",
+      "action": "same typing/keys/flags applied",
+      "rows": 17920,
+      "series": 280,
+      "simulated_future_quarters": 1
+    },
+    {
+      "step": "series volume",
+      "action": "computed from the last 24 training months only (no validation/test data)",
+      "low_volume_series": 4,
+      "rule": "median vacancies < 50"
+    }
+  ],
+  "outputs": {
+    "monthly": [
+      53760,
+      47
+    ],
+    "quarterly": [
+      17920,
+      46
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+target,sector,transform,share_rejecting_unit_root_pct
+Employed workers,Manufacturing,level (log),3.6
+Employed workers,Manufacturing,12-month difference,19.6
+Employed workers,Manufacturing,month-on-month difference,71.4
+Employed workers,Construction,level (log),0.0
+Employed workers,Construction,12-month difference,10.7
+Employed workers,Construction,month-on-month difference,58.9
+Employed workers,IT-ITeS,level (log),3.6
+Employed workers,IT-ITeS,12-month difference,14.3
+Employed workers,IT-ITeS,month-on-month difference,87.5
+Employed workers,Healthcare,level (log),0.0
+Employed workers,Healthcare,12-month difference,21.4
+Employed workers,Healthcare,month-on-month difference,96.4
+Employed workers,Textiles and Apparel,level (log),0.0
+Employed workers,Textiles and Apparel,12-month difference,19.6
+Employed workers,Textiles and Apparel,month-on-month difference,55.4
+Job vacancies,Manufacturing,level (log),41.1
+Job vacancies,Manufacturing,12-month difference,32.1
+Job vacancies,Manufacturing,month-on-month difference,98.2
+Job vacancies,Construction,level (log),25.0
+Job vacancies,Construction,12-month difference,37.5
+Job vacancies,Construction,month-on-month difference,73.2
+Job vacancies,IT-ITeS,level (log),21.4
+Job vacancies,IT-ITeS,12-month difference,30.4
+Job vacancies,IT-ITeS,month-on-month difference,100.0
+Job vacancies,Healthcare,level (log),7.1
+Job vacancies,Healthcare,12-month difference,26.8
+Job vacancies,Healthcare,month-on-month difference,100.0
+Job vacancies,Textiles and Apparel,level (log),44.6
+Job vacancies,Textiles and Apparel,12-month difference,44.6
+Job vacancies,Textiles and Apparel,month-on-month difference,96.4
+Registered seekers,Manufacturing,level (log),0.0
+Registered seekers,Manufacturing,12-month difference,23.2
+Registered seekers,Manufacturing,month-on-month difference,100.0
+Registered seekers,Construction,level (log),0.0
+Registered seekers,Construction,12-month difference,14.3
+Registered seekers,Construction,month-on-month difference,51.8
+Registered seekers,IT-ITeS,level (log),0.0
+Registered seekers,IT-ITeS,12-month difference,17.9
+Registered seekers,IT-ITeS,month-on-month difference,96.4
+Registered seekers,Healthcare,level (log),0.0
+Registered seekers,Healthcare,12-month difference,14.3
+Registered seekers,Healthcare,month-on-month difference,100.0
+Registered seekers,Textiles and Apparel,level (log),0.0
+Registered seekers,Textiles and Apparel,12-month difference,17.9
+Registered seekers,Textiles and Apparel,month-on-month difference,85.7

@@ -1,7 +1,7 @@
 # Phase 1 – Problem Definition
 
 Project: SIH26246 – AI-Enabled Labour Market Intelligence and Skill Demand-Supply Forecasting Engine (MSDE)
-Status: **Complete pending sign-off (Section 12)**. All decisions below are recorded with a rationale. Items marked **[CONFIRM]** are assumptions I made because the data or problem statement doesn't settle them.
+Status: **Approved** (sign-off in Section 12). All decisions below are recorded with a rationale. Items marked **[CONFIRM]** were assumptions that the sign-off confirmed. After Phases 2 and 3, some factual statements went out of date; they were corrected and logged in Section 13. No decision was changed.
 
 ---
 
@@ -39,7 +39,7 @@ Build a model that forecasts labour **demand** and **supply** for every district
 | Term | Definition | Notes |
 |---|---|---|
 | **Demand** | `Active_Job_Vacancies` (employer openings) | Employed workers is reported as the demand *outlook*, not the gap input |
-| **Supply** | `eShram_Registered_Seekers` (registered job-seeker pool) **[CONFIRM]** | The dataset has no training-seat or outturn column. This is a proxy and must be replaced by seat/outturn data if available |
+| **Supply** | `eShram_Registered_Seekers` (registered job-seeker pool) **[CONFIRM]** | The original dataset had no training-seat or outturn column, so this is a proxy. Phase 2 added `Training_Seats_Sanctioned` and `Trainees_Certified_Monthly`; whether to add them to the supply definition is deferred to Phase 8 (Section 13) |
 | **Net gap (persons)** | Vacancies − Seekers | > 0: openings exceed seekers (shortage). < 0: surplus of seekers (oversupply) |
 | **Coverage** | Vacancies ÷ Seekers (openings per registered seeker) | Scale-free, comparable across districts |
 | **Status flag** | Acute Shortage (coverage ≥ 1.00), Balanced, Oversupply Watch (< 0.20), Saturation Risk (< 0.10) | Thresholds are placeholders to calibrate with real placement data |
@@ -59,13 +59,13 @@ Build a model that forecasts labour **demand** and **supply** for every district
 
 ## 7. Data and constraints
 * **Allowed data:** `data/raw/lmis_district_monthly_2011_2026.csv` (and the quarterly version for roll-ups). Reference: `docs/reference/DATA_SOURCES_AND_METHODOLOGY.md`.
-* **Prohibited data:** everything under `Archived/` and the root-level copy `lmis_employment_monthly_2016_2025.csv` (identical to the archived file). The previous dataset must not be used for training, evaluation or comparison.
-* **Known limitations (carried into Phase 2):**
-  * The data is synthetic.
+* **Prohibited data:** everything under `Archived/` and the root-level copy `lmis_employment_monthly_2016_2025.csv` (identical to the archived file; deleted in Phase 2). The previous dataset must not be used for training, evaluation or comparison.
+* **Known limitations (updated after Phase 2, see Section 13):**
+  * The data is synthetic (v2 panel, recalibrated in Phase 2).
   * The last two months (Nov–Dec 2026) lie beyond today's date and are simulated.
-  * The generator clips the employment rate at 0.42, muting the Manufacturing COVID shock.
-  * Vacancies and seekers are fixed ratios of employment plus noise, so district-level gap differences within a sector are small.
-  * There is no training-capacity data.
+  * IT-ITeS hub/periphery disparity is ~20×, above the 4–8× in the brief, by deliberate choice.
+  * Supply is still only a proxy for training capacity: seekers plus the two new seat/outturn columns, all simulated.
+  * There is no trade-level detail, only sector × district.
 
 ## 8. Success criteria
 All measured on a held-out, time-based test period (Section 9).
@@ -112,12 +112,23 @@ Thresholds are set from what the data can support: the generator injects roughly
 | 5 | Multilingual accessible interface | Out of ML scope |
 
 ## 12. Sign-off checklist
-Confirm each item, or tell me what to change:
-- [ ] Targets and horizon (Section 4)
-- [ ] Supply = e-Shram seekers for now (Section 5)
-- [ ] Trade-level forecasting is out of scope (Section 4, 6)
-- [ ] v1 demand index = vacancies; composite index deferred (Section 6)
-- [ ] Success thresholds (Section 8)
-- [ ] `Archived/` and the root-level copy of the old dataset are off limits (Section 7)
+Approved by the project owner in chat after Phase 1 was presented.
+- [x] Targets and horizon (Section 4)
+- [x] Supply = e-Shram seekers for now (Section 5)
+- [x] Trade-level forecasting is out of scope (Section 4, 6)
+- [x] v1 demand index = vacancies; composite index deferred (Section 6)
+- [x] Success thresholds (Section 8)
+- [x] `Archived/` and the root-level copy of the old dataset are off limits (Section 7)
 
-**Exit criterion for Phase 1:** all boxes above ticked. Phase 2 (Data Collection) starts only after that.
+**Exit criterion for Phase 1:** all boxes above ticked. ✔ Phase 2 (Data Collection) started after that.
+
+## 13. Amendment log
+| After | Change | Type |
+|---|---|---|
+| Phase 2 | Section 7 known limitations rewritten: the 42% cap, fixed vacancy/seeker ratios and missing training-capacity data were defects of the v1 panel and no longer apply | Factual correction |
+| Phase 2 | Section 5 and 7 notes: the root-level duplicate was deleted; seat/outturn columns now exist | Factual correction |
+| Phase 3 | Equity check (Section 8): district tier is now available as `Econ_Tier` in the processed tables | Factual correction |
+
+**Deferred amendments (decision made by the project owner, to be revisited in Phase 8):**
+1. Whether supply should be redefined as seekers plus training outturn.
+2. Whether the accuracy thresholds in Section 8 need revising. They were set from the v1 noise floor; the prototype on v2 gave WAPE ≈ 1.6% employed, 9.0% vacancies, 5.4% seekers, against the targets of 2%, 7% and 6%.

@@ -1,0 +1,11 @@
+target,sector,worst_decline_pct,trough_month,months_to_regain_feb2020,peak_surge_pct,peak_month
+Employed workers,Manufacturing,-37.8,2020-04,10.0,0.0,
+Employed workers,Construction,-50.4,2020-05,18.0,0.0,
+Employed workers,IT-ITeS,0.0,,,6.1,2020-09
+Employed workers,Healthcare,0.0,,,9.1,2020-05
+Employed workers,Textiles and Apparel,-42.9,2020-04,17.0,0.0,
+Job vacancies,Manufacturing,-58.6,2020-04,18.0,0.0,
+Job vacancies,Construction,-72.4,2020-05,18.0,0.0,
+Job vacancies,IT-ITeS,0.0,,,19.4,2020-12
+Job vacancies,Healthcare,0.0,,,49.8,2020-05
+Job vacancies,Textiles and Apparel,-65.6,2020-04,18.0,0.0,

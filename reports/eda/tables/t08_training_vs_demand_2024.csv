@@ -1,0 +1,6 @@
+sector,total_variation_distance,spearman_seats_vs_vacancies,seats_per_100_vacancies,certified_to_vacancies_ratio
+Manufacturing,0.191,0.88,191.3,1.13
+Construction,0.165,0.862,95.2,0.56
+IT-ITeS,0.194,0.87,233.2,1.38
+Healthcare,0.16,0.879,274.3,1.62
+Textiles and Apparel,0.186,0.886,183.1,1.08

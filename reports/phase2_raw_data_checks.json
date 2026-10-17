@@ -1,8 +1,8 @@
 {
   "as_of": "2026-10-18",
   "summary": {
-    "PASS": 22,
-    "WARN": 3,
+    "PASS": 24,
+    "WARN": 2,
     "FAIL": 0
   },
   "checks": [
@@ -71,6 +71,12 @@
       "check": "share columns sum to 100%",
       "status": "PASS",
       "detail": "max deviation = 0.010 pp"
+    },
+    {
+      "id": "C07q",
+      "check": "quarterly counts sum to total and shares to 100%",
+      "status": "PASS",
+      "detail": "max count error = 0; max share deviation = 0.010 pp"
     },
     {
       "id": "C08",
@@ -153,8 +159,8 @@
     {
       "id": "C19",
       "check": "legacy dataset kept out of the pipeline",
-      "status": "WARN",
-      "detail": "lmis_employment_monthly_2016_2025.csv still in repo root (identical to Archived copy); not read by any script"
+      "status": "PASS",
+      "detail": "no legacy copy in repo root"
     }
   ]
 }

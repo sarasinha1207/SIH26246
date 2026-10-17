@@ -1,0 +1,1162 @@
+{
+  "scope": {
+    "rows": 47040,
+    "series": 280,
+    "first": "2011-01-01",
+    "last": "2024-12-01",
+    "roles": [
+      "train",
+      "validation"
+    ],
+    "ramp": "2021-08..2023-02"
+  },
+  "sector_summary": {
+    "Construction": {
+      "Employed": 7923295.08,
+      "Vacancies": 116716.42,
+      "Seekers": 2789794.17,
+      "Seats": 111068.75,
+      "Certified": 65540.0,
+      "Wage": 22252.47,
+      "UR": 6.46,
+      "Emp_CAGR_2011_2019_pct": 3.0,
+      "Emp_CAGR_2022_2024_pct": 8.96
+    },
+    "Healthcare": {
+      "Employed": 2665561.42,
+      "Vacancies": 80486.67,
+      "Seekers": 502229.83,
+      "Seats": 220803.0,
+      "Certified": 130624.0,
+      "Wage": 39742.25,
+      "UR": 4.57,
+      "Emp_CAGR_2011_2019_pct": 3.81,
+      "Emp_CAGR_2022_2024_pct": 7.97
+    },
+    "IT-ITeS": {
+      "Employed": 2358976.5,
+      "Vacancies": 86821.75,
+      "Seekers": 146078.58,
+      "Seats": 202468.75,
+      "Certified": 119607.0,
+      "Wage": 62197.47,
+      "UR": 4.75,
+      "Emp_CAGR_2011_2019_pct": 5.42,
+      "Emp_CAGR_2022_2024_pct": 7.48
+    },
+    "Manufacturing": {
+      "Employed": 10843613.17,
+      "Vacancies": 246697.67,
+      "Seekers": 1845053.75,
+      "Seats": 472020.5,
+      "Certified": 279797.0,
+      "Wage": 27295.71,
+      "UR": 5.26,
+      "Emp_CAGR_2011_2019_pct": 1.73,
+      "Emp_CAGR_2022_2024_pct": 7.64
+    },
+    "Textiles and Apparel": {
+      "Employed": 3067246.08,
+      "Vacancies": 53987.83,
+      "Seekers": 820018.42,
+      "Seats": 98833.25,
+      "Certified": 58089.0,
+      "Wage": 21408.81,
+      "UR": 5.82,
+      "Emp_CAGR_2011_2019_pct": 0.21,
+      "Emp_CAGR_2022_2024_pct": 6.21
+    }
+  },
+  "seasonality": [
+    {
+      "target": "Employed workers",
+      "sector": "Manufacturing",
+      "anova_p": 0.0,
+      "amplitude_pct": 5.16,
+      "peak_month": 2,
+      "trough_month": 8,
+      "variance_share_pct": 44.28
+    },
+    {
+      "target": "Employed workers",
+      "sector": "Construction",
+      "anova_p": 0.0,
+      "amplitude_pct": 14.78,
+      "peak_month": 2,
+      "trough_month": 8,
+      "variance_share_pct": 68.76
+    },
+    {
+      "target": "Employed workers",
+      "sector": "IT-ITeS",
+      "anova_p": 0.0,
+      "amplitude_pct": 1.97,
+      "peak_month": 7,
+      "trough_month": 1,
+      "variance_share_pct": 31.19
+    },
+    {
+      "target": "Employed workers",
+      "sector": "Healthcare",
+      "anova_p": 0.0,
+      "amplitude_pct": 1.74,
+      "peak_month": 9,
+      "trough_month": 1,
+      "variance_share_pct": 34.16
+    },
+    {
+      "target": "Employed workers",
+      "sector": "Textiles and Apparel",
+      "anova_p": 0.0,
+      "amplitude_pct": 11.6,
+      "peak_month": 11,
+      "trough_month": 5,
+      "variance_share_pct": 69.83
+    },
+    {
+      "target": "Job vacancies",
+      "sector": "Manufacturing",
+      "anova_p": 3.71e-187,
+      "amplitude_pct": 6.7,
+      "peak_month": 2,
+      "trough_month": 7,
+      "variance_share_pct": 12.21
+    },
+    {
+      "target": "Job vacancies",
+      "sector": "Construction",
+      "anova_p": 0.0,
+      "amplitude_pct": 16.01,
+      "peak_month": 1,
+      "trough_month": 8,
+      "variance_share_pct": 36.13
+    },
+    {
+      "target": "Job vacancies",
+      "sector": "IT-ITeS",
+      "anova_p": 1.53e-40,
+      "amplitude_pct": 3.48,
+      "peak_month": 7,
+      "trough_month": 1,
+      "variance_share_pct": 3.15
+    },
+    {
+      "target": "Job vacancies",
+      "sector": "Healthcare",
+      "anova_p": 1.64e-53,
+      "amplitude_pct": 3.62,
+      "peak_month": 7,
+      "trough_month": 1,
+      "variance_share_pct": 4.04
+    },
+    {
+      "target": "Job vacancies",
+      "sector": "Textiles and Apparel",
+      "anova_p": 0.0,
+      "amplitude_pct": 12.61,
+      "peak_month": 11,
+      "trough_month": 5,
+      "variance_share_pct": 24.91
+    },
+    {
+      "target": "Registered seekers",
+      "sector": "Manufacturing",
+      "anova_p": 5.71e-88,
+      "amplitude_pct": 3.26,
+      "peak_month": 12,
+      "trough_month": 6,
+      "variance_share_pct": 6.77
+    },
+    {
+      "target": "Registered seekers",
+      "sector": "Construction",
+      "anova_p": 0.0,
+      "amplitude_pct": 12.92,
+      "peak_month": 2,
+      "trough_month": 7,
+      "variance_share_pct": 51.15
+    },
+    {
+      "target": "Registered seekers",
+      "sector": "IT-ITeS",
+      "anova_p": 2e-24,
+      "amplitude_pct": 1.89,
+      "peak_month": 8,
+      "trough_month": 4,
+      "variance_share_pct": 2.18
+    },
+    {
+      "target": "Registered seekers",
+      "sector": "Healthcare",
+      "anova_p": 1.09e-23,
+      "amplitude_pct": 2.15,
+      "peak_month": 9,
+      "trough_month": 6,
+      "variance_share_pct": 2.13
+    },
+    {
+      "target": "Registered seekers",
+      "sector": "Textiles and Apparel",
+      "anova_p": 0.0,
+      "amplitude_pct": 9.97,
+      "peak_month": 10,
+      "trough_month": 5,
+      "variance_share_pct": 34.38
+    }
+  ],
+  "covid": [
+    {
+      "target": "Employed workers",
+      "sector": "Manufacturing",
+      "worst_decline_pct": -37.8,
+      "trough_month": "2020-04",
+      "months_to_regain_feb2020": 10.0,
+      "peak_surge_pct": 0.0,
+      "peak_month": ""
+    },
+    {
+      "target": "Employed workers",
+      "sector": "Construction",
+      "worst_decline_pct": -50.4,
+      "trough_month": "2020-05",
+      "months_to_regain_feb2020": 18.0,
+      "peak_surge_pct": 0.0,
+      "peak_month": ""
+    },
+    {
+      "target": "Employed workers",
+      "sector": "IT-ITeS",
+      "worst_decline_pct": 0.0,
+      "trough_month": "",
+      "months_to_regain_feb2020": NaN,
+      "peak_surge_pct": 6.1,
+      "peak_month": "2020-09"
+    },
+    {
+      "target": "Employed workers",
+      "sector": "Healthcare",
+      "worst_decline_pct": 0.0,
+      "trough_month": "",
+      "months_to_regain_feb2020": NaN,
+      "peak_surge_pct": 9.1,
+      "peak_month": "2020-05"
+    },
+    {
+      "target": "Employed workers",
+      "sector": "Textiles and Apparel",
+      "worst_decline_pct": -42.9,
+      "trough_month": "2020-04",
+      "months_to_regain_feb2020": 17.0,
+      "peak_surge_pct": 0.0,
+      "peak_month": ""
+    },
+    {
+      "target": "Job vacancies",
+      "sector": "Manufacturing",
+      "worst_decline_pct": -58.6,
+      "trough_month": "2020-04",
+      "months_to_regain_feb2020": 18.0,
+      "peak_surge_pct": 0.0,
+      "peak_month": ""
+    },
+    {
+      "target": "Job vacancies",
+      "sector": "Construction",
+      "worst_decline_pct": -72.4,
+      "trough_month": "2020-05",
+      "months_to_regain_feb2020": 18.0,
+      "peak_surge_pct": 0.0,
+      "peak_month": ""
+    },
+    {
+      "target": "Job vacancies",
+      "sector": "IT-ITeS",
+      "worst_decline_pct": 0.0,
+      "trough_month": "",
+      "months_to_regain_feb2020": NaN,
+      "peak_surge_pct": 19.4,
+      "peak_month": "2020-12"
+    },
+    {
+      "target": "Job vacancies",
+      "sector": "Healthcare",
+      "worst_decline_pct": 0.0,
+      "trough_month": "",
+      "months_to_regain_feb2020": NaN,
+      "peak_surge_pct": 49.8,
+      "peak_month": "2020-05"
+    },
+    {
+      "target": "Job vacancies",
+      "sector": "Textiles and Apparel",
+      "worst_decline_pct": -65.6,
+      "trough_month": "2020-04",
+      "months_to_regain_feb2020": 18.0,
+      "peak_surge_pct": 0.0,
+      "peak_month": ""
+    }
+  ],
+  "coverage": {
+    "Manufacturing": {
+      "pre_covid": 0.331,
+      "post_ramp": 0.134,
+      "ratio_post_over_pre": 0.41
+    },
+    "Construction": {
+      "pre_covid": 0.168,
+      "post_ramp": 0.043,
+      "ratio_post_over_pre": 0.25
+    },
+    "IT-ITeS": {
+      "pre_covid": 0.613,
+      "post_ramp": 0.648,
+      "ratio_post_over_pre": 1.06
+    },
+    "Healthcare": {
+      "pre_covid": 0.402,
+      "post_ramp": 0.161,
+      "ratio_post_over_pre": 0.4
+    },
+    "Textiles and Apparel": {
+      "pre_covid": 0.246,
+      "post_ramp": 0.067,
+      "ratio_post_over_pre": 0.27
+    }
+  },
+  "density": {
+    "it_ratio_top_tier_to_tribal": 26.9,
+    "mfg_ratio_hub_to_tribal": 4.8
+  },
+  "concentration": {
+    "Manufacturing": {
+      "top5_share_pct": 31.5,
+      "top10_share_pct": 50.3,
+      "gini": 0.517,
+      "top_district": "Thane"
+    },
+    "Construction": {
+      "top5_share_pct": 29.1,
+      "top10_share_pct": 45.6,
+      "gini": 0.431,
+      "top_district": "Pune"
+    },
+    "IT-ITeS": {
+      "top5_share_pct": 58.9,
+      "top10_share_pct": 73.7,
+      "gini": 0.705,
+      "top_district": "Pune"
+    },
+    "Healthcare": {
+      "top5_share_pct": 30.0,
+      "top10_share_pct": 48.0,
+      "gini": 0.465,
+      "top_district": "Pune"
+    },
+    "Textiles and Apparel": {
+      "top5_share_pct": 29.7,
+      "top10_share_pct": 48.1,
+      "gini": 0.488,
+      "top_district": "South 24 Parganas"
+    }
+  },
+  "rank_stability": [
+    {
+      "sector": "Manufacturing",
+      "lag_years": 1,
+      "mean_spearman": 0.945
+    },
+    {
+      "sector": "Manufacturing",
+      "lag_years": 2,
+      "mean_spearman": 0.909
+    },
+    {
+      "sector": "Manufacturing",
+      "lag_years": 3,
+      "mean_spearman": 0.885
+    },
+    {
+      "sector": "Manufacturing",
+      "lag_years": 5,
+      "mean_spearman": 0.876
+    },
+    {
+      "sector": "Construction",
+      "lag_years": 1,
+      "mean_spearman": 0.933
+    },
+    {
+      "sector": "Construction",
+      "lag_years": 2,
+      "mean_spearman": 0.881
+    },
+    {
+      "sector": "Construction",
+      "lag_years": 3,
+      "mean_spearman": 0.859
+    },
+    {
+      "sector": "Construction",
+      "lag_years": 5,
+      "mean_spearman": 0.85
+    },
+    {
+      "sector": "IT-ITeS",
+      "lag_years": 1,
+      "mean_spearman": 0.973
+    },
+    {
+      "sector": "IT-ITeS",
+      "lag_years": 2,
+      "mean_spearman": 0.952
+    },
+    {
+      "sector": "IT-ITeS",
+      "lag_years": 3,
+      "mean_spearman": 0.941
+    },
+    {
+      "sector": "IT-ITeS",
+      "lag_years": 5,
+      "mean_spearman": 0.933
+    },
+    {
+      "sector": "Healthcare",
+      "lag_years": 1,
+      "mean_spearman": 0.922
+    },
+    {
+      "sector": "Healthcare",
+      "lag_years": 2,
+      "mean_spearman": 0.861
+    },
+    {
+      "sector": "Healthcare",
+      "lag_years": 3,
+      "mean_spearman": 0.843
+    },
+    {
+      "sector": "Healthcare",
+      "lag_years": 5,
+      "mean_spearman": 0.81
+    },
+    {
+      "sector": "Textiles and Apparel",
+      "lag_years": 1,
+      "mean_spearman": 0.916
+    },
+    {
+      "sector": "Textiles and Apparel",
+      "lag_years": 2,
+      "mean_spearman": 0.858
+    },
+    {
+      "sector": "Textiles and Apparel",
+      "lag_years": 3,
+      "mean_spearman": 0.813
+    },
+    {
+      "sector": "Textiles and Apparel",
+      "lag_years": 5,
+      "mean_spearman": 0.785
+    }
+  ],
+  "acf": {
+    "E": {
+      "lag1": -0.054,
+      "lag2": -0.006,
+      "lag12": 0.822,
+      "lag24": 0.827,
+      "max_abs_other": 0.249
+    },
+    "V": {
+      "lag1": -0.31,
+      "lag2": 0.003,
+      "lag12": 0.14,
+      "lag24": 0.147,
+      "max_abs_other": 0.31
+    },
+    "S": {
+      "lag1": -0.342,
+      "lag2": 0.005,
+      "lag12": 0.158,
+      "lag24": 0.141,
+      "max_abs_other": 0.342
+    }
+  },
+  "leadlag": {
+    "vac_vs_emp_peak_lag": 0,
+    "vac_vs_emp_peak_corr": 0.245,
+    "vac_vs_emp_lag0": 0.245,
+    "vac_vs_seek_peak_lag": 6,
+    "vac_vs_seek_peak_corr": 0.076,
+    "vac_vs_seek_lag0": 0.073
+  },
+  "signal": {
+    "Employed workers": {
+      "employment momentum (12m)": 0.314,
+      "employment momentum (3m)": 0.269,
+      "log size (employed)": 0.068,
+      "log population": 0.065,
+      "training seats per 1,000 pop": 0.053
+    },
+    "Job vacancies": {
+      "vacancy momentum (12m)": 0.319,
+      "vacancy rate (V/E)": 0.23,
+      "employment momentum (12m)": 0.059,
+      "employment momentum (3m)": 0.049,
+      "log population": 0.03
+    },
+    "Registered seekers": {
+      "unemployment rate": 0.235,
+      "seeker rate (S/E)": 0.192,
+      "employment momentum (12m)": 0.063,
+      "employment momentum (3m)": 0.049,
+      "log size (employed)": 0.023
+    }
+  },
+  "signal_signed": {
+    "Employed workers": {
+      "youth share (15-24)": -0.016,
+      "female share": 0.025,
+      "graduate share": 0.035,
+      "log wage": 0.046,
+      "training seats per 1,000 pop": 0.053,
+      "log population": 0.065,
+      "log size (employed)": 0.068,
+      "seeker rate (S/E)": -0.011,
+      "vacancy rate (V/E)": -0.008,
+      "unemployment rate": -0.005,
+      "employment momentum (3m)": -0.269,
+      "employment momentum (12m)": -0.314,
+      "vacancy momentum (12m)": -0.032
+    },
+    "Job vacancies": {
+      "youth share (15-24)": -0.017,
+      "female share": 0.017,
+      "graduate share": -0.007,
+      "log wage": -0.013,
+      "training seats per 1,000 pop": -0.015,
+      "log population": 0.03,
+      "log size (employed)": 0.013,
+      "seeker rate (S/E)": -0.005,
+      "vacancy rate (V/E)": -0.23,
+      "unemployment rate": 0.004,
+      "employment momentum (3m)": -0.049,
+      "employment momentum (12m)": -0.059,
+      "vacancy momentum (12m)": -0.319
+    },
+    "Registered seekers": {
+      "youth share (15-24)": -0.014,
+      "female share": 0.021,
+      "graduate share": -0.022,
+      "log wage": -0.001,
+      "training seats per 1,000 pop": 0.006,
+      "log population": -0.016,
+      "log size (employed)": -0.023,
+      "seeker rate (S/E)": -0.192,
+      "vacancy rate (V/E)": -0.013,
+      "unemployment rate": -0.235,
+      "employment momentum (3m)": -0.049,
+      "employment momentum (12m)": -0.063,
+      "vacancy momentum (12m)": 0.001
+    }
+  },
+  "training_vs_demand": [
+    {
+      "sector": "Manufacturing",
+      "total_variation_distance": 0.191,
+      "spearman_seats_vs_vacancies": 0.88,
+      "seats_per_100_vacancies": 191.3,
+      "certified_to_vacancies_ratio": 1.13
+    },
+    {
+      "sector": "Construction",
+      "total_variation_distance": 0.165,
+      "spearman_seats_vs_vacancies": 0.862,
+      "seats_per_100_vacancies": 95.2,
+      "certified_to_vacancies_ratio": 0.56
+    },
+    {
+      "sector": "IT-ITeS",
+      "total_variation_distance": 0.194,
+      "spearman_seats_vs_vacancies": 0.87,
+      "seats_per_100_vacancies": 233.2,
+      "certified_to_vacancies_ratio": 1.38
+    },
+    {
+      "sector": "Healthcare",
+      "total_variation_distance": 0.16,
+      "spearman_seats_vs_vacancies": 0.879,
+      "seats_per_100_vacancies": 274.3,
+      "certified_to_vacancies_ratio": 1.62
+    },
+    {
+      "sector": "Textiles and Apparel",
+      "total_variation_distance": 0.186,
+      "spearman_seats_vs_vacancies": 0.886,
+      "seats_per_100_vacancies": 183.1,
+      "certified_to_vacancies_ratio": 1.08
+    }
+  ],
+  "noise": {
+    "E": {
+      "median_noise_pct": 1.03,
+      "p10": 0.87,
+      "p90": 3.27,
+      "spearman_level_vs_noise": 0.324
+    },
+    "V": {
+      "median_noise_pct": 4.83,
+      "p10": 4.2,
+      "p90": 5.46,
+      "spearman_level_vs_noise": -0.004
+    },
+    "S": {
+      "median_noise_pct": 4.34,
+      "p10": 3.73,
+      "p90": 5.04,
+      "spearman_level_vs_noise": 0.346
+    }
+  },
+  "baselines": [
+    {
+      "target": "Employed workers",
+      "horizon": 1,
+      "last value": 1.35,
+      "mean of last 12 months": 4.96,
+      "mean of last 6 months": 4.2,
+      "seasonal naive": 7.05,
+      "seasonal naive + drift": 1.52,
+      "seasonally adjusted 3-month level": 1.28
+    },
+    {
+      "target": "Employed workers",
+      "horizon": 3,
+      "last value": 1.93,
+      "mean of last 12 months": 5.82,
+      "mean of last 6 months": 4.92,
+      "seasonal naive": 6.47,
+      "seasonal naive + drift": 1.93,
+      "seasonally adjusted 3-month level": 2.6
+    },
+    {
+      "target": "Employed workers",
+      "horizon": 6,
+      "last value": 4.11,
+      "mean of last 12 months": 4.18,
+      "mean of last 6 months": 2.94,
+      "seasonal naive": 5.85,
+      "seasonal naive + drift": 2.48,
+      "seasonally adjusted 3-month level": 4.15
+    },
+    {
+      "target": "Employed workers",
+      "horizon": 12,
+      "last value": 5.35,
+      "mean of last 12 months": 9.35,
+      "mean of last 6 months": 8.12,
+      "seasonal naive": 5.35,
+      "seasonal naive + drift": 2.85,
+      "seasonally adjusted 3-month level": 5.28
+    },
+    {
+      "target": "Job vacancies",
+      "horizon": 1,
+      "last value": 5.16,
+      "mean of last 12 months": 10.66,
+      "mean of last 6 months": 7.76,
+      "seasonal naive": 16.25,
+      "seasonal naive + drift": 7.19,
+      "seasonally adjusted 3-month level": 5.56
+    },
+    {
+      "target": "Job vacancies",
+      "horizon": 3,
+      "last value": 7.01,
+      "mean of last 12 months": 11.89,
+      "mean of last 6 months": 9.17,
+      "seasonal naive": 16.32,
+      "seasonal naive + drift": 8.11,
+      "seasonally adjusted 3-month level": 7.52
+    },
+    {
+      "target": "Job vacancies",
+      "horizon": 6,
+      "last value": 10.22,
+      "mean of last 12 months": 13.97,
+      "mean of last 6 months": 11.52,
+      "seasonal naive": 16.62,
+      "seasonal naive + drift": 10.0,
+      "seasonally adjusted 3-month level": 11.63
+    },
+    {
+      "target": "Job vacancies",
+      "horizon": 12,
+      "last value": 9.6,
+      "mean of last 12 months": 12.82,
+      "mean of last 6 months": 10.55,
+      "seasonal naive": 9.6,
+      "seasonal naive + drift": 17.69,
+      "seasonally adjusted 3-month level": 9.45
+    },
+    {
+      "target": "Registered seekers",
+      "horizon": 1,
+      "last value": 4.36,
+      "mean of last 12 months": 9.16,
+      "mean of last 6 months": 6.77,
+      "seasonal naive": 15.01,
+      "seasonal naive + drift": 6.21,
+      "seasonally adjusted 3-month level": 4.08
+    },
+    {
+      "target": "Registered seekers",
+      "horizon": 3,
+      "last value": 5.37,
+      "mean of last 12 months": 10.49,
+      "mean of last 6 months": 8.12,
+      "seasonal naive": 13.35,
+      "seasonal naive + drift": 7.95,
+      "seasonally adjusted 3-month level": 5.11
+    },
+    {
+      "target": "Registered seekers",
+      "horizon": 6,
+      "last value": 7.07,
+      "mean of last 12 months": 7.68,
+      "mean of last 6 months": 5.87,
+      "seasonal naive": 11.11,
+      "seasonal naive + drift": 9.99,
+      "seasonally adjusted 3-month level": 6.72
+    },
+    {
+      "target": "Registered seekers",
+      "horizon": 12,
+      "last value": 8.6,
+      "mean of last 12 months": 13.92,
+      "mean of last 6 months": 11.52,
+      "seasonal naive": 8.6,
+      "seasonal naive + drift": 14.72,
+      "seasonally adjusted 3-month level": 8.31
+    }
+  ],
+  "drift": [
+    {
+      "target": "Employed workers",
+      "sector": "Manufacturing",
+      "train_2012_2019_mean_yoy_pct": 1.81,
+      "val_2024_mean_yoy_pct": 6.16,
+      "train_std_pct": 2.18,
+      "val_std_pct": 2.16,
+      "ks_stat": 0.67
+    },
+    {
+      "target": "Employed workers",
+      "sector": "Construction",
+      "train_2012_2019_mean_yoy_pct": 3.1,
+      "val_2024_mean_yoy_pct": 6.63,
+      "train_std_pct": 2.25,
+      "val_std_pct": 2.0,
+      "ks_stat": 0.6
+    },
+    {
+      "target": "Employed workers",
+      "sector": "IT-ITeS",
+      "train_2012_2019_mean_yoy_pct": 5.79,
+      "val_2024_mean_yoy_pct": 4.02,
+      "train_std_pct": 2.62,
+      "val_std_pct": 2.23,
+      "ks_stat": 0.28
+    },
+    {
+      "target": "Employed workers",
+      "sector": "Healthcare",
+      "train_2012_2019_mean_yoy_pct": 3.93,
+      "val_2024_mean_yoy_pct": 6.62,
+      "train_std_pct": 2.19,
+      "val_std_pct": 2.16,
+      "ks_stat": 0.48
+    },
+    {
+      "target": "Employed workers",
+      "sector": "Textiles and Apparel",
+      "train_2012_2019_mean_yoy_pct": 0.43,
+      "val_2024_mean_yoy_pct": 4.53,
+      "train_std_pct": 2.13,
+      "val_std_pct": 2.2,
+      "ks_stat": 0.67
+    },
+    {
+      "target": "Job vacancies",
+      "sector": "Manufacturing",
+      "train_2012_2019_mean_yoy_pct": 2.34,
+      "val_2024_mean_yoy_pct": 7.33,
+      "train_std_pct": 11.93,
+      "val_std_pct": 12.32,
+      "ks_stat": 0.17
+    },
+    {
+      "target": "Job vacancies",
+      "sector": "Construction",
+      "train_2012_2019_mean_yoy_pct": 3.31,
+      "val_2024_mean_yoy_pct": 4.81,
+      "train_std_pct": 12.34,
+      "val_std_pct": 11.27,
+      "ks_stat": 0.08
+    },
+    {
+      "target": "Job vacancies",
+      "sector": "IT-ITeS",
+      "train_2012_2019_mean_yoy_pct": 4.59,
+      "val_2024_mean_yoy_pct": -26.87,
+      "train_std_pct": 12.88,
+      "val_std_pct": 15.03,
+      "ks_stat": 0.75
+    },
+    {
+      "target": "Job vacancies",
+      "sector": "Healthcare",
+      "train_2012_2019_mean_yoy_pct": 4.77,
+      "val_2024_mean_yoy_pct": 7.49,
+      "train_std_pct": 12.06,
+      "val_std_pct": 12.02,
+      "ks_stat": 0.09
+    },
+    {
+      "target": "Job vacancies",
+      "sector": "Textiles and Apparel",
+      "train_2012_2019_mean_yoy_pct": 0.04,
+      "val_2024_mean_yoy_pct": 2.48,
+      "train_std_pct": 11.27,
+      "val_std_pct": 11.64,
+      "ks_stat": 0.09
+    },
+    {
+      "target": "Registered seekers",
+      "sector": "Manufacturing",
+      "train_2012_2019_mean_yoy_pct": 3.28,
+      "val_2024_mean_yoy_pct": 10.17,
+      "train_std_pct": 10.16,
+      "val_std_pct": 8.91,
+      "ks_stat": 0.3
+    },
+    {
+      "target": "Registered seekers",
+      "sector": "Construction",
+      "train_2012_2019_mean_yoy_pct": 3.77,
+      "val_2024_mean_yoy_pct": 12.47,
+      "train_std_pct": 9.18,
+      "val_std_pct": 8.66,
+      "ks_stat": 0.37
+    },
+    {
+      "target": "Registered seekers",
+      "sector": "IT-ITeS",
+      "train_2012_2019_mean_yoy_pct": 8.39,
+      "val_2024_mean_yoy_pct": 1.08,
+      "train_std_pct": 10.14,
+      "val_std_pct": 8.37,
+      "ks_stat": 0.33
+    },
+    {
+      "target": "Registered seekers",
+      "sector": "Healthcare",
+      "train_2012_2019_mean_yoy_pct": 6.26,
+      "val_2024_mean_yoy_pct": 10.92,
+      "train_std_pct": 9.86,
+      "val_std_pct": 8.91,
+      "ks_stat": 0.2
+    },
+    {
+      "target": "Registered seekers",
+      "sector": "Textiles and Apparel",
+      "train_2012_2019_mean_yoy_pct": 1.01,
+      "val_2024_mean_yoy_pct": 9.45,
+      "train_std_pct": 9.52,
+      "val_std_pct": 8.69,
+      "ks_stat": 0.38
+    }
+  ],
+  "wage_cagr_2011_2024_pct": 5.5,
+  "wage_tier_premium_mfg": 1.233,
+  "demographic_change_pp": {
+    "Construction": {
+      "Female_Share_Pct": 2.01,
+      "Edu_Graduate_and_Above_Pct": -0.01,
+      "Age_15_24_Pct": 0.02
+    },
+    "Healthcare": {
+      "Female_Share_Pct": 1.98,
+      "Edu_Graduate_and_Above_Pct": -0.06,
+      "Age_15_24_Pct": -0.03
+    },
+    "IT-ITeS": {
+      "Female_Share_Pct": 1.98,
+      "Edu_Graduate_and_Above_Pct": 0.03,
+      "Age_15_24_Pct": 0.02
+    },
+    "Manufacturing": {
+      "Female_Share_Pct": 1.94,
+      "Edu_Graduate_and_Above_Pct": 0.01,
+      "Age_15_24_Pct": -0.01
+    },
+    "Textiles and Apparel": {
+      "Female_Share_Pct": 1.99,
+      "Edu_Graduate_and_Above_Pct": -0.01,
+      "Age_15_24_Pct": 0.07
+    }
+  },
+  "distributions": {
+    "mean_skew_level": 2.96,
+    "mean_skew_log_level": -0.26,
+    "mean_skew_12m": 0.02,
+    "max_excess_kurtosis_12m": 0.75
+  },
+  "correlation_yoy": {
+    "max_abs_offdiag": 0.51,
+    "share_abs_below_0_2": 0.91,
+    "top_pairs": [
+      [
+        "unemployment rate",
+        "seekers",
+        0.45
+      ],
+      [
+        "training seats",
+        "unemployment rate",
+        0.35
+      ],
+      [
+        "certified",
+        "training seats",
+        0.51
+      ]
+    ]
+  },
+  "redundant_pairs_levels": 16,
+  "adf": [
+    {
+      "target": "Employed workers",
+      "transform": "12-month difference",
+      "share_rejecting_unit_root_pct": 17.1
+    },
+    {
+      "target": "Employed workers",
+      "transform": "level (log)",
+      "share_rejecting_unit_root_pct": 1.4
+    },
+    {
+      "target": "Employed workers",
+      "transform": "month-on-month difference",
+      "share_rejecting_unit_root_pct": 73.9
+    },
+    {
+      "target": "Job vacancies",
+      "transform": "12-month difference",
+      "share_rejecting_unit_root_pct": 34.3
+    },
+    {
+      "target": "Job vacancies",
+      "transform": "level (log)",
+      "share_rejecting_unit_root_pct": 27.8
+    },
+    {
+      "target": "Job vacancies",
+      "transform": "month-on-month difference",
+      "share_rejecting_unit_root_pct": 93.6
+    },
+    {
+      "target": "Registered seekers",
+      "transform": "12-month difference",
+      "share_rejecting_unit_root_pct": 17.5
+    },
+    {
+      "target": "Registered seekers",
+      "transform": "level (log)",
+      "share_rejecting_unit_root_pct": 0.0
+    },
+    {
+      "target": "Registered seekers",
+      "transform": "month-on-month difference",
+      "share_rejecting_unit_root_pct": 86.8
+    }
+  ],
+  "wage_tier_spread_pct": [
+    -5.9,
+    24.1
+  ],
+  "unemployment_peak": {
+    "Manufacturing": [
+      "2020-04",
+      11.08
+    ],
+    "Construction": [
+      "2020-05",
+      11.94
+    ],
+    "IT-ITeS": [
+      "2018-06",
+      7.37
+    ],
+    "Healthcare": [
+      "2018-06",
+      7.12
+    ],
+    "Textiles and Apparel": [
+      "2020-04",
+      11.61
+    ]
+  },
+  "state_summary": {
+    "Delhi": {
+      "emp_cagr_2022_2024_pct": 7.73,
+      "unemployment_2024": 5.72
+    },
+    "Maharashtra": {
+      "emp_cagr_2022_2024_pct": 7.68,
+      "unemployment_2024": 5.23
+    },
+    "Tamil Nadu": {
+      "emp_cagr_2022_2024_pct": 8.2,
+      "unemployment_2024": 4.92
+    },
+    "West Bengal": {
+      "emp_cagr_2022_2024_pct": 7.21,
+      "unemployment_2024": 6.0
+    }
+  },
+  "status_2024": {
+    "Construction": {
+      "Acute Shortage": 0.0,
+      "Balanced": 0.0,
+      "Oversupply Watch": 0.0,
+      "Saturation Risk": 1.0
+    },
+    "Healthcare": {
+      "Acute Shortage": 0.0,
+      "Balanced": 0.14,
+      "Oversupply Watch": 0.8,
+      "Saturation Risk": 0.05
+    },
+    "IT-ITeS": {
+      "Acute Shortage": 0.02,
+      "Balanced": 0.96,
+      "Oversupply Watch": 0.02,
+      "Saturation Risk": 0.0
+    },
+    "Manufacturing": {
+      "Acute Shortage": 0.0,
+      "Balanced": 0.05,
+      "Oversupply Watch": 0.75,
+      "Saturation Risk": 0.2
+    },
+    "Textiles and Apparel": {
+      "Acute Shortage": 0.0,
+      "Balanced": 0.0,
+      "Oversupply Watch": 0.05,
+      "Saturation Risk": 0.95
+    }
+  },
+  "status_single_class_sectors_2024": [
+    "Construction",
+    "IT-ITeS",
+    "Textiles and Apparel"
+  ],
+  "net_gap_2024": {
+    "Construction": {
+      "median_net_gap_persons": -37027.1,
+      "total_net_gap_persons": -2673077.8,
+      "share_of_districts_with_openings_above_seekers": 0.0
+    },
+    "Healthcare": {
+      "median_net_gap_persons": -5227.4,
+      "total_net_gap_persons": -421743.2,
+      "share_of_districts_with_openings_above_seekers": 0.0
+    },
+    "IT-ITeS": {
+      "median_net_gap_persons": -535.7,
+      "total_net_gap_persons": -59256.8,
+      "share_of_districts_with_openings_above_seekers": 0.0
+    },
+    "Manufacturing": {
+      "median_net_gap_persons": -17546.6,
+      "total_net_gap_persons": -1598356.1,
+      "share_of_districts_with_openings_above_seekers": 0.0
+    },
+    "Textiles and Apparel": {
+      "median_net_gap_persons": -9111.7,
+      "total_net_gap_persons": -766030.6,
+      "share_of_districts_with_openings_above_seekers": 0.0
+    }
+  },
+  "equity_preview_h6_last_value": {
+    "worst_tier_over_overall": {
+      "Employed workers": 1.67,
+      "Job vacancies": 1.68,
+      "Registered seekers": 1.82
+    },
+    "worst_tier": {
+      "Employed workers": "tier=peripheral_tribal",
+      "Job vacancies": "tier=logistics_hub",
+      "Registered seekers": "tier=metro_residential"
+    }
+  },
+  "composition": {
+    "Construction": {
+      "Male_Share_Pct": 86.7,
+      "Female_Share_Pct": 13.2,
+      "Age_15_24_Pct": 27.4,
+      "Age_25_54_Pct": 62.6,
+      "Age_55_Plus_Pct": 10.0,
+      "Edu_Below_Primary_Pct": 57.6,
+      "Edu_Secondary_HigherSecondary_Pct": 16.3,
+      "Qualification_Vocational_ITI_Certified_Pct": 23.0,
+      "Edu_Graduate_and_Above_Pct": 3.0
+    },
+    "Healthcare": {
+      "Male_Share_Pct": 50.5,
+      "Female_Share_Pct": 49.4,
+      "Age_15_24_Pct": 22.2,
+      "Age_25_54_Pct": 65.8,
+      "Age_55_Plus_Pct": 12.1,
+      "Edu_Below_Primary_Pct": 3.1,
+      "Edu_Secondary_HigherSecondary_Pct": 14.5,
+      "Qualification_Vocational_ITI_Certified_Pct": 46.2,
+      "Edu_Graduate_and_Above_Pct": 36.1
+    },
+    "IT-ITeS": {
+      "Male_Share_Pct": 64.6,
+      "Female_Share_Pct": 35.2,
+      "Age_15_24_Pct": 32.0,
+      "Age_25_54_Pct": 65.2,
+      "Age_55_Plus_Pct": 2.8,
+      "Edu_Below_Primary_Pct": 0.6,
+      "Edu_Secondary_HigherSecondary_Pct": 4.4,
+      "Qualification_Vocational_ITI_Certified_Pct": 11.4,
+      "Edu_Graduate_and_Above_Pct": 83.6
+    },
+    "Manufacturing": {
+      "Male_Share_Pct": 82.6,
+      "Female_Share_Pct": 17.2,
+      "Age_15_24_Pct": 24.1,
+      "Age_25_54_Pct": 63.8,
+      "Age_55_Plus_Pct": 12.1,
+      "Edu_Below_Primary_Pct": 21.9,
+      "Edu_Secondary_HigherSecondary_Pct": 32.5,
+      "Qualification_Vocational_ITI_Certified_Pct": 33.6,
+      "Edu_Graduate_and_Above_Pct": 12.0
+    },
+    "Textiles and Apparel": {
+      "Male_Share_Pct": 56.6,
+      "Female_Share_Pct": 43.3,
+      "Age_15_24_Pct": 29.2,
+      "Age_25_54_Pct": 60.5,
+      "Age_55_Plus_Pct": 10.2,
+      "Edu_Below_Primary_Pct": 48.5,
+      "Edu_Secondary_HigherSecondary_Pct": 18.4,
+      "Qualification_Vocational_ITI_Certified_Pct": 30.3,
+      "Edu_Graduate_and_Above_Pct": 2.9
+    }
+  }
+}

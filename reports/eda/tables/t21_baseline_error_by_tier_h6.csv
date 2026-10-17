@@ -1,0 +1,17 @@
+scope,Employed workers,Job vacancies,Registered seekers
+tier=agrarian_developing,6.16,9.27,7.4
+tier=agrarian_migrant,5.83,8.18,7.42
+tier=industrial_hub,3.83,11.23,8.41
+tier=industrial_it_hub,4.39,12.39,4.99
+tier=industrial_mining,6.45,7.14,9.34
+tier=industrial_msme,3.41,7.52,4.18
+tier=industrial_port,4.42,12.08,8.05
+tier=logistics_hub,4.5,17.21,7.8
+tier=metro_administrative,1.44,13.03,9.25
+tier=metro_core,3.9,10.76,7.24
+tier=metro_residential,2.88,8.39,12.89
+tier=peripheral_agrarian,5.79,12.2,9.4
+tier=peripheral_coastal,5.42,13.03,9.43
+tier=peripheral_tribal,6.88,13.05,5.65
+tier=semi_industrial,4.73,7.5,7.59
+tier=textile_cluster,3.69,6.02,7.61

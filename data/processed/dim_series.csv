@@ -1,0 +1,281 @@
+Series_ID,District_LGD_Code,District_Name,State_Name,Econ_Tier,Sector_Code,Sector_Name,Train_Median_Employed,Train_Median_Vacancies,Train_Median_Seekers,Low_Volume
+303-CON,303,North 24 Parganas,West Bengal,industrial_it_hub,CON,Construction,388147.0,5748.0,175545.5,False
+303-HLT,303,North 24 Parganas,West Bengal,industrial_it_hub,HLT,Healthcare,143780.0,4993.0,26866.5,False
+303-ITS,303,North 24 Parganas,West Bengal,industrial_it_hub,ITS,IT-ITeS,225916.5,11647.5,11909.5,False
+303-MFG,303,North 24 Parganas,West Bengal,industrial_it_hub,MFG,Manufacturing,587249.0,15155.0,121568.5,False
+303-TXT,303,North 24 Parganas,West Bengal,industrial_it_hub,TXT,Textiles and Apparel,165466.0,3539.0,27313.5,False
+304-CON,304,South 24 Parganas,West Bengal,industrial_msme,CON,Construction,318082.0,4716.5,105643.0,False
+304-HLT,304,South 24 Parganas,West Bengal,industrial_msme,HLT,Healthcare,102058.0,4432.0,18055.5,False
+304-ITS,304,South 24 Parganas,West Bengal,industrial_msme,ITS,IT-ITeS,33483.5,2046.5,2827.5,False
+304-MFG,304,South 24 Parganas,West Bengal,industrial_msme,MFG,Manufacturing,556881.0,15017.0,74682.5,False
+304-TXT,304,South 24 Parganas,West Bengal,industrial_msme,TXT,Textiles and Apparel,229351.5,3959.0,64840.0,False
+312-CON,312,Hooghly,West Bengal,industrial_hub,CON,Construction,216835.0,3866.0,62585.5,False
+312-HLT,312,Hooghly,West Bengal,industrial_hub,HLT,Healthcare,71545.0,1365.0,11783.5,False
+312-ITS,312,Hooghly,West Bengal,industrial_hub,ITS,IT-ITeS,31674.0,1634.0,2514.0,False
+312-MFG,312,Hooghly,West Bengal,industrial_hub,MFG,Manufacturing,414282.0,11328.0,57741.0,False
+312-TXT,312,Hooghly,West Bengal,industrial_hub,TXT,Textiles and Apparel,80149.0,1812.0,15473.5,False
+313-CON,313,Howrah,West Bengal,industrial_hub,CON,Construction,161878.5,2023.0,44609.5,False
+313-HLT,313,Howrah,West Bengal,industrial_hub,HLT,Healthcare,62178.5,2148.5,7326.0,False
+313-ITS,313,Howrah,West Bengal,industrial_hub,ITS,IT-ITeS,38432.5,2361.0,2406.5,False
+313-MFG,313,Howrah,West Bengal,industrial_hub,MFG,Manufacturing,383649.0,9113.0,46698.5,False
+313-TXT,313,Howrah,West Bengal,industrial_hub,TXT,Textiles and Apparel,85450.5,1287.0,18265.0,False
+315-CON,315,Kolkata,West Bengal,metro_core,CON,Construction,209122.5,4360.0,60428.0,False
+315-HLT,315,Kolkata,West Bengal,metro_core,HLT,Healthcare,76882.0,2237.0,12855.5,False
+315-ITS,315,Kolkata,West Bengal,metro_core,ITS,IT-ITeS,68826.0,3749.0,3730.5,False
+315-MFG,315,Kolkata,West Bengal,metro_core,MFG,Manufacturing,211655.5,3820.5,30328.0,False
+315-TXT,315,Kolkata,West Bengal,metro_core,TXT,Textiles and Apparel,47116.0,985.0,10351.5,False
+466-CON,466,Ahilyanagar,Maharashtra,semi_industrial,CON,Construction,179449.5,2505.5,58839.5,False
+466-HLT,466,Ahilyanagar,Maharashtra,semi_industrial,HLT,Healthcare,50691.0,1421.0,7524.0,False
+466-ITS,466,Ahilyanagar,Maharashtra,semi_industrial,ITS,IT-ITeS,12561.5,647.5,912.5,False
+466-MFG,466,Ahilyanagar,Maharashtra,semi_industrial,MFG,Manufacturing,208945.0,3910.5,29252.0,False
+466-TXT,466,Ahilyanagar,Maharashtra,semi_industrial,TXT,Textiles and Apparel,44851.0,776.5,11660.0,False
+467-CON,467,Akola,Maharashtra,semi_industrial,CON,Construction,52632.5,760.5,15697.0,False
+467-HLT,467,Akola,Maharashtra,semi_industrial,HLT,Healthcare,18894.5,724.5,2690.0,False
+467-ITS,467,Akola,Maharashtra,semi_industrial,ITS,IT-ITeS,7283.5,604.5,358.5,False
+467-MFG,467,Akola,Maharashtra,semi_industrial,MFG,Manufacturing,65778.5,1447.5,9507.5,False
+467-TXT,467,Akola,Maharashtra,semi_industrial,TXT,Textiles and Apparel,15404.0,256.0,3950.5,False
+468-CON,468,Amravati,Maharashtra,textile_cluster,CON,Construction,101408.0,1270.0,29748.5,False
+468-HLT,468,Amravati,Maharashtra,textile_cluster,HLT,Healthcare,31508.5,788.0,7101.0,False
+468-ITS,468,Amravati,Maharashtra,textile_cluster,ITS,IT-ITeS,12106.0,691.5,1025.0,False
+468-MFG,468,Amravati,Maharashtra,textile_cluster,MFG,Manufacturing,118493.5,2203.5,25998.5,False
+468-TXT,468,Amravati,Maharashtra,textile_cluster,TXT,Textiles and Apparel,121478.5,2280.5,31252.0,False
+469-CON,469,Chhatrapati Sambhajinagar,Maharashtra,industrial_hub,CON,Construction,173060.5,2159.0,70783.0,False
+469-HLT,469,Chhatrapati Sambhajinagar,Maharashtra,industrial_hub,HLT,Healthcare,55601.5,1157.0,9559.5,False
+469-ITS,469,Chhatrapati Sambhajinagar,Maharashtra,industrial_hub,ITS,IT-ITeS,34515.5,1801.0,2065.0,False
+469-MFG,469,Chhatrapati Sambhajinagar,Maharashtra,industrial_hub,MFG,Manufacturing,362648.0,5942.0,45457.0,False
+469-TXT,469,Chhatrapati Sambhajinagar,Maharashtra,industrial_hub,TXT,Textiles and Apparel,77347.5,741.5,16319.5,False
+470-CON,470,Beed,Maharashtra,agrarian_migrant,CON,Construction,78643.0,892.0,22671.0,False
+470-HLT,470,Beed,Maharashtra,agrarian_migrant,HLT,Healthcare,18821.0,424.5,5344.0,False
+470-ITS,470,Beed,Maharashtra,agrarian_migrant,ITS,IT-ITeS,5953.0,285.5,839.0,False
+470-MFG,470,Beed,Maharashtra,agrarian_migrant,MFG,Manufacturing,42783.5,822.0,8011.0,False
+470-TXT,470,Beed,Maharashtra,agrarian_migrant,TXT,Textiles and Apparel,22657.5,549.0,4656.5,False
+471-CON,471,Bhandara,Maharashtra,peripheral_agrarian,CON,Construction,29309.0,431.5,8524.0,False
+471-HLT,471,Bhandara,Maharashtra,peripheral_agrarian,HLT,Healthcare,9111.5,299.5,1680.0,False
+471-ITS,471,Bhandara,Maharashtra,peripheral_agrarian,ITS,IT-ITeS,3112.5,155.5,282.0,False
+471-MFG,471,Bhandara,Maharashtra,peripheral_agrarian,MFG,Manufacturing,13833.0,280.5,2087.5,False
+471-TXT,471,Bhandara,Maharashtra,peripheral_agrarian,TXT,Textiles and Apparel,9004.5,184.0,1986.0,False
+472-CON,472,Buldhana,Maharashtra,agrarian_developing,CON,Construction,72465.0,718.0,20162.0,False
+472-HLT,472,Buldhana,Maharashtra,agrarian_developing,HLT,Healthcare,25568.0,882.5,5465.5,False
+472-ITS,472,Buldhana,Maharashtra,agrarian_developing,ITS,IT-ITeS,7847.0,406.5,707.0,False
+472-MFG,472,Buldhana,Maharashtra,agrarian_developing,MFG,Manufacturing,42843.5,1180.5,7743.0,False
+472-TXT,472,Buldhana,Maharashtra,agrarian_developing,TXT,Textiles and Apparel,27183.5,723.0,6059.5,False
+473-CON,473,Chandrapur,Maharashtra,industrial_mining,CON,Construction,108367.0,1721.0,29755.5,False
+473-HLT,473,Chandrapur,Maharashtra,industrial_mining,HLT,Healthcare,24279.0,513.5,4672.0,False
+473-ITS,473,Chandrapur,Maharashtra,industrial_mining,ITS,IT-ITeS,4975.5,335.5,522.5,False
+473-MFG,473,Chandrapur,Maharashtra,industrial_mining,MFG,Manufacturing,99202.5,2317.5,16121.5,False
+473-TXT,473,Chandrapur,Maharashtra,industrial_mining,TXT,Textiles and Apparel,9019.5,199.0,2303.5,False
+474-CON,474,Dhule,Maharashtra,textile_cluster,CON,Construction,58704.0,717.5,20806.5,False
+474-HLT,474,Dhule,Maharashtra,textile_cluster,HLT,Healthcare,21580.0,703.5,3996.0,False
+474-ITS,474,Dhule,Maharashtra,textile_cluster,ITS,IT-ITeS,4867.0,229.0,435.0,False
+474-MFG,474,Dhule,Maharashtra,textile_cluster,MFG,Manufacturing,115473.5,1898.5,14716.0,False
+474-TXT,474,Dhule,Maharashtra,textile_cluster,TXT,Textiles and Apparel,155052.0,3381.5,31990.5,False
+475-CON,475,Gadchiroli,Maharashtra,peripheral_tribal,CON,Construction,25933.5,465.5,8387.0,False
+475-HLT,475,Gadchiroli,Maharashtra,peripheral_tribal,HLT,Healthcare,7012.0,275.5,1297.5,False
+475-ITS,475,Gadchiroli,Maharashtra,peripheral_tribal,ITS,IT-ITeS,892.0,45.5,208.0,True
+475-MFG,475,Gadchiroli,Maharashtra,peripheral_tribal,MFG,Manufacturing,12542.5,267.5,1867.0,False
+475-TXT,475,Gadchiroli,Maharashtra,peripheral_tribal,TXT,Textiles and Apparel,5996.0,125.5,1619.5,False
+476-CON,476,Gondia,Maharashtra,peripheral_agrarian,CON,Construction,32463.5,551.5,7867.0,False
+476-HLT,476,Gondia,Maharashtra,peripheral_agrarian,HLT,Healthcare,7540.0,156.0,1168.5,False
+476-ITS,476,Gondia,Maharashtra,peripheral_agrarian,ITS,IT-ITeS,2740.5,148.5,286.5,False
+476-MFG,476,Gondia,Maharashtra,peripheral_agrarian,MFG,Manufacturing,18088.5,283.5,2459.5,False
+476-TXT,476,Gondia,Maharashtra,peripheral_agrarian,TXT,Textiles and Apparel,6880.5,175.0,1649.0,False
+477-CON,477,Hingoli,Maharashtra,peripheral_agrarian,CON,Construction,32560.0,557.5,8276.0,False
+477-HLT,477,Hingoli,Maharashtra,peripheral_agrarian,HLT,Healthcare,9567.5,455.5,2101.0,False
+477-ITS,477,Hingoli,Maharashtra,peripheral_agrarian,ITS,IT-ITeS,1820.0,84.0,192.0,False
+477-MFG,477,Hingoli,Maharashtra,peripheral_agrarian,MFG,Manufacturing,13185.0,310.5,2023.0,False
+477-TXT,477,Hingoli,Maharashtra,peripheral_agrarian,TXT,Textiles and Apparel,4939.0,106.5,1288.0,False
+478-CON,478,Jalgaon,Maharashtra,semi_industrial,CON,Construction,144006.0,1768.5,58762.5,False
+478-HLT,478,Jalgaon,Maharashtra,semi_industrial,HLT,Healthcare,47436.5,1213.5,8463.5,False
+478-ITS,478,Jalgaon,Maharashtra,semi_industrial,ITS,IT-ITeS,16756.0,757.5,1475.5,False
+478-MFG,478,Jalgaon,Maharashtra,semi_industrial,MFG,Manufacturing,171011.5,2377.0,32351.0,False
+478-TXT,478,Jalgaon,Maharashtra,semi_industrial,TXT,Textiles and Apparel,47237.0,838.5,9977.0,False
+479-CON,479,Jalna,Maharashtra,industrial_msme,CON,Construction,78599.0,1300.0,26585.5,False
+479-HLT,479,Jalna,Maharashtra,industrial_msme,HLT,Healthcare,20664.5,710.0,4083.5,False
+479-ITS,479,Jalna,Maharashtra,industrial_msme,ITS,IT-ITeS,6666.0,304.5,515.0,False
+479-MFG,479,Jalna,Maharashtra,industrial_msme,MFG,Manufacturing,135195.5,3352.5,22777.5,False
+479-TXT,479,Jalna,Maharashtra,industrial_msme,TXT,Textiles and Apparel,41074.5,715.0,9091.5,False
+480-CON,480,Kolhapur,Maharashtra,industrial_msme,CON,Construction,127025.5,2195.0,40084.5,False
+480-HLT,480,Kolhapur,Maharashtra,industrial_msme,HLT,Healthcare,42519.0,1553.0,7821.0,False
+480-ITS,480,Kolhapur,Maharashtra,industrial_msme,ITS,IT-ITeS,21259.5,741.5,1272.0,False
+480-MFG,480,Kolhapur,Maharashtra,industrial_msme,MFG,Manufacturing,279873.5,8193.0,39696.5,False
+480-TXT,480,Kolhapur,Maharashtra,industrial_msme,TXT,Textiles and Apparel,92456.0,1597.0,24323.5,False
+481-CON,481,Latur,Maharashtra,semi_industrial,CON,Construction,87198.5,1583.5,21113.0,False
+481-HLT,481,Latur,Maharashtra,semi_industrial,HLT,Healthcare,31454.5,823.5,6278.0,False
+481-ITS,481,Latur,Maharashtra,semi_industrial,ITS,IT-ITeS,9478.5,645.0,658.5,False
+481-MFG,481,Latur,Maharashtra,semi_industrial,MFG,Manufacturing,81348.0,2054.5,12854.0,False
+481-TXT,481,Latur,Maharashtra,semi_industrial,TXT,Textiles and Apparel,22927.0,426.0,3821.0,False
+482-CON,482,Mumbai City,Maharashtra,metro_core,CON,Construction,121744.5,1679.5,40583.0,False
+482-HLT,482,Mumbai City,Maharashtra,metro_core,HLT,Healthcare,65248.0,2228.5,10774.5,False
+482-ITS,482,Mumbai City,Maharashtra,metro_core,ITS,IT-ITeS,107776.0,7090.5,5677.0,False
+482-MFG,482,Mumbai City,Maharashtra,metro_core,MFG,Manufacturing,141783.5,3733.5,18588.0,False
+482-TXT,482,Mumbai City,Maharashtra,metro_core,TXT,Textiles and Apparel,43186.5,638.0,11996.5,False
+483-CON,483,Mumbai Suburban,Maharashtra,metro_core,CON,Construction,424369.0,6374.0,145387.5,False
+483-HLT,483,Mumbai Suburban,Maharashtra,metro_core,HLT,Healthcare,163058.0,4544.0,19667.0,False
+483-ITS,483,Mumbai Suburban,Maharashtra,metro_core,ITS,IT-ITeS,176348.0,12210.5,12345.5,False
+483-MFG,483,Mumbai Suburban,Maharashtra,metro_core,MFG,Manufacturing,364560.0,8525.5,49685.0,False
+483-TXT,483,Mumbai Suburban,Maharashtra,metro_core,TXT,Textiles and Apparel,76895.0,1031.5,17952.0,False
+484-CON,484,Nagpur,Maharashtra,logistics_hub,CON,Construction,221273.0,2791.0,54495.5,False
+484-HLT,484,Nagpur,Maharashtra,logistics_hub,HLT,Healthcare,92829.0,2727.0,16912.0,False
+484-ITS,484,Nagpur,Maharashtra,logistics_hub,ITS,IT-ITeS,28452.5,2214.0,1544.0,False
+484-MFG,484,Nagpur,Maharashtra,logistics_hub,MFG,Manufacturing,230667.0,5299.5,38135.0,False
+484-TXT,484,Nagpur,Maharashtra,logistics_hub,TXT,Textiles and Apparel,47875.5,1096.0,11570.5,False
+485-CON,485,Nanded,Maharashtra,agrarian_developing,CON,Construction,105179.0,1379.0,26645.5,False
+485-HLT,485,Nanded,Maharashtra,agrarian_developing,HLT,Healthcare,32361.5,1192.5,5471.5,False
+485-ITS,485,Nanded,Maharashtra,agrarian_developing,ITS,IT-ITeS,8895.0,477.0,1173.0,False
+485-MFG,485,Nanded,Maharashtra,agrarian_developing,MFG,Manufacturing,63642.5,1633.5,9288.5,False
+485-TXT,485,Nanded,Maharashtra,agrarian_developing,TXT,Textiles and Apparel,34441.5,424.5,7268.5,False
+486-CON,486,Nandurbar,Maharashtra,peripheral_tribal,CON,Construction,40885.5,515.0,15566.0,False
+486-HLT,486,Nandurbar,Maharashtra,peripheral_tribal,HLT,Healthcare,9449.0,268.5,1312.0,False
+486-ITS,486,Nandurbar,Maharashtra,peripheral_tribal,ITS,IT-ITeS,3192.5,165.0,380.0,False
+486-MFG,486,Nandurbar,Maharashtra,peripheral_tribal,MFG,Manufacturing,19601.0,245.5,4951.0,False
+486-TXT,486,Nandurbar,Maharashtra,peripheral_tribal,TXT,Textiles and Apparel,6177.0,119.0,1356.5,False
+487-CON,487,Nashik,Maharashtra,industrial_hub,CON,Construction,305120.0,5224.5,83627.0,False
+487-HLT,487,Nashik,Maharashtra,industrial_hub,HLT,Healthcare,93591.0,2193.5,19069.0,False
+487-ITS,487,Nashik,Maharashtra,industrial_hub,ITS,IT-ITeS,29892.5,1318.0,2281.5,False
+487-MFG,487,Nashik,Maharashtra,industrial_hub,MFG,Manufacturing,454852.0,8236.0,64664.0,False
+487-TXT,487,Nashik,Maharashtra,industrial_hub,TXT,Textiles and Apparel,99901.5,1460.0,28365.0,False
+488-CON,488,Dharashiv,Maharashtra,agrarian_developing,CON,Construction,44462.0,472.0,15342.0,False
+488-HLT,488,Dharashiv,Maharashtra,agrarian_developing,HLT,Healthcare,15977.0,562.0,2838.5,False
+488-ITS,488,Dharashiv,Maharashtra,agrarian_developing,ITS,IT-ITeS,3310.0,141.5,331.0,False
+488-MFG,488,Dharashiv,Maharashtra,agrarian_developing,MFG,Manufacturing,31983.0,459.5,3948.0,False
+488-TXT,488,Dharashiv,Maharashtra,agrarian_developing,TXT,Textiles and Apparel,20245.0,475.5,5808.5,False
+489-CON,489,Parbhani,Maharashtra,agrarian_developing,CON,Construction,63000.5,773.5,19470.5,False
+489-HLT,489,Parbhani,Maharashtra,agrarian_developing,HLT,Healthcare,18416.5,462.5,2061.5,False
+489-ITS,489,Parbhani,Maharashtra,agrarian_developing,ITS,IT-ITeS,5898.5,342.5,407.5,False
+489-MFG,489,Parbhani,Maharashtra,agrarian_developing,MFG,Manufacturing,31310.0,675.0,5761.0,False
+489-TXT,489,Parbhani,Maharashtra,agrarian_developing,TXT,Textiles and Apparel,13736.0,297.0,3177.5,False
+490-CON,490,Pune,Maharashtra,industrial_it_hub,CON,Construction,455541.5,7558.5,154222.0,False
+490-HLT,490,Pune,Maharashtra,industrial_it_hub,HLT,Healthcare,163969.5,4544.5,30448.0,False
+490-ITS,490,Pune,Maharashtra,industrial_it_hub,ITS,IT-ITeS,422090.0,28484.5,20523.0,False
+490-MFG,490,Pune,Maharashtra,industrial_it_hub,MFG,Manufacturing,556601.0,11570.0,80230.5,False
+490-TXT,490,Pune,Maharashtra,industrial_it_hub,TXT,Textiles and Apparel,108256.5,1923.0,27585.5,False
+491-CON,491,Raigad,Maharashtra,industrial_port,CON,Construction,128286.5,1472.0,44572.0,False
+491-HLT,491,Raigad,Maharashtra,industrial_port,HLT,Healthcare,33875.0,1242.0,5985.0,False
+491-ITS,491,Raigad,Maharashtra,industrial_port,ITS,IT-ITeS,13030.0,1434.5,1104.5,False
+491-MFG,491,Raigad,Maharashtra,industrial_port,MFG,Manufacturing,248542.0,6666.0,27881.0,False
+491-TXT,491,Raigad,Maharashtra,industrial_port,TXT,Textiles and Apparel,35158.5,622.5,7401.5,False
+492-CON,492,Ratnagiri,Maharashtra,peripheral_coastal,CON,Construction,42033.0,536.5,16511.0,False
+492-HLT,492,Ratnagiri,Maharashtra,peripheral_coastal,HLT,Healthcare,14533.5,402.5,2061.0,False
+492-ITS,492,Ratnagiri,Maharashtra,peripheral_coastal,ITS,IT-ITeS,2528.0,159.0,286.0,False
+492-MFG,492,Ratnagiri,Maharashtra,peripheral_coastal,MFG,Manufacturing,27781.0,394.5,5031.5,False
+492-TXT,492,Ratnagiri,Maharashtra,peripheral_coastal,TXT,Textiles and Apparel,10697.0,218.5,2209.0,False
+493-CON,493,Sangli,Maharashtra,semi_industrial,CON,Construction,98717.5,1703.0,33217.5,False
+493-HLT,493,Sangli,Maharashtra,semi_industrial,HLT,Healthcare,31267.5,730.5,4913.0,False
+493-ITS,493,Sangli,Maharashtra,semi_industrial,ITS,IT-ITeS,22724.0,833.5,1685.5,False
+493-MFG,493,Sangli,Maharashtra,semi_industrial,MFG,Manufacturing,119255.5,2627.0,16381.5,False
+493-TXT,493,Sangli,Maharashtra,semi_industrial,TXT,Textiles and Apparel,25233.0,496.0,5747.0,False
+494-CON,494,Satara,Maharashtra,semi_industrial,CON,Construction,110022.5,1582.0,31538.5,False
+494-HLT,494,Satara,Maharashtra,semi_industrial,HLT,Healthcare,38141.0,1045.0,4941.0,False
+494-ITS,494,Satara,Maharashtra,semi_industrial,ITS,IT-ITeS,16069.5,699.0,1059.5,False
+494-MFG,494,Satara,Maharashtra,semi_industrial,MFG,Manufacturing,142149.0,3625.0,20155.0,False
+494-TXT,494,Satara,Maharashtra,semi_industrial,TXT,Textiles and Apparel,46647.0,784.5,9955.0,False
+495-CON,495,Sindhudurg,Maharashtra,peripheral_coastal,CON,Construction,23092.5,253.0,9598.5,False
+495-HLT,495,Sindhudurg,Maharashtra,peripheral_coastal,HLT,Healthcare,5266.0,174.5,1066.0,False
+495-ITS,495,Sindhudurg,Maharashtra,peripheral_coastal,ITS,IT-ITeS,1847.0,106.0,151.0,False
+495-MFG,495,Sindhudurg,Maharashtra,peripheral_coastal,MFG,Manufacturing,15875.0,415.0,2184.0,False
+495-TXT,495,Sindhudurg,Maharashtra,peripheral_coastal,TXT,Textiles and Apparel,6340.5,127.5,1903.5,False
+496-CON,496,Solapur,Maharashtra,textile_cluster,CON,Construction,131981.5,1784.0,51158.5,False
+496-HLT,496,Solapur,Maharashtra,textile_cluster,HLT,Healthcare,42608.0,876.0,5511.0,False
+496-ITS,496,Solapur,Maharashtra,textile_cluster,ITS,IT-ITeS,16577.0,1580.5,2316.5,False
+496-MFG,496,Solapur,Maharashtra,textile_cluster,MFG,Manufacturing,176657.5,2744.5,22008.5,False
+496-TXT,496,Solapur,Maharashtra,textile_cluster,TXT,Textiles and Apparel,134737.0,2644.5,37239.0,False
+497-CON,497,Thane,Maharashtra,industrial_hub,CON,Construction,431503.0,7798.5,129508.5,False
+497-HLT,497,Thane,Maharashtra,industrial_hub,HLT,Healthcare,138346.0,3383.5,22957.5,False
+497-ITS,497,Thane,Maharashtra,industrial_hub,ITS,IT-ITeS,72706.0,2885.0,7691.5,False
+497-MFG,497,Thane,Maharashtra,industrial_hub,MFG,Manufacturing,920582.0,18259.0,165860.5,False
+497-TXT,497,Thane,Maharashtra,industrial_hub,TXT,Textiles and Apparel,158449.0,2853.5,53315.0,False
+498-CON,498,Wardha,Maharashtra,semi_industrial,CON,Construction,41476.5,638.5,9831.0,False
+498-HLT,498,Wardha,Maharashtra,semi_industrial,HLT,Healthcare,14923.0,570.5,3580.0,False
+498-ITS,498,Wardha,Maharashtra,semi_industrial,ITS,IT-ITeS,6823.0,453.0,567.5,False
+498-MFG,498,Wardha,Maharashtra,semi_industrial,MFG,Manufacturing,69582.5,1411.0,14104.0,False
+498-TXT,498,Wardha,Maharashtra,semi_industrial,TXT,Textiles and Apparel,15457.0,325.0,3335.5,False
+499-CON,499,Washim,Maharashtra,peripheral_agrarian,CON,Construction,28402.5,320.0,8495.0,False
+499-HLT,499,Washim,Maharashtra,peripheral_agrarian,HLT,Healthcare,7339.5,237.5,1187.0,False
+499-ITS,499,Washim,Maharashtra,peripheral_agrarian,ITS,IT-ITeS,2515.5,121.0,345.0,False
+499-MFG,499,Washim,Maharashtra,peripheral_agrarian,MFG,Manufacturing,13968.0,296.0,2046.5,False
+499-TXT,499,Washim,Maharashtra,peripheral_agrarian,TXT,Textiles and Apparel,7697.5,174.5,2192.0,False
+500-CON,500,Yavatmal,Maharashtra,agrarian_developing,CON,Construction,86432.5,1049.0,30149.5,False
+500-HLT,500,Yavatmal,Maharashtra,agrarian_developing,HLT,Healthcare,23116.0,712.0,4271.0,False
+500-ITS,500,Yavatmal,Maharashtra,agrarian_developing,ITS,IT-ITeS,4120.5,202.0,741.5,False
+500-MFG,500,Yavatmal,Maharashtra,agrarian_developing,MFG,Manufacturing,42319.5,843.5,7625.5,False
+500-TXT,500,Yavatmal,Maharashtra,agrarian_developing,TXT,Textiles and Apparel,27263.5,394.0,7291.5,False
+568-CON,568,Chennai,Tamil Nadu,metro_core,CON,Construction,194639.0,1938.0,48982.0,False
+568-HLT,568,Chennai,Tamil Nadu,metro_core,HLT,Healthcare,97217.5,3090.5,14792.5,False
+568-ITS,568,Chennai,Tamil Nadu,metro_core,ITS,IT-ITeS,294159.5,17392.0,25473.0,False
+568-MFG,568,Chennai,Tamil Nadu,metro_core,MFG,Manufacturing,224612.0,3661.0,33519.0,False
+568-TXT,568,Chennai,Tamil Nadu,metro_core,TXT,Textiles and Apparel,45140.5,690.5,9735.0,False
+574-CON,574,Kanchipuram,Tamil Nadu,industrial_hub,CON,Construction,72831.0,989.0,21663.5,False
+574-HLT,574,Kanchipuram,Tamil Nadu,industrial_hub,HLT,Healthcare,24434.5,620.0,3575.5,False
+574-ITS,574,Kanchipuram,Tamil Nadu,industrial_hub,ITS,IT-ITeS,17141.5,793.0,1516.5,False
+574-MFG,574,Kanchipuram,Tamil Nadu,industrial_hub,MFG,Manufacturing,131746.0,3257.0,19032.5,False
+574-TXT,574,Kanchipuram,Tamil Nadu,industrial_hub,TXT,Textiles and Apparel,23089.5,416.5,4353.0,False
+589-CON,589,Tiruvallur,Tamil Nadu,industrial_hub,CON,Construction,165198.0,2591.5,58842.0,False
+589-HLT,589,Tiruvallur,Tamil Nadu,industrial_hub,HLT,Healthcare,62628.0,1257.5,7696.0,False
+589-ITS,589,Tiruvallur,Tamil Nadu,industrial_hub,ITS,IT-ITeS,24099.5,1945.0,2334.0,False
+589-MFG,589,Tiruvallur,Tamil Nadu,industrial_hub,MFG,Manufacturing,341328.0,7197.5,41367.5,False
+589-TXT,589,Tiruvallur,Tamil Nadu,industrial_hub,TXT,Textiles and Apparel,68700.5,1286.0,14798.0,False
+665-CON,665,Palghar,Maharashtra,industrial_msme,CON,Construction,135154.5,1432.5,36484.5,False
+665-HLT,665,Palghar,Maharashtra,industrial_msme,HLT,Healthcare,30315.0,1052.5,4784.0,False
+665-ITS,665,Palghar,Maharashtra,industrial_msme,ITS,IT-ITeS,14797.0,525.0,941.5,False
+665-MFG,665,Palghar,Maharashtra,industrial_msme,MFG,Manufacturing,281533.0,8821.0,47193.5,False
+665-TXT,665,Palghar,Maharashtra,industrial_msme,TXT,Textiles and Apparel,88162.0,1540.5,19115.0,False
+670-CON,670,South East Delhi,Delhi,industrial_hub,CON,Construction,44855.0,365.0,11861.0,False
+670-HLT,670,South East Delhi,Delhi,industrial_hub,HLT,Healthcare,13923.0,428.5,2349.0,False
+670-ITS,670,South East Delhi,Delhi,industrial_hub,ITS,IT-ITeS,11756.5,892.5,1033.5,False
+670-MFG,670,South East Delhi,Delhi,industrial_hub,MFG,Manufacturing,106831.0,1292.5,14829.0,False
+670-TXT,670,South East Delhi,Delhi,industrial_hub,TXT,Textiles and Apparel,17576.0,468.5,5097.5,False
+671-CON,671,Shahdara,Delhi,industrial_msme,CON,Construction,52475.5,784.0,14818.0,False
+671-HLT,671,Shahdara,Delhi,industrial_msme,HLT,Healthcare,16078.5,609.0,2866.0,False
+671-ITS,671,Shahdara,Delhi,industrial_msme,ITS,IT-ITeS,5245.0,312.0,268.0,False
+671-MFG,671,Shahdara,Delhi,industrial_msme,MFG,Manufacturing,93300.0,2336.5,9321.5,False
+671-TXT,671,Shahdara,Delhi,industrial_msme,TXT,Textiles and Apparel,28602.0,499.0,7008.0,False
+730-CON,730,Chengalpattu,Tamil Nadu,industrial_it_hub,CON,Construction,115294.5,1484.0,28161.5,False
+730-HLT,730,Chengalpattu,Tamil Nadu,industrial_it_hub,HLT,Healthcare,53667.5,1707.5,10602.5,False
+730-ITS,730,Chengalpattu,Tamil Nadu,industrial_it_hub,ITS,IT-ITeS,136592.0,6180.0,6485.5,False
+730-MFG,730,Chengalpattu,Tamil Nadu,industrial_it_hub,MFG,Manufacturing,262973.0,4471.5,45422.5,False
+730-TXT,730,Chengalpattu,Tamil Nadu,industrial_it_hub,TXT,Textiles and Apparel,51281.0,818.5,9743.0,False
+77-CON,77,Central Delhi,Delhi,metro_core,CON,Construction,23688.0,206.0,6475.0,False
+77-HLT,77,Central Delhi,Delhi,metro_core,HLT,Healthcare,6202.0,278.5,1463.0,False
+77-ITS,77,Central Delhi,Delhi,metro_core,ITS,IT-ITeS,9291.0,615.0,571.5,False
+77-MFG,77,Central Delhi,Delhi,metro_core,MFG,Manufacturing,23593.5,565.5,4846.0,False
+77-TXT,77,Central Delhi,Delhi,metro_core,TXT,Textiles and Apparel,3872.5,64.5,860.5,False
+78-CON,78,East Delhi,Delhi,metro_residential,CON,Construction,61188.5,710.5,22364.5,False
+78-HLT,78,East Delhi,Delhi,metro_residential,HLT,Healthcare,17552.5,611.5,2659.5,False
+78-ITS,78,East Delhi,Delhi,metro_residential,ITS,IT-ITeS,14077.0,856.0,841.0,False
+78-MFG,78,East Delhi,Delhi,metro_residential,MFG,Manufacturing,51459.5,1388.0,7427.5,False
+78-TXT,78,East Delhi,Delhi,metro_residential,TXT,Textiles and Apparel,22126.5,385.5,4128.5,False
+79-CON,79,New Delhi,Delhi,metro_administrative,CON,Construction,2585.5,34.5,892.0,True
+79-HLT,79,New Delhi,Delhi,metro_administrative,HLT,Healthcare,2596.0,79.0,441.0,False
+79-ITS,79,New Delhi,Delhi,metro_administrative,ITS,IT-ITeS,2784.0,146.0,165.5,False
+79-MFG,79,New Delhi,Delhi,metro_administrative,MFG,Manufacturing,1191.0,26.0,190.5,True
+79-TXT,79,New Delhi,Delhi,metro_administrative,TXT,Textiles and Apparel,407.0,7.0,96.5,True
+80-CON,80,North Delhi,Delhi,industrial_msme,CON,Construction,28070.0,469.0,8785.0,False
+80-HLT,80,North Delhi,Delhi,industrial_msme,HLT,Healthcare,8277.0,357.0,1178.0,False
+80-ITS,80,North Delhi,Delhi,industrial_msme,ITS,IT-ITeS,4048.0,336.5,245.0,False
+80-MFG,80,North Delhi,Delhi,industrial_msme,MFG,Manufacturing,50915.0,709.5,8736.5,False
+80-TXT,80,North Delhi,Delhi,industrial_msme,TXT,Textiles and Apparel,14773.5,192.5,3350.0,False
+81-CON,81,North East Delhi,Delhi,metro_residential,CON,Construction,76760.0,1789.5,27902.5,False
+81-HLT,81,North East Delhi,Delhi,metro_residential,HLT,Healthcare,24148.5,714.5,3471.5,False
+81-ITS,81,North East Delhi,Delhi,metro_residential,ITS,IT-ITeS,30031.5,1602.5,1850.5,False
+81-MFG,81,North East Delhi,Delhi,metro_residential,MFG,Manufacturing,64664.5,1540.5,10692.0,False
+81-TXT,81,North East Delhi,Delhi,metro_residential,TXT,Textiles and Apparel,25844.0,557.0,7065.5,False
+82-CON,82,North West Delhi,Delhi,industrial_msme,CON,Construction,116537.0,2350.5,32436.0,False
+82-HLT,82,North West Delhi,Delhi,industrial_msme,HLT,Healthcare,40091.0,1185.5,6867.5,False
+82-ITS,82,North West Delhi,Delhi,industrial_msme,ITS,IT-ITeS,16653.5,847.0,1169.0,False
+82-MFG,82,North West Delhi,Delhi,industrial_msme,MFG,Manufacturing,235221.0,5263.0,48418.5,False
+82-TXT,82,North West Delhi,Delhi,industrial_msme,TXT,Textiles and Apparel,86127.5,1257.0,20239.0,False
+83-CON,83,South Delhi,Delhi,metro_core,CON,Construction,103661.5,1545.0,30790.0,False
+83-HLT,83,South Delhi,Delhi,metro_core,HLT,Healthcare,49219.5,1435.5,8568.5,False
+83-ITS,83,South Delhi,Delhi,metro_core,ITS,IT-ITeS,37742.0,1959.5,2003.5,False
+83-MFG,83,South Delhi,Delhi,metro_core,MFG,Manufacturing,119773.0,2766.0,19292.5,False
+83-TXT,83,South Delhi,Delhi,metro_core,TXT,Textiles and Apparel,26110.5,539.5,6291.5,False
+84-CON,84,South West Delhi,Delhi,metro_residential,CON,Construction,87625.5,1326.5,24822.0,False
+84-HLT,84,South West Delhi,Delhi,metro_residential,HLT,Healthcare,28929.0,754.5,3539.0,False
+84-ITS,84,South West Delhi,Delhi,metro_residential,ITS,IT-ITeS,23277.0,1091.5,1578.5,False
+84-MFG,84,South West Delhi,Delhi,metro_residential,MFG,Manufacturing,73481.0,1554.0,10805.5,False
+84-TXT,84,South West Delhi,Delhi,metro_residential,TXT,Textiles and Apparel,43059.5,824.0,10706.5,False
+85-CON,85,West Delhi,Delhi,industrial_hub,CON,Construction,88085.0,1195.5,27919.5,False
+85-HLT,85,West Delhi,Delhi,industrial_hub,HLT,Healthcare,25002.5,922.0,4607.5,False
+85-ITS,85,West Delhi,Delhi,industrial_hub,ITS,IT-ITeS,8883.5,352.0,690.0,False
+85-MFG,85,West Delhi,Delhi,industrial_hub,MFG,Manufacturing,186057.0,3460.5,32239.0,False
+85-TXT,85,West Delhi,Delhi,industrial_hub,TXT,Textiles and Apparel,43265.0,660.5,11652.5,False

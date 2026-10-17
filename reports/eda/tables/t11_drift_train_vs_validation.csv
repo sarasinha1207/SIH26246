@@ -1,0 +1,16 @@
+target,sector,train_2012_2019_mean_yoy_pct,val_2024_mean_yoy_pct,train_std_pct,val_std_pct,ks_stat
+Employed workers,Manufacturing,1.81,6.16,2.18,2.16,0.67
+Employed workers,Construction,3.1,6.63,2.25,2.0,0.6
+Employed workers,IT-ITeS,5.79,4.02,2.62,2.23,0.28
+Employed workers,Healthcare,3.93,6.62,2.19,2.16,0.48
+Employed workers,Textiles and Apparel,0.43,4.53,2.13,2.2,0.67
+Job vacancies,Manufacturing,2.34,7.33,11.93,12.32,0.17
+Job vacancies,Construction,3.31,4.81,12.34,11.27,0.08
+Job vacancies,IT-ITeS,4.59,-26.87,12.88,15.03,0.75
+Job vacancies,Healthcare,4.77,7.49,12.06,12.02,0.09
+Job vacancies,Textiles and Apparel,0.04,2.48,11.27,11.64,0.09
+Registered seekers,Manufacturing,3.28,10.17,10.16,8.91,0.3
+Registered seekers,Construction,3.77,12.47,9.18,8.66,0.37
+Registered seekers,IT-ITeS,8.39,1.08,10.14,8.37,0.33
+Registered seekers,Healthcare,6.26,10.92,9.86,8.91,0.2
+Registered seekers,Textiles and Apparel,1.01,9.45,9.52,8.69,0.38

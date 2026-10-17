@@ -1,0 +1,71 @@
+Sector_Name,Year,Acute Shortage,Balanced,Oversupply Watch,Saturation Risk
+Construction,2011,0.0,0.518,0.464,0.018
+Construction,2012,0.0,0.661,0.321,0.018
+Construction,2013,0.0,0.679,0.304,0.018
+Construction,2014,0.0,0.571,0.411,0.018
+Construction,2015,0.0,0.518,0.482,0.0
+Construction,2016,0.0,0.429,0.571,0.0
+Construction,2017,0.0,0.232,0.732,0.036
+Construction,2018,0.0,0.25,0.696,0.054
+Construction,2019,0.0,0.286,0.679,0.036
+Construction,2020,0.0,0.0,0.589,0.411
+Construction,2021,0.0,0.0,0.304,0.696
+Construction,2022,0.0,0.0,0.0,1.0
+Construction,2023,0.0,0.0,0.0,1.0
+Construction,2024,0.0,0.0,0.0,1.0
+Healthcare,2011,0.0,0.982,0.018,0.0
+Healthcare,2012,0.054,0.946,0.0,0.0
+Healthcare,2013,0.054,0.929,0.018,0.0
+Healthcare,2014,0.036,0.964,0.0,0.0
+Healthcare,2015,0.018,0.982,0.0,0.0
+Healthcare,2016,0.0,1.0,0.0,0.0
+Healthcare,2017,0.0,1.0,0.0,0.0
+Healthcare,2018,0.0,0.982,0.018,0.0
+Healthcare,2019,0.0,0.982,0.018,0.0
+Healthcare,2020,0.0,0.982,0.018,0.0
+Healthcare,2021,0.0,0.946,0.054,0.0
+Healthcare,2022,0.0,0.554,0.429,0.018
+Healthcare,2023,0.0,0.143,0.821,0.036
+Healthcare,2024,0.0,0.143,0.804,0.054
+IT-ITeS,2011,0.321,0.679,0.0,0.0
+IT-ITeS,2012,0.375,0.625,0.0,0.0
+IT-ITeS,2013,0.321,0.661,0.018,0.0
+IT-ITeS,2014,0.268,0.732,0.0,0.0
+IT-ITeS,2015,0.286,0.714,0.0,0.0
+IT-ITeS,2016,0.179,0.804,0.018,0.0
+IT-ITeS,2017,0.054,0.929,0.018,0.0
+IT-ITeS,2018,0.018,0.946,0.036,0.0
+IT-ITeS,2019,0.036,0.946,0.018,0.0
+IT-ITeS,2020,0.071,0.911,0.018,0.0
+IT-ITeS,2021,0.161,0.839,0.0,0.0
+IT-ITeS,2022,0.268,0.732,0.0,0.0
+IT-ITeS,2023,0.125,0.857,0.018,0.0
+IT-ITeS,2024,0.018,0.964,0.018,0.0
+Manufacturing,2011,0.0,0.982,0.018,0.0
+Manufacturing,2012,0.0,0.982,0.018,0.0
+Manufacturing,2013,0.018,0.964,0.018,0.0
+Manufacturing,2014,0.018,0.964,0.018,0.0
+Manufacturing,2015,0.0,0.982,0.018,0.0
+Manufacturing,2016,0.0,0.982,0.018,0.0
+Manufacturing,2017,0.0,0.911,0.089,0.0
+Manufacturing,2018,0.0,0.857,0.143,0.0
+Manufacturing,2019,0.0,0.857,0.143,0.0
+Manufacturing,2020,0.0,0.661,0.321,0.018
+Manufacturing,2021,0.0,0.607,0.375,0.018
+Manufacturing,2022,0.0,0.196,0.714,0.089
+Manufacturing,2023,0.0,0.036,0.804,0.161
+Manufacturing,2024,0.0,0.054,0.75,0.196
+Textiles and Apparel,2011,0.0,0.964,0.036,0.0
+Textiles and Apparel,2012,0.0,1.0,0.0,0.0
+Textiles and Apparel,2013,0.0,0.982,0.018,0.0
+Textiles and Apparel,2014,0.0,0.982,0.018,0.0
+Textiles and Apparel,2015,0.0,0.982,0.018,0.0
+Textiles and Apparel,2016,0.0,0.964,0.036,0.0
+Textiles and Apparel,2017,0.0,0.875,0.125,0.0
+Textiles and Apparel,2018,0.0,0.821,0.179,0.0
+Textiles and Apparel,2019,0.0,0.857,0.143,0.0
+Textiles and Apparel,2020,0.0,0.304,0.679,0.018
+Textiles and Apparel,2021,0.0,0.089,0.839,0.071
+Textiles and Apparel,2022,0.0,0.0,0.393,0.607
+Textiles and Apparel,2023,0.0,0.0,0.054,0.946
+Textiles and Apparel,2024,0.0,0.0,0.054,0.946

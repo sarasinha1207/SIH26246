@@ -1,0 +1,6 @@
+Sector_Name,Male_Share_Pct,Female_Share_Pct,Age_15_24_Pct,Age_25_54_Pct,Age_55_Plus_Pct,Edu_Below_Primary_Pct,Edu_Secondary_HigherSecondary_Pct,Qualification_Vocational_ITI_Certified_Pct,Edu_Graduate_and_Above_Pct
+Construction,86.7,13.2,27.4,62.6,10.0,57.6,16.3,23.0,3.0
+Healthcare,50.5,49.4,22.2,65.8,12.1,3.1,14.5,46.2,36.1
+IT-ITeS,64.6,35.2,32.0,65.2,2.8,0.6,4.4,11.4,83.6
+Manufacturing,82.6,17.2,24.1,63.8,12.1,21.9,32.5,33.6,12.0
+Textiles and Apparel,56.6,43.3,29.2,60.5,10.2,48.5,18.4,30.3,2.9

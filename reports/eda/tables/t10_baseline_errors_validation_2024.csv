@@ -1,0 +1,1585 @@
+target,horizon,model,scope,wape_pct
+Employed workers,1,last value,all,1.35
+Employed workers,1,last value,Manufacturing,1.41
+Employed workers,1,last value,Construction,1.58
+Employed workers,1,last value,IT-ITeS,0.94
+Employed workers,1,last value,Healthcare,1.21
+Employed workers,1,last value,Textiles and Apparel,0.95
+Employed workers,1,last value,tier=agrarian_developing,0.87
+Employed workers,1,last value,tier=agrarian_migrant,0.7
+Employed workers,1,last value,tier=industrial_hub,1.8
+Employed workers,1,last value,tier=industrial_it_hub,1.35
+Employed workers,1,last value,tier=industrial_mining,1.31
+Employed workers,1,last value,tier=industrial_msme,0.93
+Employed workers,1,last value,tier=industrial_port,2.32
+Employed workers,1,last value,tier=logistics_hub,0.29
+Employed workers,1,last value,tier=metro_administrative,0.53
+Employed workers,1,last value,tier=metro_core,1.44
+Employed workers,1,last value,tier=metro_residential,1.09
+Employed workers,1,last value,tier=peripheral_agrarian,1.17
+Employed workers,1,last value,tier=peripheral_coastal,1.55
+Employed workers,1,last value,tier=peripheral_tribal,0.81
+Employed workers,1,last value,tier=semi_industrial,1.2
+Employed workers,1,last value,tier=textile_cluster,0.92
+Employed workers,1,mean of last 6 months,all,4.2
+Employed workers,1,mean of last 6 months,Manufacturing,3.67
+Employed workers,1,mean of last 6 months,Construction,7.46
+Employed workers,1,mean of last 6 months,IT-ITeS,1.23
+Employed workers,1,mean of last 6 months,Healthcare,1.24
+Employed workers,1,mean of last 6 months,Textiles and Apparel,2.25
+Employed workers,1,mean of last 6 months,tier=agrarian_developing,4.71
+Employed workers,1,mean of last 6 months,tier=agrarian_migrant,3.35
+Employed workers,1,mean of last 6 months,tier=industrial_hub,4.22
+Employed workers,1,mean of last 6 months,tier=industrial_it_hub,4.34
+Employed workers,1,mean of last 6 months,tier=industrial_mining,5.63
+Employed workers,1,mean of last 6 months,tier=industrial_msme,3.78
+Employed workers,1,mean of last 6 months,tier=industrial_port,4.58
+Employed workers,1,mean of last 6 months,tier=logistics_hub,3.81
+Employed workers,1,mean of last 6 months,tier=metro_administrative,2.98
+Employed workers,1,mean of last 6 months,tier=metro_core,3.89
+Employed workers,1,mean of last 6 months,tier=metro_residential,3.73
+Employed workers,1,mean of last 6 months,tier=peripheral_agrarian,5.08
+Employed workers,1,mean of last 6 months,tier=peripheral_coastal,5.64
+Employed workers,1,mean of last 6 months,tier=peripheral_tribal,5.55
+Employed workers,1,mean of last 6 months,tier=semi_industrial,4.79
+Employed workers,1,mean of last 6 months,tier=textile_cluster,3.98
+Employed workers,1,mean of last 12 months,all,4.96
+Employed workers,1,mean of last 12 months,Manufacturing,5.35
+Employed workers,1,mean of last 12 months,Construction,7.01
+Employed workers,1,mean of last 12 months,IT-ITeS,1.97
+Employed workers,1,mean of last 12 months,Healthcare,3.39
+Employed workers,1,mean of last 12 months,Textiles and Apparel,1.7
+Employed workers,1,mean of last 12 months,tier=agrarian_developing,4.98
+Employed workers,1,mean of last 12 months,tier=agrarian_migrant,4.54
+Employed workers,1,mean of last 12 months,tier=industrial_hub,5.34
+Employed workers,1,mean of last 12 months,tier=industrial_it_hub,5.19
+Employed workers,1,mean of last 12 months,tier=industrial_mining,6.06
+Employed workers,1,mean of last 12 months,tier=industrial_msme,4.35
+Employed workers,1,mean of last 12 months,tier=industrial_port,5.11
+Employed workers,1,mean of last 12 months,tier=logistics_hub,4.66
+Employed workers,1,mean of last 12 months,tier=metro_administrative,3.26
+Employed workers,1,mean of last 12 months,tier=metro_core,4.37
+Employed workers,1,mean of last 12 months,tier=metro_residential,4.8
+Employed workers,1,mean of last 12 months,tier=peripheral_agrarian,5.28
+Employed workers,1,mean of last 12 months,tier=peripheral_coastal,5.96
+Employed workers,1,mean of last 12 months,tier=peripheral_tribal,6.26
+Employed workers,1,mean of last 12 months,tier=semi_industrial,5.33
+Employed workers,1,mean of last 12 months,tier=textile_cluster,4.64
+Employed workers,1,seasonal naive,all,7.05
+Employed workers,1,seasonal naive,Manufacturing,7.7
+Employed workers,1,seasonal naive,Construction,6.63
+Employed workers,1,seasonal naive,IT-ITeS,6.68
+Employed workers,1,seasonal naive,Healthcare,7.51
+Employed workers,1,seasonal naive,Textiles and Apparel,5.75
+Employed workers,1,seasonal naive,tier=agrarian_developing,6.14
+Employed workers,1,seasonal naive,tier=agrarian_migrant,7.53
+Employed workers,1,seasonal naive,tier=industrial_hub,7.92
+Employed workers,1,seasonal naive,tier=industrial_it_hub,7.42
+Employed workers,1,seasonal naive,tier=industrial_mining,6.21
+Employed workers,1,seasonal naive,tier=industrial_msme,6.06
+Employed workers,1,seasonal naive,tier=industrial_port,6.03
+Employed workers,1,seasonal naive,tier=logistics_hub,6.33
+Employed workers,1,seasonal naive,tier=metro_administrative,6.24
+Employed workers,1,seasonal naive,tier=metro_core,6.9
+Employed workers,1,seasonal naive,tier=metro_residential,7.1
+Employed workers,1,seasonal naive,tier=peripheral_agrarian,6.12
+Employed workers,1,seasonal naive,tier=peripheral_coastal,6.47
+Employed workers,1,seasonal naive,tier=peripheral_tribal,7.35
+Employed workers,1,seasonal naive,tier=semi_industrial,6.86
+Employed workers,1,seasonal naive,tier=textile_cluster,6.65
+Employed workers,1,seasonal naive + drift,all,1.52
+Employed workers,1,seasonal naive + drift,Manufacturing,1.6
+Employed workers,1,seasonal naive + drift,Construction,1.59
+Employed workers,1,seasonal naive + drift,IT-ITeS,1.14
+Employed workers,1,seasonal naive + drift,Healthcare,1.36
+Employed workers,1,seasonal naive + drift,Textiles and Apparel,1.54
+Employed workers,1,seasonal naive + drift,tier=agrarian_developing,1.48
+Employed workers,1,seasonal naive + drift,tier=agrarian_migrant,0.88
+Employed workers,1,seasonal naive + drift,tier=industrial_hub,1.63
+Employed workers,1,seasonal naive + drift,tier=industrial_it_hub,1.73
+Employed workers,1,seasonal naive + drift,tier=industrial_mining,0.8
+Employed workers,1,seasonal naive + drift,tier=industrial_msme,1.95
+Employed workers,1,seasonal naive + drift,tier=industrial_port,0.92
+Employed workers,1,seasonal naive + drift,tier=logistics_hub,1.47
+Employed workers,1,seasonal naive + drift,tier=metro_administrative,1.3
+Employed workers,1,seasonal naive + drift,tier=metro_core,1.14
+Employed workers,1,seasonal naive + drift,tier=metro_residential,1.01
+Employed workers,1,seasonal naive + drift,tier=peripheral_agrarian,1.46
+Employed workers,1,seasonal naive + drift,tier=peripheral_coastal,1.44
+Employed workers,1,seasonal naive + drift,tier=peripheral_tribal,1.23
+Employed workers,1,seasonal naive + drift,tier=semi_industrial,1.35
+Employed workers,1,seasonal naive + drift,tier=textile_cluster,1.42
+Employed workers,1,seasonally adjusted 3-month level,all,1.28
+Employed workers,1,seasonally adjusted 3-month level,Manufacturing,1.41
+Employed workers,1,seasonally adjusted 3-month level,Construction,1.17
+Employed workers,1,seasonally adjusted 3-month level,IT-ITeS,1.32
+Employed workers,1,seasonally adjusted 3-month level,Healthcare,1.52
+Employed workers,1,seasonally adjusted 3-month level,Textiles and Apparel,0.89
+Employed workers,1,seasonally adjusted 3-month level,tier=agrarian_developing,1.19
+Employed workers,1,seasonally adjusted 3-month level,tier=agrarian_migrant,2.12
+Employed workers,1,seasonally adjusted 3-month level,tier=industrial_hub,1.47
+Employed workers,1,seasonally adjusted 3-month level,tier=industrial_it_hub,1.37
+Employed workers,1,seasonally adjusted 3-month level,tier=industrial_mining,1.37
+Employed workers,1,seasonally adjusted 3-month level,tier=industrial_msme,1.07
+Employed workers,1,seasonally adjusted 3-month level,tier=industrial_port,2.0
+Employed workers,1,seasonally adjusted 3-month level,tier=logistics_hub,1.25
+Employed workers,1,seasonally adjusted 3-month level,tier=metro_administrative,0.79
+Employed workers,1,seasonally adjusted 3-month level,tier=metro_core,1.26
+Employed workers,1,seasonally adjusted 3-month level,tier=metro_residential,0.99
+Employed workers,1,seasonally adjusted 3-month level,tier=peripheral_agrarian,1.1
+Employed workers,1,seasonally adjusted 3-month level,tier=peripheral_coastal,1.33
+Employed workers,1,seasonally adjusted 3-month level,tier=peripheral_tribal,0.98
+Employed workers,1,seasonally adjusted 3-month level,tier=semi_industrial,1.11
+Employed workers,1,seasonally adjusted 3-month level,tier=textile_cluster,0.85
+Employed workers,3,last value,all,1.93
+Employed workers,3,last value,Manufacturing,1.69
+Employed workers,3,last value,Construction,2.63
+Employed workers,3,last value,IT-ITeS,1.25
+Employed workers,3,last value,Healthcare,2.01
+Employed workers,3,last value,Textiles and Apparel,1.36
+Employed workers,3,last value,tier=agrarian_developing,2.07
+Employed workers,3,last value,tier=agrarian_migrant,2.39
+Employed workers,3,last value,tier=industrial_hub,1.9
+Employed workers,3,last value,tier=industrial_it_hub,1.86
+Employed workers,3,last value,tier=industrial_mining,1.2
+Employed workers,3,last value,tier=industrial_msme,2.11
+Employed workers,3,last value,tier=industrial_port,3.64
+Employed workers,3,last value,tier=logistics_hub,1.57
+Employed workers,3,last value,tier=metro_administrative,1.1
+Employed workers,3,last value,tier=metro_core,1.87
+Employed workers,3,last value,tier=metro_residential,1.92
+Employed workers,3,last value,tier=peripheral_agrarian,2.19
+Employed workers,3,last value,tier=peripheral_coastal,1.51
+Employed workers,3,last value,tier=peripheral_tribal,1.53
+Employed workers,3,last value,tier=semi_industrial,1.91
+Employed workers,3,last value,tier=textile_cluster,1.63
+Employed workers,3,mean of last 6 months,all,4.92
+Employed workers,3,mean of last 6 months,Manufacturing,4.24
+Employed workers,3,mean of last 6 months,Construction,8.96
+Employed workers,3,mean of last 6 months,IT-ITeS,1.12
+Employed workers,3,mean of last 6 months,Healthcare,2.02
+Employed workers,3,mean of last 6 months,Textiles and Apparel,1.88
+Employed workers,3,mean of last 6 months,tier=agrarian_developing,5.3
+Employed workers,3,mean of last 6 months,tier=agrarian_migrant,5.68
+Employed workers,3,mean of last 6 months,tier=industrial_hub,4.89
+Employed workers,3,mean of last 6 months,tier=industrial_it_hub,4.92
+Employed workers,3,mean of last 6 months,tier=industrial_mining,5.39
+Employed workers,3,mean of last 6 months,tier=industrial_msme,5.34
+Employed workers,3,mean of last 6 months,tier=industrial_port,6.82
+Employed workers,3,mean of last 6 months,tier=logistics_hub,4.65
+Employed workers,3,mean of last 6 months,tier=metro_administrative,3.14
+Employed workers,3,mean of last 6 months,tier=metro_core,4.05
+Employed workers,3,mean of last 6 months,tier=metro_residential,4.39
+Employed workers,3,mean of last 6 months,tier=peripheral_agrarian,6.06
+Employed workers,3,mean of last 6 months,tier=peripheral_coastal,5.34
+Employed workers,3,mean of last 6 months,tier=peripheral_tribal,6.36
+Employed workers,3,mean of last 6 months,tier=semi_industrial,5.41
+Employed workers,3,mean of last 6 months,tier=textile_cluster,4.33
+Employed workers,3,mean of last 12 months,all,5.82
+Employed workers,3,mean of last 12 months,Manufacturing,5.91
+Employed workers,3,mean of last 12 months,Construction,8.52
+Employed workers,3,mean of last 12 months,IT-ITeS,2.4
+Employed workers,3,mean of last 12 months,Healthcare,4.3
+Employed workers,3,mean of last 12 months,Textiles and Apparel,2.11
+Employed workers,3,mean of last 12 months,tier=agrarian_developing,6.13
+Employed workers,3,mean of last 12 months,tier=agrarian_migrant,7.01
+Employed workers,3,mean of last 12 months,tier=industrial_hub,6.11
+Employed workers,3,mean of last 12 months,tier=industrial_it_hub,5.87
+Employed workers,3,mean of last 12 months,tier=industrial_mining,6.01
+Employed workers,3,mean of last 12 months,tier=industrial_msme,5.93
+Employed workers,3,mean of last 12 months,tier=industrial_port,7.3
+Employed workers,3,mean of last 12 months,tier=logistics_hub,5.54
+Employed workers,3,mean of last 12 months,tier=metro_administrative,3.92
+Employed workers,3,mean of last 12 months,tier=metro_core,4.77
+Employed workers,3,mean of last 12 months,tier=metro_residential,5.56
+Employed workers,3,mean of last 12 months,tier=peripheral_agrarian,6.53
+Employed workers,3,mean of last 12 months,tier=peripheral_coastal,5.84
+Employed workers,3,mean of last 12 months,tier=peripheral_tribal,7.2
+Employed workers,3,mean of last 12 months,tier=semi_industrial,6.0
+Employed workers,3,mean of last 12 months,tier=textile_cluster,5.5
+Employed workers,3,seasonal naive,all,6.47
+Employed workers,3,seasonal naive,Manufacturing,6.85
+Employed workers,3,seasonal naive,Construction,6.61
+Employed workers,3,seasonal naive,IT-ITeS,4.85
+Employed workers,3,seasonal naive,Healthcare,7.24
+Employed workers,3,seasonal naive,Textiles and Apparel,5.31
+Employed workers,3,seasonal naive,tier=agrarian_developing,6.09
+Employed workers,3,seasonal naive,tier=agrarian_migrant,7.12
+Employed workers,3,seasonal naive,tier=industrial_hub,6.95
+Employed workers,3,seasonal naive,tier=industrial_it_hub,6.77
+Employed workers,3,seasonal naive,tier=industrial_mining,5.68
+Employed workers,3,seasonal naive,tier=industrial_msme,6.81
+Employed workers,3,seasonal naive,tier=industrial_port,7.73
+Employed workers,3,seasonal naive,tier=logistics_hub,5.53
+Employed workers,3,seasonal naive,tier=metro_administrative,4.91
+Employed workers,3,seasonal naive,tier=metro_core,5.28
+Employed workers,3,seasonal naive,tier=metro_residential,6.82
+Employed workers,3,seasonal naive,tier=peripheral_agrarian,6.08
+Employed workers,3,seasonal naive,tier=peripheral_coastal,5.2
+Employed workers,3,seasonal naive,tier=peripheral_tribal,7.16
+Employed workers,3,seasonal naive,tier=semi_industrial,6.27
+Employed workers,3,seasonal naive,tier=textile_cluster,6.19
+Employed workers,3,seasonal naive + drift,all,1.93
+Employed workers,3,seasonal naive + drift,Manufacturing,2.14
+Employed workers,3,seasonal naive + drift,Construction,1.61
+Employed workers,3,seasonal naive + drift,IT-ITeS,2.58
+Employed workers,3,seasonal naive + drift,Healthcare,1.44
+Employed workers,3,seasonal naive + drift,Textiles and Apparel,1.97
+Employed workers,3,seasonal naive + drift,tier=agrarian_developing,2.12
+Employed workers,3,seasonal naive + drift,tier=agrarian_migrant,1.31
+Employed workers,3,seasonal naive + drift,tier=industrial_hub,1.91
+Employed workers,3,seasonal naive + drift,tier=industrial_it_hub,1.09
+Employed workers,3,seasonal naive + drift,tier=industrial_mining,1.84
+Employed workers,3,seasonal naive + drift,tier=industrial_msme,2.28
+Employed workers,3,seasonal naive + drift,tier=industrial_port,1.59
+Employed workers,3,seasonal naive + drift,tier=logistics_hub,2.37
+Employed workers,3,seasonal naive + drift,tier=metro_administrative,2.14
+Employed workers,3,seasonal naive + drift,tier=metro_core,2.63
+Employed workers,3,seasonal naive + drift,tier=metro_residential,1.37
+Employed workers,3,seasonal naive + drift,tier=peripheral_agrarian,2.24
+Employed workers,3,seasonal naive + drift,tier=peripheral_coastal,1.57
+Employed workers,3,seasonal naive + drift,tier=peripheral_tribal,1.56
+Employed workers,3,seasonal naive + drift,tier=semi_industrial,1.8
+Employed workers,3,seasonal naive + drift,tier=textile_cluster,2.09
+Employed workers,3,seasonally adjusted 3-month level,all,2.6
+Employed workers,3,seasonally adjusted 3-month level,Manufacturing,2.67
+Employed workers,3,seasonally adjusted 3-month level,Construction,2.85
+Employed workers,3,seasonally adjusted 3-month level,IT-ITeS,1.66
+Employed workers,3,seasonally adjusted 3-month level,Healthcare,2.26
+Employed workers,3,seasonally adjusted 3-month level,Textiles and Apparel,2.75
+Employed workers,3,seasonally adjusted 3-month level,tier=agrarian_developing,2.67
+Employed workers,3,seasonally adjusted 3-month level,tier=agrarian_migrant,2.94
+Employed workers,3,seasonally adjusted 3-month level,tier=industrial_hub,2.42
+Employed workers,3,seasonally adjusted 3-month level,tier=industrial_it_hub,3.03
+Employed workers,3,seasonally adjusted 3-month level,tier=industrial_mining,2.72
+Employed workers,3,seasonally adjusted 3-month level,tier=industrial_msme,2.94
+Employed workers,3,seasonally adjusted 3-month level,tier=industrial_port,4.16
+Employed workers,3,seasonally adjusted 3-month level,tier=logistics_hub,2.43
+Employed workers,3,seasonally adjusted 3-month level,tier=metro_administrative,1.72
+Employed workers,3,seasonally adjusted 3-month level,tier=metro_core,1.76
+Employed workers,3,seasonally adjusted 3-month level,tier=metro_residential,2.81
+Employed workers,3,seasonally adjusted 3-month level,tier=peripheral_agrarian,2.73
+Employed workers,3,seasonally adjusted 3-month level,tier=peripheral_coastal,2.68
+Employed workers,3,seasonally adjusted 3-month level,tier=peripheral_tribal,2.89
+Employed workers,3,seasonally adjusted 3-month level,tier=semi_industrial,2.68
+Employed workers,3,seasonally adjusted 3-month level,tier=textile_cluster,2.79
+Employed workers,6,last value,all,4.11
+Employed workers,6,last value,Manufacturing,1.35
+Employed workers,6,last value,Construction,10.01
+Employed workers,6,last value,IT-ITeS,1.58
+Employed workers,6,last value,Healthcare,3.36
+Employed workers,6,last value,Textiles and Apparel,2.04
+Employed workers,6,last value,tier=agrarian_developing,6.16
+Employed workers,6,last value,tier=agrarian_migrant,5.83
+Employed workers,6,last value,tier=industrial_hub,3.83
+Employed workers,6,last value,tier=industrial_it_hub,4.39
+Employed workers,6,last value,tier=industrial_mining,6.45
+Employed workers,6,last value,tier=industrial_msme,3.41
+Employed workers,6,last value,tier=industrial_port,4.42
+Employed workers,6,last value,tier=logistics_hub,4.5
+Employed workers,6,last value,tier=metro_administrative,1.44
+Employed workers,6,last value,tier=metro_core,3.9
+Employed workers,6,last value,tier=metro_residential,2.88
+Employed workers,6,last value,tier=peripheral_agrarian,5.79
+Employed workers,6,last value,tier=peripheral_coastal,5.42
+Employed workers,6,last value,tier=peripheral_tribal,6.88
+Employed workers,6,last value,tier=semi_industrial,4.73
+Employed workers,6,last value,tier=textile_cluster,3.69
+Employed workers,6,mean of last 6 months,all,2.94
+Employed workers,6,mean of last 6 months,Manufacturing,2.75
+Employed workers,6,mean of last 6 months,Construction,3.94
+Employed workers,6,mean of last 6 months,IT-ITeS,1.59
+Employed workers,6,mean of last 6 months,Healthcare,3.46
+Employed workers,6,mean of last 6 months,Textiles and Apparel,1.75
+Employed workers,6,mean of last 6 months,tier=agrarian_developing,2.73
+Employed workers,6,mean of last 6 months,tier=agrarian_migrant,1.82
+Employed workers,6,mean of last 6 months,tier=industrial_hub,2.8
+Employed workers,6,mean of last 6 months,tier=industrial_it_hub,3.39
+Employed workers,6,mean of last 6 months,tier=industrial_mining,3.63
+Employed workers,6,mean of last 6 months,tier=industrial_msme,3.53
+Employed workers,6,mean of last 6 months,tier=industrial_port,2.15
+Employed workers,6,mean of last 6 months,tier=logistics_hub,3.02
+Employed workers,6,mean of last 6 months,tier=metro_administrative,3.74
+Employed workers,6,mean of last 6 months,tier=metro_core,2.55
+Employed workers,6,mean of last 6 months,tier=metro_residential,5.11
+Employed workers,6,mean of last 6 months,tier=peripheral_agrarian,2.46
+Employed workers,6,mean of last 6 months,tier=peripheral_coastal,1.17
+Employed workers,6,mean of last 6 months,tier=peripheral_tribal,2.71
+Employed workers,6,mean of last 6 months,tier=semi_industrial,2.35
+Employed workers,6,mean of last 6 months,tier=textile_cluster,2.28
+Employed workers,6,mean of last 12 months,all,4.18
+Employed workers,6,mean of last 12 months,Manufacturing,4.3
+Employed workers,6,mean of last 12 months,Construction,4.3
+Employed workers,6,mean of last 12 months,IT-ITeS,3.08
+Employed workers,6,mean of last 12 months,Healthcare,5.79
+Employed workers,6,mean of last 12 months,Textiles and Apparel,2.91
+Employed workers,6,mean of last 12 months,tier=agrarian_developing,3.73
+Employed workers,6,mean of last 12 months,tier=agrarian_migrant,2.06
+Employed workers,6,mean of last 12 months,tier=industrial_hub,4.33
+Employed workers,6,mean of last 12 months,tier=industrial_it_hub,4.76
+Employed workers,6,mean of last 12 months,tier=industrial_mining,4.9
+Employed workers,6,mean of last 12 months,tier=industrial_msme,4.58
+Employed workers,6,mean of last 12 months,tier=industrial_port,3.31
+Employed workers,6,mean of last 12 months,tier=logistics_hub,4.46
+Employed workers,6,mean of last 12 months,tier=metro_administrative,4.83
+Employed workers,6,mean of last 12 months,tier=metro_core,3.6
+Employed workers,6,mean of last 12 months,tier=metro_residential,6.46
+Employed workers,6,mean of last 12 months,tier=peripheral_agrarian,3.51
+Employed workers,6,mean of last 12 months,tier=peripheral_coastal,1.87
+Employed workers,6,mean of last 12 months,tier=peripheral_tribal,3.6
+Employed workers,6,mean of last 12 months,tier=semi_industrial,3.49
+Employed workers,6,mean of last 12 months,tier=textile_cluster,3.16
+Employed workers,6,seasonal naive,all,5.85
+Employed workers,6,seasonal naive,Manufacturing,6.51
+Employed workers,6,seasonal naive,Construction,6.42
+Employed workers,6,seasonal naive,IT-ITeS,2.45
+Employed workers,6,seasonal naive,Healthcare,6.36
+Employed workers,6,seasonal naive,Textiles and Apparel,4.29
+Employed workers,6,seasonal naive,tier=agrarian_developing,5.18
+Employed workers,6,seasonal naive,tier=agrarian_migrant,5.9
+Employed workers,6,seasonal naive,tier=industrial_hub,6.26
+Employed workers,6,seasonal naive,tier=industrial_it_hub,6.0
+Employed workers,6,seasonal naive,tier=industrial_mining,6.43
+Employed workers,6,seasonal naive,tier=industrial_msme,6.6
+Employed workers,6,seasonal naive,tier=industrial_port,4.48
+Employed workers,6,seasonal naive,tier=logistics_hub,5.1
+Employed workers,6,seasonal naive,tier=metro_administrative,3.82
+Employed workers,6,seasonal naive,tier=metro_core,4.64
+Employed workers,6,seasonal naive,tier=metro_residential,7.12
+Employed workers,6,seasonal naive,tier=peripheral_agrarian,5.83
+Employed workers,6,seasonal naive,tier=peripheral_coastal,5.51
+Employed workers,6,seasonal naive,tier=peripheral_tribal,6.36
+Employed workers,6,seasonal naive,tier=semi_industrial,5.9
+Employed workers,6,seasonal naive,tier=textile_cluster,5.05
+Employed workers,6,seasonal naive + drift,all,2.48
+Employed workers,6,seasonal naive + drift,Manufacturing,2.33
+Employed workers,6,seasonal naive + drift,Construction,1.75
+Employed workers,6,seasonal naive + drift,IT-ITeS,4.92
+Employed workers,6,seasonal naive + drift,Healthcare,2.54
+Employed workers,6,seasonal naive + drift,Textiles and Apparel,2.86
+Employed workers,6,seasonal naive + drift,tier=agrarian_developing,3.1
+Employed workers,6,seasonal naive + drift,tier=agrarian_migrant,2.51
+Employed workers,6,seasonal naive + drift,tier=industrial_hub,2.11
+Employed workers,6,seasonal naive + drift,tier=industrial_it_hub,2.13
+Employed workers,6,seasonal naive + drift,tier=industrial_mining,3.15
+Employed workers,6,seasonal naive + drift,tier=industrial_msme,2.47
+Employed workers,6,seasonal naive + drift,tier=industrial_port,3.02
+Employed workers,6,seasonal naive + drift,tier=logistics_hub,2.37
+Employed workers,6,seasonal naive + drift,tier=metro_administrative,3.24
+Employed workers,6,seasonal naive + drift,tier=metro_core,3.55
+Employed workers,6,seasonal naive + drift,tier=metro_residential,1.97
+Employed workers,6,seasonal naive + drift,tier=peripheral_agrarian,2.06
+Employed workers,6,seasonal naive + drift,tier=peripheral_coastal,2.55
+Employed workers,6,seasonal naive + drift,tier=peripheral_tribal,2.21
+Employed workers,6,seasonal naive + drift,tier=semi_industrial,2.01
+Employed workers,6,seasonal naive + drift,tier=textile_cluster,2.95
+Employed workers,6,seasonally adjusted 3-month level,all,4.15
+Employed workers,6,seasonally adjusted 3-month level,Manufacturing,4.44
+Employed workers,6,seasonally adjusted 3-month level,Construction,5.09
+Employed workers,6,seasonally adjusted 3-month level,IT-ITeS,1.76
+Employed workers,6,seasonally adjusted 3-month level,Healthcare,3.62
+Employed workers,6,seasonally adjusted 3-month level,Textiles and Apparel,3.15
+Employed workers,6,seasonally adjusted 3-month level,tier=agrarian_developing,3.72
+Employed workers,6,seasonally adjusted 3-month level,tier=agrarian_migrant,4.16
+Employed workers,6,seasonally adjusted 3-month level,tier=industrial_hub,4.2
+Employed workers,6,seasonally adjusted 3-month level,tier=industrial_it_hub,4.11
+Employed workers,6,seasonally adjusted 3-month level,tier=industrial_mining,5.42
+Employed workers,6,seasonally adjusted 3-month level,tier=industrial_msme,4.56
+Employed workers,6,seasonally adjusted 3-month level,tier=industrial_port,3.56
+Employed workers,6,seasonally adjusted 3-month level,tier=logistics_hub,5.16
+Employed workers,6,seasonally adjusted 3-month level,tier=metro_administrative,3.17
+Employed workers,6,seasonally adjusted 3-month level,tier=metro_core,3.37
+Employed workers,6,seasonally adjusted 3-month level,tier=metro_residential,4.72
+Employed workers,6,seasonally adjusted 3-month level,tier=peripheral_agrarian,4.39
+Employed workers,6,seasonally adjusted 3-month level,tier=peripheral_coastal,4.84
+Employed workers,6,seasonally adjusted 3-month level,tier=peripheral_tribal,3.97
+Employed workers,6,seasonally adjusted 3-month level,tier=semi_industrial,4.66
+Employed workers,6,seasonally adjusted 3-month level,tier=textile_cluster,3.6
+Employed workers,12,last value,all,5.35
+Employed workers,12,last value,Manufacturing,4.98
+Employed workers,12,last value,Construction,6.19
+Employed workers,12,last value,IT-ITeS,5.46
+Employed workers,12,last value,Healthcare,6.43
+Employed workers,12,last value,Textiles and Apparel,3.37
+Employed workers,12,last value,tier=agrarian_developing,5.33
+Employed workers,12,last value,tier=agrarian_migrant,4.58
+Employed workers,12,last value,tier=industrial_hub,5.49
+Employed workers,12,last value,tier=industrial_it_hub,6.22
+Employed workers,12,last value,tier=industrial_mining,5.74
+Employed workers,12,last value,tier=industrial_msme,5.0
+Employed workers,12,last value,tier=industrial_port,4.69
+Employed workers,12,last value,tier=logistics_hub,6.76
+Employed workers,12,last value,tier=metro_administrative,5.83
+Employed workers,12,last value,tier=metro_core,4.6
+Employed workers,12,last value,tier=metro_residential,5.7
+Employed workers,12,last value,tier=peripheral_agrarian,5.72
+Employed workers,12,last value,tier=peripheral_coastal,3.99
+Employed workers,12,last value,tier=peripheral_tribal,3.8
+Employed workers,12,last value,tier=semi_industrial,5.47
+Employed workers,12,last value,tier=textile_cluster,4.45
+Employed workers,12,mean of last 6 months,all,8.12
+Employed workers,12,mean of last 6 months,Manufacturing,7.73
+Employed workers,12,mean of last 6 months,Construction,12.34
+Employed workers,12,mean of last 6 months,IT-ITeS,5.29
+Employed workers,12,mean of last 6 months,Healthcare,6.51
+Employed workers,12,mean of last 6 months,Textiles and Apparel,1.65
+Employed workers,12,mean of last 6 months,tier=agrarian_developing,8.57
+Employed workers,12,mean of last 6 months,tier=agrarian_migrant,8.11
+Employed workers,12,mean of last 6 months,tier=industrial_hub,8.28
+Employed workers,12,mean of last 6 months,tier=industrial_it_hub,8.91
+Employed workers,12,mean of last 6 months,tier=industrial_mining,9.71
+Employed workers,12,mean of last 6 months,tier=industrial_msme,7.81
+Employed workers,12,mean of last 6 months,tier=industrial_port,7.57
+Employed workers,12,mean of last 6 months,tier=logistics_hub,9.81
+Employed workers,12,mean of last 6 months,tier=metro_administrative,8.11
+Employed workers,12,mean of last 6 months,tier=metro_core,6.85
+Employed workers,12,mean of last 6 months,tier=metro_residential,8.01
+Employed workers,12,mean of last 6 months,tier=peripheral_agrarian,9.32
+Employed workers,12,mean of last 6 months,tier=peripheral_coastal,7.73
+Employed workers,12,mean of last 6 months,tier=peripheral_tribal,8.68
+Employed workers,12,mean of last 6 months,tier=semi_industrial,8.75
+Employed workers,12,mean of last 6 months,tier=textile_cluster,6.71
+Employed workers,12,mean of last 12 months,all,9.35
+Employed workers,12,mean of last 12 months,Manufacturing,9.34
+Employed workers,12,mean of last 12 months,Construction,11.91
+Employed workers,12,mean of last 12 months,IT-ITeS,7.16
+Employed workers,12,mean of last 12 months,Healthcare,8.79
+Employed workers,12,mean of last 12 months,Textiles and Apparel,4.55
+Employed workers,12,mean of last 12 months,tier=agrarian_developing,9.48
+Employed workers,12,mean of last 12 months,tier=agrarian_migrant,8.73
+Employed workers,12,mean of last 12 months,tier=industrial_hub,9.79
+Employed workers,12,mean of last 12 months,tier=industrial_it_hub,10.21
+Employed workers,12,mean of last 12 months,tier=industrial_mining,10.33
+Employed workers,12,mean of last 12 months,tier=industrial_msme,8.91
+Employed workers,12,mean of last 12 months,tier=industrial_port,8.31
+Employed workers,12,mean of last 12 months,tier=logistics_hub,10.9
+Employed workers,12,mean of last 12 months,tier=metro_administrative,9.07
+Employed workers,12,mean of last 12 months,tier=metro_core,8.0
+Employed workers,12,mean of last 12 months,tier=metro_residential,9.3
+Employed workers,12,mean of last 12 months,tier=peripheral_agrarian,10.0
+Employed workers,12,mean of last 12 months,tier=peripheral_coastal,8.46
+Employed workers,12,mean of last 12 months,tier=peripheral_tribal,9.83
+Employed workers,12,mean of last 12 months,tier=semi_industrial,9.59
+Employed workers,12,mean of last 12 months,tier=textile_cluster,8.28
+Employed workers,12,seasonal naive,all,5.35
+Employed workers,12,seasonal naive,Manufacturing,4.98
+Employed workers,12,seasonal naive,Construction,6.19
+Employed workers,12,seasonal naive,IT-ITeS,5.46
+Employed workers,12,seasonal naive,Healthcare,6.43
+Employed workers,12,seasonal naive,Textiles and Apparel,3.37
+Employed workers,12,seasonal naive,tier=agrarian_developing,5.33
+Employed workers,12,seasonal naive,tier=agrarian_migrant,4.58
+Employed workers,12,seasonal naive,tier=industrial_hub,5.49
+Employed workers,12,seasonal naive,tier=industrial_it_hub,6.22
+Employed workers,12,seasonal naive,tier=industrial_mining,5.74
+Employed workers,12,seasonal naive,tier=industrial_msme,5.0
+Employed workers,12,seasonal naive,tier=industrial_port,4.69
+Employed workers,12,seasonal naive,tier=logistics_hub,6.76
+Employed workers,12,seasonal naive,tier=metro_administrative,5.83
+Employed workers,12,seasonal naive,tier=metro_core,4.6
+Employed workers,12,seasonal naive,tier=metro_residential,5.7
+Employed workers,12,seasonal naive,tier=peripheral_agrarian,5.72
+Employed workers,12,seasonal naive,tier=peripheral_coastal,3.99
+Employed workers,12,seasonal naive,tier=peripheral_tribal,3.8
+Employed workers,12,seasonal naive,tier=semi_industrial,5.47
+Employed workers,12,seasonal naive,tier=textile_cluster,4.45
+Employed workers,12,seasonal naive + drift,all,2.85
+Employed workers,12,seasonal naive + drift,Manufacturing,3.16
+Employed workers,12,seasonal naive + drift,Construction,2.05
+Employed workers,12,seasonal naive + drift,IT-ITeS,3.1
+Employed workers,12,seasonal naive + drift,Healthcare,2.94
+Employed workers,12,seasonal naive + drift,Textiles and Apparel,3.62
+Employed workers,12,seasonal naive + drift,tier=agrarian_developing,3.07
+Employed workers,12,seasonal naive + drift,tier=agrarian_migrant,4.78
+Employed workers,12,seasonal naive + drift,tier=industrial_hub,3.17
+Employed workers,12,seasonal naive + drift,tier=industrial_it_hub,1.6
+Employed workers,12,seasonal naive + drift,tier=industrial_mining,1.52
+Employed workers,12,seasonal naive + drift,tier=industrial_msme,2.66
+Employed workers,12,seasonal naive + drift,tier=industrial_port,2.29
+Employed workers,12,seasonal naive + drift,tier=logistics_hub,2.11
+Employed workers,12,seasonal naive + drift,tier=metro_administrative,2.34
+Employed workers,12,seasonal naive + drift,tier=metro_core,3.41
+Employed workers,12,seasonal naive + drift,tier=metro_residential,2.56
+Employed workers,12,seasonal naive + drift,tier=peripheral_agrarian,3.01
+Employed workers,12,seasonal naive + drift,tier=peripheral_coastal,2.32
+Employed workers,12,seasonal naive + drift,tier=peripheral_tribal,4.63
+Employed workers,12,seasonal naive + drift,tier=semi_industrial,3.32
+Employed workers,12,seasonal naive + drift,tier=textile_cluster,3.63
+Employed workers,12,seasonally adjusted 3-month level,all,5.28
+Employed workers,12,seasonally adjusted 3-month level,Manufacturing,5.08
+Employed workers,12,seasonally adjusted 3-month level,Construction,5.56
+Employed workers,12,seasonally adjusted 3-month level,IT-ITeS,5.61
+Employed workers,12,seasonally adjusted 3-month level,Healthcare,6.79
+Employed workers,12,seasonally adjusted 3-month level,Textiles and Apparel,3.62
+Employed workers,12,seasonally adjusted 3-month level,tier=agrarian_developing,4.83
+Employed workers,12,seasonally adjusted 3-month level,tier=agrarian_migrant,3.34
+Employed workers,12,seasonally adjusted 3-month level,tier=industrial_hub,5.39
+Employed workers,12,seasonally adjusted 3-month level,tier=industrial_it_hub,6.45
+Employed workers,12,seasonally adjusted 3-month level,tier=industrial_mining,6.23
+Employed workers,12,seasonally adjusted 3-month level,tier=industrial_msme,4.79
+Employed workers,12,seasonally adjusted 3-month level,tier=industrial_port,3.9
+Employed workers,12,seasonally adjusted 3-month level,tier=logistics_hub,6.89
+Employed workers,12,seasonally adjusted 3-month level,tier=metro_administrative,6.31
+Employed workers,12,seasonally adjusted 3-month level,tier=metro_core,4.54
+Employed workers,12,seasonally adjusted 3-month level,tier=metro_residential,5.57
+Employed workers,12,seasonally adjusted 3-month level,tier=peripheral_agrarian,5.25
+Employed workers,12,seasonally adjusted 3-month level,tier=peripheral_coastal,3.95
+Employed workers,12,seasonally adjusted 3-month level,tier=peripheral_tribal,4.32
+Employed workers,12,seasonally adjusted 3-month level,tier=semi_industrial,5.28
+Employed workers,12,seasonally adjusted 3-month level,tier=textile_cluster,4.61
+Job vacancies,1,last value,all,5.16
+Job vacancies,1,last value,Manufacturing,5.01
+Job vacancies,1,last value,Construction,5.64
+Job vacancies,1,last value,IT-ITeS,5.45
+Job vacancies,1,last value,Healthcare,4.18
+Job vacancies,1,last value,Textiles and Apparel,5.68
+Job vacancies,1,last value,tier=agrarian_developing,4.82
+Job vacancies,1,last value,tier=agrarian_migrant,4.69
+Job vacancies,1,last value,tier=industrial_hub,5.22
+Job vacancies,1,last value,tier=industrial_it_hub,4.22
+Job vacancies,1,last value,tier=industrial_mining,8.41
+Job vacancies,1,last value,tier=industrial_msme,5.07
+Job vacancies,1,last value,tier=industrial_port,11.88
+Job vacancies,1,last value,tier=logistics_hub,4.54
+Job vacancies,1,last value,tier=metro_administrative,5.14
+Job vacancies,1,last value,tier=metro_core,5.62
+Job vacancies,1,last value,tier=metro_residential,4.14
+Job vacancies,1,last value,tier=peripheral_agrarian,5.03
+Job vacancies,1,last value,tier=peripheral_coastal,5.76
+Job vacancies,1,last value,tier=peripheral_tribal,6.94
+Job vacancies,1,last value,tier=semi_industrial,5.08
+Job vacancies,1,last value,tier=textile_cluster,4.31
+Job vacancies,1,mean of last 6 months,all,7.76
+Job vacancies,1,mean of last 6 months,Manufacturing,6.71
+Job vacancies,1,mean of last 6 months,Construction,8.51
+Job vacancies,1,mean of last 6 months,IT-ITeS,11.91
+Job vacancies,1,mean of last 6 months,Healthcare,5.0
+Job vacancies,1,mean of last 6 months,Textiles and Apparel,7.66
+Job vacancies,1,mean of last 6 months,tier=agrarian_developing,7.25
+Job vacancies,1,mean of last 6 months,tier=agrarian_migrant,7.64
+Job vacancies,1,mean of last 6 months,tier=industrial_hub,6.96
+Job vacancies,1,mean of last 6 months,tier=industrial_it_hub,7.78
+Job vacancies,1,mean of last 6 months,tier=industrial_mining,7.62
+Job vacancies,1,mean of last 6 months,tier=industrial_msme,7.31
+Job vacancies,1,mean of last 6 months,tier=industrial_port,11.76
+Job vacancies,1,mean of last 6 months,tier=logistics_hub,9.42
+Job vacancies,1,mean of last 6 months,tier=metro_administrative,5.42
+Job vacancies,1,mean of last 6 months,tier=metro_core,9.5
+Job vacancies,1,mean of last 6 months,tier=metro_residential,6.99
+Job vacancies,1,mean of last 6 months,tier=peripheral_agrarian,6.15
+Job vacancies,1,mean of last 6 months,tier=peripheral_coastal,6.83
+Job vacancies,1,mean of last 6 months,tier=peripheral_tribal,4.4
+Job vacancies,1,mean of last 6 months,tier=semi_industrial,6.62
+Job vacancies,1,mean of last 6 months,tier=textile_cluster,8.4
+Job vacancies,1,mean of last 12 months,all,10.66
+Job vacancies,1,mean of last 12 months,Manufacturing,8.58
+Job vacancies,1,mean of last 12 months,Construction,8.71
+Job vacancies,1,mean of last 12 months,IT-ITeS,22.8
+Job vacancies,1,mean of last 12 months,Healthcare,7.57
+Job vacancies,1,mean of last 12 months,Textiles and Apparel,7.72
+Job vacancies,1,mean of last 12 months,tier=agrarian_developing,8.41
+Job vacancies,1,mean of last 12 months,tier=agrarian_migrant,7.61
+Job vacancies,1,mean of last 12 months,tier=industrial_hub,9.68
+Job vacancies,1,mean of last 12 months,tier=industrial_it_hub,11.89
+Job vacancies,1,mean of last 12 months,tier=industrial_mining,7.01
+Job vacancies,1,mean of last 12 months,tier=industrial_msme,9.04
+Job vacancies,1,mean of last 12 months,tier=industrial_port,12.9
+Job vacancies,1,mean of last 12 months,tier=logistics_hub,10.78
+Job vacancies,1,mean of last 12 months,tier=metro_administrative,10.64
+Job vacancies,1,mean of last 12 months,tier=metro_core,14.27
+Job vacancies,1,mean of last 12 months,tier=metro_residential,10.37
+Job vacancies,1,mean of last 12 months,tier=peripheral_agrarian,6.14
+Job vacancies,1,mean of last 12 months,tier=peripheral_coastal,8.06
+Job vacancies,1,mean of last 12 months,tier=peripheral_tribal,6.05
+Job vacancies,1,mean of last 12 months,tier=semi_industrial,9.08
+Job vacancies,1,mean of last 12 months,tier=textile_cluster,9.89
+Job vacancies,1,seasonal naive,all,16.25
+Job vacancies,1,seasonal naive,Manufacturing,12.42
+Job vacancies,1,seasonal naive,Construction,11.63
+Job vacancies,1,seasonal naive,IT-ITeS,37.47
+Job vacancies,1,seasonal naive,Healthcare,13.04
+Job vacancies,1,seasonal naive,Textiles and Apparel,11.47
+Job vacancies,1,seasonal naive,tier=agrarian_developing,11.23
+Job vacancies,1,seasonal naive,tier=agrarian_migrant,9.11
+Job vacancies,1,seasonal naive,tier=industrial_hub,15.99
+Job vacancies,1,seasonal naive,tier=industrial_it_hub,20.45
+Job vacancies,1,seasonal naive,tier=industrial_mining,11.19
+Job vacancies,1,seasonal naive,tier=industrial_msme,12.51
+Job vacancies,1,seasonal naive,tier=industrial_port,15.35
+Job vacancies,1,seasonal naive,tier=logistics_hub,13.41
+Job vacancies,1,seasonal naive,tier=metro_administrative,22.95
+Job vacancies,1,seasonal naive,tier=metro_core,20.27
+Job vacancies,1,seasonal naive,tier=metro_residential,16.05
+Job vacancies,1,seasonal naive,tier=peripheral_agrarian,10.34
+Job vacancies,1,seasonal naive,tier=peripheral_coastal,12.46
+Job vacancies,1,seasonal naive,tier=peripheral_tribal,14.09
+Job vacancies,1,seasonal naive,tier=semi_industrial,12.87
+Job vacancies,1,seasonal naive,tier=textile_cluster,14.22
+Job vacancies,1,seasonal naive + drift,all,7.19
+Job vacancies,1,seasonal naive + drift,Manufacturing,7.19
+Job vacancies,1,seasonal naive + drift,Construction,8.84
+Job vacancies,1,seasonal naive + drift,IT-ITeS,6.04
+Job vacancies,1,seasonal naive + drift,Healthcare,6.79
+Job vacancies,1,seasonal naive + drift,Textiles and Apparel,6.09
+Job vacancies,1,seasonal naive + drift,tier=agrarian_developing,8.79
+Job vacancies,1,seasonal naive + drift,tier=agrarian_migrant,5.58
+Job vacancies,1,seasonal naive + drift,tier=industrial_hub,7.92
+Job vacancies,1,seasonal naive + drift,tier=industrial_it_hub,5.6
+Job vacancies,1,seasonal naive + drift,tier=industrial_mining,13.97
+Job vacancies,1,seasonal naive + drift,tier=industrial_msme,7.86
+Job vacancies,1,seasonal naive + drift,tier=industrial_port,8.02
+Job vacancies,1,seasonal naive + drift,tier=logistics_hub,3.76
+Job vacancies,1,seasonal naive + drift,tier=metro_administrative,4.02
+Job vacancies,1,seasonal naive + drift,tier=metro_core,6.69
+Job vacancies,1,seasonal naive + drift,tier=metro_residential,8.64
+Job vacancies,1,seasonal naive + drift,tier=peripheral_agrarian,6.99
+Job vacancies,1,seasonal naive + drift,tier=peripheral_coastal,4.35
+Job vacancies,1,seasonal naive + drift,tier=peripheral_tribal,9.39
+Job vacancies,1,seasonal naive + drift,tier=semi_industrial,8.01
+Job vacancies,1,seasonal naive + drift,tier=textile_cluster,5.88
+Job vacancies,1,seasonally adjusted 3-month level,all,5.56
+Job vacancies,1,seasonally adjusted 3-month level,Manufacturing,4.44
+Job vacancies,1,seasonally adjusted 3-month level,Construction,7.15
+Job vacancies,1,seasonally adjusted 3-month level,IT-ITeS,6.14
+Job vacancies,1,seasonally adjusted 3-month level,Healthcare,5.52
+Job vacancies,1,seasonally adjusted 3-month level,Textiles and Apparel,6.19
+Job vacancies,1,seasonally adjusted 3-month level,tier=agrarian_developing,6.74
+Job vacancies,1,seasonally adjusted 3-month level,tier=agrarian_migrant,3.33
+Job vacancies,1,seasonally adjusted 3-month level,tier=industrial_hub,4.27
+Job vacancies,1,seasonally adjusted 3-month level,tier=industrial_it_hub,4.71
+Job vacancies,1,seasonally adjusted 3-month level,tier=industrial_mining,6.89
+Job vacancies,1,seasonally adjusted 3-month level,tier=industrial_msme,5.55
+Job vacancies,1,seasonally adjusted 3-month level,tier=industrial_port,9.39
+Job vacancies,1,seasonally adjusted 3-month level,tier=logistics_hub,6.43
+Job vacancies,1,seasonally adjusted 3-month level,tier=metro_administrative,3.45
+Job vacancies,1,seasonally adjusted 3-month level,tier=metro_core,7.04
+Job vacancies,1,seasonally adjusted 3-month level,tier=metro_residential,6.61
+Job vacancies,1,seasonally adjusted 3-month level,tier=peripheral_agrarian,6.47
+Job vacancies,1,seasonally adjusted 3-month level,tier=peripheral_coastal,4.93
+Job vacancies,1,seasonally adjusted 3-month level,tier=peripheral_tribal,6.12
+Job vacancies,1,seasonally adjusted 3-month level,tier=semi_industrial,5.32
+Job vacancies,1,seasonally adjusted 3-month level,tier=textile_cluster,7.46
+Job vacancies,3,last value,all,7.01
+Job vacancies,3,last value,Manufacturing,6.38
+Job vacancies,3,last value,Construction,5.87
+Job vacancies,3,last value,IT-ITeS,10.23
+Job vacancies,3,last value,Healthcare,7.79
+Job vacancies,3,last value,Textiles and Apparel,5.94
+Job vacancies,3,last value,tier=agrarian_developing,6.91
+Job vacancies,3,last value,tier=agrarian_migrant,5.46
+Job vacancies,3,last value,tier=industrial_hub,7.6
+Job vacancies,3,last value,tier=industrial_it_hub,5.65
+Job vacancies,3,last value,tier=industrial_mining,1.22
+Job vacancies,3,last value,tier=industrial_msme,7.19
+Job vacancies,3,last value,tier=industrial_port,8.25
+Job vacancies,3,last value,tier=logistics_hub,7.55
+Job vacancies,3,last value,tier=metro_administrative,5.7
+Job vacancies,3,last value,tier=metro_core,8.45
+Job vacancies,3,last value,tier=metro_residential,10.22
+Job vacancies,3,last value,tier=peripheral_agrarian,5.96
+Job vacancies,3,last value,tier=peripheral_coastal,6.48
+Job vacancies,3,last value,tier=peripheral_tribal,8.71
+Job vacancies,3,last value,tier=semi_industrial,5.56
+Job vacancies,3,last value,tier=textile_cluster,4.35
+Job vacancies,3,mean of last 6 months,all,9.17
+Job vacancies,3,mean of last 6 months,Manufacturing,6.83
+Job vacancies,3,mean of last 6 months,Construction,8.47
+Job vacancies,3,mean of last 6 months,IT-ITeS,18.57
+Job vacancies,3,mean of last 6 months,Healthcare,8.36
+Job vacancies,3,mean of last 6 months,Textiles and Apparel,7.07
+Job vacancies,3,mean of last 6 months,tier=agrarian_developing,6.36
+Job vacancies,3,mean of last 6 months,tier=agrarian_migrant,8.38
+Job vacancies,3,mean of last 6 months,tier=industrial_hub,6.49
+Job vacancies,3,mean of last 6 months,tier=industrial_it_hub,10.7
+Job vacancies,3,mean of last 6 months,tier=industrial_mining,6.04
+Job vacancies,3,mean of last 6 months,tier=industrial_msme,7.93
+Job vacancies,3,mean of last 6 months,tier=industrial_port,10.43
+Job vacancies,3,mean of last 6 months,tier=logistics_hub,11.32
+Job vacancies,3,mean of last 6 months,tier=metro_administrative,8.0
+Job vacancies,3,mean of last 6 months,tier=metro_core,13.92
+Job vacancies,3,mean of last 6 months,tier=metro_residential,12.6
+Job vacancies,3,mean of last 6 months,tier=peripheral_agrarian,7.21
+Job vacancies,3,mean of last 6 months,tier=peripheral_coastal,7.14
+Job vacancies,3,mean of last 6 months,tier=peripheral_tribal,9.78
+Job vacancies,3,mean of last 6 months,tier=semi_industrial,7.94
+Job vacancies,3,mean of last 6 months,tier=textile_cluster,6.56
+Job vacancies,3,mean of last 12 months,all,11.89
+Job vacancies,3,mean of last 12 months,Manufacturing,8.1
+Job vacancies,3,mean of last 12 months,Construction,8.92
+Job vacancies,3,mean of last 12 months,IT-ITeS,30.09
+Job vacancies,3,mean of last 12 months,Healthcare,10.24
+Job vacancies,3,mean of last 12 months,Textiles and Apparel,8.25
+Job vacancies,3,mean of last 12 months,tier=agrarian_developing,8.33
+Job vacancies,3,mean of last 12 months,tier=agrarian_migrant,8.98
+Job vacancies,3,mean of last 12 months,tier=industrial_hub,8.57
+Job vacancies,3,mean of last 12 months,tier=industrial_it_hub,14.61
+Job vacancies,3,mean of last 12 months,tier=industrial_mining,7.79
+Job vacancies,3,mean of last 12 months,tier=industrial_msme,9.19
+Job vacancies,3,mean of last 12 months,tier=industrial_port,11.23
+Job vacancies,3,mean of last 12 months,tier=logistics_hub,12.78
+Job vacancies,3,mean of last 12 months,tier=metro_administrative,11.66
+Job vacancies,3,mean of last 12 months,tier=metro_core,19.2
+Job vacancies,3,mean of last 12 months,tier=metro_residential,15.69
+Job vacancies,3,mean of last 12 months,tier=peripheral_agrarian,7.35
+Job vacancies,3,mean of last 12 months,tier=peripheral_coastal,8.56
+Job vacancies,3,mean of last 12 months,tier=peripheral_tribal,10.91
+Job vacancies,3,mean of last 12 months,tier=semi_industrial,10.15
+Job vacancies,3,mean of last 12 months,tier=textile_cluster,8.02
+Job vacancies,3,seasonal naive,all,16.32
+Job vacancies,3,seasonal naive,Manufacturing,12.17
+Job vacancies,3,seasonal naive,Construction,9.85
+Job vacancies,3,seasonal naive,IT-ITeS,43.03
+Job vacancies,3,seasonal naive,Healthcare,12.2
+Job vacancies,3,seasonal naive,Textiles and Apparel,11.74
+Job vacancies,3,seasonal naive,tier=agrarian_developing,10.75
+Job vacancies,3,seasonal naive,tier=agrarian_migrant,10.51
+Job vacancies,3,seasonal naive,tier=industrial_hub,11.99
+Job vacancies,3,seasonal naive,tier=industrial_it_hub,20.49
+Job vacancies,3,seasonal naive,tier=industrial_mining,7.84
+Job vacancies,3,seasonal naive,tier=industrial_msme,13.11
+Job vacancies,3,seasonal naive,tier=industrial_port,11.97
+Job vacancies,3,seasonal naive,tier=logistics_hub,18.06
+Job vacancies,3,seasonal naive,tier=metro_administrative,19.13
+Job vacancies,3,seasonal naive,tier=metro_core,26.68
+Job vacancies,3,seasonal naive,tier=metro_residential,18.88
+Job vacancies,3,seasonal naive,tier=peripheral_agrarian,9.39
+Job vacancies,3,seasonal naive,tier=peripheral_coastal,10.47
+Job vacancies,3,seasonal naive,tier=peripheral_tribal,11.39
+Job vacancies,3,seasonal naive,tier=semi_industrial,14.14
+Job vacancies,3,seasonal naive,tier=textile_cluster,9.77
+Job vacancies,3,seasonal naive + drift,all,8.11
+Job vacancies,3,seasonal naive + drift,Manufacturing,7.91
+Job vacancies,3,seasonal naive + drift,Construction,7.96
+Job vacancies,3,seasonal naive + drift,IT-ITeS,8.01
+Job vacancies,3,seasonal naive + drift,Healthcare,7.61
+Job vacancies,3,seasonal naive + drift,Textiles and Apparel,10.27
+Job vacancies,3,seasonal naive + drift,tier=agrarian_developing,10.53
+Job vacancies,3,seasonal naive + drift,tier=agrarian_migrant,7.75
+Job vacancies,3,seasonal naive + drift,tier=industrial_hub,7.9
+Job vacancies,3,seasonal naive + drift,tier=industrial_it_hub,4.9
+Job vacancies,3,seasonal naive + drift,tier=industrial_mining,13.41
+Job vacancies,3,seasonal naive + drift,tier=industrial_msme,9.44
+Job vacancies,3,seasonal naive + drift,tier=industrial_port,6.22
+Job vacancies,3,seasonal naive + drift,tier=logistics_hub,9.26
+Job vacancies,3,seasonal naive + drift,tier=metro_administrative,8.15
+Job vacancies,3,seasonal naive + drift,tier=metro_core,10.35
+Job vacancies,3,seasonal naive + drift,tier=metro_residential,10.94
+Job vacancies,3,seasonal naive + drift,tier=peripheral_agrarian,12.36
+Job vacancies,3,seasonal naive + drift,tier=peripheral_coastal,7.15
+Job vacancies,3,seasonal naive + drift,tier=peripheral_tribal,18.05
+Job vacancies,3,seasonal naive + drift,tier=semi_industrial,6.06
+Job vacancies,3,seasonal naive + drift,tier=textile_cluster,7.02
+Job vacancies,3,seasonally adjusted 3-month level,all,7.52
+Job vacancies,3,seasonally adjusted 3-month level,Manufacturing,6.15
+Job vacancies,3,seasonally adjusted 3-month level,Construction,6.44
+Job vacancies,3,seasonally adjusted 3-month level,IT-ITeS,12.49
+Job vacancies,3,seasonally adjusted 3-month level,Healthcare,7.96
+Job vacancies,3,seasonally adjusted 3-month level,Textiles and Apparel,7.38
+Job vacancies,3,seasonally adjusted 3-month level,tier=agrarian_developing,5.26
+Job vacancies,3,seasonally adjusted 3-month level,tier=agrarian_migrant,12.81
+Job vacancies,3,seasonally adjusted 3-month level,tier=industrial_hub,5.76
+Job vacancies,3,seasonally adjusted 3-month level,tier=industrial_it_hub,7.23
+Job vacancies,3,seasonally adjusted 3-month level,tier=industrial_mining,4.53
+Job vacancies,3,seasonally adjusted 3-month level,tier=industrial_msme,7.46
+Job vacancies,3,seasonally adjusted 3-month level,tier=industrial_port,6.34
+Job vacancies,3,seasonally adjusted 3-month level,tier=logistics_hub,8.87
+Job vacancies,3,seasonally adjusted 3-month level,tier=metro_administrative,5.95
+Job vacancies,3,seasonally adjusted 3-month level,tier=metro_core,10.87
+Job vacancies,3,seasonally adjusted 3-month level,tier=metro_residential,11.12
+Job vacancies,3,seasonally adjusted 3-month level,tier=peripheral_agrarian,6.27
+Job vacancies,3,seasonally adjusted 3-month level,tier=peripheral_coastal,6.87
+Job vacancies,3,seasonally adjusted 3-month level,tier=peripheral_tribal,8.94
+Job vacancies,3,seasonally adjusted 3-month level,tier=semi_industrial,6.82
+Job vacancies,3,seasonally adjusted 3-month level,tier=textile_cluster,7.12
+Job vacancies,6,last value,all,10.22
+Job vacancies,6,last value,Manufacturing,6.67
+Job vacancies,6,last value,Construction,11.69
+Job vacancies,6,last value,IT-ITeS,21.49
+Job vacancies,6,last value,Healthcare,9.62
+Job vacancies,6,last value,Textiles and Apparel,7.57
+Job vacancies,6,last value,tier=agrarian_developing,9.27
+Job vacancies,6,last value,tier=agrarian_migrant,8.18
+Job vacancies,6,last value,tier=industrial_hub,11.23
+Job vacancies,6,last value,tier=industrial_it_hub,12.39
+Job vacancies,6,last value,tier=industrial_mining,7.14
+Job vacancies,6,last value,tier=industrial_msme,7.52
+Job vacancies,6,last value,tier=industrial_port,12.08
+Job vacancies,6,last value,tier=logistics_hub,17.21
+Job vacancies,6,last value,tier=metro_administrative,13.03
+Job vacancies,6,last value,tier=metro_core,10.76
+Job vacancies,6,last value,tier=metro_residential,8.39
+Job vacancies,6,last value,tier=peripheral_agrarian,12.2
+Job vacancies,6,last value,tier=peripheral_coastal,13.03
+Job vacancies,6,last value,tier=peripheral_tribal,13.05
+Job vacancies,6,last value,tier=semi_industrial,7.5
+Job vacancies,6,last value,tier=textile_cluster,6.02
+Job vacancies,6,mean of last 6 months,all,11.52
+Job vacancies,6,mean of last 6 months,Manufacturing,7.91
+Job vacancies,6,mean of last 6 months,Construction,7.84
+Job vacancies,6,mean of last 6 months,IT-ITeS,31.35
+Job vacancies,6,mean of last 6 months,Healthcare,10.4
+Job vacancies,6,mean of last 6 months,Textiles and Apparel,7.49
+Job vacancies,6,mean of last 6 months,tier=agrarian_developing,8.17
+Job vacancies,6,mean of last 6 months,tier=agrarian_migrant,7.4
+Job vacancies,6,mean of last 6 months,tier=industrial_hub,10.08
+Job vacancies,6,mean of last 6 months,tier=industrial_it_hub,15.56
+Job vacancies,6,mean of last 6 months,tier=industrial_mining,5.77
+Job vacancies,6,mean of last 6 months,tier=industrial_msme,9.31
+Job vacancies,6,mean of last 6 months,tier=industrial_port,12.4
+Job vacancies,6,mean of last 6 months,tier=logistics_hub,17.42
+Job vacancies,6,mean of last 6 months,tier=metro_administrative,21.78
+Job vacancies,6,mean of last 6 months,tier=metro_core,13.91
+Job vacancies,6,mean of last 6 months,tier=metro_residential,11.33
+Job vacancies,6,mean of last 6 months,tier=peripheral_agrarian,11.07
+Job vacancies,6,mean of last 6 months,tier=peripheral_coastal,9.17
+Job vacancies,6,mean of last 6 months,tier=peripheral_tribal,9.86
+Job vacancies,6,mean of last 6 months,tier=semi_industrial,10.26
+Job vacancies,6,mean of last 6 months,tier=textile_cluster,6.62
+Job vacancies,6,mean of last 12 months,all,13.97
+Job vacancies,6,mean of last 12 months,Manufacturing,8.99
+Job vacancies,6,mean of last 12 months,Construction,7.77
+Job vacancies,6,mean of last 12 months,IT-ITeS,44.14
+Job vacancies,6,mean of last 12 months,Healthcare,11.8
+Job vacancies,6,mean of last 12 months,Textiles and Apparel,7.44
+Job vacancies,6,mean of last 12 months,tier=agrarian_developing,9.68
+Job vacancies,6,mean of last 12 months,tier=agrarian_migrant,7.13
+Job vacancies,6,mean of last 12 months,tier=industrial_hub,11.28
+Job vacancies,6,mean of last 12 months,tier=industrial_it_hub,19.45
+Job vacancies,6,mean of last 12 months,tier=industrial_mining,5.13
+Job vacancies,6,mean of last 12 months,tier=industrial_msme,11.11
+Job vacancies,6,mean of last 12 months,tier=industrial_port,13.87
+Job vacancies,6,mean of last 12 months,tier=logistics_hub,19.98
+Job vacancies,6,mean of last 12 months,tier=metro_administrative,25.96
+Job vacancies,6,mean of last 12 months,tier=metro_core,19.0
+Job vacancies,6,mean of last 12 months,tier=metro_residential,13.56
+Job vacancies,6,mean of last 12 months,tier=peripheral_agrarian,11.5
+Job vacancies,6,mean of last 12 months,tier=peripheral_coastal,9.03
+Job vacancies,6,mean of last 12 months,tier=peripheral_tribal,9.85
+Job vacancies,6,mean of last 12 months,tier=semi_industrial,12.1
+Job vacancies,6,mean of last 12 months,tier=textile_cluster,7.57
+Job vacancies,6,seasonal naive,all,16.62
+Job vacancies,6,seasonal naive,Manufacturing,11.63
+Job vacancies,6,seasonal naive,Construction,9.28
+Job vacancies,6,seasonal naive,IT-ITeS,49.08
+Job vacancies,6,seasonal naive,Healthcare,13.6
+Job vacancies,6,seasonal naive,Textiles and Apparel,10.23
+Job vacancies,6,seasonal naive,tier=agrarian_developing,10.67
+Job vacancies,6,seasonal naive,tier=agrarian_migrant,9.37
+Job vacancies,6,seasonal naive,tier=industrial_hub,13.62
+Job vacancies,6,seasonal naive,tier=industrial_it_hub,22.68
+Job vacancies,6,seasonal naive,tier=industrial_mining,6.95
+Job vacancies,6,seasonal naive,tier=industrial_msme,12.5
+Job vacancies,6,seasonal naive,tier=industrial_port,16.23
+Job vacancies,6,seasonal naive,tier=logistics_hub,21.21
+Job vacancies,6,seasonal naive,tier=metro_administrative,23.37
+Job vacancies,6,seasonal naive,tier=metro_core,22.7
+Job vacancies,6,seasonal naive,tier=metro_residential,18.08
+Job vacancies,6,seasonal naive,tier=peripheral_agrarian,12.48
+Job vacancies,6,seasonal naive,tier=peripheral_coastal,12.89
+Job vacancies,6,seasonal naive,tier=peripheral_tribal,11.71
+Job vacancies,6,seasonal naive,tier=semi_industrial,15.54
+Job vacancies,6,seasonal naive,tier=textile_cluster,10.03
+Job vacancies,6,seasonal naive + drift,all,10.0
+Job vacancies,6,seasonal naive + drift,Manufacturing,8.03
+Job vacancies,6,seasonal naive + drift,Construction,11.34
+Job vacancies,6,seasonal naive + drift,IT-ITeS,12.77
+Job vacancies,6,seasonal naive + drift,Healthcare,10.63
+Job vacancies,6,seasonal naive + drift,Textiles and Apparel,11.22
+Job vacancies,6,seasonal naive + drift,tier=agrarian_developing,12.72
+Job vacancies,6,seasonal naive + drift,tier=agrarian_migrant,6.45
+Job vacancies,6,seasonal naive + drift,tier=industrial_hub,9.65
+Job vacancies,6,seasonal naive + drift,tier=industrial_it_hub,8.1
+Job vacancies,6,seasonal naive + drift,tier=industrial_mining,15.36
+Job vacancies,6,seasonal naive + drift,tier=industrial_msme,9.34
+Job vacancies,6,seasonal naive + drift,tier=industrial_port,5.95
+Job vacancies,6,seasonal naive + drift,tier=logistics_hub,11.78
+Job vacancies,6,seasonal naive + drift,tier=metro_administrative,6.7
+Job vacancies,6,seasonal naive + drift,tier=metro_core,12.7
+Job vacancies,6,seasonal naive + drift,tier=metro_residential,14.59
+Job vacancies,6,seasonal naive + drift,tier=peripheral_agrarian,14.89
+Job vacancies,6,seasonal naive + drift,tier=peripheral_coastal,14.97
+Job vacancies,6,seasonal naive + drift,tier=peripheral_tribal,15.65
+Job vacancies,6,seasonal naive + drift,tier=semi_industrial,8.87
+Job vacancies,6,seasonal naive + drift,tier=textile_cluster,7.36
+Job vacancies,6,seasonally adjusted 3-month level,all,11.63
+Job vacancies,6,seasonally adjusted 3-month level,Manufacturing,8.83
+Job vacancies,6,seasonally adjusted 3-month level,Construction,8.54
+Job vacancies,6,seasonally adjusted 3-month level,IT-ITeS,28.16
+Job vacancies,6,seasonally adjusted 3-month level,Healthcare,10.41
+Job vacancies,6,seasonally adjusted 3-month level,Textiles and Apparel,7.84
+Job vacancies,6,seasonally adjusted 3-month level,tier=agrarian_developing,9.55
+Job vacancies,6,seasonally adjusted 3-month level,tier=agrarian_migrant,16.11
+Job vacancies,6,seasonally adjusted 3-month level,tier=industrial_hub,10.03
+Job vacancies,6,seasonally adjusted 3-month level,tier=industrial_it_hub,16.28
+Job vacancies,6,seasonally adjusted 3-month level,tier=industrial_mining,8.73
+Job vacancies,6,seasonally adjusted 3-month level,tier=industrial_msme,9.01
+Job vacancies,6,seasonally adjusted 3-month level,tier=industrial_port,13.41
+Job vacancies,6,seasonally adjusted 3-month level,tier=logistics_hub,13.29
+Job vacancies,6,seasonally adjusted 3-month level,tier=metro_administrative,20.09
+Job vacancies,6,seasonally adjusted 3-month level,tier=metro_core,13.6
+Job vacancies,6,seasonally adjusted 3-month level,tier=metro_residential,11.27
+Job vacancies,6,seasonally adjusted 3-month level,tier=peripheral_agrarian,9.23
+Job vacancies,6,seasonally adjusted 3-month level,tier=peripheral_coastal,9.15
+Job vacancies,6,seasonally adjusted 3-month level,tier=peripheral_tribal,11.22
+Job vacancies,6,seasonally adjusted 3-month level,tier=semi_industrial,10.26
+Job vacancies,6,seasonally adjusted 3-month level,tier=textile_cluster,7.98
+Job vacancies,12,last value,all,9.6
+Job vacancies,12,last value,Manufacturing,10.16
+Job vacancies,12,last value,Construction,9.51
+Job vacancies,12,last value,IT-ITeS,9.38
+Job vacancies,12,last value,Healthcare,9.22
+Job vacancies,12,last value,Textiles and Apparel,8.12
+Job vacancies,12,last value,tier=agrarian_developing,8.61
+Job vacancies,12,last value,tier=agrarian_migrant,9.6
+Job vacancies,12,last value,tier=industrial_hub,11.31
+Job vacancies,12,last value,tier=industrial_it_hub,8.87
+Job vacancies,12,last value,tier=industrial_mining,6.43
+Job vacancies,12,last value,tier=industrial_msme,8.75
+Job vacancies,12,last value,tier=industrial_port,6.62
+Job vacancies,12,last value,tier=logistics_hub,7.71
+Job vacancies,12,last value,tier=metro_administrative,8.06
+Job vacancies,12,last value,tier=metro_core,10.05
+Job vacancies,12,last value,tier=metro_residential,6.69
+Job vacancies,12,last value,tier=peripheral_agrarian,10.02
+Job vacancies,12,last value,tier=peripheral_coastal,8.79
+Job vacancies,12,last value,tier=peripheral_tribal,11.44
+Job vacancies,12,last value,tier=semi_industrial,8.53
+Job vacancies,12,last value,tier=textile_cluster,11.8
+Job vacancies,12,mean of last 6 months,all,10.55
+Job vacancies,12,mean of last 6 months,Manufacturing,10.33
+Job vacancies,12,mean of last 6 months,Construction,10.7
+Job vacancies,12,mean of last 6 months,IT-ITeS,12.32
+Job vacancies,12,mean of last 6 months,Healthcare,10.02
+Job vacancies,12,mean of last 6 months,Textiles and Apparel,8.91
+Job vacancies,12,mean of last 6 months,tier=agrarian_developing,7.42
+Job vacancies,12,mean of last 6 months,tier=agrarian_migrant,12.52
+Job vacancies,12,mean of last 6 months,tier=industrial_hub,10.76
+Job vacancies,12,mean of last 6 months,tier=industrial_it_hub,9.06
+Job vacancies,12,mean of last 6 months,tier=industrial_mining,6.63
+Job vacancies,12,mean of last 6 months,tier=industrial_msme,9.87
+Job vacancies,12,mean of last 6 months,tier=industrial_port,7.48
+Job vacancies,12,mean of last 6 months,tier=logistics_hub,12.87
+Job vacancies,12,mean of last 6 months,tier=metro_administrative,16.42
+Job vacancies,12,mean of last 6 months,tier=metro_core,11.78
+Job vacancies,12,mean of last 6 months,tier=metro_residential,10.39
+Job vacancies,12,mean of last 6 months,tier=peripheral_agrarian,8.89
+Job vacancies,12,mean of last 6 months,tier=peripheral_coastal,10.5
+Job vacancies,12,mean of last 6 months,tier=peripheral_tribal,13.1
+Job vacancies,12,mean of last 6 months,tier=semi_industrial,12.47
+Job vacancies,12,mean of last 6 months,tier=textile_cluster,12.84
+Job vacancies,12,mean of last 12 months,all,12.82
+Job vacancies,12,mean of last 12 months,Manufacturing,10.71
+Job vacancies,12,mean of last 12 months,Construction,11.28
+Job vacancies,12,mean of last 12 months,IT-ITeS,23.04
+Job vacancies,12,mean of last 12 months,Healthcare,11.8
+Job vacancies,12,mean of last 12 months,Textiles and Apparel,9.81
+Job vacancies,12,mean of last 12 months,tier=agrarian_developing,8.41
+Job vacancies,12,mean of last 12 months,tier=agrarian_migrant,12.26
+Job vacancies,12,mean of last 12 months,tier=industrial_hub,12.0
+Job vacancies,12,mean of last 12 months,tier=industrial_it_hub,11.83
+Job vacancies,12,mean of last 12 months,tier=industrial_mining,6.0
+Job vacancies,12,mean of last 12 months,tier=industrial_msme,11.22
+Job vacancies,12,mean of last 12 months,tier=industrial_port,8.46
+Job vacancies,12,mean of last 12 months,tier=logistics_hub,13.68
+Job vacancies,12,mean of last 12 months,tier=metro_administrative,21.03
+Job vacancies,12,mean of last 12 months,tier=metro_core,17.29
+Job vacancies,12,mean of last 12 months,tier=metro_residential,14.0
+Job vacancies,12,mean of last 12 months,tier=peripheral_agrarian,9.14
+Job vacancies,12,mean of last 12 months,tier=peripheral_coastal,10.8
+Job vacancies,12,mean of last 12 months,tier=peripheral_tribal,14.54
+Job vacancies,12,mean of last 12 months,tier=semi_industrial,14.56
+Job vacancies,12,mean of last 12 months,tier=textile_cluster,13.86
+Job vacancies,12,seasonal naive,all,9.6
+Job vacancies,12,seasonal naive,Manufacturing,10.16
+Job vacancies,12,seasonal naive,Construction,9.51
+Job vacancies,12,seasonal naive,IT-ITeS,9.38
+Job vacancies,12,seasonal naive,Healthcare,9.22
+Job vacancies,12,seasonal naive,Textiles and Apparel,8.12
+Job vacancies,12,seasonal naive,tier=agrarian_developing,8.61
+Job vacancies,12,seasonal naive,tier=agrarian_migrant,9.6
+Job vacancies,12,seasonal naive,tier=industrial_hub,11.31
+Job vacancies,12,seasonal naive,tier=industrial_it_hub,8.87
+Job vacancies,12,seasonal naive,tier=industrial_mining,6.43
+Job vacancies,12,seasonal naive,tier=industrial_msme,8.75
+Job vacancies,12,seasonal naive,tier=industrial_port,6.62
+Job vacancies,12,seasonal naive,tier=logistics_hub,7.71
+Job vacancies,12,seasonal naive,tier=metro_administrative,8.06
+Job vacancies,12,seasonal naive,tier=metro_core,10.05
+Job vacancies,12,seasonal naive,tier=metro_residential,6.69
+Job vacancies,12,seasonal naive,tier=peripheral_agrarian,10.02
+Job vacancies,12,seasonal naive,tier=peripheral_coastal,8.79
+Job vacancies,12,seasonal naive,tier=peripheral_tribal,11.44
+Job vacancies,12,seasonal naive,tier=semi_industrial,8.53
+Job vacancies,12,seasonal naive,tier=textile_cluster,11.8
+Job vacancies,12,seasonal naive + drift,all,17.69
+Job vacancies,12,seasonal naive + drift,Manufacturing,18.28
+Job vacancies,12,seasonal naive + drift,Construction,15.41
+Job vacancies,12,seasonal naive + drift,IT-ITeS,25.73
+Job vacancies,12,seasonal naive + drift,Healthcare,12.34
+Job vacancies,12,seasonal naive + drift,Textiles and Apparel,13.99
+Job vacancies,12,seasonal naive + drift,tier=agrarian_developing,12.95
+Job vacancies,12,seasonal naive + drift,tier=agrarian_migrant,8.39
+Job vacancies,12,seasonal naive + drift,tier=industrial_hub,19.81
+Job vacancies,12,seasonal naive + drift,tier=industrial_it_hub,23.21
+Job vacancies,12,seasonal naive + drift,tier=industrial_mining,25.98
+Job vacancies,12,seasonal naive + drift,tier=industrial_msme,12.37
+Job vacancies,12,seasonal naive + drift,tier=industrial_port,14.9
+Job vacancies,12,seasonal naive + drift,tier=logistics_hub,14.8
+Job vacancies,12,seasonal naive + drift,tier=metro_administrative,15.21
+Job vacancies,12,seasonal naive + drift,tier=metro_core,17.6
+Job vacancies,12,seasonal naive + drift,tier=metro_residential,16.51
+Job vacancies,12,seasonal naive + drift,tier=peripheral_agrarian,17.18
+Job vacancies,12,seasonal naive + drift,tier=peripheral_coastal,19.89
+Job vacancies,12,seasonal naive + drift,tier=peripheral_tribal,23.34
+Job vacancies,12,seasonal naive + drift,tier=semi_industrial,15.18
+Job vacancies,12,seasonal naive + drift,tier=textile_cluster,12.17
+Job vacancies,12,seasonally adjusted 3-month level,all,9.45
+Job vacancies,12,seasonally adjusted 3-month level,Manufacturing,9.95
+Job vacancies,12,seasonally adjusted 3-month level,Construction,8.11
+Job vacancies,12,seasonally adjusted 3-month level,IT-ITeS,9.27
+Job vacancies,12,seasonally adjusted 3-month level,Healthcare,10.03
+Job vacancies,12,seasonally adjusted 3-month level,Textiles and Apparel,9.57
+Job vacancies,12,seasonally adjusted 3-month level,tier=agrarian_developing,6.83
+Job vacancies,12,seasonally adjusted 3-month level,tier=agrarian_migrant,10.6
+Job vacancies,12,seasonally adjusted 3-month level,tier=industrial_hub,10.97
+Job vacancies,12,seasonally adjusted 3-month level,tier=industrial_it_hub,9.13
+Job vacancies,12,seasonally adjusted 3-month level,tier=industrial_mining,4.77
+Job vacancies,12,seasonally adjusted 3-month level,tier=industrial_msme,9.1
+Job vacancies,12,seasonally adjusted 3-month level,tier=industrial_port,4.4
+Job vacancies,12,seasonally adjusted 3-month level,tier=logistics_hub,10.22
+Job vacancies,12,seasonally adjusted 3-month level,tier=metro_administrative,13.08
+Job vacancies,12,seasonally adjusted 3-month level,tier=metro_core,8.91
+Job vacancies,12,seasonally adjusted 3-month level,tier=metro_residential,9.45
+Job vacancies,12,seasonally adjusted 3-month level,tier=peripheral_agrarian,9.49
+Job vacancies,12,seasonally adjusted 3-month level,tier=peripheral_coastal,7.54
+Job vacancies,12,seasonally adjusted 3-month level,tier=peripheral_tribal,12.18
+Job vacancies,12,seasonally adjusted 3-month level,tier=semi_industrial,8.86
+Job vacancies,12,seasonally adjusted 3-month level,tier=textile_cluster,10.94
+Registered seekers,1,last value,all,4.36
+Registered seekers,1,last value,Manufacturing,4.01
+Registered seekers,1,last value,Construction,4.5
+Registered seekers,1,last value,IT-ITeS,6.11
+Registered seekers,1,last value,Healthcare,3.89
+Registered seekers,1,last value,Textiles and Apparel,4.64
+Registered seekers,1,last value,tier=agrarian_developing,4.27
+Registered seekers,1,last value,tier=agrarian_migrant,1.47
+Registered seekers,1,last value,tier=industrial_hub,4.2
+Registered seekers,1,last value,tier=industrial_it_hub,3.96
+Registered seekers,1,last value,tier=industrial_mining,5.02
+Registered seekers,1,last value,tier=industrial_msme,4.01
+Registered seekers,1,last value,tier=industrial_port,3.02
+Registered seekers,1,last value,tier=logistics_hub,5.58
+Registered seekers,1,last value,tier=metro_administrative,2.38
+Registered seekers,1,last value,tier=metro_core,4.67
+Registered seekers,1,last value,tier=metro_residential,3.57
+Registered seekers,1,last value,tier=peripheral_agrarian,3.94
+Registered seekers,1,last value,tier=peripheral_coastal,2.87
+Registered seekers,1,last value,tier=peripheral_tribal,4.68
+Registered seekers,1,last value,tier=semi_industrial,5.58
+Registered seekers,1,last value,tier=textile_cluster,5.22
+Registered seekers,1,mean of last 6 months,all,6.77
+Registered seekers,1,mean of last 6 months,Manufacturing,5.83
+Registered seekers,1,mean of last 6 months,Construction,8.64
+Registered seekers,1,mean of last 6 months,IT-ITeS,6.01
+Registered seekers,1,mean of last 6 months,Healthcare,3.97
+Registered seekers,1,mean of last 6 months,Textiles and Apparel,4.27
+Registered seekers,1,mean of last 6 months,tier=agrarian_developing,7.78
+Registered seekers,1,mean of last 6 months,tier=agrarian_migrant,5.3
+Registered seekers,1,mean of last 6 months,tier=industrial_hub,6.86
+Registered seekers,1,mean of last 6 months,tier=industrial_it_hub,4.99
+Registered seekers,1,mean of last 6 months,tier=industrial_mining,7.36
+Registered seekers,1,mean of last 6 months,tier=industrial_msme,6.59
+Registered seekers,1,mean of last 6 months,tier=industrial_port,6.7
+Registered seekers,1,mean of last 6 months,tier=logistics_hub,9.1
+Registered seekers,1,mean of last 6 months,tier=metro_administrative,3.15
+Registered seekers,1,mean of last 6 months,tier=metro_core,6.77
+Registered seekers,1,mean of last 6 months,tier=metro_residential,3.86
+Registered seekers,1,mean of last 6 months,tier=peripheral_agrarian,5.9
+Registered seekers,1,mean of last 6 months,tier=peripheral_coastal,6.69
+Registered seekers,1,mean of last 6 months,tier=peripheral_tribal,8.4
+Registered seekers,1,mean of last 6 months,tier=semi_industrial,8.58
+Registered seekers,1,mean of last 6 months,tier=textile_cluster,8.35
+Registered seekers,1,mean of last 12 months,all,9.16
+Registered seekers,1,mean of last 12 months,Manufacturing,9.03
+Registered seekers,1,mean of last 12 months,Construction,10.46
+Registered seekers,1,mean of last 12 months,IT-ITeS,5.66
+Registered seekers,1,mean of last 12 months,Healthcare,7.2
+Registered seekers,1,mean of last 12 months,Textiles and Apparel,6.79
+Registered seekers,1,mean of last 12 months,tier=agrarian_developing,9.06
+Registered seekers,1,mean of last 12 months,tier=agrarian_migrant,8.89
+Registered seekers,1,mean of last 12 months,tier=industrial_hub,9.37
+Registered seekers,1,mean of last 12 months,tier=industrial_it_hub,7.94
+Registered seekers,1,mean of last 12 months,tier=industrial_mining,8.84
+Registered seekers,1,mean of last 12 months,tier=industrial_msme,9.66
+Registered seekers,1,mean of last 12 months,tier=industrial_port,8.3
+Registered seekers,1,mean of last 12 months,tier=logistics_hub,11.24
+Registered seekers,1,mean of last 12 months,tier=metro_administrative,6.47
+Registered seekers,1,mean of last 12 months,tier=metro_core,8.44
+Registered seekers,1,mean of last 12 months,tier=metro_residential,5.72
+Registered seekers,1,mean of last 12 months,tier=peripheral_agrarian,8.05
+Registered seekers,1,mean of last 12 months,tier=peripheral_coastal,9.42
+Registered seekers,1,mean of last 12 months,tier=peripheral_tribal,11.15
+Registered seekers,1,mean of last 12 months,tier=semi_industrial,10.8
+Registered seekers,1,mean of last 12 months,tier=textile_cluster,10.12
+Registered seekers,1,seasonal naive,all,15.01
+Registered seekers,1,seasonal naive,Manufacturing,14.85
+Registered seekers,1,seasonal naive,Construction,15.46
+Registered seekers,1,seasonal naive,IT-ITeS,5.19
+Registered seekers,1,seasonal naive,Healthcare,15.03
+Registered seekers,1,seasonal naive,Textiles and Apparel,15.57
+Registered seekers,1,seasonal naive,tier=agrarian_developing,14.6
+Registered seekers,1,seasonal naive,tier=agrarian_migrant,13.92
+Registered seekers,1,seasonal naive,tier=industrial_hub,15.84
+Registered seekers,1,seasonal naive,tier=industrial_it_hub,13.32
+Registered seekers,1,seasonal naive,tier=industrial_mining,12.51
+Registered seekers,1,seasonal naive,tier=industrial_msme,15.2
+Registered seekers,1,seasonal naive,tier=industrial_port,13.96
+Registered seekers,1,seasonal naive,tier=logistics_hub,15.77
+Registered seekers,1,seasonal naive,tier=metro_administrative,13.73
+Registered seekers,1,seasonal naive,tier=metro_core,13.41
+Registered seekers,1,seasonal naive,tier=metro_residential,13.51
+Registered seekers,1,seasonal naive,tier=peripheral_agrarian,15.51
+Registered seekers,1,seasonal naive,tier=peripheral_coastal,14.6
+Registered seekers,1,seasonal naive,tier=peripheral_tribal,18.44
+Registered seekers,1,seasonal naive,tier=semi_industrial,17.26
+Registered seekers,1,seasonal naive,tier=textile_cluster,16.26
+Registered seekers,1,seasonal naive + drift,all,6.21
+Registered seekers,1,seasonal naive + drift,Manufacturing,6.05
+Registered seekers,1,seasonal naive + drift,Construction,5.45
+Registered seekers,1,seasonal naive + drift,IT-ITeS,7.84
+Registered seekers,1,seasonal naive + drift,Healthcare,7.33
+Registered seekers,1,seasonal naive + drift,Textiles and Apparel,8.21
+Registered seekers,1,seasonal naive + drift,tier=agrarian_developing,7.06
+Registered seekers,1,seasonal naive + drift,tier=agrarian_migrant,6.08
+Registered seekers,1,seasonal naive + drift,tier=industrial_hub,6.18
+Registered seekers,1,seasonal naive + drift,tier=industrial_it_hub,4.7
+Registered seekers,1,seasonal naive + drift,tier=industrial_mining,7.85
+Registered seekers,1,seasonal naive + drift,tier=industrial_msme,6.52
+Registered seekers,1,seasonal naive + drift,tier=industrial_port,5.82
+Registered seekers,1,seasonal naive + drift,tier=logistics_hub,4.72
+Registered seekers,1,seasonal naive + drift,tier=metro_administrative,8.38
+Registered seekers,1,seasonal naive + drift,tier=metro_core,6.22
+Registered seekers,1,seasonal naive + drift,tier=metro_residential,7.33
+Registered seekers,1,seasonal naive + drift,tier=peripheral_agrarian,6.37
+Registered seekers,1,seasonal naive + drift,tier=peripheral_coastal,8.5
+Registered seekers,1,seasonal naive + drift,tier=peripheral_tribal,7.97
+Registered seekers,1,seasonal naive + drift,tier=semi_industrial,6.5
+Registered seekers,1,seasonal naive + drift,tier=textile_cluster,7.82
+Registered seekers,1,seasonally adjusted 3-month level,all,4.08
+Registered seekers,1,seasonally adjusted 3-month level,Manufacturing,4.02
+Registered seekers,1,seasonally adjusted 3-month level,Construction,3.79
+Registered seekers,1,seasonally adjusted 3-month level,IT-ITeS,5.09
+Registered seekers,1,seasonally adjusted 3-month level,Healthcare,3.81
+Registered seekers,1,seasonally adjusted 3-month level,Textiles and Apparel,5.17
+Registered seekers,1,seasonally adjusted 3-month level,tier=agrarian_developing,4.43
+Registered seekers,1,seasonally adjusted 3-month level,tier=agrarian_migrant,1.92
+Registered seekers,1,seasonally adjusted 3-month level,tier=industrial_hub,3.57
+Registered seekers,1,seasonally adjusted 3-month level,tier=industrial_it_hub,3.65
+Registered seekers,1,seasonally adjusted 3-month level,tier=industrial_mining,2.87
+Registered seekers,1,seasonally adjusted 3-month level,tier=industrial_msme,4.69
+Registered seekers,1,seasonally adjusted 3-month level,tier=industrial_port,1.6
+Registered seekers,1,seasonally adjusted 3-month level,tier=logistics_hub,3.7
+Registered seekers,1,seasonally adjusted 3-month level,tier=metro_administrative,2.82
+Registered seekers,1,seasonally adjusted 3-month level,tier=metro_core,4.43
+Registered seekers,1,seasonally adjusted 3-month level,tier=metro_residential,5.2
+Registered seekers,1,seasonally adjusted 3-month level,tier=peripheral_agrarian,4.51
+Registered seekers,1,seasonally adjusted 3-month level,tier=peripheral_coastal,3.61
+Registered seekers,1,seasonally adjusted 3-month level,tier=peripheral_tribal,3.09
+Registered seekers,1,seasonally adjusted 3-month level,tier=semi_industrial,4.37
+Registered seekers,1,seasonally adjusted 3-month level,tier=textile_cluster,5.51
+Registered seekers,3,last value,all,5.37
+Registered seekers,3,last value,Manufacturing,4.61
+Registered seekers,3,last value,Construction,6.09
+Registered seekers,3,last value,IT-ITeS,5.33
+Registered seekers,3,last value,Healthcare,5.27
+Registered seekers,3,last value,Textiles and Apparel,4.65
+Registered seekers,3,last value,tier=agrarian_developing,5.53
+Registered seekers,3,last value,tier=agrarian_migrant,2.12
+Registered seekers,3,last value,tier=industrial_hub,6.18
+Registered seekers,3,last value,tier=industrial_it_hub,4.0
+Registered seekers,3,last value,tier=industrial_mining,7.12
+Registered seekers,3,last value,tier=industrial_msme,3.77
+Registered seekers,3,last value,tier=industrial_port,2.39
+Registered seekers,3,last value,tier=logistics_hub,5.72
+Registered seekers,3,last value,tier=metro_administrative,8.37
+Registered seekers,3,last value,tier=metro_core,5.3
+Registered seekers,3,last value,tier=metro_residential,7.0
+Registered seekers,3,last value,tier=peripheral_agrarian,5.39
+Registered seekers,3,last value,tier=peripheral_coastal,6.36
+Registered seekers,3,last value,tier=peripheral_tribal,6.49
+Registered seekers,3,last value,tier=semi_industrial,7.25
+Registered seekers,3,last value,tier=textile_cluster,6.08
+Registered seekers,3,mean of last 6 months,all,8.12
+Registered seekers,3,mean of last 6 months,Manufacturing,7.31
+Registered seekers,3,mean of last 6 months,Construction,10.24
+Registered seekers,3,mean of last 6 months,IT-ITeS,5.7
+Registered seekers,3,mean of last 6 months,Healthcare,5.42
+Registered seekers,3,mean of last 6 months,Textiles and Apparel,4.69
+Registered seekers,3,mean of last 6 months,tier=agrarian_developing,6.76
+Registered seekers,3,mean of last 6 months,tier=agrarian_migrant,5.09
+Registered seekers,3,mean of last 6 months,tier=industrial_hub,8.68
+Registered seekers,3,mean of last 6 months,tier=industrial_it_hub,7.4
+Registered seekers,3,mean of last 6 months,tier=industrial_mining,6.55
+Registered seekers,3,mean of last 6 months,tier=industrial_msme,8.21
+Registered seekers,3,mean of last 6 months,tier=industrial_port,5.65
+Registered seekers,3,mean of last 6 months,tier=logistics_hub,7.45
+Registered seekers,3,mean of last 6 months,tier=metro_administrative,10.16
+Registered seekers,3,mean of last 6 months,tier=metro_core,8.37
+Registered seekers,3,mean of last 6 months,tier=metro_residential,7.28
+Registered seekers,3,mean of last 6 months,tier=peripheral_agrarian,7.78
+Registered seekers,3,mean of last 6 months,tier=peripheral_coastal,4.62
+Registered seekers,3,mean of last 6 months,tier=peripheral_tribal,10.31
+Registered seekers,3,mean of last 6 months,tier=semi_industrial,10.71
+Registered seekers,3,mean of last 6 months,tier=textile_cluster,5.69
+Registered seekers,3,mean of last 12 months,all,10.49
+Registered seekers,3,mean of last 12 months,Manufacturing,10.57
+Registered seekers,3,mean of last 12 months,Construction,12.11
+Registered seekers,3,mean of last 12 months,IT-ITeS,6.22
+Registered seekers,3,mean of last 12 months,Healthcare,8.29
+Registered seekers,3,mean of last 12 months,Textiles and Apparel,6.77
+Registered seekers,3,mean of last 12 months,tier=agrarian_developing,9.24
+Registered seekers,3,mean of last 12 months,tier=agrarian_migrant,7.85
+Registered seekers,3,mean of last 12 months,tier=industrial_hub,11.2
+Registered seekers,3,mean of last 12 months,tier=industrial_it_hub,10.68
+Registered seekers,3,mean of last 12 months,tier=industrial_mining,6.68
+Registered seekers,3,mean of last 12 months,tier=industrial_msme,10.37
+Registered seekers,3,mean of last 12 months,tier=industrial_port,7.25
+Registered seekers,3,mean of last 12 months,tier=logistics_hub,10.3
+Registered seekers,3,mean of last 12 months,tier=metro_administrative,12.93
+Registered seekers,3,mean of last 12 months,tier=metro_core,9.79
+Registered seekers,3,mean of last 12 months,tier=metro_residential,9.92
+Registered seekers,3,mean of last 12 months,tier=peripheral_agrarian,10.19
+Registered seekers,3,mean of last 12 months,tier=peripheral_coastal,7.7
+Registered seekers,3,mean of last 12 months,tier=peripheral_tribal,11.79
+Registered seekers,3,mean of last 12 months,tier=semi_industrial,13.09
+Registered seekers,3,mean of last 12 months,tier=textile_cluster,7.63
+Registered seekers,3,seasonal naive,all,13.35
+Registered seekers,3,seasonal naive,Manufacturing,14.1
+Registered seekers,3,seasonal naive,Construction,13.26
+Registered seekers,3,seasonal naive,IT-ITeS,9.14
+Registered seekers,3,seasonal naive,Healthcare,12.71
+Registered seekers,3,seasonal naive,Textiles and Apparel,13.08
+Registered seekers,3,seasonal naive,tier=agrarian_developing,12.47
+Registered seekers,3,seasonal naive,tier=agrarian_migrant,9.75
+Registered seekers,3,seasonal naive,tier=industrial_hub,14.52
+Registered seekers,3,seasonal naive,tier=industrial_it_hub,14.13
+Registered seekers,3,seasonal naive,tier=industrial_mining,7.54
+Registered seekers,3,seasonal naive,tier=industrial_msme,12.97
+Registered seekers,3,seasonal naive,tier=industrial_port,9.62
+Registered seekers,3,seasonal naive,tier=logistics_hub,7.6
+Registered seekers,3,seasonal naive,tier=metro_administrative,16.75
+Registered seekers,3,seasonal naive,tier=metro_core,11.92
+Registered seekers,3,seasonal naive,tier=metro_residential,14.73
+Registered seekers,3,seasonal naive,tier=peripheral_agrarian,10.29
+Registered seekers,3,seasonal naive,tier=peripheral_coastal,13.12
+Registered seekers,3,seasonal naive,tier=peripheral_tribal,14.18
+Registered seekers,3,seasonal naive,tier=semi_industrial,16.4
+Registered seekers,3,seasonal naive,tier=textile_cluster,10.54
+Registered seekers,3,seasonal naive + drift,all,7.95
+Registered seekers,3,seasonal naive + drift,Manufacturing,6.96
+Registered seekers,3,seasonal naive + drift,Construction,8.5
+Registered seekers,3,seasonal naive + drift,IT-ITeS,11.0
+Registered seekers,3,seasonal naive + drift,Healthcare,7.52
+Registered seekers,3,seasonal naive + drift,Textiles and Apparel,8.04
+Registered seekers,3,seasonal naive + drift,tier=agrarian_developing,11.27
+Registered seekers,3,seasonal naive + drift,tier=agrarian_migrant,11.24
+Registered seekers,3,seasonal naive + drift,tier=industrial_hub,8.41
+Registered seekers,3,seasonal naive + drift,tier=industrial_it_hub,4.9
+Registered seekers,3,seasonal naive + drift,tier=industrial_mining,11.38
+Registered seekers,3,seasonal naive + drift,tier=industrial_msme,6.03
+Registered seekers,3,seasonal naive + drift,tier=industrial_port,10.25
+Registered seekers,3,seasonal naive + drift,tier=logistics_hub,15.22
+Registered seekers,3,seasonal naive + drift,tier=metro_administrative,4.04
+Registered seekers,3,seasonal naive + drift,tier=metro_core,8.19
+Registered seekers,3,seasonal naive + drift,tier=metro_residential,5.66
+Registered seekers,3,seasonal naive + drift,tier=peripheral_agrarian,12.73
+Registered seekers,3,seasonal naive + drift,tier=peripheral_coastal,9.53
+Registered seekers,3,seasonal naive + drift,tier=peripheral_tribal,12.49
+Registered seekers,3,seasonal naive + drift,tier=semi_industrial,7.12
+Registered seekers,3,seasonal naive + drift,tier=textile_cluster,12.2
+Registered seekers,3,seasonally adjusted 3-month level,all,5.11
+Registered seekers,3,seasonally adjusted 3-month level,Manufacturing,5.29
+Registered seekers,3,seasonally adjusted 3-month level,Construction,4.74
+Registered seekers,3,seasonally adjusted 3-month level,IT-ITeS,6.01
+Registered seekers,3,seasonally adjusted 3-month level,Healthcare,5.15
+Registered seekers,3,seasonally adjusted 3-month level,Textiles and Apparel,5.78
+Registered seekers,3,seasonally adjusted 3-month level,tier=agrarian_developing,4.69
+Registered seekers,3,seasonally adjusted 3-month level,tier=agrarian_migrant,1.71
+Registered seekers,3,seasonally adjusted 3-month level,tier=industrial_hub,5.94
+Registered seekers,3,seasonally adjusted 3-month level,tier=industrial_it_hub,4.38
+Registered seekers,3,seasonally adjusted 3-month level,tier=industrial_mining,2.46
+Registered seekers,3,seasonally adjusted 3-month level,tier=industrial_msme,4.52
+Registered seekers,3,seasonally adjusted 3-month level,tier=industrial_port,4.27
+Registered seekers,3,seasonally adjusted 3-month level,tier=logistics_hub,3.98
+Registered seekers,3,seasonally adjusted 3-month level,tier=metro_administrative,8.03
+Registered seekers,3,seasonally adjusted 3-month level,tier=metro_core,4.74
+Registered seekers,3,seasonally adjusted 3-month level,tier=metro_residential,4.77
+Registered seekers,3,seasonally adjusted 3-month level,tier=peripheral_agrarian,5.18
+Registered seekers,3,seasonally adjusted 3-month level,tier=peripheral_coastal,5.02
+Registered seekers,3,seasonally adjusted 3-month level,tier=peripheral_tribal,5.27
+Registered seekers,3,seasonally adjusted 3-month level,tier=semi_industrial,6.26
+Registered seekers,3,seasonally adjusted 3-month level,tier=textile_cluster,5.79
+Registered seekers,6,last value,all,7.07
+Registered seekers,6,last value,Manufacturing,4.77
+Registered seekers,6,last value,Construction,9.51
+Registered seekers,6,last value,IT-ITeS,5.9
+Registered seekers,6,last value,Healthcare,6.75
+Registered seekers,6,last value,Textiles and Apparel,4.75
+Registered seekers,6,last value,tier=agrarian_developing,7.4
+Registered seekers,6,last value,tier=agrarian_migrant,7.42
+Registered seekers,6,last value,tier=industrial_hub,8.41
+Registered seekers,6,last value,tier=industrial_it_hub,4.99
+Registered seekers,6,last value,tier=industrial_mining,9.34
+Registered seekers,6,last value,tier=industrial_msme,4.18
+Registered seekers,6,last value,tier=industrial_port,8.05
+Registered seekers,6,last value,tier=logistics_hub,7.8
+Registered seekers,6,last value,tier=metro_administrative,9.25
+Registered seekers,6,last value,tier=metro_core,7.24
+Registered seekers,6,last value,tier=metro_residential,12.89
+Registered seekers,6,last value,tier=peripheral_agrarian,9.4
+Registered seekers,6,last value,tier=peripheral_coastal,9.43
+Registered seekers,6,last value,tier=peripheral_tribal,5.65
+Registered seekers,6,last value,tier=semi_industrial,7.59
+Registered seekers,6,last value,tier=textile_cluster,7.61
+Registered seekers,6,mean of last 6 months,all,5.87
+Registered seekers,6,mean of last 6 months,Manufacturing,6.74
+Registered seekers,6,mean of last 6 months,Construction,5.8
+Registered seekers,6,mean of last 6 months,IT-ITeS,4.59
+Registered seekers,6,mean of last 6 months,Healthcare,6.69
+Registered seekers,6,mean of last 6 months,Textiles and Apparel,3.86
+Registered seekers,6,mean of last 6 months,tier=agrarian_developing,4.97
+Registered seekers,6,mean of last 6 months,tier=agrarian_migrant,2.99
+Registered seekers,6,mean of last 6 months,tier=industrial_hub,6.01
+Registered seekers,6,mean of last 6 months,tier=industrial_it_hub,3.98
+Registered seekers,6,mean of last 6 months,tier=industrial_mining,6.01
+Registered seekers,6,mean of last 6 months,tier=industrial_msme,4.81
+Registered seekers,6,mean of last 6 months,tier=industrial_port,6.66
+Registered seekers,6,mean of last 6 months,tier=logistics_hub,3.21
+Registered seekers,6,mean of last 6 months,tier=metro_administrative,11.15
+Registered seekers,6,mean of last 6 months,tier=metro_core,8.16
+Registered seekers,6,mean of last 6 months,tier=metro_residential,13.61
+Registered seekers,6,mean of last 6 months,tier=peripheral_agrarian,4.28
+Registered seekers,6,mean of last 6 months,tier=peripheral_coastal,2.79
+Registered seekers,6,mean of last 6 months,tier=peripheral_tribal,4.75
+Registered seekers,6,mean of last 6 months,tier=semi_industrial,5.37
+Registered seekers,6,mean of last 6 months,tier=textile_cluster,7.16
+Registered seekers,6,mean of last 12 months,all,7.68
+Registered seekers,6,mean of last 12 months,Manufacturing,9.66
+Registered seekers,6,mean of last 12 months,Construction,6.7
+Registered seekers,6,mean of last 12 months,IT-ITeS,4.49
+Registered seekers,6,mean of last 12 months,Healthcare,9.49
+Registered seekers,6,mean of last 12 months,Textiles and Apparel,5.75
+Registered seekers,6,mean of last 12 months,tier=agrarian_developing,6.69
+Registered seekers,6,mean of last 12 months,tier=agrarian_migrant,4.99
+Registered seekers,6,mean of last 12 months,tier=industrial_hub,8.29
+Registered seekers,6,mean of last 12 months,tier=industrial_it_hub,6.79
+Registered seekers,6,mean of last 12 months,tier=industrial_mining,5.96
+Registered seekers,6,mean of last 12 months,tier=industrial_msme,6.83
+Registered seekers,6,mean of last 12 months,tier=industrial_port,7.89
+Registered seekers,6,mean of last 12 months,tier=logistics_hub,5.04
+Registered seekers,6,mean of last 12 months,tier=metro_administrative,14.22
+Registered seekers,6,mean of last 12 months,tier=metro_core,9.01
+Registered seekers,6,mean of last 12 months,tier=metro_residential,15.43
+Registered seekers,6,mean of last 12 months,tier=peripheral_agrarian,5.68
+Registered seekers,6,mean of last 12 months,tier=peripheral_coastal,4.57
+Registered seekers,6,mean of last 12 months,tier=peripheral_tribal,6.96
+Registered seekers,6,mean of last 12 months,tier=semi_industrial,7.28
+Registered seekers,6,mean of last 12 months,tier=textile_cluster,6.05
+Registered seekers,6,seasonal naive,all,11.11
+Registered seekers,6,seasonal naive,Manufacturing,12.58
+Registered seekers,6,seasonal naive,Construction,11.27
+Registered seekers,6,seasonal naive,IT-ITeS,6.85
+Registered seekers,6,seasonal naive,Healthcare,10.65
+Registered seekers,6,seasonal naive,Textiles and Apparel,8.23
+Registered seekers,6,seasonal naive,tier=agrarian_developing,9.12
+Registered seekers,6,seasonal naive,tier=agrarian_migrant,10.55
+Registered seekers,6,seasonal naive,tier=industrial_hub,11.87
+Registered seekers,6,seasonal naive,tier=industrial_it_hub,12.38
+Registered seekers,6,seasonal naive,tier=industrial_mining,3.81
+Registered seekers,6,seasonal naive,tier=industrial_msme,10.07
+Registered seekers,6,seasonal naive,tier=industrial_port,7.91
+Registered seekers,6,seasonal naive,tier=logistics_hub,10.25
+Registered seekers,6,seasonal naive,tier=metro_administrative,11.17
+Registered seekers,6,seasonal naive,tier=metro_core,10.73
+Registered seekers,6,seasonal naive,tier=metro_residential,15.08
+Registered seekers,6,seasonal naive,tier=peripheral_agrarian,9.35
+Registered seekers,6,seasonal naive,tier=peripheral_coastal,14.1
+Registered seekers,6,seasonal naive,tier=peripheral_tribal,10.86
+Registered seekers,6,seasonal naive,tier=semi_industrial,10.5
+Registered seekers,6,seasonal naive,tier=textile_cluster,10.36
+Registered seekers,6,seasonal naive + drift,all,9.99
+Registered seekers,6,seasonal naive + drift,Manufacturing,8.37
+Registered seekers,6,seasonal naive + drift,Construction,9.65
+Registered seekers,6,seasonal naive + drift,IT-ITeS,10.15
+Registered seekers,6,seasonal naive + drift,Healthcare,10.34
+Registered seekers,6,seasonal naive + drift,Textiles and Apparel,14.59
+Registered seekers,6,seasonal naive + drift,tier=agrarian_developing,13.14
+Registered seekers,6,seasonal naive + drift,tier=agrarian_migrant,10.88
+Registered seekers,6,seasonal naive + drift,tier=industrial_hub,9.56
+Registered seekers,6,seasonal naive + drift,tier=industrial_it_hub,8.12
+Registered seekers,6,seasonal naive + drift,tier=industrial_mining,15.83
+Registered seekers,6,seasonal naive + drift,tier=industrial_msme,8.92
+Registered seekers,6,seasonal naive + drift,tier=industrial_port,10.59
+Registered seekers,6,seasonal naive + drift,tier=logistics_hub,11.98
+Registered seekers,6,seasonal naive + drift,tier=metro_administrative,10.58
+Registered seekers,6,seasonal naive + drift,tier=metro_core,9.22
+Registered seekers,6,seasonal naive + drift,tier=metro_residential,9.38
+Registered seekers,6,seasonal naive + drift,tier=peripheral_agrarian,12.13
+Registered seekers,6,seasonal naive + drift,tier=peripheral_coastal,6.87
+Registered seekers,6,seasonal naive + drift,tier=peripheral_tribal,16.95
+Registered seekers,6,seasonal naive + drift,tier=semi_industrial,10.85
+Registered seekers,6,seasonal naive + drift,tier=textile_cluster,15.41
+Registered seekers,6,seasonally adjusted 3-month level,all,6.72
+Registered seekers,6,seasonally adjusted 3-month level,Manufacturing,6.77
+Registered seekers,6,seasonally adjusted 3-month level,Construction,7.55
+Registered seekers,6,seasonally adjusted 3-month level,IT-ITeS,5.01
+Registered seekers,6,seasonally adjusted 3-month level,Healthcare,6.86
+Registered seekers,6,seasonally adjusted 3-month level,Textiles and Apparel,4.14
+Registered seekers,6,seasonally adjusted 3-month level,tier=agrarian_developing,6.33
+Registered seekers,6,seasonally adjusted 3-month level,tier=agrarian_migrant,6.51
+Registered seekers,6,seasonally adjusted 3-month level,tier=industrial_hub,6.45
+Registered seekers,6,seasonally adjusted 3-month level,tier=industrial_it_hub,5.69
+Registered seekers,6,seasonally adjusted 3-month level,tier=industrial_mining,3.73
+Registered seekers,6,seasonally adjusted 3-month level,tier=industrial_msme,6.07
+Registered seekers,6,seasonally adjusted 3-month level,tier=industrial_port,7.34
+Registered seekers,6,seasonally adjusted 3-month level,tier=logistics_hub,4.89
+Registered seekers,6,seasonally adjusted 3-month level,tier=metro_administrative,10.69
+Registered seekers,6,seasonally adjusted 3-month level,tier=metro_core,9.08
+Registered seekers,6,seasonally adjusted 3-month level,tier=metro_residential,11.34
+Registered seekers,6,seasonally adjusted 3-month level,tier=peripheral_agrarian,4.37
+Registered seekers,6,seasonally adjusted 3-month level,tier=peripheral_coastal,5.61
+Registered seekers,6,seasonally adjusted 3-month level,tier=peripheral_tribal,6.98
+Registered seekers,6,seasonally adjusted 3-month level,tier=semi_industrial,7.1
+Registered seekers,6,seasonally adjusted 3-month level,tier=textile_cluster,5.8
+Registered seekers,12,last value,all,8.6
+Registered seekers,12,last value,Manufacturing,6.84
+Registered seekers,12,last value,Construction,10.16
+Registered seekers,12,last value,IT-ITeS,6.15
+Registered seekers,12,last value,Healthcare,10.17
+Registered seekers,12,last value,Textiles and Apparel,6.47
+Registered seekers,12,last value,tier=agrarian_developing,10.93
+Registered seekers,12,last value,tier=agrarian_migrant,9.34
+Registered seekers,12,last value,tier=industrial_hub,7.64
+Registered seekers,12,last value,tier=industrial_it_hub,8.96
+Registered seekers,12,last value,tier=industrial_mining,9.18
+Registered seekers,12,last value,tier=industrial_msme,7.1
+Registered seekers,12,last value,tier=industrial_port,8.07
+Registered seekers,12,last value,tier=logistics_hub,7.17
+Registered seekers,12,last value,tier=metro_administrative,10.21
+Registered seekers,12,last value,tier=metro_core,10.38
+Registered seekers,12,last value,tier=metro_residential,13.99
+Registered seekers,12,last value,tier=peripheral_agrarian,8.36
+Registered seekers,12,last value,tier=peripheral_coastal,14.0
+Registered seekers,12,last value,tier=peripheral_tribal,10.11
+Registered seekers,12,last value,tier=semi_industrial,7.98
+Registered seekers,12,last value,tier=textile_cluster,7.73
+Registered seekers,12,mean of last 6 months,all,11.52
+Registered seekers,12,mean of last 6 months,Manufacturing,8.99
+Registered seekers,12,mean of last 6 months,Construction,15.48
+Registered seekers,12,mean of last 6 months,IT-ITeS,6.23
+Registered seekers,12,mean of last 6 months,Healthcare,10.14
+Registered seekers,12,mean of last 6 months,Textiles and Apparel,4.79
+Registered seekers,12,mean of last 6 months,tier=agrarian_developing,14.21
+Registered seekers,12,mean of last 6 months,tier=agrarian_migrant,13.24
+Registered seekers,12,mean of last 6 months,tier=industrial_hub,11.02
+Registered seekers,12,mean of last 6 months,tier=industrial_it_hub,11.1
+Registered seekers,12,mean of last 6 months,tier=industrial_mining,12.64
+Registered seekers,12,mean of last 6 months,tier=industrial_msme,9.53
+Registered seekers,12,mean of last 6 months,tier=industrial_port,11.63
+Registered seekers,12,mean of last 6 months,tier=logistics_hub,12.19
+Registered seekers,12,mean of last 6 months,tier=metro_administrative,12.09
+Registered seekers,12,mean of last 6 months,tier=metro_core,12.61
+Registered seekers,12,mean of last 6 months,tier=metro_residential,16.16
+Registered seekers,12,mean of last 6 months,tier=peripheral_agrarian,12.83
+Registered seekers,12,mean of last 6 months,tier=peripheral_coastal,10.52
+Registered seekers,12,mean of last 6 months,tier=peripheral_tribal,14.72
+Registered seekers,12,mean of last 6 months,tier=semi_industrial,11.99
+Registered seekers,12,mean of last 6 months,tier=textile_cluster,10.91
+Registered seekers,12,mean of last 12 months,all,13.92
+Registered seekers,12,mean of last 12 months,Manufacturing,11.89
+Registered seekers,12,mean of last 12 months,Construction,17.14
+Registered seekers,12,mean of last 12 months,IT-ITeS,6.53
+Registered seekers,12,mean of last 12 months,Healthcare,13.84
+Registered seekers,12,mean of last 12 months,Textiles and Apparel,8.29
+Registered seekers,12,mean of last 12 months,tier=agrarian_developing,16.68
+Registered seekers,12,mean of last 12 months,tier=agrarian_migrant,14.49
+Registered seekers,12,mean of last 12 months,tier=industrial_hub,13.45
+Registered seekers,12,mean of last 12 months,tier=industrial_it_hub,14.21
+Registered seekers,12,mean of last 12 months,tier=industrial_mining,14.29
+Registered seekers,12,mean of last 12 months,tier=industrial_msme,11.92
+Registered seekers,12,mean of last 12 months,tier=industrial_port,13.14
+Registered seekers,12,mean of last 12 months,tier=logistics_hub,14.9
+Registered seekers,12,mean of last 12 months,tier=metro_administrative,15.14
+Registered seekers,12,mean of last 12 months,tier=metro_core,13.94
+Registered seekers,12,mean of last 12 months,tier=metro_residential,19.28
+Registered seekers,12,mean of last 12 months,tier=peripheral_agrarian,15.18
+Registered seekers,12,mean of last 12 months,tier=peripheral_coastal,10.76
+Registered seekers,12,mean of last 12 months,tier=peripheral_tribal,17.72
+Registered seekers,12,mean of last 12 months,tier=semi_industrial,14.52
+Registered seekers,12,mean of last 12 months,tier=textile_cluster,13.71
+Registered seekers,12,seasonal naive,all,8.6
+Registered seekers,12,seasonal naive,Manufacturing,6.84
+Registered seekers,12,seasonal naive,Construction,10.16
+Registered seekers,12,seasonal naive,IT-ITeS,6.15
+Registered seekers,12,seasonal naive,Healthcare,10.17
+Registered seekers,12,seasonal naive,Textiles and Apparel,6.47
+Registered seekers,12,seasonal naive,tier=agrarian_developing,10.93
+Registered seekers,12,seasonal naive,tier=agrarian_migrant,9.34
+Registered seekers,12,seasonal naive,tier=industrial_hub,7.64
+Registered seekers,12,seasonal naive,tier=industrial_it_hub,8.96
+Registered seekers,12,seasonal naive,tier=industrial_mining,9.18
+Registered seekers,12,seasonal naive,tier=industrial_msme,7.1
+Registered seekers,12,seasonal naive,tier=industrial_port,8.07
+Registered seekers,12,seasonal naive,tier=logistics_hub,7.17
+Registered seekers,12,seasonal naive,tier=metro_administrative,10.21
+Registered seekers,12,seasonal naive,tier=metro_core,10.38
+Registered seekers,12,seasonal naive,tier=metro_residential,13.99
+Registered seekers,12,seasonal naive,tier=peripheral_agrarian,8.36
+Registered seekers,12,seasonal naive,tier=peripheral_coastal,14.0
+Registered seekers,12,seasonal naive,tier=peripheral_tribal,10.11
+Registered seekers,12,seasonal naive,tier=semi_industrial,7.98
+Registered seekers,12,seasonal naive,tier=textile_cluster,7.73
+Registered seekers,12,seasonal naive + drift,all,14.72
+Registered seekers,12,seasonal naive + drift,Manufacturing,17.49
+Registered seekers,12,seasonal naive + drift,Construction,12.29
+Registered seekers,12,seasonal naive + drift,IT-ITeS,7.24
+Registered seekers,12,seasonal naive + drift,Healthcare,15.43
+Registered seekers,12,seasonal naive + drift,Textiles and Apparel,18.16
+Registered seekers,12,seasonal naive + drift,tier=agrarian_developing,14.78
+Registered seekers,12,seasonal naive + drift,tier=agrarian_migrant,16.94
+Registered seekers,12,seasonal naive + drift,tier=industrial_hub,17.14
+Registered seekers,12,seasonal naive + drift,tier=industrial_it_hub,11.96
+Registered seekers,12,seasonal naive + drift,tier=industrial_mining,9.45
+Registered seekers,12,seasonal naive + drift,tier=industrial_msme,15.61
+Registered seekers,12,seasonal naive + drift,tier=industrial_port,11.76
+Registered seekers,12,seasonal naive + drift,tier=logistics_hub,17.4
+Registered seekers,12,seasonal naive + drift,tier=metro_administrative,11.74
+Registered seekers,12,seasonal naive + drift,tier=metro_core,10.65
+Registered seekers,12,seasonal naive + drift,tier=metro_residential,11.23
+Registered seekers,12,seasonal naive + drift,tier=peripheral_agrarian,16.45
+Registered seekers,12,seasonal naive + drift,tier=peripheral_coastal,27.24
+Registered seekers,12,seasonal naive + drift,tier=peripheral_tribal,18.23
+Registered seekers,12,seasonal naive + drift,tier=semi_industrial,14.33
+Registered seekers,12,seasonal naive + drift,tier=textile_cluster,18.83
+Registered seekers,12,seasonally adjusted 3-month level,all,8.31
+Registered seekers,12,seasonally adjusted 3-month level,Manufacturing,7.4
+Registered seekers,12,seasonally adjusted 3-month level,Construction,9.36
+Registered seekers,12,seasonally adjusted 3-month level,IT-ITeS,7.13
+Registered seekers,12,seasonally adjusted 3-month level,Healthcare,10.04
+Registered seekers,12,seasonally adjusted 3-month level,Textiles and Apparel,5.69
+Registered seekers,12,seasonally adjusted 3-month level,tier=agrarian_developing,9.63
+Registered seekers,12,seasonally adjusted 3-month level,tier=agrarian_migrant,8.33
+Registered seekers,12,seasonally adjusted 3-month level,tier=industrial_hub,7.53
+Registered seekers,12,seasonally adjusted 3-month level,tier=industrial_it_hub,8.22
+Registered seekers,12,seasonally adjusted 3-month level,tier=industrial_mining,11.05
+Registered seekers,12,seasonally adjusted 3-month level,tier=industrial_msme,7.25
+Registered seekers,12,seasonally adjusted 3-month level,tier=industrial_port,7.73
+Registered seekers,12,seasonally adjusted 3-month level,tier=logistics_hub,6.89
+Registered seekers,12,seasonally adjusted 3-month level,tier=metro_administrative,10.97
+Registered seekers,12,seasonally adjusted 3-month level,tier=metro_core,10.26
+Registered seekers,12,seasonally adjusted 3-month level,tier=metro_residential,13.55
+Registered seekers,12,seasonally adjusted 3-month level,tier=peripheral_agrarian,7.87
+Registered seekers,12,seasonally adjusted 3-month level,tier=peripheral_coastal,13.18
+Registered seekers,12,seasonally adjusted 3-month level,tier=peripheral_tribal,10.24
+Registered seekers,12,seasonally adjusted 3-month level,tier=semi_industrial,7.04
+Registered seekers,12,seasonally adjusted 3-month level,tier=textile_cluster,7.94

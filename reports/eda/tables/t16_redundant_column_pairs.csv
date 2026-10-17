@@ -1,0 +1,17 @@
+a,b,pearson_r_levels
+Female_Share_Pct,Male_Share_Pct,-1.0
+Age_15_24_Count,Male_Employed_Count,0.97
+Age_15_24_Count,Transgender_Employed_Count,0.955
+Age_25_54_Count,Male_Employed_Count,0.99
+Age_25_54_Count,Transgender_Employed_Count,0.967
+Age_25_54_Count,Age_15_24_Count,0.974
+Age_55_Plus_Count,Male_Employed_Count,0.957
+Qualification_Vocational_ITI_Certified_Count,Age_25_54_Count,0.96
+Qualification_Vocational_ITI_Certified_Count,Age_55_Plus_Count,0.961
+Qualification_Vocational_ITI_Certified_Count,Edu_Secondary_HigherSecondary_Count,0.956
+Total_Employed_Workers,Male_Employed_Count,0.992
+Total_Employed_Workers,Transgender_Employed_Count,0.966
+Total_Employed_Workers,Age_15_24_Count,0.984
+Total_Employed_Workers,Age_25_54_Count,0.998
+Total_Employed_Workers,Age_55_Plus_Count,0.953
+Total_Employed_Workers,Qualification_Vocational_ITI_Certified_Count,0.956

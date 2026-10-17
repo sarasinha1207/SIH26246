@@ -1,0 +1,57 @@
+State_Name,District_Name,District_LGD_Code,LGD_Code_Source,Pop_2011,Pop_Growth_Annual,Econ_Tier,State_LGD_Code
+Maharashtra,Mumbai City,482,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),3085411,0.003,metro_core,27
+Maharashtra,Mumbai Suburban,483,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),9356962,0.009,metro_core,27
+Maharashtra,Thane,497,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),8070032,0.019,industrial_hub,27
+Maharashtra,Palghar,665,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),2990116,0.018,industrial_msme,27
+Maharashtra,Pune,490,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),9429408,0.017,industrial_it_hub,27
+Maharashtra,Nashik,487,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),6107187,0.015,industrial_hub,27
+Maharashtra,Chhatrapati Sambhajinagar,469,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),3701282,0.014,industrial_hub,27
+Maharashtra,Nagpur,484,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),4653570,0.012,logistics_hub,27
+Maharashtra,Kolhapur,480,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),3876001,0.01,industrial_msme,27
+Maharashtra,Solapur,496,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),4317756,0.011,textile_cluster,27
+Maharashtra,Raigad,491,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),2634200,0.014,industrial_port,27
+Maharashtra,Ahilyanagar,466,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),4543159,0.011,semi_industrial,27
+Maharashtra,Jalgaon,478,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),4229917,0.012,semi_industrial,27
+Maharashtra,Satara,494,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),3003741,0.009,semi_industrial,27
+Maharashtra,Sangli,493,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),2822143,0.009,semi_industrial,27
+Maharashtra,Amravati,468,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),2888445,0.01,textile_cluster,27
+Maharashtra,Nanded,485,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),3361292,0.012,agrarian_developing,27
+Maharashtra,Latur,481,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),2455543,0.011,semi_industrial,27
+Maharashtra,Dhule,474,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),2050862,0.011,textile_cluster,27
+Maharashtra,Chandrapur,473,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),2204307,0.008,industrial_mining,27
+Maharashtra,Buldhana,472,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),2586258,0.01,agrarian_developing,27
+Maharashtra,Yavatmal,500,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),2772348,0.01,agrarian_developing,27
+Maharashtra,Beed,470,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),2585049,0.011,agrarian_migrant,27
+Maharashtra,Parbhani,489,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),1836086,0.011,agrarian_developing,27
+Maharashtra,Jalna,479,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),1959046,0.012,industrial_msme,27
+Maharashtra,Akola,467,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),1813906,0.01,semi_industrial,27
+Maharashtra,Dharashiv,488,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),1657576,0.009,agrarian_developing,27
+Maharashtra,Nandurbar,486,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),1648295,0.013,peripheral_tribal,27
+Maharashtra,Ratnagiri,492,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),1615069,0.004,peripheral_coastal,27
+Maharashtra,Gondia,476,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),1322507,0.008,peripheral_agrarian,27
+Maharashtra,Wardha,498,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),1300774,0.006,semi_industrial,27
+Maharashtra,Bhandara,471,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),1200334,0.006,peripheral_agrarian,27
+Maharashtra,Washim,499,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),1197160,0.009,peripheral_agrarian,27
+Maharashtra,Hingoli,477,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),1177345,0.01,peripheral_agrarian,27
+Maharashtra,Gadchiroli,475,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),1072942,0.008,peripheral_tribal,27
+Maharashtra,Sindhudurg,495,Maharashtra land-records LGD directory (mahavillages.mahabhumi.gov.in),849651,-0.002,peripheral_coastal,27
+Tamil Nadu,Chennai,568,LGD district export (gist planemad/cd6b5237...); Kolkata also West Bengal State Health Society LGD list,4646732,0.011,metro_core,33
+Tamil Nadu,Tiruvallur,589,LGD district export (gist planemad/cd6b5237...); Kolkata also West Bengal State Health Society LGD list,3728104,0.023,industrial_hub,33
+Tamil Nadu,Kanchipuram,574,LGD district export (gist planemad/cd6b5237...); Kolkata also West Bengal State Health Society LGD list,1442008,0.021,industrial_hub,33
+Tamil Nadu,Chengalpattu,730,LGD district export (gist planemad/cd6b5237...); Kolkata also West Bengal State Health Society LGD list,2556244,0.024,industrial_it_hub,33
+Delhi,Central Delhi,77,LGD district export (gist planemad/cd6b5237...); Kolkata also West Bengal State Health Society LGD list,495538,0.007,metro_core,07
+Delhi,East Delhi,78,LGD district export (gist planemad/cd6b5237...); Kolkata also West Bengal State Health Society LGD list,1454607,0.011,metro_residential,07
+Delhi,New Delhi,79,LGD district export (gist planemad/cd6b5237...); Kolkata also West Bengal State Health Society LGD list,120842,0.005,metro_administrative,07
+Delhi,North Delhi,80,LGD district export (gist planemad/cd6b5237...); Kolkata also West Bengal State Health Society LGD list,755645,0.009,industrial_msme,07
+Delhi,North East Delhi,81,LGD district export (gist planemad/cd6b5237...); Kolkata also West Bengal State Health Society LGD list,1907561,0.015,metro_residential,07
+Delhi,North West Delhi,82,LGD district export (gist planemad/cd6b5237...); Kolkata also West Bengal State Health Society LGD list,3111615,0.016,industrial_msme,07
+Delhi,South Delhi,83,LGD district export (gist planemad/cd6b5237...); Kolkata also West Bengal State Health Society LGD list,2324797,0.013,metro_core,07
+Delhi,South East Delhi,670,LGD district export (gist planemad/cd6b5237...); Kolkata also West Bengal State Health Society LGD list,1208381,0.014,industrial_hub,07
+Delhi,South West Delhi,84,LGD district export (gist planemad/cd6b5237...); Kolkata also West Bengal State Health Society LGD list,1951245,0.015,metro_residential,07
+Delhi,West Delhi,85,LGD district export (gist planemad/cd6b5237...); Kolkata also West Bengal State Health Society LGD list,2164231,0.012,industrial_hub,07
+Delhi,Shahdara,671,LGD district export (gist planemad/cd6b5237...); Kolkata also West Bengal State Health Society LGD list,1293479,0.013,industrial_msme,07
+West Bengal,Kolkata,315,LGD district export (gist planemad/cd6b5237...); Kolkata also West Bengal State Health Society LGD list,4496694,0.004,metro_core,19
+West Bengal,North 24 Parganas,303,LGD district export (gist planemad/cd6b5237...); Kolkata also West Bengal State Health Society LGD list,10009781,0.012,industrial_it_hub,19
+West Bengal,South 24 Parganas,304,LGD district export (gist planemad/cd6b5237...); Kolkata also West Bengal State Health Society LGD list,8161961,0.014,industrial_msme,19
+West Bengal,Howrah,313,LGD district export (gist planemad/cd6b5237...); Kolkata also West Bengal State Health Society LGD list,4850029,0.009,industrial_hub,19
+West Bengal,Hooghly,312,LGD district export (gist planemad/cd6b5237...); Kolkata also West Bengal State Health Society LGD list,5519145,0.008,industrial_hub,19

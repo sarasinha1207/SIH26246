@@ -1,0 +1,6 @@
+Sector_Name,NIC_Code,NCO_Anchor_Code,NSQF_Level,Sector_Code,NCO_Families
+Manufacturing,"Division 10-12, 15-33",7223,3-6,MFG,7223;8212;8131;7233;7212
+Construction,Division 41-43,7111,2-5,CON,7111;7112;7115;7126;9313
+IT-ITeS,Division 62-63,2511,5-8,ITS,2511;2512;2513;2514;3512
+Healthcare,Division 86,2211,4-8,HLT,2211;2212;2221;3221;3212
+Textiles and Apparel,Division 13-14,8153,2-5,TXT,8153;8152;8151;7531;7533

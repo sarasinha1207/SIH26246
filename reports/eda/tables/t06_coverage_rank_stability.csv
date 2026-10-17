@@ -1,0 +1,21 @@
+sector,lag_years,mean_spearman
+Manufacturing,1,0.945
+Manufacturing,2,0.909
+Manufacturing,3,0.885
+Manufacturing,5,0.876
+Construction,1,0.933
+Construction,2,0.881
+Construction,3,0.859
+Construction,5,0.85
+IT-ITeS,1,0.973
+IT-ITeS,2,0.952
+IT-ITeS,3,0.941
+IT-ITeS,5,0.933
+Healthcare,1,0.922
+Healthcare,2,0.861
+Healthcare,3,0.843
+Healthcare,5,0.81
+Textiles and Apparel,1,0.916
+Textiles and Apparel,2,0.858
+Textiles and Apparel,3,0.813
+Textiles and Apparel,5,0.785

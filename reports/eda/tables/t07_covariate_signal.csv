@@ -1,0 +1,40 @@
+target,feature,ic
+Employed workers,log size (employed),0.068
+Employed workers,vacancy rate (V/E),-0.008
+Employed workers,seeker rate (S/E),-0.011
+Employed workers,employment momentum (12m),-0.314
+Employed workers,vacancy momentum (12m),-0.032
+Employed workers,employment momentum (3m),-0.269
+Employed workers,log wage,0.046
+Employed workers,unemployment rate,-0.005
+Employed workers,female share,0.025
+Employed workers,graduate share,0.035
+Employed workers,youth share (15-24),-0.016
+Employed workers,log population,0.065
+Employed workers,"training seats per 1,000 pop",0.053
+Job vacancies,log size (employed),0.013
+Job vacancies,vacancy rate (V/E),-0.23
+Job vacancies,seeker rate (S/E),-0.005
+Job vacancies,employment momentum (12m),-0.059
+Job vacancies,vacancy momentum (12m),-0.319
+Job vacancies,employment momentum (3m),-0.049
+Job vacancies,log wage,-0.013
+Job vacancies,unemployment rate,0.004
+Job vacancies,female share,0.017
+Job vacancies,graduate share,-0.007
+Job vacancies,youth share (15-24),-0.017
+Job vacancies,log population,0.03
+Job vacancies,"training seats per 1,000 pop",-0.015
+Registered seekers,log size (employed),-0.023
+Registered seekers,vacancy rate (V/E),-0.013
+Registered seekers,seeker rate (S/E),-0.192
+Registered seekers,employment momentum (12m),-0.063
+Registered seekers,vacancy momentum (12m),0.001
+Registered seekers,employment momentum (3m),-0.049
+Registered seekers,log wage,-0.001
+Registered seekers,unemployment rate,-0.235
+Registered seekers,female share,0.021
+Registered seekers,graduate share,-0.022
+Registered seekers,youth share (15-24),-0.014
+Registered seekers,log population,-0.016
+Registered seekers,"training seats per 1,000 pop",0.006

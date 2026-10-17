@@ -1,0 +1,51 @@
+column,role,unit,usable_as_model_input,in_monthly,in_quarterly,description
+Series_ID,key,id,N,True,True,District LGD code + sector code; one id per district x sector series
+Date,key,date,N,True,False,First day of the month
+Year,key,year,N,True,True,Calendar year
+Month,key,1-12,Y,True,False,Calendar month (monthly file only)
+Quarter,key,1-4,Y,True,True,Calendar quarter (quarterly file only)
+Quarter_ID,key,YYYY-Qn,N,True,False,Calendar quarter of the month (for aggregation)
+State_Name,key,text,categorical,True,True,State / UT name
+State_LGD_Code,key,text,N,True,True,"State LGD code (27, 33, 07, 19)"
+District_Name,key,text,categorical,True,True,District name
+District_LGD_Code,key,text,N,True,True,Official LGD district code (source in district_catalog.csv)
+Econ_Tier,covariate,category,categorical,True,True,District economic tier from the district catalog (static)
+Sector_Name,key,text,categorical,True,True,One of 5 target sectors
+Sector_Code,key,id,categorical,True,True,"Short sector code (MFG, CON, ITS, HLT, TXT)"
+District_Total_Population_Est,covariate,persons,Y,True,True,Census-2011 population projected at the district growth rate
+Male_Employed_Count,covariate,persons,Y,True,True,Employed males
+Female_Employed_Count,covariate,persons,Y,True,True,Employed females
+Transgender_Employed_Count,covariate,persons,Y,True,True,Employed transgender persons
+Male_Share_Pct,covariate,%,Y,True,True,Male share of employment
+Female_Share_Pct,covariate,%,Y,True,True,Female share of employment
+Transgender_Share_Pct,covariate,%,Y,True,True,Transgender share of employment
+Age_15_24_Count,covariate,persons,Y,True,True,Employed aged 15-24
+Age_25_54_Count,covariate,persons,Y,True,True,Employed aged 25-54
+Age_55_Plus_Count,covariate,persons,Y,True,True,Employed aged 55+
+Age_15_24_Pct,covariate,%,Y,True,True,Share aged 15-24
+Age_25_54_Pct,covariate,%,Y,True,True,Share aged 25-54
+Age_55_Plus_Pct,covariate,%,Y,True,True,Share aged 55+
+Edu_Below_Primary_Count,covariate,persons,Y,True,True,Employed with below-primary education
+Edu_Secondary_HigherSecondary_Count,covariate,persons,Y,True,True,Employed with secondary / higher secondary
+Qualification_Vocational_ITI_Certified_Count,covariate,persons,Y,True,True,Employed with vocational / ITI certification
+Edu_Graduate_and_Above_Count,covariate,persons,Y,True,True,Employed graduates and above
+Edu_Below_Primary_Pct,covariate,%,Y,True,True,Share with below-primary education
+Edu_Secondary_HigherSecondary_Pct,covariate,%,Y,True,True,Share with secondary / higher secondary
+Qualification_Vocational_ITI_Certified_Pct,covariate,%,Y,True,True,Share with vocational / ITI certification
+Edu_Graduate_and_Above_Pct,covariate,%,Y,True,True,Share graduate and above
+Active_Job_Vacancies,target,openings,Y,True,True,Open job vacancies (demand signal)
+Total_Employed_Workers,target,persons,Y,True,True,Employed stock in the sector (demand outlook)
+eShram_Registered_Seekers,target,persons,Y,True,True,Registered job-seeker / worker pool (supply proxy). Structural break at the Aug-2021 e-Shram launch
+Avg_Monthly_Wage_INR,covariate,INR / month,Y,True,True,Nominal average monthly wage
+Unemployment_Rate_Pct,covariate,%,Y,True,True,Sector unemployment rate (bounded 3.5-12)
+Training_Seats_Sanctioned,supply-capacity,seats / year,Y,True,True,"Annual sanctioned formal skilling seats (ITI, diploma, short-term NSQF centres) for the sector in the district; constant within a financial year"
+Trainees_Certified_Monthly,supply-capacity,persons / month,Y,True,False,Candidates certified in the month (training outturn)
+Is_Covid_Window,flag,bool,N,True,True,2020-03..2022-02. Known in advance of nothing: use only to mask training windows
+Is_Policy_Shock,flag,bool,N,True,True,"Demonetisation and GST windows; use to mask, not as a feature"
+Is_Eshram_Ramp,flag,bool,N,True,True,e-Shram registration ramp (data-driven window)
+Is_Simulated_Future,flag,bool,N,True,True,"Period after 2026-10 (simulated, not observed)"
+Anomaly_Flag,flag,bool,N,True,True,"DIAGNOSTIC ONLY: built from a centred window and full-sample scale, so using it as a feature would leak"
+Split_Role,flag,category,N,True,True,"train (<=2023-12) | validation (2024) | test (2025+, locked until Phase 8)"
+Quarter_Start,key,date,N,False,True,First day of the quarter (quarterly table only)
+Timestamp_Quarter,key,YYYY-Qn,N,False,True,Quarter identifier
+Trainees_Certified_Quarterly,supply-capacity,persons / quarter,Y,False,True,Candidates certified in the quarter (quarterly file only)

@@ -1,0 +1,16 @@
+target,sector,skew_level,skew_log_level,skew_12m_change,excess_kurtosis_12m_change,p01_12m_change_pct,p99_12m_change_pct
+Employed workers,Manufacturing,1.87,-0.79,0.35,0.1,-2.91,8.65
+Employed workers,Construction,1.9,-0.75,0.18,0.03,-1.88,9.58
+Employed workers,IT-ITeS,3.78,0.52,0.04,-0.21,-0.36,11.72
+Employed workers,Healthcare,1.88,-0.12,0.18,0.15,-0.91,10.01
+Employed workers,Textiles and Apparel,1.65,-0.91,0.26,0.31,-4.4,7.48
+Job vacancies,Manufacturing,1.75,-0.67,-0.0,-0.12,-24.47,30.85
+Job vacancies,Construction,2.42,-0.57,-0.04,-0.02,-24.61,31.75
+Job vacancies,IT-ITeS,4.38,0.48,-0.62,0.75,-45.93,34.55
+Job vacancies,Healthcare,2.12,-0.02,-0.04,0.23,-23.65,33.18
+Job vacancies,Textiles and Apparel,1.74,-0.96,0.06,-0.1,-25.66,26.11
+Registered seekers,Manufacturing,4.57,-0.45,-0.04,0.05,-19.98,27.93
+Registered seekers,Construction,4.39,0.07,0.02,-0.08,-16.62,26.47
+Registered seekers,IT-ITeS,4.11,0.6,0.01,-0.03,-16.58,31.71
+Registered seekers,Healthcare,3.66,0.13,-0.06,0.12,-17.34,30.01
+Registered seekers,Textiles and Apparel,4.19,-0.43,0.01,-0.06,-20.1,24.74

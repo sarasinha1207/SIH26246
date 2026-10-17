@@ -1,7 +1,7 @@
 # Phase 2 – Data Collection
 
-Status: **Complete pending your sign-off (Section 8).** The data has been regenerated, audited and documented.
-Re-run the audit any time: `python src/data_collection/validate_raw_data.py` (22 PASS · 3 WARN · 0 FAIL)
+Status: **Approved.** The data has been regenerated, audited and documented; sign-off recorded in Section 8.
+Re-run the audit any time: `python src/data_collection/validate_raw_data.py` (24 PASS · 2 WARN · 0 FAIL)
 
 ---
 
@@ -60,13 +60,12 @@ Checksums: `data/raw/DATA_MANIFEST.json`, verified on every audit run. Column de
 | I6 | Vacancies and seekers fixed ratios | District-level spread in coverage (std of log ≈ 0.26–0.41 per sector, C16) |
 | new | No training-capacity data | Seats and certified-trainee columns (C17, C18) |
 
-## 7. Audit results (25 checks: 22 PASS, 3 WARN, 0 FAIL)
-Full detail: `reports/phase2_raw_data_checks.json`. The three warnings are accepted or awaiting your decision:
+## 7. Audit results (26 checks: 24 PASS, 2 WARN, 0 FAIL)
+Full detail: `reports/phase2_raw_data_checks.json`. The two remaining warnings are accepted:
 | Check | Warning | Treatment |
 |---|---|---|
 | C10 | Nov–Dec 2026 lie after today (2026-10-18) | Accepted: the panel is a hypothetical full history |
 | C13b | IT-ITeS hub/periphery ratio is ~20×, above the 4–8× in the brief | Deliberate: real IT employment is far more concentrated. Say if you want 4–8× enforced instead |
-| C19 | Duplicate of the archived dataset still in repo root | Left in place: it is tracked in git, so deleting needs your OK (D6) |
 
 **Verification status of inputs:** all 56 LGD codes are verified against the LGD district export (Kolkata also against a West Bengal state list). Chengalpattu's population matches a published district profile; Kanchipuram's is derived from the undivided Census total. Sector index paths, tier shares, vacancy and informal-share rates and skilling-seat levels are stylised assumptions, not observed. See Section 2 of the methodology doc.
 
@@ -75,6 +74,7 @@ Full detail: `reports/phase2_raw_data_checks.json`. The three warnings are accep
 2. A start-up ramp in 2011: 36 seekers month-on-month jumps > 25% versus ~4 per year later. Fixed; new check C20.
 3. Count floors of 5/10/50 were binding on ~30 rows of the smallest series. Floors are now 1 and nothing sits on them (C15).
 4. Kolkata's LGD code and the Kanchipuram population were unverified; now verified / derived as above.
+5. Found during the Phase 3 review: the audit never tested the quarterly file's count identities. Check C07q now does (0 errors).
 
 ## 8. Decisions and sign-off
 | # | Decision | Status |
@@ -82,19 +82,19 @@ Full detail: `reports/phase2_raw_data_checks.json`. The three warnings are accep
 | D1 | Synthetic panel is the project's only dataset | Applied |
 | D2 | Regenerate with fixes | Done |
 | D3 | NCO anchor + crosswalk list | Done |
-| D4 | Disparity | Manufacturing 4–8× met; IT-ITeS ~20× by design – **confirm** |
-| D5 | Months after today kept as hypothetical history | Applied – **confirm** |
-| D6 | Delete root-level duplicate of the archived dataset | **Not done – your call** |
+| D4 | Disparity | Manufacturing 4–8× met; IT-ITeS ~20× kept by design – **approved** |
+| D5 | Months after today kept as hypothetical history | **Approved** |
+| D6 | Delete root-level duplicate of the archived dataset | **Done** (verified byte-identical to the archived copy first; C19 now PASS) |
 
-**Impact on Phase 1 (for your decision, nothing changed yet):**
+**Impact on Phase 1 (deferred to Phase 8 by your decision; nothing changed):**
 1. Supply was defined as e-Shram seekers because no capacity data existed. The panel now has seats and certified trainees; Phase 1 could be amended so supply = seekers + training outturn.
 2. The Phase 1 accuracy thresholds (e.g. vacancies WAPE ≤ 7%) were set from the v1 noise floor. A quick check of the provisional prototype on v2 gave vacancies WAPE ≈ 9.0% and employed ≈ 1.6%, so the vacancy threshold may need revisiting in Phase 8. v2 vacancies have real dynamics rather than i.i.d. noise.
 
-Sign-off checklist:
-- [ ] v2 panel accepted as the project dataset (D1–D3)
-- [ ] IT-ITeS disparity kept above 4–8× (D4)
-- [ ] Months after today kept (D5)
-- [ ] Root-level duplicate removal decided (D6)
-- [ ] Phase 1 amendments (supply definition, thresholds) – amend now or defer to Phase 8
+Sign-off (approved):
+- [x] v2 panel accepted as the project dataset (D1–D3)
+- [x] IT-ITeS disparity kept above 4–8× (D4)
+- [x] Months after today kept (D5)
+- [x] Root-level duplicate removed (D6)
+- [x] Phase 1 amendments (supply definition, accuracy thresholds) deferred to Phase 8
 
-Phase 3 (Data Cleaning & Preprocessing) starts only after sign-off.
+Phase 3 (Data Cleaning & Preprocessing) has started.

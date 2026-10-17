@@ -201,6 +201,16 @@ def main():
     worst = max(float((s - 100).abs().max()) for s in shares)
     c.add("C07", "share columns sum to 100%", "PASS" if worst <= 0.05 else "FAIL", f"max deviation = {worst:.3f} pp")
 
+    eq = q.Total_Employed_Workers
+    q_err = int(max((q[cols].sum(axis=1) - eq).abs().max() for cols in (
+        ["Male_Employed_Count", "Female_Employed_Count", "Transgender_Employed_Count"],
+        ["Age_15_24_Count", "Age_25_54_Count", "Age_55_Plus_Count"],
+        ["Edu_Below_Primary_Count", "Edu_Secondary_HigherSecondary_Count", "Qualification_Vocational_ITI_Certified_Count",
+         "Edu_Graduate_and_Above_Count"])))
+    q_dev = float((q[["Male_Share_Pct", "Female_Share_Pct", "Transgender_Share_Pct"]].sum(axis=1) - 100).abs().max())
+    c.add("C07q", "quarterly counts sum to total and shares to 100%", "PASS" if q_err == 0 and q_dev <= 0.05 else "FAIL",
+          f"max count error = {q_err}; max share deviation = {q_dev:.3f} pp")
+
     num = m.select_dtypes("number").drop(columns=["Year", "Month"])
     c.add("C08", "no negative values; unemployment within 3.5-12%",
           "PASS" if (num >= 0).all().all() and m.Unemployment_Rate_Pct.between(3.5, 12).all() else "FAIL",
