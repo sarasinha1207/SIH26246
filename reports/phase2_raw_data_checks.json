@@ -1,0 +1,112 @@
+{
+  "as_of": "2026-10-18",
+  "summary": {
+    "PASS": 12,
+    "WARN": 4,
+    "FAIL": 1
+  },
+  "checks": [
+    {
+      "id": "C00",
+      "check": "raw files match recorded checksums",
+      "status": "PASS",
+      "detail": "all 3 files unchanged since manifest"
+    },
+    {
+      "id": "C01-m",
+      "check": "monthly shape",
+      "status": "PASS",
+      "detail": "(53760, 39) (expected (53760, 39))"
+    },
+    {
+      "id": "C02-m",
+      "check": "monthly nulls",
+      "status": "PASS",
+      "detail": "0 null cells"
+    },
+    {
+      "id": "C03-m",
+      "check": "monthly unique keys + complete grid",
+      "status": "PASS",
+      "detail": "0 duplicate keys; 280 series, each 192-192 periods (expected 192)"
+    },
+    {
+      "id": "C01-q",
+      "check": "quarterly shape",
+      "status": "PASS",
+      "detail": "(17920, 38) (expected (17920, 38))"
+    },
+    {
+      "id": "C02-q",
+      "check": "quarterly nulls",
+      "status": "PASS",
+      "detail": "0 null cells"
+    },
+    {
+      "id": "C03-q",
+      "check": "quarterly unique keys + complete grid",
+      "status": "PASS",
+      "detail": "0 duplicate keys; 280 series, each 64-64 periods (expected 64)"
+    },
+    {
+      "id": "C04",
+      "check": "geography / sector inventory",
+      "status": "PASS",
+      "detail": "56 districts, 4 states, 5 sectors"
+    },
+    {
+      "id": "C05",
+      "check": "district LGD codes unique and numeric",
+      "status": "WARN",
+      "detail": "unique=True; non-numeric: {'Nandurbar': '497A'}"
+    },
+    {
+      "id": "C06",
+      "check": "gender / age / education counts sum to total",
+      "status": "PASS",
+      "detail": "max abs error = 0"
+    },
+    {
+      "id": "C07",
+      "check": "share columns sum to 100%",
+      "status": "PASS",
+      "detail": "max deviation = 0.010 pp"
+    },
+    {
+      "id": "C08",
+      "check": "no negative values; unemployment within 3.5-12%",
+      "status": "PASS",
+      "detail": "min value 0.00; UR range 3.5-12.0"
+    },
+    {
+      "id": "C09",
+      "check": "quarterly file reconciles with monthly means",
+      "status": "PASS",
+      "detail": "max abs difference = 0.667"
+    },
+    {
+      "id": "C10",
+      "check": "history does not extend beyond today",
+      "status": "WARN",
+      "detail": "data ends 2026-12; 2 month(s) lie after 2026-10-18 (simulated, not observed)"
+    },
+    {
+      "id": "C11",
+      "check": "sector NCO codes exist in NCO-2015 workbook",
+      "status": "FAIL",
+      "detail": "3/5 found; not in NCO-2015: {'Manufacturing': '8110', 'Textiles and Apparel': '8261'}"
+    },
+    {
+      "id": "C12",
+      "check": "employment-rate cap not binding",
+      "status": "WARN",
+      "detail": "25.0% of rows sit at the 42% generator cap; by sector: {'Construction': 0.151, 'Healthcare': 0.036, 'IT-ITeS': 0.31, 'Manufacturing': 0.641, 'Textiles and Apparel': 0.113}"
+    },
+    {
+      "id": "C13",
+      "check": "legacy dataset kept out of the pipeline",
+      "status": "WARN",
+      "detail": "lmis_employment_monthly_2016_2025.csv still in repo root (identical to Archived copy); not read by any script"
+    }
+  ]
+}

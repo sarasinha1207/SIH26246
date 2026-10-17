@@ -6,8 +6,9 @@ Trains a global, direct multi-horizon LightGBM forecaster on the 2011-2026 distr
 (`lmis_district_monthly_2011_2026.csv`) and turns the forecasts into a ranked demand-supply gap table with
 early-warning flags.
 
-Inputs  : lmis_district_monthly_2011_2026.csv   (the ONLY dataset used; nothing under Archived/ is read)
-Outputs : model_outputs/  (metrics, forecasts, gap ranking, feature importance, saved models)
+Inputs  : data/raw/lmis_district_monthly_2011_2026.csv  (the ONLY dataset used; nothing under Archived/ is read)
+Outputs : outputs/provisional/ and models/provisional/  (metrics, forecasts, gap ranking, saved models)
+Status  : PROVISIONAL - built ahead of Phases 2-4; to be redone once those phases are signed off.
 
 Targets (each forecast 1..12 months ahead, per district x sector):
     Total_Employed_Workers      -> employment / demand outlook
@@ -18,7 +19,7 @@ Pipeline
     A. early-stopping fold   train targets <= 2023-12, validate 2024-01..2024-12
     B. honest test fold      refit on targets <= 2024-12, test origins 2024-12..2026-11 (targets <= 2026-12)
     C. final model           refit on everything, forecast 2027-01..2027-12 from origin 2026-12
-Run:  python lmis_forecast_model.py
+Run:  python src/modeling/lmis_forecast_model.py
 """
 import json
 import os
@@ -31,10 +32,10 @@ import pandas as pd
 
 warnings.filterwarnings("ignore", category=UserWarning)
 
-ROOT = Path(__file__).resolve().parent
-DATA = ROOT / "lmis_district_monthly_2011_2026.csv"
-OUT = ROOT / "model_outputs"
-MODEL_DIR = OUT / "models"
+ROOT = Path(__file__).resolve().parents[2]
+DATA = ROOT / "data" / "raw" / "lmis_district_monthly_2011_2026.csv"
+OUT = ROOT / "outputs" / "provisional"
+MODEL_DIR = ROOT / "models" / "provisional"
 
 HORIZONS = list(range(1, 13))
 TARGETS = {

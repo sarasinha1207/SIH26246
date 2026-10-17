@@ -1,6 +1,8 @@
-# LMIS Forecasting Model – Method, Results, Limitations
+# LMIS Forecasting Model – Method, Results, Limitations (PROVISIONAL)
 
-Script: `lmis_forecast_model.py` (about 30 s to run). Data: `lmis_district_monthly_2011_2026.csv` only. Nothing under `Archived/` is read, and the script asserts this.
+> **Provisional:** built before Phases 2–4 were signed off. Treat results as a prototype; they will be regenerated once the earlier phases are complete.
+
+Script: `src/modeling/lmis_forecast_model.py` (about 30 s to run). Data: `data/raw/lmis_district_monthly_2011_2026.csv` only. Nothing under `Archived/` is read, and the script asserts this.
 
 ## What it does
 A global LightGBM model forecasts, for each of 280 district × sector series, three quantities 1–12 months ahead:
@@ -36,13 +38,13 @@ A global LightGBM model forecasts, for each of 280 district × sector series, th
 * The 90% intervals cover 91.3% (employed), 90.5% (vacancies) and 91.9% (seekers) on the held-out fold.
 * Vacancies and seekers are simulated with i.i.d. noise of about 6% and 5% (see the generator). That puts the irreducible WAPE near 4–5%. The model is at the noise floor, so a lower number should not be expected from it.
 
-## Outputs (`model_outputs/`)
+## Outputs (`outputs/provisional/`, models in `models/provisional/`)
 | File | Content |
 |---|---|
 | `forecast_2027_monthly.csv` / `_quarterly.csv` | point forecasts + P05/P95 for the three targets, net gap, coverage |
 | `gap_ranking_2027.csv` | per district × sector: net gap (persons), coverage (openings per registered seeker), status flag, trend flag, surplus/shortage ranks (overall and in-sector) |
 | `backtest_metrics.csv`, `interval_coverage.csv`, `feature_importance.csv`, `model_metadata.json` | evaluation and audit trail |
-| `models/lgbm_*.txt` | saved LightGBM boosters |
+| `models/provisional/lgbm_*.txt` | saved LightGBM boosters |
 
 Flag thresholds (`COVERAGE_*`, `TREND_ALERT` at the top of the script) are placeholders: Acute Shortage if coverage ≥ 1.0, Oversupply Watch below 0.20, Saturation Risk below 0.10, and a trend alert at ±8% change.
 

@@ -21,7 +21,7 @@ from scipy import stats
 # Set deterministic random seed for strict empirical reproducibility
 np.random.seed(42)
 
-OUTPUT_DIR = r"e:\LMIS Data"
+OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "data", "raw")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 MONTHLY_CSV = os.path.join(OUTPUT_DIR, "lmis_district_monthly_2011_2026.csv")
