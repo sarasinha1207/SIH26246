@@ -1,0 +1,7 @@
+event,flag_if_percentile_within,precision,recall
+saturation,10,0.743,0.743
+saturation,20,0.506,0.928
+saturation,30,0.347,0.984
+shortage,10,0.731,0.731
+shortage,20,0.493,0.903
+shortage,30,0.34,0.963

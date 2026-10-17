@@ -1,0 +1,71 @@
+{
+  "typical_share_range": [
+    0.393,
+    0.393
+  ],
+  "mean_share": {
+    "Tightest decile": 0.107,
+    "Tight": 0.196,
+    "Typical": 0.393,
+    "Loose": 0.196,
+    "Loosest decile": 0.107
+  },
+  "max_single_class_share": 0.393,
+  "sector_years_with_4plus_classes": 70,
+  "sector_years": 70,
+  "pct_rank_persistence_12m": 0.898,
+  "forward_value": [
+    {
+      "event": "in the saturation decile 12 months later",
+      "n": 22960,
+      "base_rate": 0.107,
+      "auc_current_percentile": 0.97,
+      "auc_trailing_trend_among_not_yet_extreme": 0.445
+    },
+    {
+      "event": "in the shortage decile 12 months later",
+      "n": 22960,
+      "base_rate": 0.107,
+      "auc_current_percentile": 0.963,
+      "auc_trailing_trend_among_not_yet_extreme": 0.471
+    }
+  ],
+  "persistence_benchmark": [
+    {
+      "event": "saturation",
+      "flag_if_percentile_within": 10,
+      "precision": 0.743,
+      "recall": 0.743
+    },
+    {
+      "event": "saturation",
+      "flag_if_percentile_within": 20,
+      "precision": 0.506,
+      "recall": 0.928
+    },
+    {
+      "event": "saturation",
+      "flag_if_percentile_within": 30,
+      "precision": 0.347,
+      "recall": 0.984
+    },
+    {
+      "event": "shortage",
+      "flag_if_percentile_within": 10,
+      "precision": 0.731,
+      "recall": 0.731
+    },
+    {
+      "event": "shortage",
+      "flag_if_percentile_within": 20,
+      "precision": 0.493,
+      "recall": 0.903
+    },
+    {
+      "event": "shortage",
+      "flag_if_percentile_within": 30,
+      "precision": 0.34,
+      "recall": 0.963
+    }
+  ]
+}

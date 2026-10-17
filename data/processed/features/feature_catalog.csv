@@ -1,0 +1,86 @@
+feature,family,series,description,excluded_time_proxy,known_at_origin,horizon_specific,selected_E,selected_V,selected_S
+E_dev0_3,level_dev,E,log employed workers minus its 3-month mean (a noise proxy),False,yes,False,True,False,True
+E_dev0_12,level_dev,E,log employed workers minus its 12-month mean,False,yes,False,True,False,True
+E_dev3_12,level_dev,E,3-month mean minus 12-month mean of log employed workers,False,yes,False,True,False,True
+E_dev6_12,level_dev,E,6-month mean minus 12-month mean of log employed workers,False,yes,False,True,False,True
+E_mom1,momentum,E,log change of employed workers over the last 1 month(s),False,yes,False,True,False,True
+E_mom3,momentum,E,log change of employed workers over the last 3 month(s),False,yes,False,True,False,True
+E_mom6,momentum,E,log change of employed workers over the last 6 month(s),False,yes,False,True,False,True
+E_mom12,momentum,E,log change of employed workers over the last 12 month(s),False,yes,False,True,False,True
+E_mom36,momentum,E,log change of employed workers over the last 36 month(s),False,yes,False,True,False,True
+E_vol12,volatility,E,std of month-on-month log change of employed workers over 12 months,False,yes,False,True,False,True
+V_dev0_3,level_dev,V,log job vacancies minus its 3-month mean (a noise proxy),False,yes,False,False,True,True
+V_dev0_12,level_dev,V,log job vacancies minus its 12-month mean,False,yes,False,False,True,True
+V_dev3_12,level_dev,V,3-month mean minus 12-month mean of log job vacancies,False,yes,False,False,True,True
+V_dev6_12,level_dev,V,6-month mean minus 12-month mean of log job vacancies,False,yes,False,False,True,True
+V_mom1,momentum,V,log change of job vacancies over the last 1 month(s),False,yes,False,False,True,True
+V_mom3,momentum,V,log change of job vacancies over the last 3 month(s),False,yes,False,False,True,True
+V_mom6,momentum,V,log change of job vacancies over the last 6 month(s),False,yes,False,False,True,True
+V_mom12,momentum,V,log change of job vacancies over the last 12 month(s),False,yes,False,False,True,True
+V_mom36,momentum,V,log change of job vacancies over the last 36 month(s),False,yes,False,False,True,True
+V_vol12,volatility,V,std of month-on-month log change of job vacancies over 12 months,False,yes,False,False,False,True
+S_dev0_3,level_dev,S,log registered seekers minus its 3-month mean (a noise proxy),False,yes,False,False,False,True
+S_dev0_12,level_dev,S,log registered seekers minus its 12-month mean,False,yes,False,False,False,True
+S_dev3_12,level_dev,S,3-month mean minus 12-month mean of log registered seekers,False,yes,False,False,False,True
+S_dev6_12,level_dev,S,6-month mean minus 12-month mean of log registered seekers,False,yes,False,False,False,True
+S_mom1,momentum,S,log change of registered seekers over the last 1 month(s),False,yes,False,False,False,True
+S_mom3,momentum,S,log change of registered seekers over the last 3 month(s),False,yes,False,False,False,True
+S_mom6,momentum,S,log change of registered seekers over the last 6 month(s),False,yes,False,False,False,True
+S_mom12,momentum,S,log change of registered seekers over the last 12 month(s),False,yes,False,False,False,True
+S_mom36,momentum,S,log change of registered seekers over the last 36 month(s),False,yes,False,False,False,True
+S_vol12,volatility,S,std of month-on-month log change of registered seekers over 12 months,False,yes,False,False,False,False
+vac_rate,cross_rates,,log(vacancies / employed),False,yes,False,False,False,True
+vac_rate_dev12,cross_rates,,log(vacancies / employed) minus its 12-month mean,False,yes,False,False,False,True
+vac_rate_mom12,cross_rates,,12-month change in log(vacancies / employed),False,yes,False,False,False,True
+seek_rate,cross_rates,,log(seekers / employed) (EXCLUDED level: trends with the e-Shram registry),True,yes,False,False,False,False
+seek_rate_dev12,cross_rates,,log(seekers / employed) (EXCLUDED level: trends with the e-Shram registry) minus its 12-month mean,False,yes,False,False,False,True
+seek_rate_mom12,cross_rates,,12-month change in log(seekers / employed) (EXCLUDED level: trends with the e-Shram registry),False,yes,False,False,False,True
+coverage,cross_rates,,log(vacancies / seekers) (EXCLUDED level: trends with the e-Shram registry),True,yes,False,False,False,False
+coverage_dev12,cross_rates,,log(vacancies / seekers) (EXCLUDED level: trends with the e-Shram registry) minus its 12-month mean,False,yes,False,False,False,True
+coverage_mom12,cross_rates,,12-month change in log(vacancies / seekers) (EXCLUDED level: trends with the e-Shram registry),False,yes,False,False,False,True
+ur,unemployment,,unemployment rate (%),False,yes,False,False,False,True
+ur_chg3,unemployment,,change in unemployment rate over 3 months,False,yes,False,False,False,True
+ur_chg12,unemployment,,change in unemployment rate over 12 months,False,yes,False,False,False,True
+sec_E_mom3,sector_aggregates,E,3-month log change of sector-wide employed workers (all districts),False,yes,False,True,True,True
+sec_E_mom12,sector_aggregates,E,12-month log change of sector-wide employed workers (all districts),False,yes,False,True,True,False
+sec_E_dev12,sector_aggregates,E,log sector-wide employed workers minus its 12-month mean,False,yes,False,True,True,False
+sec_V_mom3,sector_aggregates,V,3-month log change of sector-wide job vacancies (all districts),False,yes,False,True,True,True
+sec_V_mom12,sector_aggregates,V,12-month log change of sector-wide job vacancies (all districts),False,yes,False,True,True,True
+sec_V_dev12,sector_aggregates,V,log sector-wide job vacancies minus its 12-month mean,False,yes,False,True,True,True
+sec_S_mom3,sector_aggregates,S,3-month log change of sector-wide registered seekers (all districts),False,yes,False,True,True,True
+sec_S_mom12,sector_aggregates,S,12-month log change of sector-wide registered seekers (all districts),False,yes,False,True,True,True
+sec_S_dev12,sector_aggregates,S,log sector-wide registered seekers minus its 12-month mean,False,yes,False,True,True,True
+log_pop,size_context,,log district population (EXCLUDED: calendar-time proxy),True,yes,False,False,False,False
+wage_log,wages,,log average monthly wage (EXCLUDED: calendar-time proxy),True,yes,False,False,False,False
+wage_rel,wages,,log wage minus the sector mean across districts,False,yes,False,False,False,False
+rel_size_E,size_context,,log employed workers minus the sector mean across districts,False,yes,False,False,False,False
+seats_per_kpop,training,,"log sanctioned training seats per 1,000 residents (EXCLUDED: calendar-time proxy)",True,yes,False,False,False,False
+seats_rel,training,,"seats per 1,000 residents (log) minus the sector mean across districts",False,yes,False,False,False,True
+female_rel,demographics,,female share of employment minus the sector mean across districts (pp),False,yes,False,False,False,True
+cert_to_vac,training,,"log(1 + certified trainees, last 12 months) minus log vacancies",False,yes,False,False,False,True
+female_pct,demographics,,female share of employment (%) (EXCLUDED: calendar-time proxy),True,yes,False,False,False,False
+grad_pct,demographics,,graduate share of employment (%),False,yes,False,False,False,True
+youth_pct,demographics,,share aged 15-24 (%),False,yes,False,False,False,True
+post_covid,regime,,1 from 2022-03 onwards (EXCLUDED: calendar regime flag),True,yes,False,False,False,False
+eshram_progress,regime,,"0 before 2021-08, rising linearly to 1 by 2023-02 (EXCLUDED: calendar regime flag)",True,yes,False,False,False,False
+E_sf_origin,seasonal_profile,E,"seasonal factor of the origin month for employed workers (expanding, shock-free)",False,yes,False,True,True,True
+V_sf_origin,seasonal_profile,V,"seasonal factor of the origin month for job vacancies (expanding, shock-free)",False,yes,False,True,True,True
+S_sf_origin,seasonal_profile,S,"seasonal factor of the origin month for registered seekers (expanding, shock-free)",False,yes,False,True,True,True
+E_ya_h,seasonal_anchor,E,log employed workers in the same month last year (t+h-12) minus now,False,yes,True,True,True,True
+E_yadrift_h,seasonal_anchor,E,log employed workers change from t-12 to t+h-12 (last year's growth over the same span),False,yes,True,True,True,True
+E_sf_shift,seasonal_profile,E,seasonal factor of the target month minus the origin month for employed workers,False,yes,True,True,True,True
+V_ya_h,seasonal_anchor,V,log job vacancies in the same month last year (t+h-12) minus now,False,yes,True,True,False,True
+V_yadrift_h,seasonal_anchor,V,log job vacancies change from t-12 to t+h-12 (last year's growth over the same span),False,yes,True,True,False,True
+V_sf_shift,seasonal_profile,V,seasonal factor of the target month minus the origin month for job vacancies,False,yes,True,True,True,True
+S_ya_h,seasonal_anchor,S,log registered seekers in the same month last year (t+h-12) minus now,False,yes,True,True,True,True
+S_yadrift_h,seasonal_anchor,S,log registered seekers change from t-12 to t+h-12 (last year's growth over the same span),False,yes,True,True,True,True
+S_sf_shift,seasonal_profile,S,seasonal factor of the target month minus the origin month for registered seekers,False,yes,True,True,True,True
+horizon,core_horizon,,forecast horizon in months,False,yes,True,True,True,True
+origin_month,calendar,,calendar month of the forecast origin,False,yes,False,True,False,True
+target_month,calendar,,calendar month being forecast,False,yes (target month is calendar-only),True,True,False,True
+target_month_sin,calendar,,sine of the target calendar month,False,yes (target month is calendar-only),True,True,False,True
+target_month_cos,calendar,,cosine of the target calendar month,False,yes (target month is calendar-only),True,True,False,True
+cat_sector,identity,,sector,False,yes,False,False,False,False
+cat_tier,identity,,district economic tier,False,yes,False,False,False,False
+cat_state,identity,,state,False,yes,False,False,False,False
+cat_district,identity,,district,False,yes,False,False,False,False

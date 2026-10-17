@@ -1,0 +1,21 @@
+sector,year,share_over_allocated,share_under_allocated,median
+Construction,2012,0.162,0.073,0.142
+Construction,2016,0.121,0.082,0.098
+Construction,2019,0.198,0.083,0.132
+Construction,2024,0.19,0.074,0.166
+Healthcare,2012,0.18,0.076,0.015
+Healthcare,2016,0.17,0.061,0.023
+Healthcare,2019,0.185,0.097,0.079
+Healthcare,2024,0.196,0.085,0.021
+IT-ITeS,2012,0.472,0.04,0.44
+IT-ITeS,2016,0.485,0.028,0.487
+IT-ITeS,2019,0.487,0.021,0.448
+IT-ITeS,2024,0.455,0.033,0.423
+Manufacturing,2012,0.305,0.098,0.163
+Manufacturing,2016,0.333,0.104,0.169
+Manufacturing,2019,0.345,0.125,0.275
+Manufacturing,2024,0.321,0.095,0.178
+Textiles and Apparel,2012,0.167,0.094,0.083
+Textiles and Apparel,2016,0.22,0.088,0.119
+Textiles and Apparel,2019,0.205,0.077,0.12
+Textiles and Apparel,2024,0.192,0.076,0.067

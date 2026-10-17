@@ -1,0 +1,3 @@
+event,n,base_rate,auc_current_percentile,auc_trailing_trend_among_not_yet_extreme
+in the saturation decile 12 months later,22960,0.107,0.97,0.445
+in the shortage decile 12 months later,22960,0.107,0.963,0.471

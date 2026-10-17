@@ -1,6 +1,6 @@
 # Phase 4 – Exploratory Data Analysis
 
-Status: **Complete pending your sign-off (Section 8).**
+Status: **Approved** (sign-off in Section 8).
 Reproduce: `python src/eda/run_eda.py` (about 1 minute), then `python tests/test_eda_outputs.py`.
 Outputs: `reports/eda/figures/` (17 charts), `reports/eda/tables/` (22 CSV tables, the table view of every chart), `reports/eda/eda_findings.json`.
 
@@ -147,8 +147,8 @@ Stationarity used a small ADF implementation (`src/eda/stat_tests.py`, no statsm
 | D7 | Treat the Phase 1 coverage thresholds as placeholders and design relative early-warning flags in Phases 5 and 8 | Yes |
 | D8 | Use shares and ratios, not demographic counts, and drop redundant columns from the feature set | Yes |
 
-Sign-off checklist:
-- [ ] Findings F1–F19 and their limits (Section 6, 7) accepted
-- [ ] Decisions D1–D8 accepted
+Sign-off (approved by the project owner):
+- [x] Findings F1–F19 and their limits (Section 6, 7) accepted
+- [x] Decisions D1–D8 accepted
 
-Phase 5 (Feature Engineering & Selection) starts only after sign-off.
+Phase 5 (Feature Engineering & Selection) has started. It builds every feature from data available at the forecast origin only and selects features using train and validation periods only.

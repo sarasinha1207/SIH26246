@@ -1,0 +1,19 @@
+[     1s] examples (141680, 101); features 83; folds ['F1_2018', 'F2_2019', 'F3_2024']
+[    22s] A done for E
+[    42s] A done for V
+[    63s] A done for S
+[    63s] best base: {'E': 'last', 'V': 'last', 'S': 'sm6'}
+[    90s] B done for E
+[   115s] B done for V
+[   140s] B done for S
+[   140s] policy: {'E': {'mask_shocks': True, 'halflife': 0}, 'V': {'mask_shocks': True, 'halflife': 0}, 'S': {'mask_shocks': False, 'halflife': 0}}
+[   296s] C done for E
+[   448s] C done for V
+[   672s] C done for S
+[   672s] D E: 71 features in 18 groups, 0 pruned -> 71
+[   673s] D V: 60 features in 14 groups, 0 pruned -> 60
+[   674s] D S: 79 features in 19 groups, 2 pruned -> 77
+[   705s] E/F done for E
+[   730s] E/F done for V
+[   770s] E/F done for S
+[   770s] finished

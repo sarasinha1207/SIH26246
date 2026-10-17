@@ -1,0 +1,13 @@
+target,rows_train,train_rows_with_post_covid,feature_set,wape,h1,h3,h6,h12
+E,49280.0,5600.0,,,,,,
+E,,,final,1.209,1.022,1.219,1.424,1.827
+E,,,final + post_covid,1.214,1.016,1.225,1.455,1.764
+E,,,final + post_covid + eshram_progress,1.222,1.018,1.238,1.479,1.672
+V,128240.0,18480.0,,,,,,
+V,,,final,7.118,5.555,7.383,9.183,8.773
+V,,,final + post_covid,6.915,5.343,7.211,8.844,9.289
+V,,,final + post_covid + eshram_progress,7.228,5.604,7.488,9.39,8.989
+S,128240.0,18480.0,,,,,,
+S,,,final,4.846,3.996,4.693,5.846,9.391
+S,,,final + post_covid,4.959,4.013,4.821,5.945,10.545
+S,,,final + post_covid + eshram_progress,4.835,3.97,4.716,5.668,10.346

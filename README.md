@@ -10,8 +10,8 @@ Phases are completed strictly in order. A phase is closed only after its sign-of
 | 1 | Problem Definition | **Approved** | [docs/phases/PHASE_1_PROBLEM_DEFINITION.md](docs/phases/PHASE_1_PROBLEM_DEFINITION.md) |
 | 2 | Data Collection | **Approved** | [docs/phases/PHASE_2_DATA_COLLECTION.md](docs/phases/PHASE_2_DATA_COLLECTION.md) |
 | 3 | Data Cleaning & Preprocessing | **Approved** | [docs/phases/PHASE_3_DATA_CLEANING.md](docs/phases/PHASE_3_DATA_CLEANING.md) |
-| 4 | Exploratory Data Analysis | **Complete – awaiting sign-off** | [docs/phases/PHASE_4_EDA.md](docs/phases/PHASE_4_EDA.md) |
-| 5 | Feature Engineering & Selection | Provisional prototype only | |
+| 4 | Exploratory Data Analysis | **Approved** | [docs/phases/PHASE_4_EDA.md](docs/phases/PHASE_4_EDA.md) |
+| 5 | Feature Engineering & Selection | **Complete – awaiting sign-off** | [docs/phases/PHASE_5_FEATURE_ENGINEERING.md](docs/phases/PHASE_5_FEATURE_ENGINEERING.md) |
 | 6 | Model Selection | Provisional prototype only | |
 | 7 | Model Training | Provisional prototype only | |
 | 8 | Evaluation & Tuning | Provisional prototype only | |
@@ -39,6 +39,7 @@ LMIS Data/
 │   ├── preprocessing/       Phase 3 cleaning pipeline
 │   ├── common/              guarded data access (test period locked until Phase 8)
 │   ├── eda/                 Phase 4 exploratory analysis (train + validation only)
+│   ├── features/            Phase 5 feature engineering, selection and the training-data interface
 │   └── modeling/            provisional forecasting prototype
 ├── models/provisional/      saved prototype models
 ├── outputs/provisional/     prototype forecasts, metrics, gap rankings
@@ -50,6 +51,7 @@ LMIS Data/
 ## Data rules
 * The only modelling dataset is `data/raw/lmis_district_monthly_2011_2026.csv` (quarterly file for roll-ups). It is **synthetic**; see `docs/reference/DATA_SOURCES_AND_METHODOLOGY.md`.
 * Nothing under `Archived/` or `data/superseded/` may be used. The duplicate of the archived dataset that sat in the repo root was removed in Phase 2.
+* The test period (2025–2026) is locked behind `load_panel`. It is not pristine: the provisional prototype scored it once before the lock existed; see `docs/phases/PHASE_5_FEATURE_ENGINEERING.md`, Section 9.
 * Raw files are never edited. `python src/data_collection/validate_raw_data.py` verifies them against the checksums in `data/raw/DATA_MANIFEST.json` and runs the acceptance checks.
 
 ## Run
@@ -61,5 +63,8 @@ python src/preprocessing/clean_panel.py                         # Phase 3 cleani
 python tests/test_processed_panel.py                            # Phase 3 acceptance tests
 python src/eda/run_eda.py                                       # Phase 4 EDA (figures + tables in reports/eda)
 python tests/test_eda_outputs.py                                # Phase 4 tests
+python src/features/select_features.py                          # Phase 5 selection (~20 min)
+python src/features/design_flags.py                             # Phase 5 relative early-warning flags
+python tests/test_features.py                                   # Phase 5 tests (leak-safety etc.)
 python src/modeling/lmis_forecast_model.py                      # provisional prototype
 ```

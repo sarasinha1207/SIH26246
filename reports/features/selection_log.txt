@@ -1,0 +1,21 @@
+[     1s] examples (141680, 103); features 77; folds ['F1_2018', 'F2_2019', 'F3_2024']
+[    54s] time proxies excluded: ['coverage', 'eshram_progress', 'female_pct', 'log_pop', 'post_covid', 'seats_per_kpop', 'seek_rate', 'wage_log']; seed noise rel std 0.0077 -> group threshold 0.0153
+[    71s] A done for E
+[    88s] A done for V
+[   104s] A done for S
+[   104s] best base: {'E': 'last', 'V': 'sm3', 'S': 'sm6'}
+[   129s] B done for E
+[   152s] B done for V
+[   176s] B done for S
+[   176s] policy: {'E': {'mask_shocks': True, 'halflife': 0}, 'V': {'mask_shocks': False, 'halflife': 0}, 'S': {'mask_shocks': False, 'halflife': 0}}
+[   316s] C done for E
+[   512s] C done for V
+[   778s] C done for S
+[   810s] D E: 36 features in 10 groups, 0 pruned -> 36
+[   838s] D V: 29 features in 7 groups, 0 pruned -> 29
+[  1012s] backward pass S: removed group identity (-2.575%)
+[  1142s] D S: 70 features in 16 groups, 2 pruned -> 68
+[  1164s] E/F done for E
+[  1190s] E/F done for V
+[  1228s] E/F done for S
+[  1228s] finished
