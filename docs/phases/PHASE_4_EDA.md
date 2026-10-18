@@ -117,7 +117,7 @@ All charts use the validated reference palette in fixed sector order (blue, oran
 | F14 redundancy | Use shares and ratios, not demographic counts; keep one of male/female; expect wage and demographic features to drop out |
 | F18 thresholds | Redesign the early-warning flags: coverage relative to the series' own history or percentile within sector-year, plus trend and a supply-capacity term (D7) |
 | F19 equity | Report accuracy by tier with district counts; do not apply the 1.5× rule to tiers of one or two districts without comment |
-| Prototype comparison | The provisional LightGBM scored vacancy WAPE ≈ 9.0%, about the same as the last-value baseline over the same horizons. Treat it as not yet adding value on vacancies |
+| Prototype | The provisional prototype is not used as evidence: it scored the locked 2025–26 period and has been quarantined (Phase 5, Section 9) |
 
 ## 5. Data-quality items found
 No new defects. Items to keep in view: IT-ITeS vacancies and the e-Shram break distort any pooled metric; 4 low-volume series (`dim_series.csv`) have single-digit vacancies; the test period starts in a different growth regime from the training years (F2).

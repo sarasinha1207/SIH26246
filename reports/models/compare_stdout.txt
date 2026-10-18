@@ -1,0 +1,79 @@
+[     0s] E F1_2018 ridge done (0.1s)
+[     2s] E F1_2018 lightgbm_per_horizon done (2.1s)
+C:\Users\saras\AppData\Roaming\Python\Python313\site-packages\joblib\externals\loky\backend\context.py:136: UserWarning: Could not find the number of physical cores for the following reason:
+[WinError 2] The system cannot find the file specified
+Returning the number of logical cores instead. You can silence this warning by setting LOKY_MAX_CPU_COUNT to the number of cores you want to use.
+  warnings.warn(
+  File "C:\Users\saras\AppData\Roaming\Python\Python313\site-packages\joblib\externals\loky\backend\context.py", line 257, in _count_physical_cores
+    cpu_info = subprocess.run(
+        "wmic CPU Get NumberOfCores /Format:csv".split(),
+        capture_output=True,
+        text=True,
+    )
+  File "C:\Program Files\Python313\Lib\subprocess.py", line 554, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\subprocess.py", line 1036, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\subprocess.py", line 1548, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+                             # no special security
+                             ^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                             cwd,
+                             ^^^^
+                             startupinfo)
+                             ^^^^^^^^^^^^
+[     5s] E F1_2018 hist_gbm done (3.0s)
+[    12s] E F1_2018 mlp done (7.1s)
+[    18s] E F1_2018 random_forest done (5.5s)
+[    18s] E F2_2019 ridge done (0.1s)
+[    21s] E F2_2019 lightgbm_per_horizon done (2.9s)
+[    24s] E F2_2019 hist_gbm done (3.0s)
+[    33s] E F2_2019 mlp done (9.2s)
+[    39s] E F2_2019 random_forest done (5.7s)
+[    39s] E F3_2024 ridge done (0.2s)
+[    43s] E F3_2024 lightgbm_per_horizon done (3.6s)
+[    46s] E F3_2024 hist_gbm done (3.2s)
+[    55s] E F3_2024 mlp done (8.6s)
+[    66s] E F3_2024 random_forest done (10.8s)
+[    66s] V F1_2018 ridge done (0.2s)
+[    70s] V F1_2018 lightgbm_per_horizon done (3.7s)
+[    72s] V F1_2018 hist_gbm done (2.7s)
+[    78s] V F1_2018 mlp done (5.9s)
+[    85s] V F1_2018 random_forest done (7.1s)
+[    86s] V F2_2019 ridge done (0.2s)
+[    88s] V F2_2019 lightgbm_per_horizon done (2.5s)
+[    91s] V F2_2019 hist_gbm done (2.8s)
+[   107s] V F2_2019 mlp done (15.9s)
+[   118s] V F2_2019 random_forest done (11.0s)
+[   119s] V F3_2024 ridge done (0.7s)
+[   122s] V F3_2024 lightgbm_per_horizon done (3.3s)
+[   128s] V F3_2024 hist_gbm done (5.6s)
+[   152s] V F3_2024 mlp done (24.2s)
+[   181s] V F3_2024 random_forest done (28.5s)
+[   181s] S F1_2018 ridge done (0.4s)
+[   185s] S F1_2018 lightgbm_per_horizon done (3.5s)
+[   189s] S F1_2018 hist_gbm done (3.9s)
+[   202s] S F1_2018 mlp done (13.1s)
+[   220s] S F1_2018 random_forest done (18.3s)
+[   221s] S F2_2019 ridge done (0.5s)
+[   225s] S F2_2019 lightgbm_per_horizon done (3.7s)
+[   229s] S F2_2019 hist_gbm done (4.1s)
+[   243s] S F2_2019 mlp done (14.3s)
+[   268s] S F2_2019 random_forest done (25.0s)
+[   269s] S F3_2024 ridge done (1.2s)
+[   274s] S F3_2024 lightgbm_per_horizon done (5.0s)
+[   280s] S F3_2024 hist_gbm done (6.1s)
+[   327s] S F3_2024 mlp done (46.4s)
+[   404s] S F3_2024 random_forest done (77.5s)
+saved E:\LMIS Data\data\interim\phase6_predictions.parquet (831600, 8)

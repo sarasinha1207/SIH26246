@@ -7,8 +7,9 @@ Trains a global, direct multi-horizon LightGBM forecaster on the 2011-2026 distr
 early-warning flags.
 
 Inputs  : data/raw/lmis_district_monthly_2011_2026.csv  (the ONLY dataset used; nothing under Archived/ is read)
-Outputs : outputs/provisional/ and models/provisional/  (metrics, forecasts, gap ranking, saved models)
-Status  : PROVISIONAL - built ahead of Phases 2-4; to be redone once those phases are signed off.
+Outputs : outputs/quarantine/ and models/quarantine/  (metrics, forecasts, gap ranking, saved models)
+Status  : QUARANTINED. This prototype scores the locked 2025-2026 test period and bypasses load_panel; do not run it or use its results.
+          The Phase 6-8 pipeline replaces it.
 
 Targets (each forecast 1..12 months ahead, per district x sector):
     Total_Employed_Workers      -> employment / demand outlook
@@ -34,8 +35,8 @@ warnings.filterwarnings("ignore", category=UserWarning)
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "data" / "raw" / "lmis_district_monthly_2011_2026.csv"
-OUT = ROOT / "outputs" / "provisional"
-MODEL_DIR = ROOT / "models" / "provisional"
+OUT = ROOT / "outputs" / "quarantine" / "provisional_prototype"
+MODEL_DIR = ROOT / "models" / "quarantine" / "provisional_prototype"
 
 HORIZONS = list(range(1, 13))
 TARGETS = {

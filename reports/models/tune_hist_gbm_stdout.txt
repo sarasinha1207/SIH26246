@@ -1,0 +1,75 @@
+C:\Users\saras\AppData\Roaming\Python\Python313\site-packages\joblib\externals\loky\backend\context.py:136: UserWarning: Could not find the number of physical cores for the following reason:
+[WinError 2] The system cannot find the file specified
+Returning the number of logical cores instead. You can silence this warning by setting LOKY_MAX_CPU_COUNT to the number of cores you want to use.
+  warnings.warn(
+  File "C:\Users\saras\AppData\Roaming\Python\Python313\site-packages\joblib\externals\loky\backend\context.py", line 257, in _count_physical_cores
+    cpu_info = subprocess.run(
+        "wmic CPU Get NumberOfCores /Format:csv".split(),
+        capture_output=True,
+        text=True,
+    )
+  File "C:\Program Files\Python313\Lib\subprocess.py", line 554, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\subprocess.py", line 1036, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\subprocess.py", line 1548, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+                             # no special security
+                             ^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                             cwd,
+                             ^^^^
+                             startupinfo)
+                             ^^^^^^^^^^^^
+[    33s] config 0 done
+[   208s] config 1 done
+[   295s] config 2 done
+[   438s] config 3 done
+[   482s] config 4 done
+[   631s] config 5 done
+[   708s] config 6 done
+[   824s] config 7 done
+[  1139s] config 8 done
+[  1175s] config 9 done
+[  1344s] config 10 done
+[  1392s] config 11 done
+[  1441s] config 12 done
+[  1541s] config 13 done
+[  1657s] config 14 done
+[  1730s] config 15 done
+[  1775s] config 16 done
+[  1895s] config 17 done
+[  1960s] config 18 done
+[  2035s] config 19 done
+[  2115s] config 20 done
+[  2174s] config 21 done
+[  2386s] config 22 done
+[  2451s] config 23 done
+[  2544s] config 24 done
+{
+ "E": {
+  "default_mean_wape": 1.288,
+  "best_mean_wape": 1.269,
+  "gain_pct": 1.48
+ },
+ "V": {
+  "default_mean_wape": 6.342,
+  "best_mean_wape": 6.299,
+  "gain_pct": 0.69
+ },
+ "S": {
+  "default_mean_wape": 5.203,
+  "best_mean_wape": 5.175,
+  "gain_pct": 0.54
+ }
+}

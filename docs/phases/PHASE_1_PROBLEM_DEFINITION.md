@@ -128,7 +128,8 @@ Approved by the project owner in chat after Phase 1 was presented.
 | Phase 2 | Section 7 known limitations rewritten: the 42% cap, fixed vacancy/seeker ratios and missing training-capacity data were defects of the v1 panel and no longer apply | Factual correction |
 | Phase 2 | Section 5 and 7 notes: the root-level duplicate was deleted; seat/outturn columns now exist | Factual correction |
 | Phase 3 | Equity check (Section 8): district tier is now available as `Econ_Tier` in the processed tables | Factual correction |
+| Phase 5 | Provisional-prototype scores for 2025–26 removed from deferred amendment 2 and replaced by validation-year evidence (test-period integrity, Phase 5 Section 9) | Factual correction |
 
 **Deferred amendments (decision made by the project owner, to be revisited in Phase 8):**
 1. Whether supply should be redefined as seekers plus training outturn.
-2. Whether the accuracy thresholds in Section 8 need revising. They were set from the v1 noise floor; the prototype on v2 gave WAPE ≈ 1.6% employed, 9.0% vacancies, 5.4% seekers, against the targets of 2%, 7% and 6%.
+2. Whether the accuracy thresholds in Section 8 need revising. They were set from the v1 noise floor. On the Phase 4 validation year, even the last-value baseline errs by about 5% (1 month) to 10% (6 months) for vacancies, against a perfect-level floor of about 3.9%, so the 7% target is only reachable at short horizons. To be settled in Phase 8 per horizon.

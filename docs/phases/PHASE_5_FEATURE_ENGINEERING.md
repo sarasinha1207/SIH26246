@@ -1,6 +1,6 @@
 # Phase 5 – Feature Engineering & Selection
 
-Status: **Complete pending your sign-off (Section 9).**
+Status: **Approved** (sign-off in Section 11).
 Reproduce: `python src/features/select_features.py` (about 20 minutes), `regime_check.py`, `verify_horizons.py`, `design_flags.py`, `catalog.py`, then `python tests/test_features.py`.
 Outputs: `data/processed/features/feature_sets.json` and `feature_catalog.csv`, `reports/features/` (all experiment tables, a pass-1 archive and `time_proxy_audit.csv`).
 
@@ -107,7 +107,7 @@ What the data says (`design_flags.py`, 2011–2024, COVID and policy windows exc
 Outputs: `reports/features/flags_class_shares.csv`, `flags_forward_value.csv`, `flags_persistence_benchmark.csv`, `flags_seat_mismatch.csv`, `flags_summary.json`.
 
 ## 9. Test-period exposure (integrity note)
-The provisional prototype in `src/modeling/` predates the test lock and scored 2025–2026 once. Its aggregate scores (WAPE ≈ 1.6%, 9.0% and 5.4%) are quoted in Phase 1 (Section 13), Phase 2 (Section 8) and Phase 4 (Section 4). Nothing in Phases 3–5 used them: features, folds, thresholds and settings were chosen on data up to 2024-12 only, and the feature code cannot load the test rows. The 2025–26 period is therefore **not pristine**: one earlier model has been scored on it and the headline numbers were seen. Phase 8 should say so when it reports test results. A stricter option is to delete the quoted numbers from those approved documents and quarantine `outputs/provisional/`; that edits approved text, so it is your decision.
+The provisional prototype in `src/modeling/` predates the test lock and scored 2025–2026 once; three approved documents (Phases 1, 2 and 4) quoted its aggregate scores. Nothing in Phases 3–5 used them: features, folds, thresholds and settings were chosen on data up to 2024-12 only, and the feature code cannot load the test rows. The 2025–26 period is therefore **not pristine**: one earlier model has been scored on it and its headline numbers were seen. **Action taken (project owner delegated the choice):** the quoted scores were removed from the Phase 1, 2 and 4 documents (logged in the Phase 1 amendment log), the prototype's outputs, models and report were moved to `outputs/quarantine/`, `models/quarantine/` and `reports/quarantine/` with a do-not-consult note, and the prototype script now writes only to the quarantine folders. Phase 8 must still state that one earlier model was scored on 2025–26 when it reports test results.
 
 ## 10. Hand-off to Phase 6
 `src/features/pipeline.py` provides `training_frame(target, train_end)` and `validation_frame(target, origin, months)` with the selected features, base and masks; the test period stays locked. Phase 6 should compare model families on these inputs and report against the Phase 4 baselines (last value, seasonal naive with drift, seasonally adjusted level).
@@ -122,12 +122,12 @@ The provisional prototype in `src/modeling/` predates the test lock and scored 2
 | D5 | Use the final sets in `feature_sets.json` (36 / 29 / 68 features); drop identity, wage, size and regime features | Yes |
 | D6 | Re-test the `post_covid` flag for vacancies in Phase 6 with the longer training history | Yes |
 | D7 | Use the relative percentile flags with an absolute-context field; build "approaching" flags from forecasts in Phase 8, not from the past trend | Yes |
-| D8 | Disclose in Phase 8 that 2025–26 was scored once by the provisional prototype; choose whether to remove the quoted numbers (Section 9) | Your decision |
+| D8 | Remove the prototype's 2025–26 scores from approved documents, quarantine its outputs, and disclose the exposure in Phase 8 (Section 9) | Done |
 
-Sign-off checklist:
-- [ ] Feature design and leakage controls (Sections 2–4) accepted
-- [ ] Selection protocol and results (Sections 5–7) accepted
-- [ ] Early-warning flag design and test-period note (Sections 8, 9) accepted
-- [ ] Decisions D1–D8 accepted
+Sign-off (approved by the project owner, who also delegated the test-period decision D8 to the assistant):
+- [x] Feature design and leakage controls (Sections 2–4) accepted
+- [x] Selection protocol and results (Sections 5–7) accepted
+- [x] Early-warning flag design and test-period note (Sections 8, 9) accepted
+- [x] Decisions D1–D8 accepted
 
-Phase 6 (Model Selection) starts only after sign-off.
+Phase 6 (Model Selection) has started.

@@ -1,0 +1,42 @@
+[    41s] config 0 done
+[   264s] config 1 done
+[   283s] config 2 done
+[   308s] config 3 done
+[   334s] config 4 done
+[   382s] config 5 done
+[   512s] config 6 done
+[   723s] config 7 done
+[   761s] config 8 done
+[   884s] config 9 done
+[   902s] config 10 done
+[  1115s] config 11 done
+[  1179s] config 12 done
+[  1240s] config 13 done
+[  1280s] config 14 done
+[  1403s] config 15 done
+[  1438s] config 16 done
+[  1486s] config 17 done
+[  1557s] config 18 done
+[  1683s] config 19 done
+[  1710s] config 20 done
+[  1730s] config 21 done
+[  1782s] config 22 done
+[  1912s] config 23 done
+[  1971s] config 24 done
+{
+ "E": {
+  "default_mean_wape": 1.283,
+  "best_mean_wape": 1.273,
+  "gain_pct": 0.74
+ },
+ "V": {
+  "default_mean_wape": 6.362,
+  "best_mean_wape": 6.362,
+  "gain_pct": 0.0
+ },
+ "S": {
+  "default_mean_wape": 5.197,
+  "best_mean_wape": 5.155,
+  "gain_pct": 0.8
+ }
+}

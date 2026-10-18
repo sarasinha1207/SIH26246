@@ -88,7 +88,7 @@ Full detail: `reports/phase2_raw_data_checks.json`. The two remaining warnings a
 
 **Impact on Phase 1 (deferred to Phase 8 by your decision; nothing changed):**
 1. Supply was defined as e-Shram seekers because no capacity data existed. The panel now has seats and certified trainees; Phase 1 could be amended so supply = seekers + training outturn.
-2. The Phase 1 accuracy thresholds (e.g. vacancies WAPE ≤ 7%) were set from the v1 noise floor. A quick check of the provisional prototype on v2 gave vacancies WAPE ≈ 9.0% and employed ≈ 1.6%, so the vacancy threshold may need revisiting in Phase 8. v2 vacancies have real dynamics rather than i.i.d. noise.
+2. The Phase 1 accuracy thresholds (e.g. vacancies WAPE ≤ 7%) were set from the v1 noise floor. On the Phase 4 validation year the vacancy baselines err by about 5–10% depending on horizon, so the vacancy threshold may need revisiting in Phase 8. v2 vacancies have real dynamics rather than i.i.d. noise. (the provisional prototype's scores on the locked 2025–26 period were removed from this document; see `docs/phases/PHASE_5_FEATURE_ENGINEERING.md`, Section 9).
 
 Sign-off (approved):
 - [x] v2 panel accepted as the project dataset (D1–D3)
