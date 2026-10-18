@@ -1,6 +1,6 @@
 # Phase 6 – Model Selection
 
-Status: **Complete pending your sign-off (Section 9).** Revised after the XGBoost benchmark you requested.
+Status: **Approved.** Revised after the XGBoost benchmark you requested; signed off with XGBoost as primary and HistGradientBoosting as challenger.
 Reproduce: `python src/models/compare_models.py` (about 8 minutes), `python src/models/tune_lightgbm.py lightgbm`, `... hist_gbm` and `... xgboost` (about 15 minutes each), `python src/models/analyze_models.py`, then `python tests/test_models.py`.
 Outputs: `reports/models/` (tables `m01`–`m08`, two charts, tuning results), `data/processed/models/model_selection.json`, `data/interim/phase6_predictions.parquet` (every validation prediction).
 
@@ -108,8 +108,8 @@ Train XGBoost (primary) and HistGradientBoosting (challenger) for each target wi
 | D5 | Report IT-ITeS vacancies and low-volume series separately in Phase 8 (carried from Phase 4) | Yes |
 
 ## 9. Sign-off
-- [ ] Candidates, protocol and results (Sections 2–4, including the XGBoost benchmark) accepted
-- [ ] Decision and limits (Sections 5–6) accepted
-- [ ] Decisions D1–D5 accepted
+- [x] Candidates, protocol and results (Sections 2–4, including the XGBoost benchmark) accepted
+- [x] Decision and limits (Sections 5–6) accepted
+- [x] Decisions D1–D5 accepted
 
-Phase 7 (Model Training) starts only after sign-off.
+Phase 7 (Model Training) is documented in `PHASE_7_MODEL_TRAINING.md`. Note: Phase 7 trains XGBoost only; the challenger comparison moved to Phase 8 at the owner's request, and the Phase 7 split (70/5/25 of calendar months) replaces the Phase 3 split used in this document's folds.

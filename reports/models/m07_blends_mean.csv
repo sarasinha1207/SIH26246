@@ -1,0 +1,6 @@
+blend,E,S,V,mean_all_targets
+lightgbm+hist_gbm,1.276,5.189,6.361,4.275
+lightgbm+hist_gbm+random_forest,1.27,5.228,6.319,4.272
+lightgbm+hist_gbm+xgboost,1.273,5.175,6.342,4.263
+lightgbm+holt_winters,1.271,6.022,6.423,4.572
+lightgbm+holt_winters+last_plus_seasonal_shift,1.357,5.526,6.445,4.443

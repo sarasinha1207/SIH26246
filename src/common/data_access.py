@@ -2,6 +2,9 @@
 
 The Phase 3 split policy locks the test period (2025-01 onward) until Phase 8.  Every later phase should load data through
 `load_panel`, which refuses to return test rows unless the caller unlocks them explicitly (and says so in the log).
+
+From Phase 7 the project split is the 70/5/25 calendar split in `splits.py` (test = 2023-01 to 2026-12, read through `load_split`).  `load_panel` and the
+`Split_Role` column keep the Phase 3 definition for the Phase 3-6 code and tests; do not mix the two in new code.
 """
 import json
 from pathlib import Path

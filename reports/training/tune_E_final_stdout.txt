@@ -1,0 +1,6 @@
+[E] shortlist trial 46: cv 1.6587  validation 4.3332  (baseline 4.9850)
+[E] shortlist trial 55: cv 1.6632  validation 4.3191  (baseline 4.9850)
+[E] shortlist trial 7: cv 1.6671  validation 4.2816  (baseline 4.9850)
+[E] shortlist trial 45: cv 1.6671  validation 4.2816  (baseline 4.9850)
+[E] shortlist trial 56: cv 1.6672  validation 4.2007  (baseline 4.9850)
+[E] chosen trial 56: cv 1.6672, validation 4.2007; Phase 6 default cv 1.6935

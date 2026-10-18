@@ -1,0 +1,136 @@
+{
+ "target": "V",
+ "selection_rule": "lowest validation WAPE among configs within 1% of the best cross-validation WAPE",
+ "folds": [
+  "2016-12",
+  "2017-12",
+  "2018-12"
+ ],
+ "search": {
+  "random": 40,
+  "local": 18,
+  "total_trials": 59
+ },
+ "chosen": {
+  "trial": 6,
+  "cv_wape": 7.307974432598993,
+  "best_trees": 40,
+  "val_wape": 8.507984754750108,
+  "val_baseline_wape": 9.426130436936868,
+  "cfg": {
+   "learning_rate": 0.08,
+   "max_leaves": 63,
+   "min_child_weight": 200,
+   "reg_lambda": 50.0,
+   "reg_alpha": 0.1,
+   "gamma": 0.001,
+   "subsample": 0.7,
+   "colsample_bytree": 1.0,
+   "colsample_bynode": 0.8,
+   "max_bin": 256
+  }
+ },
+ "shortlist": [
+  {
+   "trial": 42,
+   "cv_wape": 7.305586542780264,
+   "best_trees": 40,
+   "val_wape": 8.5609757256948,
+   "val_baseline_wape": 9.426130436936868,
+   "cfg": {
+    "learning_rate": 0.08,
+    "max_leaves": 63,
+    "min_child_weight": 100,
+    "reg_lambda": 50.0,
+    "reg_alpha": 0.01,
+    "gamma": 0.001,
+    "subsample": 0.5,
+    "colsample_bytree": 1.0,
+    "colsample_bynode": 0.8,
+    "max_bin": 256
+   }
+  },
+  {
+   "trial": 46,
+   "cv_wape": 7.306548152949187,
+   "best_trees": 40,
+   "val_wape": 8.620002512221726,
+   "val_baseline_wape": 9.426130436936868,
+   "cfg": {
+    "learning_rate": 0.08,
+    "max_leaves": 63,
+    "min_child_weight": 200,
+    "reg_lambda": 50.0,
+    "reg_alpha": 0.01,
+    "gamma": 0.0,
+    "subsample": 0.7,
+    "colsample_bytree": 1.0,
+    "colsample_bynode": 0.8,
+    "max_bin": 256
+   }
+  },
+  {
+   "trial": 6,
+   "cv_wape": 7.307974432598993,
+   "best_trees": 40,
+   "val_wape": 8.507984754750108,
+   "val_baseline_wape": 9.426130436936868,
+   "cfg": {
+    "learning_rate": 0.08,
+    "max_leaves": 63,
+    "min_child_weight": 200,
+    "reg_lambda": 50.0,
+    "reg_alpha": 0.1,
+    "gamma": 0.001,
+    "subsample": 0.7,
+    "colsample_bytree": 1.0,
+    "colsample_bynode": 0.8,
+    "max_bin": 256
+   }
+  },
+  {
+   "trial": 1,
+   "cv_wape": 7.309380459695364,
+   "best_trees": 125,
+   "val_wape": 8.546455823613941,
+   "val_baseline_wape": 9.426130436936868,
+   "cfg": {
+    "learning_rate": 0.02,
+    "max_leaves": 63,
+    "min_child_weight": 400,
+    "reg_lambda": 5.0,
+    "reg_alpha": 0.0,
+    "gamma": 0.05,
+    "subsample": 0.7,
+    "colsample_bytree": 0.8,
+    "colsample_bynode": 0.8,
+    "max_bin": 64
+   }
+  },
+  {
+   "trial": 47,
+   "cv_wape": 7.309737879972469,
+   "best_trees": 150,
+   "val_wape": 8.611864705056353,
+   "val_baseline_wape": 9.426130436936868,
+   "cfg": {
+    "learning_rate": 0.02,
+    "max_leaves": 63,
+    "min_child_weight": 400,
+    "reg_lambda": 5.0,
+    "reg_alpha": 0.01,
+    "gamma": 0.05,
+    "subsample": 0.7,
+    "colsample_bytree": 0.8,
+    "colsample_bynode": 1.0,
+    "max_bin": 64
+   }
+  }
+ ],
+ "phase6_default": {
+  "cv_wape": 7.328201640845879,
+  "best_trees": 40
+ },
+ "best_cv": 7.305586542780264,
+ "seconds": 121
+}

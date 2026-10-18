@@ -1,0 +1,23 @@
+{
+  "source": {
+    "name": "LGD districts (2024) via bharatlas",
+    "url": "https://bharatlas.com/",
+    "download_url": "https://pub-0429b8e3b5a946e69ea007df844a6f1c.r2.dev/admin/districts/LGD_Districts.parquet",
+    "licence": "CC0-1.0 / CC-BY-4.0",
+    "credit": "Local Government Directory (lgdirectory.gov.in), distributed by bharatlas",
+    "layer_last_updated": "2026-05-19"
+  },
+  "source_file": "LGD_Districts.parquet",
+  "source_bytes": 22178335,
+  "source_sha256": "c205da56ce0538b33b2f66838a4032cef79be7585543686892c8a85a5d21aebc",
+  "districts": 56,
+  "simplification_tolerance_deg": 0.002,
+  "coordinate_decimals": 4,
+  "output_bytes": 410962,
+  "join_key": "properties.district_lgd_code (string) = district_lgd_code in monthly_metrics_2011_2024.csv and dim_district.csv",
+  "caveats": [
+    "Dashboard-grade simplification, not for survey use.",
+    "Mostly Census-2011-era geometry with later updates; names in the source can be older than the dashboard names.",
+    "Each district ring is simplified separately, so tiny gaps can appear along shared borders at high zoom."
+  ]
+}

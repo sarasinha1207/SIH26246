@@ -1,0 +1,642 @@
+{
+  "created_from": "train+validation only (folds F1-F3)",
+  "rule": "leader = lowest mean WAPE among learned models; tied only if the pooled bootstrap CI vs the leader includes 0; among tied models the owner's preference decides",
+  "leader_by_mean_wape": "hist_gbm",
+  "tied_with_leader": [
+    "xgboost"
+  ],
+  "primary": "xgboost",
+  "challenger": "hist_gbm",
+  "best_baseline": "last_plus_seasonal_shift",
+  "decision_basis": "statistical tie broken by project-owner preference",
+  "mean_wape": {
+    "hist_gbm": 4.278,
+    "xgboost": 4.281,
+    "lightgbm": 4.323,
+    "lightgbm_per_horizon": 4.333,
+    "random_forest": 4.357,
+    "ridge": 4.576,
+    "mlp": 4.84,
+    "last_plus_seasonal_shift": 4.849,
+    "sm3_plus_seasonal_shift": 5.082,
+    "holt_winters": 5.416,
+    "last_value": 5.703,
+    "seasonal_naive_drift": 6.598
+  },
+  "per_target": {
+    "E": {
+      "leader": "lightgbm",
+      "mean_wape": 1.28,
+      "ranking": [
+        [
+          "lightgbm",
+          1.28
+        ],
+        [
+          "xgboost",
+          1.283
+        ],
+        [
+          "hist_gbm",
+          1.288
+        ],
+        [
+          "random_forest",
+          1.292
+        ],
+        [
+          "ridge",
+          1.303
+        ],
+        [
+          "lightgbm_per_horizon",
+          1.324
+        ],
+        [
+          "mlp",
+          1.445
+        ],
+        [
+          "holt_winters",
+          1.457
+        ],
+        [
+          "last_plus_seasonal_shift",
+          1.725
+        ],
+        [
+          "seasonal_naive_drift",
+          1.889
+        ],
+        [
+          "sm3_plus_seasonal_shift",
+          2.26
+        ],
+        [
+          "last_value",
+          3.401
+        ]
+      ],
+      "vs_best_baseline": {
+        "reference": "best_baseline=last_plus_seasonal_shift",
+        "mean_diff_pts": -0.468,
+        "ci": [
+          -0.522,
+          -0.408
+        ]
+      }
+    },
+    "V": {
+      "leader": "random_forest",
+      "mean_wape": 6.31,
+      "ranking": [
+        [
+          "random_forest",
+          6.31
+        ],
+        [
+          "hist_gbm",
+          6.342
+        ],
+        [
+          "xgboost",
+          6.362
+        ],
+        [
+          "lightgbm",
+          6.462
+        ],
+        [
+          "lightgbm_per_horizon",
+          6.51
+        ],
+        [
+          "ridge",
+          6.575
+        ],
+        [
+          "mlp",
+          6.659
+        ],
+        [
+          "holt_winters",
+          6.962
+        ],
+        [
+          "last_plus_seasonal_shift",
+          7.005
+        ],
+        [
+          "sm3_plus_seasonal_shift",
+          7.122
+        ],
+        [
+          "last_value",
+          7.234
+        ],
+        [
+          "seasonal_naive_drift",
+          9.631
+        ]
+      ],
+      "vs_best_baseline": {
+        "reference": "best_baseline=last_plus_seasonal_shift",
+        "mean_diff_pts": -0.669,
+        "ci": [
+          -0.835,
+          -0.524
+        ]
+      }
+    },
+    "S": {
+      "leader": "lightgbm_per_horizon",
+      "mean_wape": 5.167,
+      "ranking": [
+        [
+          "lightgbm_per_horizon",
+          5.167
+        ],
+        [
+          "xgboost",
+          5.197
+        ],
+        [
+          "hist_gbm",
+          5.203
+        ],
+        [
+          "lightgbm",
+          5.227
+        ],
+        [
+          "random_forest",
+          5.469
+        ],
+        [
+          "last_plus_seasonal_shift",
+          5.818
+        ],
+        [
+          "ridge",
+          5.849
+        ],
+        [
+          "sm3_plus_seasonal_shift",
+          5.866
+        ],
+        [
+          "mlp",
+          6.416
+        ],
+        [
+          "last_value",
+          6.475
+        ],
+        [
+          "holt_winters",
+          7.829
+        ],
+        [
+          "seasonal_naive_drift",
+          8.274
+        ]
+      ],
+      "vs_best_baseline": {
+        "reference": "best_baseline=last_plus_seasonal_shift",
+        "mean_diff_pts": -0.625,
+        "ci": [
+          -0.787,
+          -0.451
+        ]
+      }
+    }
+  },
+  "tuning": {
+    "lightgbm": {
+      "E": {
+        "default": 1.28,
+        "best": 1.278,
+        "gain_pct": 0.18,
+        "best_config": {
+          "num_leaves": 31,
+          "learning_rate": 0.05,
+          "n_estimators": 400,
+          "min_child_samples": 100,
+          "feature_fraction": 0.7,
+          "lambda_l2": 20.0,
+          "bagging_fraction": 0.9
+        },
+        "top5_param_ranges": {
+          "num_leaves": [
+            15,
+            31,
+            127
+          ],
+          "learning_rate": [
+            0.05,
+            0.08
+          ],
+          "n_estimators": [
+            200,
+            250,
+            400,
+            700
+          ],
+          "min_child_samples": [
+            100,
+            300
+          ],
+          "feature_fraction": [
+            0.5,
+            0.7,
+            0.8,
+            0.9
+          ],
+          "lambda_l2": [
+            0.0,
+            5.0,
+            20.0
+          ],
+          "bagging_fraction": [
+            0.7,
+            0.8,
+            0.9
+          ]
+        }
+      },
+      "V": {
+        "default": 6.462,
+        "best": 6.371,
+        "gain_pct": 1.4,
+        "best_config": {
+          "num_leaves": 15,
+          "learning_rate": 0.08,
+          "n_estimators": 200,
+          "min_child_samples": 30,
+          "feature_fraction": 0.7,
+          "lambda_l2": 20.0,
+          "bagging_fraction": 0.7
+        },
+        "top5_param_ranges": {
+          "num_leaves": [
+            15,
+            63,
+            127
+          ],
+          "learning_rate": [
+            0.03,
+            0.05,
+            0.08
+          ],
+          "n_estimators": [
+            200,
+            400
+          ],
+          "min_child_samples": [
+            30,
+            100,
+            300
+          ],
+          "feature_fraction": [
+            0.7,
+            0.9
+          ],
+          "lambda_l2": [
+            0.0,
+            5.0,
+            20.0
+          ],
+          "bagging_fraction": [
+            0.7,
+            0.9
+          ]
+        }
+      },
+      "S": {
+        "default": 5.227,
+        "best": 5.171,
+        "gain_pct": 1.07,
+        "best_config": {
+          "num_leaves": 127,
+          "learning_rate": 0.03,
+          "n_estimators": 700,
+          "min_child_samples": 100,
+          "feature_fraction": 0.5,
+          "lambda_l2": 0.0,
+          "bagging_fraction": 0.7
+        },
+        "top5_param_ranges": {
+          "num_leaves": [
+            15,
+            63,
+            127
+          ],
+          "learning_rate": [
+            0.03,
+            0.05,
+            0.08
+          ],
+          "n_estimators": [
+            400,
+            700
+          ],
+          "min_child_samples": [
+            30,
+            100,
+            300
+          ],
+          "feature_fraction": [
+            0.5,
+            0.7,
+            0.9
+          ],
+          "lambda_l2": [
+            0.0,
+            5.0
+          ],
+          "bagging_fraction": [
+            0.7,
+            0.9
+          ]
+        }
+      }
+    },
+    "hist_gbm": {
+      "E": {
+        "default": 1.288,
+        "best": 1.269,
+        "gain_pct": 1.48,
+        "best_config": {
+          "max_leaf_nodes": 127,
+          "learning_rate": 0.03,
+          "max_iter": 700,
+          "min_samples_leaf": 100,
+          "max_features": 0.5,
+          "l2_regularization": 0.0
+        },
+        "top5_param_ranges": {
+          "max_leaf_nodes": [
+            15,
+            63,
+            127
+          ],
+          "learning_rate": [
+            0.03,
+            0.05
+          ],
+          "max_iter": [
+            200,
+            400,
+            700
+          ],
+          "min_samples_leaf": [
+            30,
+            100,
+            300
+          ],
+          "max_features": [
+            0.5,
+            0.7
+          ],
+          "l2_regularization": [
+            0.0,
+            20.0
+          ]
+        }
+      },
+      "V": {
+        "default": 6.342,
+        "best": 6.299,
+        "gain_pct": 0.69,
+        "best_config": {
+          "max_leaf_nodes": 127,
+          "learning_rate": 0.03,
+          "max_iter": 200,
+          "min_samples_leaf": 30,
+          "max_features": 0.5,
+          "l2_regularization": 20.0
+        },
+        "top5_param_ranges": {
+          "max_leaf_nodes": [
+            15,
+            31,
+            127
+          ],
+          "learning_rate": [
+            0.03,
+            0.05,
+            0.08
+          ],
+          "max_iter": [
+            200,
+            400,
+            700
+          ],
+          "min_samples_leaf": [
+            30,
+            100,
+            300
+          ],
+          "max_features": [
+            0.5,
+            0.7,
+            0.9
+          ],
+          "l2_regularization": [
+            0.0,
+            5.0,
+            20.0
+          ]
+        }
+      },
+      "S": {
+        "default": 5.203,
+        "best": 5.175,
+        "gain_pct": 0.54,
+        "best_config": {
+          "max_leaf_nodes": 127,
+          "learning_rate": 0.03,
+          "max_iter": 700,
+          "min_samples_leaf": 100,
+          "max_features": 0.5,
+          "l2_regularization": 0.0
+        },
+        "top5_param_ranges": {
+          "max_leaf_nodes": [
+            15,
+            63,
+            127
+          ],
+          "learning_rate": [
+            0.03,
+            0.05
+          ],
+          "max_iter": [
+            400,
+            700
+          ],
+          "min_samples_leaf": [
+            100,
+            300
+          ],
+          "max_features": [
+            0.5,
+            0.7,
+            0.9
+          ],
+          "l2_regularization": [
+            0.0,
+            5.0,
+            20.0
+          ]
+        }
+      }
+    },
+    "xgboost": {
+      "E": {
+        "default": 1.283,
+        "best": 1.273,
+        "gain_pct": 0.74,
+        "best_config": {
+          "max_leaves": 15,
+          "learning_rate": 0.05,
+          "n_estimators": 400,
+          "min_child_weight": 100,
+          "colsample_bytree": 0.5,
+          "reg_lambda": 0.0,
+          "subsample": 0.7
+        },
+        "top5_param_ranges": {
+          "max_leaves": [
+            15,
+            31,
+            127
+          ],
+          "learning_rate": [
+            0.05,
+            0.08
+          ],
+          "n_estimators": [
+            200,
+            400
+          ],
+          "min_child_weight": [
+            30,
+            100,
+            300
+          ],
+          "colsample_bytree": [
+            0.5,
+            0.9
+          ],
+          "reg_lambda": [
+            0.0,
+            20.0
+          ],
+          "subsample": [
+            0.7,
+            0.9
+          ]
+        }
+      },
+      "V": {
+        "default": 6.362,
+        "best": 6.362,
+        "gain_pct": 0.0,
+        "best_config": {
+          "max_leaves": 31,
+          "learning_rate": 0.08,
+          "n_estimators": 250,
+          "min_child_weight": 100,
+          "colsample_bytree": 0.8,
+          "reg_lambda": 5.0,
+          "subsample": 0.8
+        },
+        "top5_param_ranges": {
+          "max_leaves": [
+            15,
+            31,
+            63
+          ],
+          "learning_rate": [
+            0.03,
+            0.05,
+            0.08
+          ],
+          "n_estimators": [
+            200,
+            250,
+            400,
+            700
+          ],
+          "min_child_weight": [
+            30,
+            100,
+            300
+          ],
+          "colsample_bytree": [
+            0.7,
+            0.8,
+            0.9
+          ],
+          "reg_lambda": [
+            5.0,
+            20.0
+          ],
+          "subsample": [
+            0.7,
+            0.8,
+            0.9
+          ]
+        }
+      },
+      "S": {
+        "default": 5.197,
+        "best": 5.155,
+        "gain_pct": 0.8,
+        "best_config": {
+          "max_leaves": 15,
+          "learning_rate": 0.05,
+          "n_estimators": 700,
+          "min_child_weight": 300,
+          "colsample_bytree": 0.9,
+          "reg_lambda": 5.0,
+          "subsample": 0.7
+        },
+        "top5_param_ranges": {
+          "max_leaves": [
+            15,
+            31,
+            127
+          ],
+          "learning_rate": [
+            0.03,
+            0.05
+          ],
+          "n_estimators": [
+            400,
+            700
+          ],
+          "min_child_weight": [
+            100,
+            300
+          ],
+          "colsample_bytree": [
+            0.5,
+            0.7,
+            0.9
+          ],
+          "reg_lambda": [
+            0.0,
+            5.0,
+            20.0
+          ],
+          "subsample": [
+            0.7,
+            0.9
+          ]
+        }
+      }
+    }
+  }
+}

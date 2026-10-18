@@ -1,0 +1,66 @@
+[V] folds: 2016-12 train 99,120 / score 12,040, 2017-12 train 139,440 / score 21,840, 2018-12 train 179,760 / score 21,840
+[V     13s] trial  0 (phase6_default) trees  40  cv WAPE 7.3282  learning_rate=0.08 max_leaves=31 min_child_weight=100 reg_lambda=5.0
+[V     45s] trial  1 (random) trees 125  cv WAPE 7.3094  learning_rate=0.02 max_leaves=63 min_child_weight=400 reg_lambda=5.0
+[V     81s] trial  2 (random) trees 150  cv WAPE 7.3209  learning_rate=0.02 max_leaves=63 min_child_weight=400 reg_lambda=200.0
+[V     98s] trial  3 (random) trees  80  cv WAPE 7.3818  learning_rate=0.08 max_leaves=63 min_child_weight=100 reg_lambda=50.0
+[V    114s] trial  4 (random) trees  60  cv WAPE 7.3197  learning_rate=0.05 max_leaves=31 min_child_weight=800 reg_lambda=5.0
+[V    132s] trial  5 (random) trees  60  cv WAPE 7.3553  learning_rate=0.05 max_leaves=31 min_child_weight=50 reg_lambda=5.0
+[V    150s] trial  6 (random) trees  40  cv WAPE 7.3080  learning_rate=0.08 max_leaves=63 min_child_weight=200 reg_lambda=50.0
+[V    171s] trial  7 (random) trees 400  cv WAPE 7.3456  learning_rate=0.02 max_leaves=7 min_child_weight=800 reg_lambda=20.0
+[V    181s] trial  8 (random) trees  60  cv WAPE 7.3396  learning_rate=0.08 max_leaves=15 min_child_weight=50 reg_lambda=20.0
+[V    207s] trial  9 (random) trees 300  cv WAPE 7.3639  learning_rate=0.02 max_leaves=15 min_child_weight=50 reg_lambda=1.0
+[V    223s] trial 10 (random) trees 250  cv WAPE 7.3579  learning_rate=0.03 max_leaves=7 min_child_weight=100 reg_lambda=5.0
+[V    234s] trial 11 (random) trees  50  cv WAPE 7.3287  learning_rate=0.08 max_leaves=31 min_child_weight=100 reg_lambda=200.0
+[V    272s] trial 12 (random) trees 400  cv WAPE 7.3292  learning_rate=0.01 max_leaves=31 min_child_weight=200 reg_lambda=200.0
+[V    323s] trial 13 (random) trees 500  cv WAPE 7.3477  learning_rate=0.01 max_leaves=31 min_child_weight=50 reg_lambda=1.0
+[V    385s] trial 14 (random) trees 400  cv WAPE 7.3299  learning_rate=0.01 max_leaves=63 min_child_weight=50 reg_lambda=50.0
+[V    422s] trial 15 (random) trees 500  cv WAPE 7.3286  learning_rate=0.01 max_leaves=15 min_child_weight=200 reg_lambda=200.0
+[V    487s] trial 16 (random) trees 600  cv WAPE 7.3526  learning_rate=0.01 max_leaves=63 min_child_weight=100 reg_lambda=200.0
+[V    514s] trial 17 (random) trees 300  cv WAPE 7.3561  learning_rate=0.02 max_leaves=15 min_child_weight=400 reg_lambda=20.0
+[V    536s] trial 18 (random) trees 150  cv WAPE 7.3538  learning_rate=0.03 max_leaves=31 min_child_weight=100 reg_lambda=1.0
+[V    559s] trial 19 (random) trees 100  cv WAPE 7.3369  learning_rate=0.03 max_leaves=31 min_child_weight=50 reg_lambda=20.0
+[V    576s] trial 20 (random) trees 150  cv WAPE 7.3307  learning_rate=0.03 max_leaves=15 min_child_weight=400 reg_lambda=1.0
+[V    588s] trial 21 (random) trees  60  cv WAPE 7.3344  learning_rate=0.08 max_leaves=31 min_child_weight=400 reg_lambda=50.0
+[V    596s] trial 22 (random) trees  60  cv WAPE 7.3494  learning_rate=0.08 max_leaves=15 min_child_weight=800 reg_lambda=20.0
+[V    633s] trial 23 (random) trees 150  cv WAPE 7.3252  learning_rate=0.02 max_leaves=63 min_child_weight=50 reg_lambda=5.0
+[V    649s] trial 24 (random) trees 150  cv WAPE 7.3445  learning_rate=0.03 max_leaves=15 min_child_weight=400 reg_lambda=1.0
+[V    673s] trial 25 (random) trees 100  cv WAPE 7.3199  learning_rate=0.03 max_leaves=63 min_child_weight=50 reg_lambda=5.0
+[V    686s] trial 26 (random) trees 100  cv WAPE 7.3528  learning_rate=0.05 max_leaves=15 min_child_weight=800 reg_lambda=5.0
+[V    699s] trial 27 (random) trees  40  cv WAPE 7.3398  learning_rate=0.08 max_leaves=63 min_child_weight=800 reg_lambda=50.0
+[V    719s] trial 28 (random) trees  80  cv WAPE 7.3498  learning_rate=0.05 max_leaves=63 min_child_weight=50 reg_lambda=200.0
+[V    740s] trial 29 (random) trees 300  cv WAPE 7.3346  learning_rate=0.02 max_leaves=15 min_child_weight=50 reg_lambda=200.0
+[V    767s] trial 30 (random) trees 300  cv WAPE 7.3450  learning_rate=0.02 max_leaves=15 min_child_weight=200 reg_lambda=50.0
+[V    789s] trial 31 (random) trees  80  cv WAPE 7.3612  learning_rate=0.05 max_leaves=63 min_child_weight=50 reg_lambda=200.0
+[V    835s] trial 32 (random) trees 200  cv WAPE 7.3275  learning_rate=0.02 max_leaves=63 min_child_weight=50 reg_lambda=5.0
+[V    885s] trial 33 (random) trees 300  cv WAPE 7.3154  learning_rate=0.01 max_leaves=63 min_child_weight=400 reg_lambda=5.0
+[V    901s] trial 34 (random) trees  80  cv WAPE 7.3346  learning_rate=0.05 max_leaves=63 min_child_weight=50 reg_lambda=20.0
+[V    952s] trial 35 (random) trees 500  cv WAPE 7.3497  learning_rate=0.01 max_leaves=31 min_child_weight=400 reg_lambda=200.0
+[V    963s] trial 36 (random) trees  60  cv WAPE 7.3563  learning_rate=0.08 max_leaves=15 min_child_weight=800 reg_lambda=1.0
+[V    973s] trial 37 (random) trees 125  cv WAPE 7.3386  learning_rate=0.08 max_leaves=7 min_child_weight=100 reg_lambda=50.0
+[V   1003s] trial 38 (random) trees 600  cv WAPE 7.3554  learning_rate=0.01 max_leaves=7 min_child_weight=800 reg_lambda=1.0
+[V   1025s] trial 39 (random) trees 250  cv WAPE 7.3223  learning_rate=0.02 max_leaves=15 min_child_weight=50 reg_lambda=20.0
+[V   1053s] trial 40 (random) trees 200  cv WAPE 7.3330  learning_rate=0.02 max_leaves=31 min_child_weight=50 reg_lambda=20.0
+[V   1072s] trial 41 (local) trees  30  cv WAPE 7.3208  learning_rate=0.08 max_leaves=63 min_child_weight=200 reg_lambda=20.0
+[V   1091s] trial 42 (local) trees  40  cv WAPE 7.3056  learning_rate=0.08 max_leaves=63 min_child_weight=100 reg_lambda=50.0
+[V   1107s] trial 43 (local) trees  30  cv WAPE 7.3208  learning_rate=0.08 max_leaves=63 min_child_weight=200 reg_lambda=50.0
+[V   1126s] trial 44 (local) trees  40  cv WAPE 7.3278  learning_rate=0.08 max_leaves=63 min_child_weight=200 reg_lambda=50.0
+[V   1145s] trial 45 (local) trees  30  cv WAPE 7.3322  learning_rate=0.08 max_leaves=63 min_child_weight=200 reg_lambda=20.0
+[V   1165s] trial 46 (local) trees  40  cv WAPE 7.3065  learning_rate=0.08 max_leaves=63 min_child_weight=200 reg_lambda=50.0
+[V   1197s] trial 47 (local) trees 150  cv WAPE 7.3097  learning_rate=0.02 max_leaves=63 min_child_weight=400 reg_lambda=5.0
+[V   1229s] trial 48 (local) trees 125  cv WAPE 7.3130  learning_rate=0.02 max_leaves=63 min_child_weight=400 reg_lambda=5.0
+[V   1266s] trial 49 (local) trees 300  cv WAPE 7.3336  learning_rate=0.01 max_leaves=63 min_child_weight=400 reg_lambda=5.0
+[V   1286s] trial 50 (local) trees 100  cv WAPE 7.3235  learning_rate=0.03 max_leaves=63 min_child_weight=400 reg_lambda=20.0
+[V   1311s] trial 51 (local) trees 125  cv WAPE 7.3130  learning_rate=0.02 max_leaves=63 min_child_weight=400 reg_lambda=5.0
+[V   1327s] trial 52 (local) trees 100  cv WAPE 7.3252  learning_rate=0.03 max_leaves=31 min_child_weight=400 reg_lambda=5.0
+[V   1366s] trial 53 (local) trees 300  cv WAPE 7.3154  learning_rate=0.01 max_leaves=63 min_child_weight=400 reg_lambda=5.0
+[V   1404s] trial 54 (local) trees 300  cv WAPE 7.3108  learning_rate=0.01 max_leaves=63 min_child_weight=400 reg_lambda=5.0
+[V   1442s] trial 55 (local) trees 300  cv WAPE 7.3226  learning_rate=0.01 max_leaves=63 min_child_weight=400 reg_lambda=5.0
+[V   1480s] trial 56 (local) trees 300  cv WAPE 7.3141  learning_rate=0.01 max_leaves=63 min_child_weight=400 reg_lambda=5.0
+[V   1519s] trial 57 (local) trees 300  cv WAPE 7.3154  learning_rate=0.01 max_leaves=63 min_child_weight=400 reg_lambda=5.0
+[V   1557s] trial 58 (local) trees 500  cv WAPE 7.3476  learning_rate=0.01 max_leaves=63 min_child_weight=400 reg_lambda=5.0
+[V] shortlist trial 42: cv 7.3056  validation 8.5821  (baseline 9.4261)
+[V] shortlist trial 46: cv 7.3065  validation 8.5551  (baseline 9.4261)
+[V] shortlist trial 6: cv 7.3080  validation 8.4626  (baseline 9.4261)
+[V] shortlist trial 1: cv 7.3094  validation 8.5760  (baseline 9.4261)
+[V] shortlist trial 47: cv 7.3097  validation 8.6174  (baseline 9.4261)
+[V] chosen trial 6: cv 7.3080, validation 8.4626; Phase 6 default cv 7.3282

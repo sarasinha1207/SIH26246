@@ -1,0 +1,261 @@
+{
+  "rule": "70% / 5% / 25% of the 192 calendar months, chronological, same cut dates for every series (so every sector has the same shares)",
+  "windows": {
+    "train": {
+      "first_index": 0,
+      "last_index": 133,
+      "first_month": "2011-01-01",
+      "last_month": "2022-02-01",
+      "months": 134,
+      "share": 0.6979
+    },
+    "validation": {
+      "first_index": 134,
+      "last_index": 143,
+      "first_month": "2022-03-01",
+      "last_month": "2022-12-01",
+      "months": 10,
+      "share": 0.0521
+    },
+    "test": {
+      "first_index": 144,
+      "last_index": 191,
+      "first_month": "2023-01-01",
+      "last_month": "2026-12-01",
+      "months": 48,
+      "share": 0.25
+    }
+  },
+  "row_rule": {
+    "train": "target month in train window",
+    "validation": "target in validation window and origin >= last train month",
+    "test": "target in test window and origin >= last validation month"
+  },
+  "rows_total_before_split": 502320,
+  "rows_dropped_straddling_boundaries": 36680,
+  "files": {
+    "train": {
+      "file": "train.parquet",
+      "rows": 307440,
+      "bytes": 56129999,
+      "sha256": "ca56579f91177082d45668a523be0d166fb8122d84ca13397faa385c7dfe6c2e",
+      "origin_range": [
+        "2014-01-01",
+        "2022-01-01"
+      ],
+      "target_range": [
+        "2014-02-01",
+        "2022-02-01"
+      ],
+      "rows_by_horizon": {
+        "1": 27160,
+        "2": 26880,
+        "3": 26600,
+        "4": 26320,
+        "5": 26040,
+        "6": 25760,
+        "7": 25480,
+        "8": 25200,
+        "9": 24920,
+        "10": 24640,
+        "11": 24360,
+        "12": 24080
+      }
+    },
+    "validation": {
+      "file": "validation.parquet",
+      "rows": 15400,
+      "bytes": 3233145,
+      "sha256": "84291b66fe0512e478550c442a0dc81f140527a45f7f334764f15df6606e3d50",
+      "origin_range": [
+        "2022-02-01",
+        "2022-11-01"
+      ],
+      "target_range": [
+        "2022-03-01",
+        "2022-12-01"
+      ],
+      "rows_by_horizon": {
+        "1": 2800,
+        "2": 2520,
+        "3": 2240,
+        "4": 1960,
+        "5": 1680,
+        "6": 1400,
+        "7": 1120,
+        "8": 840,
+        "9": 560,
+        "10": 280
+      }
+    },
+    "test": {
+      "file": "test.parquet",
+      "rows": 142800,
+      "bytes": 21516198,
+      "sha256": "cd51dd5017e10221171bb2e4081ca0c277dd221664fb5b5bce77d838267ef405",
+      "origin_range": [
+        "2022-12-01",
+        "2026-11-01"
+      ],
+      "target_range": [
+        "2023-01-01",
+        "2026-12-01"
+      ],
+      "rows_by_horizon": {
+        "1": 13440,
+        "2": 13160,
+        "3": 12880,
+        "4": 12600,
+        "5": 12320,
+        "6": 12040,
+        "7": 11760,
+        "8": 11480,
+        "9": 11200,
+        "10": 10920,
+        "11": 10640,
+        "12": 10360
+      }
+    }
+  },
+  "series": 280,
+  "series_per_sector": {
+    "Construction": 56,
+    "Healthcare": 56,
+    "IT-ITeS": 56,
+    "Manufacturing": 56,
+    "Textiles and Apparel": 56
+  },
+  "calendar_months_per_sector": {
+    "Construction": {
+      "train": 134,
+      "validation": 10,
+      "test": 48
+    },
+    "Healthcare": {
+      "train": 134,
+      "validation": 10,
+      "test": 48
+    },
+    "IT-ITeS": {
+      "train": 134,
+      "validation": 10,
+      "test": 48
+    },
+    "Manufacturing": {
+      "train": 134,
+      "validation": 10,
+      "test": 48
+    },
+    "Textiles and Apparel": {
+      "train": 134,
+      "validation": 10,
+      "test": 48
+    }
+  },
+  "rows_per_sector": {
+    "train": {
+      "Construction": 61488,
+      "Healthcare": 61488,
+      "IT-ITeS": 61488,
+      "Manufacturing": 61488,
+      "Textiles and Apparel": 61488
+    },
+    "validation": {
+      "Construction": 3080,
+      "Healthcare": 3080,
+      "IT-ITeS": 3080,
+      "Manufacturing": 3080,
+      "Textiles and Apparel": 3080
+    },
+    "test": {
+      "Construction": 28560,
+      "Healthcare": 28560,
+      "IT-ITeS": 28560,
+      "Manufacturing": 28560,
+      "Textiles and Apparel": 28560
+    }
+  },
+  "feature_union": [
+    "E_dev0_12",
+    "E_dev0_3",
+    "E_dev3_12",
+    "E_dev6_12",
+    "E_mom1",
+    "E_mom12",
+    "E_mom3",
+    "E_mom36",
+    "E_mom6",
+    "E_sf_origin",
+    "E_sf_shift",
+    "E_vol12",
+    "E_ya_h",
+    "E_yadrift_h",
+    "S_dev0_12",
+    "S_dev0_3",
+    "S_dev3_12",
+    "S_dev6_12",
+    "S_mom1",
+    "S_mom12",
+    "S_mom3",
+    "S_mom36",
+    "S_mom6",
+    "S_sf_origin",
+    "S_sf_shift",
+    "S_ya_h",
+    "S_yadrift_h",
+    "V_dev0_12",
+    "V_dev0_3",
+    "V_dev3_12",
+    "V_dev6_12",
+    "V_mom1",
+    "V_mom12",
+    "V_mom3",
+    "V_mom36",
+    "V_mom6",
+    "V_sf_origin",
+    "V_sf_shift",
+    "V_vol12",
+    "V_ya_h",
+    "V_yadrift_h",
+    "cert_to_vac",
+    "coverage_dev12",
+    "coverage_mom12",
+    "female_rel",
+    "grad_pct",
+    "horizon",
+    "origin_month",
+    "seats_rel",
+    "sec_E_dev12",
+    "sec_E_mom12",
+    "sec_E_mom3",
+    "sec_S_dev12",
+    "sec_S_mom12",
+    "sec_S_mom3",
+    "sec_V_dev12",
+    "sec_V_mom12",
+    "sec_V_mom3",
+    "seek_rate_dev12",
+    "seek_rate_mom12",
+    "target_month",
+    "target_month_cos",
+    "target_month_sin",
+    "ur",
+    "ur_chg12",
+    "ur_chg3",
+    "vac_rate",
+    "vac_rate_dev12",
+    "vac_rate_mom12",
+    "youth_pct"
+  ],
+  "notes": [
+    "Features use trailing windows only; train rows can be rebuilt from a panel that stops at the train end (tests/test_splits.py).",
+    "The test file is not read in Phase 7.  Its 2023-2024 months were seen by Phase 5/6 selection (fold F3), and the 2025-26 months were scored once by the quarantined prototype.",
+    "Shock flags: target_in_shock_EV (COVID + policy spans), target_in_shock_S (also the e-Shram ramp, 2021-08 to 2023-02)."
+  ],
+  "environment": {
+    "python": "3.13.0",
+    "pandas": "2.2.3",
+    "numpy": "2.1.3"
+  },
+  "created_seconds": 4.8
+}

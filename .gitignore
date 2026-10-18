@@ -1,14 +1,41 @@
+# Python
 __pycache__/
 *.pyc
 .venv/
 venv/
 .ipynb_checkpoints/
+.pytest_cache/
+
+# Editor / OS / local tooling
 .DS_Store
-*.csv
+Thumbs.db
+.vscode/
+.idea/
+.claude/
+
+# Office / document files that are not part of the pipeline
 *.pdf
 *.docsx
-*.xlsx
 *.pptx
-data
+
+# Legacy dataset, never used for modelling (see README "Data rules")
 Archived
-*.json
+
+# Quarantined prototype outputs were never committed; keep them out
+outputs/quarantine/provisional_prototype/*.csv
+outputs/quarantine/provisional_prototype/*.json
+reports/quarantine/**/*.csv
+reports/quarantine/**/*.json
+
+# Regenerable data: rebuild with the scripts listed in README.md.
+# split_manifest.json is tracked and holds the checksums that prove a rebuilt file is identical.
+data/splits/*.parquet
+data/interim/*
+!data/interim/.gitkeep
+*.tmp
+*.log.tmp
+*_stdout.tmp
+LGD_Districts.parquet
+
+# NOTE: *.csv, *.json and data/ used to be ignored wholesale, which hid the configs, manifests,
+# reports and model-card inputs that should be committed.  Only the large regenerable files above are ignored now.

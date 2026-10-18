@@ -1,0 +1,62 @@
+{
+  "period": [
+    "2011-01",
+    "2024-12"
+  ],
+  "rows": 47040,
+  "series": 280,
+  "districts": 56,
+  "states": [
+    "Delhi",
+    "Maharashtra",
+    "Tamil Nadu",
+    "West Bengal"
+  ],
+  "sectors": [
+    "Construction",
+    "Healthcare",
+    "IT-ITeS",
+    "Manufacturing",
+    "Textiles and Apparel"
+  ],
+  "excluded": "2025-01 onward (locked test period) and the simulated months Nov-Dec 2026",
+  "data_is_synthetic": true,
+  "relative_status_values": [
+    "Tightest decile",
+    "Tight",
+    "Typical",
+    "Loose",
+    "Loosest decile"
+  ],
+  "columns": [
+    "Series_ID",
+    "Date",
+    "state",
+    "district",
+    "district_lgd_code",
+    "district_tier",
+    "sector",
+    "employed",
+    "vacancies",
+    "registered_seekers",
+    "avg_monthly_wage_inr",
+    "unemployment_rate_pct",
+    "training_seats_annual",
+    "trainees_certified",
+    "female_share_pct",
+    "graduate_share_pct",
+    "youth_15_24_share_pct",
+    "district_population",
+    "is_covid_window",
+    "is_eshram_ramp",
+    "coverage_monthly",
+    "coverage_3m",
+    "coverage_percentile_in_sector",
+    "seat_mismatch_log",
+    "relative_status",
+    "absolute_context",
+    "is_low_volume_series",
+    "net_gap_persons"
+  ],
+  "map_boundaries": "district_boundaries.geojson (build with src/dashboard/build_boundaries.py; see district_boundaries_provenance.json)"
+}

@@ -1,0 +1,15 @@
+[S    82s] trial 52                    trees 150  cv 7.7688  validation 11.5907
+[S   136s] trial 49                    trees 150  cv 7.7782  validation 10.6456
+[S   190s] trial 48                    trees 150  cv 7.8274  validation 10.6272
+[S   220s] trial 31                    trees 150  cv 7.8475  validation 10.6909
+[S   277s] trial 18                    trees 150  cv 7.8530  validation 10.8287
+[S   322s] trial 50                    trees 150  cv 7.8530  validation 10.8287
+[S   347s] trial 41                    trees 150  cv 7.8768  validation 10.6845
+[S   365s] trial 42                    trees 150  cv 7.8821  validation 10.7590
+[S   394s] trial 6                     trees 200  cv 7.8992  validation 10.3882
+[S   425s] trial 47                    trees 150  cv 7.8999  validation 10.7407
+[S   497s] trial 5                     trees 400  cv 7.9152  validation 10.6862
+[S   517s] trial 45                    trees 150  cv 7.9207  validation 10.1511
+[S   542s] phase 6 default, CV trees   trees 150  cv 8.0236  validation 9.6290
+[S   580s] phase 6 default, 250 trees  trees 250  cv 7.8970  validation 9.7035
+[S] chosen: phase 6 default, 250 trees  score 1.0000 (default 250 trees = 1.0000)

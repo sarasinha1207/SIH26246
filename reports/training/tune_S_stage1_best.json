@@ -1,0 +1,98 @@
+{
+ "target": "S",
+ "selection_rule": "lowest cross-validation WAPE",
+ "folds": [
+  "2016-12",
+  "2017-12",
+  "2018-12"
+ ],
+ "search": {
+  "random": 40,
+  "local": 18,
+  "total_trials": 59
+ },
+ "chosen": {
+  "trial": 52,
+  "cv_wape": 7.768817739133027,
+  "best_trees": 150,
+  "val_wape": 11.2767689587953,
+  "val_baseline_wape": 21.18772361092325,
+  "cfg": {
+   "learning_rate": 0.08,
+   "max_leaves": 63,
+   "min_child_weight": 400,
+   "reg_lambda": 1.0,
+   "reg_alpha": 0.1,
+   "gamma": 0.01,
+   "subsample": 0.7,
+   "colsample_bytree": 0.4,
+   "colsample_bynode": 1.0,
+   "max_bin": 128
+  }
+ },
+ "shortlist": [
+  {
+   "trial": 52,
+   "cv_wape": 7.768817739133027,
+   "best_trees": 150,
+   "val_wape": 11.2767689587953,
+   "val_baseline_wape": 21.18772361092325,
+   "cfg": {
+    "learning_rate": 0.08,
+    "max_leaves": 63,
+    "min_child_weight": 400,
+    "reg_lambda": 1.0,
+    "reg_alpha": 0.1,
+    "gamma": 0.01,
+    "subsample": 0.7,
+    "colsample_bytree": 0.4,
+    "colsample_bynode": 1.0,
+    "max_bin": 128
+   }
+  },
+  {
+   "trial": 49,
+   "cv_wape": 7.778179010273727,
+   "best_trees": 150,
+   "val_wape": 10.419860957832562,
+   "val_baseline_wape": 21.18772361092325,
+   "cfg": {
+    "learning_rate": 0.08,
+    "max_leaves": 63,
+    "min_child_weight": 200,
+    "reg_lambda": 1.0,
+    "reg_alpha": 1.0,
+    "gamma": 0.05,
+    "subsample": 0.7,
+    "colsample_bytree": 0.4,
+    "colsample_bynode": 1.0,
+    "max_bin": 256
+   }
+  },
+  {
+   "trial": 48,
+   "cv_wape": 7.827438300617957,
+   "best_trees": 150,
+   "val_wape": 10.445343022029714,
+   "val_baseline_wape": 21.18772361092325,
+   "cfg": {
+    "learning_rate": 0.08,
+    "max_leaves": 63,
+    "min_child_weight": 800,
+    "reg_lambda": 1.0,
+    "reg_alpha": 1.0,
+    "gamma": 0.05,
+    "subsample": 0.7,
+    "colsample_bytree": 0.4,
+    "colsample_bynode": 0.8,
+    "max_bin": 256
+   }
+  }
+ ],
+ "phase6_default": {
+  "cv_wape": 8.023645499226285,
+  "best_trees": 150
+ },
+ "best_cv": 7.768817739133027,
+ "seconds": 214
+}

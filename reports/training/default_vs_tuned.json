@@ -1,0 +1,14 @@
+{
+ "E": {
+  "phase6_default_validation_wape": 4.076684413476359,
+  "tuned_validation_wape": 4.190985183839696
+ },
+ "V": {
+  "phase6_default_validation_wape": 8.48991965321391,
+  "tuned_validation_wape": 8.556901481656961
+ },
+ "S": {
+  "phase6_default_validation_wape": 9.543953251114042,
+  "tuned_validation_wape": 9.543953251114042
+ }
+}

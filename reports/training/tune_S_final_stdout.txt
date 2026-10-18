@@ -1,0 +1,4 @@
+[S] shortlist trial 52: cv 7.7688  validation 11.2768  (baseline 21.1877)
+[S] shortlist trial 49: cv 7.7782  validation 10.4199  (baseline 21.1877)
+[S] shortlist trial 48: cv 7.8274  validation 10.4453  (baseline 21.1877)
+[S] chosen trial 52: cv 7.7688, validation 11.2768; Phase 6 default cv 8.0236

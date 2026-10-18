@@ -1,0 +1,57 @@
+state,state_lgd_code,district,district_lgd_code,district_tier,population_2011,population_growth_per_year
+Maharashtra,27,Mumbai City,482,metro_core,3085411,0.003
+Maharashtra,27,Mumbai Suburban,483,metro_core,9356962,0.009
+Maharashtra,27,Thane,497,industrial_hub,8070032,0.019
+Maharashtra,27,Palghar,665,industrial_msme,2990116,0.018
+Maharashtra,27,Pune,490,industrial_it_hub,9429408,0.017
+Maharashtra,27,Nashik,487,industrial_hub,6107187,0.015
+Maharashtra,27,Chhatrapati Sambhajinagar,469,industrial_hub,3701282,0.014
+Maharashtra,27,Nagpur,484,logistics_hub,4653570,0.012
+Maharashtra,27,Kolhapur,480,industrial_msme,3876001,0.01
+Maharashtra,27,Solapur,496,textile_cluster,4317756,0.011
+Maharashtra,27,Raigad,491,industrial_port,2634200,0.014
+Maharashtra,27,Ahilyanagar,466,semi_industrial,4543159,0.011
+Maharashtra,27,Jalgaon,478,semi_industrial,4229917,0.012
+Maharashtra,27,Satara,494,semi_industrial,3003741,0.009
+Maharashtra,27,Sangli,493,semi_industrial,2822143,0.009
+Maharashtra,27,Amravati,468,textile_cluster,2888445,0.01
+Maharashtra,27,Nanded,485,agrarian_developing,3361292,0.012
+Maharashtra,27,Latur,481,semi_industrial,2455543,0.011
+Maharashtra,27,Dhule,474,textile_cluster,2050862,0.011
+Maharashtra,27,Chandrapur,473,industrial_mining,2204307,0.008
+Maharashtra,27,Buldhana,472,agrarian_developing,2586258,0.01
+Maharashtra,27,Yavatmal,500,agrarian_developing,2772348,0.01
+Maharashtra,27,Beed,470,agrarian_migrant,2585049,0.011
+Maharashtra,27,Parbhani,489,agrarian_developing,1836086,0.011
+Maharashtra,27,Jalna,479,industrial_msme,1959046,0.012
+Maharashtra,27,Akola,467,semi_industrial,1813906,0.01
+Maharashtra,27,Dharashiv,488,agrarian_developing,1657576,0.009
+Maharashtra,27,Nandurbar,486,peripheral_tribal,1648295,0.013
+Maharashtra,27,Ratnagiri,492,peripheral_coastal,1615069,0.004
+Maharashtra,27,Gondia,476,peripheral_agrarian,1322507,0.008
+Maharashtra,27,Wardha,498,semi_industrial,1300774,0.006
+Maharashtra,27,Bhandara,471,peripheral_agrarian,1200334,0.006
+Maharashtra,27,Washim,499,peripheral_agrarian,1197160,0.009
+Maharashtra,27,Hingoli,477,peripheral_agrarian,1177345,0.01
+Maharashtra,27,Gadchiroli,475,peripheral_tribal,1072942,0.008
+Maharashtra,27,Sindhudurg,495,peripheral_coastal,849651,-0.002
+Tamil Nadu,33,Chennai,568,metro_core,4646732,0.011
+Tamil Nadu,33,Tiruvallur,589,industrial_hub,3728104,0.023
+Tamil Nadu,33,Kanchipuram,574,industrial_hub,1442008,0.021
+Tamil Nadu,33,Chengalpattu,730,industrial_it_hub,2556244,0.024
+Delhi,07,Central Delhi,77,metro_core,495538,0.007
+Delhi,07,East Delhi,78,metro_residential,1454607,0.011
+Delhi,07,New Delhi,79,metro_administrative,120842,0.005
+Delhi,07,North Delhi,80,industrial_msme,755645,0.009
+Delhi,07,North East Delhi,81,metro_residential,1907561,0.015
+Delhi,07,North West Delhi,82,industrial_msme,3111615,0.016
+Delhi,07,South Delhi,83,metro_core,2324797,0.013
+Delhi,07,South East Delhi,670,industrial_hub,1208381,0.014
+Delhi,07,South West Delhi,84,metro_residential,1951245,0.015
+Delhi,07,West Delhi,85,industrial_hub,2164231,0.012
+Delhi,07,Shahdara,671,industrial_msme,1293479,0.013
+West Bengal,19,Kolkata,315,metro_core,4496694,0.004
+West Bengal,19,North 24 Parganas,303,industrial_it_hub,10009781,0.012
+West Bengal,19,South 24 Parganas,304,industrial_msme,8161961,0.014
+West Bengal,19,Howrah,313,industrial_hub,4850029,0.009
+West Bengal,19,Hooghly,312,industrial_hub,5519145,0.008

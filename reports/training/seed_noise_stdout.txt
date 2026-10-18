@@ -1,0 +1,3 @@
+E {'seed_min': 4.139, 'seed_max': 4.276, 'seed_std': 0.043, 'seed_std_pct_of_mean': 1.029, 'single_fit_wape_by_threads_seed42': {'1': 4.153496290135509, '4': 4.184783521116463, '-1': 4.194261131493138}}
+V {'seed_min': 8.396, 'seed_max': 8.767, 'seed_std': 0.107, 'seed_std_pct_of_mean': 1.247, 'single_fit_wape_by_threads_seed42': {'1': 8.616700906391433, '4': 8.46258316883959, '-1': 8.581186449368886}}
+S {'seed_min': 9.543, 'seed_max': 10.073, 'seed_std': 0.169, 'seed_std_pct_of_mean': 1.726, 'single_fit_wape_by_threads_seed42': {'1': 9.617579156609084, '4': 9.533337707820847, '-1': 9.957762507466573}}

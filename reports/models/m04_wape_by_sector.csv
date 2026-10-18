@@ -1,0 +1,181 @@
+target,model,Sector_Name,wape
+E,hist_gbm,Construction,1.25
+E,hist_gbm,Healthcare,1.222
+E,hist_gbm,IT-ITeS,1.327
+E,hist_gbm,Manufacturing,1.289
+E,hist_gbm,Textiles and Apparel,1.328
+E,holt_winters,Construction,1.464
+E,holt_winters,Healthcare,1.439
+E,holt_winters,IT-ITeS,1.674
+E,holt_winters,Manufacturing,1.409
+E,holt_winters,Textiles and Apparel,1.329
+E,last_plus_seasonal_shift,Construction,1.844
+E,last_plus_seasonal_shift,Healthcare,2.016
+E,last_plus_seasonal_shift,IT-ITeS,1.792
+E,last_plus_seasonal_shift,Manufacturing,1.686
+E,last_plus_seasonal_shift,Textiles and Apparel,1.453
+E,last_value,Construction,5.993
+E,last_value,Healthcare,2.248
+E,last_value,IT-ITeS,1.922
+E,last_value,Manufacturing,2.069
+E,last_value,Textiles and Apparel,3.775
+E,lightgbm,Construction,1.259
+E,lightgbm,Healthcare,1.242
+E,lightgbm,IT-ITeS,1.307
+E,lightgbm,Manufacturing,1.267
+E,lightgbm,Textiles and Apparel,1.327
+E,lightgbm_per_horizon,Construction,1.27
+E,lightgbm_per_horizon,Healthcare,1.241
+E,lightgbm_per_horizon,IT-ITeS,1.314
+E,lightgbm_per_horizon,Manufacturing,1.358
+E,lightgbm_per_horizon,Textiles and Apparel,1.331
+E,mlp,Construction,1.411
+E,mlp,Healthcare,1.352
+E,mlp,IT-ITeS,1.6
+E,mlp,Manufacturing,1.413
+E,mlp,Textiles and Apparel,1.515
+E,random_forest,Construction,1.267
+E,random_forest,Healthcare,1.265
+E,random_forest,IT-ITeS,1.315
+E,random_forest,Manufacturing,1.277
+E,random_forest,Textiles and Apparel,1.362
+E,ridge,Construction,1.275
+E,ridge,Healthcare,1.321
+E,ridge,IT-ITeS,1.487
+E,ridge,Manufacturing,1.264
+E,ridge,Textiles and Apparel,1.325
+E,seasonal_naive_drift,Construction,1.8
+E,seasonal_naive_drift,Healthcare,1.796
+E,seasonal_naive_drift,IT-ITeS,2.086
+E,seasonal_naive_drift,Manufacturing,1.902
+E,seasonal_naive_drift,Textiles and Apparel,1.946
+E,sm3_plus_seasonal_shift,Construction,3.049
+E,sm3_plus_seasonal_shift,Healthcare,2.33
+E,sm3_plus_seasonal_shift,IT-ITeS,2.016
+E,sm3_plus_seasonal_shift,Manufacturing,1.809
+E,sm3_plus_seasonal_shift,Textiles and Apparel,2.219
+E,xgboost,Construction,1.24
+E,xgboost,Healthcare,1.242
+E,xgboost,IT-ITeS,1.322
+E,xgboost,Manufacturing,1.278
+E,xgboost,Textiles and Apparel,1.343
+S,hist_gbm,Construction,4.894
+S,hist_gbm,Healthcare,4.933
+S,hist_gbm,IT-ITeS,6.14
+S,hist_gbm,Manufacturing,5.052
+S,hist_gbm,Textiles and Apparel,4.85
+S,holt_winters,Construction,10.868
+S,holt_winters,Healthcare,8.024
+S,holt_winters,IT-ITeS,6.592
+S,holt_winters,Manufacturing,8.371
+S,holt_winters,Textiles and Apparel,9.331
+S,last_plus_seasonal_shift,Construction,5.632
+S,last_plus_seasonal_shift,Healthcare,5.818
+S,last_plus_seasonal_shift,IT-ITeS,6.226
+S,last_plus_seasonal_shift,Manufacturing,5.583
+S,last_plus_seasonal_shift,Textiles and Apparel,5.528
+S,last_value,Construction,7.954
+S,last_value,Healthcare,5.589
+S,last_value,IT-ITeS,5.736
+S,last_value,Manufacturing,5.263
+S,last_value,Textiles and Apparel,6.2
+S,lightgbm,Construction,4.953
+S,lightgbm,Healthcare,4.879
+S,lightgbm,IT-ITeS,6.341
+S,lightgbm,Manufacturing,5.06
+S,lightgbm,Textiles and Apparel,4.883
+S,lightgbm_per_horizon,Construction,4.967
+S,lightgbm_per_horizon,Healthcare,4.849
+S,lightgbm_per_horizon,IT-ITeS,6.154
+S,lightgbm_per_horizon,Manufacturing,5.063
+S,lightgbm_per_horizon,Textiles and Apparel,4.811
+S,mlp,Construction,7.073
+S,mlp,Healthcare,5.334
+S,mlp,IT-ITeS,11.281
+S,mlp,Manufacturing,5.506
+S,mlp,Textiles and Apparel,5.151
+S,random_forest,Construction,5.086
+S,random_forest,Healthcare,5.078
+S,random_forest,IT-ITeS,6.061
+S,random_forest,Manufacturing,5.359
+S,random_forest,Textiles and Apparel,5.065
+S,ridge,Construction,6.548
+S,ridge,Healthcare,5.615
+S,ridge,IT-ITeS,5.88
+S,ridge,Manufacturing,5.752
+S,ridge,Textiles and Apparel,6.461
+S,seasonal_naive_drift,Construction,7.593
+S,seasonal_naive_drift,Healthcare,8.113
+S,seasonal_naive_drift,IT-ITeS,8.455
+S,seasonal_naive_drift,Manufacturing,8.153
+S,seasonal_naive_drift,Textiles and Apparel,8.608
+S,sm3_plus_seasonal_shift,Construction,6.135
+S,sm3_plus_seasonal_shift,Healthcare,5.777
+S,sm3_plus_seasonal_shift,IT-ITeS,6.062
+S,sm3_plus_seasonal_shift,Manufacturing,5.43
+S,sm3_plus_seasonal_shift,Textiles and Apparel,5.439
+S,xgboost,Construction,4.852
+S,xgboost,Healthcare,4.863
+S,xgboost,IT-ITeS,6.203
+S,xgboost,Manufacturing,5.018
+S,xgboost,Textiles and Apparel,4.901
+V,hist_gbm,Construction,6.193
+V,hist_gbm,Healthcare,6.524
+V,hist_gbm,IT-ITeS,7.536
+V,hist_gbm,Manufacturing,6.057
+V,hist_gbm,Textiles and Apparel,6.05
+V,holt_winters,Construction,7.033
+V,holt_winters,Healthcare,6.929
+V,holt_winters,IT-ITeS,7.555
+V,holt_winters,Manufacturing,6.889
+V,holt_winters,Textiles and Apparel,6.504
+V,last_plus_seasonal_shift,Construction,6.836
+V,last_plus_seasonal_shift,Healthcare,7.227
+V,last_plus_seasonal_shift,IT-ITeS,7.748
+V,last_plus_seasonal_shift,Manufacturing,6.857
+V,last_plus_seasonal_shift,Textiles and Apparel,6.651
+V,last_value,Construction,9.012
+V,last_value,Healthcare,7.042
+V,last_value,IT-ITeS,7.302
+V,last_value,Manufacturing,6.525
+V,last_value,Textiles and Apparel,7.441
+V,lightgbm,Construction,6.193
+V,lightgbm,Healthcare,6.503
+V,lightgbm,IT-ITeS,8.462
+V,lightgbm,Manufacturing,6.055
+V,lightgbm,Textiles and Apparel,6.041
+V,lightgbm_per_horizon,Construction,6.179
+V,lightgbm_per_horizon,Healthcare,6.599
+V,lightgbm_per_horizon,IT-ITeS,8.595
+V,lightgbm_per_horizon,Manufacturing,6.055
+V,lightgbm_per_horizon,Textiles and Apparel,6.171
+V,mlp,Construction,6.519
+V,mlp,Healthcare,6.643
+V,mlp,IT-ITeS,8.555
+V,mlp,Manufacturing,6.208
+V,mlp,Textiles and Apparel,6.197
+V,random_forest,Construction,6.136
+V,random_forest,Healthcare,6.528
+V,random_forest,IT-ITeS,7.645
+V,random_forest,Manufacturing,5.951
+V,random_forest,Textiles and Apparel,6.111
+V,ridge,Construction,7.244
+V,ridge,Healthcare,6.783
+V,ridge,IT-ITeS,6.741
+V,ridge,Manufacturing,6.462
+V,ridge,Textiles and Apparel,6.266
+V,seasonal_naive_drift,Construction,9.842
+V,seasonal_naive_drift,Healthcare,10.029
+V,seasonal_naive_drift,IT-ITeS,10.381
+V,seasonal_naive_drift,Manufacturing,9.356
+V,seasonal_naive_drift,Textiles and Apparel,9.291
+V,sm3_plus_seasonal_shift,Construction,7.011
+V,sm3_plus_seasonal_shift,Healthcare,7.194
+V,sm3_plus_seasonal_shift,IT-ITeS,8.102
+V,sm3_plus_seasonal_shift,Manufacturing,6.903
+V,sm3_plus_seasonal_shift,Textiles and Apparel,6.979
+V,xgboost,Construction,6.212
+V,xgboost,Healthcare,6.523
+V,xgboost,IT-ITeS,7.698
+V,xgboost,Manufacturing,6.055
+V,xgboost,Textiles and Apparel,6.016

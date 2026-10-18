@@ -1,0 +1,13 @@
+model,mean_wape,wape_range_across_folds,avg_fit_seconds,rank_accuracy,native_missing_values,native_categoricals,interval_support,interpretability
+hist_gbm,4.278,5.538,3.8,1.0,3,3,3,2
+xgboost,4.281,5.6,3.8,2.0,3,2,3,2
+lightgbm,4.323,5.908,1.3,3.0,3,3,3,2
+lightgbm_per_horizon,4.333,5.903,3.4,4.0,3,3,3,2
+random_forest,4.357,5.479,21.0,5.0,1,1,2,2
+ridge,4.576,6.283,0.4,6.0,1,1,1,3
+mlp,4.84,5.867,16.1,7.0,1,1,1,1
+last_plus_seasonal_shift,4.849,5.62,0.0,8.0,3,3,1,3
+sm3_plus_seasonal_shift,5.082,5.404,0.0,9.0,3,3,1,3
+holt_winters,5.416,9.616,0.8,10.0,3,1,2,3
+last_value,5.703,4.203,0.0,11.0,3,3,1,3
+seasonal_naive_drift,6.598,8.589,0.0,12.0,3,3,1,3

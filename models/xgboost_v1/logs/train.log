@@ -1,0 +1,13 @@
+2026-10-18 17:54:41,517 Phase 7 training: XGBoost 3.4.1, pandas 2.2.3, numpy 2.1.3, python 3.13.0
+2026-10-18 17:54:41,518 splits: {"train": 307440, "validation": 15400, "test": 142800}
+2026-10-18 17:54:41,634 train and validation files match the checksums in split_manifest.json; the test file is not opened
+2026-10-18 17:54:41,972 [E] fitting 5 seeds x 300 trees on 124320 rows (124320 of 307440 train rows after the shock-window policy, 36 features)
+2026-10-18 17:55:22,442 [E] validation WAPE (mean over horizons) 4.191 vs last value + seasonal shift 4.985; in-sample 1.484; 41s
+2026-10-18 17:56:54,497 [E] 90% interval coverage on validation: 0.612 (nominal 0.90)
+2026-10-18 17:56:55,215 [V] fitting 5 seeds x 40 trees on 307440 rows (307440 of 307440 train rows after the shock-window policy, 29 features)
+2026-10-18 17:57:06,018 [V] validation WAPE (mean over horizons) 8.557 vs last value + seasonal shift 9.426; in-sample 7.348; 12s
+2026-10-18 17:57:25,593 [V] 90% interval coverage on validation: 0.828 (nominal 0.90)
+2026-10-18 17:57:27,169 [S] fitting 5 seeds x 250 trees on 307440 rows (307440 of 307440 train rows after the shock-window policy, 68 features)
+2026-10-18 17:58:34,468 [S] validation WAPE (mean over horizons) 9.544 vs last value + seasonal shift 21.188; in-sample 5.287; 69s
+2026-10-18 18:00:19,187 [S] 90% interval coverage on validation: 0.792 (nominal 0.90)
+2026-10-18 18:00:19,291 done in 338s; checkpoint folder E:\LMIS Data\models\xgboost_v1
