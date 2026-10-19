@@ -348,7 +348,8 @@ PAGE = {
     '5 of 23': '23 में से 5',
     'An AI-enabled labour market intelligence and skill demand-supply forecasting engine for the Ministry of Skill Development and Entrepreneurship.': 'कौशल विकास एवं उद्यमिता मंत्रालय के लिए एआई-आधारित श्रम बाज़ार संबंधी जानकारी और कौशल की माँग-आपूर्ति के पूर्वानुमान का इंजन।',
     'Districts forecast': 'पूर्वानुमान वाले ज़िले',
-    'LMIS India is an AI-enabled labour market intelligence and skill demand-supply forecasting engine for the Ministry of Skill Development and Entrepreneurship (MSDE).': 'LMIS India कौशल विकास एवं उद्यमिता मंत्रालय (MSDE) के लिए एआई-आधारित श्रम बाज़ार संबंधी जानकारी और कौशल की माँग-आपूर्ति के पूर्वानुमान का इंजन है।',
+    'Bridging Skills. Forecasting Futures.': 'कौशल को जोड़ना। भविष्य का पूर्वानुमान।',
+    'KaushalSetu is an AI-enabled labour market intelligence and skill demand-supply forecasting engine for the Ministry of Skill Development and Entrepreneurship (MSDE).': 'KaushalSetu कौशल विकास एवं उद्यमिता मंत्रालय (MSDE) के लिए एआई-आधारित श्रम बाज़ार संबंधी जानकारी और कौशल की माँग-आपूर्ति के पूर्वानुमान का इंजन है।',
     'Everything the forecasts are built from is listed on this page: the monthly district and sector panel, the district catalogue, the occupation list, the crosswalk that links them and the district boundaries used by the map. For each one you can see what it contains, how large it is, where it came from, and whether it is real, simulated or produced by the model.': 'पूर्वानुमान जिन सभी आँकड़ों पर बने हैं, वे इस पृष्ठ पर सूचीबद्ध हैं: मासिक ज़िला-सेक्टर पैनल, ज़िला सूची, व्यवसाय सूची, उन्हें जोड़ने वाला क्रॉसवॉक और मानचित्र में उपयोग हुई ज़िलों की सीमाएँ। हर एक के लिए आप देख सकते हैं कि उसमें क्या है, वह कितना बड़ा है, कहाँ से आया, और वह असली है, सिम्युलेटेड है या मॉडल का परिणाम।',
     'No public source reports these counts by district and sector, so every count on this site is simulated to behave like official statistics. The codes, populations and boundaries are real. The forecasts are real model output on that simulated history.': 'कोई सार्वजनिक स्रोत ये गिनतियाँ ज़िले और सेक्टर के अनुसार नहीं बताता, इसलिए इस साइट की हर गिनती आधिकारिक सांख्यिकी की तरह व्यवहार करने के लिए सिम्युलेट की गई है। कोड, जनसंख्या और सीमाएँ असली हैं। पूर्वानुमान उसी सिम्युलेटेड इतिहास पर मॉडल के असली परिणाम हैं।',
     'The data behind the forecasts, and where each part of it came from.': 'पूर्वानुमानों के पीछे का डेटा, और उसका हर हिस्सा कहाँ से आया।',
@@ -365,7 +366,7 @@ PAGE = {
 # aria-label values (the page script swaps them)
 ATTR = {
     "Main": "मुख्य",
-    "LMIS India home": "LMIS India का मुख्य पृष्ठ",
+    "KaushalSetu home": "KaushalSetu का मुख्य पृष्ठ",
     "Display options": "प्रदर्शन विकल्प",
     "Text size": "अक्षर का आकार",
     "Smaller text": "छोटे अक्षर",
@@ -502,8 +503,8 @@ LONG_MONTHS = {"January": "जनवरी", "February": "फ़रवरी", "
 NAMES = {**STATES, **SECTORS, **DISTRICTS, **LONG_MONTHS}
 MONTHS = ["जन", "फ़र", "मार्च", "अप्रैल", "मई", "जून", "जुल", "अग", "सित", "अक्टू", "नव", "दिस"]
 TITLES = {
-    "LMIS India: labour market forecasts for districts": "LMIS India: ज़िलों के लिए श्रम बाज़ार पूर्वानुमान",
-    "About | LMIS India": "परिचय | LMIS India",
-    "Resources | LMIS India": "संसाधन | LMIS India",
-    "Dashboard | LMIS India": "डैशबोर्ड | LMIS India",
+    "KaushalSetu: Bridging Skills. Forecasting Futures.": "KaushalSetu: कौशल को जोड़ना। भविष्य का पूर्वानुमान।",
+    "About | KaushalSetu": "परिचय | KaushalSetu",
+    "Resources | KaushalSetu": "संसाधन | KaushalSetu",
+    "Dashboard | KaushalSetu": "डैशबोर्ड | KaushalSetu",
 }

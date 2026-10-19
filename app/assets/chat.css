@@ -1,0 +1,60 @@
+/* KaushalSetu assistant window. Shared by the public site and the dashboard: it reads the colour tokens of whichever stylesheet is loaded, with fallbacks. */
+.lc-root { --lc-accent: #2A5BD7; --lc-accent-hi: #1F4AB8; font: 400 .92rem/1.5 var(--font, var(--body, "Geist", "Noto Sans Devanagari", "Segoe UI", system-ui, sans-serif)); color: var(--ink, #0B1B3A); }
+.lc-root *, .lc-root *::before, .lc-root *::after { box-sizing: border-box; }
+.lc-fab { position: fixed; right: 20px; bottom: calc(var(--ft, 0px) + 18px); z-index: 70; width: 56px; height: 56px; border-radius: 50%; border: 0; cursor: pointer; display: grid; place-items: center; color: #fff; background: var(--lc-accent);
+  box-shadow: 0 12px 28px -10px rgba(15, 43, 99, .65), 0 0 0 1px rgba(255, 255, 255, .12) inset; transition: transform .2s ease, background .2s ease; }
+.lc-fab:hover { transform: translateY(-2px); background: var(--lc-accent-hi); }
+.lc-fab:focus-visible { outline: 3px solid var(--supply, #E39A1F); outline-offset: 3px; }
+.lc-fab svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; grid-area: 1 / 1; transition: opacity .2s ease, transform .2s ease; }
+.lc-fab .i-x { opacity: 0; transform: rotate(-45deg) scale(.7); }
+.lc-fab.on .i-chat { opacity: 0; transform: rotate(45deg) scale(.7); }
+.lc-fab.on .i-x { opacity: 1; transform: none; }
+.lc-panel { position: fixed; right: 20px; bottom: calc(var(--ft, 0px) + 88px); z-index: 70; width: min(392px, calc(100vw - 24px)); height: min(580px, calc(100dvh - var(--ft, 0px) - 112px)); display: flex; flex-direction: column;
+  background: var(--surface, #fff); color: var(--ink, #0B1B3A); border: 1px solid var(--line, #D3DDEE); border-radius: 18px; box-shadow: var(--shadow, 0 24px 60px -24px rgba(15, 43, 99, .55)); overflow: hidden; animation: lc-in .22s ease; }
+.lc-panel[hidden] { display: none; }
+@keyframes lc-in { from { opacity: 0; transform: translateY(10px) scale(.98); } to { opacity: 1; transform: none; } }
+.lc-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 14px; border-bottom: 1px solid var(--line, #D3DDEE); background: var(--surface-2, #F1F5FC); }
+.lc-head b { display: block; font-size: 1rem; }
+.lc-head span { display: block; font-size: .74rem; color: var(--ink-2, #4A5878); line-height: 1.35; }
+.lc-clear { flex: none; border: 1px solid var(--line, #D3DDEE); background: var(--surface, #fff); color: var(--ink-2, #4A5878); border-radius: 8px; padding: 4px 10px; font: 600 .76rem inherit; font-family: inherit; cursor: pointer; }
+.lc-clear:hover { color: var(--ink, #0B1B3A); border-color: var(--demand, #2F6BFF); }
+.lc-log { flex: 1; min-height: 0; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 10px; overscroll-behavior: contain; }
+.lc-msg { max-width: 92%; padding: 9px 12px; border-radius: 14px; font-size: .88rem; overflow-wrap: anywhere; }
+.lc-msg p { margin: 0; }
+.lc-msg.bot { align-self: flex-start; background: var(--surface-2, #F1F5FC); border: 1px solid var(--line, #D3DDEE); border-top-left-radius: 4px; }
+.lc-msg.me { align-self: flex-end; background: var(--lc-accent); color: #fff; border-top-right-radius: 4px; }
+.lc-msg ul { margin: 7px 0 0; padding: 0; list-style: none; display: grid; gap: 5px; }
+.lc-msg li { position: relative; padding-left: 14px; font-size: .84rem; }
+.lc-msg li::before { content: ""; position: absolute; left: 2px; top: .62em; width: 6px; height: 6px; border-radius: 50%; background: var(--supply, #E39A1F); }
+.lc-links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
+.lc-links a { display: inline-block; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--demand, #2F6BFF); color: var(--demand-deep, #1F4FD1); text-decoration: none; font-weight: 600; font-size: .78rem; background: var(--surface, #fff); }
+html[data-theme="dark"] .lc-links a { color: var(--demand-deep, #8FB0FF); }
+.lc-links a:hover { background: var(--lc-accent); border-color: var(--lc-accent); color: #fff; }
+.lc-msg small { display: block; margin-top: 7px; font-size: .7rem; color: var(--ink-2, #4A5878); }
+.lc-tools { display: flex; gap: 6px; flex: none; }
+.lc-ai[aria-pressed="true"] { background: var(--lc-accent); border-color: var(--lc-accent); color: #fff; }
+.lc-note { margin: 0; padding: 0 14px 8px; font-size: .7rem; line-height: 1.4; color: var(--ink-2, #4A5878); }
+.lc-note[hidden], .lc-ai[hidden] { display: none; }
+.lc-wait { color: var(--ink-2, #4A5878); font-style: italic; }
+.lc-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 14px 10px; }
+.lc-chips:empty { display: none; }
+.lc-chip { border: 1px solid var(--line, #D3DDEE); background: var(--surface, #fff); color: var(--ink, #0B1B3A); border-radius: 999px; padding: 5px 11px; font: 500 .78rem inherit; font-family: inherit; cursor: pointer; text-align: left; }
+.lc-chip:hover { border-color: var(--demand, #2F6BFF); color: var(--demand-deep, #1F4FD1); }
+.lc-form { display: flex; gap: 8px; padding: 10px 12px; border-top: 1px solid var(--line, #D3DDEE); background: var(--surface, #fff); }
+.lc-form input { flex: 1; min-width: 0; border: 1px solid var(--line, #D3DDEE); background: var(--surface-2, #F1F5FC); color: var(--ink, #0B1B3A); border-radius: 10px; padding: 9px 12px; font: 400 .9rem inherit; font-family: inherit; }
+.lc-form input:focus { outline: 2px solid var(--demand, #2F6BFF); outline-offset: 1px; }
+.lc-send { border: 0; border-radius: 10px; padding: 0 16px; background: var(--lc-accent); color: #fff; font: 700 .85rem inherit; font-family: inherit; cursor: pointer; }
+.lc-send:hover { background: var(--lc-accent-hi); }
+.lc-fab:focus-visible, .lc-send:focus-visible, .lc-chip:focus-visible, .lc-clear:focus-visible, .lc-links a:focus-visible { outline: 2px solid var(--supply, #E39A1F); outline-offset: 2px; }
+
+/* the other fixed buttons move out of its way */
+.lc-on .to-top { right: 26px; bottom: 90px; }
+.lc-on .toast { right: 88px; }
+
+@media (max-width: 560px) {
+  .lc-fab { right: 14px; width: 52px; height: 52px; }
+  .lc-panel { right: 10px; left: 10px; width: auto; bottom: calc(var(--ft, 0px) + 78px); height: min(78dvh, calc(100dvh - var(--ft, 0px) - 100px)); }
+  .lc-on .to-top { right: 19px; bottom: 82px; }
+}
+@media (prefers-reduced-motion: reduce) { .lc-panel { animation: none; } .lc-fab, .lc-fab svg { transition: none; } }
+@media print { .lc-root { display: none; } }

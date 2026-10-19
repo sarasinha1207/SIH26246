@@ -30,7 +30,8 @@ def main():
     panel = panel[panel.Date <= pd.Timestamp(ORIGIN + "-01")]
     D = {"meta": {"origin": ORIGIN, "origin_label": "October 2026", "first_target": "November 2026", "last_target": "October 2027", "model": "xgboost_v3 refitted on data to 2026-10",
                   "series": 280, "districts": int(dims.District_LGD_Code.nunique()), "states": int(dims.State_Name.nunique()), "sectors": int(dims.Sector_Name.nunique()), "tiers": int(dims.Econ_Tier.nunique()),
-                  "forecast_rows": int(len(L)), "flag_rows": int(len(W)), "horizons": 12, "synthetic": True}}
+                  "forecast_rows": int(len(L)), "flag_rows": int(len(W)), "horizons": 12, "synthetic": True,
+                  "sector_list": sorted(dims.Sector_Name.unique()), "state_list": sorted(dims.State_Name.unique())}}
     # ---- hero example
     piv = L[L.horizon == 12].pivot_table(index="Series_ID", columns="target_variable", values=["forecast", "last_observed"])
     gap = (piv["forecast"][VARS["V"]] / piv["last_observed"][VARS["V"]]) / (piv["forecast"][VARS["S"]] / piv["last_observed"][VARS["S"]])

@@ -1,4 +1,6 @@
-# LMIS – Labour Market Intelligence & Skill Demand-Supply Forecasting
+# KaushalSetu: Bridging Skills. Forecasting Futures.
+
+LMIS: Labour Market Intelligence & Skill Demand-Supply Forecasting
 
 SIH26246 · Ministry of Skill Development and Entrepreneurship (MSDE)
 
@@ -103,6 +105,8 @@ python src/app/build_site_data.py                           # public website: re
 python src/app/build_map_data.py                            # public website: rebuild the map (districts, India outline, forecast values)
 python src/app/build_dashboard.py                           # dashboard: rebuild its data file and page shell
 python tests/test_dashboard.py                              # dashboard tests (data vs forecast and flag files, frame, filters, palette)
+python tests/test_chat.py                                   # assistant engine tests (on every page, answers equal the CSV values)
+python tests/test_chat_proxy.py                             # Gemini proxy tests (Google stubbed; key never in the browser or the repo)
 python src/app/build_pages.py                               # public website: rebuild the pages and the Hindi text
 python tests/test_app.py                                    # website tests (links, numbers vs source files, map, Hindi text, notices)
 python src/app/serve.py                                      # preview the website at http://localhost:8080 (rebuilds pages when you edit; Ctrl+C to stop)

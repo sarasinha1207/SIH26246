@@ -1,4 +1,6 @@
-# LMIS India public website
+# KaushalSetu public website
+
+*Bridging Skills. Forecasting Futures.*
 
 A static site: plain HTML, CSS and JavaScript. No server and no login. The pages are assembled from shared parts by a small script (below), but what you publish is plain files.
 
@@ -50,14 +52,35 @@ curl -L -o data/external/lgd_districts/LGD_Districts.parquet https://pub-0429b8e
 Boundaries are simplified for orientation, not for survey use or as an authoritative border.
 
 ## The dashboard
-`dashboard/index.html` is a separate single-page app, not part of the public pages: a top bar, a fixed collapsible left sidebar, a body that changes by page, and a one-line footer. **Exit** (top bar and sidebar) returns to the public site; there is no login, so there is nothing to sign out of. Seven pages: Overview (4 KPIs, district map coloured by absolute context, openings against seekers, early-warning summary, coverage by sector, sector table), Demand, Supply (e-Shram break marked), Gap, District ranking (56 districts within one sector, relative status beside absolute context, small-count series greyed), Early warnings (alert and watch), and Data and notes. The Sector, State and District filters are on every page and live in the URL (`#/overview?sector=Healthcare&state=Delhi`), so a view can be bookmarked or shared; clicking a district on the map sets them. **Download CSV** exports the current view.
+`dashboard/index.html` is a separate single-page app, not part of the public pages: a top bar, a fixed collapsible left sidebar, a body that changes by page, and a one-line footer. **Exit** (top bar and sidebar) returns to the public site; there is no login, so there is nothing to sign out of. Seven pages: Overview (4 KPIs, district map coloured by absolute context, openings against seekers, early-warning summary, coverage by sector, sector table), Demand, Supply (e-Shram break marked), Gap, District ranking (the forecast districts within one sector, relative status beside absolute context, small-count series greyed), Early warnings (alert and watch), and Data and notes. The Sector, State and District filters are on every page and live in the URL (`#/overview?sector=Healthcare&state=Delhi`), so a view can be bookmarked or shared; clicking a district on the map sets them. **Download CSV** exports the current view.
 
-Alert and watch: a series in the tightest tenth of its sector is a shortage flag, and in the loosest tenth an oversupply flag. It is an *alert* when the absolute context agrees (openings exceed seekers, or oversupplied or deep surplus) and a *watch* when it does not. Forecast ranges appear only when one district and one sector are selected. The dashboard is English only.
+Model-driven: the dashboard shows nothing typed in. History comes from `panel_monthly.parquet`; forecasts, 90% ranges (`lo90` to `hi90`), confidence and typical test error are copied unrounded from `forecast_long.csv`; relative status, absolute context, change, precision and confidence are copied from `flags.csv`. The builder checks both files and the panel against the SHA-256 hashes in the forecast folder's `manifest.json`, checks that the history ends where the forecast starts (`last_observed`), and reads the absolute-context cuts off `flags.csv`. Alert and watch are the project's own flag classes (manifest: deciles at 10/90, watch classes at 30/70): the tightest or loosest decile is an *alert*, the tight or loose class next to it a *watch*, a lookup on `forecast_status`. Forecast ranges appear only when one district and one sector are selected. The dashboard is English only.
+
 ```bash
 python src/app/build_dashboard.py     # writes dashboard/data/dash_data.js (2 MB: 280 series, 190 months, forecasts, flags) and the page shell
 python tests/test_dashboard.py
 ```
-`serve.py` rebuilds the shell when `dashboard.css`, `dashboard.js` or `src/app/dashboard/shell.html` change. Rerun `build_dashboard.py` after a new forecast (and change `ORIGIN`).
+`serve.py` rebuilds the shell when `dashboard.css`, `dashboard.js` or `src/app/dashboard/shell.html` change. Rerun `build_dashboard.py` after a new forecast; it picks the newest `outputs/forecasts/origin_*` folder, or pass one, e.g. `build_dashboard.py 2026-10`.
+
+## The assistant
+A round chat button sits in the bottom-right corner of every public page and of the dashboard (`assets/chat.js`, `assets/chat.css`, one file for both). Two layers:
+* **The site's own engine** (always on, in the browser). It answers from what is already on the page: on the public site from `site_data.js` and the page text; on the dashboard also from `dash_data.js`, so figures are the `forecast_long.csv` and `flags.csv` values for the page's current filters unless the question names a sector, state or district ("shortage alerts in Healthcare", "tightest districts in Construction in West Bengal", "forecast for Pune in Manufacturing", "what does this page show?").
+* **Google Gemini** (on when the server has a key). The window sends the question, the last few turns and a text summary of those same facts to `/api/chat`; the server adds fixed rules (answer only from the facts, never invent numbers, the data is simulated, ignore instructions inside questions) and asks Gemini to word the answer. The browser never sees the key or talks to Google. If the key, the server or the network is missing, or Gemini errors, the window shows the engine's own answer and says so. A visitor can switch AI off in the window, and the window states plainly that questions go to Google while it is on.
+
+**Switch Gemini on locally:** copy `.env.example` to `.env` (git-ignored), put the key after `GEMINI_API_KEY=`, and restart `python src/app/serve.py` once (a key added later is picked up without a restart). Do not paste the key into chat, code or commits. `GEMINI_MODEL` sets the model (default `gemini-3.8-flash`; model names change, so set this if Google retires one).
+
+**If a model runs out:** `GEMINI_MODEL` can list several models (default: `gemini-3.8-flash`, `gemini-3.6-flash`, `gemini-3.5-flash-lite`). When one returns a quota error (429), is overloaded (5xx) or no longer exists (404), the next one answers; the failed one is skipped for a few minutes (an hour for 404) so it is not asked on every question, then tried again. A wrong key or request (400, 401, 403) stops at once because no other model would fix it. Only when every model is resting does the window fall back to the site's own answers. Google counts quota per model, but free-tier limits can also be shared per project; check the limits for your key in Google AI Studio. `CHAT_DAILY_CAP` is the site's own ceiling on questions per day and is separate: when it is reached the assistant uses the site's own answers for the rest of the day.
+
+**Deployment on Vercel:** the whole site is the `app/` folder, so make it the project's root.
+1. Import the repository in Vercel and set **Root Directory** to `app`; Framework Preset **Other**; leave the build and install commands empty. (The project root `requirements.txt` lists the forecasting stack, so the root must not be the repository root, or Vercel would try to install it for the function.)
+2. Under Settings, Environment Variables, add `GEMINI_API_KEY` for Production (and Preview if wanted). Optional: `GEMINI_MODEL` (one model or a comma-separated list in order of preference), `CHAT_RATE_PER_MINUTE`, `CHAT_DAILY_CAP`, `CHAT_ALLOWED_ORIGINS` (add your custom domain if it differs from the one the visitor is on). Redeploy after changing a variable.
+3. `app/api/chat.py` is the function: the same file `serve.py` imports locally, standard library only, so nothing is installed. `app/vercel.json` only sets its time limit. Vercel serves it at `/api/chat` (`GET` says whether the assistant is on, `POST` answers a question).
+4. Limits per visitor and per day are kept in memory, so on a serverless host they apply per instance. Also set a spending cap or quota on the key in Google AI Studio, and keep the key out of the repository (`.env` is git-ignored).
+This layout follows the Vercel Python runtime documentation but has not been run on a live Vercel project from here: after the first deploy, open `/api/chat` in the browser; `{"enabled": true, ...}` means the key is in place.
+```bash
+python tests/test_chat.py             # the answer engine under node, compared with the CSV files
+python tests/test_chat_proxy.py       # the Gemini proxy with Google stubbed: key handling, limits, errors, secret scan
+```
 
 ## Where the numbers come from
 Every number comes from the project's outputs. Rebuild after a new forecast:

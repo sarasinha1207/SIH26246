@@ -1,4 +1,4 @@
-/* LMIS India dashboard. Separate from the public site: its own layout, its own header and footer. Blues for demand and employment, marigold for supply. */
+/* KaushalSetu dashboard. Separate from the public site: its own layout, its own header and footer. Blues for demand and employment, marigold for supply. */
 :root {
   --ink: #0B1B3A; --ink-2: #4A5878; --paper: #EEF3FB; --surface: #FFFFFF; --surface-2: #F1F5FC; --line: #D3DDEE;
   --demand: #2F6BFF; --demand-deep: #1F4FD1; --employed: #0F2B63; --supply: #E39A1F; --supply-ink: #8A5A00;
@@ -34,6 +34,7 @@ svg path, svg rect, svg circle, svg ellipse { vector-effect: none; }
 .icon-btn svg { width: 18px; height: 18px; }
 .tb-brand { display: flex; align-items: center; gap: 9px; text-decoration: none; font: 700 1rem/1 var(--font); letter-spacing: -.02em; flex: none; }
 .tb-brand svg { width: 28px; height: 28px; }
+.tb-brand span { text-transform: uppercase; letter-spacing: .07em; font-size: .92rem; }
 .tb-brand b { color: var(--demand); }
 .tb-brand em { font: 600 .68rem/1 var(--font); letter-spacing: .08em; text-transform: uppercase; padding: 4px 8px; border-radius: 6px; background: color-mix(in srgb, var(--demand) 16%, transparent); color: var(--demand); }
 .tb-title { display: flex; align-items: baseline; gap: 10px; min-width: 0; margin-left: 10px; padding-left: 18px; border-left: 1px solid var(--line); }
@@ -91,7 +92,7 @@ select { font: 550 .86rem var(--font); color: var(--ink); background: var(--surf
 .delta.up { color: var(--demand); } .delta.down { color: var(--supply-ink); }
 html[data-theme="dark"] .delta.up { color: var(--demand-deep); } html[data-theme="dark"] .delta.down { color: var(--supply); }
 .conf { font: 600 .68rem var(--font); letter-spacing: .04em; padding: 2px 7px; border-radius: 999px; border: 1px solid var(--line); text-transform: uppercase; }
-.conf.high { color: var(--demand); border-color: color-mix(in srgb, var(--demand) 50%, var(--line)); } .conf.medium { color: var(--supply-ink); border-color: color-mix(in srgb, var(--supply) 55%, var(--line)); } .conf.low { color: var(--low); border-color: color-mix(in srgb, var(--low) 50%, var(--line)); }
+.conf.high { color: var(--demand); border-color: color-mix(in srgb, var(--demand) 50%, var(--line)); } .conf.medium { color: var(--supply-ink); border-color: color-mix(in srgb, var(--supply) 55%, var(--line)); } .conf.mixed { color: var(--ink-2); border-color: var(--line); } .conf.low { color: var(--low); border-color: color-mix(in srgb, var(--low) 50%, var(--line)); }
 .seg-row { display: inline-flex; padding: 3px; gap: 2px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px; }
 .seg-row button { border: 0; background: transparent; color: var(--ink-2); padding: 6px 12px; border-radius: 999px; font: 600 .78rem/1 var(--font); cursor: pointer; }
 .seg-row button[aria-pressed="true"] { background: var(--seg); color: #fff; }

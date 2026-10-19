@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dashboard | LMIS India</title>
-<meta name="description" content="LMIS India dashboard: demand, supply and gap forecasts for 56 districts and five sectors, with early-warning flags. Simulated data.">
+<title>Dashboard | KaushalSetu</title>
+<meta name="description" content="KaushalSetu dashboard (Bridging Skills. Forecasting Futures.) Demand, supply and gap forecasts for 56 districts and five sectors, with early-warning flags. Simulated data.">
 <meta name="theme-color" content="#0A0E16">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <script>(function(){var s={};try{s=JSON.parse(localStorage.getItem('lmis-display')||'{}')}catch(e){}document.documentElement.dataset.theme=s.theme==='light'?'light':'dark';
@@ -14,15 +14,16 @@ var d={};try{d=JSON.parse(localStorage.getItem('lmis-dash')||'{}')}catch(e){}if(
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..800&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..800&display=swap"></noscript>
 <link rel="stylesheet" href="dashboard.css?v={CSS}">
+<link rel="stylesheet" href="../assets/chat.css?v={CHATCSS}">
 </head>
 <body>
 <a class="skip" href="#view">Skip to the page</a>
 <div class="app" id="app">
   <header class="topbar">
     <button class="icon-btn" id="sb-toggle" type="button" aria-label="Collapse the menu" aria-expanded="true" aria-controls="sidebar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-    <a class="tb-brand" href="#/overview" aria-label="LMIS India dashboard home">
-      <svg viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="9" fill="#0F2B63"/><path d="M6 25 L15 17 L22 20 L28 8" fill="none" stroke="#8FB0FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 10 L14 14 L21 12 L28 24" fill="none" stroke="#F2A93B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <span>LMIS <b>India</b></span><em>Dashboard</em>
+    <a class="tb-brand" href="#/overview" aria-label="KaushalSetu dashboard home">
+      {LOGO}
+      <span>Kaushal<b>Setu</b></span><em>Dashboard</em>
     </a>
     <div class="tb-title"><h1 id="page-title">Overview</h1><span id="page-sub"></span></div>
     <div class="tb-right">
@@ -61,11 +62,12 @@ var d={};try{d=JSON.parse(localStorage.getItem('lmis-dash')||'{}')}catch(e){}if(
     <div class="view" id="view" tabindex="-1"><p class="loading">Loading the dashboard…</p></div>
   </main>
 
-  <footer class="foot" id="foot">Simulated data, not official statistics &middot; Forecast from <span id="foot-origin"></span> &middot; Model xgboost_v3 &middot; LMIS India</footer>
+  <footer class="foot" id="foot">Simulated data, not official statistics &middot; Forecast from <span id="foot-origin"></span> &middot; Model <span id="foot-model"></span> &middot; KaushalSetu</footer>
 </div>
 <div class="tip" id="tip" role="status" hidden></div>
 <script src="data/dash_data.js?v={DATA}"></script>
 <script src="../data/map_data.js?v={MAP}"></script>
 <script src="dashboard.js?v={JS}"></script>
+<script src="../assets/chat.js?v={CHATJS}"></script>
 </body>
 </html>

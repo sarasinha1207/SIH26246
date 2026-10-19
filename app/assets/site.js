@@ -1,4 +1,4 @@
-/* LMIS India public site: dependency-free. All numbers come from data/site_data.js and data/map_data.js (built from the project outputs).
+/* KaushalSetu public site: dependency-free. All numbers come from data/site_data.js and data/map_data.js (built from the project outputs).
    Text the page builds itself goes through t() / nm() so the same code can speak English or Hindi (assets/i18n-hi.js). */
 (function () {
   "use strict";

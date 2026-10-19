@@ -1,4 +1,4 @@
-/* LMIS India dashboard: dependency-free. Everything comes from data/dash_data.js (history, forecasts, flags) and ../data/map_data.js (district shapes).
+/* KaushalSetu dashboard: dependency-free. Everything comes from data/dash_data.js (history, forecasts, flags) and ../data/map_data.js (district shapes).
    The filters (sector, state, district) live in the URL hash, so every view can be bookmarked and shared:  #/overview?sector=Healthcare&state=Delhi  */
 (function () {
   "use strict";
@@ -6,10 +6,10 @@
   var NS = "http://www.w3.org/2000/svg";
   var S = D.series, MONTHS = D.meta.months, FM = D.meta.fmonths, H = MONTHS.length, SECTORS = D.meta.sectors, STATES = D.meta.states;
   var STATUS = D.meta.status, CONTEXT = D.meta.context, CHANGE = D.meta.change;
-  var CTX_NAME = ["Openings exceed seekers", "Moderate", "Oversupplied", "Deep surplus"];
+  var CTX_NAME = CONTEXT.map(function (c) { return c.charAt(0).toUpperCase() + c.slice(1); }), TH = D.meta.thresholds, FLAGC = D.meta.flag_class, TGT = D.meta.target_names;
   var PAGES = {
     overview: ["Overview", "Where demand and supply are drifting apart"], demand: ["Demand", "Employed workers and vacancies, with forecasts"], supply: ["Supply", "Registered job seekers and training"],
-    gap: ["Gap", "Openings against seekers over time"], ranking: ["District ranking", "56 districts ranked within one sector"], warnings: ["Early warnings", "Shortage and oversupply flags from the forecast"], data: ["Data and notes", "Coverage, caveats, definitions and downloads"]
+    gap: ["Gap", "Openings against seekers over time"], ranking: ["District ranking", "Districts ranked within one sector"], warnings: ["Early warnings", "Shortage and oversupply flags from the forecast"], data: ["Data and notes", "Coverage, caveats, definitions and downloads"]
   };
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
@@ -22,7 +22,7 @@
   var css = function (n) { return getComputedStyle(root).getPropertyValue(n).trim(); };
   var reduced = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   var last = function (a) { return a[a.length - 1]; };
-  var ctxOf = function (r) { return r >= 1 ? 0 : r >= 0.2 ? 1 : r >= 0.1 ? 2 : 3; };
+  var ctxOf = function (r) { return r >= TH.exceed ? 0 : r >= TH.moderate ? 1 : r >= TH.oversupplied ? 2 : 3; };
   var byCode = {};
   S.forEach(function (s, i) { (byCode[s.code] = byCode[s.code] || []).push(i); });
   var DISTRICTS = {};
@@ -82,12 +82,11 @@
   }
   function roll12(a) { return a.map(function (_, m) { if (m < 11) return null; var s = 0; for (var j = m - 11; j <= m; j++) s += a[j]; return s; }); }
   function div(a, b) { return a.map(function (v, i) { return b[i] ? v / b[i] : 0; }); }
-  function confOf(k, idx) {
-    if (k === "E") return "high"; if (k === "V") return "low";
-    var c = {}; idx.forEach(function (i) { c[D.fc.S.conf[i]] = 1; }); var ks = Object.keys(c);
-    return ks.length === 1 ? ks[0] : "medium";
-  }
-  var confChip = function (c) { return '<span class="conf ' + c + '">' + c + " confidence</span>"; };
+  var CRANK = { low: 0, medium: 1, high: 2 };
+  function confOf(k, idx) { var c = {}; idx.forEach(function (i) { c[D.fc[k].conf[i]] = 1; }); var ks = Object.keys(c); return ks.length === 1 ? ks[0] : "mixed"; }
+  function confFloor(ks, idx) { var lo = 2; ks.forEach(function (k) { idx.forEach(function (i) { lo = Math.min(lo, CRANK[D.fc[k].conf[i]]); }); }); return Object.keys(CRANK).filter(function (n) { return CRANK[n] === lo; })[0]; }
+  var tally = function (a) { var c = {}; a.forEach(function (v) { c[v] = (c[v] || 0) + 1; }); return Object.keys(c).sort().map(function (k) { return c[k] + " " + k; }).join(", "); };
+  var confChip = function (c) { return '<span class="conf ' + c + '"' + (c === "mixed" ? ' title="The series in this view have different confidence levels in forecast_long.csv"' : "") + ">" + c + " confidence</span>"; };
   var deltaHtml = function (v, label) { return '<span class="delta ' + (v >= 0 ? "up" : "down") + '">' + pct(v) + "</span>" + (label ? " <span>" + label + "</span>" : ""); };
 
   /* ---------- the line chart ---------- */
@@ -191,12 +190,12 @@
   function fname(page) { return "lmis_" + page + "_" + slug(cur.p.sector || "all-sectors") + "_" + slug(cur.p.district ? DISTRICTS[cur.p.district].name : cur.p.state || "all-states"); }
   function rowsForecast(idx) {
     var out = [];
-    idx.forEach(function (i) { ["E", "V", "S"].forEach(function (k) { for (var h = 0; h < 12; h++) out.push([S[i].id, S[i].district, S[i].state, S[i].sector, { E: "Total_Employed_Workers", V: "Active_Job_Vacancies", S: "eShram_Registered_Seekers" }[k], h + 1, FM[h], D.fc[k].f[i][h], D.fc[k].lo[i][h], D.fc[k].hi[i][h], D.fc[k].conf[i]]); }); });
+    idx.forEach(function (i) { ["E", "V", "S"].forEach(function (k) { for (var h = 0; h < 12; h++) out.push([S[i].id, S[i].district, S[i].state, S[i].sector, TGT[k], h + 1, FM[h], D.fc[k].f[i][h], D.fc[k].lo[i][h], D.fc[k].hi[i][h], D.fc[k].conf[i], D.fc[k].err[i][h]]); }); });
     return out;
   }
-  var HEAD_F = ["series_id", "district", "state", "sector", "measure", "horizon_months", "target_month", "forecast", "lo90", "hi90", "confidence"];
-  function rowsFlags(idx) { var out = []; idx.forEach(function (i) { for (var h = 0; h < 12; h++) { var f = D.fl[i][h]; out.push([S[i].id, S[i].district, S[i].state, S[i].sector, h + 1, FM[h], f[6], f[0], STATUS[f[1]], CONTEXT[f[2]], STATUS[f[3]], CHANGE[f[4]], f[5] < 0 ? "" : f[5], S[i].low ? "yes" : "no"]); } }); return out; }
-  var HEAD_L = ["series_id", "district", "state", "sector", "horizon_months", "target_month", "forecast_openings_per_seeker", "percentile_in_sector", "relative_status", "absolute_context", "current_status", "change", "historical_precision", "small_count_series"];
+  var HEAD_F = ["series_id", "district", "state", "sector", "measure", "horizon_months", "target_month", "forecast", "lo90", "hi90", "confidence", "typical_test_error_pct"];
+  function rowsFlags(idx) { var out = []; idx.forEach(function (i) { for (var h = 0; h < 12; h++) { var f = D.fl[i][h]; out.push([S[i].id, S[i].district, S[i].state, S[i].sector, h + 1, FM[h], f[6], f[0], STATUS[f[1]], CONTEXT[f[2]], STATUS[f[3]], CHANGE[f[4]], f[5] == null ? "" : f[5], D.meta.flag_conf[i], FLAGC[f[1]] ? FLAGC[f[1]].join(" ") : "", S[i].low ? "yes" : "no"]); } }); return out; }
+  var HEAD_L = ["series_id", "district", "state", "sector", "horizon_months", "target_month", "forecast_openings_per_seeker", "percentile_in_sector", "relative_status", "absolute_context", "current_status", "change", "historical_precision", "confidence", "flag", "small_count_series"];
   function rowsHistory(idx) {
     var out = []; idx.forEach(function (i) { for (var m = 0; m < H; m++) out.push([S[i].id, S[i].district, S[i].state, S[i].sector, MONTHS[m], D.hist.E[i][m], D.hist.V[i][m], D.hist.S[i][m], D.hist.W[i][m], D.hist.U[i][m] / 10, D.hist.T[i][m], D.hist.C[i][m]]); });
     return out;
@@ -207,9 +206,8 @@
   function warnRows(idx, hz) {
     var out = [];
     idx.forEach(function (i) {
-      var f = D.fl[i][hz - 1], st = f[1]; if (st !== 0 && st !== 4) return;
-      var type = st === 0 ? "shortage" : "oversupply", ok = type === "shortage" ? f[2] === 0 : f[2] >= 2;
-      out.push({ i: i, type: type, level: ok ? "alert" : "watch", pct: f[0], status: st, ctx: f[2], cur: f[3], chg: f[4], prec: f[5], ratio: f[6] });
+      var f = D.fl[i][hz - 1], c = FLAGC[f[1]]; if (!c) return;
+      out.push({ i: i, type: c[0], level: c[1], pct: f[0], status: f[1], ctx: f[2], cur: f[3], chg: f[4], prec: f[5], ratio: f[6] });
     });
     out.sort(function (a, b) { return (a.level === b.level ? 0 : a.level === "alert" ? -1 : 1) || Math.abs(b.pct - 50) - Math.abs(a.pct - 50); });
     return out;
@@ -222,7 +220,7 @@
   var mapVB = null;
   function mapView(host, p) {
     var mh = [0, 3, 6, 12].indexOf(+p.mh) >= 0 ? +p.mh : 0, counts = [0, 0, 0, 0];
-    host.innerHTML = '<div class="m-chips" id="m-states" role="group" aria-label="State"></div><svg id="m-svg" role="img" aria-label="Map of the 56 districts coloured by absolute context"></svg>';
+    host.innerHTML = '<div class="m-chips" id="m-states" role="group" aria-label="State"></div><svg id="m-svg" role="img" aria-label="Map of the forecast districts coloured by absolute context"></svg>';
     var svg = $("#m-svg", host), box = host;
     var chips = $("#m-states", host);
     [["", "All states"]].concat(STATES.map(function (s) { return [s, s]; })).forEach(function (o) { var b = document.createElement("button"); b.type = "button"; b.textContent = o[1]; b.setAttribute("aria-pressed", (p.state || "") === o[0]); b.addEventListener("click", function () { go({ state: o[0], district: "" }); }); chips.appendChild(b); });
@@ -320,7 +318,7 @@
 
   render.demand = function (p, view) {
     var idx = sel(p), E = sumH("E", idx), V = sumH("V", idx), W = wavg("W", idx), U = wavg("U", idx), fE = sumF("E", "f", idx), fV = sumF("V", "f", idx), tl = timeline(p), one = idx.length === 1 ? idx[0] : -1;
-    var info = function (a, f, k) { return '<div class="sub">' + deltaHtml((f[11] / last(a) - 1) * 100, "in 12 months") + " " + confChip(confOf(k, idx)) + "</div>"; };
+    var info = function (a, f, k) { return '<div class="sub">' + deltaHtml((f[11] / last(a) - 1) * 100, "in 12 months") + " " + confChip(confOf(k, idx)) + (one >= 0 ? " <span>typical test error at 12 months " + fmt(D.fc[k].err[one][11], 1) + "%</span>" : "") + "</div>"; };
     view.innerHTML = '<div class="card-h"><div><h2 style="font-size:1.05rem">' + esc(scopeText(p)) + '</h2></div>' + rangeToggle(p) + "</div>" + (one < 0 ? '<p class="note" style="margin:-4px 0 12px">The 90% range appears when one district and one sector are selected; sums over several series would overstate it.</p>' : "") +
       '<div class="grid g2">' + chartCard("Employed workers", "Latest " + compact(last(E)), info(E, fE, "E"), "c-e") + chartCard("Job vacancies", "Latest " + compact(last(V)), info(V, fV, "V"), "c-v") +
       chartCard("Average monthly wage", "Employment-weighted, rupees. Latest " + fmt(last(W)), "", "c-w") + chartCard("Unemployment rate", "Employment-weighted, per cent. Latest " + fmt(last(U), 1) + "%", "", "c-u") + "</div>" +
@@ -340,7 +338,7 @@
     var kpi = function (l, v, s, c) { return '<div class="card kpi" style="--c:' + c + '"><div class="lbl"><i></i>' + l + '</div><span class="val">' + v + '</span><div class="sub">' + s + "</div></div>"; };
     view.innerHTML = '<div class="card-h"><div><h2 style="font-size:1.05rem">' + esc(scopeText(p)) + "</h2></div>" + rangeToggle(p) + "</div>" +
       '<div class="grid g4">' + kpi("Registered seekers", compact(last(Sk)), deltaHtml((fS[11] / last(Sk) - 1) * 100, "in 12 months") + " " + confChip(confOf("S", idx)), "var(--supply)") + kpi("Training seats sanctioned", compact(last(T)), "Annual capacity, latest month", "var(--demand)") + kpi("Certified, last 12 months", compact(last(C12)), "People who completed training", "var(--employed)") + kpi("Certified per seat", fmt(util, 0) + "%", "Last 12 months against seats", "var(--ctx1)") + "</div>" +
-      '<div class="grid g2 mt">' + chartCard("Registered job seekers", "The e-Shram registry launched in August 2021; the rise that follows is a break in the series, not a labour-market change.", confChip(confOf("S", idx)), "c-s") +
+      '<div class="grid g2 mt">' + chartCard("Registered job seekers", "The e-Shram registry launched in " + ml(D.meta.eshram.launch) + "; the rise that follows is a break in the series, not a labour-market change.", confChip(confOf("S", idx)), "c-s") +
       chartCard("Training seats and certified trainees", "Seats are annual capacity; certified trainees are summed over the last 12 months.", "", "c-t") + "</div>" + (one < 0 ? '<p class="note">The 90% range appears when one district and one sector are selected.</p>' : "");
     var base = { T: tl.T, nh: tl.nh };
     draw("c-s", Object.assign({ label: "Registered job seekers with the e-Shram break marked", lines: [{ name: "Registered seekers", color: css("--supply"), hist: Sk.slice(tl.start), fc: fS, band: one >= 0 ? { lo: D.fc.S.lo[one], hi: D.fc.S.hi[one] } : null }],
@@ -351,15 +349,15 @@
   };
 
   render.gap = function (p, view) {
-    var idx = sel(p), V = sumH("V", idx), Sk = sumH("S", idx), fV = sumF("V", "f", idx), fS = sumF("S", "f", idx), tl = timeline(p), rows = sectorRows(p);
+    var idx = sel(p), V = sumH("V", idx), Sk = sumH("S", idx), fV = sumF("V", "f", idx), fS = sumF("S", "f", idx), tl = timeline(p), rows = sectorRows(p), gc = confFloor(["V", "S"], idx);
     var cov = div(V, Sk).map(function (v) { return v * 100; }), fcov = div(fV, fS).map(function (v) { return v * 100; }), gap = V.map(function (v, i) { return v - Sk[i]; }), fgap = fV.map(function (v, i) { return v - fS[i]; });
     view.innerHTML = '<div class="card-h"><div><h2 style="font-size:1.05rem">' + esc(scopeText(p)) + '</h2></div>' + rangeToggle(p) + "</div>" +
-      '<div class="grid g2">' + chartCard("Coverage: openings per 100 seekers", "Vacancies divided by registered seekers. Above 100 openings exceed seekers.", confChip("low"), "c-cov") + chartCard("Net gap: vacancies minus seekers", "Below zero there are more seekers than openings.", confChip("low"), "c-gap") + "</div>" +
+      '<div class="grid g2">' + chartCard("Coverage: openings per 100 seekers", "Vacancies divided by registered seekers. Above 100 openings exceed seekers.", confChip(gc), "c-cov") + chartCard("Net gap: vacancies minus seekers", "Below zero there are more seekers than openings.", confChip(gc), "c-gap") + "</div>" +
       '<section class="card mt"><div class="card-h"><div><h2>Coverage by sector</h2><p>Selected state and district; click a bar to filter the sector</p></div></div>' + sectorBars(rows, p) + "</section>" +
-      '<p class="note">Coverage and the gap rest on the vacancy forecast, which adds little over a simple baseline, so they carry low confidence.</p>';
+      '<p class="note">Coverage and the gap combine the vacancy and seeker forecasts, so they carry the lower of the two confidence levels in forecast_long.csv for the selected series.</p>';
     var base = { T: tl.T, nh: tl.nh, regions: regionsCovid() };
     draw("c-cov", Object.assign({ label: "Coverage over time", fmtAxis: [function (v) { return fmt(v, v < 10 ? 1 : 0); }], fmtTip: [function (v) { return fmt(v, 1); }], lines: [{ name: "Openings per 100 seekers", color: css("--demand"), hist: cov.slice(tl.start), fc: fcov }],
-      hlines: [{ v: 10, label: "10: deep surplus below", color: css("--ctx3") }, { v: 20, label: "20: moderate above", color: css("--ctx1") }] }, base));
+      hlines: [{ v: TH.oversupplied * 100, label: fmt(TH.oversupplied * 100, 0) + ": " + CONTEXT[3] + " below", color: css("--ctx3") }, { v: TH.moderate * 100, label: fmt(TH.moderate * 100, 0) + ": " + CONTEXT[1] + " above", color: css("--ctx1") }] }, base));
     draw("c-gap", Object.assign({ label: "Net gap over time", fmtTip: [function (v) { return fmt(v); }], lines: [{ name: "Vacancies minus seekers", color: css("--supply"), hist: gap.slice(tl.start), fc: fgap }], hlines: [{ v: 0, label: "zero", color: css("--ink") }] }, base));
     bindRange(view); bindBars(view, p);
     cur.csv = seriesCsv("gap", idx, tl, [{ n: "job_vacancies", v: full(V, fV), d: 0 }, { n: "registered_seekers", v: full(Sk, fS), d: 0 }, { n: "openings_per_100_seekers", v: full(cov, fcov), d: 2 }, { n: "net_gap", v: full(gap, fgap), d: 0 }]);
@@ -374,11 +372,11 @@
     var th = function (key, label, cls) { return '<th class="' + (cls || "") + '"><button type="button" data-o="' + key + '">' + label + (order === key ? " ▾" : "") + "</button></th>"; };
     view.innerHTML = (p.sector ? "" : '<div class="banner">Ranking is within one sector. Showing ' + esc(sector) + "; choose another in the Sector filter.</div>") +
       '<section class="card"><div class="card-h"><div><h2>' + esc(sector) + ": " + rows.length + ' districts ranked</h2><p>Rank 1 has the most openings per seeker in the sector, ' + hz + " months ahead. Greyed rows are small-count series.</p></div>" + hzSeg(p) + '</div><div class="tbl-wrap"><table class="tbl"><thead><tr>' + th("rank", "Rank", "num") + th("name", "District") + "<th>State</th><th>Relative status</th><th>Absolute context</th>" + th("ratio", "Per 100 seekers", "num") + "<th>Today</th><th>Change</th><th class=\"num\">Flag precision</th></tr></thead><tbody>" +
-      shown.map(function (r) { var s = S[r.i]; return '<tr class="click' + (s.low ? " grey" : "") + (p.district === s.code ? " on" : "") + '" data-code="' + s.code + '"><td class="num">' + r.rank + "</td><td>" + esc(s.district) + (s.low ? ' <small title="Very small counts">small count</small>' : "") + "</td><td>" + esc(s.state) + '</td><td><span class="pill s' + r.st + '">' + STATUS[r.st] + " · " + fmt(r.pct, 0) + '</span></td><td><span class="pill c' + r.ctx + '">' + CTX_NAME[r.ctx] + '</span></td><td class="num">' + fmt(r.ratio * 100, 1) + "</td><td>" + STATUS[r.cur] + "</td><td>" + (r.chg ? CHANGE[r.chg] : "no change") + '</td><td class="num">' + (r.prec < 0 ? "–" : fmt(r.prec * 100, 0) + "%") + "</td></tr>"; }).join("") + "</tbody></table></div>" +
+      shown.map(function (r) { var s = S[r.i]; return '<tr class="click' + (s.low ? " grey" : "") + (p.district === s.code ? " on" : "") + '" data-code="' + s.code + '"><td class="num">' + r.rank + "</td><td>" + esc(s.district) + (s.low ? ' <small title="Very small counts">small count</small>' : "") + "</td><td>" + esc(s.state) + '</td><td><span class="pill s' + r.st + '">' + STATUS[r.st] + " · " + fmt(r.pct, 0) + '</span></td><td><span class="pill c' + r.ctx + '">' + CTX_NAME[r.ctx] + '</span></td><td class="num">' + fmt(r.ratio * 100, 1) + "</td><td>" + STATUS[r.cur] + "</td><td>" + (r.chg ? CHANGE[r.chg] : "no change") + '</td><td class="num">' + (r.prec == null ? "–" : fmt(r.prec * 100, 0) + "%") + "</td></tr>"; }).join("") + "</tbody></table></div>" +
       '<p class="note">Relative status compares a district with the others in its sector in the same month; the absolute context says whether openings really exceed seekers. Both are shown together on purpose: the tightest districts of a sector can still be in surplus.</p></section>';
     bindHz(view); $$("[data-o]", view).forEach(function (b) { b.addEventListener("click", function () { go({ o: b.dataset.o === "rank" ? "" : b.dataset.o }); }); });
     $$("tr.click", view).forEach(function (tr) { tr.addEventListener("click", function () { go({ district: p.district === tr.dataset.code ? "" : tr.dataset.code, sector: sector }); }); });
-    cur.csv = function () { return { name: fname("ranking") + "_" + hz + "m", head: ["rank", "district", "state", "sector", "horizon_months", "percentile_in_sector", "relative_status", "absolute_context", "forecast_openings_per_100_seekers", "current_status", "change", "historical_precision", "small_count_series"], rows: shown.map(function (r) { var s = S[r.i]; return [r.rank, s.district, s.state, sector, hz, r.pct, STATUS[r.st], CONTEXT[r.ctx], (r.ratio * 100).toFixed(2), STATUS[r.cur], CHANGE[r.chg], r.prec < 0 ? "" : r.prec, s.low ? "yes" : "no"]; }) }; };
+    cur.csv = function () { return { name: fname("ranking") + "_" + hz + "m", head: ["rank", "district", "state", "sector", "horizon_months", "percentile_in_sector", "relative_status", "absolute_context", "forecast_openings_per_100_seekers", "current_status", "change", "historical_precision", "small_count_series"], rows: shown.map(function (r) { var s = S[r.i]; return [r.rank, s.district, s.state, sector, hz, r.pct, STATUS[r.st], CONTEXT[r.ctx], (r.ratio * 100).toFixed(2), STATUS[r.cur], CHANGE[r.chg], r.prec == null ? "" : r.prec, s.low ? "yes" : "no"]; }) }; };
   };
 
   render.warnings = function (p, view) {
@@ -386,26 +384,50 @@
     var n = function (ty, l) { return all.filter(function (r) { return r.type === ty && r.level === l; }).length; };
     var rows = all.filter(function (r) { return (!t || r.type === t) && (!lv || r.level === lv); });
     var seg = function (key, opts, curv) { return '<div class="seg-row" role="group">' + opts.map(function (o) { return '<button type="button" data-k="' + key + '" data-v="' + o[0] + '" aria-pressed="' + (o[0] === curv) + '">' + o[1] + "</button>"; }).join("") + "</div>"; };
-    view.innerHTML = '<div class="grid g4"><div class="card kpi" style="--c:var(--demand)"><div class="lbl"><i></i>Shortage alerts</div><span class="val">' + n("shortage", "alert") + '</span><div class="sub">Tightest tenth and openings exceed seekers</div></div>' +
-      '<div class="card kpi" style="--c:var(--ctx1)"><div class="lbl"><i></i>Shortage watch</div><span class="val">' + n("shortage", "watch") + '</span><div class="sub">Tightest tenth, but still in surplus</div></div>' +
-      '<div class="card kpi" style="--c:var(--low)"><div class="lbl"><i></i>Oversupply alerts</div><span class="val">' + n("oversupply", "alert") + '</span><div class="sub">Loosest tenth and oversupplied</div></div>' +
-      '<div class="card kpi" style="--c:var(--supply)"><div class="lbl"><i></i>Oversupply watch</div><span class="val">' + n("oversupply", "watch") + '</span><div class="sub">Loosest tenth, but not oversupplied</div></div></div>' +
-      '<section class="card mt"><div class="card-h"><div><h2>' + rows.length + " flagged series</h2><p>For " + esc(scopeText(p)) + ", " + hz + ' months ahead. All flags carry low confidence; the precision column shows how often such flags were right in testing.</p></div><div style="display:flex;gap:8px;flex-wrap:wrap">' + hzSeg(p) + seg("t", [["", "Both"], ["shortage", "Shortage"], ["oversupply", "Oversupply"]], t) + seg("lv", [["", "All levels"], ["alert", "Alert"], ["watch", "Watch"]], lv) + "</div></div>" +
+    view.innerHTML = '<div class="grid g4"><div class="card kpi" style="--c:var(--demand)"><div class="lbl"><i></i>Shortage alerts</div><span class="val">' + n("shortage", "alert") + '</span><div class="sub">Tightest decile of its sector</div></div>' +
+      '<div class="card kpi" style="--c:var(--ctx1)"><div class="lbl"><i></i>Shortage watch</div><span class="val">' + n("shortage", "watch") + '</span><div class="sub">Tight class, next to the decile</div></div>' +
+      '<div class="card kpi" style="--c:var(--low)"><div class="lbl"><i></i>Oversupply alerts</div><span class="val">' + n("oversupply", "alert") + '</span><div class="sub">Loosest decile of its sector</div></div>' +
+      '<div class="card kpi" style="--c:var(--supply)"><div class="lbl"><i></i>Oversupply watch</div><span class="val">' + n("oversupply", "watch") + '</span><div class="sub">Loose class, next to the decile</div></div></div>' +
+      '<section class="card mt"><div class="card-h"><div><h2>' + rows.length + " flagged series</h2><p>For " + esc(scopeText(p)) + ", " + hz + ' months ahead. Confidence of these flags in flags.csv: ' + tally(rows.map(function (r) { return D.meta.flag_conf[r.i]; })) + '. The precision column shows how often such flags were right in testing.</p></div><div style="display:flex;gap:8px;flex-wrap:wrap">' + hzSeg(p) + seg("t", [["", "Both"], ["shortage", "Shortage"], ["oversupply", "Oversupply"]], t) + seg("lv", [["", "All levels"], ["alert", "Alert"], ["watch", "Watch"]], lv) + "</div></div>" +
       '<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Flag</th><th>District</th><th>State</th><th>Sector</th><th>Relative status</th><th>Absolute context</th><th class="num">Per 100 seekers</th><th>Change</th><th class="num">Precision</th></tr></thead><tbody>' +
-      (rows.length ? rows.map(function (r) { var s = S[r.i]; return '<tr class="click' + (s.low ? " grey" : "") + '" data-code="' + s.code + '" data-sec="' + esc(s.sector) + '"><td><span class="pill ' + r.level + '">' + r.type + " " + r.level + "</span></td><td>" + esc(s.district) + "</td><td>" + esc(s.state) + "</td><td>" + esc(s.sector) + '</td><td><span class="pill s' + r.status + '">' + STATUS[r.status] + " · " + fmt(r.pct, 0) + '</span></td><td><span class="pill c' + r.ctx + '">' + CTX_NAME[r.ctx] + '</span></td><td class="num">' + fmt(r.ratio * 100, 1) + "</td><td>" + (r.chg ? CHANGE[r.chg] : "no change") + '</td><td class="num">' + (r.prec < 0 ? "–" : fmt(r.prec * 100, 0) + "%") + "</td></tr>"; }).join("") : '<tr><td colspan="9">No flags for this selection.</td></tr>') + "</tbody></table></div>" +
-      '<p class="note"><b>Alert</b>: in the tightest tenth with openings exceeding seekers (shortage), or in the loosest tenth and oversupplied or in deep surplus (oversupply). <b>Watch</b>: in the tightest or loosest tenth of its sector, but the absolute context does not agree. Flags come from the forecast and are the weakest part of the model.</p></section>';
+      (rows.length ? rows.map(function (r) { var s = S[r.i]; return '<tr class="click' + (s.low ? " grey" : "") + '" data-code="' + s.code + '" data-sec="' + esc(s.sector) + '"><td><span class="pill ' + r.level + '">' + r.type + " " + r.level + "</span></td><td>" + esc(s.district) + "</td><td>" + esc(s.state) + "</td><td>" + esc(s.sector) + '</td><td><span class="pill s' + r.status + '">' + STATUS[r.status] + " · " + fmt(r.pct, 0) + '</span></td><td><span class="pill c' + r.ctx + '">' + CTX_NAME[r.ctx] + '</span></td><td class="num">' + fmt(r.ratio * 100, 1) + "</td><td>" + (r.chg ? CHANGE[r.chg] : "no change") + '</td><td class="num">' + (r.prec == null ? "–" : fmt(r.prec * 100, 0) + "%") + "</td></tr>"; }).join("") : '<tr><td colspan="9">No flags for this selection.</td></tr>') + "</tbody></table></div>" +
+      '<p class="note"><b>Alert</b>: the forecast puts the series in the tightest decile of its sector (shortage) or the loosest (oversupply). <b>Watch</b>: the tight or loose class next to the decile. Both are read from the forecast_status column of flags.csv, and absolute context is shown beside them because a relative flag does not mean openings really exceed seekers. Flag rule in the forecast manifest: ' + esc(D.meta.manifest.flag_rules) + "</p></section>";
     bindHz(view); $$("[data-k]", view).forEach(function (b) { b.addEventListener("click", function () { var o = {}; o[b.dataset.k] = b.dataset.v; go(o); }); });
     $$("tr.click", view).forEach(function (tr) { tr.addEventListener("click", function () { go({ district: tr.dataset.code, sector: tr.dataset.sec }, "demand"); }); });
-    cur.csv = function () { return { name: fname("warnings") + "_" + hz + "m", head: ["flag", "level", "district", "state", "sector", "horizon_months", "percentile_in_sector", "relative_status", "absolute_context", "forecast_openings_per_100_seekers", "change", "historical_precision", "small_count_series"], rows: rows.map(function (r) { var s = S[r.i]; return [r.type, r.level, s.district, s.state, s.sector, hz, r.pct, STATUS[r.status], CONTEXT[r.ctx], (r.ratio * 100).toFixed(2), CHANGE[r.chg], r.prec < 0 ? "" : r.prec, s.low ? "yes" : "no"]; }) }; };
+    cur.csv = function () { return { name: fname("warnings") + "_" + hz + "m", head: ["flag", "level", "district", "state", "sector", "horizon_months", "percentile_in_sector", "relative_status", "absolute_context", "forecast_openings_per_100_seekers", "change", "historical_precision", "small_count_series"], rows: rows.map(function (r) { var s = S[r.i]; return [r.type, r.level, s.district, s.state, s.sector, hz, r.pct, STATUS[r.status], CONTEXT[r.ctx], (r.ratio * 100).toFixed(2), CHANGE[r.chg], r.prec == null ? "" : r.prec, s.low ? "yes" : "no"]; }) }; };
   };
 
   render.data = function (p, view) {
     var idx = sel(p), dset = {}; idx.forEach(function (i) { dset[S[i].code] = 1; });
-    var st = STATES.map(function (s) { var ds = {}; S.forEach(function (x) { if (x.state === s) ds[x.code] = 1; }); return [s, Object.keys(ds).length]; });
-    view.innerHTML = '<div class="grid g2"><section class="card"><div class="card-h"><div><h2>Coverage</h2><p>Current filters and the whole dataset</p></div></div><div class="tbl-wrap"><table class="tbl"><tbody>' +
-      [["Series in this view", fmt(idx.length) + " of " + S.length], ["Districts in this view", Object.keys(dset).length + " of 56"], ["Sectors", SECTORS.join(", ")], ["States", st.map(function (x) { return x[0] + " (" + x[1] + ")"; }).join(", ")], ["History", ml(MONTHS[0]) + " to " + ml(last(MONTHS)) + " (" + H + " months)"], ["Forecast", ml(FM[0]) + " to " + ml(last(FM)) + " (12 months, made from " + D.meta.origin_label + ")"], ["Forecast rows", fmt(D.meta.forecast_rows) + " (280 series, 3 measures, 12 horizons)"], ["Flag rows", fmt(D.meta.flag_rows)], ["Economic tiers", D.meta.tiers], ["Model", D.meta.model]].map(function (r) { return "<tr><td><b>" + r[0] + "</b></td><td>" + esc(r[1]) + "</td></tr>"; }).join("") + "</tbody></table></div></section>" +
-      '<section class="card"><div class="card-h"><div><h2>Caveats</h2></div></div><ul class="plain"><li><b>The data is simulated.</b> It behaves like official statistics but describes no real district.</li><li><b>Vacancy forecasts are low confidence.</b> In testing they beat a simple baseline by only 2 to 4%.</li><li><b>Early-warning flags are low confidence.</b> They are a little better than repeating today\'s flag.</li><li><b>Job seekers have a break</b> at the e-Shram launch in August 2021; the ramp to early 2023 is registration, not labour demand.</li><li><b>COVID</b> (March 2020 to February 2022) distorts the history and is shaded on the charts.</li><li><b>Four series have very small counts</b> (for example New Delhi construction); they are greyed in tables.</li><li><b>IT-ITeS</b> forecasts for seekers carry low confidence.</li><li><b>Only 5 of West Bengal\'s 23 and 4 of Tamil Nadu\'s 38 districts</b> are forecast.</li></ul></section></div>' +
-      '<section class="card mt"><div class="card-h"><div><h2>Definitions</h2></div></div><dl class="defs"><dt>Coverage</dt><dd>Job vacancies divided by registered job seekers. The charts show it as openings per 100 seekers.</dd><dt>Net gap</dt><dd>Vacancies minus registered seekers. Negative means more seekers than openings.</dd><dt>Absolute context</dt><dd>From coverage: openings exceed seekers (100 or more per 100), moderate (20 to 100), oversupplied (10 to 20) and deep surplus (under 10).</dd><dt>Relative status</dt><dd>A district\'s coverage percentile among the 56 districts of its sector in the same month: tightest tenth, tight, typical, loose, loosest tenth.</dd><dt>Alert and watch</dt><dd>Alert: an extreme tenth whose absolute context agrees. Watch: an extreme tenth whose absolute context does not.</dd><dt>90% range</dt><dd>The range that held about nine in ten outcomes in testing. Shown for a single district and sector.</dd><dt>Confidence</dt><dd>High for employed workers, medium for job seekers, low for vacancies, flags and IT-ITeS seekers, earned in testing.</dd><dt>WAPE</dt><dd>Weighted absolute percentage error: the size of the misses divided by the size of the actual values.</dd></dl></section>' +
+    var mp = D.meta.manifest, per100 = function (x) { return fmt(x * 100, 0); };
+    var st = STATES.map(function (s) { var ds = {}; S.forEach(function (x) { if (x.state === s) ds[x.code] = 1; }); var n = Object.keys(ds).length; return [s, n, n + (M.others || []).filter(function (o) { return o.s === s; }).length]; });
+    var smalls = S.filter(function (s) { return s.low; }).map(function (s) { return s.district + " " + s.sector; });
+    var short = function (h) { return h.slice(0, 12); };
+    var row = function (a, b) { return "<tr><td><b>" + a + "</b></td><td>" + esc(b) + "</td></tr>"; };
+    var tbl = function (rows) { return '<div class="tbl-wrap"><table class="tbl"><tbody>' + rows.map(function (r) { return row(r[0], r[1]); }).join("") + "</tbody></table></div>"; };
+    view.innerHTML = '<div class="grid g2"><section class="card"><div class="card-h"><div><h2>Coverage</h2><p>Current filters and the whole dataset</p></div></div>' + tbl([
+      ["Series in this view", fmt(idx.length) + " of " + S.length], ["Districts in this view", Object.keys(dset).length + " of " + DLIST.length], ["Sectors", SECTORS.join(", ")],
+      ["States (districts forecast of all districts)", st.map(function (x) { return x[0] + " (" + x[1] + " of " + x[2] + ")"; }).join(", ")], ["History", ml(MONTHS[0]) + " to " + ml(last(MONTHS)) + " (" + H + " months)"],
+      ["Forecast", ml(FM[0]) + " to " + ml(last(FM)) + " (" + FM.length + " months, made from " + D.meta.origin_label + ")"],
+      ["Forecast rows", fmt(D.meta.forecast_rows) + " (" + S.length + " series, " + D.meta.targets.length + " measures, " + D.meta.horizons.length + " horizons)"], ["Flag rows", fmt(D.meta.flag_rows)], ["Economic tiers", D.meta.tiers], ["Model", D.meta.model]]) + "</section>" +
+      '<section class="card"><div class="card-h"><div><h2>Caveats</h2></div></div><ul class="plain"><li><b>The data is simulated.</b> It behaves like official statistics but describes no real district.</li>' +
+      "<li><b>Confidence</b> in forecast_long.csv: employed workers " + tally(D.fc.E.conf) + "; vacancies " + tally(D.fc.V.conf) + "; seekers " + tally(D.fc.S.conf) + ". Forecast manifest on vacancies: " + esc(mp.confidence_rules.vacancies) + ".</li>" +
+      "<li><b>Early-warning flags</b> carry " + tally(D.meta.flag_conf) + " confidence in flags.csv. They are relative: " + esc(mp.flag_rules) + ".</li>" +
+      "<li><b>Job seekers have a break</b> at the e-Shram launch in " + ml(D.meta.eshram.launch) + "; the ramp to " + ml(D.meta.eshram.ramp[1]) + " is registration, not labour demand.</li>" +
+      "<li><b>COVID</b> (" + ml(D.meta.covid[0]) + " to " + ml(D.meta.covid[1]) + ") distorts the history and is shaded on the charts.</li>" +
+      "<li><b>" + smalls.length + " series have very small counts</b> (" + esc(smalls.join(", ")) + "); they are greyed in tables.</li>" +
+      "<li><b>Not every district is forecast:</b> " + esc(st.filter(function (x) { return x[1] < x[2]; }).map(function (x) { return x[1] + " of " + x[2] + " in " + x[0]; }).join(", ")) + ".</li></ul></section></div>" +
+      '<section class="card mt"><div class="card-h"><div><h2>Where the numbers come from</h2><p>Nothing on these pages is typed in; each figure is read from these files</p></div></div>' + tbl([
+      ["forecast_long.csv", "Forecasts and the 90% range (lo90 to hi90), confidence. sha256 " + short(D.meta.sources["forecast_long.csv"]) + "…"], ["flags.csv", "Percentile, relative status, absolute context, change, precision, confidence. sha256 " + short(D.meta.sources["flags.csv"]) + "…"],
+      ["panel_monthly.parquet", "History to " + D.meta.origin_label + ". sha256 " + short(D.meta.sources["panel_monthly.parquet"]) + "…"], ["Forecast run", D.meta.manifest.created],
+      ["90% range method, employed", mp.interval_policy.E], ["90% range method, vacancies", mp.interval_policy.V], ["90% range method, seekers", mp.interval_policy.S]]) + "</section>" +
+      '<section class="card mt"><div class="card-h"><div><h2>Definitions</h2></div></div><dl class="defs"><dt>Coverage</dt><dd>Job vacancies divided by registered job seekers. The charts show it as openings per 100 seekers.</dd><dt>Net gap</dt><dd>Vacancies minus registered seekers. Negative means more seekers than openings.</dd>' +
+      "<dt>Absolute context</dt><dd>From coverage: " + CONTEXT[0] + " (" + per100(TH.exceed) + " or more openings per 100 seekers), " + CONTEXT[1] + " (" + per100(TH.moderate) + " to " + per100(TH.exceed) + "), " + CONTEXT[2] + " (" + per100(TH.oversupplied) + " to " + per100(TH.moderate) + ") and " + CONTEXT[3] + " (under " + per100(TH.oversupplied) + "). The cuts are read from flags.csv.</dd>" +
+      "<dt>Relative status</dt><dd>A district's coverage percentile among the " + DLIST.length + " districts of its sector in the same month: " + STATUS.join(", ").toLowerCase() + ".</dd>" +
+      "<dt>Alert and watch</dt><dd>Alert: the tightest or loosest decile. Watch: the tight or loose class next to it. Both are read from the forecast status in flags.csv.</dd>" +
+      "<dt>90% range</dt><dd>The lo90 to hi90 columns of forecast_long.csv, built to hold about nine in ten outcomes. Shown for a single district and sector.</dd>" +
+      "<dt>Confidence</dt><dd>Employed workers: " + esc(mp.confidence_rules.employed) + ". Seekers: " + esc(mp.confidence_rules.seekers) + ". Vacancies: " + esc(mp.confidence_rules.vacancies) + ".</dd>" +
+      '<dt>Typical test error</dt><dd>The typical_test_error_pct column of forecast_long.csv, per horizon: the size of the misses on held-out data.</dd></dl></section>' +
       '<section class="card mt"><div class="card-h"><div><h2>Downloads</h2><p>CSV files for the current filters (' + esc(scopeText(p)) + ")</p></div></div><div class=\"dl-row\"><button class=\"chip-btn primary\" style=\"margin-left:0\" data-dl=\"f\">Forecasts</button><button class=\"chip-btn primary\" style=\"margin-left:0\" data-dl=\"l\">Flags</button><button class=\"chip-btn primary\" style=\"margin-left:0\" data-dl=\"h\">History</button></div></section>";
     $$("[data-dl]", view).forEach(function (b) { b.addEventListener("click", function () { var k = b.dataset.dl; if (k === "f") download(fname("forecasts"), HEAD_F, rowsForecast(idx)); else if (k === "l") download(fname("flags"), HEAD_L, rowsFlags(idx)); else download(fname("history"), HEAD_H, rowsHistory(idx)); }); });
     cur.csv = function () { return { name: fname("forecasts"), head: HEAD_F, rows: rowsForecast(idx) }; };
@@ -420,7 +442,7 @@
   }
   function route() {
     var r = parse(); cur.page = r.page; cur.p = r.p; cur.csv = null;
-    var meta = PAGES[r.page]; $("#page-title").textContent = meta[0]; $("#page-sub").textContent = meta[1]; document.title = meta[0] + " | LMIS India Dashboard";
+    var meta = PAGES[r.page]; $("#page-title").textContent = meta[0]; $("#page-sub").textContent = r.page === "ranking" ? DLIST.length + " districts ranked within one sector" : meta[1]; document.title = meta[0] + " | KaushalSetu Dashboard";
     $$("#nav a").forEach(function (a) { a.setAttribute("aria-current", a.dataset.page === r.page ? "page" : "false"); a.href = url(a.dataset.page, {}); });
     renderFilters(r.p);
     var view = $("#view"); hideTip();
@@ -428,7 +450,7 @@
     $("#main").scrollTop = 0; document.body.classList.remove("sb-open"); $("#scrim").hidden = true;
   }
   function init() {
-    $("#tb-origin").textContent = "Forecast from " + D.meta.origin_label; $("#foot-origin").textContent = D.meta.origin_label;
+    $("#tb-origin").textContent = "Forecast from " + D.meta.origin_label; $("#foot-origin").textContent = D.meta.origin_label; $("#foot-model").textContent = D.meta.model;
     ["sector", "state", "district"].forEach(function (k) { $("#f-" + k).addEventListener("change", function (e) { var o = {}; o[k] = e.target.value; if (k === "state") o.district = ""; go(o); }); });
     $("#f-reset").addEventListener("click", function () { go({ sector: "", state: "", district: "" }); });
     $("#f-csv").addEventListener("click", function () { if (!cur.csv) return; var c = cur.csv(); download(c.name, c.head, c.rows); });

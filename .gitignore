@@ -46,3 +46,6 @@ backups/
 
 # external source files downloaded for the map outline (22 MB; the build script says how to fetch them again)
 data/external/
+
+# secrets
+.env

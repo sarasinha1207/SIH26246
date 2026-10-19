@@ -10,6 +10,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import i18n  # noqa: E402
+import logo  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 SITE = ROOT / "app"
@@ -22,18 +23,16 @@ def ver(rel):
 
 
 PAGES = [  # file, nav key, title, description, body file
-    ("index.html", "home", "LMIS India: labour market forecasts for districts", "Twelve-month forecasts of employment, job vacancies and job seekers for 56 districts and five sectors, with honest ranges.", "index"),
-    ("about.html", "about", "About | LMIS India", "What LMIS India is, how monthly counts become twelve-month district forecasts, what the pilot covers and how the forecasting engine is built.", "about"),
-    ("resources.html", "res", "Resources | LMIS India", "The data behind the forecasts and where each part came from: the datasets, what the simulator was calibrated to, and what each column measures.", "resources"),
+    ("index.html", "home", "KaushalSetu: Bridging Skills. Forecasting Futures.", "Twelve-month forecasts of employment, job vacancies and job seekers for 56 districts and five sectors, with honest ranges.", "index"),
+    ("about.html", "about", "About | KaushalSetu", "What KaushalSetu is, how monthly counts become twelve-month district forecasts, what the pilot covers and how the forecasting engine is built.", "about"),
+    ("resources.html", "res", "Resources | KaushalSetu", "The data behind the forecasts and where each part came from: the datasets, what the simulator was calibrated to, and what each column measures.", "resources"),
 ]
 
 PREPAINT = """<script>(function(){var h=document.documentElement,s={};try{s=JSON.parse(localStorage.getItem('lmis-display')||'{}')}catch(e){}
 h.dataset.theme=s.theme==='light'?'light':'dark';h.dataset.size=s.size||'m';var l=s.lang==='hi'?'hi':'en';h.dataset.lang=l;h.lang=l;
 h.dataset.motion=(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)?'reduced':'full';})();</script>"""
 
-LOGO = ('<svg viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="9" fill="#0F2B63"/>'
-        '<path d="M6 25 L15 17 L22 20 L28 8" fill="none" stroke="#8FB0FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>'
-        '<path d="M6 10 L14 14 L21 12 L28 24" fill="none" stroke="#F2A93B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+LOGO = logo.inline()          # one definition for every page: src/app/logo.py
 
 DISPLAY = """<div class="display">
   <button class="display-btn" type="button" aria-expanded="false" aria-controls="display-panel" aria-label="Display options">
@@ -67,6 +66,7 @@ def head(title, desc, p):
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..800&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..800&display=swap"></noscript>
 <link rel="stylesheet" href="{p}assets/styles.css?v={ver("assets/styles.css")}">
+<link rel="stylesheet" href="{p}assets/chat.css?v={ver("assets/chat.css")}">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>"""
@@ -79,7 +79,7 @@ def header(active, p):
 <header class="site-header">
   <div class="wrap">
     <nav class="nav" aria-label="Main">
-      <a class="brand" href="{p}index.html" aria-label="LMIS India home">{LOGO}<span translate="no">LMIS <b>India</b></span></a>
+      <a class="brand" href="{p}index.html" aria-label="KaushalSetu home">{LOGO}<span translate="no">Kaushal<b>Setu</b></span></a>
       <ul class="nav-links" id="nav-links">{li}</ul>
       <div class="nav-actions">
         {DISPLAY}
@@ -100,6 +100,7 @@ def footer(p, extra_scripts):
     <div class="foot-grid">
       <div>
         <h4>About</h4>
+        <p class="foot-tag">Bridging Skills. Forecasting Futures.</p>
         <p>An AI-enabled labour market intelligence and skill demand-supply forecasting engine for the Ministry of Skill Development and Entrepreneurship.</p>
         <p>All figures on this site are simulated for demonstration. They are not official statistics.</p>
       </div>
@@ -115,6 +116,7 @@ def footer(p, extra_scripts):
 <script src="{p}assets/i18n-hi.js?v={ver("assets/i18n-hi.js")}"></script>
 <script src="{p}data/site_data.js?v={ver("data/site_data.js")}"></script>
 {extra_scripts.format(p=p)}<script src="{p}assets/site.js?v={ver("assets/site.js")}"></script>
+<script src="{p}assets/chat.js?v={ver("assets/chat.js")}"></script>
 </body>
 </html>
 """
@@ -138,9 +140,8 @@ def main():
         print(f"\n{len(missing)} text elements have no Hindi translation yet:")
         for f, m in missing:
             print(" -", f, "|", m)
-    (SITE / "assets" / "favicon.svg").write_text(
-        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 34"><rect width="34" height="34" rx="9" fill="#0F2B63"/><path d="M6 25 L15 17 L22 20 L28 8" fill="none" stroke="#8FB0FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>'
-        '<path d="M6 10 L14 14 L21 12 L28 24" fill="none" stroke="#F2A93B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>\n', encoding="utf-8")
+    for name in ("favicon.svg", "logo.svg"):
+        (SITE / "assets" / name).write_text(logo.standalone(), encoding="utf-8")
 
 
 if __name__ == "__main__":
