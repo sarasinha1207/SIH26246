@@ -11,7 +11,7 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "app"
-PAGES = ["index.html", "about.html", "resources.html", "dashboard/index.html"]
+PAGES = ["index.html", "about.html", "resources.html"]           # the public pages; the dashboard has its own tests
 FC = ROOT / "outputs" / "forecasts" / "origin_2026-10"
 sys.path.insert(0, str(ROOT / "src" / "app"))
 
@@ -45,11 +45,11 @@ def test_pages_exist_and_internal_links_resolve():
 
 
 def test_the_public_site_has_three_pages_plus_footer_and_a_dashboard_button():
-    for p in PAGES[:3]:
+    for p in PAGES:
         html = read(p)
         assert 'class="btn small nav-cta" href="dashboard/index.html">Open dashboard' in html, p
         assert len(re.findall(r'<nav[^>]*class="nav"', html)) == 1 and "<footer" in html, p
-    assert len(list(SITE.glob("*.html"))) == 3
+    assert len(list(SITE.glob("*.html"))) == 3 and (SITE / "dashboard" / "index.html").exists()
 
 
 def test_every_page_says_the_data_is_simulated_and_asks_for_no_login():
@@ -58,7 +58,7 @@ def test_every_page_says_the_data_is_simulated_and_asks_for_no_login():
         assert "simulated" in html and "are not official statistics" in html, p              # the footer carries the notice on every page
         assert 'class="notice"' not in html and "Demonstration data:" not in html, p        # no strip above the header
         assert not re.search(r"<input[^>]*type=\"password\"|type=\"email\"", html), p
-    for p in PAGES[:3]:
+    for p in PAGES:
         assert "No login" in read(p)
 
 
@@ -137,7 +137,7 @@ def test_display_options_are_text_size_theme_and_language_in_the_header_of_every
 
 
 def test_fonts_changed_and_loaded_without_a_build_step():
-    for p in PAGES[:3]:
+    for p in PAGES:
         html = read(p)
         assert "family=Geist" in html and "Sora" not in html and "Public+Sans" not in html, p
         assert "media=\"print\" onload=" in html, "font stylesheet must not block the first paint"
@@ -164,7 +164,7 @@ def test_the_site_has_exactly_the_requested_pages_and_nothing_left_over():
         html = read(p)
         assert "how-it-works" not in html and "data-and-accuracy" not in html and "downloads/" not in html, p
         nav = html[html.index('class="nav-links"'):html.index("</ul>")]
-        if p != "dashboard/index.html":
+        if True:
             assert ">Home<" in nav and ">About<" in nav and ">Resources<" in nav and "How it works<" not in nav and "Data and accuracy" not in nav, p
     D = data()
     for k in ("flags", "flag_labels", "downloads", "by_horizon", "noise_floor", "interval_half_width", "typical_error", "updates", "snapshot"):
@@ -362,7 +362,7 @@ def test_pages_are_generated_reproducibly_from_the_shared_parts():
 
 def test_unfinished_items_are_limited_to_the_documented_ones():
     readme = read("README.md")
-    for p in PAGES[:3]:
+    for p in PAGES:
         html = read(p)
         assert "lorem" not in html.lower() and "TODO" not in html
         assert set(re.findall(r"mailto:([^\"]+)", html)) <= {"feedback@lmis-demo.example"}
@@ -373,7 +373,7 @@ def test_reduced_motion_and_accessibility_basics_are_present():
     css, js = read("assets/styles.css"), read("assets/site.js")
     assert "prefers-reduced-motion: reduce" in css and "prefers-reduced-motion" in js and ":focus-visible" in css
     assert 'role="tablist"' in read("index.html") and "ArrowDown" in js                    # the home page steps work from the keyboard
-    for p in PAGES[:3]:
+    for p in PAGES:
         html = read(p)
         assert 'lang="en"' in html and 'class="skip"' in html and 'name="viewport"' in html and "<h1" in html and html.count("<h1") == 1, p
 

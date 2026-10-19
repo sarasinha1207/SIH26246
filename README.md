@@ -101,6 +101,8 @@ python src/deployment/forecast.py --origin 2026-10              # Phase 9: forec
 python tests/test_deployment.py                                 # Phase 9 tests (coverage, validity, reproducibility, no look-ahead)
 python src/app/build_site_data.py                           # public website: rebuild app/data and downloads from the forecast files
 python src/app/build_map_data.py                            # public website: rebuild the map (districts, India outline, forecast values)
+python src/app/build_dashboard.py                           # dashboard: rebuild its data file and page shell
+python tests/test_dashboard.py                              # dashboard tests (data vs forecast and flag files, frame, filters, palette)
 python src/app/build_pages.py                               # public website: rebuild the pages and the Hindi text
 python tests/test_app.py                                    # website tests (links, numbers vs source files, map, Hindi text, notices)
 python src/app/serve.py                                      # preview the website at http://localhost:8080 (rebuilds pages when you edit; Ctrl+C to stop)

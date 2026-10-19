@@ -7,6 +7,7 @@ A static site: plain HTML, CSS and JavaScript. No server and no login. The pages
 | Home (map, method, features, results) | `index.html` |
 | About (project, how it works timeline, coverage, dataset used, principles, engine, evaluation) | `about.html` |
 | Resources (the data used, with its source websites) | `resources.html` |
+| Dashboard (its own layout: top bar, collapsible sidebar, one-line footer) | `dashboard/index.html` |
 | Dashboard (placeholder until it is built) | `dashboard/index.html` |
 
 ## Preview
@@ -48,6 +49,16 @@ curl -L -o data/external/lgd_districts/LGD_Districts.parquet https://pub-0429b8e
 ```
 Boundaries are simplified for orientation, not for survey use or as an authoritative border.
 
+## The dashboard
+`dashboard/index.html` is a separate single-page app, not part of the public pages: a top bar, a fixed collapsible left sidebar, a body that changes by page, and a one-line footer. **Exit** (top bar and sidebar) returns to the public site; there is no login, so there is nothing to sign out of. Seven pages: Overview (4 KPIs, district map coloured by absolute context, openings against seekers, early-warning summary, coverage by sector, sector table), Demand, Supply (e-Shram break marked), Gap, District ranking (56 districts within one sector, relative status beside absolute context, small-count series greyed), Early warnings (alert and watch), and Data and notes. The Sector, State and District filters are on every page and live in the URL (`#/overview?sector=Healthcare&state=Delhi`), so a view can be bookmarked or shared; clicking a district on the map sets them. **Download CSV** exports the current view.
+
+Alert and watch: a series in the tightest tenth of its sector is a shortage flag, and in the loosest tenth an oversupply flag. It is an *alert* when the absolute context agrees (openings exceed seekers, or oversupplied or deep surplus) and a *watch* when it does not. Forecast ranges appear only when one district and one sector are selected. The dashboard is English only.
+```bash
+python src/app/build_dashboard.py     # writes dashboard/data/dash_data.js (2 MB: 280 series, 190 months, forecasts, flags) and the page shell
+python tests/test_dashboard.py
+```
+`serve.py` rebuilds the shell when `dashboard.css`, `dashboard.js` or `src/app/dashboard/shell.html` change. Rerun `build_dashboard.py` after a new forecast (and change `ORIGIN`).
+
 ## Where the numbers come from
 Every number comes from the project's outputs. Rebuild after a new forecast:
 ```bash
@@ -60,7 +71,6 @@ Edit `ORIGIN` in `src/app/build_site_data.py` and `src/app/build_map_data.py` wh
 
 ## Before launch: things only you can fill in
 * **Contact address:** `feedback@lmis-demo.example` in each footer is a placeholder. Replace it.
-* **Dashboard link:** `dashboard/index.html` is a "being built" page. The dashboard replaces it.
 * **Hindi review:** see above.
 * **Fonts:** Geist (and Noto Sans Devanagari in Hindi) load from Google Fonts without blocking the page. That sends the visitor's IP address to Google. To avoid it, download the fonts, serve them from `assets/` and add `@font-face` rules. The footer says the site has no cookies and no analytics, which stays true either way.
 

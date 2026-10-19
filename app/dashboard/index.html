@@ -1,80 +1,71 @@
 <!doctype html>
-<html lang="en" data-theme="dark" data-size="m" data-lang="en" data-motion="full">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dashboard | LMIS India</title>
-<meta name="description" content="The LMIS India dashboard is being built.">
+<meta name="description" content="LMIS India dashboard: demand, supply and gap forecasts for 56 districts and five sectors, with early-warning flags. Simulated data.">
 <meta name="theme-color" content="#0A0E16">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-<script>(function(){var h=document.documentElement,s={};try{s=JSON.parse(localStorage.getItem('lmis-display')||'{}')}catch(e){}
-h.dataset.theme=s.theme==='light'?'light':'dark';h.dataset.size=s.size||'m';var l=s.lang==='hi'?'hi':'en';h.dataset.lang=l;h.lang=l;
-h.dataset.motion=(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)?'reduced':'full';})();</script>
+<script>(function(){var s={};try{s=JSON.parse(localStorage.getItem('lmis-display')||'{}')}catch(e){}document.documentElement.dataset.theme=s.theme==='light'?'light':'dark';
+var d={};try{d=JSON.parse(localStorage.getItem('lmis-dash')||'{}')}catch(e){}if(d.collapsed)document.documentElement.classList.add('sb-collapsed');})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..800&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..800&display=swap"></noscript>
-<link rel="stylesheet" href="../assets/styles.css?v=5afe5e60">
+<link rel="stylesheet" href="dashboard.css?v=e77c63ff">
 </head>
 <body>
-<a data-hi="मुख्य सामग्री पर जाएँ" class="skip" href="#main">Skip to content</a>
-<header class="site-header">
-  <div class="wrap">
-    <nav data-hi-aria="मुख्य" class="nav" aria-label="Main">
-      <a data-hi-aria="LMIS India का मुख्य पृष्ठ" class="brand" href="../index.html" aria-label="LMIS India home"><svg viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="9" fill="#0F2B63"/><path d="M6 25 L15 17 L22 20 L28 8" fill="none" stroke="#8FB0FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 10 L14 14 L21 12 L28 24" fill="none" stroke="#F2A93B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span translate="no">LMIS <b>India</b></span></a>
-      <ul class="nav-links" id="nav-links"><li><a data-hi="मुख्य पृष्ठ" href="../index.html">Home</a></li><li><a data-hi="परिचय" href="../about.html">About</a></li><li><a data-hi="संसाधन" href="../resources.html">Resources</a></li></ul>
-      <div class="nav-actions">
-        <div class="display">
-  <button data-hi-aria="प्रदर्शन विकल्प" class="display-btn" type="button" aria-expanded="false" aria-controls="display-panel" aria-label="Display options">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4v5M6 13v7M12 4v10M12 18v2M18 4v2M18 10v10" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="6" cy="11" r="2.4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="16" r="2.4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="8" r="2.4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-  </button>
-  <div data-hi-aria="प्रदर्शन विकल्प" class="display-panel" id="display-panel" role="group" aria-label="Display options" hidden>
-    <div data-hi="प्रदर्शन विकल्प" class="dp-title">Display options</div>
-    <div class="dp-row"><span data-hi="अक्षर का आकार" class="dp-label">Text size</span><div data-hi-aria="अक्षर का आकार" class="seg" role="group" aria-label="Text size">
-      <button data-hi-aria="छोटे अक्षर" type="button" data-size-step="-1" aria-label="Smaller text" translate="no">A&minus;</button><button data-hi-aria="सामान्य आकार" type="button" data-size-step="0" aria-label="Default text size" translate="no">A</button><button data-hi-aria="बड़े अक्षर" type="button" data-size-step="1" aria-label="Larger text" translate="no">A+</button></div></div>
-    <div class="dp-row"><span data-hi="थीम" class="dp-label">Theme</span><div data-hi-aria="थीम" class="seg" role="group" aria-label="Theme">
-      <button data-hi="हल्का" type="button" data-opt="theme" data-val="light">Light</button><button data-hi="गहरा" type="button" data-opt="theme" data-val="dark">Dark</button></div></div>
-    <div class="dp-row"><span data-hi="भाषा" class="dp-label">Language</span><div data-hi-aria="भाषा" class="seg" role="group" aria-label="Language">
-      <button type="button" data-opt="lang" data-val="en" translate="no">English</button><button type="button" data-opt="lang" data-val="hi" lang="hi" translate="no">हिन्दी</button></div></div>
-  </div>
-</div>
-        <a data-hi="डैशबोर्ड खोलें" class="btn small nav-cta" href="../dashboard/index.html">Open dashboard</a>
-        <button data-hi="मेनू" class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
-      </div>
-    </nav>
-  </div>
-  <div class="progress" aria-hidden="true"><i></i></div>
-</header>
-<main id="main" class="soon">
-  <div class="grid-bg" aria-hidden="true"></div>
-  <div class="orbs" aria-hidden="true"><i></i><i></i></div>
-  <div class="wrap">
-    <span data-hi="&lt;i class=&quot;dot-live&quot;&gt;&lt;/i&gt;जल्द आ रहा है" class="pill"><i class="dot-live"></i>Coming next</span>
-    <h1 data-hi="डैशबोर्ड बनाया जा रहा है।" style="margin-top:18px">The dashboard is being built.</h1>
-    <p data-hi="जब तक यह नहीं खुलता, आप पढ़ सकते हैं कि पूर्वानुमान कैसे काम करते हैं और उनके पीछे का डेटा देख सकते हैं।" class="lede" style="margin-top:20px">Until it opens, you can read how the forecasts work and see the data behind them.</p>
-    <p style="display:flex;gap:12px;flex-wrap:wrap;align-items:center"><a data-hi="परियोजना के बारे में" class="btn" href="../about.html">About the project</a><a data-hi="डेटा देखें" class="btn ghost" href="../resources.html">See the data</a></p>
-  </div>
-</main>
-
-<footer class="site-footer">
-  <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <h4 data-hi="परिचय">About</h4>
-        <p data-hi="कौशल विकास एवं उद्यमिता मंत्रालय के लिए एआई-आधारित श्रम बाज़ार संबंधी जानकारी और कौशल की माँग-आपूर्ति के पूर्वानुमान का इंजन।">An AI-enabled labour market intelligence and skill demand-supply forecasting engine for the Ministry of Skill Development and Entrepreneurship.</p>
-        <p data-hi="इस साइट के सभी आँकड़े प्रदर्शन के लिए सिम्युलेटेड हैं। ये आधिकारिक सांख्यिकी नहीं हैं।">All figures on this site are simulated for demonstration. They are not official statistics.</p>
-      </div>
-      <div><h4 data-hi="पृष्ठ">Pages</h4><ul><li><a data-hi="मुख्य पृष्ठ" href="../index.html">Home</a></li><li><a data-hi="परिचय" href="../about.html">About</a></li><li><a data-hi="संसाधन" href="../resources.html">Resources</a></li><li><a data-hi="डैशबोर्ड" href="../dashboard/index.html">Dashboard</a></li></ul></div>
-      <div><h4 data-hi="डेटा">Data</h4><ul><li><a data-hi="डेटा के स्रोत" href="../resources.html#datasets">Data sources</a></li><li><a data-hi="डेटासेट का ब्यौरा" href="../about.html#dataset">Dataset details</a></li><li><a data-hi="मॉडल का मूल्यांकन" href="../about.html#evaluation">Model evaluation</a></li></ul></div>
-      <div><h4 data-hi="संपर्क">Contact</h4><p><a href="mailto:feedback@lmis-demo.example" translate="no">feedback@lmis-demo.example</a></p><p data-hi="कोई लॉगिन नहीं। यह साइट कोई कुकी नहीं लगाती और कोई एनालिटिक्स नहीं चलाती। आपके प्रदर्शन संबंधी चुनाव आपके अपने उपकरण में ही रहते हैं।">No login. This site sets no cookies and has no analytics. Your display choices stay on your device.</p></div>
+<a class="skip" href="#view">Skip to the page</a>
+<div class="app" id="app">
+  <header class="topbar">
+    <button class="icon-btn" id="sb-toggle" type="button" aria-label="Collapse the menu" aria-expanded="true" aria-controls="sidebar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <a class="tb-brand" href="#/overview" aria-label="LMIS India dashboard home">
+      <svg viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="9" fill="#0F2B63"/><path d="M6 25 L15 17 L22 20 L28 8" fill="none" stroke="#8FB0FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 10 L14 14 L21 12 L28 24" fill="none" stroke="#F2A93B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>LMIS <b>India</b></span><em>Dashboard</em>
+    </a>
+    <div class="tb-title"><h1 id="page-title">Overview</h1><span id="page-sub"></span></div>
+    <div class="tb-right">
+      <span class="tb-origin" id="tb-origin"></span>
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch between dark and light theme"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6L17 7M7 17l-1.4 1.4"/></svg></button>
+      <a class="btn-exit" id="exit-top" href="../index.html" title="Leave the dashboard and return to the website"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4M10 8l-4 4 4 4M6 12h10"/></svg><span>Exit</span></a>
     </div>
-    <div data-hi="पूर्वानुमान &lt;span data-fill=&quot;meta.first_target&quot;&gt;November 2026&lt;/span&gt; से &lt;span data-fill=&quot;meta.last_target&quot;&gt;October 2027&lt;/span&gt; तक, &lt;span data-fill=&quot;meta.origin_label&quot;&gt;October 2026&lt;/span&gt; तक के डेटा से बनाया गया।" class="legal">Forecast for <span data-fill="meta.first_target">November 2026</span> to <span data-fill="meta.last_target">October 2027</span>, made from data up to <span data-fill="meta.origin_label">October 2026</span>.</div>
-  </div>
-</footer>
-<button data-hi-aria="ऊपर जाएँ" class="to-top" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-<div class="tip" id="tip" role="status" aria-live="polite" hidden></div>
-<script src="../assets/i18n-hi.js?v=30fba87f"></script>
-<script src="../data/site_data.js?v=3496a9e7"></script>
-<script src="../assets/site.js?v=6edff5c6"></script>
+  </header>
+
+  <aside class="sidebar" id="sidebar" aria-label="Dashboard pages">
+    <nav>
+      <ul id="nav">
+        <li><a href="#/overview" data-page="overview"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="5" rx="1.5"/><rect x="13" y="11" width="7" height="9" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/></svg><span>Overview</span></a></li>
+        <li><a href="#/demand" data-page="demand"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 19h16M8 15l4-4 3 3 5-6"/></svg><span>Demand</span></a></li>
+        <li><a href="#/supply" data-page="supply"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 19c0-3.3 2.7-5 6-5s6 1.700 6 5M16 5.500a3 3 0 0 1 0 5M18 14c2 .5 3 2 3 5"/></svg><span>Supply</span></a></li>
+        <li><a href="#/gap" data-page="gap"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M6 20h12M5 8h14M7 8l-3 6a3 3 0 0 0 6 0zM17 8l-3 6a3 3 0 0 0 6 0z"/></svg><span>Gap</span></a></li>
+        <li><a href="#/ranking" data-page="ranking"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></svg><span>District ranking</span></a></li>
+        <li><a href="#/warnings" data-page="warnings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l9 16H3zM12 10v4M12 17h.01"/></svg><span>Early warnings</span></a></li>
+        <li><a href="#/data" data-page="data"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.700 3.100 3 7 3s7-1.300 7-3V6M5 12v6c0 1.700 3.100 3 7 3s7-1.300 7-3v-6"/></svg><span>Data and notes</span></a></li>
+      </ul>
+    </nav>
+    <div class="sb-foot">
+      <a class="btn-exit" id="exit-side" href="../index.html" title="Leave the dashboard and return to the website"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4M10 8l-4 4 4 4M6 12h10"/></svg><span>Exit</span></a>
+    </div>
+  </aside>
+  <div class="scrim" id="scrim" hidden></div>
+
+  <main class="main" id="main">
+    <div class="filters" id="filters" role="group" aria-label="Filters for every page">
+      <label><span>Sector</span><select id="f-sector"></select></label>
+      <label><span>State</span><select id="f-state"></select></label>
+      <label><span>District</span><select id="f-district"></select></label>
+      <button class="chip-btn" id="f-reset" type="button">Reset filters</button>
+      <button class="chip-btn primary" id="f-csv" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14"/></svg>Download CSV</button>
+    </div>
+    <div class="view" id="view" tabindex="-1"><p class="loading">Loading the dashboard…</p></div>
+  </main>
+
+  <footer class="foot" id="foot">Simulated data, not official statistics &middot; Forecast from <span id="foot-origin"></span> &middot; Model xgboost_v3 &middot; LMIS India</footer>
+</div>
+<div class="tip" id="tip" role="status" hidden></div>
+<script src="data/dash_data.js?v=b2afe240"></script>
+<script src="../data/map_data.js?v=e704b259"></script>
+<script src="dashboard.js?v=d8456080"></script>
 </body>
 </html>

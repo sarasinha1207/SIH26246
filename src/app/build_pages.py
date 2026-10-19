@@ -25,7 +25,6 @@ PAGES = [  # file, nav key, title, description, body file
     ("index.html", "home", "LMIS India: labour market forecasts for districts", "Twelve-month forecasts of employment, job vacancies and job seekers for 56 districts and five sectors, with honest ranges.", "index"),
     ("about.html", "about", "About | LMIS India", "What LMIS India is, how monthly counts become twelve-month district forecasts, what the pilot covers and how the forecasting engine is built.", "about"),
     ("resources.html", "res", "Resources | LMIS India", "The data behind the forecasts and where each part came from: the datasets, what the simulator was calibrated to, and what each column measures.", "resources"),
-    ("dashboard/index.html", "dash", "Dashboard | LMIS India", "The LMIS India dashboard is being built.", "dashboard"),
 ]
 
 PREPAINT = """<script>(function(){var h=document.documentElement,s={};try{s=JSON.parse(localStorage.getItem('lmis-display')||'{}')}catch(e){}

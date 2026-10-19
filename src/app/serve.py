@@ -3,6 +3,7 @@
 Local server for the website.   Run:  python src/app/serve.py [port]      (default port 8080; stop with Ctrl+C)
 
 * Serves the app/ folder, and tells the browser never to keep a copy, so a refresh always shows the latest files.
+* Watches the dashboard files too and rebuilds its shell when one changes.
 * Watches the page sources (src/app/pages, build_pages.py, the Hindi text) and the stylesheet and script, and rebuilds the pages when one changes,
   so you only edit and refresh.  Rebuilding the data files (site_data.js, map_data.js) is still a separate command, see app/README.md.
 * Refuses to start if the port is already taken, instead of quietly sharing it.
@@ -19,6 +20,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 SITE = ROOT / "app"
 SRC = Path(__file__).resolve().parent
+DASH_WATCH = [SRC / "dashboard" / "shell.html", SITE / "dashboard" / "dashboard.css", SITE / "dashboard" / "dashboard.js", SITE / "dashboard" / "data" / "dash_data.js"]
 WATCH = [*SRC.glob("pages/*.html"), SRC / "build_pages.py", SRC / "i18n.py", SRC / "i18n_hi.py", SITE / "assets" / "styles.css", SITE / "assets" / "site.js"]
 
 
@@ -41,10 +43,25 @@ def stamp():
     return [p.stat().st_mtime for p in WATCH if p.exists()]
 
 
+def dash_stamp():
+    return [p.stat().st_mtime for p in DASH_WATCH if p.exists()]
+
+
 def watch():
-    last = stamp()
+    last, dlast = stamp(), dash_stamp()
     while True:
         time.sleep(1)
+        dnow = dash_stamp()
+        if dnow != dlast:
+            try:
+                spec = importlib.util.spec_from_file_location("build_dashboard_live", SRC / "build_dashboard.py")
+                mod = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(mod)
+                mod.shell()
+                print(time.strftime("%H:%M:%S"), "dashboard rebuilt", flush=True)
+            except Exception as e:  # noqa: BLE001
+                print(time.strftime("%H:%M:%S"), "dashboard rebuild failed:", type(e).__name__, e, flush=True)
+            dlast = dash_stamp()
         now = stamp()
         if now != last:
             last = now
