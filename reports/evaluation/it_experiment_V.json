@@ -1,0 +1,34 @@
+{
+ "target": "V",
+ "sector": "IT-ITeS",
+ "folds": {
+  "2016-12": {
+   "global_model": 6.669032846437133,
+   "sector_model": 6.540493702533067,
+   "change_pct": -1.9274030712374879,
+   "rows": 2408
+  },
+  "2017-12": {
+   "global_model": 7.237286306530675,
+   "sector_model": 7.625238249016596,
+   "change_pct": 5.360461449975351,
+   "rows": 4368
+  },
+  "2018-12": {
+   "global_model": 7.004761308843217,
+   "sector_model": 7.169368642804884,
+   "change_pct": 2.3499349471602704,
+   "rows": 4368
+  },
+  "validation": {
+   "global_model": 9.413289847005089,
+   "sector_model": 9.94048214552572,
+   "change_pct": 5.60051063006799,
+   "rows": 3080
+  }
+ },
+ "mean_cv_change_pct": 1.9276644419660445,
+ "validation_change_pct": 5.60051063006799,
+ "adopt": false,
+ "rule": "adopt only if the sector model is at least 3% better on the mean of the rolling-origin folds and on the validation split"
+}

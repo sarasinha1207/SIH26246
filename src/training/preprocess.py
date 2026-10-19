@@ -20,17 +20,19 @@ class FeaturePreprocessor:
         self.features = list(features)
         self.continuous = [c for c in self.features if c not in DISCRETE]
         self.fitted = False
+        self.fitted_on_train_only = True
 
-    def fit(self, X, split_names):
-        """`split_names`: the values of the `split` column of the rows being fitted; only {'train'} is allowed."""
-        if set(split_names) != {"train"}:
-            raise ValueError(f"preprocessing statistics may be fitted on the train split only, got {sorted(set(split_names))}")
+    def fit(self, X, split_names, allowed=("train",)):
+        """`split_names`: the values of the `split` column of the rows being fitted; by default only {'train'} is allowed (Phase 8 refits may add 'validation', never 'test')."""
+        if not set(split_names) <= set(allowed) or "test" in set(split_names):
+            raise ValueError(f"preprocessing statistics may be fitted on {sorted(allowed)} only, got {sorted(set(split_names))}")
         Z = X[self.features].astype(float)
         self.median = Z.median().to_dict()
         self.mean = Z[self.continuous].mean().to_dict()
         std = Z[self.continuous].std(ddof=0).replace(0.0, 1.0)
         self.std = std.to_dict()
         self.n_rows = int(len(Z))
+        self.fitted_on_train_only = set(split_names) == {"train"}
         self.n_missing_in_fit = int(Z.isna().sum().sum())
         self.fitted = True
         return self
@@ -45,7 +47,7 @@ class FeaturePreprocessor:
 
     def to_dict(self):
         return {"features": self.features, "continuous": self.continuous, "median": self.median, "mean": self.mean, "std": self.std,
-                "n_rows": self.n_rows, "n_missing_in_fit": self.n_missing_in_fit, "fitted_on": "train split only"}
+                "n_rows": self.n_rows, "n_missing_in_fit": self.n_missing_in_fit, "fitted_on": "train split only" if self.fitted_on_train_only else "train + validation splits"}
 
     @classmethod
     def from_dict(cls, d):

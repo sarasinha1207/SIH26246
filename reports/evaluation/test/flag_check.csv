@@ -1,0 +1,37 @@
+horizon,event,flag_source,base_rate,precision,recall,auc,rows
+1,tightest decile (shortage),persistence (today's percentile),0.10714285714285714,0.7804347826086957,0.7804347826086957,0.9787101449275363,12880
+1,tightest decile (shortage),model forecast (blended seekers),0.10714285714285714,0.7934782608695652,0.7934782608695652,0.981,12880
+1,tightest decile (shortage),model forecast (declared seekers),0.10714285714285714,0.7949275362318841,0.7949275362318841,0.9813188405797102,12880
+1,loosest decile (saturation),persistence (today's percentile),0.08928571428571429,0.7895652173913044,0.7895652173913044,0.9835805626598465,12880
+1,loosest decile (saturation),model forecast (blended seekers),0.08928571428571429,0.808695652173913,0.808695652173913,0.9865643648763853,12880
+1,loosest decile (saturation),model forecast (declared seekers),0.08928571428571429,0.808695652173913,0.808695652173913,0.9863427109974424,12880
+1,"actual coverage ratio inside [V_lo/S_hi, V_hi/S_lo]",intervals,,0.9946428571428572,,,12880
+1,"rank correlation, forecast vs actual percentile",model forecast (blended seekers),,0.9541546554132367,,,12880
+1,"rank correlation, today vs actual percentile",persistence,,0.9468421052631579,,,12880
+3,tightest decile (shortage),persistence (today's percentile),0.10714285714285714,0.7528985507246376,0.7528985507246376,0.9702028985507246,12880
+3,tightest decile (shortage),model forecast (blended seekers),0.10714285714285714,0.763768115942029,0.763768115942029,0.9730869565217392,12880
+3,tightest decile (shortage),model forecast (declared seekers),0.10714285714285714,0.763768115942029,0.763768115942029,0.9730869565217392,12880
+3,loosest decile (saturation),persistence (today's percentile),0.08928571428571429,0.7478260869565218,0.7478260869565218,0.9786018755328219,12880
+3,loosest decile (saturation),model forecast (blended seekers),0.08928571428571429,0.7582608695652174,0.7582608695652174,0.9816538789428815,12880
+3,loosest decile (saturation),model forecast (declared seekers),0.08928571428571429,0.7582608695652174,0.7582608695652174,0.9816538789428815,12880
+3,"actual coverage ratio inside [V_lo/S_hi, V_hi/S_lo]",intervals,,0.9944099378881988,,,12880
+3,"rank correlation, forecast vs actual percentile",model forecast (blended seekers),,0.9334197152961456,,,12880
+3,"rank correlation, today vs actual percentile",persistence,,0.924958839787215,,,12880
+6,tightest decile (shortage),persistence (today's percentile),0.10714285714285714,0.7124031007751938,0.7124031007751938,0.9589302325581396,12040
+6,tightest decile (shortage),model forecast (blended seekers),0.10714285714285714,0.7170542635658915,0.7170542635658915,0.9624496124031008,12040
+6,tightest decile (shortage),model forecast (declared seekers),0.10714285714285714,0.7193798449612403,0.7193798449612403,0.9624031007751938,12040
+6,loosest decile (saturation),persistence (today's percentile),0.08928571428571429,0.706046511627907,0.706046511627907,0.9713816689466485,12040
+6,loosest decile (saturation),model forecast (blended seekers),0.08928571428571429,0.7227906976744186,0.7227906976744186,0.9749931600547196,12040
+6,loosest decile (saturation),model forecast (declared seekers),0.08928571428571429,0.7237209302325581,0.7237209302325581,0.9752120383036935,12040
+6,"actual coverage ratio inside [V_lo/S_hi, V_hi/S_lo]",intervals,,0.99078073089701,,,12040
+6,"rank correlation, forecast vs actual percentile",model forecast (blended seekers),,0.9093096377306903,,,12040
+6,"rank correlation, today vs actual percentile",persistence,,0.8992315884849544,,,12040
+12,tightest decile (shortage),persistence (today's percentile),0.10714285714285714,0.6495495495495496,0.6495495495495496,0.9443783783783783,10360
+12,tightest decile (shortage),model forecast (blended seekers),0.10714285714285714,0.6648648648648648,0.6648648648648648,0.9505765765765766,10360
+12,tightest decile (shortage),model forecast (declared seekers),0.10714285714285714,0.6621621621621622,0.6621621621621622,0.9496576576576576,10360
+12,loosest decile (saturation),persistence (today's percentile),0.08928571428571429,0.6464864864864864,0.6464864864864864,0.9575198728139904,10360
+12,loosest decile (saturation),model forecast (blended seekers),0.08928571428571429,0.6756756756756757,0.6756756756756757,0.9646210916799152,10360
+12,loosest decile (saturation),model forecast (declared seekers),0.08928571428571429,0.6778378378378378,0.6778378378378378,0.9650026497085321,10360
+12,"actual coverage ratio inside [V_lo/S_hi, V_hi/S_lo]",intervals,,0.9847490347490347,,,10360
+12,"rank correlation, forecast vs actual percentile",model forecast (blended seekers),,0.8757536347010032,,,10360
+12,"rank correlation, today vs actual percentile",persistence,,0.8618880124143283,,,10360

@@ -6,3 +6,4 @@ pyarrow==20.0.0
 matplotlib==3.9.2
 scikit-learn==1.5.2
 xgboost==3.4.1
+optuna==4.1.0

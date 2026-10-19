@@ -14,7 +14,7 @@ Phases are completed strictly in order. A phase is closed only after its sign-of
 | 5 | Feature Engineering & Selection | **Approved** | [docs/phases/PHASE_5_FEATURE_ENGINEERING.md](docs/phases/PHASE_5_FEATURE_ENGINEERING.md) |
 | 6 | Model Selection | **Approved** | [docs/phases/PHASE_6_MODEL_SELECTION.md](docs/phases/PHASE_6_MODEL_SELECTION.md) |
 | 7 | Model Training | **Approved** | [docs/phases/PHASE_7_MODEL_TRAINING.md](docs/phases/PHASE_7_MODEL_TRAINING.md) |
-| 8 | Evaluation & Tuning | Not started | |
+| 8 | Evaluation & Tuning | **Complete – awaiting sign-off** | [docs/phases/PHASE_8_EVALUATION_AND_TUNING.md](docs/phases/PHASE_8_EVALUATION_AND_TUNING.md) |
 | 9 | Deployment | Not started | |
 | 10 | Monitoring & Maintenance | Not started | |
 
@@ -46,9 +46,10 @@ LMIS Data/
 │   ├── models/              Phase 6 model comparison and tuning
 │   ├── splits/              Phase 7 builds the 70/5/25 split files
 │   ├── training/            Phase 7 preprocessing, tuning, final training, prediction, model card
+│   ├── evaluation/          Phase 8 Optuna tuning, freezing, one-shot test evaluation, diagnostics
 │   ├── dashboard/           builds the dashboard data pack
 │   └── modeling/            quarantined prototype (do not run)
-├── models/                  trained models: xgboost_v1/ (Phase 7 checkpoint + model_card.md); quarantine/ holds the prototype's
+├── models/                  trained models: xgboost_v1/ (Phase 7), xgboost_v2/ (Phase 8 frozen models + model_card.md); quarantine/ holds the prototype's
 ├── outputs/                 forecasts and rankings (quarantine/ holds the prototype's)
 ├── tests/                   automated data tests
 ├── reports/                 audit results and reports
@@ -58,6 +59,7 @@ LMIS Data/
 ## Data rules
 * The only modelling dataset is `data/raw/lmis_district_monthly_2011_2026.csv` (quarterly file for roll-ups). It is **synthetic**; see `docs/reference/DATA_SOURCES_AND_METHODOLOGY.md`.
 * Nothing under `Archived/` or `data/superseded/` may be used. The duplicate of the archived dataset that sat in the repo root was removed in Phase 2.
+* **The test split has been evaluated once (Phase 8) and is spent**; see `reports/evaluation/test_access_log.json`.
 * From Phase 7 the project split is 70/5/25 of the calendar months (train 2011-01 to 2022-02, validation 2022-03 to 2022-12, test 2023-01 to 2026-12), defined in `src/common/splits.py`; the test file is locked behind `load_split` until Phase 8. This replaces the Phase 3 `Split_Role` split (test 2025–2026), which `load_panel` still enforces for the older phases.
 * The test period (2025–2026) is locked behind `load_panel`. It is not pristine: the provisional prototype scored it once before the lock existed; see `docs/phases/PHASE_5_FEATURE_ENGINEERING.md`, Section 9 (its scores were removed from decision documents and the prototype quarantined).
 * Raw files are never edited. `python src/data_collection/validate_raw_data.py` verifies them against the checksums in `data/raw/DATA_MANIFEST.json` and runs the acceptance checks.
@@ -84,6 +86,9 @@ python src/training/train.py                                    # Phase 7 final 
 python src/training/make_model_card.py                          # regenerates models/xgboost_v1/model_card.md
 python tests/test_training.py                                   # Phase 7 tests
 python src/training/predict.py --split validation --out f.parquet   # run the saved model
+python src/evaluation/tune_optuna.py E                          # Phase 8 Optuna search per target (~70 min); then finalize.py, recalibrate.py, build_models.py (freeze)
+python src/evaluation/evaluate.py                               # Phase 8 ONE-SHOT test evaluation (refuses a second run), then diagnostics.py, make_report.py
+python tests/test_evaluation.py                                 # Phase 8 tests
 python src/dashboard/export_data_pack.py                        # dashboard data pack (see docs/DASHBOARD_BRIEF.md)
 python src/dashboard/build_boundaries.py <LGD_Districts.parquet> # district map polygons (source download described in the script)
 python tests/test_dashboard_pack.py                             # data pack and map tests

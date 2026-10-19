@@ -48,12 +48,17 @@ class Forecaster:
                 m.load_model(folder / f"{k}_seed{sd}.ubj")
                 models[k].append(m)
         intervals = json.load(open(folder / "intervals.json"))["by_target_horizon"]
-        return cls(models, pre, params, intervals, manifest)
+        fc = cls(models, pre, params, intervals, manifest)
+        bp = folder / "blend.json"
+        fc.blend = json.load(open(bp))["model_weight_by_target_horizon"] if bp.exists() else None      # Phase 8: weight on the model vs last value + seasonal shift
+        return fc
 
     def required_columns(self):
         cols = set()
         for k in KEYS:
             cols |= set(self.params[k]["features"]) | {f"{self.params[k]['base']}_{k}"}
+            if getattr(self, "blend", None):
+                cols |= {f"last_{k}", f"{k}_sf_shift"}
         return sorted(cols)
 
     def predict(self, df, targets=KEYS):
@@ -69,6 +74,9 @@ class Forecaster:
             Z = self.pre[k].transform(df[p["features"]])
             change = np.mean([m.predict(Z) for m in self.models[k]], axis=0)
             lvl = df[f"{p['base']}_{k}"].to_numpy() + change
+            if getattr(self, "blend", None):
+                w = np.array([self.blend[k][str(int(h))] for h in df["horizon"]])
+                lvl = w * lvl + (1 - w) * (df[f"last_{k}"].to_numpy() + np.nan_to_num(df[f"{k}_sf_shift"].to_numpy(), nan=0.0))
             lo = np.array([self.intervals[k][str(int(h))][0] for h in df["horizon"]])
             hi = np.array([self.intervals[k][str(int(h))][1] for h in df["horizon"]])
             out[f"pred_log_{k}"] = lvl

@@ -1,0 +1,4 @@
+target,wape_mean_horizon,phase1_wape_limit,within_limit,best_baseline,improvement_over_best_baseline_pct,improvement_over_phase1_baseline_pct,meets_20pct,h12_over_h1,within_1_5x,worst_tier_ratio_h6_all,worst_tier_ratio_h6_4plus_districts
+E,1.7467230213358096,2.0,True,seasonal_naive_drift,28.952813356154238,28.952813356154238,True,1.924674417784035,False,1.0574081334971313,1.0574081334971313
+V,9.157908211739402,7.0,False,last_plus_seasonal_shift,3.0379721148686034,7.209163232275206,False,2.247408334207433,False,1.1708556252844309,1.1518795072810348
+S,7.355524901086039,6.0,False,last_plus_seasonal_shift,-9.961378656946373,7.465925844910903,False,2.6420849258849097,False,1.122059701897778,1.071777940882039

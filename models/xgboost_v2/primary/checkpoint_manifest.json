@@ -1,0 +1,33 @@
+{
+ "variant": "primary",
+ "note": "Phase 8 candidate: tuned, blended where the validation veto allows, recalibrated; fitted on train + validation",
+ "files_sha256": {
+  "blend.json": "2f829e509262702c9c6393a5137d171d0ebc374a1a66f9ba34f33e56353364cc",
+  "blend_cv.json": "326b2d7bd66f12eea59d5d2051cddb4512ab88a08f5ccf4bbe15a3a61b29d692",
+  "E_seed42.ubj": "9b1cfaf810ede8b478be77fc84a76eb2482992c81892be9a90e9f5c23a0237c6",
+  "E_seed43.ubj": "43b7990490e7eb8771f838df4c84e435ee51759a55ca647c6f71e9cd03f91f89",
+  "E_seed44.ubj": "b136d0791bbefd1cee1fb9a76e122aa2ccc3053a67855694a2288b46aa401797",
+  "E_seed45.ubj": "8701f021e541682af6d306de9e6fd3ba13fc4cde398dcbc1f053ad012514071a",
+  "E_seed46.ubj": "9dbb868d57f92fd873646592f266b776d03560149ecf83df381f694427fbe2d2",
+  "intervals.json": "3219faea786e40b0d5ca7022c15bd75f8137e0ef8efd317425d653e46ace62b8",
+  "params.json": "feb547262eb5b1d040d4a36948cf3aa282ab804b65a0852d7565b914b6f4610f",
+  "preprocessor.json": "3774a5d9d6c4a00e928f5054f87b8f6fd3f4bfb593ca00863031e8ceac18ceb5",
+  "S_seed42.ubj": "5883556929be0c27fe0b112a41cf2b6f89940593fc60464664487d2f767ed62f",
+  "S_seed43.ubj": "acb23e99c595277314d150e4b4421f998122d3076c66970aaf70eab86e61a838",
+  "S_seed44.ubj": "8a45b10e4ed5ecb84ada0ada48dc4a35b4b224c4d6db08f8f68cc1d6964d0fd8",
+  "S_seed45.ubj": "6cd94d3f01e04096f31c58734b367cb57e6282b9f1c96a5f1ca66218a38c9843",
+  "S_seed46.ubj": "19b41f79d5e77e5fc9f5fe8aad39a14230b4c6f95671892dbf5971b0ff7c9f2d",
+  "V_seed42.ubj": "0c1500485becee2e86c47d817aa1e45454e248c15a6ca56d4bc80b10a591420c",
+  "V_seed43.ubj": "2d4a96cd92631ce0863147e9ca0caa3dd996d4dd289955b6be866c3a9aaf4643",
+  "V_seed44.ubj": "cc30037d72947c83f87318e0127d5c8947bb69ffd2de507d56b465e4ab253c19",
+  "V_seed45.ubj": "ea0264079192d00851512306ff6dcc948ebf37b07fe3d01d3d6a943644eb5a44",
+  "V_seed46.ubj": "f4c2c060c3b35d8d4395dd52f2454e0a1c28b9a9f6130035e67c651f81b44129"
+ },
+ "trained_on_validation_too": true,
+ "test_split_opened": false,
+ "environment": {
+  "xgboost": "3.4.1",
+  "numpy": "2.1.3",
+  "pandas": "2.2.3"
+ }
+}

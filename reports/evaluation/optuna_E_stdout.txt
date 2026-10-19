@@ -1,0 +1,152 @@
+[E] folds: 2016-12 92,400/12,040, 2017-12 92,400/21,840, 2018-12 92,680/21,840, validation 124,320/15,400
+[E] Phase 7 reference WAPE per fold: 2016-12 1.926, 2017-12 1.558, 2018-12 1.523, validation 4.163
+C:\Users\saras\AppData\Roaming\Python\Python313\site-packages\optuna\_experimental.py:31: ExperimentalWarning: Argument ``multivariate`` is an experimental feature. The interface can change in the future.
+  warnings.warn(
+[I 2026-10-19 02:52:07,136] A new study created in RDB with name: lmis_E
+[E     85s] trial   0  score 0.9994  trees 500  lr 0.030 leaves 63 mcw 800 loss squarederror hl 0
+[E    112s] trial   1  score 0.9966  trees 250  lr 0.080 leaves 31 mcw 100 loss squarederror hl 0
+[E    139s] trial   2  score 1.1529  trees 500  lr 0.017 leaves 15 mcw 1356 loss pseudohuber hl 24
+[E    152s] trial   3  score 1.0586  trees 200  lr 0.084 leaves 4 mcw 34 loss squarederror hl 60
+[E    210s] trial   4  score 1.0211  trees 600  lr 0.031 leaves 7 mcw 140 loss absoluteerror hl 24
+[E    232s] trial   5  score 1.0310  trees 400  lr 0.045 leaves 126 mcw 148 loss squarederror hl 0
+[E    275s] trial   6  score 1.0693  trees 500  lr 0.029 leaves 9 mcw 421 loss absoluteerror hl 0
+[E    292s] trial   7  score 1.2191  trees 100  lr 0.092 leaves 46 mcw 26 loss absoluteerror hl 24
+[E    331s] trial   8  score 1.1235  trees 600  lr 0.029 leaves 95 mcw 393 loss absoluteerror hl 0
+[E    357s] trial   9  score 1.0593  trees 600  lr 0.022 leaves 19 mcw 1413 loss pseudohuber hl 60
+[E    403s] trial  10  score 1.0458  trees 500  lr 0.040 leaves 68 mcw 330 loss squarederror hl 60
+[E    434s] trial  11  score 1.0444  trees 300  lr 0.053 leaves 11 mcw 820 loss absoluteerror hl 60
+[E    476s] trial  12  score 1.0185  trees 600  lr 0.013 leaves 61 mcw 1447 loss squarederror hl 24
+[E    502s] trial  13  score 1.0570  trees 600  lr 0.018 leaves 68 mcw 23 loss squarederror hl 0
+[E    533s] trial  14  score 1.0484  trees 600  lr 0.012 leaves 10 mcw 48 loss squarederror hl 0
+[E    584s] trial  15  score 1.0147  trees 600  lr 0.010 leaves 20 mcw 182 loss pseudohuber hl 60
+[E    611s] trial  16  score 1.0405  trees 400  lr 0.021 leaves 16 mcw 667 loss squarederror hl 0
+[E    642s] trial  17  score 1.0259  trees 500  lr 0.037 leaves 6 mcw 185 loss pseudohuber hl 0
+[E    663s] trial  18  score 1.0627  trees 250  lr 0.073 leaves 67 mcw 105 loss pseudohuber hl 0
+[E    694s] trial  19  score 1.0253  trees 300  lr 0.037 leaves 6 mcw 316 loss pseudohuber hl 0
+[E    798s] trial  20  score 1.0015  trees 500  lr 0.035 leaves 77 mcw 241 loss squarederror hl 0
+[E    845s] trial  21  score 0.9828  trees 200  lr 0.077 leaves 76 mcw 165 loss squarederror hl 0
+[E    861s] trial  22  score 1.0203  trees 200  lr 0.085 leaves 14 mcw 71 loss squarederror hl 0
+[E    893s] trial  23  score 1.0021  trees 250  lr 0.068 leaves 23 mcw 50 loss squarederror hl 0
+[E    930s] trial  24  score 1.0198  trees 600  lr 0.023 leaves 64 mcw 612 loss squarederror hl 24
+[E    981s] trial  25  score 1.0139  trees 300  lr 0.056 leaves 70 mcw 135 loss squarederror hl 24
+[W 2026-10-19 03:08:25,724] The parameter 'huber_slope' in trial#26 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   1060s] trial  26  score 1.0043  trees 600  lr 0.019 leaves 57 mcw 1247 loss pseudohuber hl 0
+[E   1084s] trial  27  score 1.0387  trees 200  lr 0.093 leaves 23 mcw 382 loss squarederror hl 60
+[E   1132s] trial  28  score 1.0016  trees 200  lr 0.082 leaves 74 mcw 37 loss absoluteerror hl 0
+[E   1157s] trial  29  score 0.9880  trees 250  lr 0.078 leaves 16 mcw 398 loss squarederror hl 0
+[E   1185s] trial  30  score 0.9797  trees 300  lr 0.062 leaves 10 mcw 229 loss squarederror hl 0
+[E   1222s] trial  31  score 0.9835  trees 500  lr 0.040 leaves 7 mcw 482 loss squarederror hl 0
+[E   1246s] trial  32  score 0.9965  trees 200  lr 0.091 leaves 14 mcw 471 loss squarederror hl 0
+[W 2026-10-19 03:12:51,078] The parameter 'huber_slope' in trial#33 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   1288s] trial  33  score 0.9794  trees 500  lr 0.039 leaves 10 mcw 840 loss pseudohuber hl 0
+[W 2026-10-19 03:13:33,461] The parameter 'huber_slope' in trial#34 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   1325s] trial  34  score 1.0392  trees 600  lr 0.027 leaves 4 mcw 1044 loss pseudohuber hl 0
+[E   1360s] trial  35  score 1.0131  trees 200  lr 0.094 leaves 80 mcw 191 loss absoluteerror hl 0
+[W 2026-10-19 03:14:45,525] The parameter 'huber_slope' in trial#36 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   1381s] trial  36  score 1.0513  trees 250  lr 0.071 leaves 5 mcw 490 loss pseudohuber hl 24
+[W 2026-10-19 03:15:05,962] The parameter 'huber_slope' in trial#37 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   1435s] trial  37  score 0.9996  trees 600  lr 0.020 leaves 12 mcw 672 loss pseudohuber hl 0
+[E   1472s] trial  38  score 1.0286  trees 500  lr 0.036 leaves 5 mcw 872 loss squarederror hl 60
+[W 2026-10-19 03:16:37,056] The parameter 'huber_slope' in trial#39 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   1490s] trial  39  score 0.9953  trees 200  lr 0.090 leaves 7 mcw 668 loss pseudohuber hl 60
+[E   1531s] trial  40  score 1.0027  trees 600  lr 0.028 leaves 5 mcw 338 loss squarederror hl 24
+[E   1559s] trial  41  score 1.0099  trees 400  lr 0.041 leaves 4 mcw 528 loss squarederror hl 0
+[E   1588s] trial  42  score 1.0286  trees 250  lr 0.071 leaves 14 mcw 941 loss absoluteerror hl 0
+[E   1654s] trial  43  score 1.0003  trees 250  lr 0.077 leaves 96 mcw 226 loss squarederror hl 0
+[E   1678s] trial  44  score 1.0048  trees 250  lr 0.074 leaves 10 mcw 76 loss squarederror hl 24
+[E   1712s] trial  45  score 1.0253  trees 400  lr 0.042 leaves 14 mcw 254 loss squarederror hl 0
+[E   1779s] trial  46  score 1.0073  trees 500  lr 0.035 leaves 27 mcw 525 loss squarederror hl 0
+[E   1855s] trial  47  score 0.9906  trees 400  lr 0.050 leaves 37 mcw 504 loss absoluteerror hl 0
+[E   1884s] trial  48  score 0.9963  trees 250  lr 0.068 leaves 16 mcw 618 loss squarederror hl 60
+[E   1910s] trial  49  score 0.9914  trees 250  lr 0.078 leaves 8 mcw 97 loss squarederror hl 0
+[W 2026-10-19 03:23:54,942] The parameter 'huber_slope' in trial#50 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   1931s] trial  50  score 0.9959  trees 200  lr 0.096 leaves 10 mcw 199 loss pseudohuber hl 24
+[E   2014s] trial  51  score 1.0134  trees 600  lr 0.029 leaves 18 mcw 440 loss absoluteerror hl 0
+[W 2026-10-19 03:25:38,865] The parameter 'huber_slope' in trial#52 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   2071s] trial  52  score 1.0096  trees 300  lr 0.055 leaves 46 mcw 581 loss pseudohuber hl 0
+[W 2026-10-19 03:26:36,583] The parameter 'huber_slope' in trial#53 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   2113s] trial  53  score 0.9863  trees 500  lr 0.034 leaves 7 mcw 571 loss pseudohuber hl 0
+[W 2026-10-19 03:27:18,395] The parameter 'huber_slope' in trial#54 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   2156s] trial  54  score 0.9750  trees 400  lr 0.042 leaves 16 mcw 226 loss pseudohuber hl 0
+[W 2026-10-19 03:28:01,209] The parameter 'huber_slope' in trial#55 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   2194s] trial  55  score 0.9831  trees 300  lr 0.062 leaves 27 mcw 357 loss pseudohuber hl 0
+[W 2026-10-19 03:28:38,870] The parameter 'huber_slope' in trial#56 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   2249s] trial  56  score 0.9881  trees 400  lr 0.040 leaves 32 mcw 281 loss pseudohuber hl 0
+[W 2026-10-19 03:29:34,213] The parameter 'huber_slope' in trial#57 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   2272s] trial  57  score 0.9899  trees 200  lr 0.087 leaves 20 mcw 64 loss pseudohuber hl 60
+[E   2331s] trial  58  score 1.0187  trees 600  lr 0.017 leaves 7 mcw 1283 loss absoluteerror hl 0
+[W 2026-10-19 03:30:55,937] The parameter 'huber_slope' in trial#59 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   2373s] trial  59  score 0.9858  trees 300  lr 0.052 leaves 33 mcw 516 loss pseudohuber hl 0
+[W 2026-10-19 03:31:37,773] The parameter 'huber_slope' in trial#60 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   2420s] trial  60  score 1.0784  trees 250  lr 0.072 leaves 66 mcw 279 loss pseudohuber hl 0
+[W 2026-10-19 03:32:24,886] The parameter 'huber_slope' in trial#61 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   2456s] trial  61  score 0.9998  trees 400  lr 0.050 leaves 24 mcw 386 loss pseudohuber hl 0
+[W 2026-10-19 03:33:01,242] The parameter 'huber_slope' in trial#62 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   2505s] trial  62  score 1.0118  trees 400  lr 0.044 leaves 49 mcw 489 loss pseudohuber hl 24
+[W 2026-10-19 03:33:49,907] The parameter 'huber_slope' in trial#63 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   2545s] trial  63  score 0.9774  trees 300  lr 0.054 leaves 30 mcw 818 loss pseudohuber hl 0
+[E   2584s] trial  64  score 1.0180  trees 300  lr 0.063 leaves 35 mcw 1046 loss absoluteerror hl 0
+[E   2619s] trial  65  score 0.9943  trees 400  lr 0.040 leaves 5 mcw 336 loss squarederror hl 0
+[W 2026-10-19 03:35:44,634] The parameter 'huber_slope' in trial#66 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   2650s] trial  66  score 0.9954  trees 250  lr 0.069 leaves 18 mcw 613 loss pseudohuber hl 0
+[W 2026-10-19 03:36:15,237] The parameter 'huber_slope' in trial#67 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   2681s] trial  67  score 1.0178  trees 400  lr 0.048 leaves 11 mcw 486 loss pseudohuber hl 0
+[W 2026-10-19 03:36:46,093] The parameter 'huber_slope' in trial#68 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   2723s] trial  68  score 0.9919  trees 300  lr 0.052 leaves 45 mcw 252 loss pseudohuber hl 0
+[E   2762s] trial  69  score 1.0073  trees 300  lr 0.060 leaves 48 mcw 247 loss squarederror hl 0
+[W 2026-10-19 03:38:07,440] The parameter 'huber_slope' in trial#70 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   2798s] trial  70  score 1.0241  trees 300  lr 0.061 leaves 19 mcw 265 loss pseudohuber hl 0
+[E   2854s] trial  71  score 1.0219  trees 600  lr 0.033 leaves 23 mcw 859 loss squarederror hl 0
+[W 2026-10-19 03:39:39,374] The parameter 'huber_slope' in trial#72 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   2893s] trial  72  score 1.0210  trees 250  lr 0.069 leaves 100 mcw 1481 loss pseudohuber hl 0
+[E   2956s] trial  73  score 0.9972  trees 125  lr 0.062 leaves 95 mcw 51 loss squarederror hl 0
+[W 2026-10-19 03:41:20,893] The parameter 'huber_slope' in trial#74 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   3011s] trial  74  score 0.9891  trees 500  lr 0.034 leaves 22 mcw 290 loss pseudohuber hl 0
+[E   3044s] trial  75  score 1.0199  trees 250  lr 0.070 leaves 14 mcw 301 loss absoluteerror hl 0
+[W 2026-10-19 03:42:49,498] The parameter 'huber_slope' in trial#76 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   3064s] trial  76  score 0.9961  trees 250  lr 0.071 leaves 4 mcw 121 loss pseudohuber hl 0
+[W 2026-10-19 03:43:09,360] The parameter 'huber_slope' in trial#77 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   3134s] trial  77  score 1.0181  trees 600  lr 0.030 leaves 33 mcw 1174 loss pseudohuber hl 0
+[W 2026-10-19 03:44:19,518] The parameter 'huber_slope' in trial#78 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   3172s] trial  78  score 1.0246  trees 300  lr 0.061 leaves 33 mcw 100 loss pseudohuber hl 24
+[W 2026-10-19 03:44:56,659] The parameter 'huber_slope' in trial#79 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   3228s] trial  79  score 1.0306  trees 600  lr 0.015 leaves 13 mcw 994 loss pseudohuber hl 60
+[W 2026-10-19 03:45:52,853] The parameter 'huber_slope' in trial#80 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   3251s] trial  80  score 1.0635  trees 300  lr 0.058 leaves 5 mcw 1088 loss pseudohuber hl 0
+[E   3307s] trial  81  score 1.0158  trees 600  lr 0.028 leaves 7 mcw 537 loss absoluteerror hl 60
+[W 2026-10-19 03:47:12,186] The parameter 'huber_slope' in trial#82 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   3350s] trial  82  score 1.0102  trees 400  lr 0.048 leaves 12 mcw 573 loss pseudohuber hl 24
+[W 2026-10-19 03:47:55,206] The parameter 'huber_slope' in trial#83 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   3379s] trial  83  score 1.0121  trees 200  lr 0.077 leaves 41 mcw 1234 loss pseudohuber hl 0
+[W 2026-10-19 03:48:24,091] The parameter 'huber_slope' in trial#84 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   3436s] trial  84  score 0.9957  trees 500  lr 0.039 leaves 27 mcw 248 loss pseudohuber hl 0
+[W 2026-10-19 03:49:20,862] The parameter 'huber_slope' in trial#85 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   3472s] trial  85  score 1.0212  trees 500  lr 0.036 leaves 9 mcw 528 loss pseudohuber hl 0
+[E   3504s] trial  86  score 1.0296  trees 500  lr 0.034 leaves 4 mcw 750 loss squarederror hl 0
+[E   3547s] trial  87  score 1.0049  trees 300  lr 0.059 leaves 38 mcw 509 loss squarederror hl 0
+[E   3621s] trial  88  score 1.0126  trees 500  lr 0.038 leaves 22 mcw 245 loss absoluteerror hl 0
+[W 2026-10-19 03:52:26,565] The parameter 'huber_slope' in trial#89 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   3666s] trial  89  score 1.0162  trees 300  lr 0.055 leaves 31 mcw 1152 loss pseudohuber hl 0
+[W 2026-10-19 03:53:10,987] The parameter 'huber_slope' in trial#90 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   3755s] trial  90  score 1.0162  trees 500  lr 0.035 leaves 33 mcw 1305 loss pseudohuber hl 60
+[W 2026-10-19 03:54:39,765] The parameter 'huber_slope' in trial#91 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   3782s] trial  91  score 1.0198  trees 300  lr 0.051 leaves 4 mcw 903 loss pseudohuber hl 0
+[E   3820s] trial  92  score 0.9790  trees 300  lr 0.062 leaves 18 mcw 160 loss squarederror hl 0
+[E   3857s] trial  93  score 1.0069  trees 250  lr 0.069 leaves 26 mcw 197 loss squarederror hl 0
+[E   3899s] trial  94  score 0.9890  trees 600  lr 0.031 leaves 7 mcw 577 loss squarederror hl 0
+[E   3943s] trial  95  score 1.0166  trees 500  lr 0.039 leaves 12 mcw 174 loss squarederror hl 0
+[W 2026-10-19 03:57:48,380] The parameter 'huber_slope' in trial#96 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   3983s] trial  96  score 0.9858  trees 600  lr 0.027 leaves 7 mcw 262 loss pseudohuber hl 0
+[W 2026-10-19 03:58:27,750] The parameter 'huber_slope' in trial#97 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   4018s] trial  97  score 1.0450  trees 600  lr 0.020 leaves 4 mcw 501 loss pseudohuber hl 0
+[W 2026-10-19 03:59:03,243] The parameter 'huber_slope' in trial#98 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   4045s] trial  98  score 1.0004  trees 250  lr 0.080 leaves 21 mcw 527 loss pseudohuber hl 0
+[E   4087s] trial  99  score 1.0172  trees 150  lr 0.097 leaves 95 mcw 162 loss squarederror hl 0
+[W 2026-10-19 04:00:11,872] The parameter 'huber_slope' in trial#100 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   4124s] trial 100  score 1.0054  trees 600  lr 0.023 leaves 6 mcw 103 loss pseudohuber hl 60
+[E   4144s] trial 101  score 1.0259  trees 300  lr 0.063 leaves 6 mcw 729 loss squarederror hl 0
+[W 2026-10-19 04:01:08,900] The parameter 'huber_slope' in trial#102 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   4183s] trial 102  score 0.9931  trees 600  lr 0.032 leaves 10 mcw 138 loss pseudohuber hl 0
+[W 2026-10-19 04:01:47,752] The parameter 'huber_slope' in trial#103 is sampled independently instead of being sampled by multivariate TPE sampler. (optimization performance may be degraded). You can suppress this warning by setting `warn_independent_sampling` to `False` in the constructor of `TPESampler`, if this independent sampling is intended behavior.
+[E   4216s] trial 103  score 1.0213  trees 600  lr 0.025 leaves 6 mcw 661 loss pseudohuber hl 0
+[E] done: 104 trials, best 0.9750 (trial 54), 4216s

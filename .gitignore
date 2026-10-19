@@ -39,3 +39,9 @@ LGD_Districts.parquet
 
 # NOTE: *.csv, *.json and data/ used to be ignored wholesale, which hid the configs, manifests,
 # reports and model-card inputs that should be committed.  Only the large regenerable files above are ignored now.
+
+# Optuna study databases (the trials are exported to csv)
+*.db
+
+# File-level backup snapshots (the git tags are the version-controlled safety net)
+backups/

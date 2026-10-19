@@ -1,0 +1,63 @@
+test rows 142,800; frozen at 2026-10-19 05:37:17
+C:\Users\saras\AppData\Roaming\Python\Python313\site-packages\joblib\externals\loky\backend\context.py:136: UserWarning: Could not find the number of physical cores for the following reason:
+[WinError 2] The system cannot find the file specified
+Returning the number of logical cores instead. You can silence this warning by setting LOKY_MAX_CPU_COUNT to the number of cores you want to use.
+  warnings.warn(
+  File "C:\Users\saras\AppData\Roaming\Python\Python313\site-packages\joblib\externals\loky\backend\context.py", line 257, in _count_physical_cores
+    cpu_info = subprocess.run(
+        "wmic CPU Get NumberOfCores /Format:csv".split(),
+        capture_output=True,
+        text=True,
+    )
+  File "C:\Program Files\Python313\Lib\subprocess.py", line 554, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\subprocess.py", line 1036, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python313\Lib\subprocess.py", line 1548, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+                             # no special security
+                             ^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                             cwd,
+                             ^^^^
+                             startupinfo)
+                             ^^^^^^^^^^^^
+   target                     model  wape_mean_horizon  wape_pooled  diff_primary_minus_model  diff_ci_low  diff_ci_high
+0       E                   primary              1.747        1.723                     0.000          NaN           NaN
+1       E                  cv_blend              1.747        1.723                     0.000        0.000         0.000
+2       E                train_only              1.747        1.723                     0.000        0.000         0.000
+3       E                  v1_refit              1.791        1.766                    -0.045       -0.054        -0.034
+4       E                       hgb              1.836        1.808                    -0.089       -0.097        -0.081
+5       E  last_plus_seasonal_shift              2.913        2.829                    -1.167       -1.227        -1.104
+6       E                last_value              4.550        4.495                    -2.803       -3.155        -2.459
+7       E      seasonal_naive_drift              2.459        2.418                    -0.712       -0.796        -0.639
+8       V                   primary              9.158        8.991                     0.000          NaN           NaN
+9       V                  cv_blend              9.158        8.991                     0.000        0.000         0.000
+10      V                train_only              9.148        8.978                     0.010       -0.037         0.064
+11      V                  v1_refit              9.158        8.991                     0.000        0.000         0.000
+12      V                       hgb              9.186        9.018                    -0.028       -0.104         0.060
+13      V  last_plus_seasonal_shift              9.445        9.286                    -0.287       -0.589        -0.042
+14      V                last_value              9.869        9.716                    -0.712       -1.003        -0.433
+15      V      seasonal_naive_drift             13.552       13.297                    -4.395       -4.860        -3.972
+16      S                   primary              7.356        7.215                     0.000          NaN           NaN
+17      S                  cv_blend              5.695        5.655                     1.661        1.413         1.926
+18      S                train_only              7.735        7.576                    -0.380       -0.479        -0.282
+19      S                  v1_refit              7.122        6.995                     0.233        0.168         0.301
+20      S                       hgb              7.324        7.190                     0.031       -0.024         0.084
+21      S  last_plus_seasonal_shift              6.689        6.615                     0.666        0.228         1.059
+22      S                last_value              7.949        7.899                    -0.593       -0.870        -0.315
+23      S      seasonal_naive_drift             11.973       11.741                    -4.617       -4.835        -4.365
+  target  wape_mean_horizon  phase1_wape_limit  within_limit             best_baseline  improvement_over_best_baseline_pct  improvement_over_phase1_baseline_pct  meets_20pct  h12_over_h1  within_1_5x  worst_tier_ratio_h6_all  worst_tier_ratio_h6_4plus_districts
+0      E              1.747                2.0          True      seasonal_naive_drift                              28.953                                28.953         True        1.925        False                    1.057                                1.057
+1      V              9.158                7.0         False  last_plus_seasonal_shift                               3.038                                 7.209        False        2.247        False                    1.171                                1.152
+2      S              7.356                6.0         False  last_plus_seasonal_shift                              -9.961                                 7.466        False        2.642        False                    1.122                                1.072

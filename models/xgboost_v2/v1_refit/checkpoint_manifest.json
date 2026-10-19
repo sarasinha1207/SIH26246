@@ -1,0 +1,31 @@
+{
+ "variant": "v1_refit",
+ "note": "Phase 7 configuration, no blend, Phase 7 intervals; fitted on train + validation",
+ "files_sha256": {
+  "E_seed42.ubj": "757fe59c90ab892177d50df5a8f344a402b5dee653245c6786f4c20c926621d0",
+  "E_seed43.ubj": "d0982da2ea977d96df170fcb93c6aa45b1241b4f43cebd3dec245a04cde07c8b",
+  "E_seed44.ubj": "93c3147571dfd17daa69450d45f4160ca2550384aa72db4c3ed87c61b62dff5b",
+  "E_seed45.ubj": "68ba0d152680d5c4493610099b3e243b8fde52fedb38bb9c5a075f58393adfae",
+  "E_seed46.ubj": "71d4dd6d40ef8994654a6ac283fc58d255cb645293da62d8862214605052fb51",
+  "intervals.json": "39c50651077544e62719f520817b596e65a6ff3a874f711ca95a4ce647806e1b",
+  "params.json": "7284b1cff1b95d9a3a40f2cfc77173bfe57e9e059abff2d4ae40beb2636a6d0c",
+  "preprocessor.json": "3774a5d9d6c4a00e928f5054f87b8f6fd3f4bfb593ca00863031e8ceac18ceb5",
+  "S_seed42.ubj": "4230e91644e00fefb4ee3488a755aff764fc9c1665b528cdf785f4a28b738e46",
+  "S_seed43.ubj": "04567926deff82a3d4386ef804246432c057232ae03247bf3136cb97185a361f",
+  "S_seed44.ubj": "267b2a704a86b9f6c6b21a0b46d85bcfe72e9b228c203c6d60e10da24899187c",
+  "S_seed45.ubj": "90a47a92b82f8b635cc0a36d9623fb07a1f79c3c14617e6746b39c72e40f226b",
+  "S_seed46.ubj": "2566e94f034b8eb8282e1d9cb6fb1778ed8d2e5d33f99e4ead99f085d90f3292",
+  "V_seed42.ubj": "0c1500485becee2e86c47d817aa1e45454e248c15a6ca56d4bc80b10a591420c",
+  "V_seed43.ubj": "2d4a96cd92631ce0863147e9ca0caa3dd996d4dd289955b6be866c3a9aaf4643",
+  "V_seed44.ubj": "cc30037d72947c83f87318e0127d5c8947bb69ffd2de507d56b465e4ab253c19",
+  "V_seed45.ubj": "ea0264079192d00851512306ff6dcc948ebf37b07fe3d01d3d6a943644eb5a44",
+  "V_seed46.ubj": "f4c2c060c3b35d8d4395dd52f2454e0a1c28b9a9f6130035e67c651f81b44129"
+ },
+ "trained_on_validation_too": true,
+ "test_split_opened": false,
+ "environment": {
+  "xgboost": "3.4.1",
+  "numpy": "2.1.3",
+  "pandas": "2.2.3"
+ }
+}

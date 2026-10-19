@@ -1,0 +1,48 @@
+{
+ "rows": 142800,
+ "frozen_at": "2026-10-19 05:37:17",
+ "targets": {
+  "E": {
+   "scored_rows": 142800,
+   "excluded_shock_rows": 0,
+   "best_baseline": "seasonal_naive_drift",
+   "primary_wape_excluding_months_after_today": 1.743499353837075,
+   "baseline_wape_excluding_months_after_today": 2.4363227245519568,
+   "interval_coverage_primary": 0.9298949579831933,
+   "interval_coverage_v1_refit": 0.8453781512605042,
+   "primary_wape": 1.7467230213358096,
+   "best_baseline_wape": 2.458539322734905,
+   "v1_refit_wape": 1.7914079342319533,
+   "train_only_wape": 1.7467230213358096,
+   "hgb_wape": 1.8361499229562892
+  },
+  "V": {
+   "scored_rows": 142800,
+   "excluded_shock_rows": 0,
+   "best_baseline": "last_plus_seasonal_shift",
+   "primary_wape_excluding_months_after_today": 9.215396689630301,
+   "baseline_wape_excluding_months_after_today": 9.566417288597703,
+   "interval_coverage_primary": 0.8826330532212885,
+   "interval_coverage_v1_refit": 0.8275420168067227,
+   "primary_wape": 9.157908211739402,
+   "best_baseline_wape": 9.444839811506993,
+   "v1_refit_wape": 9.157908211739402,
+   "train_only_wape": 9.148040822552684,
+   "hgb_wape": 9.185714344584929
+  },
+  "S": {
+   "scored_rows": 141960,
+   "excluded_shock_rows": 840,
+   "best_baseline": "last_plus_seasonal_shift",
+   "primary_wape_excluding_months_after_today": 7.421905275169551,
+   "baseline_wape_excluding_months_after_today": 6.789620858814945,
+   "interval_coverage_primary": 0.9575443786982248,
+   "interval_coverage_v1_refit": 0.906839954916878,
+   "primary_wape": 7.355524901086039,
+   "best_baseline_wape": 6.689189414433904,
+   "v1_refit_wape": 7.1220886717409515,
+   "train_only_wape": 7.7351256349540725,
+   "hgb_wape": 7.324228166997636
+  }
+ }
+}

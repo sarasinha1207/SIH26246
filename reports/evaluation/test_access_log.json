@@ -1,0 +1,35 @@
+{
+ "runs": [
+  {
+   "time": "2026-10-19 05:39:17",
+   "frozen_at": "2026-10-19 05:37:17",
+   "git_head_at_freeze": "009865449c31f47d4591e656c32964a6c989d1c0",
+   "frozen_config_sha256": "92ca6b7e51d4bb123d97c5132cdf4160024be72375c7372db5eac9216b5fe0f2",
+   "purpose": "one-shot Phase 8 evaluation",
+   "finished": "2026-10-19 05:39:47",
+   "seconds": 30
+  }
+ ],
+ "descriptive_reads": [
+  {
+   "script": "src/evaluation/extra_metrics.py",
+   "purpose": "RMSE/MAE tables and a forecast-flag check from the saved predictions; also reads origin-month columns of the test split",
+   "changed_any_model_or_decision": false
+  },
+  {
+   "script": "src/evaluation/coverage_check.py",
+   "purpose": "series-coverage audit (counts only)",
+   "changed_any_model_or_decision": false
+  },
+  {
+   "script": "src/evaluation/diagnostics.py",
+   "purpose": "SHAP sample of 20,000 test rows for feature importance",
+   "changed_any_model_or_decision": false
+  },
+  {
+   "script": "tests/test_evaluation.py",
+   "purpose": "reproduces saved test predictions from the frozen checkpoint",
+   "changed_any_model_or_decision": false
+  }
+ ]
+}

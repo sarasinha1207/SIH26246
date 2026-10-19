@@ -1,0 +1,9 @@
+[E   143s] phase7_incumbent       trees 300 score 1.0000  2016-12 1.926 2017-12 1.558 2018-12 1.523 validation 4.163
+[E   221s] phase6_default         trees 250 score 0.9900  2016-12 1.885 2017-12 1.565 2018-12 1.514 validation 4.092
+[E   307s] optuna_trial_54        trees 400 score 0.9801  2016-12 1.886 2017-12 1.536 2018-12 1.532 validation 3.954
+[E   364s] optuna_trial_63        trees 300 score 0.9925  2016-12 1.905 2017-12 1.541 2018-12 1.545 validation 4.068
+[E   418s] optuna_trial_92        trees 300 score 0.9843  2016-12 1.870 2017-12 1.567 2018-12 1.510 validation 4.037
+[E   493s] optuna_trial_33        trees 500 score 0.9797  2016-12 1.940 2017-12 1.515 2018-12 1.516 validation 3.931
+[E   539s] optuna_trial_30        trees 300 score 0.9912  2016-12 1.892 2017-12 1.553 2018-12 1.520 validation 4.112
+[E] best candidate optuna_trial_33 (0.9797) vs incumbent 1.0000: keep optuna_trial_33
+[E] blend weights {1: 0.75, 2: 0.75, 3: 1.0, 4: 1.0, 5: 1.0, 6: 1.0, 7: 1.0, 8: 1.0, 9: 1.0, 10: 1.0, 11: 1.0, 12: 1.0}  validation (model / blend / baseline): {'model_only': 3.988369430644184, 'blended': 3.959147963872842, 'baseline': 4.9849523015558015}  interval scale 1.31

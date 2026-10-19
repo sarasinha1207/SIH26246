@@ -1,0 +1,159 @@
+{
+ "dim_series": {
+  "series": 280,
+  "districts": 56,
+  "states": 4,
+  "tiers": 16,
+  "sectors": 5,
+  "series_per_district": [
+   5
+  ],
+  "states_list": [
+   "Delhi",
+   "Maharashtra",
+   "Tamil Nadu",
+   "West Bengal"
+  ],
+  "districts_per_state": {
+   "Delhi": 11,
+   "Maharashtra": 36,
+   "Tamil Nadu": 4,
+   "West Bengal": 5
+  }
+ },
+ "panel": {
+  "series": 280,
+  "months_per_series": [
+   192
+  ],
+  "missing_series": []
+ },
+ "splits": {
+  "train": {
+   "series": 280,
+   "missing": [],
+   "rows_per_series_min": 1098,
+   "rows_per_series_max": 1098,
+   "horizons": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+   ]
+  },
+  "validation": {
+   "series": 280,
+   "missing": [],
+   "rows_per_series_min": 55,
+   "rows_per_series_max": 55,
+   "horizons": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ]
+  },
+  "test": {
+   "series": 280,
+   "missing": [],
+   "rows_per_series_min": 510,
+   "rows_per_series_max": 510,
+   "horizons": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+   ]
+  }
+ },
+ "training_rows_after_policy": {
+  "E": {
+   "series_with_training_rows": 280,
+   "missing": [],
+   "min_rows": 444,
+   "max_rows": 444,
+   "rows_removed_by_shock_policy": 198520
+  },
+  "V": {
+   "series_with_training_rows": 280,
+   "missing": [],
+   "min_rows": 1153,
+   "max_rows": 1153,
+   "rows_removed_by_shock_policy": 0
+  },
+  "S": {
+   "series_with_training_rows": 280,
+   "missing": [],
+   "min_rows": 1153,
+   "max_rows": 1153,
+   "rows_removed_by_shock_policy": 0
+  }
+ },
+ "test_evaluation": {
+  "E": {
+   "series_with_predictions": 280,
+   "series_scored": 280,
+   "scored_rows": 142800,
+   "rows_not_scored": 0,
+   "series_with_unscored_rows": 0,
+   "nan_or_inf_predictions": 0,
+   "horizons_per_series_min": 12,
+   "districts_scored": 56,
+   "tiers_scored": 16,
+   "sectors_scored": 5,
+   "states_scored": 4
+  },
+  "V": {
+   "series_with_predictions": 280,
+   "series_scored": 280,
+   "scored_rows": 142800,
+   "rows_not_scored": 0,
+   "series_with_unscored_rows": 0,
+   "nan_or_inf_predictions": 0,
+   "horizons_per_series_min": 12,
+   "districts_scored": 56,
+   "tiers_scored": 16,
+   "sectors_scored": 5,
+   "states_scored": 4
+  },
+  "S": {
+   "series_with_predictions": 280,
+   "series_scored": 280,
+   "scored_rows": 141960,
+   "rows_not_scored": 840,
+   "series_with_unscored_rows": 280,
+   "nan_or_inf_predictions": 0,
+   "horizons_per_series_min": 12,
+   "districts_scored": 56,
+   "tiers_scored": 16,
+   "sectors_scored": 5,
+   "states_scored": 4
+  }
+ },
+ "forecast_file": {
+  "exists": false,
+  "note": "no forecast beyond the data (after 2026-12) and no flag file has been produced yet; the evaluation forecasts are in-sample-period test forecasts"
+ }
+}
