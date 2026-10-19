@@ -8,6 +8,8 @@ This one file is both the proxy and the deployed function: src/app/serve.py impo
 
 Settings (environment or .env):
     GEMINI_API_KEY          required to switch the AI answers on; without it the page answers from its own data and says so
+    GEMINI_THINKING_LEVEL   how much the model thinks before answering: low (default; about twice as fast and enough for answers drawn from supplied facts),
+                            medium, high, or off to leave it to the model. A model that does not accept the setting is retried without it.
     GEMINI_MODEL            one model, or several separated by commas in order of preference. Default: gemini-3.8-flash, gemini-3.6-flash, gemini-3.5-flash-lite.
                             When a model's quota is used up (HTTP 429), is overloaded, or no longer exists, the next one answers, so the assistant keeps working.
                             Quotas are per model, so list models that Google counts separately; model names change, so check them against Google's list.
@@ -37,7 +39,7 @@ COOLDOWN_SECONDS = {429: 300, 404: 3600, 500: 60, 502: 60, 503: 60, 504: 60}    
 SWITCH_ON = set(COOLDOWN_SECONDS)                                                  # 400, 401 and 403 mean the request or the key is wrong, which another model cannot fix
 COOLDOWN, COOLDOWN_LOCK = {}, threading.Lock()                                     # model -> (skip until, error code); in memory, per server instance
 ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
-LIMIT = {"body": 30000, "question": 500, "turns": 6, "turn_chars": 900, "facts": 8000, "draft": 1500, "page": 60, "out_tokens": 1024, "timeout": 25}
+LIMIT = {"body": 30000, "question": 500, "turns": 6, "turn_chars": 900, "facts": 8000, "draft": 1500, "page": 60, "out_tokens": 1024, "timeout": 25, "total": 26}
 
 SYSTEM = (
     "You are the assistant for KaushalSetu (Bridging Skills. Forecasting Futures.), a labour market forecasting website and dashboard for 56 districts, five sectors and a twelve-month horizon. "
@@ -142,8 +144,11 @@ def build_request(payload):
     where = clean(payload.get("page", ""), LIMIT["page"])
     last = ("FACTS (the only source you may use):\n" + (facts or "(none)") + "\n\nDRAFT FROM THE SITE'S OWN ENGINE (may be empty; check it against the facts):\n" + (draft or "(none)")
             + "\n\nWHERE THE VISITOR IS: " + (where or "unknown") + "\n\nQUESTION:\n" + question)
-    return {"systemInstruction": {"parts": [{"text": SYSTEM}]}, "contents": turns + [{"role": "user", "parts": [{"text": last}]}],
-            "generationConfig": {"temperature": 0.3, "maxOutputTokens": LIMIT["out_tokens"]}}
+    cfg = {"temperature": 0.3, "maxOutputTokens": LIMIT["out_tokens"]}
+    level = os.environ.get("GEMINI_THINKING_LEVEL", "low").strip().lower()
+    if level and level != "off":
+        cfg["thinkingConfig"] = {"thinkingLevel": level}
+    return {"systemInstruction": {"parts": [{"text": SYSTEM}]}, "contents": turns + [{"role": "user", "parts": [{"text": last}]}], "generationConfig": cfg}
 
 
 def parse_response(obj):
@@ -194,10 +199,16 @@ def answer(raw, ip="", origin=None, host=None, opener=urllib.request.urlopen, li
     if not order:                                              # every model is resting after a failure: do not spend a call to find out
         return 502, {"ok": False, "error": ERRORS.get(waiting[0] if waiting else 429, "upstream")}
     data = json.dumps(body).encode("utf-8")
-    for name in order:
+    started = time.monotonic()
+    i = 0
+    while i < len(order):
+        name = order[i]
+        left = LIMIT["total"] - (time.monotonic() - started)
+        if left < 3:                                          # no time for another model inside the function limit
+            return 504, {"ok": False, "error": "timeout"}
         req = urllib.request.Request(ENDPOINT.format(model=name), data=data, method="POST", headers={"Content-Type": "application/json", "x-goog-api-key": k})
         try:
-            with opener(req, timeout=LIMIT["timeout"]) as r:
+            with opener(req, timeout=min(LIMIT["timeout"], left)) as r:
                 obj = json.loads(r.read().decode("utf-8"))
         except urllib.error.HTTPError as e:
             detail = ""
@@ -206,11 +217,16 @@ def answer(raw, ip="", origin=None, host=None, opener=urllib.request.urlopen, li
             except Exception:  # noqa: BLE001
                 pass
             print(f"assistant: {name} returned HTTP {e.code} {detail}", file=sys.stderr, flush=True)
+            if e.code == 400 and "thinking" in detail.lower() and "thinkingConfig" in body["generationConfig"]:
+                body["generationConfig"].pop("thinkingConfig")             # this model does not accept the setting: ask again without it
+                data = json.dumps(body).encode("utf-8")
+                continue
             if e.code in SWITCH_ON:
                 with COOLDOWN_LOCK:
                     COOLDOWN[name] = (t + COOLDOWN_SECONDS[e.code], e.code)
-                if name != order[-1]:
-                    print(f"assistant: trying {order[order.index(name) + 1]} instead", file=sys.stderr, flush=True)
+                if i < len(order) - 1:
+                    print(f"assistant: trying {order[i + 1]} instead", file=sys.stderr, flush=True)
+                    i += 1
                     continue
             return 502, {"ok": False, "error": ERRORS.get(e.code, "upstream")}
         except (urllib.error.URLError, TimeoutError, OSError, ValueError) as e:

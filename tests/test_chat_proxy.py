@@ -24,7 +24,7 @@ KEY = "test-key-not-real-0123456789"
 @contextlib.contextmanager
 def env(**kw):
     """Set environment variables and point the .env lookup at an empty folder, then restore everything."""
-    old = {k: os.environ.get(k) for k in ("GEMINI_API_KEY", "GEMINI_MODEL", "CHAT_ALLOWED_ORIGINS", "CHAT_RATE_PER_MINUTE", "CHAT_DAILY_CAP")}
+    old = {k: os.environ.get(k) for k in ("GEMINI_API_KEY", "GEMINI_MODEL", "GEMINI_THINKING_LEVEL", "CHAT_ALLOWED_ORIGINS", "CHAT_RATE_PER_MINUTE", "CHAT_DAILY_CAP")}
     old_root = cp.ROOT
     cp.COOLDOWN.clear()
     with tempfile.TemporaryDirectory() as d:
@@ -275,6 +275,65 @@ def test_the_key_is_not_committed_and_the_deployment_files_are_in_place():
     cfg = json.loads((ROOT / "app" / "vercel.json").read_text(encoding="utf-8"))
     assert list(cfg["functions"]) == ["api/chat.py"] and cfg["functions"]["api/chat.py"]["maxDuration"] <= 60
     assert "/api/chat" in (ROOT / "src" / "app" / "serve.py").read_text(encoding="utf-8")
+
+
+def test_deployment_sends_security_headers_and_long_caches_only_versioned_files():
+    cfg = json.loads((ROOT / "app" / "vercel.json").read_text(encoding="utf-8"))
+    rules = {r["source"]: {h["key"]: h["value"] for h in r["headers"]} for r in cfg["headers"]}
+    h = rules["/(.*)"]
+    csp = h["Content-Security-Policy"]
+    for part in ("default-src 'self'", "connect-src 'self'", "frame-ancestors 'none'", "object-src 'none'", "base-uri 'self'", "https://fonts.googleapis.com", "https://fonts.gstatic.com"):
+        assert part in csp, part
+    assert "http:" not in csp.replace("https:", "") and "*" not in csp                   # no wildcard sources
+    assert h["X-Content-Type-Options"] == "nosniff" and "Referrer-Policy" in h and "Permissions-Policy" in h and "Strict-Transport-Security" in h
+    assert "immutable" in rules["/(.*)\\.(js|css)"]["Cache-Control"]
+    for rel in ("index.html", "about.html", "resources.html", "dashboard/index.html"):                # a year-long cache is safe only if every script and stylesheet URL changes with its content
+        t = (ROOT / "app" / rel).read_text(encoding="utf-8")
+        for m in re.finditer(r'(?:src|href)="([^"]+\.(?:js|css))(\?[^"]*)?"', t):
+            if not m.group(1).startswith("http"):
+                assert re.fullmatch(r"\?v=[0-9a-f]{8}", m.group(2) or ""), (rel, m.group(0))
+    import serve
+    assert ("Content-Security-Policy", csp) in serve.SECURITY and all(k != "Strict-Transport-Security" for k, _ in serve.SECURITY)    # the local site runs under the same policy
+    assert "beautifulsoup4" in (ROOT / "requirements.txt").read_text(encoding="utf-8")                # the page build imports it
+
+
+def test_thinking_level_is_low_by_default_and_dropped_for_a_model_that_rejects_it():
+    with env(GEMINI_API_KEY=KEY):
+        stub = Stub(GOOD)
+        post(PAYLOAD, opener=stub)
+        assert json.loads(stub.req.data)["generationConfig"]["thinkingConfig"] == {"thinkingLevel": "low"}
+    with env(GEMINI_API_KEY=KEY, GEMINI_THINKING_LEVEL="off"):
+        stub = Stub(GOOD)
+        post(PAYLOAD, opener=stub)
+        assert "thinkingConfig" not in json.loads(stub.req.data)["generationConfig"]
+    with env(GEMINI_API_KEY=KEY):
+        seen = []
+
+        def picky(req, timeout=None):                                                  # the first model refuses the thinking setting with a 400
+            has = "thinkingConfig" in json.loads(req.data)["generationConfig"]
+            seen.append(has)
+            if has:
+                raise urllib.error.HTTPError(req.full_url, 400, "bad", {}, io.BytesIO(b'{"error":{"message":"Thinking level LOW is not supported for this model"}}'))
+            return Stub(GOOD)(req, timeout)
+        with contextlib.redirect_stderr(io.StringIO()):
+            code, obj = post(PAYLOAD, opener=picky)
+        assert code == 200 and obj["ok"] and obj["model"] == cp.DEFAULT_MODELS[0] and seen == [True, False]      # retried on the same model without the setting
+        assert cp.COOLDOWN == {}                                                       # a rejected setting does not put the model to rest
+
+
+def test_the_total_time_limit_stops_a_slow_chain_of_models():
+    a, b, c = cp.DEFAULT_MODELS
+    with env(GEMINI_API_KEY=KEY):
+        ticks = iter([100.0, 100.0, 130.0, 130.0, 130.0])                                      # the first model uses the whole budget, then fails over
+        orig = cp.time.monotonic
+        cp.time.monotonic = lambda: next(ticks, 130.0)
+        try:
+            up = Seq({a: 503})
+            with contextlib.redirect_stderr(io.StringIO()):
+                code, obj = post(PAYLOAD, opener=up, now=1.0)
+        finally:
+            cp.time.monotonic = orig
+        assert (code, obj) == (504, {"ok": False, "error": "timeout"}) and up.asked == [a]
 
 
 if __name__ == "__main__":

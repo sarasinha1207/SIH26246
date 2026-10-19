@@ -29,9 +29,24 @@ DASH_WATCH = [SRC / "logo.py", SRC / "dashboard" / "shell.html", SITE / "dashboa
 WATCH = [SRC / "logo.py", *SRC.glob("pages/*.html"), SRC / "build_pages.py", SRC / "i18n.py", SRC / "i18n_hi.py", SITE / "assets" / "styles.css", SITE / "assets" / "site.js", SITE / "assets" / "chat.js", SITE / "assets" / "chat.css"]
 
 
+def site_headers():
+    """The security headers of app/vercel.json (the rule for every path), so the local site is tested with the same policy as the deployed one.
+    Cache rules are not applied locally: this server always sends no-store."""
+    try:
+        rules = json.loads((SITE / "vercel.json").read_text(encoding="utf-8")).get("headers", [])
+    except (OSError, ValueError):
+        return []
+    return [(h["key"], h["value"]) for r in rules if r.get("source") == "/(.*)" for h in r["headers"] if h["key"].lower() != "strict-transport-security"]
+
+
+SECURITY = site_headers()
+
+
 class Handler(http.server.SimpleHTTPRequestHandler):
     def end_headers(self):
         self.send_header("Cache-Control", "no-store")
+        for k, v in SECURITY:
+            self.send_header(k, v)
         super().end_headers()
 
     def _json(self, code, obj):

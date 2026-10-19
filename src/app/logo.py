@@ -1,20 +1,19 @@
 """
 The logo mark, defined once.  build_pages.py puts it in the public header and writes assets/favicon.svg and assets/logo.svg; build_dashboard.py puts it in the dashboard top bar.
 
-The mark: one line that splits in two, blue for demand and employment and marigold for supply (the same colours as the charts), drifting apart on a navy tile.
-The dashed segment between the two end points is the gap the product measures and warns about.  Flat colours only, so it reads at 16 px and the same markup can appear
-twice on a page.
+The mark: three rising bars on a navy tile (history, then the forecast bar drawn lighter) crossed by a marigold trend line that ends in a dot (the forecast point).
+Blue is demand and employment, marigold is supply, as on the charts.  Flat colours only, so it reads at 16 px and the same markup can appear twice on a page.
 """
 NAVY, BLUE, MARIGOLD = "#0F2B63", "#8FB0FF", "#F2A93B"
 
 SHAPES = (
     f'<rect width="34" height="34" rx="9" fill="{NAVY}"/>'
     '<rect x=".5" y=".5" width="33" height="33" rx="8.5" fill="none" stroke="#fff" stroke-opacity=".16"/>'
-    f'<path d="M8 25.5C13 25 15 21 18 18S23 11.5 27 9.5" fill="none" stroke="{BLUE}" stroke-width="3.2" stroke-linecap="round"/>'
-    f'<path d="M8 25.5C13 25.2 17 24 20.5 22.3S25.5 20.5 27 20.5" fill="none" stroke="{MARIGOLD}" stroke-width="3.2" stroke-linecap="round"/>'
-    f'<circle cx="27" cy="9.5" r="2.9" fill="{BLUE}"/>'
-    f'<circle cx="27" cy="20.5" r="2.9" fill="{MARIGOLD}"/>'
-    '<path d="M27 13.5V17" stroke="#fff" stroke-opacity=".55" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="1.2 2.2"/>'
+    f'<rect x="6.5" y="19" width="5.4" height="8.5" rx="1.6" fill="{BLUE}"/>'
+    f'<rect x="14.3" y="14" width="5.4" height="13.5" rx="1.6" fill="{BLUE}"/>'
+    f'<rect x="22.1" y="8.5" width="5.4" height="19" rx="1.6" fill="{BLUE}" fill-opacity=".42"/>'
+    f'<path d="M5.5 22.5C10 22 13 17.5 17 15S23.5 9.5 27.5 7" fill="none" stroke="{MARIGOLD}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>'
+    f'<circle cx="27.5" cy="7" r="2.7" fill="{MARIGOLD}"/>'
 )
 
 
