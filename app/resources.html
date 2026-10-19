@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-size="m" data-lang="en" data-motion="full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resources | LMIS India</title>
+<meta name="description" content="The data behind the forecasts and where each part came from: the datasets, what the simulator was calibrated to, and what each column measures.">
+<meta name="theme-color" content="#0A0E16">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script>(function(){var h=document.documentElement,s={};try{s=JSON.parse(localStorage.getItem('lmis-display')||'{}')}catch(e){}
+h.dataset.theme=s.theme==='light'?'light':'dark';h.dataset.size=s.size||'m';var l=s.lang==='hi'?'hi':'en';h.dataset.lang=l;h.lang=l;
+h.dataset.motion=(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)?'reduced':'full';})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..800&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..800&display=swap"></noscript>
+<link rel="stylesheet" href="assets/styles.css?v=5afe5e60">
+</head>
+<body>
+<a data-hi="मुख्य सामग्री पर जाएँ" class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <nav data-hi-aria="मुख्य" class="nav" aria-label="Main">
+      <a data-hi-aria="LMIS India का मुख्य पृष्ठ" class="brand" href="index.html" aria-label="LMIS India home"><svg viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="9" fill="#0F2B63"/><path d="M6 25 L15 17 L22 20 L28 8" fill="none" stroke="#8FB0FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 10 L14 14 L21 12 L28 24" fill="none" stroke="#F2A93B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span translate="no">LMIS <b>India</b></span></a>
+      <ul class="nav-links" id="nav-links"><li><a data-hi="मुख्य पृष्ठ" href="index.html">Home</a></li><li><a data-hi="परिचय" href="about.html">About</a></li><li><a data-hi="संसाधन" href="resources.html" aria-current="page">Resources</a></li></ul>
+      <div class="nav-actions">
+        <div class="display">
+  <button data-hi-aria="प्रदर्शन विकल्प" class="display-btn" type="button" aria-expanded="false" aria-controls="display-panel" aria-label="Display options">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4v5M6 13v7M12 4v10M12 18v2M18 4v2M18 10v10" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="6" cy="11" r="2.4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="16" r="2.4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="8" r="2.4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+  </button>
+  <div data-hi-aria="प्रदर्शन विकल्प" class="display-panel" id="display-panel" role="group" aria-label="Display options" hidden>
+    <div data-hi="प्रदर्शन विकल्प" class="dp-title">Display options</div>
+    <div class="dp-row"><span data-hi="अक्षर का आकार" class="dp-label">Text size</span><div data-hi-aria="अक्षर का आकार" class="seg" role="group" aria-label="Text size">
+      <button data-hi-aria="छोटे अक्षर" type="button" data-size-step="-1" aria-label="Smaller text" translate="no">A&minus;</button><button data-hi-aria="सामान्य आकार" type="button" data-size-step="0" aria-label="Default text size" translate="no">A</button><button data-hi-aria="बड़े अक्षर" type="button" data-size-step="1" aria-label="Larger text" translate="no">A+</button></div></div>
+    <div class="dp-row"><span data-hi="थीम" class="dp-label">Theme</span><div data-hi-aria="थीम" class="seg" role="group" aria-label="Theme">
+      <button data-hi="हल्का" type="button" data-opt="theme" data-val="light">Light</button><button data-hi="गहरा" type="button" data-opt="theme" data-val="dark">Dark</button></div></div>
+    <div class="dp-row"><span data-hi="भाषा" class="dp-label">Language</span><div data-hi-aria="भाषा" class="seg" role="group" aria-label="Language">
+      <button type="button" data-opt="lang" data-val="en" translate="no">English</button><button type="button" data-opt="lang" data-val="hi" lang="hi" translate="no">हिन्दी</button></div></div>
+  </div>
+</div>
+        <a data-hi="डैशबोर्ड खोलें" class="btn small nav-cta" href="dashboard/index.html">Open dashboard</a>
+        <button data-hi="मेनू" class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      </div>
+    </nav>
+  </div>
+  <div class="progress" aria-hidden="true"><i></i></div>
+</header>
+
+<main id="main">
+  <section class="page-head big">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="wrap">
+      <h1 data-hi="संसाधन">Resources</h1>
+      <p data-hi="पूर्वानुमानों के पीछे का डेटा, और उसका हर हिस्सा कहाँ से आया।" class="lead">The data behind the forecasts, and where each part of it came from.</p>
+      <div class="hero-text">
+        <p data-hi="पूर्वानुमान जिन सभी आँकड़ों पर बने हैं, वे इस पृष्ठ पर सूचीबद्ध हैं: मासिक ज़िला-सेक्टर पैनल, ज़िला सूची, व्यवसाय सूची, उन्हें जोड़ने वाला क्रॉसवॉक और मानचित्र में उपयोग हुई ज़िलों की सीमाएँ। हर एक के लिए आप देख सकते हैं कि उसमें क्या है, वह कितना बड़ा है, कहाँ से आया, और वह असली है, सिम्युलेटेड है या मॉडल का परिणाम।">Everything the forecasts are built from is listed on this page: the monthly district and sector panel, the district catalogue, the occupation list, the crosswalk that links them and the district boundaries used by the map. For each one you can see what it contains, how large it is, where it came from, and whether it is real, simulated or produced by the model.</p>
+        <p data-hi="कोई सार्वजनिक स्रोत ये गिनतियाँ ज़िले और सेक्टर के अनुसार नहीं बताता, इसलिए इस साइट की हर गिनती आधिकारिक सांख्यिकी की तरह व्यवहार करने के लिए सिम्युलेट की गई है। कोड, जनसंख्या और सीमाएँ असली हैं। पूर्वानुमान उसी सिम्युलेटेड इतिहास पर मॉडल के असली परिणाम हैं।">No public source reports these counts by district and sector, so every count on this site is simulated to behave like official statistics. The codes, populations and boundaries are real. The forecasts are real model output on that simulated history.</p>
+      </div>
+      <ul class="hero-chips">
+        <li><b>7</b><span data-hi="सूचीबद्ध डेटासेट">datasets listed</span></li>
+        <li><b>3</b><span data-hi="असली स्रोत">real sources</span></li>
+        <li><b>2</b><span data-hi="सिम्युलेटेड डेटासेट">simulated datasets</span></li>
+        <li><b>2</b><span data-hi="परियोजना द्वारा निर्मित">built by the project</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="datasets">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 data-hi="उपयोग किया गया डेटा">Data used</h2>
+      </div>
+      <div class="table-wrap">
+        <table class="files res">
+          <thead><tr><th data-hi="डेटासेट">Dataset</th><th data-hi="इसमें क्या है">What it contains</th><th data-hi="आकार और अवधि">Size and period</th><th data-hi="यह कहाँ से आया">Where it came from</th><th data-hi="स्थिति">Status</th></tr></thead>
+          <tbody>
+            <tr><td><span data-hi="मासिक ज़िला-सेक्टर पैनल" class="ds">Monthly district and sector panel</span><span data-hi="आधार: &lt;a class=&quot;ulink&quot; href=&quot;https://mospi.gov.in/&quot;&gt;mospi.gov.in&lt;/a&gt; (PLFS), &lt;a class=&quot;ulink&quot; href=&quot;https://nasscom.in/&quot;&gt;nasscom.in&lt;/a&gt;, &lt;a class=&quot;ulink&quot; href=&quot;https://censusindia.gov.in/&quot;&gt;censusindia.gov.in&lt;/a&gt;" class="srcl">Calibrated to: <a class="ulink" href="https://mospi.gov.in/">mospi.gov.in</a> (PLFS), <a class="ulink" href="https://nasscom.in/">nasscom.in</a>, <a class="ulink" href="https://censusindia.gov.in/">censusindia.gov.in</a></span></td><td data-hi="नियोजित कामगार, रिक्तियाँ, पंजीकृत नौकरी चाहने वाले, मज़दूरी, बेरोज़गारी दर, प्रशिक्षण सीटें, प्रमाणित प्रशिक्षु, और लिंग, आयु तथा शिक्षा के विभाजन।">Employed workers, job vacancies, registered job seekers, wages, unemployment rate, training seats, certified trainees, and gender, age and education splits.</td><td data-hi="53,760 पंक्तियाँ और 41 कॉलम, जनवरी 2011 से दिसंबर 2026। पूर्वानुमान अक्टूबर 2026 तक के डेटा का उपयोग करते हैं।">53,760 rows and 41 columns, January 2011 to December 2026. Forecasts use data up to October 2026.</td><td data-hi="परियोजना के अपने सिम्युलेटर (संस्करण 2, तय रैंडम सीड) से तैयार। इसे जहाँ सत्यापन संभव था वहाँ प्रकाशित आँकड़ों के अनुसार अंशांकित किया गया है: शहरी बेरोज़गारी आवधिक श्रम बल सर्वेक्षण के सारांशों से, IT-BPM कार्यबल NASSCOM से, और जनसंख्या 2011 की जनगणना से। बाकी सब बताई गई मान्यताओं पर आधारित है। इसमें कोई देखा गया मान शामिल नहीं है।">Generated by the project's own simulator (version 2, fixed random seed). It is calibrated to published figures where they could be verified: urban unemployment from Periodic Labour Force Survey summaries, the IT-BPM workforce from NASSCOM, and populations from Census 2011. Everything else follows stated assumptions. No observed values are included.</td><td><span data-hi="सिम्युलेटेड" class="tag sim">Simulated</span></td></tr>
+            <tr><td><span data-hi="तिमाही सारांश" class="ds">Quarterly roll-up</span></td><td data-hi="वही पैनल, तिमाही के अनुसार जोड़ा या औसत किया हुआ।">The same panel summed or averaged by quarter.</td><td data-hi="17,920 पंक्तियाँ और 40 कॉलम।">17,920 rows and 40 columns.</td><td data-hi="मासिक पैनल से व्युत्पन्न।">Derived from the monthly panel.</td><td><span data-hi="सिम्युलेटेड" class="tag sim">Simulated</span></td></tr>
+            <tr><td><span data-hi="ज़िला सूची" class="ds">District catalogue</span><span data-hi="वेबसाइटें: &lt;a class=&quot;ulink&quot; href=&quot;https://lgdirectory.gov.in/&quot;&gt;lgdirectory.gov.in&lt;/a&gt;, &lt;a class=&quot;ulink&quot; href=&quot;https://mahavillages.mahabhumi.gov.in/&quot;&gt;mahavillages.mahabhumi.gov.in&lt;/a&gt;, &lt;a class=&quot;ulink&quot; href=&quot;https://censusindia.gov.in/&quot;&gt;censusindia.gov.in&lt;/a&gt;" class="srcl">Websites: <a class="ulink" href="https://lgdirectory.gov.in/">lgdirectory.gov.in</a>, <a class="ulink" href="https://mahavillages.mahabhumi.gov.in/">mahavillages.mahabhumi.gov.in</a>, <a class="ulink" href="https://censusindia.gov.in/">censusindia.gov.in</a></span></td><td data-hi="56 ज़िलों में से हर एक के लिए: आधिकारिक LGD कोड, 2011 की जनसंख्या, वार्षिक वृद्धि दर, आर्थिक श्रेणी और राज्य।">For each of the 56 districts: official LGD code, 2011 population, annual growth rate, economic tier and state.</td><td data-hi="चार राज्यों के 56 ज़िले।">56 districts in four states.</td><td data-hi="कोड स्थानीय सरकार निर्देशिका की ज़िला निर्यात फ़ाइल से, महाराष्ट्र के 36 की राज्य भू-अभिलेख LGD निर्देशिका से भी जाँच, और कोलकाता की पश्चिम बंगाल राज्य स्वास्थ्य समिति की सूची से। जनसंख्या 2011 की जनगणना से; कांचीपुरम की अविभाजित कांचीपुरम के कुल से व्युत्पन्न है। वृद्धि दर और श्रेणियाँ परियोजना की मान्यताएँ हैं।">Codes from the Local Government Directory district export, Maharashtra's 36 also checked against the state land-records LGD directory and Kolkata against the West Bengal State Health Society list. Populations from Census 2011; Kanchipuram's is derived from the undivided Kancheepuram total. Growth rates and tiers are project assumptions.</td><td><span data-hi="असली कोड" class="tag real">Real codes</span></td></tr>
+            <tr><td><span data-hi="व्यवसाय सूची (NCO-2015)" class="ds">Occupation list (NCO-2015)</span><span data-hi="वेबसाइटें: &lt;a class=&quot;ulink&quot; href=&quot;https://dge.gov.in/&quot;&gt;dge.gov.in&lt;/a&gt;, &lt;a class=&quot;ulink&quot; href=&quot;https://labour.gov.in/&quot;&gt;labour.gov.in&lt;/a&gt;" class="srcl">Websites: <a class="ulink" href="https://dge.gov.in/">dge.gov.in</a>, <a class="ulink" href="https://labour.gov.in/">labour.gov.in</a></span></td><td data-hi="राष्ट्रीय व्यवसाय वर्गीकरण 2015 के 3,447 व्यवसाय, जिनका उपयोग व्यवसाय कोड जाँचने में होता है।">The 3,447 occupations of the National Classification of Occupations 2015, used to check occupation codes.</td><td data-hi="एक कार्यपुस्तिका।">One workbook.</td><td data-hi="NCO-2015, जिसे रोज़गार महानिदेशालय, श्रम और रोज़गार मंत्रालय ने प्रकाशित किया।">NCO-2015, published by the Directorate General of Employment, Ministry of Labour and Employment.</td><td><span data-hi="असली" class="tag real">Real</span></td></tr>
+            <tr><td><span data-hi="सेक्टर से व्यवसाय का क्रॉसवॉक" class="ds">Sector to occupation crosswalk</span></td><td data-hi="हर एक सेक्टर को उसके NIC प्रभागों और NCO-2015 के पाँच व्यवसाय-परिवारों से जोड़ती है।">Links each of the five sectors to its NIC divisions and five NCO-2015 occupation families.</td><td data-hi="25 पंक्तियाँ।">25 rows.</td><td data-hi="परियोजना द्वारा बनाया गया। सभी 25 व्यवसाय कोड NCO-2015 सूची से जाँचे गए।">Built by the project. All 25 occupation codes were checked against the NCO-2015 list.</td><td><span data-hi="परियोजना द्वारा निर्मित" class="tag model">Project-made</span></td></tr>
+            <tr><td><span data-hi="ज़िलों की सीमाएँ" class="ds">District boundaries</span><span data-hi="वेबसाइटें: &lt;a class=&quot;ulink&quot; href=&quot;https://bharatlas.com/&quot;&gt;bharatlas.com&lt;/a&gt;, &lt;a class=&quot;ulink&quot; href=&quot;https://lgdirectory.gov.in/&quot;&gt;lgdirectory.gov.in&lt;/a&gt;" class="srcl">Websites: <a class="ulink" href="https://bharatlas.com/">bharatlas.com</a>, <a class="ulink" href="https://lgdirectory.gov.in/">lgdirectory.gov.in</a></span></td><td data-hi="मानचित्र के लिए ज़िलों की आकृतियाँ: 56 परियोजना ज़िले, चारों राज्यों के अन्य ज़िले, और शेष भारत की रूपरेखा।">District shapes for the map: the 56 project districts, the other districts of the four states, and an outline of the rest of India.</td><td data-hi="स्रोत परत में 785 ज़िले, प्रदर्शन के लिए सरल किए गए।">785 districts in the source layer, simplified for display.</td><td data-hi="bharatlas द्वारा CC0 1.0 या CC BY 4.0 के अंतर्गत वितरित स्थानीय सरकार निर्देशिका की परत। परत अंतिम बार 19 मई 2026 को अद्यतन हुई। सर्वेक्षण के उपयोग के लिए नहीं।">The Local Government Directory layer, distributed by bharatlas under CC0 1.0 or CC BY 4.0. Layer last updated 19 May 2026. Not for survey use.</td><td><span data-hi="असली" class="tag real">Real</span></td></tr>
+            <tr><td><span data-hi="पूर्वानुमान, दायरे और चेतावनियाँ" class="ds">Forecasts, ranges and flags</span></td><td data-hi="हर श्रृंखला, माप और आगे के महीने के लिए: पूर्वानुमान, 90% दायरा, आधार-रेखा, विश्वसनीयता-चिह्न और पूर्व-चेतावनी का निशान।">For every series, measure and month ahead: the forecast, 90% range, baseline, confidence label and early-warning flag.</td><td data-hi="10,080 पूर्वानुमान पंक्तियाँ और 3,360 चेतावनी पंक्तियाँ, अक्टूबर 2026 तक के डेटा से।">10,080 forecast rows and 3,360 flag rows, from data up to October 2026.</td><td data-hi="मॉडल ने सिम्युलेटेड पैनल से तैयार किया। दोबारा चलाने पर वही फ़ाइलें मिलती हैं।">Produced by the model from the simulated panel. Rerunning gives identical files.</td><td><span data-hi="मॉडल का परिणाम" class="tag model">Model output</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4 data-hi="परिचय">About</h4>
+        <p data-hi="कौशल विकास एवं उद्यमिता मंत्रालय के लिए एआई-आधारित श्रम बाज़ार संबंधी जानकारी और कौशल की माँग-आपूर्ति के पूर्वानुमान का इंजन।">An AI-enabled labour market intelligence and skill demand-supply forecasting engine for the Ministry of Skill Development and Entrepreneurship.</p>
+        <p data-hi="इस साइट के सभी आँकड़े प्रदर्शन के लिए सिम्युलेटेड हैं। ये आधिकारिक सांख्यिकी नहीं हैं।">All figures on this site are simulated for demonstration. They are not official statistics.</p>
+      </div>
+      <div><h4 data-hi="पृष्ठ">Pages</h4><ul><li><a data-hi="मुख्य पृष्ठ" href="index.html">Home</a></li><li><a data-hi="परिचय" href="about.html">About</a></li><li><a data-hi="संसाधन" href="resources.html">Resources</a></li><li><a data-hi="डैशबोर्ड" href="dashboard/index.html">Dashboard</a></li></ul></div>
+      <div><h4 data-hi="डेटा">Data</h4><ul><li><a data-hi="डेटा के स्रोत" href="resources.html#datasets">Data sources</a></li><li><a data-hi="डेटासेट का ब्यौरा" href="about.html#dataset">Dataset details</a></li><li><a data-hi="मॉडल का मूल्यांकन" href="about.html#evaluation">Model evaluation</a></li></ul></div>
+      <div><h4 data-hi="संपर्क">Contact</h4><p><a href="mailto:feedback@lmis-demo.example" translate="no">feedback@lmis-demo.example</a></p><p data-hi="कोई लॉगिन नहीं। यह साइट कोई कुकी नहीं लगाती और कोई एनालिटिक्स नहीं चलाती। आपके प्रदर्शन संबंधी चुनाव आपके अपने उपकरण में ही रहते हैं।">No login. This site sets no cookies and has no analytics. Your display choices stay on your device.</p></div>
+    </div>
+    <div data-hi="पूर्वानुमान &lt;span data-fill=&quot;meta.first_target&quot;&gt;November 2026&lt;/span&gt; से &lt;span data-fill=&quot;meta.last_target&quot;&gt;October 2027&lt;/span&gt; तक, &lt;span data-fill=&quot;meta.origin_label&quot;&gt;October 2026&lt;/span&gt; तक के डेटा से बनाया गया।" class="legal">Forecast for <span data-fill="meta.first_target">November 2026</span> to <span data-fill="meta.last_target">October 2027</span>, made from data up to <span data-fill="meta.origin_label">October 2026</span>.</div>
+  </div>
+</footer>
+<button data-hi-aria="ऊपर जाएँ" class="to-top" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+<div class="tip" id="tip" role="status" aria-live="polite" hidden></div>
+<script src="assets/i18n-hi.js?v=30fba87f"></script>
+<script src="data/site_data.js?v=3496a9e7"></script>
+<script src="assets/site.js?v=6edff5c6"></script>
+</body>
+</html>

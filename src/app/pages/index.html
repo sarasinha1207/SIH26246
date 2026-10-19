@@ -1,0 +1,179 @@
+
+<main id="main">
+  <section class="hero">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="orbs" aria-hidden="true"><i></i><i></i></div>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <h1 class="h1-lines"><span><span>See where jobs</span></span> <span><span>will outrun skills,</span></span> <span><span><em>twelve months early.</em></span></span></h1>
+        <p class="lede">Monthly forecasts of employment, job vacancies and job seekers for 56 districts and five sectors in Maharashtra, Delhi, West Bengal and Tamil Nadu. Every forecast comes with a range that shows how sure we are.</p>
+        <div class="hero-actions">
+          <a class="btn" href="{P}dashboard/index.html">Open the dashboard</a>
+          <a class="btn ghost" href="about.html#timeline">See how it works</a>
+        </div>
+      </div>
+      <figure class="hero-figure">
+        <div class="chart-card">
+          <div class="chart-tools" role="group" aria-label="Chart options">
+            <button class="chip on" type="button" data-show="V" aria-pressed="true"><i class="sw v"></i>Vacancies</button>
+            <button class="chip on" type="button" data-show="S" aria-pressed="true"><i class="sw s"></i>Job seekers</button>
+            <button class="chip on" type="button" data-show="range" aria-pressed="true">Ranges</button>
+            <button class="chip ghost" type="button" id="replay-btn"><span>Replay</span></button>
+          </div>
+          <div class="hero-chart-wrap" id="hero-chart"></div>
+          <p class="hint">Move over the chart to read each month.</p>
+        </div>
+        <figcaption id="hero-caption">Loading the example forecast.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="stats" aria-label="Coverage at a glance">
+    <div class="wrap">
+      <div class="stats-grid">
+        <div class="fact"><b data-count="4">4</b><span>states</span></div>
+        <div class="fact"><b data-count="56">56</b><span>districts, by official LGD code</span></div>
+        <div class="fact"><b data-count="5">5</b><span>sectors, from manufacturing to healthcare</span></div>
+        <div class="fact"><b data-count="280">280</b><span>district and sector series, every one forecast</span></div>
+        <div class="fact"><b data-count="12">12</b><span>months ahead, updated monthly</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="map">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Coverage map</p>
+        <h2>Every district and sector, on one map.</h2>
+        <p>56 districts in four states, each forecast for five sectors. Choose a sector and a measure, hover a district for its numbers, and select a state to zoom in.</p>
+      </div>
+      <div class="map-panel">
+        <div class="map-controls">
+          <div class="ctl"><span class="ctl-l">Sector</span><select id="map-sector"></select></div>
+          <div class="ctl"><span class="ctl-l">Show</span><div class="tabs" id="map-measure" role="tablist"></div></div>
+          <div class="ctl"><span class="ctl-l">Months ahead</span><div class="chip-row" id="map-h" role="group"></div></div>
+        </div>
+        <div class="map-grid">
+          <div class="map-left">
+            <div class="map-stage">
+              <div class="map-states" id="map-state" role="group"></div>
+              <svg id="map-svg" class="map-svg" role="img" xmlns="http://www.w3.org/2000/svg"></svg>
+            </div>
+            <div class="map-legend" id="map-legend"></div>
+            <p class="map-hint">Select a state to zoom in.</p>
+          </div>
+          <aside class="map-side" id="map-side"></aside>
+        </div>
+        <p class="note">Colours sort the 56 districts into five equal groups, so they show who is higher or lower, not by how much. Read the exact figure in the hover. Employed-worker forecasts are the most reliable and vacancy forecasts the least. Boundaries are the Local Government Directory layer, distributed by bharatlas under CC0 or CC BY, simplified for orientation only.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Why this exists</p>
+        <h2>Training seats are planned for a market that has already moved.</h2>
+        <p>Built for officials, planners and training providers who decide where to open seats, run camps or look closer.</p>
+      </div>
+      <div class="grid3">
+        <article class="card"><h3>Counts look backwards</h3><p>Official counts describe last month or last year. A seat opened today produces a worker a year or more from now, so planning needs to see what is coming, not only what has been.</p></article>
+        <article class="card"><h3>One number hides the doubt</h3><p>A single forecast with no range invites false confidence. Every forecast here carries a range and a confidence label, both earned in testing on months the model had not seen.</p></article>
+        <article class="card"><h3>Districts differ</h3><p>State averages hide the districts where openings and job seekers are drifting apart. Each of the 56 districts is forecast on its own and compared with its peers.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">How it works</p>
+        <h2>From monthly counts to a twelve-month view.</h2>
+        <p>The same four steps run every month for every one of the 280 series. Pick a step to see it.</p>
+      </div>
+      <div class="how">
+        <ol class="how-steps" role="tablist" aria-label="The four steps">
+          <li><button type="button" class="how-step on" role="tab" id="how-t0" aria-controls="how-p0" aria-selected="true" data-step="0"><span class="how-n">01</span><span class="how-t">Collect</span><span class="how-d">Monthly counts of employed workers, job vacancies and registered job seekers, back to January 2011.</span><i class="how-bar"></i></button></li>
+          <li><button type="button" class="how-step" role="tab" id="how-t1" aria-controls="how-p1" aria-selected="false" data-step="1"><span class="how-n">02</span><span class="how-t">Learn</span><span class="how-d">Recent movement, the sector trend and the calendar month, using only what was known at the forecast date.</span><i class="how-bar"></i></button></li>
+          <li><button type="button" class="how-step" role="tab" id="how-t2" aria-controls="how-p2" aria-selected="false" data-step="2"><span class="how-n">03</span><span class="how-t">Forecast</span><span class="how-d">One to twelve months ahead, each with a 90% range and a simple baseline to compare against.</span><i class="how-bar"></i></button></li>
+          <li><button type="button" class="how-step" role="tab" id="how-t3" aria-controls="how-p3" aria-selected="false" data-step="3"><span class="how-n">04</span><span class="how-t">Flag</span><span class="how-d">Districts are ranked within their sector, and the tightest and loosest tenth are flagged.</span><i class="how-bar"></i></button></li>
+        </ol>
+        <div class="how-stage">
+          <div class="how-panel on" id="how-p0" role="tabpanel" aria-labelledby="how-t0" data-panel="0">
+            <div class="mini-list">
+              <div class="mini"><span class="mini-l"><i class="sw e"></i>Employed workers</span><svg viewBox="0 0 220 46" aria-hidden="true"><path class="draw c-e" pathLength="1" d="M0 38 C25 36 40 33 60 30 S95 31 115 24 S160 17 185 12 S210 9 220 7"/></svg></div>
+              <div class="mini"><span class="mini-l"><i class="sw v"></i>Job vacancies</span><svg viewBox="0 0 220 46" aria-hidden="true"><path class="draw c-v" pathLength="1" d="M0 30 L12 22 L24 33 L36 18 L48 28 L60 14 L72 30 L84 20 L96 34 L108 16 L120 26 L132 12 L144 28 L156 18 L168 30 L180 14 L192 24 L204 10 L220 20"/></svg></div>
+              <div class="mini"><span class="mini-l"><i class="sw s"></i>Registered job seekers</span><svg viewBox="0 0 220 46" aria-hidden="true"><path class="draw c-s" pathLength="1" d="M0 40 C30 39 55 38 80 37 S100 20 120 20 S170 16 200 12 L220 10"/></svg></div>
+            </div>
+            <div class="how-axis"><span>Jan 2011</span><i></i><span>Oct 2026</span></div>
+            <p class="how-cap">The same three counts, every month, for 56 districts and five sectors.</p>
+          </div>
+          <div class="how-panel" id="how-p1" role="tabpanel" aria-labelledby="how-t1" data-panel="1">
+            <div class="learn">
+              <svg viewBox="0 0 360 150" aria-hidden="true"><rect class="win" x="196" y="4" width="84" height="142" rx="8"/><rect class="future" x="280" y="4" width="76" height="142" rx="8"/><path class="draw c-v" pathLength="1" d="M0 100 L14 90 L28 98 L42 78 L56 86 L70 66 L84 76 L98 58 L112 68 L126 50 L140 62 L154 46 L168 58 L182 40 L196 52 L210 34 L224 48 L238 30 L252 44 L266 36 L280 40"/><line class="fdate" x1="280" x2="280" y1="4" y2="146"/></svg>
+              <span class="ovl o1">Learns from here</span><span class="ovl o2">Never used</span>
+            </div>
+            <ul class="feat-list"><li>Recent movement</li><li>Sector trend</li><li>Calendar month</li></ul>
+            <p class="how-cap">Only what was known at the forecast date is used. Nothing after it can leak in.</p>
+          </div>
+          <div class="how-panel" id="how-p2" role="tabpanel" aria-labelledby="how-t2" data-panel="2">
+            <div class="learn">
+              <svg viewBox="0 0 360 160" aria-hidden="true"><path class="draw c-v" pathLength="1" d="M0 112 L20 102 L40 108 L60 90 L80 98 L100 78 L120 86 L140 68 L160 74"/><path class="fan" d="M160 74 L200 64 L240 54 L280 46 L320 36 L356 24 L356 84 L320 80 L280 80 L240 78 L200 78 L160 74Z"/><path class="base" d="M160 74 L200 74 L240 70 L280 72 L320 68 L356 70"/><path class="draw dash c-v" pathLength="1" d="M160 74 L200 70 L240 65 L280 62 L320 57 L356 52"/><line class="fdate" x1="160" x2="160" y1="4" y2="156"/></svg>
+            </div>
+            <ul class="feat-list key"><li><i class="sw v"></i>Forecast</li><li><i class="sw fan"></i>90% range</li><li><i class="sw base"></i>Simple baseline</li></ul>
+            <p class="how-cap">One to twelve months ahead. The range widens the further we look.</p>
+          </div>
+          <div class="how-panel" id="how-p3" role="tabpanel" aria-labelledby="how-t3" data-panel="3">
+            <div class="dots" aria-hidden="true"><i class="dt lo" style="--i:0"></i><i class="dt lo" style="--i:1"></i><i class="dt" style="--i:2"></i><i class="dt" style="--i:3"></i><i class="dt" style="--i:4"></i><i class="dt" style="--i:5"></i><i class="dt" style="--i:6"></i><i class="dt" style="--i:7"></i><i class="dt" style="--i:8"></i><i class="dt" style="--i:9"></i><i class="dt" style="--i:10"></i><i class="dt" style="--i:11"></i><i class="dt" style="--i:12"></i><i class="dt" style="--i:13"></i><i class="dt" style="--i:14"></i><i class="dt" style="--i:15"></i><i class="dt" style="--i:16"></i><i class="dt" style="--i:17"></i><i class="dt hi" style="--i:18"></i><i class="dt hi" style="--i:19"></i></div>
+            <div class="dots-l"><span>Loosest tenth</span><span>Districts of one sector, ranked</span><span>Tightest tenth</span></div>
+            <p class="how-cap">A district is judged against its peers in the same sector, not against a fixed line.</p>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top:28px"><a class="ulink" href="about.html#timeline">Read the full method</a></p>
+    </div>
+  </section>
+
+  <section class="section alt" id="features">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Features of this website.</h2>
+        <p>Built to be read by people who are not statisticians, and to be checked by people who are.</p>
+      </div>
+      <div class="grid3">
+        <article class="card"><span class="icon-box"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-5.4-6-10a6 6 0 0 1 12 0c0 4.6-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></svg></span><h3>Interactive district map</h3><p>Colour all 56 districts by sector, measure and months ahead, and zoom into a state.</p></article>
+        <article class="card"><span class="icon-box"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18l5-6 4 3 7-9"/></svg></span><h3>Forecasts with honest ranges</h3><p>Every forecast shows the 90% range around it, in a chart you can read month by month.</p></article>
+        <article class="card"><span class="icon-box"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span><h3>Confidence labels</h3><p>High, medium or low, earned in testing on months the model had not seen, so you know when to lean on a number.</p></article>
+        <article class="card"><span class="icon-box"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V4m0 0h11l-2 4 2 4H5"/></svg></span><h3>Early-warning flags</h3><p>See every district of a sector in order, and which are heading into the tightest or loosest tenth.</p></article>
+        <article class="card"><span class="icon-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg></span><h3>Accuracy you can check</h3><p>Results against simple baselines and the best any forecast could do, with the weak spots stated.</p></article>
+        <article class="card"><span class="icon-box"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14"/></svg></span><h3>Open data downloads</h3><p>Forecast, range, baseline and flag files, with checksums, free to download.</p></article>
+        <article class="card"><span class="icon-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M4 12h16M12 4c2.5 2.5 2.5 13.5 0 16M12 4c-2.5 2.5-2.5 13.5 0 16"/></svg></span><h3>English and Hindi</h3><p>Switch language, text size and light or dark theme from the round button in the header.</p></article>
+        <article class="card"><span class="icon-box"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span><h3>No login, no tracking</h3><p>No accounts, no cookies and no analytics. Your display choices stay on your device.</p></article>
+        <article class="card"><span class="icon-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="1.8"/><path d="M5 9h14M12 9v5m0 0l-3 6m3-6l3 6"/></svg></span><h3>Works for everyone</h3><p>Friendly on phones, usable from the keyboard, and calm for people who prefer less motion.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Measured, not asserted</p>
+        <h2>How the forecasts did on months they had not seen.</h2>
+      </div>
+      <div class="grid3">
+        <article class="card evidence"><b class="c-demand">29%</b><span>closer to the truth than a simple baseline for employed workers.</span><small>Miss of 1.75% against 2.46%. Test period 2023 to 2026.</small></article>
+        <article class="card evidence"><b class="c-demand">15%</b><span>closer than the baseline for registered job seekers.</span><small>Miss of 5.69% against 6.69%. Held on two newly simulated datasets.</small></article>
+        <article class="card evidence"><b class="c-demand">91%</b><span>of job seeker outcomes fell inside the 90% range.</span><small>The ranges are honest, not just narrow.</small></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark cta">
+    <div class="wrap">
+      <div class="cta-card">
+        <div><h2>Look up your district.</h2><p>The dashboard is the place to explore every district and sector.</p></div>
+        <a class="btn" href="{P}dashboard/index.html">Open the dashboard</a>
+      </div>
+    </div>
+  </section>
+</main>

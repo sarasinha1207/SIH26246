@@ -43,3 +43,6 @@ backups/
 
 # NOTE: *.csv, *.json and data/ used to be ignored wholesale, which hid configs, manifests, reports and
 # model inputs that must be committed. Only the large regenerable files above are ignored now.
+
+# external source files downloaded for the map outline (22 MB; the build script says how to fetch them again)
+data/external/

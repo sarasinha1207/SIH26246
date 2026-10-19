@@ -49,12 +49,14 @@ LMIS Data/
 │   ├── training/            Phase 7 preprocessing, tuning, final training, prediction, model card
 │   ├── evaluation/          Phase 8 Optuna tuning, freezing, one-shot test evaluation, diagnostics
 │   ├── deployment/          Phase 9 latest-origin features, refit on all history, forecast + flag files
+│   ├── app/                 builds the web app files (public site; dashboard to follow) from the project outputs
 │   ├── dashboard/           builds the dashboard data pack
 │   └── modeling/            quarantined prototype (do not run)
 ├── models/                  trained models: xgboost_v1/ (Phase 7), xgboost_v2/ (Phase 8 frozen), xgboost_v3/ (declared config), deployed/origin_<month>/ (Phase 9 refit); quarantine/ holds the prototype's
 ├── outputs/                 forecasts/origin_<month>/ (Phase 9 forecast and flag files); quarantine/ holds the prototype's
 ├── tests/                   automated data tests
 ├── reports/                 audit results and reports
+├── app/                 the web app, deployable as plain static files: public site (3 pages) + dashboard placeholder; see app/README.md
 ├── backups/                 file-level snapshots (not in git; the git tags are the rollback points)
 └── Archived/                previous dataset – NOT to be used anywhere
 ```
@@ -97,6 +99,11 @@ python tests/test_phase8_addendum.py                            # Phase 8 addend
 python src/deployment/refit.py --origin 2026-10                 # Phase 9: refit the declared v3 settings on all history (~6 min)
 python src/deployment/forecast.py --origin 2026-10              # Phase 9: forecast + flag files for all 280 series (~1 min)
 python tests/test_deployment.py                                 # Phase 9 tests (coverage, validity, reproducibility, no look-ahead)
+python src/app/build_site_data.py                           # public website: rebuild app/data and downloads from the forecast files
+python src/app/build_map_data.py                            # public website: rebuild the map (districts, India outline, forecast values)
+python src/app/build_pages.py                               # public website: rebuild the pages and the Hindi text
+python tests/test_app.py                                    # website tests (links, numbers vs source files, map, Hindi text, notices)
+python src/app/serve.py                                      # preview the website at http://localhost:8080 (rebuilds pages when you edit; Ctrl+C to stop)
 python src/dashboard/export_data_pack.py                        # dashboard data pack (see docs/DASHBOARD_BRIEF.md)
 python src/dashboard/build_boundaries.py <LGD_Districts.parquet> # district map polygons (source download described in the script)
 python tests/test_dashboard_pack.py                             # data pack and map tests
