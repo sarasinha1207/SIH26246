@@ -1,4 +1,4 @@
-# Python
+# ---- Python ----
 __pycache__/
 *.pyc
 .venv/
@@ -6,48 +6,40 @@ venv/
 .ipynb_checkpoints/
 .pytest_cache/
 
-# Editor / OS / local tooling
+# ---- Editor / OS / local tooling ----
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
 .claude/
 
-# Office / document files that are not part of the pipeline
+# ---- Documents that are not part of the pipeline ----
 *.pdf
 *.docsx
 *.pptx
 
-# Legacy dataset, never used for modelling (see README "Data rules")
+# ---- Legacy dataset: never used for modelling (see README "Data rules") ----
 Archived
 
-# Quarantined prototype outputs were never committed; keep them out
+# ---- Quarantined prototype outputs (never committed) ----
 outputs/quarantine/provisional_prototype/*.csv
 outputs/quarantine/provisional_prototype/*.json
 reports/quarantine/**/*.csv
 reports/quarantine/**/*.json
 
-# Regenerable data: rebuild with the scripts listed in README.md.
-# split_manifest.json is tracked and holds the checksums that prove a rebuilt file is identical.
+# ---- Regenerable data (rebuild with the scripts in README.md) ----
+# split_manifest.json is tracked: its checksums prove a rebuilt split file is identical.
 data/splits/*.parquet
 data/interim/*
 !data/interim/.gitkeep
-*.tmp
-*.log.tmp
-*_stdout.tmp
+data/fresh_draws/
+reports/evaluation/v3/**/*.npy
 LGD_Districts.parquet
-
-# NOTE: *.csv, *.json and data/ used to be ignored wholesale, which hid the configs, manifests,
-# reports and model-card inputs that should be committed.  Only the large regenerable files above are ignored now.
-
-# Optuna study databases (the trials are exported to csv)
 *.db
+*.tmp
 
-# File-level backup snapshots (the git tags are the version-controlled safety net)
+# ---- File-level backup snapshots (git tags are the version-controlled safety net) ----
 backups/
 
-# Fresh synthetic evaluation draws (regenerate with src/evaluation/make_fresh_draw.py <seed>)
-data/fresh_draws/
-
-# Per-row adaptive interval arrays (regenerate with evaluate_v3.py)
-reports/evaluation/v3/**/*.npy
+# NOTE: *.csv, *.json and data/ used to be ignored wholesale, which hid configs, manifests, reports and
+# model inputs that must be committed. Only the large regenerable files above are ignored now.

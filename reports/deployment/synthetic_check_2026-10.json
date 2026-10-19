@@ -1,0 +1,29 @@
+{
+ "note": "the target months are simulated months after today; a sanity check only",
+ "checks": {
+  "E_h1": {
+   "target_month": "2026-11-01",
+   "wape_pct": 1.011
+  },
+  "E_h2": {
+   "target_month": "2026-12-01",
+   "wape_pct": 1.182
+  },
+  "V_h1": {
+   "target_month": "2026-11-01",
+   "wape_pct": 5.592
+  },
+  "V_h2": {
+   "target_month": "2026-12-01",
+   "wape_pct": 5.132
+  },
+  "S_h1": {
+   "target_month": "2026-11-01",
+   "wape_pct": 4.271
+  },
+  "S_h2": {
+   "target_month": "2026-12-01",
+   "wape_pct": 4.33
+  }
+ }
+}

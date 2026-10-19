@@ -15,7 +15,7 @@ Phases are completed strictly in order. A phase is closed only after its sign-of
 | 6 | Model Selection | **Approved** | [docs/phases/PHASE_6_MODEL_SELECTION.md](docs/phases/PHASE_6_MODEL_SELECTION.md) |
 | 7 | Model Training | **Approved** | [docs/phases/PHASE_7_MODEL_TRAINING.md](docs/phases/PHASE_7_MODEL_TRAINING.md) |
 | 8 | Evaluation & Tuning | **Complete – awaiting sign-off** | [docs/phases/PHASE_8_EVALUATION_AND_TUNING.md](docs/phases/PHASE_8_EVALUATION_AND_TUNING.md) |
-| 9 | Deployment | Not started | |
+| 9 | Deployment | **Built – awaiting sign-off** | [docs/phases/PHASE_9_DEPLOYMENT.md](docs/phases/PHASE_9_DEPLOYMENT.md), [docs/RUNBOOK.md](docs/RUNBOOK.md) |
 | 10 | Monitoring & Maintenance | Not started | |
 
 The provisional prototype and everything it produced are **quarantined** (`outputs/quarantine/`, `models/quarantine/`, `reports/quarantine/`): it scored the locked test period before the lock existed. Do not consult or run it; Phases 6–8 replace it.
@@ -29,6 +29,7 @@ LMIS Data/
 │   ├── raw/                 immutable inputs: panel CSVs, district catalog, NCO crosswalk, NCO workbook, DATA_MANIFEST.json
 │   ├── interim/             scratch space (Phase 6 predictions; not in git)
 │   ├── splits/              Phase 7 train / validation / test example files (parquet, not in git) + split_manifest.json (checksums)
+│   ├── fresh_draws/         Phase 8 fresh synthetic evaluation draws (not in git; make_fresh_draw.py <seed>)
 │   ├── dashboard/           dashboard data pack (2011-2024, no test period)
 │   ├── processed/           Phase 3 base tables (parquet), dimension tables, SCHEMA.json
 │   └── superseded/          v1 synthetic panel – audit trail only, do not use
@@ -47,12 +48,14 @@ LMIS Data/
 │   ├── splits/              Phase 7 builds the 70/5/25 split files
 │   ├── training/            Phase 7 preprocessing, tuning, final training, prediction, model card
 │   ├── evaluation/          Phase 8 Optuna tuning, freezing, one-shot test evaluation, diagnostics
+│   ├── deployment/          Phase 9 latest-origin features, refit on all history, forecast + flag files
 │   ├── dashboard/           builds the dashboard data pack
 │   └── modeling/            quarantined prototype (do not run)
-├── models/                  trained models: xgboost_v1/ (Phase 7), xgboost_v2/ (Phase 8 frozen models + model_card.md); quarantine/ holds the prototype's
-├── outputs/                 forecasts and rankings (quarantine/ holds the prototype's)
+├── models/                  trained models: xgboost_v1/ (Phase 7), xgboost_v2/ (Phase 8 frozen), xgboost_v3/ (declared config), deployed/origin_<month>/ (Phase 9 refit); quarantine/ holds the prototype's
+├── outputs/                 forecasts/origin_<month>/ (Phase 9 forecast and flag files); quarantine/ holds the prototype's
 ├── tests/                   automated data tests
 ├── reports/                 audit results and reports
+├── backups/                 file-level snapshots (not in git; the git tags are the rollback points)
 └── Archived/                previous dataset – NOT to be used anywhere
 ```
 
@@ -91,6 +94,9 @@ python src/evaluation/evaluate.py                               # Phase 8 ONE-SH
 python tests/test_evaluation.py                                 # Phase 8 tests
 python src/evaluation/noise_floor.py                            # Phase 8 addendum: noise floor, flag_significance.py, declare.py (xgboost_v3), make_fresh_draw.py <seed>, evaluate_v3.py original|fresh <seed>
 python tests/test_phase8_addendum.py                            # Phase 8 addendum tests
+python src/deployment/refit.py --origin 2026-10                 # Phase 9: refit the declared v3 settings on all history (~6 min)
+python src/deployment/forecast.py --origin 2026-10              # Phase 9: forecast + flag files for all 280 series (~1 min)
+python tests/test_deployment.py                                 # Phase 9 tests (coverage, validity, reproducibility, no look-ahead)
 python src/dashboard/export_data_pack.py                        # dashboard data pack (see docs/DASHBOARD_BRIEF.md)
 python src/dashboard/build_boundaries.py <LGD_Districts.parquet> # district map polygons (source download described in the script)
 python tests/test_dashboard_pack.py                             # data pack and map tests

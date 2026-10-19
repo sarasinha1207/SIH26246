@@ -1,0 +1,55 @@
+{
+ "origin": "2026-10",
+ "created": "2026-10-19 10:05:42",
+ "coverage": {
+  "series": 280,
+  "districts": 56,
+  "states": 4,
+  "tiers": 16,
+  "sectors": 5,
+  "targets": [
+   "Active_Job_Vacancies",
+   "Total_Employed_Workers",
+   "eShram_Registered_Seekers"
+  ],
+  "horizons": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12
+  ],
+  "forecast_rows": 10080,
+  "flag_rows": 3360,
+  "rows_per_series_target": [
+   12
+  ]
+ },
+ "files_sha256": {
+  "flags.csv": "5c84dcfa1bed7d50286015139d0343f548fc5e838588526a8c6bc35735ba93af",
+  "forecast_long.csv": "0229d31e57ef22fe37ef5f0234ce9e9fa7539670ebf8f00030e61d15f39643e5"
+ },
+ "model_manifest_sha256": "53d185942d7da783d2002b2d1e4f25385dea6efa1b3b6c32798e0ff72e6ea80e",
+ "panel_sha256": "9e5cd51ae032688c260bea85cb5c871c0aecf3c55a8eda20d69d9ecfe95304c8",
+ "history_last_month": "2026-10-01",
+ "interval_policy": {
+  "E": "static fold-based intervals (models/xgboost_v3/primary/intervals.json): adaptive conformal under-covered (86% vs 93%) on the original test and both fresh draws",
+  "V": "static intervals recalibrated per horizon (models/xgboost_v3/vacancy_intervals_recalibrated.json): 12-month coverage 90.8% / 90.7% on the fresh draws; adaptive conformal made 12-month coverage worse (77-79%)",
+  "S": "adaptive conformal (models/xgboost_v3/conformal.json): coverage 91.0% / 91.0% / 90.9% and 29% narrower than static on the original test and both fresh draws"
+ },
+ "seekers_intervals_adaptive_share": 1.0,
+ "confidence_rules": {
+  "employed": "high",
+  "seekers": "medium",
+  "vacancies": "low (small gain over the baseline in 2025-26); every IT-ITeS vacancy or seeker forecast is low"
+ },
+ "flag_rules": "forecast single-month vacancies/seekers ratio, percentile among the 56 districts of the sector in the target month; deciles at 10/90, watch classes at 30/70; absolute context kept separate",
+ "seconds": 8.0
+}

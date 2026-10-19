@@ -1,0 +1,16 @@
+{
+ "window": 12,
+ "gamma": 0.05,
+ "alpha": 0.1,
+ "n_min": 200,
+ "alpha_range": [
+  0.02,
+  0.5
+ ],
+ "mondrian_by": [
+  "sector",
+  "horizon"
+ ],
+ "pool": "signed log errors of earlier forecasts whose target month <= the origin month, shock months excluded",
+ "initial_calibration": "validation-split errors of the train-only model (same blend)"
+}
