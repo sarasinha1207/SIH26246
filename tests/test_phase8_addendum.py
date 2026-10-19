@@ -11,7 +11,9 @@ sys.path.insert(0, str(ROOT / "src" / "common"))
 import splits as sp  # noqa: E402
 
 OUT, V3 = ROOT / "reports" / "evaluation", ROOT / "models" / "xgboost_v3"
-DOC = (ROOT / "docs" / "phases" / "PHASE_8_EVALUATION_AND_TUNING.md").read_text(encoding="utf-8")
+from _guard import read_doc, skip_module_unless  # noqa: E402
+skip_module_unless(ROOT / "models" / "xgboost_v2", ROOT / "data" / "fresh_draws", ROOT / "docs" / "phases" / "PHASE_8_EVALUATION_AND_TUNING.md", why="checks the Phase 8 addendum: frozen v2 models, fresh draws and write-up are kept locally")
+DOC = read_doc(ROOT / "docs" / "phases" / "PHASE_8_EVALUATION_AND_TUNING.md")
 SOURCES = ("original", "fresh_2027", "fresh_2028")
 
 

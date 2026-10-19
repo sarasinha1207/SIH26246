@@ -2,6 +2,7 @@
 Runs under pytest or standalone: python tests/test_deployment.py"""
 import json
 import sys
+import unittest
 from pathlib import Path
 
 import numpy as np
@@ -11,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 for sub in ("common", "deployment", "features", "splits"):
     sys.path.insert(0, str(ROOT / "src" / sub))
 import splits as sp  # noqa: E402
+from _guard import read_doc  # noqa: E402
 
 ORIGIN = "2026-10"
 OUT = ROOT / "outputs" / "forecasts" / f"origin_{ORIGIN}"
@@ -112,7 +114,7 @@ def test_refit_backtest_shows_more_data_does_not_hurt():
 def test_synthetic_months_check_is_in_range_and_the_document_matches():
     syn = json.load(open(ROOT / "reports" / "deployment" / f"synthetic_check_{ORIGIN}.json"))["checks"]
     assert len(syn) == 6 and all(v["wape_pct"] < 8 for v in syn.values())
-    doc = (ROOT / "docs" / "phases" / "PHASE_9_DEPLOYMENT.md").read_text(encoding="utf-8")
+    doc = read_doc(ROOT / "docs" / "phases" / "PHASE_9_DEPLOYMENT.md")
     man = json.load(open(OUT / "manifest.json"))
     assert f"{man['coverage']['forecast_rows']:,}" in doc and f"{man['coverage']['flag_rows']:,}" in doc
     b = json.load(open(ROOT / "reports" / "deployment" / "refit_backtest.json"))["wape_mean_horizon"]
@@ -127,6 +129,8 @@ if __name__ == "__main__":
         try:
             f()
             print(f"[PASS] {n}")
+        except unittest.SkipTest as e:
+            print(f"[SKIP] {n}: {e}")
         except AssertionError as e:
             failed += 1
             print(f"[FAIL] {n}: {e}")

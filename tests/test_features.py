@@ -2,6 +2,7 @@
 Runs under pytest or standalone: python tests/test_features.py"""
 import json
 import sys
+import unittest
 from pathlib import Path
 
 import numpy as np
@@ -12,6 +13,7 @@ sys.path.insert(0, str(ROOT / "src" / "common"))
 sys.path.insert(0, str(ROOT / "src" / "features"))
 from data_access import load_panel  # noqa: E402
 import engineering as en  # noqa: E402
+from _guard import read_doc  # noqa: E402
 
 PANEL = load_panel("monthly")
 D = en.PanelData(PANEL)
@@ -149,7 +151,7 @@ def test_relative_flags_are_leak_safe_and_balanced():
 
 def test_flag_findings_in_summary_and_document():
     S = json.load(open(ROOT / "reports" / "features" / "flags_summary.json"))
-    doc = (ROOT / "docs" / "phases" / "PHASE_5_FEATURE_ENGINEERING.md").read_text(encoding="utf-8")
+    doc = read_doc(ROOT / "docs" / "phases" / "PHASE_5_FEATURE_ENGINEERING.md")
     fv = {r["event"]: r for r in S["forward_value"]}
     sat, sho = fv["in the saturation decile 12 months later"], fv["in the shortage decile 12 months later"]
     assert sat["auc_current_percentile"] > 0.9 and sho["auc_current_percentile"] > 0.9
@@ -164,7 +166,7 @@ def test_flag_findings_in_summary_and_document():
 
 
 def test_phase5_document_numbers_match_the_experiment_tables():
-    doc = (ROOT / "docs" / "phases" / "PHASE_5_FEATURE_ENGINEERING.md").read_text(encoding="utf-8")
+    doc = read_doc(ROOT / "docs" / "phases" / "PHASE_5_FEATURE_ENGINEERING.md")
     rep = ROOT / "reports" / "features"
     F = pd.read_csv(rep / "selection_F_final_vs_full.csv")
     m = F.pivot_table(index="target", columns="feature_set", values="wape")
@@ -192,6 +194,8 @@ if __name__ == "__main__":
         try:
             f()
             print(f"[PASS] {n}")
+        except unittest.SkipTest as e:
+            print(f"[SKIP] {n}: {e}")
         except AssertionError as e:
             failed += 1
             print(f"[FAIL] {n}: {e}")

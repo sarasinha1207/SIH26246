@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 810" width="1500" height="810" font-family="Geist, Segoe UI, system-ui, sans-serif" role="img" aria-label="Machine learning lifecycle and how a forecast is made">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9 z" fill="#8FB0FF"/></marker><radialGradient id="g1" cx="90%" cy="0%" r="65%"><stop offset="0" stop-color="#5B8DFF" stop-opacity=".20"/><stop offset="1" stop-color="#5B8DFF" stop-opacity="0"/></radialGradient><radialGradient id="g2" cx="0%" cy="100%" r="60%"><stop offset="0" stop-color="#F2A93B" stop-opacity=".10"/><stop offset="1" stop-color="#F2A93B" stop-opacity="0"/></radialGradient></defs>
+<rect width="1500" height="810" fill="#070C16"/><rect width="1500" height="810" fill="url(#g1)"/><rect width="1500" height="810" fill="url(#g2)"/>
+<text x="60" y="68" fill="#E8EEFB" font-size="32" font-weight="800">Machine learning lifecycle</text>
+<text x="60" y="98" fill="#93A1BD" font-size="16">From the problem statement to a monthly forecast, and how a forecast is made</text>
+<rect x="1000" y="58" width="14" height="14" rx="4" fill="#5B8DFF" fill-opacity=".25" stroke="#5B8DFF" stroke-width="2"/>
+<text x="1022" y="70" fill="#93A1BD" font-size="14">Approved</text>
+<rect x="1120" y="58" width="14" height="14" rx="4" fill="#F2A93B" fill-opacity=".25" stroke="#F2A93B" stroke-width="2"/>
+<text x="1142" y="70" fill="#93A1BD" font-size="14">Awaiting sign-off</text>
+<rect x="1300" y="58" width="14" height="14" rx="4" fill="#6B7A96" fill-opacity=".25" stroke="#6B7A96" stroke-width="2" stroke-dasharray="3 3"/>
+<text x="1322" y="70" fill="#93A1BD" font-size="14">Next</text>
+<text x="60" y="146" fill="#8FB0FF" font-size="13" font-weight="700" letter-spacing="2.2">THE LIFECYCLE</text>
+<rect x="60" y="168" width="244" height="112" rx="16" fill="#0E1626" stroke="#5B8DFF" stroke-opacity=".85" stroke-width="1.8"/>
+<rect x="60" y="168" width="244" height="112" rx="16" fill="#5B8DFF" fill-opacity=".05"/>
+<circle cx="94" cy="204" r="19" fill="#5B8DFF" fill-opacity=".2" stroke="#5B8DFF" stroke-width="1.8"/>
+<text x="94" y="210" text-anchor="middle" fill="#E8EEFB" font-size="17" font-weight="800">1</text>
+<text x="124" y="210" fill="#E8EEFB" font-size="17" font-weight="700">Problem definition</text>
+<text x="82" y="246" fill="#93A1BD" font-size="14">what to forecast and how good</text>
+<text x="82" y="266" fill="#93A1BD" font-size="14">is good</text>
+<line x1="309" y1="224" x2="338" y2="224" stroke="#8FB0FF" stroke-width="2.4" marker-end="url(#ah)"/>
+<rect x="344" y="168" width="244" height="112" rx="16" fill="#0E1626" stroke="#5B8DFF" stroke-opacity=".85" stroke-width="1.8"/>
+<rect x="344" y="168" width="244" height="112" rx="16" fill="#5B8DFF" fill-opacity=".05"/>
+<circle cx="378" cy="204" r="19" fill="#5B8DFF" fill-opacity=".2" stroke="#5B8DFF" stroke-width="1.8"/>
+<text x="378" y="210" text-anchor="middle" fill="#E8EEFB" font-size="17" font-weight="800">2</text>
+<text x="408" y="210" fill="#E8EEFB" font-size="17" font-weight="700">Data collection</text>
+<text x="366" y="246" fill="#93A1BD" font-size="14">district panel, sources,</text>
+<text x="366" y="266" fill="#93A1BD" font-size="14">checksums</text>
+<line x1="593" y1="224" x2="622" y2="224" stroke="#8FB0FF" stroke-width="2.4" marker-end="url(#ah)"/>
+<rect x="628" y="168" width="244" height="112" rx="16" fill="#0E1626" stroke="#5B8DFF" stroke-opacity=".85" stroke-width="1.8"/>
+<rect x="628" y="168" width="244" height="112" rx="16" fill="#5B8DFF" fill-opacity=".05"/>
+<circle cx="662" cy="204" r="19" fill="#5B8DFF" fill-opacity=".2" stroke="#5B8DFF" stroke-width="1.8"/>
+<text x="662" y="210" text-anchor="middle" fill="#E8EEFB" font-size="17" font-weight="800">3</text>
+<text x="692" y="210" fill="#E8EEFB" font-size="17" font-weight="700">Cleaning</text>
+<text x="650" y="246" fill="#93A1BD" font-size="14">validate, fix, process</text>
+<line x1="877" y1="224" x2="906" y2="224" stroke="#8FB0FF" stroke-width="2.4" marker-end="url(#ah)"/>
+<rect x="912" y="168" width="244" height="112" rx="16" fill="#0E1626" stroke="#5B8DFF" stroke-opacity=".85" stroke-width="1.8"/>
+<rect x="912" y="168" width="244" height="112" rx="16" fill="#5B8DFF" fill-opacity=".05"/>
+<circle cx="946" cy="204" r="19" fill="#5B8DFF" fill-opacity=".2" stroke="#5B8DFF" stroke-width="1.8"/>
+<text x="946" y="210" text-anchor="middle" fill="#E8EEFB" font-size="17" font-weight="800">4</text>
+<text x="976" y="210" fill="#E8EEFB" font-size="17" font-weight="700">Exploration</text>
+<text x="934" y="246" fill="#93A1BD" font-size="14">trends, shocks, seasonality</text>
+<line x1="1161" y1="224" x2="1190" y2="224" stroke="#8FB0FF" stroke-width="2.4" marker-end="url(#ah)"/>
+<rect x="1196" y="168" width="244" height="112" rx="16" fill="#0E1626" stroke="#5B8DFF" stroke-opacity=".85" stroke-width="1.8"/>
+<rect x="1196" y="168" width="244" height="112" rx="16" fill="#5B8DFF" fill-opacity=".05"/>
+<circle cx="1230" cy="204" r="19" fill="#5B8DFF" fill-opacity=".2" stroke="#5B8DFF" stroke-width="1.8"/>
+<text x="1230" y="210" text-anchor="middle" fill="#E8EEFB" font-size="17" font-weight="800">5</text>
+<text x="1260" y="210" fill="#E8EEFB" font-size="17" font-weight="700">Feature engineering</text>
+<text x="1218" y="246" fill="#93A1BD" font-size="14">leak-safe features, picked</text>
+<text x="1218" y="266" fill="#93A1BD" font-size="14">from 77</text>
+<rect x="60" y="340" width="244" height="112" rx="16" fill="#0E1626" stroke="#5B8DFF" stroke-opacity=".85" stroke-width="1.8"/>
+<rect x="60" y="340" width="244" height="112" rx="16" fill="#5B8DFF" fill-opacity=".05"/>
+<circle cx="94" cy="376" r="19" fill="#5B8DFF" fill-opacity=".2" stroke="#5B8DFF" stroke-width="1.8"/>
+<text x="94" y="382" text-anchor="middle" fill="#E8EEFB" font-size="17" font-weight="800">6</text>
+<text x="124" y="382" fill="#E8EEFB" font-size="17" font-weight="700">Model selection</text>
+<text x="82" y="418" fill="#93A1BD" font-size="14">XGBoost, LightGBM,</text>
+<text x="82" y="438" fill="#93A1BD" font-size="14">HistGradientBoosting</text>
+<line x1="309" y1="396" x2="338" y2="396" stroke="#8FB0FF" stroke-width="2.4" marker-end="url(#ah)"/>
+<rect x="344" y="340" width="244" height="112" rx="16" fill="#0E1626" stroke="#5B8DFF" stroke-opacity=".85" stroke-width="1.8"/>
+<rect x="344" y="340" width="244" height="112" rx="16" fill="#5B8DFF" fill-opacity=".05"/>
+<circle cx="378" cy="376" r="19" fill="#5B8DFF" fill-opacity=".2" stroke="#5B8DFF" stroke-width="1.8"/>
+<text x="378" y="382" text-anchor="middle" fill="#E8EEFB" font-size="17" font-weight="800">7</text>
+<text x="408" y="382" fill="#E8EEFB" font-size="17" font-weight="700">Training</text>
+<text x="366" y="418" fill="#93A1BD" font-size="14">15 models, 5 seeds per target</text>
+<line x1="593" y1="396" x2="622" y2="396" stroke="#8FB0FF" stroke-width="2.4" marker-end="url(#ah)"/>
+<rect x="628" y="340" width="244" height="112" rx="16" fill="#0E1626" stroke="#F2A93B" stroke-opacity=".85" stroke-width="1.8"/>
+<rect x="628" y="340" width="244" height="112" rx="16" fill="#F2A93B" fill-opacity=".05"/>
+<circle cx="662" cy="376" r="19" fill="#F2A93B" fill-opacity=".2" stroke="#F2A93B" stroke-width="1.8"/>
+<text x="662" y="382" text-anchor="middle" fill="#E8EEFB" font-size="17" font-weight="800">8</text>
+<text x="692" y="382" fill="#E8EEFB" font-size="17" font-weight="700">Evaluation &amp; tuning</text>
+<text x="650" y="418" fill="#93A1BD" font-size="14">one-shot test, noise floor</text>
+<line x1="877" y1="396" x2="906" y2="396" stroke="#8FB0FF" stroke-width="2.4" marker-end="url(#ah)"/>
+<rect x="912" y="340" width="244" height="112" rx="16" fill="#0E1626" stroke="#F2A93B" stroke-opacity=".85" stroke-width="1.8"/>
+<rect x="912" y="340" width="244" height="112" rx="16" fill="#F2A93B" fill-opacity=".05"/>
+<circle cx="946" cy="376" r="19" fill="#F2A93B" fill-opacity=".2" stroke="#F2A93B" stroke-width="1.8"/>
+<text x="946" y="382" text-anchor="middle" fill="#E8EEFB" font-size="17" font-weight="800">9</text>
+<text x="976" y="382" fill="#E8EEFB" font-size="17" font-weight="700">Deployment</text>
+<text x="934" y="418" fill="#93A1BD" font-size="14">monthly refit and forecast</text>
+<text x="934" y="438" fill="#93A1BD" font-size="14">files</text>
+<line x1="1161" y1="396" x2="1190" y2="396" stroke="#8FB0FF" stroke-width="2.4" marker-end="url(#ah)"/>
+<rect x="1196" y="340" width="244" height="112" rx="16" fill="#0E1626" stroke="#6B7A96" stroke-opacity=".85" stroke-width="1.8" stroke-dasharray="6 5"/>
+<rect x="1196" y="340" width="244" height="112" rx="16" fill="#6B7A96" fill-opacity=".05"/>
+<circle cx="1230" cy="376" r="19" fill="#6B7A96" fill-opacity=".2" stroke="#6B7A96" stroke-width="1.8"/>
+<text x="1230" y="382" text-anchor="middle" fill="#E8EEFB" font-size="17" font-weight="800">10</text>
+<text x="1260" y="382" fill="#E8EEFB" font-size="17" font-weight="700">Monitoring</text>
+<text x="1218" y="418" fill="#93A1BD" font-size="14">forecast vs actuals,</text>
+<text x="1218" y="438" fill="#93A1BD" font-size="14">retraining triggers</text>
+<path d="M1318.0 284 V308 H182.0 V332" fill="none" stroke="#8FB0FF" stroke-width="2.4" stroke-linejoin="round" marker-end="url(#ah)"/>
+<rect x="420.0" y="486" width="660" height="40" rx="20" fill="#0E1626" stroke="#F2A93B" stroke-opacity=".7" stroke-dasharray="5 5"/>
+<text x="750.0" y="511" text-anchor="middle" fill="#E8EEFB" font-size="15.5">Monitoring closes the loop: <tspan fill="#F2A93B" font-weight="700">new month → refit → forecast again</tspan></text>
+<text x="60" y="578" fill="#8FB0FF" font-size="13" font-weight="700" letter-spacing="2.2">HOW IT WORKS, EVERY MONTH</text>
+<rect x="60" y="604" width="200" height="130" rx="16" fill="#0E1626" stroke="#5B8DFF" stroke-opacity=".85" stroke-width="1.8"/>
+<rect x="78" y="604" width="36" height="3.5" rx="2" fill="#5B8DFF"/>
+<circle cx="90" cy="642" r="15" fill="#5B8DFF" fill-opacity=".2" stroke="#5B8DFF" stroke-width="1.6"/>
+<text x="90" y="647.5" text-anchor="middle" fill="#E8EEFB" font-size="14" font-weight="800">1</text>
+<text x="114" y="648" fill="#E8EEFB" font-size="17.5" font-weight="700">New data</text>
+<text x="80" y="684" fill="#93A1BD" font-size="14">panel up to the forecast</text>
+<text x="80" y="704" fill="#93A1BD" font-size="14">month</text>
+<line x1="265" y1="669" x2="290" y2="669" stroke="#8FB0FF" stroke-width="2.4" marker-end="url(#ah)"/>
+<rect x="296" y="604" width="200" height="130" rx="16" fill="#0E1626" stroke="#5B8DFF" stroke-opacity=".85" stroke-width="1.8"/>
+<rect x="314" y="604" width="36" height="3.5" rx="2" fill="#5B8DFF"/>
+<circle cx="326" cy="642" r="15" fill="#5B8DFF" fill-opacity=".2" stroke="#5B8DFF" stroke-width="1.6"/>
+<text x="326" y="647.5" text-anchor="middle" fill="#E8EEFB" font-size="14" font-weight="800">2</text>
+<text x="350" y="648" fill="#E8EEFB" font-size="17.5" font-weight="700">Features</text>
+<text x="316" y="684" fill="#93A1BD" font-size="14">history, season, sector;</text>
+<text x="316" y="704" fill="#93A1BD" font-size="14">no future data</text>
+<line x1="501" y1="669" x2="526" y2="669" stroke="#8FB0FF" stroke-width="2.4" marker-end="url(#ah)"/>
+<rect x="532" y="604" width="200" height="130" rx="16" fill="#0E1626" stroke="#F2A93B" stroke-opacity=".85" stroke-width="1.8"/>
+<rect x="550" y="604" width="36" height="3.5" rx="2" fill="#F2A93B"/>
+<circle cx="562" cy="642" r="15" fill="#F2A93B" fill-opacity=".2" stroke="#F2A93B" stroke-width="1.6"/>
+<text x="562" y="647.5" text-anchor="middle" fill="#E8EEFB" font-size="14" font-weight="800">3</text>
+<text x="586" y="648" fill="#E8EEFB" font-size="17.5" font-weight="700">Model</text>
+<text x="552" y="684" fill="#93A1BD" font-size="14">15 XGBoost models</text>
+<line x1="737" y1="669" x2="762" y2="669" stroke="#8FB0FF" stroke-width="2.4" marker-end="url(#ah)"/>
+<rect x="768" y="604" width="200" height="130" rx="16" fill="#0E1626" stroke="#F2A93B" stroke-opacity=".85" stroke-width="1.8"/>
+<rect x="786" y="604" width="36" height="3.5" rx="2" fill="#F2A93B"/>
+<circle cx="798" cy="642" r="15" fill="#F2A93B" fill-opacity=".2" stroke="#F2A93B" stroke-width="1.6"/>
+<text x="798" y="647.5" text-anchor="middle" fill="#E8EEFB" font-size="14" font-weight="800">4</text>
+<text x="822" y="648" fill="#E8EEFB" font-size="17.5" font-weight="700">Forecast</text>
+<text x="788" y="684" fill="#93A1BD" font-size="14">12 months ahead with a</text>
+<text x="788" y="704" fill="#93A1BD" font-size="14">90% range</text>
+<line x1="973" y1="669" x2="998" y2="669" stroke="#8FB0FF" stroke-width="2.4" marker-end="url(#ah)"/>
+<rect x="1004" y="604" width="200" height="130" rx="16" fill="#0E1626" stroke="#7FD1C7" stroke-opacity=".85" stroke-width="1.8"/>
+<rect x="1022" y="604" width="36" height="3.5" rx="2" fill="#7FD1C7"/>
+<circle cx="1034" cy="642" r="15" fill="#7FD1C7" fill-opacity=".2" stroke="#7FD1C7" stroke-width="1.6"/>
+<text x="1034" y="647.5" text-anchor="middle" fill="#E8EEFB" font-size="14" font-weight="800">5</text>
+<text x="1058" y="648" fill="#E8EEFB" font-size="17.5" font-weight="700">Early warning</text>
+<text x="1024" y="684" fill="#93A1BD" font-size="14">shortage and surplus</text>
+<text x="1024" y="704" fill="#93A1BD" font-size="14">flags, confidence</text>
+<line x1="1209" y1="669" x2="1234" y2="669" stroke="#8FB0FF" stroke-width="2.4" marker-end="url(#ah)"/>
+<rect x="1240" y="604" width="200" height="130" rx="16" fill="#0E1626" stroke="#C69BFF" stroke-opacity=".85" stroke-width="1.8"/>
+<rect x="1258" y="604" width="36" height="3.5" rx="2" fill="#C69BFF"/>
+<circle cx="1270" cy="642" r="15" fill="#C69BFF" fill-opacity=".2" stroke="#C69BFF" stroke-width="1.6"/>
+<text x="1270" y="647.5" text-anchor="middle" fill="#E8EEFB" font-size="14" font-weight="800">6</text>
+<text x="1294" y="648" fill="#E8EEFB" font-size="17.5" font-weight="700">Decision</text>
+<text x="1260" y="684" fill="#93A1BD" font-size="14">dashboard and CSV for</text>
+<text x="1260" y="704" fill="#93A1BD" font-size="14">planners</text>
+<text x="1440" y="784" text-anchor="end" fill="#64738F" font-size="13">All data is simulated · forecast origin October 2026</text>
+</svg>

@@ -13,9 +13,11 @@ for sub in ("common", "training", "evaluation"):
 import splits as sp  # noqa: E402
 from predict import Forecaster  # noqa: E402
 
+from _guard import read_doc, skip_module_unless  # noqa: E402
+skip_module_unless(ROOT / "models" / "xgboost_v2", ROOT / "docs" / "phases" / "PHASE_8_EVALUATION_AND_TUNING.md", why="checks the frozen Phase 8 models and write-up, which are kept locally")
 V2, OUT = ROOT / "models" / "xgboost_v2", ROOT / "reports" / "evaluation"
 T = OUT / "test"
-DOC = (ROOT / "docs" / "phases" / "PHASE_8_EVALUATION_AND_TUNING.md").read_text(encoding="utf-8")
+DOC = read_doc(ROOT / "docs" / "phases" / "PHASE_8_EVALUATION_AND_TUNING.md")
 FR = json.load(open(V2 / "frozen_config.json"))
 OV = pd.read_csv(T / "overall.csv").set_index(["target", "model"])
 

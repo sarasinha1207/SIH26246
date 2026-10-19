@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 930" width="720" height="930" font-family="Geist, Segoe UI, system-ui, sans-serif" role="img" aria-label="KaushalSetu system architecture">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9 z" fill="#8FB0FF"/></marker><radialGradient id="g1" cx="85%" cy="0%" r="70%"><stop offset="0" stop-color="#5B8DFF" stop-opacity=".22"/><stop offset="1" stop-color="#5B8DFF" stop-opacity="0"/></radialGradient></defs>
+<rect width="720" height="930" fill="#070C16"/><rect width="720" height="930" fill="url(#g1)"/>
+<g transform="translate(40 34) scale(1.35)"><rect width="34" height="34" rx="9" fill="#0F2B63"/><rect x=".5" y=".5" width="33" height="33" rx="8.5" fill="none" stroke="#fff" stroke-opacity=".16"/><rect x="6.5" y="19" width="5.4" height="8.5" rx="1.6" fill="#8FB0FF"/><rect x="14.3" y="14" width="5.4" height="13.5" rx="1.6" fill="#8FB0FF"/><rect x="22.1" y="8.5" width="5.4" height="19" rx="1.6" fill="#8FB0FF" fill-opacity=".42"/><path d="M5.5 22.5C10 22 13 17.5 17 15S23.5 9.5 27.5 7" fill="none" stroke="#F2A93B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="27.5" cy="7" r="2.7" fill="#F2A93B"/></g>
+<text x="96" y="58" fill="#E8EEFB" font-size="25" font-weight="800" letter-spacing="2.2">KAUSHAL<tspan fill="#5B8DFF">SETU</tspan></text>
+<text x="96" y="80" fill="#93A1BD" font-size="14" letter-spacing=".4">System architecture</text>
+<rect x="190" y="120" width="340" height="70" rx="14" fill="#0E1626" stroke="#8FB0FF" stroke-opacity=".75" stroke-width="1.6"/>
+<rect x="208" y="120" width="36" height="3.5" rx="2" fill="#8FB0FF"/>
+<text x="360.0" y="152.0" text-anchor="middle" fill="#E8EEFB" font-size="18" font-weight="700">Users</text>
+<text x="360.0" y="173.0" text-anchor="middle" fill="#93A1BD" font-size="13">planners · skill councils · public</text>
+<rect x="60" y="244" width="600" height="96" rx="18" fill="none" stroke="#C69BFF" stroke-opacity=".28" stroke-dasharray="5 6"/>
+<rect x="80" y="258" width="180" height="68" rx="14" fill="#0E1626" stroke="#C69BFF" stroke-opacity=".75" stroke-width="1.6"/>
+<rect x="98" y="258" width="36" height="3.5" rx="2" fill="#C69BFF"/>
+<text x="170.0" y="298.0" text-anchor="middle" fill="#E8EEFB" font-size="17" font-weight="700">Website</text>
+<rect x="270" y="258" width="180" height="68" rx="14" fill="#0E1626" stroke="#C69BFF" stroke-opacity=".75" stroke-width="1.6"/>
+<rect x="288" y="258" width="36" height="3.5" rx="2" fill="#C69BFF"/>
+<text x="360.0" y="298.0" text-anchor="middle" fill="#E8EEFB" font-size="17" font-weight="700">Dashboard</text>
+<rect x="460" y="258" width="180" height="68" rx="14" fill="#0E1626" stroke="#C69BFF" stroke-opacity=".75" stroke-width="1.6"/>
+<rect x="478" y="258" width="36" height="3.5" rx="2" fill="#C69BFF"/>
+<text x="550.0" y="298.0" text-anchor="middle" fill="#E8EEFB" font-size="17" font-weight="700">Assistant</text>
+<rect x="60" y="380" width="250" height="84" rx="14" fill="#0E1626" stroke="#7FD1C7" stroke-opacity=".75" stroke-width="1.6"/>
+<rect x="78" y="380" width="36" height="3.5" rx="2" fill="#7FD1C7"/>
+<text x="185.0" y="419.0" text-anchor="middle" fill="#E8EEFB" font-size="17" font-weight="700">Vercel hosting</text>
+<text x="185.0" y="440.0" text-anchor="middle" fill="#93A1BD" font-size="13">static site</text>
+<rect x="340" y="380" width="140" height="84" rx="14" fill="#0E1626" stroke="#7FD1C7" stroke-opacity=".75" stroke-width="1.6"/>
+<rect x="358" y="380" width="36" height="3.5" rx="2" fill="#7FD1C7"/>
+<text x="410.0" y="419.0" text-anchor="middle" fill="#E8EEFB" font-size="16" font-weight="700">/api/chat</text>
+<text x="410.0" y="440.0" text-anchor="middle" fill="#93A1BD" font-size="13">function</text>
+<rect x="520" y="380" width="140" height="84" rx="14" fill="#0E1626" stroke="#FF8A70" stroke-opacity=".75" stroke-width="1.6"/>
+<rect x="538" y="380" width="36" height="3.5" rx="2" fill="#FF8A70"/>
+<text x="590.0" y="419.0" text-anchor="middle" fill="#E8EEFB" font-size="16" font-weight="700">Gemini</text>
+<text x="590.0" y="440.0" text-anchor="middle" fill="#93A1BD" font-size="13">external AI</text>
+<line x1="480" y1="422.0" x2="514" y2="422.0" stroke="#8FB0FF" stroke-width="2.4" marker-end="url(#ah)" marker-start="url(#ah)"/>
+<rect x="130" y="510" width="460" height="84" rx="14" fill="#0E1626" stroke="#5B8DFF" stroke-opacity=".75" stroke-width="1.6"/>
+<rect x="148" y="510" width="36" height="3.5" rx="2" fill="#5B8DFF"/>
+<text x="360.0" y="549.0" text-anchor="middle" fill="#E8EEFB" font-size="17" font-weight="700">Forecast files</text>
+<text x="360.0" y="570.0" text-anchor="middle" fill="#93A1BD" font-size="13">forecast_long.csv · flags.csv</text>
+<rect x="130" y="640" width="460" height="84" rx="14" fill="#0E1626" stroke="#F2A93B" stroke-opacity=".75" stroke-width="1.6"/>
+<rect x="148" y="640" width="36" height="3.5" rx="2" fill="#F2A93B"/>
+<text x="360.0" y="679.0" text-anchor="middle" fill="#E8EEFB" font-size="17" font-weight="700">ML engine</text>
+<text x="360.0" y="700.0" text-anchor="middle" fill="#93A1BD" font-size="13">XGBoost v3 · monthly refit and forecast</text>
+<rect x="130" y="770" width="460" height="84" rx="14" fill="#0E1626" stroke="#5B8DFF" stroke-opacity=".75" stroke-width="1.6"/>
+<rect x="148" y="770" width="36" height="3.5" rx="2" fill="#5B8DFF"/>
+<text x="360.0" y="809.0" text-anchor="middle" fill="#E8EEFB" font-size="17" font-weight="700">Data</text>
+<text x="360.0" y="830.0" text-anchor="middle" fill="#93A1BD" font-size="13">simulated panel · cleaned · time splits</text>
+<line x1="360.0" y1="242" x2="360.0" y2="200" stroke="#8FB0FF" stroke-width="2.4" stroke-dasharray="1 7" stroke-linecap="round" opacity=".9"/>
+<path d="M353.0 208 L360.0 196 L367.0 208" fill="none" stroke="#8FB0FF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="185" y1="380" x2="185" y2="344" stroke="#8FB0FF" stroke-width="2.4" stroke-dasharray="1 7" stroke-linecap="round" opacity=".9"/>
+<path d="M178 352 L185 340 L192 352" fill="none" stroke="#8FB0FF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="410" y1="380" x2="410" y2="344" stroke="#8FB0FF" stroke-width="2.4" stroke-dasharray="1 7" stroke-linecap="round" opacity=".9"/>
+<path d="M403 352 L410 340 L417 352" fill="none" stroke="#8FB0FF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="185" y1="510" x2="185" y2="474" stroke="#8FB0FF" stroke-width="2.4" stroke-dasharray="1 7" stroke-linecap="round" opacity=".9"/>
+<path d="M178 482 L185 470 L192 482" fill="none" stroke="#8FB0FF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="360.0" y1="640" x2="360.0" y2="604" stroke="#8FB0FF" stroke-width="2.4" stroke-dasharray="1 7" stroke-linecap="round" opacity=".9"/>
+<path d="M353.0 612 L360.0 600 L367.0 612" fill="none" stroke="#8FB0FF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="360.0" y1="770" x2="360.0" y2="734" stroke="#8FB0FF" stroke-width="2.4" stroke-dasharray="1 7" stroke-linecap="round" opacity=".9"/>
+<path d="M353.0 742 L360.0 730 L367.0 742" fill="none" stroke="#8FB0FF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="374.0" y="623" fill="#93A1BD" font-size="12.5" font-style="italic">forecasts</text>
+<text x="374.0" y="753" fill="#93A1BD" font-size="12.5" font-style="italic">features</text>
+<text x="200" y="493" fill="#93A1BD" font-size="12.5" font-style="italic">static files</text>
+<text x="424" y="363" fill="#93A1BD" font-size="12.5" font-style="italic">answers</text>
+<text x="680" y="902" text-anchor="end" fill="#93A1BD" font-size="12.5">Data flows upwards · all data is simulated</text>
+</svg>

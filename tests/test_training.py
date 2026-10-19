@@ -17,6 +17,8 @@ import splits as sp  # noqa: E402
 from predict import Forecaster  # noqa: E402
 from preprocess import FeaturePreprocessor  # noqa: E402
 
+from _guard import read_doc, skip_module_unless  # noqa: E402
+skip_module_unless(ROOT / "models" / "xgboost_v1", ROOT / "docs" / "phases" / "PHASE_7_MODEL_TRAINING.md", why="checks the Phase 7 models and write-up, which are kept locally")
 M = ROOT / "models" / "xgboost_v1"
 R = ROOT / "reports" / "training"
 PARAMS, MAN = json.load(open(M / "params.json")), json.load(open(M / "checkpoint_manifest.json"))
@@ -152,7 +154,7 @@ def test_model_card_lists_every_hyperparameter_and_the_reported_scores():
 
 
 def test_phase7_document_quotes_the_saved_scores():
-    doc = (ROOT / "docs" / "phases" / "PHASE_7_MODEL_TRAINING.md").read_text(encoding="utf-8")
+    doc = read_doc(ROOT / "docs" / "phases" / "PHASE_7_MODEL_TRAINING.md")
     met = json.load(open(R / "validation_metrics.json"))
     for k in "EVS":
         assert f"{met[k]['validation_wape_mean_horizon']:.2f}" in doc and f"{met[k]['baselines']['last_plus_seasonal_shift']['mean_horizon']:.2f}" in doc, k

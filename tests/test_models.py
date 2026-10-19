@@ -14,6 +14,8 @@ import pipeline as pl  # noqa: E402
 import model_zoo as zoo  # noqa: E402
 
 REP = ROOT / "reports" / "models"
+from _guard import read_doc, skip_module_unless  # noqa: E402
+skip_module_unless(ROOT / "data" / "interim" / "phase6_predictions.parquet", ROOT / "docs" / "phases" / "PHASE_6_MODEL_SELECTION.md", why="checks the Phase 6 model comparison, which needs its prediction file and write-up")
 P = pd.read_parquet(ROOT / "data" / "interim" / "phase6_predictions.parquet")
 D, EX = pl._examples()
 FOLD_END = {"F1_2018": "2017-12-01", "F2_2019": "2018-12-01", "F3_2024": "2023-12-01"}
@@ -94,7 +96,7 @@ def near(doc, v, nd=2):
 
 
 def test_phase6_document_numbers_match_the_tables():
-    doc = (ROOT / "docs" / "phases" / "PHASE_6_MODEL_SELECTION.md").read_text(encoding="utf-8")
+    doc = read_doc(ROOT / "docs" / "phases" / "PHASE_6_MODEL_SELECTION.md")
     m2 = pd.read_csv(REP / "m02_wape_mean.csv").set_index("model")
     for m in m2.index:
         for c in ("E", "V", "S", "mean_all_targets"):

@@ -1,116 +1,280 @@
-# KaushalSetu: Bridging Skills. Forecasting Futures.
+# KaushalSetu
 
-LMIS: Labour Market Intelligence & Skill Demand-Supply Forecasting
+**Bridging Skills. Forecasting Futures.**
 
-SIH26246 · Ministry of Skill Development and Entrepreneurship (MSDE)
+KaushalSetu (Bridging Skills. Forecasting Futures.) is an AI-enabled labour market intelligence platform for the Ministry of Skill Development and Entrepreneurship. It forecasts, twelve months ahead, how many people will be employed, how many jobs will be open and how many job seekers will be registered, for 56 districts across four states and five sectors. Every forecast carries a 90% range and an honest confidence label, while early-warning flags show where demand for workers and supply of job seekers are drifting apart. A public website, an interactive dashboard and a built-in assistant make results easy to explore. All data is simulated.
 
-## Project status (ML lifecycle)
-Phases are completed strictly in order. A phase is closed only after its sign-off checklist is approved.
+## Problem Statement
 
-| # | Phase | Status | Document |
+- **Problem Statement ID**: SIH26246	
+- **Problem Statement Title**: AI-Enabled Labour Market Intelligence and Skill Demand-Supply Forecasting Engine
+- **Ministry / Department**: Ministry of Skill Development and Entrepreneurship (MSDE)
+- **Category**: Software
+- **Theme**: Miscellaneous
+
+
+![KaushalSetu home page](docs/screenshots/Home.png)
+
+
+## 1. Why we built this and who benefits
+**Why**  
+Training seats are sanctioned months or years ahead, but labour demand shifts month by month and varies sharply between districts. Planners need to see *where* demand and supply are moving apart *early enough to act*, and they need to know how far to trust each number. Most tools give a point estimate; KaushalSetu gives the range, the confidence, the baseline it must beat, and the limits.
+
+**Who Benefits**
+* **MSDE and NCVET planners:** set training targets and sanction new centres where forecasts show shortage, and pause expansion where they show surplus.
+* **Sector Skill Councils:** see which trades and districts are heading towards saturation or acute shortage.
+* **State skill-development units:** drill from state to district, in Hindi or English.
+* **Training providers and institutions:** align courses and seat allocation with expected demand.
+* **Job seekers and employers (indirectly):** better-matched training means fewer certified candidates without jobs and fewer vacancies without candidates.
+* **Researchers and evaluators:** a transparent, reproducible method with a measured noise floor and a tested pipeline.
+
+## 2. Key features
+**Forecasting and statistics**
+* 12-month forecasts of employed workers, job vacancies and registered job seekers for 280 district-sector series.
+* 90% prediction ranges, a baseline forecast beside every forecast, and a confidence label per measure (employed: high, seekers: medium, vacancies: low).
+* Early-warning flags: relative status within a sector (tightest decile ... loosest decile) always shown beside the absolute context (openings exceed seekers, moderate, oversupplied, deep surplus), with alert and watch levels.
+
+**Public website** (Home, About, Resources)
+* Interactive India map of all forecast districts, with state zoom; hero forecast chart; how-it-works timeline; honest evaluation summary.
+* English and Hindi, light and dark theme, three text sizes, reduced-motion support.
+
+**Dashboard** (separate layout, top bar, collapsible sidebar, filters kept in the URL)
+* Overview, Demand, Supply, Gap, District ranking, Early warnings, and Data and notes.
+* Sector, State and District filters on every page; CSV download of the current view; every figure read from the forecast files and the monthly panel.
+
+**Assistant** (button at the bottom right of every page)
+* Answers from the site's own data in the browser, and optionally words answers with Google Gemini through a server-side route that keeps the API key off the page. Falls back to the site's own answers if the key, network or model quota is unavailable.
+
+**Engineering**
+* Every number on the site and dashboard is built from `forecast_long.csv`, `flags.csv` and the monthly panel, checked against SHA-256 hashes in the forecast manifest.
+* Reproducible, leak-safe pipeline (no data after the origin month reaches a forecast), 143 automated tests, security headers, and a Vercel-ready layout.
+
+![Machine learning lifecycle and how a forecast is made](docs/screenshots/Dashboard-1.png)
+
+![Machine learning lifecycle and how a forecast is made](docs/screenshots/Dashboard-2.png)
+
+
+## 3. Technology stack
+| Layer | Technology |
+|---|---|
+| Language | Python 3.12+ (tested on 3.13); JavaScript (no framework) |
+| Data and numerics | pandas 2.2, NumPy 2.1, SciPy 1.14, PyArrow 20 (Parquet), joblib |
+| Machine learning | **XGBoost 3.4** (final models), LightGBM 4.7 and scikit-learn 1.5 (model comparison and challenger), **Optuna 4.1** (tuning) |
+| Uncertainty | Static fold-based, recalibrated and adaptive conformal intervals (own implementation) |
+| Front end | Hand-written HTML, CSS and JavaScript; SVG charts and map; Geist font; no build tool or framework |
+| Internationalisation | English and Hindi via generated `data-hi` attributes (BeautifulSoup 4 at build time) |
+| Backend | Python standard library `http.server` (local server); one Vercel Python function for `/api/chat` |
+| AI assistant | Rule-based engine in the browser; Google Gemini REST API (optional, server-side key) |
+| Testing | Plain-Python test files (no framework needed); Node.js (any recent version) only to syntax-check and run the assistant engine |
+| Data formats | CSV, Parquet, JSON, GeoJSON |
+
+## 4. Overview of the Dataset
+The modelling dataset is a **simulated** monthly panel, calibrated to published Indian statistics where they could be verified and to stated assumptions elsewhere (see [`docs/reference/DATA_SOURCES_AND_METHODOLOGY.md`](docs/reference/DATA_SOURCES_AND_METHODOLOGY.md) for what is verified and what is not).
+
+| Item | Detail |
+|---|---|
+| Files | `data/raw/lmis_district_monthly_2011_2026.csv` (53,760 rows x 41 columns) and a quarterly roll-up (17,920 x 40) |
+| Series | 280 = 56 districts x 5 sectors; 192 months (January 2011 to December 2026); history to October 2026 is used |
+| Geography | Maharashtra 36, Delhi 11, West Bengal 5 and Tamil Nadu 4 districts, identified by official LGD codes; 16 economic tiers |
+| Sectors | Construction, Healthcare, IT-ITeS, Manufacturing, Textiles and Apparel (linked to NIC divisions and NCO-2015 codes) |
+| Forecast targets | `Total_Employed_Workers`, `Active_Job_Vacancies`, `eShram_Registered_Seekers` |
+| Other columns | Average monthly wage, unemployment rate, training seats sanctioned, trainees certified, demographic counts, regime flags (COVID window, e-Shram ramp) |
+| Known structure | COVID shock (March 2020 to February 2022); a break at the e-Shram launch (August 2021) in registered seekers; seasonality by sector |
+| Split | Train 2011-01 to 2022-02, validation 2022-03 to 2022-12, test 2023-01 to 2026-12 (70/5/25 of calendar months, same cut dates for all series) |
+| Integrity | Raw files are never edited; `data/raw/DATA_MANIFEST.json` holds checksums; the test split was opened once and is spent |
+
+Derived tables live in `data/processed/` (cleaned panels, dimension tables, `SCHEMA.json`), and the data dictionaries are in `docs/reference/`.
+
+## 5. ML model and its evaluation metrics
+![Machine learning lifecycle and how a forecast is made](docs/screenshots/ml-lifecycle.png)
+
+**Model.** One XGBoost model per target (employed workers, job vacancies, registered seekers), each averaged over 5 seeds: 15 models. Tuned with Optuna on training and validation data only, then refitted monthly with nothing re-tuned.
+
+**Evaluation.** Time-based split (train to 2022-02, validation to 2022-12, test 2023 to 2026). The test period was opened once. Metric: **WAPE** (lower is better).
+
+### Test results
+
+| Target | Model WAPE | Best simple baseline | Improvement | Noise floor* |
+|---|---|---|---|---|
+| Employed workers | **1.75%** | 2.46% | **29%** | 1.13% |
+| Registered seekers | **5.69%** | 6.69% | **15%** | 4.73% |
+| Job vacancies | **9.16%** | 9.44% | **3%** | 6.74% |
+
+*The lowest error any model could reach on this simulated data.
+
+### Error by forecast horizon (model vs. last value + seasonal shift)
+
+| Months ahead | Employed | Seekers | Vacancies |
 |---|---|---|---|
-| 1 | Problem Definition | **Approved** | [docs/phases/PHASE_1_PROBLEM_DEFINITION.md](docs/phases/PHASE_1_PROBLEM_DEFINITION.md) |
-| 2 | Data Collection | **Approved** | [docs/phases/PHASE_2_DATA_COLLECTION.md](docs/phases/PHASE_2_DATA_COLLECTION.md) |
-| 3 | Data Cleaning & Preprocessing | **Approved** | [docs/phases/PHASE_3_DATA_CLEANING.md](docs/phases/PHASE_3_DATA_CLEANING.md) |
-| 4 | Exploratory Data Analysis | **Approved** | [docs/phases/PHASE_4_EDA.md](docs/phases/PHASE_4_EDA.md) |
-| 5 | Feature Engineering & Selection | **Approved** | [docs/phases/PHASE_5_FEATURE_ENGINEERING.md](docs/phases/PHASE_5_FEATURE_ENGINEERING.md) |
-| 6 | Model Selection | **Approved** | [docs/phases/PHASE_6_MODEL_SELECTION.md](docs/phases/PHASE_6_MODEL_SELECTION.md) |
-| 7 | Model Training | **Approved** | [docs/phases/PHASE_7_MODEL_TRAINING.md](docs/phases/PHASE_7_MODEL_TRAINING.md) |
-| 8 | Evaluation & Tuning | **Complete – awaiting sign-off** | [docs/phases/PHASE_8_EVALUATION_AND_TUNING.md](docs/phases/PHASE_8_EVALUATION_AND_TUNING.md) |
-| 9 | Deployment | **Built – awaiting sign-off** | [docs/phases/PHASE_9_DEPLOYMENT.md](docs/phases/PHASE_9_DEPLOYMENT.md), [docs/RUNBOOK.md](docs/RUNBOOK.md) |
-| 10 | Monitoring & Maintenance | Not started | |
+| 1 | **1.07** vs 1.17 | **4.03** vs 4.55 | **5.36** vs 5.69 |
+| 6 | **1.78** vs 2.70 | **5.96** vs 6.63 | **8.87** vs 9.42 |
+| 12 | **2.07** vs 4.80 | **6.44** vs 8.35 | **12.04** vs 12.26 |
 
-The provisional prototype and everything it produced are **quarantined** (`outputs/quarantine/`, `models/quarantine/`, `reports/quarantine/`): it scored the locked test period before the lock existed. Do not consult or run it; Phases 6–8 replace it.
+### Results by sector (WAPE %)
 
-## Folder structure
-```
-LMIS Data/
-├── README.md
-├── requirements.txt
-├── data/
-│   ├── raw/                 immutable inputs: panel CSVs, district catalog, NCO crosswalk, NCO workbook, DATA_MANIFEST.json
-│   ├── interim/             scratch space (Phase 6 predictions; not in git)
-│   ├── splits/              Phase 7 train / validation / test example files (parquet, not in git) + split_manifest.json (checksums)
-│   ├── fresh_draws/         Phase 8 fresh synthetic evaluation draws (not in git; make_fresh_draw.py <seed>)
-│   ├── dashboard/           dashboard data pack (2011-2024, no test period)
-│   ├── processed/           Phase 3 base tables (parquet), dimension tables, SCHEMA.json
-│   └── superseded/          v1 synthetic panel – audit trail only, do not use
-├── docs/
-│   ├── phases/              one document per lifecycle phase
-│   ├── reference/           problem statement, data dictionary, data sources & method, NCO hierarchy
-│   └── DASHBOARD_BRIEF.md   everything an AI or developer needs to build the dashboard
-├── src/
-│   ├── data_generation/     synthetic data generator v2 (+ legacy/ v1 for the audit trail)
-│   ├── data_collection/     Phase 2 raw-data audit
-│   ├── preprocessing/       Phase 3 cleaning pipeline
-│   ├── common/              guarded data access (test period locked until Phase 8)
-│   ├── eda/                 Phase 4 exploratory analysis (train + validation only)
-│   ├── features/            Phase 5 feature engineering, selection and the training-data interface
-│   ├── models/              Phase 6 model comparison and tuning
-│   ├── splits/              Phase 7 builds the 70/5/25 split files
-│   ├── training/            Phase 7 preprocessing, tuning, final training, prediction, model card
-│   ├── evaluation/          Phase 8 Optuna tuning, freezing, one-shot test evaluation, diagnostics
-│   ├── deployment/          Phase 9 latest-origin features, refit on all history, forecast + flag files
-│   ├── app/                 builds the web app files (public site; dashboard to follow) from the project outputs
-│   ├── dashboard/           builds the dashboard data pack
-│   └── modeling/            quarantined prototype (do not run)
-├── models/                  trained models: xgboost_v1/ (Phase 7), xgboost_v2/ (Phase 8 frozen), xgboost_v3/ (declared config), deployed/origin_<month>/ (Phase 9 refit); quarantine/ holds the prototype's
-├── outputs/                 forecasts/origin_<month>/ (Phase 9 forecast and flag files); quarantine/ holds the prototype's
-├── tests/                   automated data tests
-├── reports/                 audit results and reports
-├── app/                 the web app, deployable as plain static files: public site (3 pages) + dashboard placeholder; see app/README.md
-├── backups/                 file-level snapshots (not in git; the git tags are the rollback points)
-└── Archived/                previous dataset – NOT to be used anywhere
-```
+| Sector | Employed | Vacancies | Seekers |
+|---|---|---|---|
+| Construction | 1.72 | 7.86 | 5.92 |
+| Healthcare | 1.73 | 7.53 | 5.50 |
+| IT-ITeS | 1.73 | 13.42 | 6.41 |
+| Manufacturing | 1.79 | 8.59 | 5.42 |
+| Textiles and Apparel | 1.70 | 8.76 | 5.51 |
 
-## Data rules
-* The only modelling dataset is `data/raw/lmis_district_monthly_2011_2026.csv` (quarterly file for roll-ups). It is **synthetic**; see `docs/reference/DATA_SOURCES_AND_METHODOLOGY.md`.
-* Nothing under `Archived/` or `data/superseded/` may be used. The duplicate of the archived dataset that sat in the repo root was removed in Phase 2.
-* **The test split has been evaluated once (Phase 8) and is spent**; see `reports/evaluation/test_access_log.json`.
-* From Phase 7 the project split is 70/5/25 of the calendar months (train 2011-01 to 2022-02, validation 2022-03 to 2022-12, test 2023-01 to 2026-12), defined in `src/common/splits.py`; the test file is locked behind `load_split` until Phase 8. This replaces the Phase 3 `Split_Role` split (test 2025–2026), which `load_panel` still enforces for the older phases.
-* The test period (2025–2026) is locked behind `load_panel`. It is not pristine: the provisional prototype scored it once before the lock existed; see `docs/phases/PHASE_5_FEATURE_ENGINEERING.md`, Section 9 (its scores were removed from decision documents and the prototype quarantined).
-* Raw files are never edited. `python src/data_collection/validate_raw_data.py` verifies them against the checksums in `data/raw/DATA_MANIFEST.json` and runs the acceptance checks.
+### Held up on new data: model (best baseline), WAPE %
 
-## Run
+| Data set | Employed | Vacancies | Seekers |
+|---|---|---|---|
+| Original test | **1.75** (2.46) | **9.16** (9.44) | **5.69** (6.69) |
+| Fresh world, seed 2027 | **1.73** (2.35) | **8.94** (9.37) | **6.00** (7.00) |
+| Fresh world, seed 2028 | **1.68** (2.36) | **9.20** (9.39) | **5.91** (6.86) |
+
+### Uncertainty and flags
+
+| Target | 90% range method | Coverage, original test | Coverage, fresh data |
+|---|---|---|---|
+| Employed | Static | 93.0% | 93.0% to 93.7% |
+| Vacancies | Recalibrated static | 90.0% | 88.9% to 90.4% |
+| Seekers | Adaptive conformal | 91.0% | 90.9% to 91.0% |
+
+Every forecast has a confidence label: high for employed, medium for seekers, low for vacancies. Early-warning flags are right 65% to 81% of the time; they beat repeating today's flag significantly only for oversupply at 12 months (0.676 vs 0.646), so they are labelled low confidence.
+
+**Limits.** The data is simulated. Vacancy forecasts add only about 3% over a simple baseline and are weakest for IT-ITeS (13.4%).
+
+## 6. Tests done and their overview
+**143 automated tests in 14 files, all passing.** Run any file with `python tests/<name>.py` (no pytest needed).
+
+| Area | Test file | Tests | What it proves |
+|---|---|---|---|
+| Website | `test_app.py` | 20 | Links and anchors, numbers equal the source files, map data, complete Hindi text, notices, accessibility basics, pages rebuild reproducibly |
+| Dashboard | `test_dashboard.py` | 9 | Every forecast value and flag equals `forecast_long.csv` and `flags.csv` (all 10,080 and 3,360 rows), manifest hashes, frame and filters, no typed-in numbers, one logo |
+| Assistant | `test_chat.py` | 7 | The answer engine (run under Node) returns the CSV values; no network use beyond one route |
+| Assistant server | `test_chat_proxy.py` | 13 | Key only in a header, rules in the system instruction, limits, model fallback, error handling, security headers, no secrets in the repo |
+| Data pack | `test_dashboard_pack.py` | 7 | Boundaries and metrics match the districts and source areas |
+| Data | `test_processed_panel.py` | 15 | Cleaned panel, dimension tables and dictionary coverage; test period locked |
+| EDA | `test_eda_outputs.py` | 7 | EDA tables and findings match the write-up |
+| Features | `test_features.py` | 13 | No leakage: features at a given origin never use later data |
+| Model selection | `test_models.py` | 8 | Phase 6 comparison tables and selection |
+| Splits | `test_splits.py` | 6 | Split files rebuild identically from truncated data; checksums; test split locked |
+| Training | `test_training.py` | 13 | Preprocessing fitted on train only, reproducibility, saved-model prediction |
+| Evaluation | `test_evaluation.py` | 10 | Frozen model hashes, one-shot test access log, reported tables |
+| Phase 8 addendum | `test_phase8_addendum.py` | 7 | Noise floor, flag significance, fresh draws, declared v3 configuration |
+| Deployment | `test_deployment.py` | 8 | 100% coverage of 280 series x 3 targets x 12 horizons, no missing or inverted values, byte-identical re-run, no look-ahead |
+
+
+## 7. Quick start and installation
+
+**Requires** Python 3.12+ and git.
+
 ```bash
+git clone https://github.com/<your-account>/<repo-name>.git
+cd <repo-name>
+python -m venv .venv
+.venv\Scripts\activate          # macOS/Linux: source .venv/bin/activate
 pip install -r requirements.txt
-python src/data_generation/generate_lmis_master_dataset.py      # regenerate data/raw (deterministic)
-python src/data_collection/validate_raw_data.py                 # Phase 2 audit
-python src/preprocessing/clean_panel.py                         # Phase 3 cleaning (deterministic)
-python tests/test_processed_panel.py                            # Phase 3 acceptance tests
-python src/eda/run_eda.py                                       # Phase 4 EDA (figures + tables in reports/eda)
-python tests/test_eda_outputs.py                                # Phase 4 tests
-python src/features/select_features.py                          # Phase 5 selection (~20 min)
-python src/features/design_flags.py                             # Phase 5 relative early-warning flags
-python tests/test_features.py                                   # Phase 5 tests (leak-safety etc.)
-python src/models/compare_models.py                             # Phase 6 model comparison (~7 min)
-python src/models/analyze_models.py                             # Phase 6 tables, charts, selection file
-python tests/test_models.py                                     # Phase 6 tests
-python src/splits/make_splits.py                                # Phase 7 train/validation/test files (~1 min)
-python tests/test_splits.py                                     # Phase 7 split tests
-python src/training/tune.py E                                   # Phase 7 tuning, per target E|V|S (~30 min); then --final-only and --recent
-python src/training/train.py                                    # Phase 7 final models -> models/xgboost_v1 (~6 min)
-python src/training/make_model_card.py                          # regenerates models/xgboost_v1/model_card.md
-python tests/test_training.py                                   # Phase 7 tests
-python src/training/predict.py --split validation --out f.parquet   # run the saved model
-python src/evaluation/tune_optuna.py E                          # Phase 8 Optuna search per target (~70 min); then finalize.py, recalibrate.py, build_models.py (freeze)
-python src/evaluation/evaluate.py                               # Phase 8 ONE-SHOT test evaluation (refuses a second run), then diagnostics.py, make_report.py
-python tests/test_evaluation.py                                 # Phase 8 tests
-python src/evaluation/noise_floor.py                            # Phase 8 addendum: noise floor, flag_significance.py, declare.py (xgboost_v3), make_fresh_draw.py <seed>, evaluate_v3.py original|fresh <seed>
-python tests/test_phase8_addendum.py                            # Phase 8 addendum tests
-python src/deployment/refit.py --origin 2026-10                 # Phase 9: refit the declared v3 settings on all history (~6 min)
-python src/deployment/forecast.py --origin 2026-10              # Phase 9: forecast + flag files for all 280 series (~1 min)
-python tests/test_deployment.py                                 # Phase 9 tests (coverage, validity, reproducibility, no look-ahead)
-python src/app/build_site_data.py                           # public website: rebuild app/data and downloads from the forecast files
-python src/app/build_map_data.py                            # public website: rebuild the map (districts, India outline, forecast values)
-python src/app/build_dashboard.py                           # dashboard: rebuild its data file and page shell
-python tests/test_dashboard.py                              # dashboard tests (data vs forecast and flag files, frame, filters, palette)
-python tests/test_chat.py                                   # assistant engine tests (on every page, answers equal the CSV values)
-python tests/test_chat_proxy.py                             # Gemini proxy tests (Google stubbed; key never in the browser or the repo)
-python src/app/build_pages.py                               # public website: rebuild the pages and the Hindi text
-python tests/test_app.py                                    # website tests (links, numbers vs source files, map, Hindi text, notices)
-python src/app/serve.py                                      # preview the website at http://localhost:8080 (rebuilds pages when you edit; Ctrl+C to stop)
-python src/dashboard/export_data_pack.py                        # dashboard data pack (see docs/DASHBOARD_BRIEF.md)
-python src/dashboard/build_boundaries.py <LGD_Districts.parquet> # district map polygons (source download described in the script)
-python tests/test_dashboard_pack.py                             # data pack and map tests
 ```
+
+**Run the website and dashboard**
+```bash
+python src/app/serve.py
+```
+Website: `http://localhost:8080` · Dashboard: `http://localhost:8080/dashboard/index.html`
+
+**Enable the Gemini assistant (optional)**
+```bash
+cp .env.example .env            # add your key after GEMINI_API_KEY=
+```
+Without a key the assistant still answers from the site's own data. Never commit `.env`.
+
+**Run the tests**
+```bash
+python tests/test_app.py
+python tests/test_dashboard.py
+python tests/test_chat.py
+python tests/test_chat_proxy.py
+```
+
+**Make a new monthly forecast and rebuild the site**
+```bash
+python src/deployment/refit.py --origin 2026-10
+python src/deployment/forecast.py --origin 2026-10
+python src/app/build_site_data.py
+python src/app/build_dashboard.py
+python src/app/build_pages.py
+```
+
+
+## 8. Folder structure
+```
+.
+├── README.md
+├── requirements.txt           Python dependencies (the deployed function needs none)
+├── .env.example               copy to .env and add GEMINI_API_KEY (the real .env is git-ignored)
+├── .gitignore
+├── app/                       the website and dashboard: deploy this folder (Vercel Root Directory)
+│   ├── index.html  about.html  resources.html
+│   ├── vercel.json            security and cache headers, function time limit
+│   ├── api/chat.py            the assistant's server route (Gemini proxy)
+│   ├── assets/                styles, scripts, logo, favicon, Hindi text
+│   ├── dashboard/             dashboard page, script, styles and data file
+│   ├── data/                  site data and map data (built from the forecast files)
+│   └── README.md              how the site is built and deployed
+├── src/
+│   ├── app/                   builds the site, dashboard and map; local server; i18n; logo
+│   ├── deployment/            monthly refit and forecast (Phase 9)
+│   ├── data_generation/       synthetic data generator (v2)
+│   ├── data_collection/       raw-data audit
+│   ├── preprocessing/         cleaning pipeline
+│   ├── common/                guarded data access and split definitions
+│   ├── eda/  features/  models/  splits/  training/  evaluation/   Phases 4-8
+│   └── dashboard/             builds the dashboard data pack
+├── data/
+│   ├── raw/                   immutable simulated panel, district catalogue, NCO crosswalk, manifest
+│   ├── processed/             cleaned panels, dimension tables, schema
+│   ├── dashboard/             district boundaries and the dashboard data pack
+│   └── splits/                split_manifest.json (checksums; the split files are rebuilt)
+├── models/
+│   ├── xgboost_v3/            declared configuration, interval policy and primary models
+│   └── deployed/origin_2026-10/   the refitted models the forecast uses
+├── outputs/forecasts/origin_2026-10/   forecast_long.csv, flags.csv, manifest.json
+├── reports/                   EDA, feature, model, evaluation, training and deployment reports
+├── tests/                     14 test files, a shared guard helper and the assistant test runner
+└── docs/
+    ├── RUNBOOK.md             monthly run, retraining triggers, rollback
+    ├── DASHBOARD_BRIEF.md     dashboard data pack description
+    ├── reference/             data dictionaries, data sources and methodology
+    ├── ml-lifecycle.svg           ML lifecycle diagram source (the PNG is in screenshots/)
+    ├── system-architecture.svg    architecture diagram source (the PNG is in screenshots/)
+    └── screenshots/           images used in this README
+```
+**Kept on your machine, not in the repository** (listed in `.gitignore`): the phase write-ups `docs/phases/`; earlier versions `models/xgboost_v1/`, `models/xgboost_v2/`, `data/superseded/`, `src/data_generation/legacy/`, `Archived/`; the quarantined prototype (`src/modeling/` and every `quarantine/` folder); regenerable files (`data/splits/*.parquet`, `data/interim/`, `data/fresh_draws/`, `data/external/`); `backups/`; and the local `.env`.
+
+## 9. Future improvements
+* **Phase 10 monitoring:** score each month's forecast against the actuals that arrive, track WAPE, interval coverage and flag precision against the baseline and the noise floor, and apply the retraining triggers in the runbook; add a forecast-versus-actual page to the dashboard.
+* **Real data:** replace the simulator with PLFS, e-Shram, NCS and training-centre data, and re-validate the model, the confidence labels and the flag thresholds on it.
+* **Wider coverage:** forecast all districts of West Bengal (5 of 23 now) and Tamil Nadu (4 of 38), then more states and trades.
+* **A forecast API:** serve forecasts and flags through a documented REST API for scheme-planning workflows (today they are batch files and CSV downloads).
+* **Better vacancy and flag models:** vacancies add only about 3% over a baseline; richer demand signals (job-portal and hiring data) and better-calibrated flags are the main modelling opportunities.
+* **Scenario tools:** "what if" seat allocations and a recommended training-target view for planners.
+* **Automation:** a scheduled monthly job that refits, forecasts, rebuilds and publishes, with an alert if any check fails.
+
+## 10. References
+**Data and statistics sources** (the simulator is calibrated to these where verifiable; see the Resources page of the site)
+1. Ministry of Statistics and Programme Implementation, *Periodic Labour Force Survey (PLFS)*, <https://mospi.gov.in/>
+2. Office of the Registrar General and Census Commissioner, India, *Census of India 2011*, <https://censusindia.gov.in/>
+3. Ministry of Labour and Employment, *e-Shram portal*, <https://labour.gov.in/>
+4. Directorate General of Employment, *National Classification of Occupations 2015 (NCO-2015)*, <https://dge.gov.in/>
+5. Local Government Directory (LGD), *district and state codes*, <https://lgdirectory.gov.in/>; Maharashtra Land Records LGD directory, <https://mahavillages.mahabhumi.gov.in/>
+6. NASSCOM, *IT-BPM sector workforce figures*, <https://nasscom.in/>
+7. District boundary geometry: Bharat Atlas, <https://bharatlas.com/> (simplified for display; licence recorded in `app/data/map_data.js`)
+
+**Methods**  
+
+8. Chen, T. and Guestrin, C. (2016). *XGBoost: A Scalable Tree Boosting System.* Proceedings of the 22nd ACM SIGKDD Conference. 
+
+9. Akiba, T., Sano, S., Yanase, T., Ohta, T. and Koyama, M. (2019). *Optuna: A Next-generation Hyperparameter Optimization Framework.* KDD 2019.  
+
+10. Gibbs, I. and Candes, E. (2021). *Adaptive Conformal Inference Under Distribution Shift.* NeurIPS 2021.  
+
+11. Angelopoulos, A. N. and Bates, S. (2021). *A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification.* arXiv:2107.07511. 
+
+12. Ke, G. et al. (2017). *LightGBM: A Highly Efficient Gradient Boosting Decision Tree.* NeurIPS 2017 (model-selection comparison).

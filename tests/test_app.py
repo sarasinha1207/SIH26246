@@ -287,12 +287,14 @@ def test_map_data_matches_the_forecast_files_and_the_district_list():
     assert M["sectors"] == sorted(L.sector.unique()) and M["horizons"] == [3, 6, 12] and M["targets"] == ["E", "V", "S"]
     assert len({d["s"] for d in M["districts"]}) == 4 and all(d["d"].startswith("M") and d["d"].endswith("z") for d in M["districts"])
     assert len(M["backdrop"]) > 50_000                                          # the faint outline of the rest of India
-    import pyarrow.parquet as pq
-    lgd = pq.read_table(ROOT / "data" / "external" / "lgd_districts" / "LGD_Districts.parquet", columns=["dist_lgd", "state_lgd"]).to_pandas()
-    for state, code in (("Maharashtra", 27), ("Delhi", 7), ("West Bengal", 19), ("Tamil Nadu", 33)):
-        every = {str(int(c)) for c in lgd[lgd.state_lgd.astype(int) == code].dist_lgd}
-        drawn = {d["c"] for d in M["districts"] if d["s"] == state} | {o["c"] for o in M["others"] if o["s"] == state}
-        assert drawn == every, state                                            # every district of each project state is drawn
+    lgd_file = ROOT / "data" / "external" / "lgd_districts" / "LGD_Districts.parquet"
+    if lgd_file.exists():                                                       # the 22 MB source file is git-ignored: this check runs only where it has been downloaded (see app/README.md)
+        import pyarrow.parquet as pq
+        lgd = pq.read_table(lgd_file, columns=["dist_lgd", "state_lgd"]).to_pandas()
+        for state, code in (("Maharashtra", 27), ("Delhi", 7), ("West Bengal", 19), ("Tamil Nadu", 33)):
+            every = {str(int(c)) for c in lgd[lgd.state_lgd.astype(int) == code].dist_lgd}
+            drawn = {d["c"] for d in M["districts"] if d["s"] == state} | {o["c"] for o in M["others"] if o["s"] == state}
+            assert drawn == every, state                                        # every district of each project state is drawn
     assert {o["s"] for o in M["others"]} == {"West Bengal", "Tamil Nadu"} and len(M["others"]) == 52
     assert not {o["c"] for o in M["others"]} & {d["c"] for d in M["districts"]} and all(o["d"].startswith("M") and o["d"].endswith("z") for o in M["others"])
     tv = {"E": "Total_Employed_Workers", "V": "Active_Job_Vacancies", "S": "eShram_Registered_Seekers"}

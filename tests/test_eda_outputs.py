@@ -9,7 +9,9 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 EDA = ROOT / "reports" / "eda"
-DOC = (ROOT / "docs" / "phases" / "PHASE_4_EDA.md").read_text(encoding="utf-8")
+from _guard import read_doc, skip_module_unless  # noqa: E402
+skip_module_unless(ROOT / "docs" / "phases" / "PHASE_4_EDA.md", why="checks the Phase 4 write-up against the EDA tables")
+DOC = read_doc(ROOT / "docs" / "phases" / "PHASE_4_EDA.md")
 F = json.load(open(EDA / "eda_findings.json"))
 FIGS = ["fig01_trends", "fig02_seasonality", "fig03_covid", "fig04_coverage", "fig05_density_heatmap", "fig06_rank_stability",
         "fig07_acf", "fig08_leadlag", "fig09_covariate_signal", "fig10_seats_vs_demand", "fig11_noise_vs_volume", "fig12_yoy_growth",
