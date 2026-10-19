@@ -271,7 +271,9 @@ def test_the_key_is_not_committed_and_the_deployment_files_are_in_place():
     assert "class handler(BaseHTTPRequestHandler)" in fn and "def do_POST" in fn and "def do_GET" in fn
     imports = set(re.findall(r"^(?:import|from) ([a-z_.]+)", fn, flags=re.M))
     assert imports <= {"json", "os", "re", "sys", "threading", "time", "urllib.error", "urllib.request", "collections", "http.server", "pathlib", "urllib.parse"}, imports       # standard library only: nothing to install on Vercel
-    assert not (ROOT / "app" / "requirements.txt").exists() and not (ROOT / "app" / "pyproject.toml").exists() and not (ROOT / "api").exists() and not (ROOT / "vercel.json").exists()
+    req = ROOT / "app" / "requirements.txt"                                                          # present so Vercel never installs the root ML requirements into the function
+    assert req.exists() and not [l for l in req.read_text(encoding="utf-8").splitlines() if l.strip() and not l.lstrip().startswith("#")], "app/requirements.txt must list no packages"
+    assert not (ROOT / "app" / "pyproject.toml").exists() and not (ROOT / "api").exists() and not (ROOT / "vercel.json").exists()
     cfg = json.loads((ROOT / "app" / "vercel.json").read_text(encoding="utf-8"))
     assert list(cfg["functions"]) == ["api/chat.py"] and cfg["functions"]["api/chat.py"]["maxDuration"] <= 60
     assert "/api/chat" in (ROOT / "src" / "app" / "serve.py").read_text(encoding="utf-8")

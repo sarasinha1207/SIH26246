@@ -1,0 +1,3 @@
+# The serverless function app/api/chat.py uses only the Python standard library, so nothing is installed.
+# This file exists on purpose: with it here, Vercel does not pick up the repository's root requirements.txt
+# (XGBoost, pandas, SciPy and the rest of the ML stack, which are far over the function size limit).
