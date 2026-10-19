@@ -45,3 +45,9 @@ LGD_Districts.parquet
 
 # File-level backup snapshots (the git tags are the version-controlled safety net)
 backups/
+
+# Fresh synthetic evaluation draws (regenerate with src/evaluation/make_fresh_draw.py <seed>)
+data/fresh_draws/
+
+# Per-row adaptive interval arrays (regenerate with evaluate_v3.py)
+reports/evaluation/v3/**/*.npy

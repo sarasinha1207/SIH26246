@@ -1,0 +1,50 @@
+running data_generation/generate_lmis_master_dataset.py
+me
+Construction             1.7
+Healthcare               2.2
+IT-ITeS                 22.4
+Manufacturing            4.0
+Textiles and Apparel     2.5
+Female share (%) by sector: {'Construction': 13.4, 'Healthcare': 49.4, 'IT-ITeS': 35.6, 'Manufacturing': 17.5, 'Textiles and Apparel': 43.4}
+IT-ITeS graduate share (%): 84.08
+Unemployment range: 3.5 - 12.0 | share of rows at the 3.5/12.0 bounds: 0.006
+
+running preprocessing/clean_panel.py
+: compared every retained measure with raw values_modified=0 columns_compared=28
+- quarterly: same typing/keys/flags applied rows=17920 series=280 simulated_future_quarters=1
+- series volume: computed from the last 24 training months only (no validation/test data) low_volume_series=3 rule=median vacancies < 50
+
+monthly (53760, 47), quarterly (17920, 46); wrote data/processed/ and reports/phase3_*
+
+running splits/make_splits.py
+train       rows  307,440  origins ['2014-01-01', '2022-01-01']  targets ['2014-02-01', '2022-02-01']  56.0 MB
+validation  rows   15,400  origins ['2022-02-01', '2022-11-01']  targets ['2022-03-01', '2022-12-01']  3.2 MB
+test        rows  142,800  origins ['2022-12-01', '2026-11-01']  targets ['2023-01-01', '2026-12-01']  21.6 MB
+dropped (straddling): 36680
+
+fresh draw ready: E:\LMIS Data\data\fresh_draws\seed_2027
+running data_generation/generate_lmis_master_dataset.py
+me
+Construction             1.6
+Healthcare               2.6
+IT-ITeS                 22.2
+Manufacturing            4.8
+Textiles and Apparel     4.3
+Female share (%) by sector: {'Construction': 13.4, 'Healthcare': 49.4, 'IT-ITeS': 35.5, 'Manufacturing': 17.4, 'Textiles and Apparel': 43.4}
+IT-ITeS graduate share (%): 84.38
+Unemployment range: 3.5 - 12.0 | share of rows at the 3.5/12.0 bounds: 0.007
+
+running preprocessing/clean_panel.py
+: compared every retained measure with raw values_modified=0 columns_compared=28
+- quarterly: same typing/keys/flags applied rows=17920 series=280 simulated_future_quarters=1
+- series volume: computed from the last 24 training months only (no validation/test data) low_volume_series=2 rule=median vacancies < 50
+
+monthly (53760, 47), quarterly (17920, 46); wrote data/processed/ and reports/phase3_*
+
+running splits/make_splits.py
+train       rows  307,440  origins ['2014-01-01', '2022-01-01']  targets ['2014-02-01', '2022-02-01']  56.5 MB
+validation  rows   15,400  origins ['2022-02-01', '2022-11-01']  targets ['2022-03-01', '2022-12-01']  3.2 MB
+test        rows  142,800  origins ['2022-12-01', '2026-11-01']  targets ['2023-01-01', '2026-12-01']  21.6 MB
+dropped (straddling): 36680
+
+fresh draw ready: E:\LMIS Data\data\fresh_draws\seed_2028

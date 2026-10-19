@@ -1,0 +1,42 @@
+{
+ "declared_at": "2026-10-19 07:46:02",
+ "source": "models/xgboost_v2/primary (frozen, unchanged)",
+ "evidence": {
+  "blend": "weights from the folds; on the test split the seekers blend scored 5.69% vs 7.36% without it and 6.69% for the baseline (post-test choice, small selection bias)",
+  "conformal": "static intervals covered 93% / 88% / 96% (E / V / S) with seekers mean width 45% and vacancies 85% coverage at 12 months"
+ },
+ "files_sha256": {
+  "conformal.json": "57a21386e89d0b38f2008ea15b80e523db5d04428bdf1414b31cc663aa513216",
+  "primary/blend.json": "798b73f5191083515ae2774a1eebb906ebaae0953ec0d8174fb86d2b4977b15e",
+  "primary/checkpoint_manifest.json": "3665a4ed29e422bbb1f44b4dea7fb7f3485feabe8cdac976df965a5415fac0cf",
+  "primary/E_seed42.ubj": "9b1cfaf810ede8b478be77fc84a76eb2482992c81892be9a90e9f5c23a0237c6",
+  "primary/E_seed43.ubj": "43b7990490e7eb8771f838df4c84e435ee51759a55ca647c6f71e9cd03f91f89",
+  "primary/E_seed44.ubj": "b136d0791bbefd1cee1fb9a76e122aa2ccc3053a67855694a2288b46aa401797",
+  "primary/E_seed45.ubj": "8701f021e541682af6d306de9e6fd3ba13fc4cde398dcbc1f053ad012514071a",
+  "primary/E_seed46.ubj": "9dbb868d57f92fd873646592f266b776d03560149ecf83df381f694427fbe2d2",
+  "primary/intervals.json": "760dee7511798c123d454a2f9be85863afbc483095a43a7a8d7904261c77ffdb",
+  "primary/params.json": "feb547262eb5b1d040d4a36948cf3aa282ab804b65a0852d7565b914b6f4610f",
+  "primary/preprocessor.json": "3774a5d9d6c4a00e928f5054f87b8f6fd3f4bfb593ca00863031e8ceac18ceb5",
+  "primary/S_seed42.ubj": "5883556929be0c27fe0b112a41cf2b6f89940593fc60464664487d2f767ed62f",
+  "primary/S_seed43.ubj": "acb23e99c595277314d150e4b4421f998122d3076c66970aaf70eab86e61a838",
+  "primary/S_seed44.ubj": "8a45b10e4ed5ecb84ada0ada48dc4a35b4b224c4d6db08f8f68cc1d6964d0fd8",
+  "primary/S_seed45.ubj": "6cd94d3f01e04096f31c58734b367cb57e6282b9f1c96a5f1ca66218a38c9843",
+  "primary/S_seed46.ubj": "19b41f79d5e77e5fc9f5fe8aad39a14230b4c6f95671892dbf5971b0ff7c9f2d",
+  "primary/V_seed42.ubj": "0c1500485becee2e86c47d817aa1e45454e248c15a6ca56d4bc80b10a591420c",
+  "primary/V_seed43.ubj": "2d4a96cd92631ce0863147e9ca0caa3dd996d4dd289955b6be866c3a9aaf4643",
+  "primary/V_seed44.ubj": "cc30037d72947c83f87318e0127d5c8947bb69ffd2de507d56b465e4ab253c19",
+  "primary/V_seed45.ubj": "ea0264079192d00851512306ff6dcc948ebf37b07fe3d01d3d6a943644eb5a44",
+  "primary/V_seed46.ubj": "f4c2c060c3b35d8d4395dd52f2454e0a1c28b9a9f6130035e67c651f81b44129"
+ },
+ "settings_chosen_before_evaluation": {
+  "window": 12,
+  "gamma": 0.05,
+  "alpha": 0.1,
+  "n_min": 200,
+  "alpha_range": [
+   0.02,
+   0.5
+  ]
+ },
+ "fresh_draw_run_after_declaration": true
+}

@@ -1,0 +1,83 @@
+{
+ "mean_over_horizons": {
+  "E": {
+   "floor_wape": 1.1281214255898804,
+   "model_wape": 1.7467230213358096,
+   "blend_wape": 1.7467230213358096
+  },
+  "S": {
+   "floor_wape": 4.734652490206038,
+   "model_wape": 7.3555249010860395,
+   "blend_wape": 5.694740496371286
+  },
+  "V": {
+   "floor_wape": 6.736757746038836,
+   "model_wape": 9.157908211739402,
+   "blend_wape": 9.157908211739402
+  }
+ },
+ "simulation_check": {
+  "E": {
+   "1": {
+    "simulated": 0.8917859192746781,
+    "formula": 0.8930930782440619
+   },
+   "6": {
+    "simulated": 1.150867753975173,
+    "formula": 1.1539666586351007
+   },
+   "12": {
+    "simulated": 1.2372051854088992,
+    "formula": 1.237244768739609
+   }
+  },
+  "V": {
+   "1": {
+    "simulated": 4.771413772523393,
+    "formula": 4.775985137970759
+   },
+   "6": {
+    "simulated": 6.77143283768772,
+    "formula": 6.7846981169162195
+   },
+   "12": {
+    "simulated": 7.651473746512661,
+    "formula": 7.654876993431802
+   }
+  }
+ },
+ "parameters": {
+  "E": [
+   [
+    0.9,
+    0.006,
+    0.008
+   ]
+  ],
+  "V": [
+   [
+    0.93,
+    0.035,
+    0.04
+   ],
+   [
+    0.9,
+    0.006,
+    0.008
+   ]
+  ],
+  "S": [
+   [
+    0.95,
+    0.02,
+    0.035
+   ],
+   [
+    0.9,
+    0.006,
+    0.008
+   ]
+  ]
+ },
+ "note": "lower bound on this simulator: oracle knows the structure exactly; the unemployment-rate noise in seekers is ignored"
+}

@@ -30,6 +30,26 @@
    "script": "tests/test_evaluation.py",
    "purpose": "reproduces saved test predictions from the frozen checkpoint",
    "changed_any_model_or_decision": false
+  },
+  {
+   "script": "src/evaluation/flag_significance.py",
+   "purpose": "bootstrap of the flag precision/recall gains from saved predictions",
+   "changed_any_model_or_decision": false
+  },
+  {
+   "script": "src/evaluation/evaluate_v3.py original",
+   "purpose": "re-scoring of the declared v3 configuration on the original test split (post-hoc, no refit)",
+   "changed_any_model_or_decision": true
+  },
+  {
+   "script": "src/evaluation/recal_static_intervals.py",
+   "purpose": "vacancy interval quantiles computed from the original test errors (post-hoc calibration; verified on fresh draws)",
+   "changed_any_model_or_decision": true
+  },
+  {
+   "script": "src/evaluation/noise_floor.py",
+   "purpose": "reads saved test WAPE tables only",
+   "changed_any_model_or_decision": false
   }
  ]
 }

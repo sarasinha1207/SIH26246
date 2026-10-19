@@ -1,0 +1,10 @@
+{
+ "declared_at": "2026-10-19 07:52:55",
+ "policy": {
+  "E": "static fold-based intervals (models/xgboost_v3/primary/intervals.json): adaptive conformal under-covered (86% vs 93%) on the original test and both fresh draws",
+  "V": "static intervals recalibrated per horizon (models/xgboost_v3/vacancy_intervals_recalibrated.json): 12-month coverage 90.8% / 90.7% on the fresh draws; adaptive conformal made 12-month coverage worse (77-79%)",
+  "S": "adaptive conformal (models/xgboost_v3/conformal.json): coverage 91.0% / 91.0% / 90.9% and 29% narrower than static on the original test and both fresh draws"
+ },
+ "evidence": "reports/evaluation/v3/{original,fresh_2027,fresh_2028}/intervals.csv, reports/evaluation/v3/vacancy_interval_recalibration.csv",
+ "note": "the per-target choice was made after seeing the original test (spent) and is confirmed on two fresh draws that were run with both interval types before the choice"
+}

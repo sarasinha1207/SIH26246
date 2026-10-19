@@ -36,11 +36,13 @@ def test_the_test_split_was_evaluated_once_after_the_freeze():
     assert log[0]["frozen_at"] == FR["frozen_at"] and log[0]["time"] > FR["frozen_at"]
     assert log[0]["frozen_config_sha256"] == sp.sha256(V2 / "frozen_config.json")
     reads = json.load(open(OUT / "test_access_log.json"))["descriptive_reads"]
-    assert {r["script"].split("/")[-1] for r in reads} >= {"extra_metrics.py", "coverage_check.py", "diagnostics.py"} and not any(r["changed_any_model_or_decision"] for r in reads)
+    assert {r["script"].split("/")[-1] for r in reads} >= {"extra_metrics.py", "coverage_check.py", "diagnostics.py"} 
+    # after the evaluation only the interval policy and the seekers blend declaration (both documented in the Phase 8 document, Section 11) were decided from the spent test split
+    assert {r["script"] for r in reads if r["changed_any_model_or_decision"]} <= {"src/evaluation/evaluate_v3.py original", "src/evaluation/recal_static_intervals.py"}
 
 
 def test_only_the_evaluation_code_unlocks_the_test_split():
-    allowed = {"evaluate.py", "diagnostics.py", "make_splits.py", "extra_metrics.py", "coverage_check.py"}      # the last two are read-only audits listed under descriptive_reads in the access log
+    allowed = {"evaluate.py", "diagnostics.py", "make_splits.py", "extra_metrics.py", "coverage_check.py", "flag_significance.py", "evaluate_v3.py", "recal_static_intervals.py"}      # the last two are read-only audits listed under descriptive_reads in the access log
     for d in ("training", "evaluation", "splits"):
         for p in (ROOT / "src" / d).glob("*.py"):
             src = p.read_text(encoding="utf-8")

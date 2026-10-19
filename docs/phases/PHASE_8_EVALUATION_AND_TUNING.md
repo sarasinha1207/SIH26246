@@ -1,6 +1,6 @@
 # Phase 8 – Evaluation & Tuning
 
-Status: **Complete pending your sign-off (Section 10).** The test split was evaluated once; it is now spent.
+Status: **Complete pending your sign-off (Section 10).** The test split was evaluated once; it is now spent. **Section 11 (added later) records the noise floor, the flag significance tests, the fresh-draw check, the declared `xgboost_v3` configuration and the new interval policy; where it differs from Sections 1–9, Section 11 is current.**
 Deliverables: `models/xgboost_v2/` (frozen models, `frozen_config.json`, `model_card.md`), `reports/evaluation/` (Optuna trials, re-ranking, test tables in `test/`, figures in `figures/`, `test_access_log.json`), `src/evaluation/`, `tests/test_evaluation.py`.
 Reproduce: `tune_optuna.py E|V|S` → `finalize.py E|V|S` → `recalibrate.py E|V|S` → `build_models.py` (freezes) → `it_experiment.py V` → `evaluate.py` (once) → `diagnostics.py` → `make_report.py`.
 
@@ -94,3 +94,79 @@ Synthetic data; the test window mixes the post-COVID transition (2023) with stea
 - [ ] Decisions D1–D5 (Section 8) accepted
 
 Phase 9 (Deployment) starts only after sign-off.
+
+
+---
+
+## 11. Addendum: stronger evaluation and the declared v3 configuration
+Everything below was run after the one-shot test evaluation, in this order: noise floor, flag significance, **declaration of `models/xgboost_v3`** (settings fixed before any of the next steps was run), the conformal evaluation, and two fresh synthetic draws. I moved the declaration ahead of the fresh draws so that they test the declared choices instead of the frozen v2 ones. Scripts are in `src/evaluation/`; tables in `reports/evaluation/` and `reports/evaluation/v3/`.
+
+### 11.1 Noise floor of the simulator (`noise_floor.py`)
+The generator adds multiplicative noise to each series (an AR(1) component plus white noise). An oracle that knew every structural component exactly and filtered the AR state from past values (Kalman filter) would still err by the noise it cannot predict. That is a lower bound on this simulator; no model can beat it. A simulation of the filter agrees with the formula to within 0.5% at horizons 6 and 12.
+
+| Target | Noise floor (mean WAPE over horizons) | Our model | Model / floor |
+|---|---|---|---|
+| Employed workers | 1.13% | 1.75% | 1.55× |
+| Job vacancies | 6.74% | 9.16% | 1.36× |
+| Registered seekers | 4.73% | 5.69% with the blend (7.36% without) | 1.20× (1.56×) |
+
+At one month ahead vacancies are at 5.36% against a floor of 4.86% (1.10×); at twelve months 12.04% against 7.75% (1.55×). The floor leaves at most about 2.4 WAPE points of possible gain for vacancies, 0.6 for employed workers and 1.0 for seekers. The seekers floor ignores the unemployment-rate noise, so it is slightly too low. Figure: `figures/d09_noise_floor.png`.
+
+### 11.2 Are the flag gains over persistence real? (`flag_significance.py`)
+Paired bootstraps (2,000 resamples) of the model-minus-persistence difference in precision, over the 280 series and over moving blocks of 6 target months. The series bootstrap is the more conservative.
+
+| Horizon | Event | Precision, model vs persistence | Difference | 95% interval, series bootstrap | 95% interval, block bootstrap |
+|---|---|---|---|---|---|
+| 1 | shortage | 0.793 vs 0.780 | +0.013 | −0.005 to +0.034 | +0.003 to +0.024 |
+| 1 | saturation | 0.809 vs 0.790 | +0.019 | −0.001 to +0.045 | +0.008 to +0.031 |
+| 6 | shortage | 0.717 vs 0.712 | +0.005 | −0.014 to +0.027 | −0.005 to +0.021 |
+| 6 | saturation | 0.723 vs 0.706 | +0.017 | −0.005 to +0.042 | +0.009 to +0.027 |
+| 12 | shortage | 0.665 vs 0.650 | +0.015 | −0.003 to +0.038 | +0.008 to +0.024 |
+| 12 | saturation | 0.676 vs 0.646 | +0.029 | +0.008 to +0.052 | +0.015 to +0.040 |
+
+**Only one gain is significant under both bootstraps: saturation at 12 months (+2.9 points).** The rest are small, and their intervals include zero under the series bootstrap. Forecast-based flags are therefore no worse than persistence and slightly better at long horizons, which is a weak case for the extra machinery; the flag thresholds remain placeholders.
+
+### 11.3 Declared configuration `models/xgboost_v3` (B1) and the interval policy (B2)
+* **Declared:** the v2 primary models with the horizon blend chosen on the training folds for every target (the validation veto on seekers is dropped), recorded in `declaration.json` with checksums. The seekers blend is a post-test decision; its unbiased check is Section 11.4.
+* **Adaptive conformal intervals** (`conformal.py`, settings in `conformal.json`, chosen before any run): the interval for a forecast is the empirical 5% to 95% range of earlier signed log errors of the same target, sector and horizon within the last 12 target months that are already known at the forecast origin, with a per-(sector, horizon) miscoverage level updated monthly from the miss rate of the intervals issued (step 0.05). The static fold-based interval is the fallback when fewer than 200 errors are known. Errors in the e-Shram ramp are excluded.
+* **Result: adaptive conformal helps seekers only.**
+
+| Target | Intervals | Coverage (original test / fresh 2027 / fresh 2028) | Mean width |
+|---|---|---|---|
+| Employed | static | 93.0% / 93.7% / 93.0% | 8.4% |
+| Employed | adaptive | 86.4% / 86.5% / 85.7% | 7.3% |
+| Vacancies | static | 88.3% / 88.7% / 87.3% | 42.0% |
+| Vacancies | adaptive | 85.1% / 84.9% / 84.3% (12 months: 78.6% / 76.7% / 79.0%) | 41.5–42.9% |
+| Vacancies | **recalibrated static** | 90.0% / 90.4% / 88.9% (12 months: 90.0% / 90.8% / 90.7%) | 46.4% |
+| Seekers | static | 97.6% / 97.2% / 97.4% | 43.3% |
+| Seekers | **adaptive** | **91.0% / 91.0% / 90.9%** | **30.6–31.2%** (29% narrower) |
+
+* **Seekers:** adaptive conformal reaches the 90% target and cuts the width by 29%; the interval score improves from about 0.37 to about 0.32 on all three data sets.
+* **Vacancies' 12-month coverage was not restored by adaptive conformal; it got worse** (77–79%). A 12-month delay before an outcome can update the level, and errors that drift upward over time, defeat it. What did restore it is a per-horizon recalibration of the static quantiles (computed from the original test errors, so post-hoc), which gives 90.8% and 90.7% at 12 months on the two fresh draws, at the cost of wider intervals (46.4% instead of 42.0%).
+* **Employed workers:** keep the static intervals (adaptive under-covers).
+* **Final policy** (`models/xgboost_v3/final_interval_policy.json`): employed static, vacancies recalibrated static, seekers adaptive conformal. The per-target choice was made after seeing the original test, and is confirmed on the two fresh draws, which were run with every interval type before the choice.
+
+### 11.4 Fresh synthetic draws (`make_fresh_draw.py`, `evaluate_v3.py`)
+Two new worlds (seeds 2027 and 2028) were generated by the same generator, cleaning and split code in isolated copies of the project: new district effects, noise and shock paths, same structural design. All 280 series are present, and fewer than 0.01% of employment values equal the original. The frozen v3 models were applied with **no refit and no tuning** (WAPE %, targets 2023-01 to 2026-12, horizons 1–12):
+
+| Target | Original test | Fresh 2027 | Fresh 2028 | Best simple baseline (fresh 2027 / 2028) |
+|---|---|---|---|---|
+| Employed | 1.75 | 1.73 | 1.68 | 2.35 / 2.36 (seasonal naive + drift) |
+| Vacancies | 9.16 | 8.94 | 9.20 | 9.37 / 9.39 (last value + seasonal shift) |
+| Seekers, v3 with blend | 5.69 | 6.00 | 5.91 | 7.00 / 6.86 (last value + seasonal shift) |
+| Seekers, v2 without blend | 7.36 | 7.66 | 7.67 | |
+
+* **No sign of test-set overfitting.** Employed and vacancy scores on the new draws are the same as, or slightly better than, on the original test.
+* **The seekers blend holds up on unseen data.** It beats the baseline by 1.00 and 0.94 points and the unblended model by 1.66 and 1.75 points (all intervals exclude zero). The original 5.69% was somewhat lucky: the unbiased expectation is about **6.0%**, right at the Phase 1 limit of 6%.
+* **Vacancies beat the baseline only slightly:** by 0.42 (interval −0.61 to −0.20) and 0.19 (−0.31 to −0.03) points, i.e. 2–4.5%.
+* **The tuned model is better than the Phase 7 settings for employed workers** (0.04 to 0.06 points, interval excludes zero) and equal for vacancies; HistGradientBoosting is worse for employed workers and for seekers.
+* The fresh draws share the simulator's structure, so they rule out overfitting to one draw, not a mismatch between the simulator and the real economy.
+
+### 11.5 Updated status of the decisions
+| # | Status |
+|---|---|
+| D1 (seekers blend) | declared in `xgboost_v3`; confirmed on two fresh draws |
+| D2 (revise Phase 1 limits) | the noise floor now supports it: vacancies cannot go below about 6.7% on this simulator; your call |
+| D3 (low-confidence labels) | still recommended; the flag gain over persistence is real only for saturation at 12 months |
+| D4 (deploy refitted models) | yes: `xgboost_v3/primary` with the interval policy above |
+| D5 (stop tuning) | yes; accuracy is within 1.2–1.55× of the noise floor and the remaining gap is mostly vacancies and longer horizons |

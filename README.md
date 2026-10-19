@@ -89,6 +89,8 @@ python src/training/predict.py --split validation --out f.parquet   # run the sa
 python src/evaluation/tune_optuna.py E                          # Phase 8 Optuna search per target (~70 min); then finalize.py, recalibrate.py, build_models.py (freeze)
 python src/evaluation/evaluate.py                               # Phase 8 ONE-SHOT test evaluation (refuses a second run), then diagnostics.py, make_report.py
 python tests/test_evaluation.py                                 # Phase 8 tests
+python src/evaluation/noise_floor.py                            # Phase 8 addendum: noise floor, flag_significance.py, declare.py (xgboost_v3), make_fresh_draw.py <seed>, evaluate_v3.py original|fresh <seed>
+python tests/test_phase8_addendum.py                            # Phase 8 addendum tests
 python src/dashboard/export_data_pack.py                        # dashboard data pack (see docs/DASHBOARD_BRIEF.md)
 python src/dashboard/build_boundaries.py <LGD_Districts.parquet> # district map polygons (source download described in the script)
 python tests/test_dashboard_pack.py                             # data pack and map tests
