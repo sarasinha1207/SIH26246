@@ -54,8 +54,8 @@ Each phase: what is built, how it is checked, and the commit message to use. A p
 
 ### Phase 1: district catalogue (317 districts)
 * `src/v4/catalog.py` builds `data/v4/district_catalog.csv`: official names and LGD codes, 2011 population, annual growth, economic tier (16 existing tiers, assigned by documented rules plus a named list of known hubs), state multipliers for the six new states.
-* Populations: Census 2011 figures for the 56 existing districts and West Bengal are already in hand; the rest need a public source (open question below). State totals are checked against Census 2011.
-* Check: 317 unique LGD codes; state sums match the Census within 0.5%; every district has a tier; map geometry exists for every code.
+* Populations: Census 2011 district figures read from public tables (`data/v4/census_2011_district_tables.csv`, source recorded per row); the 56 v3 districts keep their v3 values. Districts that lost territory to a district created after 2011 (Gujarat 2013, Pathankot 2011) are reduced by the new district's population; the Botad, Mahisagar and Morbi shares between two parents are assumptions.
+* Check: 317 unique LGD codes; state sums match the Census totals within 0.1% (largest gap 0.015%); every district has a tier, an area and a source; map geometry exists for every code.
 * Commit: `v4 phase 1: catalogue of 317 districts in 10 states`
 
 ### Phase 2: trade-level dataset, 2000 to 2025
@@ -111,6 +111,3 @@ Each phase: what is built, how it is checked, and the commit message to use. A p
 * **Run time.** Five times more series and five times more horizons. Origins and horizons are sampled in training; run times are measured in phase 3 before committing to the tuning budget.
 * **Small trades in small districts.** Noisier series: the confidence labels and low-volume flag from v3 are kept.
 * **Data source honesty.** District populations and any figure copied from a public source are listed with the source; assumptions are labelled as assumptions.
-
-## Open question for phase 1
-District populations (Census 2011) for the districts outside the 56 existing ones and West Bengal. Options: read the figures from public web pages (Wikipedia district tables with Census 2011 numbers), or allocate each state's Census total by a documented rule. The first is more faithful; either is labelled in the data dictionary.

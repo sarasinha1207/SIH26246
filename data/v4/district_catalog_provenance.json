@@ -1,0 +1,59 @@
+{
+  "districts": 317,
+  "states": 10,
+  "population_sources": {
+    "census_2011_table": 255,
+    "census_2011 (v3 catalogue)": 51,
+    "census_2011_table, reduced by the district created from it": 11
+  },
+  "census_2011_state_totals": {
+    "Delhi": 16787941,
+    "Gujarat": 60439692,
+    "Karnataka": 61095297,
+    "Kerala": 33406061,
+    "Maharashtra": 112374333,
+    "Punjab": 27743338,
+    "Tamil Nadu": 72147030,
+    "Telangana": 35003674,
+    "Uttar Pradesh": 199812341,
+    "West Bengal": 91276115
+  },
+  "state_sums": {
+    "Delhi": 16787941,
+    "Gujarat": 60439692,
+    "Karnataka": 61095297,
+    "Kerala": 33406061,
+    "Maharashtra": 112375680,
+    "Punjab": 27743338,
+    "Tamil Nadu": 72149985,
+    "Telangana": 34998289,
+    "Uttar Pradesh": 199812341,
+    "West Bengal": 91276116
+  },
+  "tiers": {
+    "agrarian_developing": 75,
+    "semi_industrial": 57,
+    "peripheral_agrarian": 54,
+    "industrial_msme": 27,
+    "industrial_hub": 24,
+    "peripheral_tribal": 14,
+    "peripheral_coastal": 12,
+    "industrial_it_hub": 10,
+    "industrial_mining": 9,
+    "industrial_port": 9,
+    "metro_core": 9,
+    "textile_cluster": 8,
+    "agrarian_migrant": 3,
+    "metro_residential": 3,
+    "metro_administrative": 2,
+    "logistics_hub": 1
+  },
+  "tier_sources": {
+    "named list": 141,
+    "rule on population": 120,
+    "v3 catalogue": 56
+  },
+  "lgd_layer_sha256": "c205da56ce0538b33b2f66838a4032cef79be7585543686892c8a85a5d21aebc",
+  "census_tables_sha256": "704ae120b2dd5f0975d2f40248d4756a2f67a9ab863e39a45a2435aacab5dd97",
+  "note": "Pop_2011 is the Census 2011 population of the present district; where a district was split after 2011 the figure is reduced by the new district's population (see CARVE_OUT). The data built on this catalogue is simulated."
+}

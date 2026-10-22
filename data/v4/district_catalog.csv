@@ -1,0 +1,318 @@
+State_Name,State_LGD_Code,District_Name,LGD_Name,District_LGD_Code,Pop_2011,Pop_Source,Pop_Growth_Annual,Econ_Tier,Tier_Source,Area_Km2,Boundary_Vintage
+Delhi,7,Central Delhi,Central,77,495538,census_2011 (v3 catalogue),0.007,metro_core,v3 catalogue,106.3,2011_c
+Delhi,7,East Delhi,East,78,1454607,census_2011 (v3 catalogue),0.011,metro_residential,v3 catalogue,31.4,2011_c
+Delhi,7,New Delhi,New Delhi,79,120842,census_2011 (v3 catalogue),0.005,metro_administrative,v3 catalogue,156.2,2011_c
+Delhi,7,North Delhi,North,80,755645,census_2011 (v3 catalogue),0.009,industrial_msme,v3 catalogue,290.5,2011_c
+Delhi,7,North East Delhi,North East,81,1907561,census_2011 (v3 catalogue),0.015,metro_residential,v3 catalogue,35.2,2011_c
+Delhi,7,North West Delhi,North West,82,3111615,census_2011 (v3 catalogue),0.016,industrial_msme,v3 catalogue,153.5,2011_c
+Delhi,7,Shahdara,Shahdara,671,1293479,census_2011 (v3 catalogue),0.013,industrial_msme,v3 catalogue,34.3,update2014
+Delhi,7,South Delhi,South,83,2324797,census_2011 (v3 catalogue),0.013,metro_core,v3 catalogue,158.8,2011_c
+Delhi,7,South East Delhi,South East,670,1208381,census_2011 (v3 catalogue),0.014,industrial_hub,v3 catalogue,101.1,update2014
+Delhi,7,South West Delhi,South West,84,1951245,census_2011 (v3 catalogue),0.015,metro_residential,v3 catalogue,282.5,2011_c
+Delhi,7,West Delhi,West,85,2164231,census_2011 (v3 catalogue),0.012,industrial_hub,v3 catalogue,131.0,2011_c
+Gujarat,24,Ahmedabad,Ahmadabad,438,7018482,"census_2011_table, reduced by the district created from it; absorbs the state-total difference",0.0105,metro_core,named list,7220.7,2011_c
+Gujarat,24,Amreli,Amreli,439,1513614,census_2011_table,0.0158,agrarian_developing,rule on population,7304.7,2011_c
+Gujarat,24,Anand,Anand,440,2090276,census_2011_table,0.0166,semi_industrial,named list,3165.9,2011_c
+Gujarat,24,Aravalli,Arvalli,672,1051746,census_2011_table,0.0123,peripheral_agrarian,rule on population,3144.9,update2014
+Gujarat,24,Banaskantha,Banas Kantha,441,3116045,census_2011_table,0.0158,agrarian_developing,rule on population,10741.6,2011_c
+Gujarat,24,Bharuch,Bharuch,442,1550822,census_2011_table,0.0228,industrial_hub,named list,4920.0,2011_c
+Gujarat,24,Bhavnagar,Bhavnagar,443,2451558,"census_2011_table, reduced by the district created from it",0.0193,industrial_port,named list,6753.9,2011_c
+Gujarat,24,Botad,Botad,676,656005,census_2011_table,0.0123,peripheral_agrarian,rule on population,2475.6,update2014
+Gujarat,24,Chhota Udaipur,Chhotaudepur,668,1071831,census_2011_table,0.0123,peripheral_tribal,named list,3450.0,update2014
+Gujarat,24,Dahod,Dohad,445,2126558,census_2011_table,0.0123,peripheral_tribal,named list,3634.2,2011_c
+Gujarat,24,Devbhumi Dwarka,Devbhumi Dwarka,674,752484,census_2011_table,0.0193,industrial_port,named list,4146.8,update2014
+Gujarat,24,Gandhinagar,Gandhinagar,446,1387478,census_2011_table,0.0236,industrial_it_hub,named list,2098.8,2011_c
+Gujarat,24,Gir Somnath,Gir Somnath,675,1217477,census_2011_table,0.0123,peripheral_coastal,named list,2639.6,update2014
+Gujarat,24,Jamnagar,Jamnagar,447,1406646,"census_2011_table, reduced by the district created from it",0.0193,industrial_port,named list,5907.2,2011_c
+Gujarat,24,Junagadh,Junagadh,448,1524814,"census_2011_table, reduced by the district created from it",0.0158,agrarian_developing,rule on population,6136.9,2011_c
+Gujarat,24,Kheda,Kheda,450,2050278,"census_2011_table, reduced by the district created from it",0.0158,agrarian_developing,rule on population,3435.5,2011_c
+Gujarat,24,Kutch,Kachchh,449,2090313,census_2011_table,0.0193,industrial_port,named list,40661.3,2011_c
+Gujarat,24,Mahisagar,Mahisagar,669,994624,census_2011_table,0.0123,peripheral_agrarian,rule on population,2506.9,update2014
+Gujarat,24,Mehsana,Mahesana,451,2027727,census_2011_table,0.0166,semi_industrial,named list,4410.0,2011_c
+Gujarat,24,Morbi,Morbi,673,960329,census_2011_table,0.0193,industrial_msme,named list,4970.1,update2014
+Gujarat,24,Narmada,Narmada,452,590379,census_2011_table,0.0123,peripheral_tribal,named list,2812.7,2011_c
+Gujarat,24,Navsari,Navsari,453,1330711,census_2011_table,0.0166,semi_industrial,named list,2200.5,2011_c
+Gujarat,24,Panchmahal,Panch Mahals,454,1642299,"census_2011_table, reduced by the district created from it",0.0158,agrarian_developing,rule on population,3277.6,2011_c
+Gujarat,24,Patan,Patan,455,1342746,census_2011_table,0.0158,agrarian_developing,rule on population,5771.4,2011_c
+Gujarat,24,Porbandar,Porbandar,456,586062,census_2011_table,0.0123,peripheral_coastal,named list,2309.5,2011_c
+Gujarat,24,Rajkot,Rajkot,457,2988278,"census_2011_table, reduced by the district created from it",0.0193,industrial_msme,named list,7671.7,2011_c
+Gujarat,24,Sabarkantha,Sabar Kantha,458,1376843,"census_2011_table, reduced by the district created from it",0.0158,agrarian_developing,rule on population,4234.6,2011_c
+Gujarat,24,Surat,Surat,459,6081322,census_2011_table,0.0175,textile_cluster,named list,4327.4,2011_c
+Gujarat,24,Surendranagar,Surendranagar,460,1611824,"census_2011_table, reduced by the district created from it",0.0158,agrarian_developing,rule on population,9152.1,2011_c
+Gujarat,24,Tapi,Tapi,641,806489,census_2011_table,0.0123,peripheral_tribal,named list,3133.8,2011_c
+Gujarat,24,The Dangs,Dang,444,226769,census_2011_table,0.0123,peripheral_tribal,named list,1763.3,2011_c
+Gujarat,24,Vadodara,Vadodara,461,3093795,"census_2011_table, reduced by the district created from it",0.0228,industrial_hub,named list,4084.4,2011_c
+Gujarat,24,Valsad,Valsad,462,1703068,census_2011_table,0.0228,industrial_hub,named list,2945.2,2011_c
+Karnataka,29,Bagalkot,Bagalkote,524,1889752,census_2011_table,0.0131,agrarian_developing,rule on population,6557.8,2011_c
+Karnataka,29,Ballari,Ballari,528,1400970,census_2011_table,0.0116,industrial_mining,named list,4248.6,2011_c
+Karnataka,29,Belagavi,Belagavi,527,4779661,census_2011_table,0.0189,industrial_hub,named list,13389.4,2011_c
+Karnataka,29,Bengaluru Rural,Bengaluru Rural,526,990923,census_2011_table,0.0189,industrial_hub,named list,2296.8,2011_c
+Karnataka,29,Bengaluru Urban,Bengaluru Urban,525,9621551,census_2011_table,0.0196,industrial_it_hub,named list,2194.8,2011_c
+Karnataka,29,Bidar,Bidar,529,1703300,census_2011_table,0.0131,agrarian_developing,rule on population,5441.5,2011_c
+Karnataka,29,Chamarajanagar,Chamarajanagara,531,1020791,census_2011_table,0.0101,peripheral_agrarian,rule on population,5645.3,2011_c
+Karnataka,29,Chikkaballapur,Chikkaballapura,630,1255104,census_2011_table,0.0131,agrarian_developing,rule on population,4239.9,2011_c
+Karnataka,29,Chikkamagaluru,Chikkamagaluru,532,1137961,census_2011_table,0.0101,peripheral_agrarian,named list,7199.4,2011_c
+Karnataka,29,Chitradurga,Chitradurga,533,1659456,census_2011_table,0.0131,agrarian_developing,rule on population,8426.4,2011_c
+Karnataka,29,Dakshina Kannada,Dakshina Kannada,534,2089649,census_2011_table,0.016,industrial_port,named list,4855.8,2011_c
+Karnataka,29,Davangere,Davangere,535,1643494,census_2011_table,0.0138,semi_industrial,named list,4485.0,2011_c
+Karnataka,29,Dharwad,Dharwad,536,1847023,census_2011_table,0.0189,industrial_hub,named list,4256.0,2011_c
+Karnataka,29,Gadag,Gadag,537,1064570,census_2011_table,0.0101,peripheral_agrarian,rule on population,4650.4,2011_c
+Karnataka,29,Hassan,Hassan,539,1776421,census_2011_table,0.0131,agrarian_developing,rule on population,6809.8,2011_c
+Karnataka,29,Haveri,Haveri,540,1597668,census_2011_table,0.0131,agrarian_developing,rule on population,4819.6,2011_c
+Karnataka,29,Kalaburagi,Kalaburagi,538,2566326,census_2011_table,0.0131,agrarian_developing,rule on population,10941.0,2011_c
+Karnataka,29,Kodagu,Kodagu,541,554519,census_2011_table,0.0101,peripheral_agrarian,named list,4098.3,2011_c
+Karnataka,29,Kolar,Kolar,542,1536401,census_2011_table,0.016,industrial_msme,named list,3976.5,2011_c
+Karnataka,29,Koppal,Koppal,543,1389920,census_2011_table,0.0131,agrarian_developing,rule on population,5567.7,2011_c
+Karnataka,29,Mandya,Mandya,544,1805769,census_2011_table,0.0131,agrarian_developing,rule on population,4953.0,2011_c
+Karnataka,29,Mysuru,Mysuru,545,3001127,census_2011_table,0.0189,industrial_hub,named list,6311.6,2011_c
+Karnataka,29,Raichur,Raichur,546,1928812,census_2011_table,0.0131,agrarian_developing,rule on population,8432.3,2011_c
+Karnataka,29,Ramanagara,Ramanagara,631,1082636,census_2011_table,0.0138,semi_industrial,named list,3510.4,2011_c
+Karnataka,29,Shivamogga,Shivamogga,547,1752753,census_2011_table,0.0131,agrarian_developing,rule on population,8463.8,2011_c
+Karnataka,29,Tumakuru,Tumakuru,548,2678980,census_2011_table,0.016,industrial_msme,named list,10588.5,2011_c
+Karnataka,29,Udupi,Udupi,549,1177361,census_2011_table,0.0101,peripheral_coastal,named list,3579.3,2011_c
+Karnataka,29,Uttara Kannada,Uttara Kannada,550,1437169,census_2011_table,0.0101,peripheral_coastal,named list,10291.0,2011_c
+Karnataka,29,Vijayanagar,Vijayanagar,738,1353628,census_2011_table,0.0116,industrial_mining,named list,5633.1,2022
+Karnataka,29,Vijayapura,Vijayapura,530,2177331,census_2011_table,0.0131,agrarian_developing,rule on population,10480.1,2011_c
+Karnataka,29,Yadgir,Yadgir,635,1174271,census_2011_table,0.0101,peripheral_agrarian,rule on population,5269.4,2011_c
+Kerala,32,Alappuzha,Alappuzha,554,2127789,census_2011_table,0.0035,peripheral_coastal,named list,1419.8,2011_c
+Kerala,32,Ernakulam,Ernakulam,555,3282388,census_2011_table,0.0068,industrial_it_hub,named list,3059.3,2011_c
+Kerala,32,Idukki,Idukki,556,1108974,census_2011_table,0.0035,peripheral_agrarian,named list,4355.2,2011_c
+Kerala,32,Kannur,Kannur,557,2523003,census_2011_table,0.0047,semi_industrial,named list,2965.6,2011_c
+Kerala,32,Kasaragod,Kasaragod,558,1307375,census_2011_table,0.0035,peripheral_coastal,named list,1991.5,2011_c
+Kerala,32,Kollam,Kollam,559,2635375,census_2011_table,0.0035,peripheral_coastal,named list,2483.0,2011_c
+Kerala,32,Kottayam,Kottayam,560,1974551,census_2011_table,0.0047,semi_industrial,named list,2205.2,2011_c
+Kerala,32,Kozhikode,Kozhikode,561,3086293,census_2011_table,0.0047,semi_industrial,named list,2347.2,2011_c
+Kerala,32,Malappuram,Malappuram,562,4112920,census_2011_table,0.004,agrarian_migrant,named list,3553.6,2011_c
+Kerala,32,Palakkad,Palakkad,563,2809934,census_2011_table,0.0047,semi_industrial,named list,4480.1,2011_c
+Kerala,32,Pathanamthitta,Pathanamthitta,564,1197412,census_2011_table,0.0035,peripheral_agrarian,named list,2649.7,2011_c
+Kerala,32,Thiruvananthapuram,Thiruvananthapuram,565,3301427,census_2011_table,0.003,metro_administrative,named list,2192.5,2011_c
+Kerala,32,Thrissur,Thrissur,566,3121200,census_2011_table,0.0047,semi_industrial,named list,3020.4,2011_c
+Kerala,32,Wayanad,Wayanad,567,817420,census_2011_table,0.0035,peripheral_agrarian,named list,2129.9,2011_c
+Maharashtra,27,Ahilyanagar,Ahmednagar,466,4543159,census_2011 (v3 catalogue),0.011,semi_industrial,v3 catalogue,17068.4,2011_c
+Maharashtra,27,Akola,Akola,467,1813906,census_2011 (v3 catalogue),0.01,semi_industrial,v3 catalogue,5430.5,2011_c
+Maharashtra,27,Amravati,Amravati,468,2888445,census_2011 (v3 catalogue),0.01,textile_cluster,v3 catalogue,12181.4,2011_c
+Maharashtra,27,Beed,Beed,470,2585049,census_2011 (v3 catalogue),0.011,agrarian_migrant,v3 catalogue,10591.8,2011_c
+Maharashtra,27,Bhandara,Bhandara,471,1200334,census_2011 (v3 catalogue),0.006,peripheral_agrarian,v3 catalogue,4130.9,2011_c
+Maharashtra,27,Buldhana,Buldhana,472,2586258,census_2011 (v3 catalogue),0.01,agrarian_developing,v3 catalogue,9723.3,2011_c
+Maharashtra,27,Chandrapur,Chandrapur,473,2204307,census_2011 (v3 catalogue),0.008,industrial_mining,v3 catalogue,11342.4,2011_c
+Maharashtra,27,Chhatrapati Sambhajinagar,Aurangabad,469,3701282,census_2011 (v3 catalogue),0.014,industrial_hub,v3 catalogue,10099.6,2011_c
+Maharashtra,27,Dharashiv,Osmanabad,488,1657576,census_2011 (v3 catalogue),0.009,agrarian_developing,v3 catalogue,7566.8,2011_c
+Maharashtra,27,Dhule,Dhule,474,2050862,census_2011 (v3 catalogue),0.011,textile_cluster,v3 catalogue,7173.3,2011_c
+Maharashtra,27,Gadchiroli,Gadchiroli,475,1072942,census_2011 (v3 catalogue),0.008,peripheral_tribal,v3 catalogue,14479.1,2011_c
+Maharashtra,27,Gondia,Gondia,476,1322507,census_2011 (v3 catalogue),0.008,peripheral_agrarian,v3 catalogue,5175.9,2011_c
+Maharashtra,27,Hingoli,Hingoli,477,1177345,census_2011 (v3 catalogue),0.01,peripheral_agrarian,v3 catalogue,4704.5,2011_c
+Maharashtra,27,Jalgaon,Jalgaon,478,4229917,census_2011 (v3 catalogue),0.012,semi_industrial,v3 catalogue,11774.1,2011_c
+Maharashtra,27,Jalna,Jalna,479,1959046,census_2011 (v3 catalogue),0.012,industrial_msme,v3 catalogue,7658.2,2011_c
+Maharashtra,27,Kolhapur,Kolhapur,480,3876001,census_2011 (v3 catalogue),0.01,industrial_msme,v3 catalogue,7671.5,2011_c
+Maharashtra,27,Latur,Latur,481,2455543,census_2011 (v3 catalogue),0.011,semi_industrial,v3 catalogue,7193.0,2011_c
+Maharashtra,27,Mumbai City,Mumbai,482,3085411,census_2011 (v3 catalogue),0.003,metro_core,v3 catalogue,63.9,2011_c
+Maharashtra,27,Mumbai Suburban,Mumbai Suburban,483,9356962,census_2011 (v3 catalogue),0.009,metro_core,v3 catalogue,431.1,2011_c
+Maharashtra,27,Nagpur,Nagpur,484,4653570,census_2011 (v3 catalogue),0.012,logistics_hub,v3 catalogue,9879.7,2011_c
+Maharashtra,27,Nanded,Nanded,485,3361292,census_2011 (v3 catalogue),0.012,agrarian_developing,v3 catalogue,10520.5,2011_c
+Maharashtra,27,Nandurbar,Nandurbar,486,1648295,census_2011 (v3 catalogue),0.013,peripheral_tribal,v3 catalogue,5949.2,2011_c
+Maharashtra,27,Nashik,Nashik,487,6107187,census_2011 (v3 catalogue),0.015,industrial_hub,v3 catalogue,15496.5,2011_c
+Maharashtra,27,Palghar,Palghar,665,2990116,census_2011 (v3 catalogue),0.018,industrial_msme,v3 catalogue,5262.0,update2014
+Maharashtra,27,Parbhani,Parbhani,489,1836086,census_2011 (v3 catalogue),0.011,agrarian_developing,v3 catalogue,6298.3,2011_c
+Maharashtra,27,Pune,Pune,490,9429408,census_2011 (v3 catalogue),0.017,industrial_it_hub,v3 catalogue,15629.4,2011_c
+Maharashtra,27,Raigad,Raigad,491,2634200,census_2011 (v3 catalogue),0.014,industrial_port,v3 catalogue,6972.3,2011_c
+Maharashtra,27,Ratnagiri,Ratnagiri,492,1615069,census_2011 (v3 catalogue),0.004,peripheral_coastal,v3 catalogue,8284.4,2011_c
+Maharashtra,27,Sangli,Sangli,493,2822143,census_2011 (v3 catalogue),0.009,semi_industrial,v3 catalogue,8594.2,2011_c
+Maharashtra,27,Satara,Satara,494,3003741,census_2011 (v3 catalogue),0.009,semi_industrial,v3 catalogue,10462.5,2011_c
+Maharashtra,27,Sindhudurg,Sindhudurg,495,849651,census_2011 (v3 catalogue),-0.002,peripheral_coastal,v3 catalogue,5101.0,2011_c
+Maharashtra,27,Solapur,Solapur,496,4317756,census_2011 (v3 catalogue),0.011,textile_cluster,v3 catalogue,14837.4,2011_c
+Maharashtra,27,Thane,Thane,497,8070032,census_2011 (v3 catalogue),0.019,industrial_hub,v3 catalogue,4268.4,2011_c
+Maharashtra,27,Wardha,Wardha,498,1300774,census_2011 (v3 catalogue),0.006,semi_industrial,v3 catalogue,6296.1,2011_c
+Maharashtra,27,Washim,Washim,499,1197160,census_2011 (v3 catalogue),0.009,peripheral_agrarian,v3 catalogue,5123.4,2011_c
+Maharashtra,27,Yavatmal,Yavatmal,500,2772348,census_2011 (v3 catalogue),0.01,agrarian_developing,v3 catalogue,13559.5,2011_c
+Punjab,3,Amritsar,Amritsar,27,2490891,census_2011_table,0.0169,industrial_hub,named list,2668.1,2011_c
+Punjab,3,Barnala,Barnala,605,596294,census_2011_table,0.0091,peripheral_agrarian,rule on population,1419.4,2011_c
+Punjab,3,Bathinda,Bathinda,28,1388859,census_2011_table,0.0123,semi_industrial,named list,3366.8,2011_c
+Punjab,3,Faridkot,Faridkot,29,618008,census_2011_table,0.0091,peripheral_agrarian,rule on population,1456.1,2011_c
+Punjab,3,Fatehgarh Sahib,Fatehgarh Sahib,30,599814,census_2011_table,0.0143,industrial_msme,named list,1142.5,2011_c
+Punjab,3,Fazilka,Fazilka,651,1180483,census_2011_table,0.0091,peripheral_agrarian,rule on population,2862.5,update2014
+Punjab,3,Firozpur,Ferozepur,31,884689,census_2011_table; absorbs the state-total difference,0.0091,peripheral_agrarian,rule on population,2363.7,2011_c
+Punjab,3,Gurdaspur,Gurdaspur,32,1622428,"census_2011_table, reduced by the district created from it",0.0117,agrarian_developing,rule on population,2593.7,2011_c
+Punjab,3,Hoshiarpur,Hoshiarpur,33,1582793,census_2011_table,0.0123,semi_industrial,named list,3372.3,2011_c
+Punjab,3,Jalandhar,Jalandhar,34,2181753,census_2011_table,0.0143,industrial_msme,named list,2626.8,2011_c
+Punjab,3,Kapurthala,Kapurthala,35,817668,census_2011_table,0.0123,semi_industrial,named list,1627.0,2011_c
+Punjab,3,Ludhiana,Ludhiana,36,3487882,census_2011_table,0.0143,industrial_msme,named list,3678.8,2011_c
+Punjab,3,Malerkotla,Malerkotla,737,452016,census_2011_table,0.0091,peripheral_agrarian,rule on population,679.5,2022
+Punjab,3,Mansa,Mansa,37,768808,census_2011_table,0.0091,peripheral_agrarian,rule on population,2164.7,2011_c
+Punjab,3,Moga,Moga,38,992289,census_2011_table,0.0091,peripheral_agrarian,rule on population,2242.7,2011_c
+Punjab,3,Pathankot,Pathankot,662,676598,census_2011_table,0.0123,semi_industrial,named list,946.1,2011_c
+Punjab,3,Patiala,Patiala,41,1892282,census_2011_table,0.0123,semi_industrial,named list,3311.1,2011_c
+Punjab,3,Rupnagar,Rupnagar,42,683349,census_2011_table,0.0169,industrial_hub,named list,1369.4,2011_c
+Punjab,3,SAS Nagar (Mohali),S.A.S Nagar,608,986147,census_2011_table,0.0175,industrial_it_hub,named list,1089.6,2011_c
+Punjab,3,Sangrur,Sangrur,43,1203153,census_2011_table,0.0117,agrarian_developing,rule on population,2916.1,2011_c
+Punjab,3,Shaheed Bhagat Singh Nagar,Shahid Bhagat Singh Nagar,40,614362,census_2011_table,0.0123,semi_industrial,named list,1258.9,2011_c
+Punjab,3,Sri Muktsar Sahib,Sri Muktsar Sahib,39,902702,census_2011_table,0.0091,peripheral_agrarian,rule on population,2631.7,2011_c
+Punjab,3,Tarn Taran,Tarn Taran,609,1120070,census_2011_table,0.0091,peripheral_agrarian,rule on population,2405.9,2011_c
+Tamil Nadu,33,Ariyalur,Ariyalur,610,754894,census_2011_table,0.0116,industrial_mining,named list,1934.2,2011_c
+Tamil Nadu,33,Chengalpattu,Chengalpattu,730,2556244,census_2011 (v3 catalogue),0.024,industrial_it_hub,v3 catalogue,2720.1,201920
+Tamil Nadu,33,Chennai,Chennai,568,4646732,census_2011 (v3 catalogue),0.011,metro_core,v3 catalogue,334.1,2011_c
+Tamil Nadu,33,Coimbatore,Coimbatore,569,3458045,census_2011_table,0.0189,industrial_hub,named list,4717.5,2011_c
+Tamil Nadu,33,Cuddalore,Cuddalore,570,2605914,census_2011_table,0.016,industrial_port,named list,3699.1,2011_c
+Tamil Nadu,33,Dharmapuri,Dharmapuri,571,1506843,census_2011_table,0.0131,agrarian_developing,rule on population,4493.1,2011_c
+Tamil Nadu,33,Dindigul,Dindigul,572,2159775,census_2011_table,0.016,industrial_msme,named list,6048.2,2011_c
+Tamil Nadu,33,Erode,Erode,573,2251744,census_2011_table,0.0145,textile_cluster,named list,5107.5,2011_c
+Tamil Nadu,33,Kallakurichi,Kallakurichi,729,1370281,census_2011_table,0.0131,agrarian_developing,rule on population,3502.0,201920
+Tamil Nadu,33,Kanchipuram,Kanchipuram,574,1442008,census_2011 (v3 catalogue),0.021,industrial_hub,v3 catalogue,1741.6,2011_c
+Tamil Nadu,33,Kanyakumari,Kanniyakumari,575,1870374,census_2011_table,0.0101,peripheral_coastal,named list,1678.3,2011_c
+Tamil Nadu,33,Karur,Karur,576,1064493,census_2011_table,0.0145,textile_cluster,named list,2902.4,2011_c
+Tamil Nadu,33,Krishnagiri,Krishnagiri,577,1883731,census_2011_table,0.0189,industrial_hub,named list,5132.5,2011_c
+Tamil Nadu,33,Madurai,Madurai,578,3038252,census_2011_table,0.0138,semi_industrial,named list,3705.2,2011_c
+Tamil Nadu,33,Mayiladuthurai,Mayiladuthurai,735,918356,census_2011_table,0.0101,peripheral_agrarian,named list,1176.5,2022
+Tamil Nadu,33,Nagapattinam,Nagapattinam,579,697069,census_2011_table,0.0101,peripheral_coastal,named list,1387.7,2011_c
+Tamil Nadu,33,Namakkal,Namakkal,580,1726601,census_2011_table,0.016,industrial_msme,named list,3416.8,2011_c
+Tamil Nadu,33,Perambalur,Perambalur,581,565223,census_2011_table,0.0101,peripheral_agrarian,named list,1755.4,2011_c
+Tamil Nadu,33,Pudukkottai,Pudukkottai,582,1618345,census_2011_table,0.0131,agrarian_developing,rule on population,4649.9,2011_c
+Tamil Nadu,33,Ramanathapuram,Ramanathapuram,583,1353445,census_2011_table,0.0101,peripheral_coastal,named list,4107.1,2011_c
+Tamil Nadu,33,Ranipet,Ranipet,731,1210277,census_2011_table,0.016,industrial_msme,named list,1848.8,201920
+Tamil Nadu,33,Salem,Salem,584,3482056,census_2011_table,0.016,industrial_msme,named list,6000.2,2011_c
+Tamil Nadu,33,Sivaganga,Sivaganga,585,1339101,census_2011_table,0.0131,agrarian_developing,rule on population,4239.5,2011_c
+Tamil Nadu,33,Tenkasi,Tenkasi,733,1407627,census_2011_table,0.0131,agrarian_developing,rule on population,2808.1,201920
+Tamil Nadu,33,Thanjavur,Thanjavur,586,2405890,census_2011_table,0.0131,agrarian_developing,rule on population,3424.0,2011_c
+Tamil Nadu,33,The Nilgiris,The Nilgiris,587,735394,census_2011_table,0.0101,peripheral_agrarian,named list,2429.4,2011_c
+Tamil Nadu,33,Theni,Theni,588,1245899,census_2011_table,0.0131,agrarian_developing,rule on population,2865.3,2011_c
+Tamil Nadu,33,Thiruvarur,Thiruvarur,590,1264277,census_2011_table,0.0101,peripheral_agrarian,named list,2262.9,2011_c
+Tamil Nadu,33,Thoothukudi,Tuticorin,594,1750176,census_2011_table,0.016,industrial_port,named list,4738.2,2011_c
+Tamil Nadu,33,Tiruchirappalli,Tiruchirappalli,591,2722290,census_2011_table,0.0189,industrial_hub,named list,4491.7,2011_c
+Tamil Nadu,33,Tirunelveli,Tirunelveli,592,1665253,census_2011_table,0.0138,semi_industrial,named list,3880.9,2011_c
+Tamil Nadu,33,Tirupattur,Tirupathur,732,1111812,census_2011_table,0.016,industrial_msme,named list,2114.7,201920
+Tamil Nadu,33,Tiruppur,Tiruppur,634,2479052,census_2011_table,0.0145,textile_cluster,named list,5193.9,2011_c
+Tamil Nadu,33,Tiruvallur,Thiruvallur,589,3728104,census_2011 (v3 catalogue),0.023,industrial_hub,v3 catalogue,3228.3,2011_c
+Tamil Nadu,33,Tiruvannamalai,Tiruvannamalai,593,2464875,census_2011_table,0.0131,agrarian_developing,rule on population,6194.8,2011_c
+Tamil Nadu,33,Vellore,Vellore,595,1614242,census_2011_table,0.016,industrial_msme,named list,2106.0,2011_c
+Tamil Nadu,33,Viluppuram,Villupuram,596,2093003,census_2011_table,0.0131,agrarian_developing,rule on population,3668.6,2011_c
+Tamil Nadu,33,Virudhunagar,Virudhunagar,597,1942288,census_2011_table,0.016,industrial_msme,named list,4237.4,2011_c
+Telangana,36,Adilabad,Adilabad,501,708972,census_2011_table,0.009,peripheral_tribal,named list,3989.8,2016_c
+Telangana,36,Bhadradri Kothagudem,Bhadradri Kothagudem,690,1069261,census_2011_table,0.0102,industrial_mining,named list,6899.2,2016_c
+Telangana,36,Hanumakonda,Hanumakonda,686,1080858,census_2011_table,0.0122,semi_industrial,named list,1655.0,2016_c
+Telangana,36,Hyderabad,Hyderabad,507,3943323,census_2011_table,0.0077,metro_core,named list,191.2,2016_c
+Telangana,36,Jagitial,Jagitial,681,985417,census_2011_table,0.009,peripheral_agrarian,rule on population,2881.1,2016_c
+Telangana,36,Jangoan,Jangoan,689,566376,census_2011_table,0.009,peripheral_agrarian,rule on population,2393.7,2016_c
+Telangana,36,Jayashankar Bhupalapally,Jayashankar Bhupalapally,687,416763,census_2011_table,0.009,peripheral_tribal,named list,2869.9,2016_c
+Telangana,36,Jogulamba Gadwal,Jogulamba Gadwal,695,609990,census_2011_table,0.009,peripheral_agrarian,rule on population,2569.6,2016_c
+Telangana,36,Kamareddy,Kamareddy,685,972625,census_2011_table,0.009,peripheral_agrarian,rule on population,3742.0,2016_c
+Telangana,36,Karimnagar,Karimnagar,508,1005711,census_2011_table,0.0122,semi_industrial,named list,2000.8,2016_c
+Telangana,36,Khammam,Khammam,509,1401639,census_2011_table,0.0122,semi_industrial,named list,4674.5,2016_c
+Telangana,36,Komaram Bheem Asifabad,Kumuram Bheem Asifabad,699,515812,census_2011_table,0.009,peripheral_tribal,named list,4529.5,2016_c
+Telangana,36,Mahabubabad,Mahabubabad,688,774549,census_2011_table,0.009,peripheral_agrarian,rule on population,3538.1,2016_c
+Telangana,36,Mahbubnagar,Mahabubnagar,512,919903,census_2011_table,0.009,peripheral_agrarian,rule on population,2799.3,2016_c
+Telangana,36,Mancherial,Mancherial,684,807037,census_2011_table,0.0102,industrial_mining,named list,3850.0,2016_c
+Telangana,36,Medak,Medak,513,767428,census_2011_table,0.009,peripheral_agrarian,rule on population,2744.2,2016_c
+Telangana,36,Medchal-Malkajgiri,Medchal Malkajgiri,700,2440073,census_2011_table,0.0173,industrial_it_hub,named list,1074.0,2016_c
+Telangana,36,Mulugu,Mulugu,720,257744,census_2011_table,0.009,peripheral_tribal,named list,4283.8,2019
+Telangana,36,Nagarkurnool,Nagarkurnool,694,893308,census_2011_table,0.009,peripheral_agrarian,rule on population,6192.2,2016_c
+Telangana,36,Nalgonda,Nalgonda,514,1618416,census_2011_table,0.0115,agrarian_developing,rule on population,7196.0,2016_c
+Telangana,36,Narayanpet,Narayanpet,721,566874,census_2011_table,0.009,peripheral_agrarian,rule on population,2358.1,2019
+Telangana,36,Nirmal,Nirmal,680,709418,census_2011_table,0.009,peripheral_agrarian,rule on population,3709.5,2016_c
+Telangana,36,Nizamabad,Nizamabad,516,1571022,census_2011_table,0.0122,semi_industrial,named list,4204.9,2016_c
+Telangana,36,Peddapalli,Peddapalli,682,795332,census_2011_table,0.0102,industrial_mining,named list,2190.5,2016_c
+Telangana,36,Rajanna Sircilla,Rajanna Sircilla,683,552037,census_2011_table,0.009,peripheral_agrarian,rule on population,1806.1,2016_c
+Telangana,36,Rangareddy,Ranga Reddy,518,2446265,census_2011_table,0.0173,industrial_it_hub,named list,4989.9,2016_c
+Telangana,36,Sangareddy,Sangareddy,691,1527628,census_2011_table,0.0166,industrial_hub,named list,4445.5,2016_c
+Telangana,36,Siddipet,Siddipet,692,1012065,census_2011_table,0.009,peripheral_agrarian,rule on population,3720.2,2016_c
+Telangana,36,Suryapet,Suryapet,696,1099560,census_2011_table,0.009,peripheral_agrarian,rule on population,3588.7,2016_c
+Telangana,36,Vikarabad,Vikarabad,698,927140,census_2011_table,0.009,peripheral_agrarian,rule on population,3699.6,2016_c
+Telangana,36,Wanaparthy,Wanaparthy,693,577758,census_2011_table,0.009,peripheral_agrarian,rule on population,2222.9,2016_c
+Telangana,36,Warangal,Warangal,522,718537,census_2011_table,0.0122,semi_industrial,named list,1748.2,2016_c
+Telangana,36,Yadadri Bhuvanagiri,Yadadri Bhuvanagiri,697,739448,census_2011_table,0.009,peripheral_agrarian,rule on population,3224.4,2016_c
+Uttar Pradesh,9,Agra,Agra,118,4418797,census_2011_table,0.0198,industrial_msme,named list,4037.2,2011_c
+Uttar Pradesh,9,Aligarh,Aligarh,119,3673889,census_2011_table,0.0198,industrial_msme,named list,3700.2,2011_c
+Uttar Pradesh,9,Ambedkar Nagar,Ambedkar Nagar,121,2397888,census_2011_table,0.0162,agrarian_developing,rule on population,2323.0,2011_c
+Uttar Pradesh,9,Amethi,Amethi,640,2050133,census_2011_table,0.0162,agrarian_developing,rule on population,2419.3,update2014
+Uttar Pradesh,9,Amroha,Amroha,154,1840221,census_2011_table,0.0162,agrarian_developing,rule on population,2450.0,2011_c
+Uttar Pradesh,9,Auraiya,Auraiya,122,1379545,census_2011_table,0.0162,agrarian_developing,rule on population,2012.6,2011_c
+Uttar Pradesh,9,Ayodhya,Ayodhya,140,2470996,census_2011_table,0.0162,agrarian_developing,rule on population,2682.6,2011_c
+Uttar Pradesh,9,Azamgarh,Azamgarh,123,4613913,census_2011_table,0.0171,semi_industrial,rule on population,4204.4,2011_c
+Uttar Pradesh,9,Baghpat,Baghpat,124,1303048,census_2011_table,0.0171,semi_industrial,named list,1318.3,2011_c
+Uttar Pradesh,9,Bahraich,Bahraich,125,3487731,census_2011_table,0.0126,peripheral_agrarian,named list,4937.9,2011_c
+Uttar Pradesh,9,Ballia,Ballia,126,3239774,census_2011_table,0.0171,semi_industrial,rule on population,2983.4,2011_c
+Uttar Pradesh,9,Balrampur,Balrampur,127,2148665,census_2011_table,0.0126,peripheral_agrarian,named list,3336.8,2011_c
+Uttar Pradesh,9,Banda,Banda,128,1799410,census_2011_table,0.0162,agrarian_developing,rule on population,4448.1,2011_c
+Uttar Pradesh,9,Barabanki,Barabanki,129,3260699,census_2011_table,0.0171,semi_industrial,rule on population,3834.0,2011_c
+Uttar Pradesh,9,Bareilly,Bareilly,130,4448359,census_2011_table,0.0171,semi_industrial,rule on population,4105.9,2011_c
+Uttar Pradesh,9,Basti,Basti,131,2464464,census_2011_table,0.0162,agrarian_developing,rule on population,2775.4,2011_c
+Uttar Pradesh,9,Bhadohi,Bhadohi,179,1578213,census_2011_table,0.018,textile_cluster,named list,1012.1,2011_c
+Uttar Pradesh,9,Bijnor,Bijnor,132,3682713,census_2011_table,0.0171,semi_industrial,rule on population,4588.8,2011_c
+Uttar Pradesh,9,Budaun,Budaun,133,3127621,census_2011_table,0.0162,agrarian_developing,rule on population,4238.7,2011_c
+Uttar Pradesh,9,Bulandshahr,Bulandshahr,134,3499171,census_2011_table,0.0171,semi_industrial,rule on population,3509.4,2011_c
+Uttar Pradesh,9,Chandauli,Chandauli,135,1952756,census_2011_table,0.0162,agrarian_developing,rule on population,2543.8,2011_c
+Uttar Pradesh,9,Chitrakoot,Chitrakoot,136,991730,census_2011_table,0.0126,peripheral_agrarian,named list,3186.2,2011_c
+Uttar Pradesh,9,Deoria,Deoria,137,3100946,census_2011_table,0.0162,agrarian_developing,rule on population,2529.4,2011_c
+Uttar Pradesh,9,Etah,Etah,138,1774480,census_2011_table,0.0162,agrarian_developing,rule on population,2416.7,2011_c
+Uttar Pradesh,9,Etawah,Etawah,139,1581810,census_2011_table,0.0162,agrarian_developing,rule on population,2320.1,2011_c
+Uttar Pradesh,9,Farrukhabad,Farrukhabad,141,1885204,census_2011_table,0.0162,agrarian_developing,rule on population,2175.2,2011_c
+Uttar Pradesh,9,Fatehpur,Fatehpur,142,2632733,census_2011_table,0.0162,agrarian_developing,rule on population,4158.7,2011_c
+Uttar Pradesh,9,Firozabad,Firozabad,143,2498156,census_2011_table,0.0198,industrial_msme,named list,2413.4,2011_c
+Uttar Pradesh,9,Gautam Buddha Nagar,Gautam Buddha Nagar,144,1648115,census_2011_table,0.0243,industrial_it_hub,named list,1410.1,2011_c
+Uttar Pradesh,9,Ghaziabad,Ghaziabad,145,3343334,census_2011_table,0.0234,industrial_hub,named list,908.7,2011_c
+Uttar Pradesh,9,Ghazipur,Ghazipur,146,3620268,census_2011_table,0.0171,semi_industrial,rule on population,3370.9,2011_c
+Uttar Pradesh,9,Gonda,Gonda,147,3433919,census_2011_table,0.0171,semi_industrial,rule on population,3967.7,2011_c
+Uttar Pradesh,9,Gorakhpur,Gorakhpur,148,4440895,census_2011_table,0.0171,semi_industrial,named list,3318.9,2011_c
+Uttar Pradesh,9,Hamirpur,Hamirpur,149,1104285,census_2011_table,0.0126,peripheral_agrarian,rule on population,3886.2,2011_c
+Uttar Pradesh,9,Hapur,Hapur,661,1338311,census_2011_table,0.0171,semi_industrial,named list,1113.6,update2014
+Uttar Pradesh,9,Hardoi,Hardoi,150,4092845,census_2011_table,0.0171,semi_industrial,rule on population,5971.7,2011_c
+Uttar Pradesh,9,Hathras,Hathras,163,1564708,census_2011_table,0.0162,agrarian_developing,rule on population,1777.4,2011_c
+Uttar Pradesh,9,Jalaun,Jalaun,151,1689974,census_2011_table,0.0162,agrarian_developing,rule on population,4552.2,2011_c
+Uttar Pradesh,9,Jaunpur,Jaunpur,152,4494204,census_2011_table,0.0171,semi_industrial,rule on population,4025.3,2011_c
+Uttar Pradesh,9,Jhansi,Jhansi,153,1998603,census_2011_table,0.0162,agrarian_developing,rule on population,5014.2,2011_c
+Uttar Pradesh,9,Kannauj,Kannauj,155,1656616,census_2011_table,0.0162,agrarian_developing,rule on population,2084.0,2011_c
+Uttar Pradesh,9,Kanpur Dehat,Kanpur Dehat,156,1796184,census_2011_table,0.0162,agrarian_developing,rule on population,3147.7,2011_c
+Uttar Pradesh,9,Kanpur Nagar,Kanpur Nagar,157,4581268,census_2011_table,0.0234,industrial_hub,named list,2991.0,2011_c
+Uttar Pradesh,9,Kasganj,Kasganj,633,1436719,census_2011_table,0.0162,agrarian_developing,rule on population,1953.8,2011_c
+Uttar Pradesh,9,Kaushambi,Kaushambi,158,1599596,census_2011_table,0.0162,agrarian_developing,rule on population,1784.9,2011_c
+Uttar Pradesh,9,Kushinagar,Kushi Nagar,160,3564544,census_2011_table,0.0171,semi_industrial,rule on population,2866.9,2011_c
+Uttar Pradesh,9,Lakhimpur Kheri,Kheri,159,4021243,census_2011_table,0.0171,semi_industrial,rule on population,7673.6,2011_c
+Uttar Pradesh,9,Lalitpur,Lalitpur,161,1221592,census_2011_table,0.0162,agrarian_developing,rule on population,5035.3,2011_c
+Uttar Pradesh,9,Lucknow,Lucknow,162,4589838,census_2011_table,0.0108,metro_core,named list,2523.3,2011_c
+Uttar Pradesh,9,Maharajganj,Maharajganj,164,2684703,census_2011_table,0.0126,peripheral_agrarian,named list,2937.7,2011_c
+Uttar Pradesh,9,Mahoba,Mahoba,165,875958,census_2011_table,0.0126,peripheral_agrarian,named list,3260.4,2011_c
+Uttar Pradesh,9,Mainpuri,Mainpuri,166,1868529,census_2011_table,0.0162,agrarian_developing,rule on population,2729.8,2011_c
+Uttar Pradesh,9,Mathura,Mathura,167,2547184,census_2011_table,0.0162,agrarian_developing,rule on population,3332.5,2011_c
+Uttar Pradesh,9,Mau,Mau,168,2205968,census_2011_table,0.0162,agrarian_developing,rule on population,1731.7,2011_c
+Uttar Pradesh,9,Meerut,Meerut,169,3443689,census_2011_table,0.0198,industrial_msme,named list,2585.6,2011_c
+Uttar Pradesh,9,Mirzapur,Mirzapur,170,2496970,census_2011_table,0.0162,agrarian_developing,rule on population,4407.2,2011_c
+Uttar Pradesh,9,Moradabad,Moradabad,171,3126507,census_2011_table,0.0198,industrial_msme,named list,1942.6,2011_c
+Uttar Pradesh,9,Muzaffarnagar,Muzaffarnagar,172,2869934,census_2011_table,0.0171,semi_industrial,named list,2729.9,2011_c
+Uttar Pradesh,9,Pilibhit,Pilibhit,173,2031007,census_2011_table,0.0162,agrarian_developing,rule on population,3753.7,2011_c
+Uttar Pradesh,9,Pratapgarh,Pratapgarh,174,3209141,census_2011_table,0.0171,semi_industrial,rule on population,3702.4,2011_c
+Uttar Pradesh,9,Prayagraj,Prayagraj,120,5954391,census_2011_table,0.0171,semi_industrial,named list,5457.9,2011_c
+Uttar Pradesh,9,Raebareli,Rae Bareli,175,2903507,census_2011_table,0.0162,agrarian_developing,rule on population,3918.8,2011_c
+Uttar Pradesh,9,Rampur,Rampur,176,2335819,census_2011_table,0.0162,agrarian_developing,rule on population,2358.2,2011_c
+Uttar Pradesh,9,Saharanpur,Saharanpur,177,3466382,census_2011_table,0.0198,industrial_msme,named list,3704.9,2011_c
+Uttar Pradesh,9,Sambhal,Sambhal,659,2199774,census_2011_table,0.0162,agrarian_developing,rule on population,2420.9,2011_c
+Uttar Pradesh,9,Sant Kabir Nagar,Sant Kabeer Nagar,178,1715183,census_2011_table,0.0162,agrarian_developing,rule on population,1636.9,2011_c
+Uttar Pradesh,9,Shahjahanpur,Shahjahanpur,180,3006538,census_2011_table,0.0162,agrarian_developing,rule on population,4300.7,2011_c
+Uttar Pradesh,9,Shamli,Shamli,660,1273578,census_2011_table,0.0162,agrarian_developing,rule on population,1259.7,update2014
+Uttar Pradesh,9,Shrawasti,Shravasti,181,1117361,census_2011_table,0.0126,peripheral_agrarian,named list,1926.3,2011_c
+Uttar Pradesh,9,Siddharthnagar,Siddharth Nagar,182,2559297,census_2011_table,0.0126,peripheral_agrarian,named list,2888.8,2011_c
+Uttar Pradesh,9,Sitapur,Sitapur,183,4483992,census_2011_table,0.0171,semi_industrial,rule on population,5724.3,2011_c
+Uttar Pradesh,9,Sonbhadra,Sonbhadra,184,1862559,census_2011_table,0.0144,industrial_mining,named list,6865.5,2011_c
+Uttar Pradesh,9,Sultanpur,Sultanpur,185,2249036,census_2011_table,0.0162,agrarian_developing,rule on population,2667.0,2011_c
+Uttar Pradesh,9,Unnao,Unnao,186,3108367,census_2011_table,0.0162,agrarian_developing,rule on population,4554.8,2011_c
+Uttar Pradesh,9,Varanasi,Varanasi,187,3676841,census_2011_table,0.0171,semi_industrial,named list,1529.4,2011_c
+West Bengal,19,Alipurduar,Alipurduar,664,1491250,census_2011_table,0.0087,peripheral_tribal,named list,2791.1,2014_c
+West Bengal,19,Bankura,Bankura,305,3596674,census_2011_table,0.0119,semi_industrial,rule on population,6873.7,2011_c
+West Bengal,19,Birbhum,Birbhum,307,3502404,census_2011_table,0.0119,semi_industrial,rule on population,4535.8,2011_c
+West Bengal,19,Cooch Behar,Coochbehar,308,2819086,census_2011_table,0.0113,agrarian_developing,rule on population,3364.7,2011_c
+West Bengal,19,Dakshin Dinajpur,Dinajpur Dakshin,310,1676276,census_2011_table,0.0113,agrarian_developing,rule on population,2229.2,2011_c
+West Bengal,19,Darjeeling,Darjeeling,309,1595181,census_2011_table,0.0087,peripheral_agrarian,named list,2044.9,2011_c
+West Bengal,19,Hooghly,Hooghly,312,5519145,census_2011_table,0.008,industrial_hub,v3 catalogue,3146.1,2011_c
+West Bengal,19,Howrah,Howrah,313,4850029,census_2011_table,0.009,industrial_hub,v3 catalogue,1464.6,2011_c
+West Bengal,19,Jalpaiguri,Jalpaiguri,314,2381596,census_2011_table,0.0119,semi_industrial,named list,3425.2,2011_c
+West Bengal,19,Jhargram,Jhargram,703,1136548,census_2011_table,0.0087,peripheral_tribal,named list,3094.0,2017_c
+West Bengal,19,Kalimpong,Kalimpong,702,251642,census_2011_table,0.0087,peripheral_tribal,named list,1090.0,2017_c
+West Bengal,19,Kolkata,Kolkata,315,4496694,census_2011_table,0.004,metro_core,v3 catalogue,185.1,2011_c
+West Bengal,19,Malda,Maldah,316,3988845,census_2011_table,0.0119,semi_industrial,rule on population,3601.0,2011_c
+West Bengal,19,Murshidabad,Murshidabad,319,7103807,census_2011_table,0.01,agrarian_migrant,named list,5332.9,2011_c
+West Bengal,19,Nadia,Nadia,320,5167601,census_2011_table,0.0119,semi_industrial,named list,3886.3,2011_c
+West Bengal,19,North 24 Parganas,24 Paraganas North,303,10009781,census_2011_table,0.012,industrial_it_hub,v3 catalogue,3992.9,2011_c
+West Bengal,19,Paschim Bardhaman,Paschim Bardhaman,704,2882031,census_2011_table,0.01,industrial_mining,named list,1805.8,2017_c
+West Bengal,19,Paschim Medinipur,Medinipur West,318,4776909,census_2011_table,0.0119,semi_industrial,rule on population,6262.6,2011_c
+West Bengal,19,Purba Bardhaman,Purba Bardhaman,306,4835532,census_2011_table,0.0119,semi_industrial,named list,5199.6,2011_c
+West Bengal,19,Purba Medinipur,Medinipur East,317,5095875,census_2011_table,0.0138,industrial_port,named list,3949.5,2011_c
+West Bengal,19,Purulia,Purulia,321,2930115,census_2011_table,0.0087,peripheral_agrarian,named list,6245.5,2011_c
+West Bengal,19,South 24 Parganas,24 Paraganas South,304,8161961,census_2011_table,0.014,industrial_msme,v3 catalogue,7677.7,2011_c
+West Bengal,19,Uttar Dinajpur,Dinajpur Uttar,311,3007134,census_2011_table,0.0113,agrarian_developing,rule on population,3125.3,2011_c
