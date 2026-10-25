@@ -74,10 +74,15 @@ Each phase: what is built, how it is checked, and the commit message to use. A p
 * Commit: `v4 phase 3: leak-safe splits and features for 60-month forecasting`
 
 ### Phase 4: training, tuning and the one-shot test
-* `src/v4/train.py`: XGBoost per target (employed, vacancies, seekers) with horizon as a feature, Optuna tuning on validation only, 5 seeds each, baselines (seasonal naive, drift) for every horizon.
-* Test: one pass; WAPE by horizon (12, 24, 36, 48, 60), by sector, trade and state; noise floor; no re-tuning afterwards.
-* Check: the model beats the baseline where claimed; results written to `reports/v4/` with the exact numbers.
-* Commit: `v4 phase 4: trained models and one-shot test results`
+* `src/v4/model_lib.py`, `ablation.py`, `tune.py`, `evaluate.py`, `fresh_worlds.py`: one XGBoost model per target (employed, vacancies, seekers) with the horizon as an input; 3-seed ensembles; baselines no change, seasonal naive and damped trend (the best of the three in each cell is the comparison).
+* Inputs: 82 of 119 candidates. Dropping the sector, trade and state-sector aggregates and the near-unique identities (district, tier) cut the validation error of employed workers from 10.9% to 4.5%: they let the trees memorise the period instead of the series. Time-proxy features stay out, as in v3.
+* Tuning: Optuna (20 trials per target) on the validation window only; the number of trees per horizon band is also chosen there (employed 400/250/200/100/100, vacancies 100/100/100/150/150, seekers 250/250/250/400/400 for horizons 1-12 ... 49-60).
+* Test (2015-2019, fit on targets to 2014, scored once): WAPE of the model against the best baseline, all horizons: employed 4.64% vs 5.65% (17.8% better), vacancies 13.14% vs 13.61% (3.5% better), seekers 16.15% vs 17.63% (8.4% better). Employed is better at every horizon (3.7% at 1-12 months, 30.4% at 49-60). Vacancies are better to 48 months and 3.0% worse at 49-60. Seekers are 3.7% worse than the baseline in the first two years and 15-23% better in years four and five. Seekers are under-forecast on average (bias -14.8%).
+* Stress (2020-2025, fit on targets to 2019, scored once, information only): employed 14.29% vs 16.65% (14.2% better), vacancies 20.57% vs 24.51% (16.1% better), seekers 43.01% vs 42.90% (no gain; under-forecast by 41%: the model cannot know the COVID-19 and e-Shram jump in seekers). Employed in the first year is 7.1% worse than the baseline.
+* Fresh worlds (the test-fit models, not refitted, on two other simulated worlds, seeds 101 and 202): employed 4.61% and 4.60% (best baseline 5.61% and 5.55%), vacancies 13.02% and 12.55% (13.63% and 13.45%), seekers 15.77% and 16.32% (17.37% and 17.91%). The test result is not one lucky draw.
+* Caveats to repeat in the documents: all data is simulated; validation scores are not an honest estimate (the validation window was used to tune); the test window is calm by design; long-horizon accuracy is limited by regime changes the model has not seen; vacancies and seekers are noisier than employed workers and do not beat the baseline everywhere.
+* Check: ablation, tuning trials, per-window metrics (by slice and horizon band), summaries, lock files (`test_opened.json`, `stress_opened.json`, same parameter hash) and `fresh_worlds.csv` are in `reports/v4/evaluation/`; fitted models (54 MB) are in `models/v4/` (git-ignored).
+* Commit: `v4 phase 4: tuned models, one-shot test and stress results`
 
 ### Phase 5: intervals, flags, confidence labels
 * Calibrated 90% intervals per horizon, confidence labels per target/sector/trade, early-warning flags at trade level (shortage and oversupply alerts and watches), flag precision from the validation and test periods.

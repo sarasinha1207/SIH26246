@@ -118,3 +118,5 @@ data/v4/raw/
 data/v4/processed/
 data/v4/splits/
 data/v4/interim/
+# v4 fitted models (rebuilt by src/v4/evaluate.py and src/v4/forecast.py); the tuned settings and the result tables in reports/v4/evaluation are tracked
+models/v4/
