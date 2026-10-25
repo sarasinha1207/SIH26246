@@ -1,0 +1,87 @@
+{
+  "history": [
+    "2000-01",
+    "2025-12"
+  ],
+  "horizons": [
+    1,
+    60
+  ],
+  "min_origin": 36,
+  "sampling_fraction": 0.16666666666666666,
+  "min_origins_per_horizon": 6,
+  "seed": 42,
+  "windows": {
+    "train": {
+      "first_target": "2000-01",
+      "last_target": "2009-12",
+      "fitted_on_targets_up_to": null
+    },
+    "validation": {
+      "first_target": "2010-01",
+      "last_target": "2014-12",
+      "fitted_on_targets_up_to": "2009-12"
+    },
+    "test": {
+      "first_target": "2015-01",
+      "last_target": "2019-12",
+      "fitted_on_targets_up_to": "2014-12"
+    },
+    "stress": {
+      "first_target": "2020-01",
+      "last_target": "2025-12",
+      "fitted_on_targets_up_to": "2019-12"
+    }
+  },
+  "counts": {
+    "train": {
+      "target_first": "2000-01",
+      "target_last": "2009-12",
+      "months": 120,
+      "pairs": 568,
+      "rows": 4501400,
+      "horizons": 60,
+      "max_horizon": 60
+    },
+    "validation": {
+      "target_first": "2010-01",
+      "target_last": "2014-12",
+      "months": 60,
+      "pairs": 405,
+      "rows": 3209625,
+      "horizons": 60,
+      "max_horizon": 60
+    },
+    "test": {
+      "target_first": "2015-01",
+      "target_last": "2019-12",
+      "months": 60,
+      "pairs": 405,
+      "rows": 3209625,
+      "horizons": 60,
+      "max_horizon": 60
+    },
+    "stress": {
+      "target_first": "2020-01",
+      "target_last": "2025-12",
+      "months": 72,
+      "pairs": 486,
+      "rows": 3851550,
+      "horizons": 60,
+      "max_horizon": 60
+    },
+    "deploy_fit": {
+      "target_last": "2025-12",
+      "pairs": 2480,
+      "rows": 19654000
+    }
+  },
+  "pair_sha256": {
+    "train_fit": "34d956f2b68247f9be3f119fdcc6e20e7f0c06eb8eaf05669f002852d5d9b27f",
+    "validation": "6788e8028a66731a565e44e2a978976e42b3098c27ea75eb874e46eb7a983feb",
+    "test": "a1843fc6bb0afa0b106158406d5de2aa70da6b9f0d1497ed39ce4b9974a684a1",
+    "stress": "13623bbefe4bbb2bbee7a4bc57aa638600de63f2b5aed161015cb829a7642edf",
+    "deploy_fit": "8c4a0e5bd0d4d8f6792cd5d2bc58f1a623dc75f5949062b8f3f91cb3dd391f62"
+  },
+  "rule": "v4 phase 3 - time windows, forecast-origin rules and row sampling for a 60-month horizon.\n\nA training example is one (series, forecast origin t, horizon h); the target is the log level at month t + h.  History has 312 months (2000-01 = index 0\nto 2025-12 = index 311) and the forecast horizon is 1..60, so windows are cut by the month of the TARGET, with a strict rule on the origin:\n\n    window       target months (index)          fitted on                       origin rule\n    train        2000-01 to 2009-12 (0..119)    -                               t + h <= 119\n    validation   2010-01 to 2014-12 (120..179)  rows with t + h <= 119          t >= 119          (tuning only)\n    test         2015-01 to 2019-12 (180..239)  rows with t + h <= 179          t >= 179          (opened once)\n    stress       2020-01 to 2025-12 (240..311)  rows with t + h <= 239          t >= 239          (opened once, information only)\n    deploy       2026-01 to 2030-12 (forecast)  rows with t + h <= 311          t = 311\n\nA row of an evaluation window starts after the last month the model was fitted on, so the model could have been fitted on every label before the forecast was\nmade.  Each window is 60 months or longer, so even the 60-month horizon is evaluated with strict origins.  The test window is calm on purpose (no COVID-19, no\ne-Shram break), so it measures typical forecasting skill; the COVID-19 and e-Shram years form the stress window, which measures how a model fitted on\nthe earlier years copes with shocks nobody could foresee.  The deployed model is fitted on everything (2000-2025) and has seen those shocks."
+}

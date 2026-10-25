@@ -1,0 +1,40 @@
+{
+  "series": 7925,
+  "months": 312,
+  "candidate_features": 119,
+  "model_inputs": 111,
+  "time_proxies_excluded": [
+    "coverage",
+    "eshram_progress",
+    "female_pct",
+    "log_pop",
+    "post_covid",
+    "seats_per_kpop",
+    "seek_rate",
+    "wage_log"
+  ],
+  "origin_features_seconds": 10.5,
+  "train_window_rows": 4501400,
+  "train_window_columns": 111,
+  "train_window_matrix_mb": 1936,
+  "train_window_assembly_seconds": 4.1,
+  "inputs_all_missing_in_train_window": [
+    "lfs_gap_dev12",
+    "lfs_mom3",
+    "ncs_dev12",
+    "ncs_mom3",
+    "survey_dev12"
+  ],
+  "inputs_partly_missing_in_train_window": {
+    "survey_mom3": 0.988
+  },
+  "categorical_levels": {
+    "cat_sector": 5,
+    "cat_trade": 25,
+    "cat_tier": 16,
+    "cat_state": 10,
+    "cat_district": 317
+  },
+  "low_volume_series_train": 4219,
+  "low_volume_series_current": 2945
+}

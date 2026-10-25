@@ -67,9 +67,10 @@ Each phase: what is built, how it is checked, and the commit message to use. A p
 * Commit: `v4 phase 2: trade-level dataset for 10 states, 2000-2025`
 
 ### Phase 3: splits and features for a 60-month horizon
-* `src/v4/splits.py`, `src/v4/features.py`: leak-safe features (re-using the v3 design, extended for 60 months and the new channels), sampled origins and horizons to keep training size manageable, hierarchical context (trade, sector, district, state).
-* Proposed splits by target month: train to 2015-12, validation 2016-01 to 2018-12, test 2019-01 to 2025-12 (includes COVID). Test is opened once.
-* Check: no feature uses data after its origin; splits are disjoint and time-ordered; row counts and memory use recorded.
+* `src/v4/splits.py`, `src/v4/features.py`, `src/v4/build_phase3.py`: leak-safe features (the v3 design extended to 60 months, 25 trades, group aggregates for sector, trade and state-sector cell, and the four source channels), and time windows with a strict origin rule.
+* A 60-month horizon needs 60 months of evaluation targets after the last fitted month, so the windows are cut by target month: train 2000-2009, validation 2010-2014 (tuning), test 2015-2019 (opened once, calm years), stress 2020-2025 (opened once: COVID-19 and the e-Shram break, information only). Each evaluation fit uses everything before its window: validation fit on targets to 2009, test fit on targets to 2014, stress fit on targets to 2019; the deployed model is fitted on all of 2000-2025. Every evaluation row starts after the last fitted month, for all 60 horizons.
+* Sampling: about 1/6 of the (origin, horizon) pairs of each window, at least 6 origins per horizon; the training window has 4.5 million rows with 111 model inputs (1.9 GB, built in 8 seconds).
+* Check: windows tile 2000-2025; fit rows use targets up to the cut only; evaluation rows start after it and cover all 60 horizons; test and stress are locked; rewriting every value after month 200 leaves all features for earlier origins unchanged; the year-ago anchor never looks past the origin for any horizon.
 * Commit: `v4 phase 3: leak-safe splits and features for 60-month forecasting`
 
 ### Phase 4: training, tuning and the one-shot test
