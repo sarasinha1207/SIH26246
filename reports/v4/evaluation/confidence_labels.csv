@@ -1,0 +1,85 @@
+window,target,band,label,rows,share,wape_pct
+test,E,1-12,High,422484,0.4676,3.0535
+test,E,1-12,Medium,480966,0.5324,3.2264
+test,E,13-24,High,333540,0.4676,4.632
+test,E,13-24,Medium,379710,0.5324,4.9781
+test,E,25-36,High,261504,0.4583,5.1457
+test,E,25-36,Medium,245952,0.431,6.4313
+test,E,25-36,Low,63144,0.1107,11.4296
+test,E,37-48,High,261504,0.4583,5.2468
+test,E,37-48,Medium,245952,0.431,7.0801
+test,E,37-48,Low,63144,0.1107,13.5878
+test,E,49-60,High,207024,0.4583,5.4582
+test,E,49-60,Medium,194712,0.431,7.8189
+test,E,49-60,Low,49989,0.1107,14.9426
+test,E,all horizons,High,1486056,0.463,4.5133
+test,E,all horizons,Medium,1547292,0.4821,5.6172
+test,E,all horizons,Low,176277,0.0549,13.216
+test,V,1-12,Medium,422484,0.4676,9.2829
+test,V,1-12,Low,480966,0.5324,9.8344
+test,V,13-24,Medium,333540,0.4676,12.6195
+test,V,13-24,Low,379710,0.5324,13.6934
+test,V,25-36,Medium,266832,0.4676,13.9006
+test,V,25-36,Low,303768,0.5324,15.4935
+test,V,37-48,Medium,265320,0.465,14.944
+test,V,37-48,Low,305280,0.535,19.8388
+test,V,49-60,Medium,209361,0.4635,15.9846
+test,V,49-60,Low,242364,0.5365,25.1474
+test,V,all horizons,Medium,1497537,0.4666,12.8266
+test,V,all horizons,Low,1712088,0.5334,15.9493
+test,S,1-12,High,422484,0.4676,9.0295
+test,S,1-12,Medium,480966,0.5324,8.4765
+test,S,13-24,High,26820,0.0376,15.4284
+test,S,13-24,Medium,336960,0.4724,15.8198
+test,S,13-24,Low,349470,0.49,14.2433
+test,S,25-36,Medium,266832,0.4676,20.5145
+test,S,25-36,Low,303768,0.5324,17.794
+test,S,37-48,Medium,266832,0.4676,21.0195
+test,S,37-48,Low,303768,0.5324,18.1489
+test,S,49-60,Medium,211242,0.4676,19.5501
+test,S,49-60,Low,240483,0.5324,16.7681
+test,S,all horizons,High,449304,0.14,9.7007
+test,S,all horizons,Medium,1562832,0.4869,18.7021
+test,S,all horizons,Low,1197489,0.3731,16.6754
+stress,E,1-12,High,511428,0.4676,5.8174
+stress,E,1-12,Medium,582222,0.5324,5.3351
+stress,E,13-24,High,422484,0.4676,10.5932
+stress,E,13-24,Medium,480966,0.5324,9.5739
+stress,E,25-36,High,324900,0.4555,16.0271
+stress,E,25-36,Medium,282870,0.3966,13.8093
+stress,E,25-36,Low,105480,0.1479,12.1568
+stress,E,37-48,High,259920,0.4555,21.0128
+stress,E,37-48,Medium,226296,0.3966,17.9617
+stress,E,37-48,Low,84384,0.1479,14.8257
+stress,E,49-60,High,259920,0.4555,26.6806
+stress,E,49-60,Medium,226296,0.3966,22.1653
+stress,E,49-60,Low,84384,0.1479,16.6707
+stress,E,all horizons,High,1778652,0.4618,14.4399
+stress,E,all horizons,Medium,1798650,0.467,12.8856
+stress,E,all horizons,Low,274248,0.0712,14.4072
+stress,V,1-12,Medium,511428,0.4676,12.4299
+stress,V,1-12,Low,582222,0.5324,12.9745
+stress,V,13-24,Medium,422484,0.4676,18.7192
+stress,V,13-24,Low,480966,0.5324,19.7372
+stress,V,25-36,Medium,328680,0.4608,23.5707
+stress,V,25-36,Low,384570,0.5392,25.3333
+stress,V,37-48,Medium,255888,0.4485,25.901
+stress,V,37-48,Low,314712,0.5515,21.5608
+stress,V,49-60,Medium,255888,0.4485,30.5659
+stress,V,49-60,Low,314712,0.5515,19.5138
+stress,V,all horizons,Medium,1774368,0.4607,20.7064
+stress,V,all horizons,Low,2077182,0.5393,19.664
+stress,S,1-12,High,232530,0.2126,15.5074
+stress,S,1-12,Medium,571320,0.5224,13.6136
+stress,S,1-12,Low,289800,0.265,14.0108
+stress,S,13-24,Medium,422484,0.4676,31.5671
+stress,S,13-24,Low,480966,0.5324,29.5758
+stress,S,25-36,Medium,333540,0.4676,51.5993
+stress,S,25-36,Low,379710,0.5324,47.7538
+stress,S,37-48,Medium,266832,0.4676,62.7208
+stress,S,37-48,Low,303768,0.5324,57.9923
+stress,S,49-60,Medium,266832,0.4676,70.0312
+stress,S,49-60,Low,303768,0.5324,65.1935
+stress,S,all horizons,High,232530,0.0604,15.5074
+stress,S,all horizons,Medium,1861008,0.4832,47.334
+stress,S,all horizons,Low,1758012,0.4564,43.3996

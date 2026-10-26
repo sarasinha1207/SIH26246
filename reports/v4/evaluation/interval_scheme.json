@@ -1,0 +1,8 @@
+{
+  "rule": "lowest mean interval score on validation targets 2013-2014 (calibrated on 2010-2012)",
+  "scheme": {
+    "E": "h_sector",
+    "V": "h_sector",
+    "S": "h"
+  }
+}
