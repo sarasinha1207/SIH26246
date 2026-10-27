@@ -25,7 +25,7 @@ SITE = ROOT / "app"
 SRC = Path(__file__).resolve().parent
 sys.path.insert(0, str(SITE / "api"))
 import chat as chat_proxy  # noqa: E402,E501   (app/api/chat.py: the same file Vercel runs at /api/chat)
-DASH_WATCH = [SRC / "logo.py", SRC / "dashboard" / "shell.html", SITE / "dashboard" / "dashboard.css", SITE / "dashboard" / "dashboard.js", SITE / "dashboard" / "data" / "dash_data.js", SITE / "assets" / "chat.js", SITE / "assets" / "chat.css"]
+DASH_WATCH = [SRC / "logo.py", ROOT / "src" / "v4" / "dashboard_shell.html", SITE / "dashboard" / "dashboard.css", SITE / "dashboard" / "dashboard.js", SITE / "dashboard" / "data" / "core.js", SITE / "dashboard" / "data" / "alerts.js"]
 WATCH = [SRC / "logo.py", *SRC.glob("pages/*.html"), SRC / "build_pages.py", SRC / "i18n.py", SRC / "i18n_hi.py", SITE / "assets" / "styles.css", SITE / "assets" / "site.js", SITE / "assets" / "chat.js", SITE / "assets" / "chat.css"]
 
 

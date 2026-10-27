@@ -1,0 +1,54 @@
+{
+ "states": {
+  "Delhi": {
+   "file": "shards/delhi.json",
+   "series": 275,
+   "bytes": 735063
+  },
+  "Gujarat": {
+   "file": "shards/gujarat.json",
+   "series": 825,
+   "bytes": 2200053
+  },
+  "Karnataka": {
+   "file": "shards/karnataka.json",
+   "series": 775,
+   "bytes": 2068371
+  },
+  "Kerala": {
+   "file": "shards/kerala.json",
+   "series": 350,
+   "bytes": 931318
+  },
+  "Maharashtra": {
+   "file": "shards/maharashtra.json",
+   "series": 900,
+   "bytes": 2489440
+  },
+  "Punjab": {
+   "file": "shards/punjab.json",
+   "series": 575,
+   "bytes": 1481654
+  },
+  "Tamil Nadu": {
+   "file": "shards/tamil-nadu.json",
+   "series": 950,
+   "bytes": 2595553
+  },
+  "Telangana": {
+   "file": "shards/telangana.json",
+   "series": 825,
+   "bytes": 2093643
+  },
+  "Uttar Pradesh": {
+   "file": "shards/uttar-pradesh.json",
+   "series": 1875,
+   "bytes": 5084673
+  },
+  "West Bengal": {
+   "file": "shards/west-bengal.json",
+   "series": 575,
+   "bytes": 1577360
+  }
+ }
+}

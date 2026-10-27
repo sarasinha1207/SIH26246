@@ -1,98 +1,313 @@
-/* KaushalSetu dashboard: dependency-free. Everything comes from data/dash_data.js (history, forecasts, flags) and ../data/map_data.js (district shapes).
-   The filters (sector, state, district) live in the URL hash, so every view can be bookmarked and shared:  #/overview?sector=Healthcare&state=Delhi  */
+/* KaushalSetu dashboard (v4): dependency-free. Everything comes from data/core.js (India, sectors, trades, states, ranges, capacity gap, rankings), data/alerts.js and
+   one shard per state (data/shards/<state>.json) that is fetched when a state or district is chosen.  Built by src/v4/build_dashboard.py; nothing is typed in here.
+   The filters live in the URL hash, so every view can be bookmarked:  #/forecast?sector=Healthcare&trade=HLT-3221&state=Kerala&district=332 */
 (function () {
   "use strict";
-  var D = window.DASH, M = window.MAP_DATA, root = document.documentElement;
-  var NS = "http://www.w3.org/2000/svg";
-  var S = D.series, MONTHS = D.meta.months, FM = D.meta.fmonths, H = MONTHS.length, SECTORS = D.meta.sectors, STATES = D.meta.states;
-  var STATUS = D.meta.status, CONTEXT = D.meta.context, CHANGE = D.meta.change;
-  var CTX_NAME = CONTEXT.map(function (c) { return c.charAt(0).toUpperCase() + c.slice(1); }), TH = D.meta.thresholds, FLAGC = D.meta.flag_class, TGT = D.meta.target_names;
-  var PAGES = {
-    overview: ["Overview", "Where demand and supply are drifting apart"], demand: ["Demand", "Employed workers and vacancies, with forecasts"], supply: ["Supply", "Registered job seekers and training"],
-    gap: ["Gap", "Openings against seekers over time"], ranking: ["District ranking", "Districts ranked within one sector"], warnings: ["Early warnings", "Shortage and oversupply flags from the forecast"], data: ["Data and notes", "Coverage, caveats, definitions and downloads"]
+  var D = window.DASH4, A = window.DASH4_ALERTS, M = D.meta, root = document.documentElement, NS = "http://www.w3.org/2000/svg";
+  var STATES = M.states, SECTORS = M.sectors, TRADES = M.trades, YEARS = M.years, HC = M.hist_core[2], HS = M.hist_shard[2];
+  var LANG = root.dataset.lang === "hi" ? "hi" : "en";
+  var HI = {
+    "#": "क्र.",
+    "(beyond 24 months) are learned from pre-2020 dynamics and are lumpier where the horizon crosses 24 months.": "(24 महीने से आगे) 2020 से पहले के रुझानों से सीखे गए हैं और जहाँ अवधि 24 महीने पार करती है वहाँ अधिक असमान दिखते हैं।",
+    "0 to 100. Compares openings per worker (vacancies, job-portal postings, National Career Service) with other districts of the same trade, plus a national level term; 50 is the median district at the 2018-2019 level.": "0 से 100। प्रति कामगार रिक्तियों (रिक्तियाँ, जॉब-पोर्टल पोस्टिंग, राष्ट्रीय कॅरियर सेवा) की तुलना उसी ट्रेड के अन्य ज़िलों से करता है, साथ में एक राष्ट्रीय स्तर का घटक; 50 का अर्थ है 2018-2019 के स्तर पर मध्य ज़िला।",
+    "0 to 100; 50 is a typical district in the trade at the 2018-2019 level": "0 से 100; 50 का अर्थ है 2018-2019 के स्तर पर ट्रेड का एक सामान्य ज़िला",
+    "2020-23 shock and recovery": "2020-23 का झटका और सुधार",
+    "A national level term lets the index move up and down over the years: 50 is the median district at the 2018-2019 demand level, 84 is one standard deviation above, 16 one below.": "एक राष्ट्रीय स्तर का घटक सूचकांक को वर्षों में ऊपर-नीचे होने देता है: 50 का अर्थ 2018-2019 की माँग पर मध्य ज़िला, 84 एक मानक विचलन ऊपर और 16 एक नीचे।",
+    "Alert": "चेतावनी",
+    "Alert accuracy in testing": "परीक्षण में चेतावनियों की सटीकता",
+    "Alerts 12 months ahead for {0}": "{0} के लिए 12 महीने आगे की चेतावनियाँ",
+    "Alerts are relative: the series is among the 10% of districts in its trade with the highest (shortage) or lowest (oversupply) forecast vacancies per seeker in that month.": "चेतावनियाँ सापेक्ष हैं: श्रृंखला अपने ट्रेड के उन 10% ज़िलों में है जिनमें उस महीने प्रति नौकरी चाहने वाले पूर्वानुमानित रिक्तियाँ सबसे अधिक (कमी) या सबसे कम (अधिशेष) हैं।",
+    "Alerts page": "चेतावनी पृष्ठ",
+    "All districts": "सभी ज़िले",
+    "All sectors": "सभी सेक्टर",
+    "All states": "सभी राज्य",
+    "All trades": "सभी ट्रेड",
+    "An alert is relative: the series lies in the top (shortage) or bottom (oversupply) 10% of districts in its trade in that month. In testing such alerts were right about seven times in ten at 1-12 months, against a base rate of one in ten. Seeker forecasts and long horizons are less reliable; the confidence columns show it.": "चेतावनी सापेक्ष है: श्रृंखला उस महीने अपने ट्रेड के शीर्ष (कमी) या निचले (अधिशेष) 10% ज़िलों में है। परीक्षण में 1-12 महीनों पर ऐसी चेतावनियाँ दस में लगभग सात बार सही थीं, जबकि आधार दर दस में एक है। नौकरी चाहने वालों के पूर्वानुमान और लंबी अवधि कम भरोसेमंद हैं; विश्वसनीयता के स्तंभ यह दिखाते हैं।",
+    "Annual mean 2030, with 2026 for comparison. Choose a sector or state in the filters.": "2030 का वार्षिक औसत, तुलना के लिए 2026 के साथ। फ़िल्टर में सेक्टर या राज्य चुनें।",
+    "Avg. openings": "औसत रिक्तियाँ",
+    "Both": "दोनों",
+    "Both are 90% ranges. The usual one is calibrated on 2010-2019; the wide one also on 2020-2025.": "दोनों 90% दायरे हैं। सामान्य दायरा 2010-2019 पर और विस्तृत दायरा 2020-2025 पर भी आधारित है।",
+    "Built": "बनाया गया",
+    "By year": "वर्ष के अनुसार",
+    "CSV": "CSV",
+    "CSV and JSON of the page you are on use the current filters. Series-level files for all 7,925 series are in the export folder.": "इस पृष्ठ की CSV और JSON फ़ाइलें वर्तमान फ़िल्टर के अनुसार बनती हैं। सभी 7,925 श्रृंखलाओं की फ़ाइलें export फ़ोल्डर में हैं।",
+    "Capacity gap": "क्षमता अंतर",
+    "Certified per opening": "प्रति रिक्ति प्रमाणित",
+    "Change": "बदलाव",
+    "Click a row to filter by state": "राज्य से फ़िल्टर करने के लिए पंक्ति पर क्लिक करें",
+    "Click a trade to filter": "फ़िल्टर करने के लिए ट्रेड पर क्लिक करें",
+    "Confidence": "विश्वसनीयता",
+    "Confidence S": "विश्वसनीयता (नौकरी चाहने वाले)",
+    "Confidence V": "विश्वसनीयता (रिक्तियाँ)",
+    "Confidence of this forecast by horizon (12-month bands):": "इस पूर्वानुमान की विश्वसनीयता अवधि के अनुसार (12-महीने के खंड):",
+    "Construction": "निर्माण कार्य",
+    "Coverage of the dataset": "डेटासेट का दायरा",
+    "Cr": "करोड़",
+    "Dashboard": "डैशबोर्ड",
+    "Data and notes": "डेटा और टिप्पणियाँ",
+    "December": "दिसंबर",
+    "December values": "दिसंबर के मान",
+    "Definitions": "परिभाषाएँ",
+    "Demand Index": "माँग सूचकांक",
+    "Demand Index 2030": "माँग सूचकांक 2030",
+    "Demand Index in 2030 (annual mean for trades, December for sectors); click a state to filter": "2030 में माँग सूचकांक (ट्रेड के लिए वार्षिक औसत, सेक्टर के लिए दिसंबर); फ़िल्टर करने के लिए राज्य पर क्लिक करें",
+    "District": "ज़िला",
+    "Districts forecast to be short of workers or in surplus": "वे ज़िले जहाँ कामगारों की कमी या अधिशेष का अनुमान है",
+    "Districts with the highest index: {0}": "सबसे ऊँचे सूचकांक वाले ज़िले: {0}",
+    "Districts with the lowest index: {0}": "सबसे नीचे के सूचकांक वाले ज़िले: {0}",
+    "Downloaded {0}.csv ({1} rows)": "{0}.csv डाउनलोड हुई ({1} पंक्तियाँ)",
+    "Downloaded {0}.json ({1} rows)": "{0}.json डाउनलोड हुई ({1} पंक्तियाँ)",
+    "Downloads": "डाउनलोड",
+    "Early warnings": "पूर्व चेतावनी",
+    "Early-warning alert": "पूर्व-चेतावनी अलर्ट",
+    "Early-warning summary": "पूर्व-चेतावनी सारांश",
+    "Employed": "नियोजित",
+    "Employed 2030": "नियोजित 2030",
+    "Employed now": "अभी नियोजित",
+    "Employed workers": "नियोजित कामगार",
+    "Exit": "बाहर निकलें",
+    "Expected certified": "अपेक्षित प्रमाणित",
+    "Expected certified a year": "प्रति वर्ष अपेक्षित प्रमाणित",
+    "Fewer trainees certified than openings": "रिक्तियों से कम प्रशिक्षु प्रमाणित",
+    "Final models fitted on": "अंतिम मॉडल इस डेटा पर बने",
+    "Five-year forecasts with 90% ranges": "90% दायरे सहित पाँच वर्ष के पूर्वानुमान",
+    "For {0}, {1} months ahead": "{0} के लिए, {1} महीने आगे",
+    "Forecast": "पूर्वानुमान",
+    "Forecast from": "पूर्वानुमान का आधार माह",
+    "Forecast months use the forecast vacancies only. In the past years this version tracks the three-channel index closely (correlation 0.89 to 0.94 in 2012-2025).": "पूर्वानुमान के महीनों में केवल पूर्वानुमानित रिक्तियाँ ली जाती हैं। बीते वर्षों में यह रूप तीन-स्रोत वाले सूचकांक के बहुत निकट रहता है (2012-2025 में सहसंबंध 0.89 से 0.94)।",
+    "Forecast openings (average monthly vacancies) against seats and expected certified trainees": "पूर्वानुमानित रिक्तियाँ (औसत मासिक) सीटों और अपेक्षित प्रमाणित प्रशिक्षुओं के सामने",
+    "Forecast openings against training seats": "पूर्वानुमानित रिक्तियाँ बनाम प्रशिक्षण सीटें",
+    "Forecast openings against training seats sanctioned in 2025-26 (held flat) and the trainees expected to be certified (seats times the 2023-25 median certification rate). Status: seats fall short when the district's share of seats is less than 0.6 times its share of openings in the trade, exceed when more than 1.65 times.": "पूर्वानुमानित रिक्तियाँ बनाम 2025-26 में स्वीकृत प्रशिक्षण सीटें (स्थिर मानी गई) और अपेक्षित प्रमाणित प्रशिक्षु (सीटें × 2023-25 की माध्य प्रमाणन दर)। स्थिति: जब ट्रेड में ज़िले की सीटों का हिस्सा रिक्तियों के हिस्से के 0.6 गुना से कम हो तो सीटें कम पड़ती हैं, 1.65 गुना से अधिक हो तो सीटें अधिक हैं।",
+    "Forecast page": "पूर्वानुमान पृष्ठ",
+    "Forecasts are not certain.": "पूर्वानुमान निश्चित नहीं हैं।",
+    "Healthcare": "स्वास्थ्य सेवा",
+    "High": "उच्च",
+    "High, Medium or Low from the typical error of earlier forecasts for the same trade and horizon band: up to 8%, up to 20%, above; one level lower for small series.": "उच्च, मध्यम या निम्न: उसी ट्रेड और अवधि-खंड के पिछले पूर्वानुमानों की सामान्य त्रुटि से, क्रमशः 8% तक, 20% तक, उससे अधिक; छोटी श्रृंखलाओं के लिए एक स्तर नीचे।",
+    "Highest forecast vacancies per seeker in the trade": "ट्रेड में प्रति नौकरी चाहने वाले सबसे अधिक पूर्वानुमानित रिक्तियाँ",
+    "History": "इतिहास",
+    "History to {0} and forecast to {1}": "{0} तक का इतिहास और {1} तक का पूर्वानुमान",
+    "How often the 90% ranges held": "90% दायरे कितनी बार सही रहे",
+    "How strong hiring demand is, from 0 to 100": "भर्ती की माँग कितनी मज़बूत है, 0 से 100 तक",
+    "IT-ITeS": "आईटी-आईटीईएस",
+    "It behaves like official statistics but describes no real district.": "यह सरकारी आँकड़ों जैसा व्यवहार करता है, पर किसी वास्तविक ज़िले का वर्णन नहीं करता।",
+    "It compares a district with the other districts of the same trade in the same month, using openings per worker from vacancies, job-portal postings and the National Career Service.": "यह एक ज़िले की तुलना उसी महीने उसी ट्रेड के अन्य ज़िलों से करता है, रिक्तियों, जॉब-पोर्टल पोस्टिंग और राष्ट्रीय कॅरियर सेवा से प्रति कामगार रिक्तियों के आधार पर।",
+    "JSON": "JSON",
+    "Job vacancies": "रिक्तियाँ",
+    "L": "लाख",
+    "Latest December against December 2030": "नवीनतम दिसंबर बनाम दिसंबर 2030",
+    "Latest {0}, December {1}": "नवीनतम {0}, दिसंबर {1}",
+    "Loading…": "लोड हो रहा है…",
+    "Long horizons": "लंबी अवधि",
+    "Low": "निम्न",
+    "Lowest forecast vacancies per seeker in the trade": "ट्रेड में प्रति नौकरी चाहने वाले सबसे कम पूर्वानुमानित रिक्तियाँ",
+    "Manufacturing": "विनिर्माण",
+    "Measure": "माप",
+    "Medium": "मध्यम",
+    "Method, limits and downloads": "तरीका, सीमाएँ और डाउनलोड",
+    "Month": "महीना",
+    "More trainees certified than openings": "रिक्तियों से अधिक प्रशिक्षु प्रमाणित",
+    "Name": "नाम",
+    "No calibrated 90% range exists for this combination of filters, so only the point forecast is drawn. Choose a sector, state, state with sector, or a district with a sector or trade for a range.": "फ़िल्टर के इस संयोजन के लिए कोई जाँचा हुआ 90% दायरा नहीं है, इसलिए केवल बिंदु पूर्वानुमान दिखाया गया है। दायरे के लिए सेक्टर, राज्य, सेक्टर सहित राज्य, या सेक्टर/ट्रेड सहित ज़िला चुनें।",
+    "Open": "खोलें",
+    "Openings per seat": "प्रति सीट रिक्तियाँ",
+    "Oversupply": "अधिशेष",
+    "Oversupply alert": "अधिशेष चेतावनी",
+    "Oversupply alerts": "अधिशेष चेतावनियाँ",
+    "Overview": "सारांश",
+    "Percentile": "प्रतिशतक",
+    "Point forecast and the two 90% ranges": "बिंदु पूर्वानुमान और दोनों 90% दायरे",
+    "Rankings": "रैंकिंग",
+    "Rankings are computed once for all of India and do not follow the filters.": "रैंकिंग पूरे भारत के लिए एक बार निकाली जाती हैं और फ़िल्टर के अनुसार नहीं बदलतीं।",
+    "Read this first": "पहले यह पढ़ें",
+    "Registered job seekers": "पंजीकृत नौकरी चाहने वाले",
+    "Reset filters": "फ़िल्टर हटाएँ",
+    "Right": "सही",
+    "Seats": "सीटें",
+    "Seats are held flat because no seat plans are forecast. Openings are a monthly stock and seats an annual flow, so read the ratios as a ranking of where capacity is stretched, not as a count of unfilled places.": "सीटें स्थिर मानी गई हैं क्योंकि सीट योजनाओं का पूर्वानुमान नहीं होता। रिक्तियाँ मासिक स्टॉक हैं और सीटें वार्षिक प्रवाह, इसलिए अनुपात को इस क्रम के रूप में पढ़ें कि क्षमता कहाँ तनी हुई है, खाली स्थानों की गिनती के रूप में नहीं।",
+    "Sector": "सेक्टर",
+    "Seekers": "नौकरी चाहने वाले",
+    "Seekers are the least reliable measure,": "नौकरी चाहने वाले सबसे कम भरोसेमंद माप हैं,",
+    "Seekers change": "नौकरी चाहने वाले: बदलाव",
+    "Series": "श्रृंखला",
+    "Share of actual values inside the usual range in held-out years (a good range gives about 90%). The wide range includes 2020-25 in its calibration, so it cannot be tested on those years.": "परीक्षण वर्षों में वास्तविक मानों का कितना हिस्सा सामान्य दायरे के भीतर रहा (अच्छा दायरा लगभग 90% देता है)। विस्तृत दायरे में 2020-25 शामिल है, इसलिए उन वर्षों पर उसकी जाँच नहीं हो सकती।",
+    "Share of alerts that were in the true top or bottom 10% (and how many times better than chance), 2015-19, 1-12 months ahead": "जो चेतावनियाँ वास्तव में शीर्ष या निचले 10% में थीं उनका हिस्सा (और संयोग से कितने गुना बेहतर), 2015-19, 1-12 महीने आगे",
+    "Shortage": "कमी",
+    "Shortage alert": "कमी की चेतावनी",
+    "Shortage alerts": "कमी की चेतावनियाँ",
+    "Showing the first {0} of {1}; the CSV has all of them.": "{1} में से पहली {0} दिखाई गई हैं; CSV में सभी हैं।",
+    "Simulated data, not official statistics": "सिम्युलेटेड डेटा, आधिकारिक आँकड़े नहीं",
+    "Skip to the page": "पृष्ठ पर जाएँ",
+    "State": "राज्य",
+    "States": "राज्य",
+    "States by sector": "राज्य और सेक्टर",
+    "States by trade": "राज्य और ट्रेड",
+    "Textiles and Apparel": "वस्त्र एवं परिधान",
+    "The 2020-23 shock was not foreseeable from earlier years; ranges calibrated on calm years are too narrow for totals, so wide ranges are drawn too.": "2020-23 का झटका पहले के वर्षों से अनुमान योग्य नहीं था; शांत वर्षों पर बने दायरे कुल योग के लिए बहुत संकरे हैं, इसलिए विस्तृत दायरे भी दिखाए गए हैं।",
+    "The data is simulated.": "डेटा सिम्युलेटेड है।",
+    "The series is in the top or bottom 10% of districts of its trade in forecast vacancies per seeker for that month. A watch is the next 15%.": "उस महीने प्रति नौकरी चाहने वाले पूर्वानुमानित रिक्तियों में श्रृंखला अपने ट्रेड के शीर्ष या निचले 10% ज़िलों में है। निगरानी अगले 15% के लिए है।",
+    "The usual range was calibrated on 2010-2019, years without an unforeseen shock; the wide range also uses 2020-2025 and is the one to read for totals of many series, whose errors move together.": "सामान्य दायरा 2010-2019 पर बना है, जब कोई अप्रत्याशित झटका नहीं था; विस्तृत दायरा 2020-2025 भी लेता है और कई श्रृंखलाओं के कुल योग के लिए वही पढ़ना चाहिए, क्योंकि उनकी त्रुटियाँ साथ-साथ चलती हैं।",
+    "This page could not be drawn": "यह पृष्ठ नहीं बन सका",
+    "Totals for a state or India: the usual range held only {0} of the time for employed workers in 2015-19 and {1} in 2020-25, which is why the wide range is shown for totals. District-sector totals behave like single series ({2} in 2015-19).": "राज्य या भारत के कुल योग: नियोजित कामगारों के लिए सामान्य दायरा 2015-19 में केवल {0} और 2020-25 में {1} बार सही रहा, इसीलिए कुल योग के लिए विस्तृत दायरा दिखाया जाता है। ज़िला-सेक्टर कुल योग एकल श्रृंखला जैसे व्यवहार करते हैं (2015-19 में {2})।",
+    "Trade": "ट्रेड",
+    "Trades": "ट्रेड",
+    "Trades, states and districts compared": "ट्रेड, राज्य और ज़िलों की तुलना",
+    "Training seats": "प्रशिक्षण सीटें",
+    "Usual 90% range": "सामान्य 90% दायरा",
+    "Usual and wide range": "सामान्य और विस्तृत दायरा",
+    "Usual range": "सामान्य दायरा",
+    "Vacancies": "रिक्तियाँ",
+    "Vacancies change": "रिक्तियाँ: बदलाव",
+    "Vacancies per 100 seekers": "प्रति 100 नौकरी चाहने वाले रिक्तियाँ",
+    "Value": "मान",
+    "What the index means": "सूचकांक का अर्थ",
+    "Where employment, vacancies and seekers are heading to 2030": "2030 तक रोज़गार, रिक्तियाँ और नौकरी चाहने वाले किस ओर",
+    "Wide 90% range": "विस्तृत 90% दायरा",
+    "Wide range": "विस्तृत दायरा",
+    "Year": "वर्ष",
+    "Year 2030. Below 1 certified per opening, fewer people finish training in a year than there are openings.": "वर्ष 2030। प्रति रिक्ति 1 से कम प्रमाणित होने का अर्थ है कि एक वर्ष में रिक्तियों से कम लोग प्रशिक्षण पूरा करते हैं।",
+    "all sectors": "सभी सेक्टर",
+    "and their confidence labels do not always fall as the horizon grows.": "और उनके विश्वसनीयता लेबल अवधि बढ़ने पर हमेशा नहीं घटते।",
+    "by Dec {0}: {1}": "दिसंबर {0} तक: {1}",
+    "charts show from": "चार्ट इससे दिखते हैं",
+    "districts": "ज़िले",
+    "districts from": "ज़िला स्तर इससे",
+    "forecast": "पूर्वानुमान",
+    "forecast for": "का पूर्वानुमान",
+    "held flat at the 2025-26 level (assumption)": "2025-26 के स्तर पर स्थिर (मान्यता)",
+    "in": "में",
+    "in Dec {0}": "दिसंबर {0} में",
+    "in {0}; {1} in {2}": "{0} में; {2} में {1}",
+    "made from": "आधार",
+    "months": "महीने",
+    "seats times the 2023-25 certification rate": "सीटें × 2023-25 की प्रमाणन दर",
+    "sectors": "सेक्टर",
+    "series at 12 months": "12 महीने पर श्रृंखलाएँ",
+    "states": "राज्य",
+    "trades": "ट्रेड",
+    "usual range": "सामान्य दायरा",
+    "wide range": "विस्तृत दायरा",
+    "without the 2020-23 shock and recovery pairs": "2020-23 के झटके और सुधार वाले जोड़ों के बिना",
+    "{0} flagged series": "{0} चिह्नित श्रृंखलाएँ",
+    "{0} months": "{0} महीने"
   };
+  var t = function (s) { return LANG === "hi" && HI[s] ? HI[s] : s; };
+  var tf = function (s) { var a = Array.prototype.slice.call(arguments, 1); return t(s).replace(/\{(\d)\}/g, function (_, i) { return a[+i]; }); };
+  var PAGES = {
+    overview: ["Overview", "Where employment, vacancies and seekers are heading to 2030"], forecast: ["Forecast", "Five-year forecasts with 90% ranges"], index: ["Demand Index", "How strong hiring demand is, from 0 to 100"],
+    capacity: ["Capacity gap", "Forecast openings against training seats"], ranking: ["Rankings", "Trades, states and districts compared"], warnings: ["Early warnings", "Districts forecast to be short of workers or in surplus"], data: ["Data and notes", "Method, limits and downloads"]
+  };
+  var TR = {}, TIX = {}, DNAME = {}, DSTATE = {}, DLIST = [];
+  TRADES.forEach(function (x, i) { TR[x.c] = x; TIX[x.c] = i; });
+  D.meta.districts.forEach(function (d) { DNAME[d[0]] = d[1]; DSTATE[d[0]] = STATES[d[2]]; DLIST.push({ c: String(d[0]), n: d[1], s: STATES[d[2]] }); });
+  DLIST.sort(function (a, b) { return a.n < b.n ? -1 : 1; });
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
   var fmt = function (n, d) { return Number(n).toLocaleString("en-IN", { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 }); };
-  var compact = function (n) { var a = Math.abs(n), s = n < 0 ? "−" : ""; return a >= 1e7 ? s + (a / 1e7).toFixed(2) + " Cr" : a >= 1e5 ? s + (a / 1e5).toFixed(2) + " L" : a >= 1e3 ? s + (a / 1e3).toFixed(1) + "K" : s + Math.round(a); };
+  var compact = function (n) { var a = Math.abs(n), s = n < 0 ? "−" : ""; return a >= 1e7 ? s + (a / 1e7).toFixed(2) + " " + t("Cr") : a >= 1e5 ? s + (a / 1e5).toFixed(2) + " " + t("L") : a >= 1e3 ? s + (a / 1e3).toFixed(1) + (LANG === "hi" ? " हज़ार" : "K") : s + Math.round(a); };
   var pct = function (n, d) { return (n > 0.0005 ? "+" : n < -0.0005 ? "−" : "") + Math.abs(n).toFixed(d == null ? 1 : d) + "%"; };
   var MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  var ml = function (ym) { var p = ym.split("-"); return MON[+p[1] - 1] + " " + p[0]; };
+  var MONHI = ["जन॰", "फ़र॰", "मार्च", "अप्रैल", "मई", "जून", "जुलाई", "अग॰", "सित॰", "अक्टू॰", "नव॰", "दिस॰"];
+  var ml = function (ym) { var p = ym.split("-"); return (LANG === "hi" ? MONHI : MON)[+p[1] - 1] + " " + p[0]; };
   var css = function (n) { return getComputedStyle(root).getPropertyValue(n).trim(); };
-  var reduced = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   var last = function (a) { return a[a.length - 1]; };
-  var ctxOf = function (r) { return r >= TH.exceed ? 0 : r >= TH.moderate ? 1 : r >= TH.oversupplied ? 2 : 3; };
-  var byCode = {};
-  S.forEach(function (s, i) { (byCode[s.code] = byCode[s.code] || []).push(i); });
-  var DISTRICTS = {};
-  S.forEach(function (s) { DISTRICTS[s.code] = { code: s.code, name: s.district, state: s.state }; });
-  var DLIST = Object.keys(DISTRICTS).map(function (c) { return DISTRICTS[c]; }).sort(function (a, b) { return a.name < b.name ? -1 : 1; });
-
+  var slug = function (s) { return String(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); };
+  var sum = function (a) { return a.reduce(function (x, y) { return x + y; }, 0); };
+  var dir = function (v) { return '<span class="delta ' + (v >= 0 ? "up" : "down") + '">' + pct(v) + "</span>"; };
+  var growth = function (a, b) { return a ? (b / a - 1) * 100 : 0; };
+  var NAMES = { E: "Employed workers", V: "Job vacancies", S: "Registered job seekers" };
+  var COLORS = function () { return { E: css("--employed"), V: css("--demand"), S: css("--supply") }; };
+  var CONF = { H: "High", M: "Medium", L: "Low" };
   function el(tag, attrs, parent) { var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+  function mAdd(ym, n) { var y = +ym.slice(0, 4), m = +ym.slice(5) - 1 + n; return (y + Math.floor(m / 12)) + "-" + ("0" + (m % 12 + 1)).slice(-2); }
+  function monthsOf(start, n) { var o = []; for (var i = 0; i < n; i++) o.push(mAdd(start, i)); return o; }
+  var decs = function (a) { return YEARS.map(function (_, y) { return a[12 * y + 11]; }); };
 
   /* ---------- tooltip ---------- */
   var tip = $("#tip");
-  function showTip(html, x, y) {
-    tip.innerHTML = html; tip.hidden = false;
-    var w = tip.offsetWidth, h = tip.offsetHeight;
-    tip.style.left = Math.min(Math.max(8, x + 14), window.innerWidth - w - 8) + "px"; tip.style.top = (y - h - 14 < 8 ? y + 18 : y - h - 14) + "px";
-  }
+  function showTip(html, x, y) { tip.innerHTML = html; tip.hidden = false; var w = tip.offsetWidth, h = tip.offsetHeight; tip.style.left = Math.min(Math.max(8, x + 14), window.innerWidth - w - 8) + "px"; tip.style.top = (y - h - 14 < 8 ? y + 18 : y - h - 14) + "px"; }
   function hideTip() { tip.hidden = true; }
-  document.addEventListener("pointermove", function (e) { var t = e.target.closest ? e.target.closest("[data-tip]") : null; if (t) showTip(t.getAttribute("data-tip"), e.clientX, e.clientY); else if (!document.body.classList.contains("tip-chart")) hideTip(); });
+  document.addEventListener("pointermove", function (e) { var q = e.target.closest ? e.target.closest("[data-tip]") : null; if (q) showTip(q.getAttribute("data-tip"), e.clientX, e.clientY); else if (!document.body.classList.contains("tip-chart")) hideTip(); });
 
-  /* ---------- URL state ---------- */
+  /* ---------- URL state: sector, trade, state, district ---------- */
   var cur = { page: "overview", p: {}, csv: null };
   function parse() {
     var h = location.hash.replace(/^#\/?/, ""), q = h.split("?"), page = PAGES[q[0]] ? q[0] : "overview", p = {};
     (q[1] || "").split("&").forEach(function (kv) { if (!kv) return; var a = kv.split("="); p[decodeURIComponent(a[0])] = decodeURIComponent((a[1] || "").replace(/\+/g, " ")); });
+    if (p.trade && !TR[p.trade]) delete p.trade;
+    if (p.trade) p.sector = TR[p.trade].s;
     if (p.sector && SECTORS.indexOf(p.sector) < 0) delete p.sector;
+    if (p.trade && p.sector && TR[p.trade].s !== p.sector) delete p.trade;
     if (p.state && STATES.indexOf(p.state) < 0) delete p.state;
-    if (p.district) { var d = DISTRICTS[p.district]; if (!d) delete p.district; else if (p.state && p.state !== d.state) delete p.district; else p.state = d.state; }
+    if (p.district) { if (!DNAME[p.district]) delete p.district; else if (p.state && p.state !== DSTATE[p.district]) delete p.district; else p.state = DSTATE[p.district]; }
     return { page: page, p: p };
   }
   function url(page, patch) {
     var p = Object.assign({}, cur.p, patch), parts = [];
-    if (patch && patch.district) p.state = DISTRICTS[patch.district].state;
-    if (patch && patch.state && !patch.district && p.district && DISTRICTS[p.district].state !== patch.state) delete p.district;
+    if (patch && patch.trade) p.sector = TR[patch.trade].s;
+    if (patch && patch.sector != null && !patch.trade && p.trade && TR[p.trade].s !== patch.sector) delete p.trade;
+    if (patch && patch.district) p.state = DSTATE[patch.district];
+    if (patch && patch.state != null && !patch.district && p.district && DSTATE[p.district] !== patch.state) delete p.district;
     Object.keys(p).forEach(function (k) { if (p[k] !== "" && p[k] != null) parts.push(encodeURIComponent(k) + "=" + encodeURIComponent(p[k])); });
     return "#/" + page + (parts.length ? "?" + parts.join("&") : "");
   }
   function go(patch, page) { location.hash = url(page || cur.page, patch); }
-  function sel(p, ignore) {
-    ignore = ignore || [];
+  var scopeText = function (p) { return [p.district ? DNAME[p.district] : p.state || t("All states"), p.trade ? TR[p.trade].n : p.sector ? t(p.sector) : t("all sectors")].join(", "); };
+
+  /* ---------- the state shards ---------- */
+  var shards = {};
+  function shard(state) {
+    if (!shards[state]) shards[state] = fetch("data/shards/" + slug(state) + ".json").then(function (r) { if (!r.ok) throw new Error("shard " + r.status); return r.json(); });
+    return shards[state];
+  }
+  function rowsOf(sh, p) {
     var out = [];
-    S.forEach(function (s, i) {
-      if (p.sector && ignore.indexOf("sector") < 0 && s.sector !== p.sector) return;
-      if (p.state && ignore.indexOf("state") < 0 && s.state !== p.state) return;
-      if (p.district && ignore.indexOf("district") < 0 && s.code !== p.district) return;
-      out.push(i);
-    });
+    sh.ids.forEach(function (_, i) { var tr = TRADES[sh.t[i]]; if (p.district && String(sh.d[i]) !== String(p.district)) return; if (p.trade && tr.c !== p.trade) return; if (p.sector && tr.s !== p.sector) return; out.push(i); });
     return out;
   }
-  var scopeText = function (p) { return [p.district ? DISTRICTS[p.district].name : p.state || "All states", p.sector || "all sectors"].join(", "); };
-
-  /* ---------- aggregation ---------- */
-  function sumH(k, idx) { var out = new Array(H).fill(0); idx.forEach(function (i) { var a = D.hist[k][i]; for (var m = 0; m < H; m++) out[m] += a[m]; }); return out; }
-  function sumF(k, nm, idx) { var out = new Array(12).fill(0); idx.forEach(function (i) { var a = D.fc[k][nm][i]; for (var m = 0; m < 12; m++) out[m] += a[m]; }); return out; }
-  function wavg(k, idx) {
-    var num = new Array(H).fill(0), den = new Array(H).fill(0), sc = k === "U" ? 10 : 1;
-    idx.forEach(function (i) { var a = D.hist[k][i], e = D.hist.E[i]; for (var m = 0; m < H; m++) { num[m] += a[m] / sc * e[m]; den[m] += e[m]; } });
-    return num.map(function (v, m) { return den[m] ? v / den[m] : 0; });
+  function sumRows(sh, idx, block, k) { var n = sh[block][k][0].length, o = new Array(n).fill(0); idx.forEach(function (i) { var a = sh[block][k][i]; for (var m = 0; m < n; m++) o[m] += a[m]; }); return o; }
+  function diRows(sh, idx) {
+    var n = sh.DI[0].length, num = new Array(n).fill(0), den = new Array(n).fill(0), hs = sh.hist.E[0].length;
+    idx.forEach(function (i) { var e = sh.hist.E[i].concat(sh.fc.E[i]), d = sh.DI[i]; for (var m = 0; m < n; m++) { num[m] += e[m] * d[m]; den[m] += e[m]; } });
+    return num.map(function (v, m) { return den[m] ? Math.round(v / den[m] * 10) / 10 : 0; });
   }
-  function roll12(a) { return a.map(function (_, m) { if (m < 11) return null; var s = 0; for (var j = m - 11; j <= m; j++) s += a[j]; return s; }); }
-  function div(a, b) { return a.map(function (v, i) { return b[i] ? v / b[i] : 0; }); }
-  var CRANK = { low: 0, medium: 1, high: 2 };
-  function confOf(k, idx) { var c = {}; idx.forEach(function (i) { c[D.fc[k].conf[i]] = 1; }); var ks = Object.keys(c); return ks.length === 1 ? ks[0] : "mixed"; }
-  function confFloor(ks, idx) { var lo = 2; ks.forEach(function (k) { idx.forEach(function (i) { lo = Math.min(lo, CRANK[D.fc[k].conf[i]]); }); }); return Object.keys(CRANK).filter(function (n) { return CRANK[n] === lo; })[0]; }
-  var tally = function (a) { var c = {}; a.forEach(function (v) { c[v] = (c[v] || 0) + 1; }); return Object.keys(c).sort().map(function (k) { return c[k] + " " + k; }).join(", "); };
-  var confChip = function (c) { return '<span class="conf ' + c + '"' + (c === "mixed" ? ' title="The series in this view have different confidence levels in forecast_long.csv"' : "") + ">" + c + " confidence</span>"; };
-  var deltaHtml = function (v, label) { return '<span class="delta ' + (v >= 0 ? "up" : "down") + '">' + pct(v) + "</span>" + (label ? " <span>" + label + "</span>" : ""); };
 
-  /* ---------- the line chart ---------- */
-  function timeline(p) { var w = p.r === "all" ? H : 60, start = Math.max(0, H - w); return { start: start, T: MONTHS.slice(start).concat(FM), nh: H - start }; }
+  /* ---------- a scope: the numbers of the current filters ---------- */
+  function fromGroup(G, level, sec) {
+    return { nh: HC, start: M.hist_core[0], hist: { E: G.E.slice(0, HC), V: G.V.slice(0, HC), S: G.S.slice(0, HC) }, fc: { E: G.E.slice(HC), V: G.V.slice(HC), S: G.S.slice(HC) }, DI: G.DI, level: level, sec: sec };
+  }
+  function scopeOf(p) {
+    var g = D.groups;
+    if (!p.state && !p.district) return Promise.resolve(p.trade ? fromGroup(g.trade[p.trade], "trade", p.sector) : p.sector ? fromGroup(g.sector[p.sector], "sector", p.sector) : fromGroup(g.india[""], "india", null));
+    if (p.state && !p.district && !p.trade) return Promise.resolve(p.sector ? fromGroup(g.state_sector[p.state + "|" + p.sector], "state_sector", p.sector) : fromGroup(g.state[p.state], "state", null));
+    return shard(p.state).then(function (sh) {
+      var idx = rowsOf(sh, p), level = null;
+      if (p.district && p.trade) level = "series"; else if (p.district && p.sector) level = "district_sector";
+      return { nh: HS, start: M.hist_shard[0], hist: { E: sumRows(sh, idx, "hist", "E"), V: sumRows(sh, idx, "hist", "V"), S: sumRows(sh, idx, "hist", "S") }, fc: { E: sumRows(sh, idx, "fc", "E"), V: sumRows(sh, idx, "fc", "V"), S: sumRows(sh, idx, "fc", "S") },
+        DI: diRows(sh, idx), level: level, sec: p.sector, sh: sh, idx: idx };
+    });
+  }
+  /* 90% ranges: the point forecast times exp(offset) from the calibration tables of core.js; the range always contains the point. null where no calibration exists for the combination. */
+  function ranges(S, k) {
+    if (!S.level) return null;
+    var cal = S.level === "series" ? D.cal_series[k][k === "S" ? "all" : S.sec] : D.cal_levels[S.level][k], pt = S.fc[k];
+    var f = function (nm, lo) { return pt.map(function (v, i) { var o = cal[nm][i]; o = lo ? Math.min(o, 0) : Math.max(o, 0); return Math.round(v * Math.exp(o)); }); };
+    return { lo: f("lo", 1), hi: f("hi", 0), lo_w: f("lo_wide", 1), hi_w: f("hi_wide", 0) };
+  }
+  function breakdown(p) {
+    var trs = TRADES.filter(function (x) { return (!p.sector || x.s === p.sector) && (!p.trade || x.c === p.trade); });
+    if (!p.state && !p.district) return Promise.resolve(trs.map(function (x) { var G = D.groups.trade[x.c]; return { tr: x, E0: G.E[HC - 1], E5: G.E[HC + 59], V0: G.V[HC - 1], V5: G.V[HC + 59], S0: G.S[HC - 1], S5: G.S[HC + 59], DI5: G.DI[HC + 59], DI0: G.DI[HC - 1] }; }));
+    return shard(p.state).then(function (sh) {
+      return trs.map(function (x) {
+        var idx = rowsOf(sh, Object.assign({}, p, { trade: x.c, sector: x.s })), E = sumRows(sh, idx, "hist", "E").concat(sumRows(sh, idx, "fc", "E")), V = sumRows(sh, idx, "hist", "V").concat(sumRows(sh, idx, "fc", "V")), S = sumRows(sh, idx, "hist", "S").concat(sumRows(sh, idx, "fc", "S")), d = diRows(sh, idx);
+        return { tr: x, E0: E[HS - 1], E5: last(E), V0: V[HS - 1], V5: last(V), S0: S[HS - 1], S5: last(S), DI5: last(d), DI0: d[HS - 1], idx: idx };
+      });
+    });
+  }
+
+  /* ---------- line chart with two nested 90% ranges ---------- */
   function ticks(lo, hi, n) {
-    if (hi - lo < 1e-9) { hi = lo + 1; }
+    if (hi - lo < 1e-9) hi = lo + 1;
     var span = hi - lo, step = Math.pow(10, Math.floor(Math.log10(span / n))), err = span / n / step;
     step *= err >= 7 ? 10 : err >= 3 ? 5 : err >= 1.5 ? 2 : 1;
     var a = Math.floor(lo / step) * step, b = Math.ceil(hi / step) * step, out = [];
@@ -102,51 +317,36 @@
   function legend(items) { return '<div class="legend">' + items.map(function (l) { return '<span style="--c:' + l.color + '"><i class="' + (l.cls || "") + '"></i>' + esc(l.name) + "</span>"; }).join("") + "</div>"; }
   function lineChart(host, o) {
     host.innerHTML = "";
-    var W = 780, HT = o.height || 290, two = o.lines.some(function (l) { return l.axis === 1; }), m = { l: 64, r: two ? 64 : 16, t: 16, b: 32 }, nT = o.T.length, nh = o.nh;
-    var rng = [[Infinity, -Infinity], [Infinity, -Infinity]];
+    var W = 780, HT = o.height || 290, m = { l: 64, r: 16, t: 16, b: 32 }, nT = o.T.length, nh = o.nh, lo = Infinity, hi = -Infinity;
     o.lines.forEach(function (l) {
-      var r = rng[l.axis || 0], all = l.hist.concat(l.fc || []).concat(l.band ? l.band.lo.concat(l.band.hi) : []);
-      all.forEach(function (v) { if (v != null && isFinite(v)) { if (v < r[0]) r[0] = v; if (v > r[1]) r[1] = v; } });
+      var all = l.hist.concat(l.fc || []).concat(l.band ? l.band.lo_w.concat(l.band.hi_w) : []);
+      all.forEach(function (v) { if (v != null && isFinite(v)) { if (v < lo) lo = v; if (v > hi) hi = v; } });
     });
-    (o.hlines || []).forEach(function (hl) { var r = rng[hl.axis || 0]; if (hl.v < r[0]) r[0] = hl.v; if (hl.v > r[1]) r[1] = hl.v; });
-    var sc = rng.map(function (r, ax) {
-      if (!isFinite(r[0])) return null;
-      var pad = (r[1] - r[0]) * 0.08 || Math.abs(r[1]) * 0.1 || 1, lo = o.zero ? Math.min(0, r[0]) : r[0] - pad, hi = r[1] + pad, t = ticks(lo, hi, 5);
-      return { lo: t[0], hi: t[t.length - 1], t: t };
-    });
-    var x = function (i) { return m.l + (i / (nT - 1)) * (W - m.l - m.r); };
-    var y = function (v, ax) { var s = sc[ax || 0]; return m.t + (1 - (v - s.lo) / (s.hi - s.lo)) * (HT - m.t - m.b); };
+    (o.hlines || []).forEach(function (hl) { lo = Math.min(lo, hl.v); hi = Math.max(hi, hl.v); });
+    var pad = (hi - lo) * 0.08 || Math.abs(hi) * 0.1 || 1, tk = ticks(o.zero ? Math.min(0, lo) : lo - pad, hi + pad, 5), s0 = tk[0], s1 = last(tk);
+    var x = function (i) { return m.l + (i / (nT - 1)) * (W - m.l - m.r); }, y = function (v) { return m.t + (1 - (v - s0) / (s1 - s0)) * (HT - m.t - m.b); };
     var svg = el("svg", { viewBox: "0 0 " + W + " " + HT, role: "img", "aria-label": o.label || "chart" }, host);
     (o.regions || []).forEach(function (r) {
-      var i0 = Math.max(0, o.T.indexOf(r.from)), i1 = o.T.indexOf(r.to); if (i1 < 0) i1 = nh - 1; if (i1 < 0 || i0 > nh - 1) return;
-      el("rect", { x: x(i0), y: m.t, width: Math.max(2, x(Math.min(i1, nT - 1)) - x(i0)), height: HT - m.t - m.b, fill: r.color || css("--ink-2"), "fill-opacity": ".09" }, svg);
+      var i0 = o.T.indexOf(r.from), i1 = o.T.indexOf(r.to); if (i0 < 0) i0 = 0; if (i1 < 0 || i1 < i0) return;
+      el("rect", { x: x(i0), y: m.t, width: Math.max(2, x(i1) - x(i0)), height: HT - m.t - m.b, fill: css("--ink-2"), "fill-opacity": ".09" }, svg);
       el("text", { x: x(i0) + 4, y: m.t + 11, class: "axis-l" }, svg).textContent = r.label;
     });
-    sc.forEach(function (s, ax) {
-      if (!s) return;
-      s.t.forEach(function (v) {
-        if (ax === 0) el("line", { x1: m.l, x2: W - m.r, y1: y(v, 0), y2: y(v, 0), stroke: css("--line"), "stroke-dasharray": v === 0 ? "none" : "3 5" }, svg);
-        el("text", { x: ax === 0 ? m.l - 8 : W - m.r + 8, y: y(v, ax) + 4, "text-anchor": ax === 0 ? "end" : "start", style: two ? "fill:" + (o.axisColors ? o.axisColors[ax] : "") : "" }, svg).textContent = (o.fmtAxis && o.fmtAxis[ax] || compact)(v);
-      });
-    });
+    tk.forEach(function (v) { el("line", { x1: m.l, x2: W - m.r, y1: y(v), y2: y(v), stroke: css("--line"), "stroke-dasharray": v === 0 ? "none" : "3 5" }, svg); el("text", { x: m.l - 8, y: y(v) + 4, "text-anchor": "end" }, svg).textContent = (o.fmtAxis || compact)(v); });
     var lastYear = "";
-    o.T.forEach(function (ym, i) { var yr = ym.slice(0, 4); if (ym.slice(5) === "01" && yr !== lastYear && (o.T.length < 90 || +yr % 2 === 1 || i === 0)) { lastYear = yr; el("text", { x: x(i), y: HT - 10, "text-anchor": "middle" }, svg).textContent = yr; } });
+    o.T.forEach(function (ym, i) { var yr = ym.slice(0, 4); if (ym.slice(5) === "01" && yr !== lastYear && (nT < 100 || +yr % 2 === 0 || i === 0)) { lastYear = yr; el("text", { x: x(i), y: HT - 10, "text-anchor": "middle" }, svg).textContent = yr; } });
     (o.hlines || []).forEach(function (hl) {
-      el("line", { x1: m.l, x2: W - m.r, y1: y(hl.v, hl.axis), y2: y(hl.v, hl.axis), stroke: hl.color || css("--ink-2"), "stroke-dasharray": "5 4", "stroke-opacity": ".7" }, svg);
-      if (hl.label) el("text", { x: m.l + 6, y: y(hl.v, hl.axis) - 4, class: "mark-t" }, svg).textContent = hl.label;
-    });
-    (o.marks || []).forEach(function (mk) {
-      var i = o.T.indexOf(mk.ym); if (i < 0) return;
-      el("line", { x1: x(i), x2: x(i), y1: m.t, y2: HT - m.b, stroke: css("--ink"), "stroke-width": 1.2, "stroke-dasharray": "4 4", "stroke-opacity": ".7" }, svg);
-      el("text", { x: x(i) + 5, y: m.t + 24, class: "mark-t" }, svg).textContent = mk.label;
+      el("line", { x1: m.l, x2: W - m.r, y1: y(hl.v), y2: y(hl.v), stroke: hl.color || css("--ink-2"), "stroke-dasharray": "5 4", "stroke-opacity": ".7" }, svg);
+      if (hl.label) el("text", { x: m.l + 6, y: y(hl.v) - 4, class: "axis-l" }, svg).textContent = hl.label;
     });
     el("line", { x1: x(nh - 1), x2: x(nh - 1), y1: m.t, y2: HT - m.b, stroke: css("--ink-2"), "stroke-dasharray": "2 4" }, svg);
-    el("text", { x: x(nh - 1) + 6, y: HT - m.b - 6, class: "axis-l" }, svg).textContent = "forecast →";
+    el("text", { x: x(nh - 1) + 6, y: HT - m.b - 6, class: "axis-l" }, svg).textContent = t("forecast") + " →";
     o.lines.forEach(function (l) {
-      var ax = l.axis || 0, path = function (arr, from) { var d = "", started = false; arr.forEach(function (v, j) { if (v == null) return; d += (started ? "L" : "M") + x(from + j).toFixed(1) + " " + y(v, ax).toFixed(1); started = true; }); return d; };
+      var path = function (arr, from) { var d = "", st = false; arr.forEach(function (v, j) { if (v == null) return; d += (st ? "L" : "M") + x(from + j).toFixed(1) + " " + y(v).toFixed(1); st = true; }); return d; };
       if (l.band) {
-        var up = l.band.hi.map(function (v, j) { return x(nh + j).toFixed(1) + "," + y(v, ax).toFixed(1); }), dn = l.band.lo.map(function (v, j) { return x(nh + j).toFixed(1) + "," + y(v, ax).toFixed(1); }).reverse();
-        el("polygon", { points: x(nh - 1).toFixed(1) + "," + y(last(l.hist), ax).toFixed(1) + " " + up.join(" ") + " " + dn.join(" "), fill: l.color, "fill-opacity": ".18" }, svg);
+        [["lo_w", "hi_w", ".11"], ["lo", "hi", ".22"]].forEach(function (b) {
+          var up = l.band[b[1]].map(function (v, j) { return x(nh + j).toFixed(1) + "," + y(v).toFixed(1); }), dn = l.band[b[0]].map(function (v, j) { return x(nh + j).toFixed(1) + "," + y(v).toFixed(1); }).reverse();
+          el("polygon", { points: x(nh - 1).toFixed(1) + "," + y(last(l.hist)).toFixed(1) + " " + up.join(" ") + " " + dn.join(" "), fill: l.color, "fill-opacity": b[2] }, svg);
+        });
       }
       el("path", { d: path(l.hist, 0), fill: "none", stroke: l.color, "stroke-width": 2.4, "stroke-linejoin": "round", "stroke-linecap": "round" }, svg);
       if (l.fc) el("path", { d: path([last(l.hist)].concat(l.fc), nh - 1), fill: "none", stroke: l.color, "stroke-width": 2.4, "stroke-dasharray": "6 5", "stroke-linecap": "round" }, svg);
@@ -157,318 +357,266 @@
     function at(e) {
       var r = svg.getBoundingClientRect(), px = (e.clientX - r.left) / r.width * W, i = Math.max(0, Math.min(nT - 1, Math.round((px - m.l) / (W - m.l - m.r) * (nT - 1))));
       hg.style.display = ""; hl.setAttribute("x1", x(i)); hl.setAttribute("x2", x(i));
-      var isF = i >= nh, html = "<b>" + ml(o.T[i]) + (isF ? " (forecast)" : "") + "</b>";
+      var isF = i >= nh, html = "<b>" + ml(o.T[i]) + (isF ? " (" + t("forecast") + ")" : "") + "</b>";
       o.lines.forEach(function (l, j) {
         var v = isF ? (l.fc ? l.fc[i - nh] : null) : l.hist[i];
         if (v == null) { dots[j].style.display = "none"; return; }
-        dots[j].style.display = ""; dots[j].setAttribute("cx", x(i)); dots[j].setAttribute("cy", y(v, l.axis || 0));
-        var f = (o.fmtTip && o.fmtTip[j]) || fmt;
-        html += "<br>" + esc(l.name) + ": " + f(v) + (isF && l.band ? " (" + f(l.band.lo[i - nh]) + " to " + f(l.band.hi[i - nh]) + ")" : "");
+        dots[j].style.display = ""; dots[j].setAttribute("cx", x(i)); dots[j].setAttribute("cy", y(v));
+        var f = o.fmtTip || fmt;
+        html += "<br>" + esc(l.name) + ": " + f(v);
+        if (isF && l.band) html += "<br><small>" + t("Usual range") + " " + f(l.band.lo[i - nh]) + " – " + f(l.band.hi[i - nh]) + "<br>" + t("Wide range") + " " + f(l.band.lo_w[i - nh]) + " – " + f(l.band.hi_w[i - nh]) + "</small>";
       });
       document.body.classList.add("tip-chart"); showTip(html, e.clientX, e.clientY);
     }
     cap.addEventListener("pointermove", at); cap.addEventListener("pointerdown", at);
     cap.addEventListener("pointerleave", function () { hg.style.display = "none"; document.body.classList.remove("tip-chart"); hideTip(); });
   }
-  function chartCard(title, sub, right, id) { return '<section class="card"><div class="card-h"><div><h2>' + title + "</h2>" + (sub ? "<p>" + sub + "</p>" : "") + "</div>" + (right || "") + '</div><div id="' + id + '-lg"></div><div class="chart" id="' + id + '"></div></section>'; }
-  function draw(id, o) { var host = document.getElementById(id); lineChart(host, o); document.getElementById(id + "-lg").innerHTML = legend(o.lines.map(function (l) { return { name: l.name, color: l.color }; }).concat(o.lines.some(function (l) { return l.band; }) ? [{ name: "90% range", color: o.lines[0].color, cls: "box" }] : [])); }
-  function rangeToggle(p) { return '<div class="seg-row" role="group" aria-label="Time range"><button type="button" data-r="60" aria-pressed="' + (p.r !== "all") + '">Last 5 years</button><button type="button" data-r="all" aria-pressed="' + (p.r === "all") + '">Since 2011</button></div>'; }
-  function bindRange(view) { $$("[data-r]", view).forEach(function (b) { b.addEventListener("click", function () { go({ r: b.dataset.r === "all" ? "all" : "" }); }); }); }
-  var COV = function () { return [{ ym: D.meta.covid[0], to: D.meta.covid[1], label: "COVID" }]; };
-  var regionsCovid = function () { return [{ from: D.meta.covid[0], to: D.meta.covid[1], label: "COVID period" }]; };
+  function chartCard(title, sub, right, id) { return '<section class="card"><div class="card-h"><div><h2>' + title + "</h2>" + (sub ? "<p>" + sub + "</p>" : "") + "</div>" + (right || "") + '</div><div id="' + id + '-lg"></div><div class="chart" id="' + id + '"></div><p class="sr-only" id="' + id + '-sr"></p></section>'; }
+  function draw(id, o, summary) {
+    lineChart(document.getElementById(id), o);
+    var band = o.lines.some(function (l) { return l.band; });
+    document.getElementById(id + "-lg").innerHTML = legend(o.lines.map(function (l) { return { name: l.name, color: l.color }; }).concat(band ? [{ name: t("Usual 90% range"), color: o.lines[0].color, cls: "box" }, { name: t("Wide 90% range"), color: o.lines[0].color, cls: "box faint" }] : []));
+    if (summary) document.getElementById(id + "-sr").textContent = summary;
+  }
+  var window_ = function (S) { return { T: monthsOf(S.start, S.nh + 60), nh: S.nh }; };
+  var shock = function () { return [{ from: "2020-03", to: "2023-12", label: t("2020-23 shock and recovery") }]; };
+  var rangeNote = function (S) { return S.level ? "" : '<p class="note">' + t("No calibrated 90% range exists for this combination of filters, so only the point forecast is drawn. Choose a sector, state, state with sector, or a district with a sector or trade for a range.") + "</p>"; };
 
-  /* ---------- CSV ---------- */
-  function slug(s) { return String(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
-  function download(name, head, rows) {
+  /* ---------- CSV and JSON ---------- */
+  function toast(s) { var n = document.createElement("div"); n.className = "toast"; n.textContent = s; document.body.appendChild(n); setTimeout(function () { n.remove(); }, 2600); }
+  function save(blob, name) { var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500); }
+  function downloadCsv(name, head, rows) {
     var q = function (v) { v = v == null ? "" : String(v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
-    var text = [head].concat(rows).map(function (r) { return r.map(q).join(","); }).join("\r\n") + "\r\n";
-    var a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([text], { type: "text/csv;charset=utf-8" })); a.download = name + ".csv"; document.body.appendChild(a); a.click();
-    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
-    toast("Downloaded " + name + ".csv (" + fmt(rows.length) + " rows)");
+    save(new Blob(["﻿" + [head].concat(rows).map(function (r) { return r.map(q).join(","); }).join("\r\n") + "\r\n"], { type: "text/csv;charset=utf-8" }), name + ".csv"); toast(tf("Downloaded {0}.csv ({1} rows)", name, fmt(rows.length)));
   }
-  function toast(t) { var n = document.createElement("div"); n.className = "toast"; n.textContent = t; document.body.appendChild(n); setTimeout(function () { n.remove(); }, 2600); }
-  function fname(page) { return "lmis_" + page + "_" + slug(cur.p.sector || "all-sectors") + "_" + slug(cur.p.district ? DISTRICTS[cur.p.district].name : cur.p.state || "all-states"); }
-  function rowsForecast(idx) {
-    var out = [];
-    idx.forEach(function (i) { ["E", "V", "S"].forEach(function (k) { for (var h = 0; h < 12; h++) out.push([S[i].id, S[i].district, S[i].state, S[i].sector, TGT[k], h + 1, FM[h], D.fc[k].f[i][h], D.fc[k].lo[i][h], D.fc[k].hi[i][h], D.fc[k].conf[i], D.fc[k].err[i][h]]); }); });
-    return out;
+  function downloadJson(name, head, rows) {
+    var o = rows.map(function (r) { var x = {}; head.forEach(function (h, i) { x[h] = r[i]; }); return x; });
+    save(new Blob([JSON.stringify({ source: "KaushalSetu dashboard, simulated data", forecast_origin: M.origin, rows: o }, null, 1)], { type: "application/json" }), name + ".json"); toast(tf("Downloaded {0}.json ({1} rows)", name, fmt(rows.length)));
   }
-  var HEAD_F = ["series_id", "district", "state", "sector", "measure", "horizon_months", "target_month", "forecast", "lo90", "hi90", "confidence", "typical_test_error_pct"];
-  function rowsFlags(idx) { var out = []; idx.forEach(function (i) { for (var h = 0; h < 12; h++) { var f = D.fl[i][h]; out.push([S[i].id, S[i].district, S[i].state, S[i].sector, h + 1, FM[h], f[6], f[0], STATUS[f[1]], CONTEXT[f[2]], STATUS[f[3]], CHANGE[f[4]], f[5] == null ? "" : f[5], D.meta.flag_conf[i], FLAGC[f[1]] ? FLAGC[f[1]].join(" ") : "", S[i].low ? "yes" : "no"]); } }); return out; }
-  var HEAD_L = ["series_id", "district", "state", "sector", "horizon_months", "target_month", "forecast_openings_per_seeker", "percentile_in_sector", "relative_status", "absolute_context", "current_status", "change", "historical_precision", "confidence", "flag", "small_count_series"];
-  function rowsHistory(idx) {
-    var out = []; idx.forEach(function (i) { for (var m = 0; m < H; m++) out.push([S[i].id, S[i].district, S[i].state, S[i].sector, MONTHS[m], D.hist.E[i][m], D.hist.V[i][m], D.hist.S[i][m], D.hist.W[i][m], D.hist.U[i][m] / 10, D.hist.T[i][m], D.hist.C[i][m]]); });
-    return out;
-  }
-  var HEAD_H = ["series_id", "district", "state", "sector", "month", "employed_workers", "job_vacancies", "registered_seekers", "avg_monthly_wage_inr", "unemployment_rate_pct", "training_seats_sanctioned", "trainees_certified"];
+  var fname = function (page) { return "kaushalsetu_" + page + "_" + slug(cur.p.trade || cur.p.sector || "all-sectors") + "_" + slug(cur.p.district ? DNAME[cur.p.district] : cur.p.state || "all-states"); };
 
-  /* ---------- warnings ---------- */
-  function warnRows(idx, hz) {
-    var out = [];
-    idx.forEach(function (i) {
-      var f = D.fl[i][hz - 1], c = FLAGC[f[1]]; if (!c) return;
-      out.push({ i: i, type: c[0], level: c[1], pct: f[0], status: f[1], ctx: f[2], cur: f[3], chg: f[4], prec: f[5], ratio: f[6] });
-    });
-    out.sort(function (a, b) { return (a.level === b.level ? 0 : a.level === "alert" ? -1 : 1) || Math.abs(b.pct - 50) - Math.abs(a.pct - 50); });
-    return out;
-  }
-  var horizonOf = function (p) { return [3, 6, 12].indexOf(+p.h) >= 0 ? +p.h : 12; };
-  function hzSeg(p, key) { var h = horizonOf(p); return '<div class="seg-row" role="group" aria-label="Months ahead">' + [3, 6, 12].map(function (v) { return '<button type="button" data-hz="' + v + '" aria-pressed="' + (v === h) + '">' + v + " months</button>"; }).join("") + "</div>"; }
-  function bindHz(view, key) { $$("[data-hz]", view).forEach(function (b) { b.addEventListener("click", function () { var o = {}; o[key || "h"] = b.dataset.hz; go(o); }); }); }
-
-  /* ---------- the districts: map ---------- */
-  var mapVB = null;
-  function mapView(host, p) {
-    var mh = [0, 3, 6, 12].indexOf(+p.mh) >= 0 ? +p.mh : 0, counts = [0, 0, 0, 0];
-    host.innerHTML = '<div class="m-chips" id="m-states" role="group" aria-label="State"></div><svg id="m-svg" role="img" aria-label="Map of the forecast districts coloured by absolute context"></svg>';
-    var svg = $("#m-svg", host), box = host;
-    var chips = $("#m-states", host);
-    [["", "All states"]].concat(STATES.map(function (s) { return [s, s]; })).forEach(function (o) { var b = document.createElement("button"); b.type = "button"; b.textContent = o[1]; b.setAttribute("aria-pressed", (p.state || "") === o[0]); b.addEventListener("click", function () { go({ state: o[0], district: "" }); }); chips.appendChild(b); });
-    el("path", { d: M.backdrop, class: "mbackdrop" }, svg);
-    var og = el("g", {}, svg);
-    (M.others || []).forEach(function (o) { var q = el("path", { d: o.d, class: "mextra" + (p.state && p.state !== o.s ? " dim" : "") }, og); q.setAttribute("data-tip", "<b>" + esc(o.n) + "</b> · " + esc(o.s) + "<br>No forecast data for this district"); });
-    var g = el("g", {}, svg), hl;
-    M.districts.forEach(function (d) {
-      var idx = (byCode[d.c] || []).filter(function (i) { return !p.sector || S[i].sector === p.sector; }), v = 0, s = 0;
-      idx.forEach(function (i) { if (mh === 0) { v += D.hist.V[i][H - 1]; s += D.hist.S[i][H - 1]; } else { v += D.fc.V.f[i][mh - 1]; s += D.fc.S.f[i][mh - 1]; } });
-      var r = s ? v / s : 0, c = ctxOf(r); counts[c]++;
-      var path = el("path", { d: d.d, class: "mdist" + (p.state && p.state !== d.s ? " dim" : ""), style: "fill:var(--ctx" + c + ")", "data-code": d.c }, g);
-      path.setAttribute("data-tip", "<b>" + esc(d.n) + "</b> · " + esc(d.s) + "<br>" + CTX_NAME[c] + "<br>Openings per 100 seekers: " + fmt(r * 100, 1) + "<br>Vacancies " + fmt(v) + ", seekers " + fmt(s) + (mh ? "<br>" + mh + " months ahead" : "<br>Latest month"));
-      path.addEventListener("click", function () { go(p.district === d.c ? { district: "" } : { district: d.c }); });
-      if (p.district === d.c) { hl = d.d; }
-    });
-    var hp = el("path", { class: "mhl", d: hl || "" }, svg);
-    var labels = {};
-    STATES.forEach(function (s) { var ds = M.districts.concat(M.others).filter(function (d) { return d.s === s; }); if (!ds.length) return; labels[s] = el("text", { class: "mstate", "data-x": ds.reduce(function (a, d) { return a + (d.bb[0] + d.bb[2]) / 2; }, 0) / ds.length, "data-y": ds.reduce(function (a, d) { return a + (d.bb[1] + d.bb[3]) / 2; }, 0) / ds.length, "data-dx": s === "Delhi" ? 16 : 0 }, svg); labels[s].textContent = s; if (p.state && p.state !== s) labels[s].style.display = "none"; });
-    function target() {
-      var r = box.clientWidth > 0 && box.clientHeight > 0 ? box.clientWidth / box.clientHeight : 1, b;
-      if (!p.state) b = M.viewBox.slice(); else { var x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9; M.districts.concat(M.others).filter(function (d) { return d.s === p.state; }).forEach(function (d) { x0 = Math.min(x0, d.bb[0]); y0 = Math.min(y0, d.bb[1]); x1 = Math.max(x1, d.bb[2]); y1 = Math.max(y1, d.bb[3]); }); var pad = Math.max(x1 - x0, y1 - y0) * 0.14; b = [x0 - pad, y0 - pad, x1 - x0 + 2 * pad, y1 - y0 + 2 * pad]; }
-      var cx = b[0] + b[2] / 2, cy = b[1] + b[3] / 2, w = b[2], h = b[3]; if (w / h < r) w = h * r; else h = w / r; return [cx - w / 2, cy - h / 2, w, h];
-    }
-    function setVB(vb) {
-      if (!vb.every(isFinite) || vb[2] <= 0) return; mapVB = vb; svg.setAttribute("viewBox", vb.map(function (n) { return n.toFixed(1); }).join(" "));
-      var k = Math.min(box.clientWidth / vb[2], box.clientHeight / vb[3]) || 1;
-      Object.keys(labels).forEach(function (s) { var t = labels[s]; t.setAttribute("font-size", (12 / k).toFixed(1)); t.setAttribute("stroke-width", (3.5 / k).toFixed(1)); var dx = +t.getAttribute("data-dx"); t.setAttribute("x", (+t.getAttribute("data-x") + dx / k).toFixed(1)); t.setAttribute("y", t.getAttribute("data-y")); if (dx) t.style.textAnchor = "start"; });
-    }
-    var to = target(), from = mapVB || to;
-    if (reduced || !mapVB) setVB(to); else { var t0 = null; (function f(ts) { if (t0 === null) t0 = ts; var q = Math.min(1, (ts - t0) / 650), e = 1 - Math.pow(1 - q, 3); setVB(from.map(function (a, i) { return a + (to[i] - a) * e; })); if (q < 1) requestAnimationFrame(f); })(performance.now()); }
-    return counts;
-  }
-  function ctxLegend(counts) { return '<div class="ctx-legend">' + CTX_NAME.map(function (n, c) { return '<span style="--c:var(--ctx' + c + ')"><i></i>' + n + " (" + counts[c] + ")</span>"; }).join("") + '<span style="--c:var(--surface-2)"><i style="border:1px solid var(--line)"></i>No forecast data</span></div>'; }
-
-  /* ---------- sector rows (shared by the overview table and the bar charts) ---------- */
-  function sectorRows(p) {
-    return SECTORS.map(function (sec) {
-      var idx = sel(p, ["sector"]).filter(function (i) { return S[i].sector === sec; });
-      if (!idx.length) return { sec: sec, empty: true };
-      var E = sumH("E", idx), V = sumH("V", idx), Sk = sumH("S", idx), fV = sumF("V", "f", idx), fS = sumF("S", "f", idx), r0 = last(V) / last(Sk), r12 = fV[11] / fS[11];
-      return { sec: sec, idx: idx, E: last(E), V: last(V), S: last(Sk), r0: r0, r12: r12, ctx: ctxOf(r0), dV: (fV[11] / last(V) - 1) * 100, dS: (fS[11] / last(Sk) - 1) * 100, conf: confOf("S", idx) };
-    });
-  }
-  function sectorBars(rows, p) {
-    var max = Math.max.apply(null, rows.filter(function (r) { return !r.empty; }).map(function (r) { return Math.max(r.r0, r.r12); })) * 1.1 || 1;
-    return '<div class="bars">' + rows.map(function (r) {
-      if (r.empty) return "";
-      return '<div class="bar-row' + (p.sector === r.sec ? " on" : "") + '" data-sec="' + esc(r.sec) + '" data-tip="<b>' + esc(r.sec) + "</b><br>" + CTX_NAME[r.ctx] + "<br>Now: " + fmt(r.r0 * 100, 1) + " openings per 100 seekers<br>In 12 months: " + fmt(r.r12 * 100, 1) + '"><span>' + esc(r.sec) + '</span><span class="tr"><span class="fi" style="width:' + (r.r0 / max * 100).toFixed(1) + "%;--c:var(--ctx" + r.ctx + ')"></span><span class="tk" style="left:' + (r.r12 / max * 100).toFixed(1) + '%"></span></span><b>' + fmt(r.r0 * 100, 1) + "</b></div>";
-    }).join("") + '</div><p class="note">Openings per 100 registered seekers, latest month. The dark tick marks the forecast for twelve months ahead.</p>';
-  }
-  function bindBars(view, p) { $$(".bar-row", view).forEach(function (b) { b.addEventListener("click", function () { go({ sector: p.sector === b.dataset.sec ? "" : b.dataset.sec }); }); }); }
+  /* ---------- small parts ---------- */
+  var kpi = function (lbl, color, val, sub) { return '<div class="card kpi" style="--c:' + color + '"><div class="lbl"><i></i>' + lbl + '</div><span class="val">' + val + '</span><div class="sub">' + sub + "</div></div>"; };
+  var confChip = function (c) { return '<span class="conf ' + ({ H: "high", M: "medium", L: "low" }[c] || "") + '">' + t(CONF[c] || c) + "</span>"; };
+  var heat = function (v) { return 'style="background:color-mix(in srgb, var(--demand) ' + Math.round(Math.max(0, Math.min(100, v)) * 0.55) + '%, transparent)"'; };
+  var scopeHead = function (p, right) { return '<div class="card-h"><div><h2 style="font-size:1.05rem">' + esc(scopeText(p)) + "</h2></div>" + (right || "") + "</div>"; };
+  function segment(key, opts, value, label) { return '<div class="seg-row" role="group" aria-label="' + esc(t(label)) + '">' + opts.map(function (o) { return '<button type="button" data-k="' + key + '" data-v="' + o[0] + '" aria-pressed="' + (String(o[0]) === String(value)) + '">' + esc(o[1]) + "</button>"; }).join("") + "</div>"; }
+  function bindSeg(view) { $$("[data-k]", view).forEach(function (b) { b.addEventListener("click", function () { var o = {}; o[b.dataset.k] = b.dataset.v; go(o); }); }); }
+  function bindRows(view) { $$("tr.click", view).forEach(function (tr) { tr.addEventListener("click", function () { var o = {}; if (tr.dataset.trade) o.trade = tr.dataset.trade; if (tr.dataset.state) o.state = tr.dataset.state; if (tr.dataset.sector) o.sector = tr.dataset.sector; if (tr.dataset.district) o.district = tr.dataset.district; go(o); }); }); }
+  var table = function (head, rows, cls) { return '<div class="tbl-wrap"><table class="tbl ' + (cls || "") + '"><thead><tr>' + head.map(function (h) { return '<th class="' + (h[1] || "") + '">' + esc(t(h[0])) + "</th>"; }).join("") + "</tr></thead><tbody>" + rows.join("") + "</tbody></table></div>"; };
+  var render = {};
+  var loadingErr = function (view, e) { view.innerHTML = '<div class="banner">' + esc(t("This page could not be drawn")) + ": " + esc(e.message) + "</div>"; if (window.console) console.error(e); };
 
   /* ---------- pages ---------- */
-  var render = {};
-
   render.overview = function (p, view) {
-    var idx = sel(p), E = sumH("E", idx), V = sumH("V", idx), Sk = sumH("S", idx), fE = sumF("E", "f", idx), fV = sumF("V", "f", idx), fS = sumF("S", "f", idx);
-    var r0 = last(V) / last(Sk), r12 = fV[11] / fS[11];
-    var kpi = function (lbl, color, val, dv, k) { return '<div class="card kpi" style="--c:' + color + '"><div class="lbl"><i></i>' + lbl + '</div><span class="val">' + val + '</span><div class="sub">' + dv + (k ? " " + confChip(confOf(k, idx)) : "") + "</div></div>"; };
-    var w = warnRows(idx, 12), cnt = function (t, l) { return w.filter(function (r) { return r.type === t && r.level === l; }).length; };
-    var tile = function (t, l, lbl) { return '<a class="ew-tile' + (l === "alert" ? " a" : "") + '" href="' + url("warnings", { t: t, lv: l, h: 12 }) + '"><span>' + lbl + "</span><b>" + cnt(t, l) + "</b><span>series at 12 months</span></a>"; };
-    var rows = sectorRows(p), top = w.filter(function (r) { return r.level === "alert"; }).slice(0, 5);
-    view.innerHTML = '<div class="grid g4">' +
-      kpi("Employed workers", "var(--employed)", compact(last(E)), deltaHtml((fE[11] / last(E) - 1) * 100, "in 12 months"), "E") +
-      kpi("Job vacancies", "var(--demand)", compact(last(V)), deltaHtml((fV[11] / last(V) - 1) * 100, "in 12 months"), "V") +
-      kpi("Registered job seekers", "var(--supply)", compact(last(Sk)), deltaHtml((fS[11] / last(Sk) - 1) * 100, "in 12 months"), "S") +
-      kpi("Openings per 100 seekers", "var(--ctx" + ctxOf(r0) + ")", fmt(r0 * 100, 1), '<span class="pill c' + ctxOf(r0) + '">' + CTX_NAME[ctxOf(r0)] + "</span> <span>" + fmt(r12 * 100, 1) + " in 12 months</span>", null) + "</div>" +
-      '<div class="grid g-map mt"><section class="card"><div class="card-h"><div><h2>District map</h2><p>Coloured by absolute context. Click a district to filter every page.</p></div>' +
-      '<div class="seg-row" role="group" aria-label="Map month">' + [[0, "Latest"], [3, "+3 months"], [6, "+6"], [12, "+12"]].map(function (o) { return '<button type="button" data-mh="' + o[0] + '" aria-pressed="' + (o[0] === ([0, 3, 6, 12].indexOf(+p.mh) >= 0 ? +p.mh : 0)) + '">' + o[1] + "</button>"; }).join("") + '</div></div><div class="mapbox" id="mapbox"></div><div id="m-leg"></div></section>' +
-      '<div class="grid"><section class="card"><div class="card-h"><div><h2>Openings vs seekers</h2><p>' + esc(scopeText(p)) + "</p></div>" + rangeToggle(p) + '</div><div id="c-ovs-lg"></div><div class="chart" id="c-ovs"></div></section>' +
-      '<section class="card"><div class="card-h"><div><h2>Early-warning summary</h2><p>Forecast flags twelve months ahead for ' + esc(scopeText(p)) + '</p></div><a class="chip-btn" href="' + url("warnings", {}) + '">Open</a></div><div class="ew-tiles">' + tile("shortage", "alert", "Shortage alerts") + tile("shortage", "watch", "Shortage watch") + tile("oversupply", "alert", "Oversupply alerts") + tile("oversupply", "watch", "Oversupply watch") + "</div>" +
-      '<ul class="list">' + (top.length ? top.map(function (r) { return "<li><span>" + esc(S[r.i].district) + " · " + esc(S[r.i].sector) + "</span><small>" + r.type + "</small></li>"; }).join("") : "<li><span>No alerts in this view.</span></li>") + "</ul></section></div></div>" +
-      '<div class="grid g2 mt"><section class="card"><div class="card-h"><div><h2>Coverage by sector</h2><p>Selected state and district; click a bar to filter the sector</p></div></div>' + sectorBars(rows, p) + "</section>" +
-      '<section class="card"><div class="card-h"><div><h2>Sector table</h2><p>Latest month and the twelve-month forecast</p></div></div><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Sector</th><th class="num">Employed</th><th class="num">Vacancies</th><th class="num">Seekers</th><th class="num">Per 100</th><th>Context</th><th class="num">Vac. 12m</th><th class="num">Seek. 12m</th></tr></thead><tbody>' +
-      rows.map(function (r) { return r.empty ? "" : '<tr class="click' + (p.sector === r.sec ? " on" : "") + '" data-sec="' + esc(r.sec) + '"><td>' + esc(r.sec) + '</td><td class="num">' + compact(r.E) + '</td><td class="num">' + compact(r.V) + '</td><td class="num">' + compact(r.S) + '</td><td class="num">' + fmt(r.r0 * 100, 1) + '</td><td><span class="pill c' + r.ctx + '">' + CTX_NAME[r.ctx] + '</span></td><td class="num">' + pct(r.dV) + '</td><td class="num">' + pct(r.dS) + "</td></tr>"; }).join("") + "</tbody></table></div></section></div>";
-    var counts = mapView($("#mapbox", view), p); $("#m-leg", view).innerHTML = ctxLegend(counts);
-    $$("[data-mh]", view).forEach(function (b) { b.addEventListener("click", function () { go({ mh: b.dataset.mh === "0" ? "" : b.dataset.mh }); }); });
-    var tl = timeline(p), fl = idx.length === 1 ? idx[0] : -1;
-    draw("c-ovs", { T: tl.T, nh: tl.nh, label: "Vacancies and registered seekers, history and forecast", axisColors: [css("--demand"), css("--supply")], lines: [
-      { name: "Job vacancies (left)", color: css("--demand"), hist: V.slice(tl.start), fc: fV, axis: 0, band: fl >= 0 ? { lo: D.fc.V.lo[fl], hi: D.fc.V.hi[fl] } : null },
-      { name: "Registered seekers (right)", color: css("--supply"), hist: Sk.slice(tl.start), fc: fS, axis: 1, band: fl >= 0 ? { lo: D.fc.S.lo[fl], hi: D.fc.S.hi[fl] } : null }], regions: regionsCovid(), marks: [{ ym: D.meta.eshram.launch, label: "e-Shram" }], height: 300 });
-    bindRange(view); bindBars(view, p);
-    $$("tr.click", view).forEach(function (tr) { tr.addEventListener("click", function () { go({ sector: p.sector === tr.dataset.sec ? "" : tr.dataset.sec }); }); });
-    cur.csv = function () { return { name: fname("overview"), head: ["sector", "employed_workers", "job_vacancies", "registered_seekers", "openings_per_100_seekers", "absolute_context", "vacancies_change_12m_pct", "seekers_change_12m_pct", "openings_per_100_seekers_12m"], rows: rows.filter(function (r) { return !r.empty; }).map(function (r) { return [r.sec, r.E, r.V, r.S, (r.r0 * 100).toFixed(2), CTX_NAME[r.ctx], r.dV.toFixed(2), r.dS.toFixed(2), (r.r12 * 100).toFixed(2)]; }) }; };
+    return Promise.all([scopeOf(p), breakdown(p)]).then(function (r) {
+      var S = r[0], rows = r[1], C = COLORS(), E0 = last(S.hist.E), V0 = last(S.hist.V), S0 = last(S.hist.S), E5 = last(S.fc.E), V5 = last(S.fc.V), S5 = last(S.fc.S), d0 = S.DI[S.nh - 1], d5 = last(S.DI);
+      var w = window_(S), rE = ranges(S, "E"), rV = ranges(S, "V");
+      var al = alertsFor(p, 0), nS = al.filter(function (a) { return a[0] === 0; }).length, nO = al.length - nS;
+      var states = p.trade ? null : STATES.map(function (s) { var G = p.sector ? D.groups.state_sector[s + "|" + p.sector] : D.groups.state[s]; return { s: s, E0: G.E[HC - 1], E5: G.E[HC + 59], V5: G.V[HC + 59], V0: G.V[HC - 1], d5: G.DI[HC + 59] }; });
+      view.innerHTML = scopeHead(p) + '<div class="grid g4">' +
+        kpi(t(NAMES.E), C.E, compact(E0), dir(growth(E0, E5)) + " <span>" + tf("by Dec {0}: {1}", YEARS[4], compact(E5)) + "</span>") + kpi(t(NAMES.V), C.V, compact(V0), dir(growth(V0, V5)) + " <span>" + tf("by Dec {0}: {1}", YEARS[4], compact(V5)) + "</span>") +
+        kpi(t(NAMES.S), C.S, compact(S0), dir(growth(S0, S5)) + " <span>" + tf("by Dec {0}: {1}", YEARS[4], compact(S5)) + "</span>") +
+        kpi(t("Demand Index"), "var(--demand)", fmt(d0, 0), '<span class="pill ' + (d5 >= d0 ? "s1" : "c2") + '">' + fmt(d5, 0) + "</span> <span>" + tf("in Dec {0}", YEARS[4]) + "</span>") + "</div>" +
+        '<div class="grid g2 mt">' + chartCard(t(NAMES.E), tf("Latest {0}, December {1}", compact(E0), M.hist_core[1].slice(0, 4)), "", "c-e") + chartCard(t(NAMES.V), tf("Latest {0}, December {1}", compact(V0), M.hist_core[1].slice(0, 4)), "", "c-v") + "</div>" + rangeNote(S) +
+        '<div class="grid g2 mt">' + (states ? '<section class="card"><div class="card-h"><div><h2>' + t("States") + "</h2><p>" + t("Click a row to filter by state") + "</p></div></div>" + table([["State"], ["Employed now", "num"], ["Employed 2030", "num"], ["Change", "num"], ["Demand Index 2030", "num"]],
+          states.map(function (x) { return '<tr class="click' + (p.state === x.s ? " on" : "") + '" data-state="' + esc(x.s) + '"><td>' + esc(x.s) + '</td><td class="num">' + compact(x.E0) + '</td><td class="num">' + compact(x.E5) + '</td><td class="num">' + dir(growth(x.E0, x.E5)) + '</td><td class="num" ' + heat(x.d5) + ">" + fmt(x.d5, 0) + "</td></tr>"; })) + "</section>" : "") +
+        '<section class="card"><div class="card-h"><div><h2>' + t("Early-warning summary") + "</h2><p>" + tf("Alerts 12 months ahead for {0}", esc(scopeText(p))) + '</p></div><a class="chip-btn" href="' + url("warnings", {}) + '">' + t("Open") + '</a></div><div class="ew-tiles">' +
+        '<a class="ew-tile a" href="' + url("warnings", { t: "0" }) + '"><span>' + t("Shortage alerts") + "</span><b>" + nS + "</b><span>" + t("series at 12 months") + '</span></a><a class="ew-tile a" href="' + url("warnings", { t: "1" }) + '"><span>' + t("Oversupply alerts") + "</span><b>" + nO + "</b><span>" + t("series at 12 months") + "</span></a></div>" +
+        '<p class="note">' + t("Alerts are relative: the series is among the 10% of districts in its trade with the highest (shortage) or lowest (oversupply) forecast vacancies per seeker in that month.") + "</p></section></div>" +
+        '<section class="card mt"><div class="card-h"><div><h2>' + t("Trades") + "</h2><p>" + t("Latest December against December 2030") + "</p></div></div>" + tradeTable(rows, p) + "</section>";
+      draw("c-e", { T: w.T, nh: w.nh, label: t(NAMES.E), lines: [{ name: t(NAMES.E), color: C.E, hist: S.hist.E, fc: S.fc.E, band: rE }], regions: shock() }, summarise(NAMES.E, S, rE, "E"));
+      draw("c-v", { T: w.T, nh: w.nh, label: t(NAMES.V), lines: [{ name: t(NAMES.V), color: C.V, hist: S.hist.V, fc: S.fc.V, band: rV }], regions: shock() }, summarise(NAMES.V, S, rV, "V"));
+      bindRows(view);
+      var head = ["trade_code", "trade", "sector", "employed_dec_2025", "employed_dec_2030", "vacancies_dec_2025", "vacancies_dec_2030", "seekers_dec_2025", "seekers_dec_2030", "demand_index_dec_2030"];
+      cur.csv = { name: fname("overview"), head: head, rows: rows.map(function (x) { return [x.tr.c, x.tr.n, x.tr.s, x.E0, x.E5, x.V0, x.V5, x.S0, x.S5, x.DI5]; }) };
+    });
   };
-
-  function seriesCsv(page, idx, tl, cols) {
-    return function () {
-      var T = MONTHS.concat(FM), rows = T.map(function (m, i) { return [m, i < H ? "history" : "forecast"].concat(cols.map(function (c) { return c.v[i] == null ? "" : +(+c.v[i]).toFixed(c.d == null ? 2 : c.d); })); });
-      return { name: fname(page), head: ["month", "type"].concat(cols.map(function (c) { return c.n; })), rows: rows };
-    };
+  function summarise(name, S, rg, k) {
+    var s = t(name) + ": " + compact(last(S.hist[k])) + " " + t("in") + " " + ml(mAdd(S.start, S.nh - 1)) + ", " + compact(last(S.fc[k])) + " " + t("forecast for") + " " + ml(mAdd(S.start, S.nh + 59));
+    return s + (rg ? " (" + t("usual range") + " " + compact(last(rg.lo)) + " – " + compact(last(rg.hi)) + ", " + t("wide range") + " " + compact(last(rg.lo_w)) + " – " + compact(last(rg.hi_w)) + ")" : "");
   }
-  var full = function (hist, fc) { return hist.concat(fc || new Array(12).fill(null)); };
+  function tradeTable(rows, p) {
+    return table([["Trade"], ["Employed now", "num"], ["Employed 2030", "num"], ["Change", "num"], ["Vacancies change", "num"], ["Seekers change", "num"], ["Demand Index 2030", "num"]], rows.map(function (x) {
+      return '<tr class="click' + (p.trade === x.tr.c ? " on" : "") + '" data-trade="' + x.tr.c + '"><td>' + esc(x.tr.n) + " <small>" + x.tr.c + '</small></td><td class="num">' + compact(x.E0) + '</td><td class="num">' + compact(x.E5) + '</td><td class="num">' + dir(growth(x.E0, x.E5)) + '</td><td class="num">' + dir(growth(x.V0, x.V5)) + '</td><td class="num">' + dir(growth(x.S0, x.S5)) + '</td><td class="num" ' + heat(x.DI5) + ">" + fmt(x.DI5, 0) + "</td></tr>";
+    }));
+  }
+  function alertsFor(p, hz) {
+    return A.rows.filter(function (a) { var tr = TRADES[a[4]]; return a[1] === hz && (!p.state || STATES[a[2]] === p.state) && (!p.district || String(a[3]) === String(p.district)) && (!p.trade || tr.c === p.trade) && (!p.sector || tr.s === p.sector); });
+  }
 
-  render.demand = function (p, view) {
-    var idx = sel(p), E = sumH("E", idx), V = sumH("V", idx), W = wavg("W", idx), U = wavg("U", idx), fE = sumF("E", "f", idx), fV = sumF("V", "f", idx), tl = timeline(p), one = idx.length === 1 ? idx[0] : -1;
-    var info = function (a, f, k) { return '<div class="sub">' + deltaHtml((f[11] / last(a) - 1) * 100, "in 12 months") + " " + confChip(confOf(k, idx)) + (one >= 0 ? " <span>typical test error at 12 months " + fmt(D.fc[k].err[one][11], 1) + "%</span>" : "") + "</div>"; };
-    view.innerHTML = '<div class="card-h"><div><h2 style="font-size:1.05rem">' + esc(scopeText(p)) + '</h2></div>' + rangeToggle(p) + "</div>" + (one < 0 ? '<p class="note" style="margin:-4px 0 12px">The 90% range appears when one district and one sector are selected; sums over several series would overstate it.</p>' : "") +
-      '<div class="grid g2">' + chartCard("Employed workers", "Latest " + compact(last(E)), info(E, fE, "E"), "c-e") + chartCard("Job vacancies", "Latest " + compact(last(V)), info(V, fV, "V"), "c-v") +
-      chartCard("Average monthly wage", "Employment-weighted, rupees. Latest " + fmt(last(W)), "", "c-w") + chartCard("Unemployment rate", "Employment-weighted, per cent. Latest " + fmt(last(U), 1) + "%", "", "c-u") + "</div>" +
-      '<p class="note">Wage and unemployment are history only; the forecast engine does not project them.</p>';
-    var base = { T: tl.T, nh: tl.nh, regions: regionsCovid() };
-    draw("c-e", Object.assign({ label: "Employed workers", lines: [{ name: "Employed workers", color: css("--employed"), hist: E.slice(tl.start), fc: fE, band: one >= 0 ? { lo: D.fc.E.lo[one], hi: D.fc.E.hi[one] } : null }] }, base));
-    draw("c-v", Object.assign({ label: "Job vacancies", lines: [{ name: "Job vacancies", color: css("--demand"), hist: V.slice(tl.start), fc: fV, band: one >= 0 ? { lo: D.fc.V.lo[one], hi: D.fc.V.hi[one] } : null }] }, base));
-    draw("c-w", Object.assign({ label: "Average wage", fmtAxis: [compact], lines: [{ name: "Average monthly wage", color: css("--supply"), hist: W.slice(tl.start), fc: null }] }, base));
-    draw("c-u", Object.assign({ label: "Unemployment rate", fmtAxis: [function (v) { return v.toFixed(1) + "%"; }], fmtTip: [function (v) { return v.toFixed(1) + "%"; }], lines: [{ name: "Unemployment rate", color: css("--low"), hist: U.slice(tl.start), fc: null }] }, base));
-    bindRange(view);
-    cur.csv = seriesCsv("demand", idx, tl, [{ n: "employed_workers", v: full(E, fE), d: 0 }, { n: "job_vacancies", v: full(V, fV), d: 0 }, { n: "avg_monthly_wage_inr", v: full(W), d: 0 }, { n: "unemployment_rate_pct", v: full(U), d: 2 }]);
+  render.forecast = function (p, view) {
+    var k = ["E", "V", "S"].indexOf(p.k) >= 0 ? p.k : "E";
+    return Promise.all([scopeOf(p), breakdown(p)]).then(function (r) {
+      var S = r[0], rows = r[1], C = COLORS(), w = window_(S), rg = ranges(S, k), ye = decs(S.fc[k]), single = S.sh && p.district && p.trade ? S.idx[0] : -1;
+      var yr = YEARS.map(function (y, i) { return '<tr><td>' + t("December") + " " + y + '</td><td class="num">' + fmt(ye[i]) + "</td>" + (rg ? '<td class="num">' + fmt(decs(rg.lo)[i]) + " – " + fmt(decs(rg.hi)[i]) + '</td><td class="num">' + fmt(decs(rg.lo_w)[i]) + " – " + fmt(decs(rg.hi_w)[i]) + "</td>" : "") + "</tr>"; });
+      view.innerHTML = scopeHead(p, segment("k", [["E", t("Employed")], ["V", t("Vacancies")], ["S", t("Seekers")]], k, "Measure")) +
+        chartCard(t(NAMES[k]), tf("History to {0} and forecast to {1}", ml(M.hist_core[1]), ml(M.fc[1])), "", "c-main") + rangeNote(S) +
+        (single >= 0 ? '<p class="note">' + t("Confidence of this forecast by horizon (12-month bands):") + " " + M.bands.map(function (b, i) { return b + ": " + confChip(S.sh.conf[k][single][i]); }).join(" ") + "</p>" : "") +
+        '<section class="card mt"><div class="card-h"><div><h2>' + t("December values") + "</h2><p>" + t("Point forecast and the two 90% ranges") + "</p></div></div>" + table([["Month"], ["Forecast", "num"]].concat(rg ? [["Usual range", "num"], ["Wide range", "num"]] : []), yr) + "</section>" +
+        '<section class="card mt"><div class="card-h"><div><h2>' + t("Trades") + "</h2><p>" + t("Click a trade to filter") + "</p></div></div>" + tradeTable(rows, p) + "</section>" +
+        '<p class="note">' + t("The usual range was calibrated on 2010-2019, years without an unforeseen shock; the wide range also uses 2020-2025 and is the one to read for totals of many series, whose errors move together.") + "</p>";
+      draw("c-main", { T: w.T, nh: w.nh, label: t(NAMES[k]), lines: [{ name: t(NAMES[k]), color: C[k], hist: S.hist[k], fc: S.fc[k], band: rg }], regions: shock() }, summarise(NAMES[k], S, rg, k));
+      bindSeg(view); bindRows(view);
+      var T = w.T, head = ["month", "type", "value"].concat(rg ? ["usual_lo", "usual_hi", "wide_lo", "wide_hi"] : []);
+      cur.csv = { name: fname("forecast_" + k), head: head, rows: T.map(function (m, i) { var f = i >= S.nh, j = i - S.nh; return [m, f ? "forecast" : "history", f ? S.fc[k][j] : S.hist[k][i]].concat(rg ? (f ? [rg.lo[j], rg.hi[j], rg.lo_w[j], rg.hi_w[j]] : ["", "", "", ""]) : []); }) };
+    });
   };
 
-  render.supply = function (p, view) {
-    var idx = sel(p), Sk = sumH("S", idx), fS = sumF("S", "f", idx), T = sumH("T", idx), C = sumH("C", idx), C12 = roll12(C), tl = timeline(p), one = idx.length === 1 ? idx[0] : -1;
-    var util = last(T) ? last(C12) / last(T) * 100 : 0;
-    var kpi = function (l, v, s, c) { return '<div class="card kpi" style="--c:' + c + '"><div class="lbl"><i></i>' + l + '</div><span class="val">' + v + '</span><div class="sub">' + s + "</div></div>"; };
-    view.innerHTML = '<div class="card-h"><div><h2 style="font-size:1.05rem">' + esc(scopeText(p)) + "</h2></div>" + rangeToggle(p) + "</div>" +
-      '<div class="grid g4">' + kpi("Registered seekers", compact(last(Sk)), deltaHtml((fS[11] / last(Sk) - 1) * 100, "in 12 months") + " " + confChip(confOf("S", idx)), "var(--supply)") + kpi("Training seats sanctioned", compact(last(T)), "Annual capacity, latest month", "var(--demand)") + kpi("Certified, last 12 months", compact(last(C12)), "People who completed training", "var(--employed)") + kpi("Certified per seat", fmt(util, 0) + "%", "Last 12 months against seats", "var(--ctx1)") + "</div>" +
-      '<div class="grid g2 mt">' + chartCard("Registered job seekers", "The e-Shram registry launched in " + ml(D.meta.eshram.launch) + "; the rise that follows is a break in the series, not a labour-market change.", confChip(confOf("S", idx)), "c-s") +
-      chartCard("Training seats and certified trainees", "Seats are annual capacity; certified trainees are summed over the last 12 months.", "", "c-t") + "</div>" + (one < 0 ? '<p class="note">The 90% range appears when one district and one sector are selected.</p>' : "");
-    var base = { T: tl.T, nh: tl.nh };
-    draw("c-s", Object.assign({ label: "Registered job seekers with the e-Shram break marked", lines: [{ name: "Registered seekers", color: css("--supply"), hist: Sk.slice(tl.start), fc: fS, band: one >= 0 ? { lo: D.fc.S.lo[one], hi: D.fc.S.hi[one] } : null }],
-      regions: [{ from: D.meta.eshram.ramp[0], to: D.meta.eshram.ramp[1], label: "e-Shram ramp", color: css("--supply") }], marks: [{ ym: D.meta.eshram.launch, label: "e-Shram launch" }] }, base));
-    draw("c-t", Object.assign({ label: "Training seats and certified trainees", lines: [{ name: "Seats sanctioned", color: css("--demand"), hist: T.slice(tl.start), fc: null }, { name: "Certified, last 12 months", color: css("--employed"), hist: C12.slice(tl.start), fc: null }], regions: regionsCovid() }, base));
-    bindRange(view);
-    cur.csv = seriesCsv("supply", idx, tl, [{ n: "registered_seekers", v: full(Sk, fS), d: 0 }, { n: "training_seats_sanctioned", v: full(T), d: 0 }, { n: "certified_trainees_monthly", v: full(C), d: 0 }, { n: "certified_last_12_months", v: full(C12), d: 0 }]);
+  render.index = function (p, view) {
+    var sec = p.sector || SECTORS[0];
+    return Promise.all([scopeOf(p), breakdown(p)]).then(function (r) {
+      var S = r[0], rows = r[1], w = window_(S), n = S.nh;
+      var stateCols = p.sector ? TRADES.filter(function (x) { return x.s === p.sector; }).map(function (x) { return { k: x.c, n: x.n }; }) : SECTORS.map(function (s) { return { k: s, n: t(s) }; });
+      var heatRows = STATES.map(function (s) {
+        return '<tr class="click" data-state="' + esc(s) + '"><td>' + esc(s) + "</td>" + stateCols.map(function (c) { var v = p.sector ? D.di_state_trade[s + "|" + c.k][4] : D.groups.state_sector[s + "|" + c.k].DI[HC + 59]; return "<td class=\"num\" " + heat(v) + ">" + fmt(v, 0) + "</td>"; }).join("") + "</tr>";
+      });
+      var ds = DLIST.filter(function (d) { return !p.state || d.s === p.state; }).map(function (d) { return { d: d, v: D.di_district_sector[d.c + "|" + sec][4], v0: D.di_district_sector[d.c + "|" + sec][0] }; }).sort(function (a, b) { return b.v - a.v; });
+      var top = ds.slice(0, 15), bottom = ds.slice(-5).reverse();
+      var di2 = function (x, i) { return '<tr class="click" data-district="' + x.d.c + '" data-sector="' + esc(sec) + '"><td class="num">' + (i + 1) + "</td><td>" + esc(x.d.n) + "</td><td>" + esc(x.d.s) + '</td><td class="num" ' + heat(x.v) + ">" + fmt(x.v, 0) + '</td><td class="num">' + fmt(x.v0, 0) + "</td></tr>"; };
+      view.innerHTML = scopeHead(p) + '<div class="grid g2">' + chartCard(t("Demand Index"), t("0 to 100; 50 is a typical district in the trade at the 2018-2019 level"), "", "c-di") +
+        '<section class="card"><div class="card-h"><div><h2>' + t("What the index means") + '</h2></div></div><ul class="plain"><li>' + t("It compares a district with the other districts of the same trade in the same month, using openings per worker from vacancies, job-portal postings and the National Career Service.") + "</li><li>" + t("A national level term lets the index move up and down over the years: 50 is the median district at the 2018-2019 demand level, 84 is one standard deviation above, 16 one below.") + "</li><li>" + t("Forecast months use the forecast vacancies only. In the past years this version tracks the three-channel index closely (correlation 0.89 to 0.94 in 2012-2025).") + "</li></ul></section></div>" +
+        '<section class="card mt"><div class="card-h"><div><h2>' + (p.sector ? t("States by trade") : t("States by sector")) + "</h2><p>" + t("Demand Index in 2030 (annual mean for trades, December for sectors); click a state to filter") + "</p></div></div>" + table([["State"]].concat(stateCols.map(function (c) { return [c.n, "num"]; })), heatRows) + "</section>" +
+        '<div class="grid g2 mt"><section class="card"><div class="card-h"><div><h2>' + tf("Districts with the highest index: {0}", esc(t(sec))) + "</h2><p>" + t("Annual mean 2030, with 2026 for comparison. Choose a sector or state in the filters.") + "</p></div></div>" + table([["#", "num"], ["District"], ["State"], ["2030", "num"], ["2026", "num"]], top.map(di2)) + "</section>" +
+        '<section class="card"><div class="card-h"><div><h2>' + tf("Districts with the lowest index: {0}", esc(t(sec))) + "</h2></div></div>" + table([["#", "num"], ["District"], ["State"], ["2030", "num"], ["2026", "num"]], bottom.map(function (x, i) { return di2(x, ds.length - 1 - i); })) + "</section></div>" +
+        '<section class="card mt"><div class="card-h"><div><h2>' + t("Trades") + "</h2></div></div>" + tradeTable(rows, p) + "</section>";
+      draw("c-di", { T: w.T, nh: n, label: t("Demand Index"), fmtAxis: function (v) { return fmt(v, 0); }, fmtTip: function (v) { return fmt(v, 1); }, lines: [{ name: t("Demand Index"), color: css("--demand"), hist: S.DI.slice(0, n), fc: S.DI.slice(n) }], hlines: [{ v: 50, label: "50", color: css("--ink-2") }], regions: shock() }, t("Demand Index") + ": " + fmt(S.DI[n - 1], 1) + " " + t("in") + " " + ml(mAdd(S.start, n - 1)) + ", " + fmt(last(S.DI), 1) + " " + t("forecast for") + " " + ml(M.fc[1]));
+      bindRows(view);
+      cur.csv = { name: fname("demand_index"), head: ["month", "type", "demand_index"], rows: w.T.map(function (m, i) { return [m, i >= n ? "forecast" : "history", S.DI[i]]; }) };
+    });
   };
 
-  render.gap = function (p, view) {
-    var idx = sel(p), V = sumH("V", idx), Sk = sumH("S", idx), fV = sumF("V", "f", idx), fS = sumF("S", "f", idx), tl = timeline(p), rows = sectorRows(p), gc = confFloor(["V", "S"], idx);
-    var cov = div(V, Sk).map(function (v) { return v * 100; }), fcov = div(fV, fS).map(function (v) { return v * 100; }), gap = V.map(function (v, i) { return v - Sk[i]; }), fgap = fV.map(function (v, i) { return v - fS[i]; });
-    view.innerHTML = '<div class="card-h"><div><h2 style="font-size:1.05rem">' + esc(scopeText(p)) + '</h2></div>' + rangeToggle(p) + "</div>" +
-      '<div class="grid g2">' + chartCard("Coverage: openings per 100 seekers", "Vacancies divided by registered seekers. Above 100 openings exceed seekers.", confChip(gc), "c-cov") + chartCard("Net gap: vacancies minus seekers", "Below zero there are more seekers than openings.", confChip(gc), "c-gap") + "</div>" +
-      '<section class="card mt"><div class="card-h"><div><h2>Coverage by sector</h2><p>Selected state and district; click a bar to filter the sector</p></div></div>' + sectorBars(rows, p) + "</section>" +
-      '<p class="note">Coverage and the gap combine the vacancy and seeker forecasts, so they carry the lower of the two confidence levels in forecast_long.csv for the selected series.</p>';
-    var base = { T: tl.T, nh: tl.nh, regions: regionsCovid() };
-    draw("c-cov", Object.assign({ label: "Coverage over time", fmtAxis: [function (v) { return fmt(v, v < 10 ? 1 : 0); }], fmtTip: [function (v) { return fmt(v, 1); }], lines: [{ name: "Openings per 100 seekers", color: css("--demand"), hist: cov.slice(tl.start), fc: fcov }],
-      hlines: [{ v: TH.oversupplied * 100, label: fmt(TH.oversupplied * 100, 0) + ": " + CONTEXT[3] + " below", color: css("--ctx3") }, { v: TH.moderate * 100, label: fmt(TH.moderate * 100, 0) + ": " + CONTEXT[1] + " above", color: css("--ctx1") }] }, base));
-    draw("c-gap", Object.assign({ label: "Net gap over time", fmtTip: [function (v) { return fmt(v); }], lines: [{ name: "Vacancies minus seekers", color: css("--supply"), hist: gap.slice(tl.start), fc: fgap }], hlines: [{ v: 0, label: "zero", color: css("--ink") }] }, base));
-    bindRange(view); bindBars(view, p);
-    cur.csv = seriesCsv("gap", idx, tl, [{ n: "job_vacancies", v: full(V, fV), d: 0 }, { n: "registered_seekers", v: full(Sk, fS), d: 0 }, { n: "openings_per_100_seekers", v: full(cov, fcov), d: 2 }, { n: "net_gap", v: full(gap, fgap), d: 0 }]);
+  /* ---------- capacity gap ---------- */
+  function capTable(p, sh) {
+    var C = D.capacity, pick = function (rows, f) { return rows.filter(f); };
+    if (sh) {
+      var idx = rowsOf(sh, p), o = YEARS.map(function (y, i) { var v = 0; idx.forEach(function (j) { v += sh.cap.vac[j][i]; }); return v; }), seats = 0, cert = 0;
+      idx.forEach(function (j) { seats += sh.cap.seats[j]; cert += sh.cap.cert[j]; });
+      return YEARS.map(function (y, i) { return { year: y, avg_vacancies: o[i], seats: seats, expected_certified: cert, openings_per_seat: seats ? o[i] / seats : 0, supply_per_opening: o[i] ? cert / o[i] : 0 }; });
+    }
+    var t_ = p.state ? (p.trade ? pick(C.state_trade, function (r) { return r.State_Name === p.state && r.Trade_Code === p.trade; }) : p.sector ? pick(C.state_sector, function (r) { return r.State_Name === p.state && r.Sector_Name === p.sector; }) : pick(C.state, function (r) { return r.State_Name === p.state; }))
+      : p.trade ? pick(C.trade, function (r) { return r.Trade_Code === p.trade; }) : p.sector ? pick(C.sector, function (r) { return r.Sector_Name === p.sector; }) : C.india;
+    return t_.slice().sort(function (a, b) { return a.year - b.year; });
+  }
+  render.capacity = function (p, view) {
+    var needShard = !!(p.district), hold = needShard ? shard(p.state) : Promise.resolve(null);
+    return Promise.all([hold, breakdownCap(p)]).then(function (r) {
+      var sh = r[0], rows = capTable(p, sh), brk = r[1], C = COLORS(), y0 = rows[0], y4 = rows[4];
+      var status = y4.supply_per_opening < 1 ? "Fewer trainees certified than openings" : "More trainees certified than openings";
+      var yrs = rows.map(function (x) { return '<tr><td>' + x.year + '</td><td class="num">' + fmt(x.avg_vacancies) + '</td><td class="num">' + fmt(x.seats) + '</td><td class="num">' + fmt(x.expected_certified) + '</td><td class="num">' + fmt(x.openings_per_seat, 2) + '</td><td class="num">' + fmt(x.supply_per_opening, 2) + "</td></tr>"; });
+      view.innerHTML = scopeHead(p) + '<div class="grid g4">' + kpi(t("Openings per seat"), "var(--demand)", fmt(y4.openings_per_seat, 2), "<span>" + tf("in {0}; {1} in {2}", YEARS[4], fmt(y0.openings_per_seat, 2), YEARS[0]) + "</span>") +
+        kpi(t("Certified per opening"), "var(--supply)", fmt(y4.supply_per_opening, 2), '<span class="pill ' + (y4.supply_per_opening < 1 ? "c2" : "s1") + '">' + t(status) + "</span>") + kpi(t("Training seats"), "var(--employed)", compact(y4.seats), "<span>" + t("held flat at the 2025-26 level (assumption)") + "</span>") +
+        kpi(t("Expected certified a year"), "var(--employed)", compact(y4.expected_certified), "<span>" + t("seats times the 2023-25 certification rate") + "</span>") + "</div>" +
+        '<section class="card mt"><div class="card-h"><div><h2>' + t("By year") + "</h2><p>" + t("Forecast openings (average monthly vacancies) against seats and expected certified trainees") + "</p></div></div>" + table([["Year"], ["Avg. openings", "num"], ["Seats", "num"], ["Expected certified", "num"], ["Openings per seat", "num"], ["Certified per opening", "num"]], yrs) + "</section>" +
+        '<section class="card mt"><div class="card-h"><div><h2>' + (brk.title) + "</h2><p>" + t("Year 2030. Below 1 certified per opening, fewer people finish training in a year than there are openings.") + "</p></div></div>" + table(brk.head, brk.rows) + "</section>" +
+        '<p class="note">' + t("Seats are held flat because no seat plans are forecast. Openings are a monthly stock and seats an annual flow, so read the ratios as a ranking of where capacity is stretched, not as a count of unfilled places.") + "</p>";
+      bindRows(view);
+      cur.csv = { name: fname("capacity"), head: ["year", "avg_openings", "seats", "expected_certified", "openings_per_seat", "certified_per_opening"], rows: rows.map(function (x) { return [x.year, x.avg_vacancies, x.seats, x.expected_certified, x.openings_per_seat, x.supply_per_opening]; }) };
+    });
   };
+  function breakdownCap(p) {
+    var C = D.capacity, y = function (r) { return r.year === 2030; }, row = function (name, attrs, r) { return '<tr class="click" ' + attrs + "><td>" + esc(name) + '</td><td class="num">' + compact(r.avg_vacancies) + '</td><td class="num">' + compact(r.seats) + '</td><td class="num">' + fmt(r.openings_per_seat, 2) + '</td><td class="num" ' + heat(Math.max(0, 100 - r.supply_per_opening * 50)) + ">" + fmt(r.supply_per_opening, 2) + "</td></tr>"; };
+    var head = [["Name"], ["Avg. openings", "num"], ["Seats", "num"], ["Openings per seat", "num"], ["Certified per opening", "num"]];
+    if (!p.state && !p.district) {
+      if (p.trade) return Promise.resolve({ title: t("States"), head: head, rows: C.state_trade.filter(function (r) { return r.Trade_Code === p.trade && y(r); }).map(function (r) { return row(r.State_Name, 'data-state="' + esc(r.State_Name) + '"', r); }) });
+      return Promise.resolve({ title: t("Trades"), head: head, rows: C.trade.filter(function (r) { return y(r) && (!p.sector || TR[r.Trade_Code].s === p.sector); }).map(function (r) { return row(TR[r.Trade_Code].n, 'data-trade="' + r.Trade_Code + '"', r); }) });
+    }
+    if (!p.district) {
+      return Promise.resolve({ title: t("Trades"), head: head, rows: C.state_trade.filter(function (r) { return r.State_Name === p.state && y(r) && (!p.sector || TR[r.Trade_Code].s === p.sector) && (!p.trade || r.Trade_Code === p.trade); }).map(function (r) { return row(TR[r.Trade_Code].n, 'data-trade="' + r.Trade_Code + '"', r); }) });
+    }
+    return shard(p.state).then(function (sh) {
+      var idx = rowsOf(sh, p), rows = idx.map(function (j) { var v = sh.cap.vac[j][4], s = sh.cap.seats[j], c = sh.cap.cert[j]; return { j: j, r: { avg_vacancies: v, seats: s, openings_per_seat: s ? v / s : 0, supply_per_opening: v ? c / v : 0 } }; });
+      return { title: t("Trades"), head: head, rows: rows.map(function (x) { var tr = TRADES[sh.t[x.j]]; return row(tr.n, 'data-trade="' + tr.c + '"', x.r); }) };
+    });
+  }
 
   render.ranking = function (p, view) {
-    var sector = p.sector || SECTORS[0], hz = horizonOf(p), order = p.o || "rank";
-    var rows = S.map(function (s, i) { return i; }).filter(function (i) { return S[i].sector === sector; }).map(function (i) { var f = D.fl[i][hz - 1]; return { i: i, pct: f[0], st: f[1], ctx: f[2], cur: f[3], chg: f[4], prec: f[5], ratio: f[6] }; });
-    rows.sort(function (a, b) { return b.pct - a.pct; }); rows.forEach(function (r, k) { r.rank = k + 1; });
-    var shown = rows.filter(function (r) { return (!p.state || S[r.i].state === p.state) && (!p.district || S[r.i].code === p.district); });
-    if (order === "name") shown.sort(function (a, b) { return S[a.i].district < S[b.i].district ? -1 : 1; }); else if (order === "ratio") shown.sort(function (a, b) { return b.ratio - a.ratio; });
-    var th = function (key, label, cls) { return '<th class="' + (cls || "") + '"><button type="button" data-o="' + key + '">' + label + (order === key ? " ▾" : "") + "</button></th>"; };
-    view.innerHTML = (p.sector ? "" : '<div class="banner">Ranking is within one sector. Showing ' + esc(sector) + "; choose another in the Sector filter.</div>") +
-      '<section class="card"><div class="card-h"><div><h2>' + esc(sector) + ": " + rows.length + ' districts ranked</h2><p>Rank 1 has the most openings per seeker in the sector, ' + hz + " months ahead. Greyed rows are small-count series.</p></div>" + hzSeg(p) + '</div><div class="tbl-wrap"><table class="tbl"><thead><tr>' + th("rank", "Rank", "num") + th("name", "District") + "<th>State</th><th>Relative status</th><th>Absolute context</th>" + th("ratio", "Per 100 seekers", "num") + "<th>Today</th><th>Change</th><th class=\"num\">Flag precision</th></tr></thead><tbody>" +
-      shown.map(function (r) { var s = S[r.i]; return '<tr class="click' + (s.low ? " grey" : "") + (p.district === s.code ? " on" : "") + '" data-code="' + s.code + '"><td class="num">' + r.rank + "</td><td>" + esc(s.district) + (s.low ? ' <small title="Very small counts">small count</small>' : "") + "</td><td>" + esc(s.state) + '</td><td><span class="pill s' + r.st + '">' + STATUS[r.st] + " · " + fmt(r.pct, 0) + '</span></td><td><span class="pill c' + r.ctx + '">' + CTX_NAME[r.ctx] + '</span></td><td class="num">' + fmt(r.ratio * 100, 1) + "</td><td>" + STATUS[r.cur] + "</td><td>" + (r.chg ? CHANGE[r.chg] : "no change") + '</td><td class="num">' + (r.prec == null ? "–" : fmt(r.prec * 100, 0) + "%") + "</td></tr>"; }).join("") + "</tbody></table></div>" +
-      '<p class="note">Relative status compares a district with the others in its sector in the same month; the absolute context says whether openings really exceed seekers. Both are shown together on purpose: the tightest districts of a sector can still be in surplus.</p></section>';
-    bindHz(view); $$("[data-o]", view).forEach(function (b) { b.addEventListener("click", function () { go({ o: b.dataset.o === "rank" ? "" : b.dataset.o }); }); });
-    $$("tr.click", view).forEach(function (tr) { tr.addEventListener("click", function () { go({ district: p.district === tr.dataset.code ? "" : tr.dataset.code, sector: sector }); }); });
-    cur.csv = function () { return { name: fname("ranking") + "_" + hz + "m", head: ["rank", "district", "state", "sector", "horizon_months", "percentile_in_sector", "relative_status", "absolute_context", "forecast_openings_per_100_seekers", "current_status", "change", "historical_precision", "small_count_series"], rows: shown.map(function (r) { var s = S[r.i]; return [r.rank, s.district, s.state, sector, hz, r.pct, STATUS[r.st], CONTEXT[r.ctx], (r.ratio * 100).toFixed(2), STATUS[r.cur], CHANGE[r.chg], r.prec == null ? "" : r.prec, s.low ? "yes" : "no"]; }) }; };
+    var by = {}; D.rankings.forEach(function (r) { (by[r.ranking] = by[r.ranking] || []).push(r); });
+    var keyName = function (k) { return k.split(" | ").map(function (q) { return TR[q] ? TR[q].n + " (" + q + ")" : q; }).join(", "); };
+    view.innerHTML = '<div class="grid g2">' + Object.keys(by).map(function (title) {
+      return '<section class="card"><div class="card-h"><div><h2 style="font-size:.98rem">' + esc(title) + "</h2></div></div>" +
+        table([["#", "num"], ["Name"], ["Value", "num"]], by[title].map(function (r) { return '<tr><td class="num">' + r.rank + "</td><td>" + esc(keyName(r.key)) + (r.detail ? "<br><small>" + esc(r.detail) + "</small>" : "") + '</td><td class="num">' + fmt(r.value, 2) + "</td></tr>"; })) + "</section>";
+    }).join("") + "</div><p class=\"note\">" + t("Rankings are computed once for all of India and do not follow the filters.") + "</p>";
+    cur.csv = { name: "kaushalsetu_rankings", head: ["ranking", "rank", "key", "value", "detail"], rows: D.rankings.map(function (r) { return [r.ranking, r.rank, r.key, r.value, r.detail]; }) };
+    return Promise.resolve();
   };
 
   render.warnings = function (p, view) {
-    var idx = sel(p), hz = horizonOf(p), all = warnRows(idx, hz), t = p.t || "", lv = p.lv || "";
-    var n = function (ty, l) { return all.filter(function (r) { return r.type === ty && r.level === l; }).length; };
-    var rows = all.filter(function (r) { return (!t || r.type === t) && (!lv || r.level === lv); });
-    var seg = function (key, opts, curv) { return '<div class="seg-row" role="group">' + opts.map(function (o) { return '<button type="button" data-k="' + key + '" data-v="' + o[0] + '" aria-pressed="' + (o[0] === curv) + '">' + o[1] + "</button>"; }).join("") + "</div>"; };
-    view.innerHTML = '<div class="grid g4"><div class="card kpi" style="--c:var(--demand)"><div class="lbl"><i></i>Shortage alerts</div><span class="val">' + n("shortage", "alert") + '</span><div class="sub">Tightest decile of its sector</div></div>' +
-      '<div class="card kpi" style="--c:var(--ctx1)"><div class="lbl"><i></i>Shortage watch</div><span class="val">' + n("shortage", "watch") + '</span><div class="sub">Tight class, next to the decile</div></div>' +
-      '<div class="card kpi" style="--c:var(--low)"><div class="lbl"><i></i>Oversupply alerts</div><span class="val">' + n("oversupply", "alert") + '</span><div class="sub">Loosest decile of its sector</div></div>' +
-      '<div class="card kpi" style="--c:var(--supply)"><div class="lbl"><i></i>Oversupply watch</div><span class="val">' + n("oversupply", "watch") + '</span><div class="sub">Loose class, next to the decile</div></div></div>' +
-      '<section class="card mt"><div class="card-h"><div><h2>' + rows.length + " flagged series</h2><p>For " + esc(scopeText(p)) + ", " + hz + ' months ahead. Confidence of these flags in flags.csv: ' + tally(rows.map(function (r) { return D.meta.flag_conf[r.i]; })) + '. The precision column shows how often such flags were right in testing.</p></div><div style="display:flex;gap:8px;flex-wrap:wrap">' + hzSeg(p) + seg("t", [["", "Both"], ["shortage", "Shortage"], ["oversupply", "Oversupply"]], t) + seg("lv", [["", "All levels"], ["alert", "Alert"], ["watch", "Watch"]], lv) + "</div></div>" +
-      '<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Flag</th><th>District</th><th>State</th><th>Sector</th><th>Relative status</th><th>Absolute context</th><th class="num">Per 100 seekers</th><th>Change</th><th class="num">Precision</th></tr></thead><tbody>' +
-      (rows.length ? rows.map(function (r) { var s = S[r.i]; return '<tr class="click' + (s.low ? " grey" : "") + '" data-code="' + s.code + '" data-sec="' + esc(s.sector) + '"><td><span class="pill ' + r.level + '">' + r.type + " " + r.level + "</span></td><td>" + esc(s.district) + "</td><td>" + esc(s.state) + "</td><td>" + esc(s.sector) + '</td><td><span class="pill s' + r.status + '">' + STATUS[r.status] + " · " + fmt(r.pct, 0) + '</span></td><td><span class="pill c' + r.ctx + '">' + CTX_NAME[r.ctx] + '</span></td><td class="num">' + fmt(r.ratio * 100, 1) + "</td><td>" + (r.chg ? CHANGE[r.chg] : "no change") + '</td><td class="num">' + (r.prec == null ? "–" : fmt(r.prec * 100, 0) + "%") + "</td></tr>"; }).join("") : '<tr><td colspan="9">No flags for this selection.</td></tr>') + "</tbody></table></div>" +
-      '<p class="note"><b>Alert</b>: the forecast puts the series in the tightest decile of its sector (shortage) or the loosest (oversupply). <b>Watch</b>: the tight or loose class next to the decile. Both are read from the forecast_status column of flags.csv, and absolute context is shown beside them because a relative flag does not mean openings really exceed seekers. Flag rule in the forecast manifest: ' + esc(D.meta.manifest.flag_rules) + "</p></section>";
-    bindHz(view); $$("[data-k]", view).forEach(function (b) { b.addEventListener("click", function () { var o = {}; o[b.dataset.k] = b.dataset.v; go(o); }); });
-    $$("tr.click", view).forEach(function (tr) { tr.addEventListener("click", function () { go({ district: tr.dataset.code, sector: tr.dataset.sec }, "demand"); }); });
-    cur.csv = function () { return { name: fname("warnings") + "_" + hz + "m", head: ["flag", "level", "district", "state", "sector", "horizon_months", "percentile_in_sector", "relative_status", "absolute_context", "forecast_openings_per_100_seekers", "change", "historical_precision", "small_count_series"], rows: rows.map(function (r) { var s = S[r.i]; return [r.type, r.level, s.district, s.state, s.sector, hz, r.pct, STATUS[r.status], CONTEXT[r.ctx], (r.ratio * 100).toFixed(2), CHANGE[r.chg], r.prec == null ? "" : r.prec, s.low ? "yes" : "no"]; }) }; };
+    var hzs = [12, 36, 60], hz = hzs.indexOf(+p.h) >= 0 ? hzs.indexOf(+p.h) : 0, ty = p.t === "0" || p.t === "1" ? +p.t : -1, all = alertsFor(p, hz), rows = all.filter(function (a) { return ty < 0 || a[0] === ty; });
+    rows.sort(function (a, b) { return (a[0] - b[0]) || (a[0] === 0 ? b[5] - a[5] : a[5] - b[5]); });
+    var shown = rows.slice(0, 250), nS = all.filter(function (a) { return a[0] === 0; }).length;
+    view.innerHTML = '<div class="grid g4">' + kpi(t("Shortage alerts"), "var(--demand)", nS, "<span>" + t("Highest forecast vacancies per seeker in the trade") + "</span>") + kpi(t("Oversupply alerts"), "var(--low)", all.length - nS, "<span>" + t("Lowest forecast vacancies per seeker in the trade") + "</span>") + "</div>" +
+      '<section class="card mt"><div class="card-h"><div><h2>' + tf("{0} flagged series", fmt(rows.length)) + "</h2><p>" + tf("For {0}, {1} months ahead", esc(scopeText(p)), hzs[hz]) + '</p></div><div style="display:flex;gap:8px;flex-wrap:wrap">' +
+      segment("h", [[12, tf("{0} months", 12)], [36, tf("{0} months", 36)], [60, tf("{0} months", 60)]], hzs[hz], "Months ahead") + segment("t", [["", t("Both")], ["0", t("Shortage")], ["1", t("Oversupply")]], ty < 0 ? "" : ty, "Type") + "</div></div>" +
+      table([["Alert"], ["District"], ["State"], ["Trade"], ["Vacancies per 100 seekers", "num"], ["Percentile", "num"], ["Confidence V", "num"], ["Confidence S", "num"]], shown.map(function (a) {
+        var tr = TRADES[a[4]], cov = a[7] ? a[6] / a[7] * 100 : 0;
+        return '<tr class="click" data-district="' + a[3] + '" data-trade="' + tr.c + '"><td><span class="pill ' + (a[0] === 0 ? "alert" : "s4") + '">' + t(a[0] === 0 ? "Shortage alert" : "Oversupply alert") + "</span></td><td>" + esc(DNAME[a[3]]) + "</td><td>" + esc(STATES[a[2]]) + "</td><td>" + esc(tr.n) + '</td><td class="num">' + fmt(cov, 1) + '</td><td class="num">' + fmt(a[5], 0) + '</td><td class="num">' + confChip(a[8]) + '</td><td class="num">' + confChip(a[9]) + "</td></tr>";
+      })) + (rows.length > shown.length ? '<p class="note">' + tf("Showing the first {0} of {1}; the CSV has all of them.", shown.length, fmt(rows.length)) + "</p>" : "") +
+      '<p class="note">' + t("An alert is relative: the series lies in the top (shortage) or bottom (oversupply) 10% of districts in its trade in that month. In testing such alerts were right about seven times in ten at 1-12 months, against a base rate of one in ten. Seeker forecasts and long horizons are less reliable; the confidence columns show it.") + "</p></section>";
+    bindSeg(view); bindRows(view);
+    cur.csv = { name: fname("warnings_" + hzs[hz] + "m"), head: ["alert", "months_ahead", "state", "district_lgd", "district", "trade", "percentile", "vacancies", "seekers", "vacancies_per_100_seekers", "confidence_V", "confidence_S"], rows: rows.map(function (a) { var tr = TRADES[a[4]]; return [a[0] === 0 ? "shortage" : "oversupply", hzs[hz], STATES[a[2]], a[3], DNAME[a[3]], tr.c, a[5], a[6], a[7], a[7] ? +(a[6] / a[7] * 100).toFixed(2) : "", a[8], a[9]]; }) };
+    return Promise.resolve();
   };
 
   render.data = function (p, view) {
-    var idx = sel(p), dset = {}; idx.forEach(function (i) { dset[S[i].code] = 1; });
-    var mp = D.meta.manifest, per100 = function (x) { return fmt(x * 100, 0); };
-    var st = STATES.map(function (s) { var ds = {}; S.forEach(function (x) { if (x.state === s) ds[x.code] = 1; }); var n = Object.keys(ds).length; return [s, n, n + (M.others || []).filter(function (o) { return o.s === s; }).length]; });
-    var smalls = S.filter(function (s) { return s.low; }).map(function (s) { return s.district + " " + s.sector; });
-    var short = function (h) { return h.slice(0, 12); };
-    var row = function (a, b) { return "<tr><td><b>" + a + "</b></td><td>" + esc(b) + "</td></tr>"; };
-    var tbl = function (rows) { return '<div class="tbl-wrap"><table class="tbl"><tbody>' + rows.map(function (r) { return row(r[0], r[1]); }).join("") + "</tbody></table></div>"; };
-    view.innerHTML = '<div class="grid g2"><section class="card"><div class="card-h"><div><h2>Coverage</h2><p>Current filters and the whole dataset</p></div></div>' + tbl([
-      ["Series in this view", fmt(idx.length) + " of " + S.length], ["Districts in this view", Object.keys(dset).length + " of " + DLIST.length], ["Sectors", SECTORS.join(", ")],
-      ["States (districts forecast of all districts)", st.map(function (x) { return x[0] + " (" + x[1] + " of " + x[2] + ")"; }).join(", ")], ["History", ml(MONTHS[0]) + " to " + ml(last(MONTHS)) + " (" + H + " months)"],
-      ["Forecast", ml(FM[0]) + " to " + ml(last(FM)) + " (" + FM.length + " months, made from " + D.meta.origin_label + ")"],
-      ["Forecast rows", fmt(D.meta.forecast_rows) + " (" + S.length + " series, " + D.meta.targets.length + " measures, " + D.meta.horizons.length + " horizons)"], ["Flag rows", fmt(D.meta.flag_rows)], ["Economic tiers", D.meta.tiers], ["Model", D.meta.model]]) + "</section>" +
-      '<section class="card"><div class="card-h"><div><h2>Caveats</h2></div></div><ul class="plain"><li><b>The data is simulated.</b> It behaves like official statistics but describes no real district.</li>' +
-      "<li><b>Confidence</b> in forecast_long.csv: employed workers " + tally(D.fc.E.conf) + "; vacancies " + tally(D.fc.V.conf) + "; seekers " + tally(D.fc.S.conf) + ". Forecast manifest on vacancies: " + esc(mp.confidence_rules.vacancies) + ".</li>" +
-      "<li><b>Early-warning flags</b> carry " + tally(D.meta.flag_conf) + " confidence in flags.csv. They are relative: " + esc(mp.flag_rules) + ".</li>" +
-      "<li><b>Job seekers have a break</b> at the e-Shram launch in " + ml(D.meta.eshram.launch) + "; the ramp to " + ml(D.meta.eshram.ramp[1]) + " is registration, not labour demand.</li>" +
-      "<li><b>COVID</b> (" + ml(D.meta.covid[0]) + " to " + ml(D.meta.covid[1]) + ") distorts the history and is shaded on the charts.</li>" +
-      "<li><b>" + smalls.length + " series have very small counts</b> (" + esc(smalls.join(", ")) + "); they are greyed in tables.</li>" +
-      "<li><b>Not every district is forecast:</b> " + esc(st.filter(function (x) { return x[1] < x[2]; }).map(function (x) { return x[1] + " of " + x[2] + " in " + x[0]; }).join(", ")) + ".</li></ul></section></div>" +
-      '<section class="card mt"><div class="card-h"><div><h2>Where the numbers come from</h2><p>Nothing on these pages is typed in; each figure is read from these files</p></div></div>' + tbl([
-      ["forecast_long.csv", "Forecasts and the 90% range (lo90 to hi90), confidence. sha256 " + short(D.meta.sources["forecast_long.csv"]) + "…"], ["flags.csv", "Percentile, relative status, absolute context, change, precision, confidence. sha256 " + short(D.meta.sources["flags.csv"]) + "…"],
-      ["panel_monthly.parquet", "History to " + D.meta.origin_label + ". sha256 " + short(D.meta.sources["panel_monthly.parquet"]) + "…"], ["Forecast run", D.meta.manifest.created],
-      ["90% range method, employed", mp.interval_policy.E], ["90% range method, vacancies", mp.interval_policy.V], ["90% range method, seekers", mp.interval_policy.S]]) + "</section>" +
-      '<section class="card mt"><div class="card-h"><div><h2>Definitions</h2></div></div><dl class="defs"><dt>Coverage</dt><dd>Job vacancies divided by registered job seekers. The charts show it as openings per 100 seekers.</dd><dt>Net gap</dt><dd>Vacancies minus registered seekers. Negative means more seekers than openings.</dd>' +
-      "<dt>Absolute context</dt><dd>From coverage: " + CONTEXT[0] + " (" + per100(TH.exceed) + " or more openings per 100 seekers), " + CONTEXT[1] + " (" + per100(TH.moderate) + " to " + per100(TH.exceed) + "), " + CONTEXT[2] + " (" + per100(TH.oversupplied) + " to " + per100(TH.moderate) + ") and " + CONTEXT[3] + " (under " + per100(TH.oversupplied) + "). The cuts are read from flags.csv.</dd>" +
-      "<dt>Relative status</dt><dd>A district's coverage percentile among the " + DLIST.length + " districts of its sector in the same month: " + STATUS.join(", ").toLowerCase() + ".</dd>" +
-      "<dt>Alert and watch</dt><dd>Alert: the tightest or loosest decile. Watch: the tight or loose class next to it. Both are read from the forecast status in flags.csv.</dd>" +
-      "<dt>90% range</dt><dd>The lo90 to hi90 columns of forecast_long.csv, built to hold about nine in ten outcomes. Shown for a single district and sector.</dd>" +
-      "<dt>Confidence</dt><dd>Employed workers: " + esc(mp.confidence_rules.employed) + ". Seekers: " + esc(mp.confidence_rules.seekers) + ". Vacancies: " + esc(mp.confidence_rules.vacancies) + ".</dd>" +
-      '<dt>Typical test error</dt><dd>The typical_test_error_pct column of forecast_long.csv, per horizon: the size of the misses on held-out data.</dd></dl></section>' +
-      '<section class="card mt"><div class="card-h"><div><h2>Downloads</h2><p>CSV files for the current filters (' + esc(scopeText(p)) + ")</p></div></div><div class=\"dl-row\"><button class=\"chip-btn primary\" style=\"margin-left:0\" data-dl=\"f\">Forecasts</button><button class=\"chip-btn primary\" style=\"margin-left:0\" data-dl=\"l\">Flags</button><button class=\"chip-btn primary\" style=\"margin-left:0\" data-dl=\"h\">History</button></div></section>";
-    $$("[data-dl]", view).forEach(function (b) { b.addEventListener("click", function () { var k = b.dataset.dl; if (k === "f") download(fname("forecasts"), HEAD_F, rowsForecast(idx)); else if (k === "l") download(fname("flags"), HEAD_L, rowsFlags(idx)); else download(fname("history"), HEAD_H, rowsHistory(idx)); }); });
-    cur.csv = function () { return { name: fname("forecasts"), head: HEAD_F, rows: rowsForecast(idx) }; };
+    var cv = D.coverage, g = function (o, k) { return o[k] == null ? "–" : fmt(o[k] * 100, 0) + "%"; }, man = M.manifest, ap = cv.alert_precision_test;
+    var pr = function (b, f) { var v = ap[b + "|" + f]; return v ? fmt(v[0] * 100, 0) + "% (" + v[1] + "×)" : "–"; };
+    var row = function (a, b) { return "<tr><td><b>" + a + "</b></td><td>" + b + "</td></tr>"; };
+    view.innerHTML = '<div class="grid g2"><section class="card"><div class="card-h"><div><h2>' + t("Coverage of the dataset") + '</h2></div></div><div class="tbl-wrap"><table class="tbl"><tbody>' + [
+      [t("Series"), fmt(M.series) + " (" + STATES.length + " " + t("states") + ", " + DLIST.length + " " + t("districts") + ", " + SECTORS.length + " " + t("sectors") + ", " + TRADES.length + " " + t("trades") + ")"], [t("History"), "2000-01 – " + M.hist_core[1] + " (" + t("charts show from") + " " + M.hist_core[0] + ", " + t("districts from") + " " + M.hist_shard[0] + ")"],
+      [t("Forecast"), ml(M.fc[0]) + " – " + ml(M.fc[1]) + " (60 " + t("months") + ", " + t("made from") + " " + ml(M.origin) + ")"], [t("Final models fitted on"), esc(String(man.deploy_fit.fit_targets_to)) + " (" + t("without the 2020-23 shock and recovery pairs") + ")"], [t("Built"), esc(man.generated_at_utc)]].map(function (r) { return row(r[0], r[1]); }).join("") + "</tbody></table></div></section>" +
+      '<section class="card"><div class="card-h"><div><h2>' + t("Read this first") + '</h2></div></div><ul class="plain"><li><b>' + t("The data is simulated.") + "</b> " + t("It behaves like official statistics but describes no real district.") + "</li><li><b>" + t("Forecasts are not certain.") + "</b> " + t("The 2020-23 shock was not foreseeable from earlier years; ranges calibrated on calm years are too narrow for totals, so wide ranges are drawn too.") + "</li><li><b>" + t("Seekers are the least reliable measure,") + "</b> " + t("and their confidence labels do not always fall as the horizon grows.") + "</li><li><b>" + t("Long horizons") + "</b> " + t("(beyond 24 months) are learned from pre-2020 dynamics and are lumpier where the horizon crosses 24 months.") + "</li></ul></section></div>" +
+      '<section class="card mt"><div class="card-h"><div><h2>' + t("How often the 90% ranges held") + "</h2><p>" + t("Share of actual values inside the usual range in held-out years (a good range gives about 90%). The wide range includes 2020-25 in its calibration, so it cannot be tested on those years.") + "</p></div></div>" + table([["Measure"], ["2015-19", "num"], ["2020-25", "num"]], ["E", "V", "S"].map(function (k) { return "<tr><td>" + t(NAMES[k]) + '</td><td class="num">' + g(cv.series, "test|" + k + "|validation") + '</td><td class="num">' + g(cv.series, "stress|" + k + "|validation+test") + "</td></tr>"; })) +
+      '<p class="note">' + tf("Totals for a state or India: the usual range held only {0} of the time for employed workers in 2015-19 and {1} in 2020-25, which is why the wide range is shown for totals. District-sector totals behave like single series ({2} in 2015-19).", g(cv.aggregate, "forward|test|india|E"), g(cv.aggregate, "forward|stress|india|E"), g(cv.aggregate, "forward|test|district_sector|E")) + "</p></section>" +
+      '<section class="card mt"><div class="card-h"><div><h2>' + t("Definitions") + '</h2></div></div><dl class="defs"><dt>' + t("Demand Index") + "</dt><dd>" + t("0 to 100. Compares openings per worker (vacancies, job-portal postings, National Career Service) with other districts of the same trade, plus a national level term; 50 is the median district at the 2018-2019 level.") + "</dd><dt>" + t("Capacity gap") + "</dt><dd>" + t("Forecast openings against training seats sanctioned in 2025-26 (held flat) and the trainees expected to be certified (seats times the 2023-25 median certification rate). Status: seats fall short when the district's share of seats is less than 0.6 times its share of openings in the trade, exceed when more than 1.65 times.") + "</dd><dt>" + t("Early-warning alert") + "</dt><dd>" + t("The series is in the top or bottom 10% of districts of its trade in forecast vacancies per seeker for that month. A watch is the next 15%.") + "</dd><dt>" + t("Usual and wide range") + "</dt><dd>" + t("Both are 90% ranges. The usual one is calibrated on 2010-2019; the wide one also on 2020-2025.") + "</dd><dt>" + t("Confidence") + "</dt><dd>" + t("High, Medium or Low from the typical error of earlier forecasts for the same trade and horizon band: up to 8%, up to 20%, above; one level lower for small series.") + "</dd></dl></section>" +
+      '<section class="card mt"><div class="card-h"><div><h2>' + t("Alert accuracy in testing") + "</h2><p>" + t("Share of alerts that were in the true top or bottom 10% (and how many times better than chance), 2015-19, 1-12 months ahead") + "</p></div></div>" + table([["Alert"], ["Right", "num"]], [["Shortage alert"], ["Oversupply alert"]].map(function (f) { return "<tr><td>" + t(f[0]) + '</td><td class="num">' + pr("1-12", f[0]) + "</td></tr>"; })) + "</section>" +
+      '<section class="card mt"><div class="card-h"><div><h2>' + t("Downloads") + "</h2><p>" + t("CSV and JSON of the page you are on use the current filters. Series-level files for all 7,925 series are in the export folder.") + '</p></div></div><div class="dl-row"><a class="chip-btn primary" style="margin-left:0" href="' + url("forecast", {}) + '">' + t("Forecast page") + '</a> <a class="chip-btn primary" style="margin-left:0" href="' + url("warnings", {}) + '">' + t("Alerts page") + "</a></div></section>";
+    cur.csv = { name: "kaushalsetu_coverage", head: ["key", "coverage"], rows: Object.keys(cv.series).map(function (k) { return ["series|" + k, cv.series[k]]; }).concat(Object.keys(cv.aggregate).map(function (k) { return ["aggregate|" + k, cv.aggregate[k]]; })) };
+    return Promise.resolve();
   };
 
   /* ---------- frame: filters, sidebar, router ---------- */
   function renderFilters(p) {
-    var fs = $("#f-sector"), fa = $("#f-state"), fd = $("#f-district");
-    fs.innerHTML = '<option value="">All sectors</option>' + SECTORS.map(function (s) { return '<option value="' + esc(s) + '">' + esc(s) + "</option>"; }).join(""); fs.value = p.sector || "";
-    fa.innerHTML = '<option value="">All states</option>' + STATES.map(function (s) { return '<option value="' + esc(s) + '">' + esc(s) + "</option>"; }).join(""); fa.value = p.state || "";
-    fd.innerHTML = '<option value="">All districts</option>' + DLIST.filter(function (d) { return !p.state || d.state === p.state; }).map(function (d) { return '<option value="' + d.code + '">' + esc(d.name) + (p.state ? "" : " (" + d.state + ")") + "</option>"; }).join(""); fd.value = p.district || "";
+    var fs = $("#f-sector"), ft = $("#f-trade"), fa = $("#f-state"), fd = $("#f-district");
+    fs.innerHTML = '<option value="">' + t("All sectors") + "</option>" + SECTORS.map(function (s) { return '<option value="' + esc(s) + '">' + esc(t(s)) + "</option>"; }).join(""); fs.value = p.sector || "";
+    ft.innerHTML = '<option value="">' + t("All trades") + "</option>" + TRADES.filter(function (x) { return !p.sector || x.s === p.sector; }).map(function (x) { return '<option value="' + x.c + '">' + esc(x.n) + (p.sector ? "" : " (" + x.c + ")") + "</option>"; }).join(""); ft.value = p.trade || "";
+    fa.innerHTML = '<option value="">' + t("All states") + "</option>" + STATES.map(function (s) { return '<option value="' + esc(s) + '">' + esc(s) + "</option>"; }).join(""); fa.value = p.state || "";
+    fd.innerHTML = '<option value="">' + t("All districts") + "</option>" + DLIST.filter(function (d) { return !p.state || d.s === p.state; }).map(function (d) { return '<option value="' + d.c + '">' + esc(d.n) + (p.state ? "" : " (" + d.s + ")") + "</option>"; }).join(""); fd.value = p.district || "";
   }
+  function applyStatic() { $$("[data-t]").forEach(function (e) { e.textContent = t(e.dataset.t); }); $("#lang-label").textContent = LANG === "hi" ? "EN" : "हिं"; $("#tb-origin").textContent = t("Forecast from") + " " + ml(M.origin); $("#foot-origin").textContent = ml(M.origin); }
+  var token = 0;
   function route() {
-    var r = parse(); cur.page = r.page; cur.p = r.p; cur.csv = null;
-    var meta = PAGES[r.page]; $("#page-title").textContent = meta[0]; $("#page-sub").textContent = r.page === "ranking" ? DLIST.length + " districts ranked within one sector" : meta[1]; document.title = meta[0] + " | KaushalSetu Dashboard";
+    var r = parse(), my = ++token; cur.page = r.page; cur.p = r.p; cur.csv = null;
+    var meta = PAGES[r.page]; $("#page-title").textContent = t(meta[0]); $("#page-sub").textContent = t(meta[1]); document.title = t(meta[0]) + " | KaushalSetu";
     $$("#nav a").forEach(function (a) { a.setAttribute("aria-current", a.dataset.page === r.page ? "page" : "false"); a.href = url(a.dataset.page, {}); });
     renderFilters(r.p);
-    var view = $("#view"); hideTip();
-    try { render[r.page](r.p, view); } catch (e) { view.innerHTML = '<div class="banner">This page could not be drawn: ' + esc(e.message) + "</div>"; if (window.console) console.error(e); }
-    $("#main").scrollTop = 0; document.body.classList.remove("sb-open"); $("#scrim").hidden = true;
+    var view = $("#view"); hideTip(); view.innerHTML = '<p class="loading">' + t("Loading…") + "</p>";
+    Promise.resolve().then(function () { return render[r.page](r.p, view); }).then(function () { if (my === token) { $("#main").scrollTop = 0; } }).catch(function (e) { if (my === token) loadingErr(view, e); });
+    document.body.classList.remove("sb-open"); $("#scrim").hidden = true;
   }
   function init() {
-    $("#tb-origin").textContent = "Forecast from " + D.meta.origin_label; $("#foot-origin").textContent = D.meta.origin_label; $("#foot-model").textContent = D.meta.model;
-    ["sector", "state", "district"].forEach(function (k) { $("#f-" + k).addEventListener("change", function (e) { var o = {}; o[k] = e.target.value; if (k === "state") o.district = ""; go(o); }); });
-    $("#f-reset").addEventListener("click", function () { go({ sector: "", state: "", district: "" }); });
-    $("#f-csv").addEventListener("click", function () { if (!cur.csv) return; var c = cur.csv(); download(c.name, c.head, c.rows); });
+    applyStatic();
+    ["sector", "trade", "state", "district"].forEach(function (k) { $("#f-" + k).addEventListener("change", function (e) { var o = {}; o[k] = e.target.value; if (k === "state") o.district = ""; if (k === "sector") o.trade = ""; go(o); }); });
+    $("#f-reset").addEventListener("click", function () { go({ sector: "", trade: "", state: "", district: "" }); });
+    $("#f-csv").addEventListener("click", function () { if (cur.csv) downloadCsv(cur.csv.name, cur.csv.head, cur.csv.rows); });
+    $("#f-json").addEventListener("click", function () { if (cur.csv) downloadJson(cur.csv.name, cur.csv.head, cur.csv.rows); });
     var tog = $("#sb-toggle"), small = function () { return window.matchMedia("(max-width: 900px)").matches; };
     tog.addEventListener("click", function () {
       if (small()) { var o = document.body.classList.toggle("sb-open"); $("#scrim").hidden = !o; tog.setAttribute("aria-expanded", o); return; }
-      var c = root.classList.toggle("sb-collapsed"); tog.setAttribute("aria-expanded", !c); tog.setAttribute("aria-label", c ? "Expand the menu" : "Collapse the menu");
+      var c = root.classList.toggle("sb-collapsed"); tog.setAttribute("aria-expanded", !c);
       try { var d = JSON.parse(localStorage.getItem("lmis-dash") || "{}"); d.collapsed = c; localStorage.setItem("lmis-dash", JSON.stringify(d)); } catch (e) { /* the choice lasts for this visit */ }
-      setTimeout(function () { window.dispatchEvent(new Event("resize")); }, 320);
     });
     $("#scrim").addEventListener("click", function () { document.body.classList.remove("sb-open"); $("#scrim").hidden = true; });
     $("#theme-toggle").addEventListener("click", function () {
-      var t = root.dataset.theme === "dark" ? "light" : "dark"; root.dataset.theme = t;
-      try { var s = JSON.parse(localStorage.getItem("lmis-display") || "{}"); s.theme = t; localStorage.setItem("lmis-display", JSON.stringify(s)); } catch (e) { /* ignore */ }
+      var th = root.dataset.theme === "dark" ? "light" : "dark"; root.dataset.theme = th;
+      try { var s = JSON.parse(localStorage.getItem("lmis-display") || "{}"); s.theme = th; localStorage.setItem("lmis-display", JSON.stringify(s)); } catch (e) { /* ignore */ }
       route();
     });
-    if (root.classList.contains("sb-collapsed")) { tog.setAttribute("aria-expanded", "false"); tog.setAttribute("aria-label", "Expand the menu"); }
-    var rz; window.addEventListener("resize", function () { clearTimeout(rz); rz = setTimeout(function () { if (cur.page === "overview" && !document.hidden) route(); }, 220); });
+    $("#lang-toggle").addEventListener("click", function () {
+      LANG = LANG === "hi" ? "en" : "hi"; root.dataset.lang = LANG; root.lang = LANG;
+      try { var s = JSON.parse(localStorage.getItem("lmis-display") || "{}"); s.lang = LANG; localStorage.setItem("lmis-display", JSON.stringify(s)); } catch (e) { /* ignore */ }
+      applyStatic(); route();
+    });
     window.addEventListener("hashchange", route);
     route();
   }

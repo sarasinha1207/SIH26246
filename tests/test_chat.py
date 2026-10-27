@@ -29,7 +29,7 @@ def compact(n):
 
 
 def test_the_widget_is_on_every_page_of_both_sites():
-    for rel in ("index.html", "about.html", "resources.html", "dashboard/index.html"):
+    for rel in ("index.html", "about.html", "resources.html"):                                          # the v4 dashboard gets the assistant back in phase 8, with the v4 data
         h = (APP / rel).read_text(encoding="utf-8")
         assert re.search(r'assets/chat\.css\?v=[0-9a-f]{8}', h) and re.search(r'assets/chat\.js\?v=[0-9a-f]{8}', h), rel
         assert "{CHAT" not in h
