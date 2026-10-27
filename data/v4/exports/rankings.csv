@@ -1,0 +1,111 @@
+ranking,rank,key,value,detail
+"Trades with the fastest vacancy growth, Dec 2026 to Dec 2030 (%)",1,ITS-2512,13.866,employed_growth_pct_2026_2030=13.16
+"Trades with the fastest vacancy growth, Dec 2026 to Dec 2030 (%)",2,CON-7126,13.431,employed_growth_pct_2026_2030=8.84
+"Trades with the fastest vacancy growth, Dec 2026 to Dec 2030 (%)",3,HLT-3212,13.272,employed_growth_pct_2026_2030=9.55
+"Trades with the fastest vacancy growth, Dec 2026 to Dec 2030 (%)",4,HLT-2221,12.686,employed_growth_pct_2026_2030=9.66
+"Trades with the fastest vacancy growth, Dec 2026 to Dec 2030 (%)",5,CON-7111,12.482,employed_growth_pct_2026_2030=8.59
+"Trades with the fastest vacancy growth, Dec 2026 to Dec 2030 (%)",6,ITS-2511,12.279,employed_growth_pct_2026_2030=13.62
+"Trades with the fastest vacancy growth, Dec 2026 to Dec 2030 (%)",7,ITS-2513,12.217,employed_growth_pct_2026_2030=13.27
+"Trades with the fastest vacancy growth, Dec 2026 to Dec 2030 (%)",8,HLT-3221,11.223,employed_growth_pct_2026_2030=8.56
+"Trades with the fastest vacancy growth, Dec 2026 to Dec 2030 (%)",9,ITS-2514,10.812,employed_growth_pct_2026_2030=11.70
+"Trades with the fastest vacancy growth, Dec 2026 to Dec 2030 (%)",10,HLT-2212,9.952,employed_growth_pct_2026_2030=7.95
+"Trades with the slowest vacancy growth, Dec 2026 to Dec 2030 (%)",1,TXT-8151,0.95,employed_growth_pct_2026_2030=0.17
+"Trades with the slowest vacancy growth, Dec 2026 to Dec 2030 (%)",2,TXT-8152,1.102,employed_growth_pct_2026_2030=1.12
+"Trades with the slowest vacancy growth, Dec 2026 to Dec 2030 (%)",3,TXT-7533,1.603,employed_growth_pct_2026_2030=0.92
+"Trades with the slowest vacancy growth, Dec 2026 to Dec 2030 (%)",4,TXT-7531,1.877,employed_growth_pct_2026_2030=1.28
+"Trades with the slowest vacancy growth, Dec 2026 to Dec 2030 (%)",5,TXT-8153,2.897,employed_growth_pct_2026_2030=2.02
+"Trades with the slowest vacancy growth, Dec 2026 to Dec 2030 (%)",6,MFG-7212,4.328,employed_growth_pct_2026_2030=4.39
+"Trades with the slowest vacancy growth, Dec 2026 to Dec 2030 (%)",7,MFG-8131,4.386,employed_growth_pct_2026_2030=4.41
+"Trades with the slowest vacancy growth, Dec 2026 to Dec 2030 (%)",8,MFG-7223,4.724,employed_growth_pct_2026_2030=4.35
+"Trades with the slowest vacancy growth, Dec 2026 to Dec 2030 (%)",9,MFG-7233,5.55,employed_growth_pct_2026_2030=4.92
+"Trades with the slowest vacancy growth, Dec 2026 to Dec 2030 (%)",10,MFG-8212,8.371,employed_growth_pct_2026_2030=5.82
+Trades where trained supply is most stretched in 2030 (certified per opening),1,CON-9313,0.177,openings_per_seat=3.32
+Trades where trained supply is most stretched in 2030 (certified per opening),2,HLT-2212,0.436,openings_per_seat=1.31
+Trades where trained supply is most stretched in 2030 (certified per opening),3,CON-7111,0.512,openings_per_seat=1.15
+Trades where trained supply is most stretched in 2030 (certified per opening),4,CON-7112,0.587,openings_per_seat=1.00
+Trades where trained supply is most stretched in 2030 (certified per opening),5,CON-7126,0.739,openings_per_seat=0.80
+Trades where trained supply is most stretched in 2030 (certified per opening),6,HLT-2211,0.835,openings_per_seat=0.70
+Trades where trained supply is most stretched in 2030 (certified per opening),7,CON-7115,0.838,openings_per_seat=0.70
+Trades where trained supply is most stretched in 2030 (certified per opening),8,TXT-8153,0.987,openings_per_seat=0.60
+Trades where trained supply is most stretched in 2030 (certified per opening),9,TXT-8152,1.121,openings_per_seat=0.52
+Trades where trained supply is most stretched in 2030 (certified per opening),10,MFG-8212,1.127,openings_per_seat=0.52
+State-trade pairs where trained supply is most stretched in 2030 (certified per opening),1,Uttar Pradesh | CON-9313,0.116,openings_per_seat=5.07
+State-trade pairs where trained supply is most stretched in 2030 (certified per opening),2,West Bengal | CON-9313,0.151,openings_per_seat=3.92
+State-trade pairs where trained supply is most stretched in 2030 (certified per opening),3,Delhi | CON-9313,0.178,openings_per_seat=3.31
+State-trade pairs where trained supply is most stretched in 2030 (certified per opening),4,Maharashtra | CON-9313,0.185,openings_per_seat=3.16
+State-trade pairs where trained supply is most stretched in 2030 (certified per opening),5,Telangana | CON-9313,0.205,openings_per_seat=2.89
+State-trade pairs where trained supply is most stretched in 2030 (certified per opening),6,Punjab | CON-9313,0.207,openings_per_seat=2.86
+State-trade pairs where trained supply is most stretched in 2030 (certified per opening),7,Karnataka | CON-9313,0.217,openings_per_seat=2.71
+State-trade pairs where trained supply is most stretched in 2030 (certified per opening),8,Gujarat | CON-9313,0.229,openings_per_seat=2.59
+State-trade pairs where trained supply is most stretched in 2030 (certified per opening),9,Tamil Nadu | CON-9313,0.273,openings_per_seat=2.15
+State-trade pairs where trained supply is most stretched in 2030 (certified per opening),10,Kerala | CON-9313,0.277,openings_per_seat=2.13
+State-trade pairs where trained supply is most stretched in 2030 (certified per opening),11,Delhi | HLT-2212,0.283,openings_per_seat=1.92
+State-trade pairs where trained supply is most stretched in 2030 (certified per opening),12,Uttar Pradesh | CON-7111,0.331,openings_per_seat=1.78
+State-trade pairs where trained supply is most stretched in 2030 (certified per opening),13,West Bengal | HLT-2212,0.346,openings_per_seat=1.65
+State-trade pairs where trained supply is most stretched in 2030 (certified per opening),14,Uttar Pradesh | HLT-2212,0.348,openings_per_seat=1.66
+State-trade pairs where trained supply is most stretched in 2030 (certified per opening),15,Telangana | HLT-2212,0.389,openings_per_seat=1.30
+State-trade pairs with the most surplus training capacity in 2030 (certified per opening),1,Gujarat | ITS-3512,12.572,openings_per_seat=0.05
+State-trade pairs with the most surplus training capacity in 2030 (certified per opening),2,Tamil Nadu | ITS-3512,12.396,openings_per_seat=0.05
+State-trade pairs with the most surplus training capacity in 2030 (certified per opening),3,Kerala | ITS-3512,10.252,openings_per_seat=0.06
+State-trade pairs with the most surplus training capacity in 2030 (certified per opening),4,Punjab | ITS-3512,8.725,openings_per_seat=0.07
+State-trade pairs with the most surplus training capacity in 2030 (certified per opening),5,Uttar Pradesh | ITS-3512,8.636,openings_per_seat=0.07
+State-trade pairs with the most surplus training capacity in 2030 (certified per opening),6,West Bengal | ITS-3512,8.503,openings_per_seat=0.07
+State-trade pairs with the most surplus training capacity in 2030 (certified per opening),7,Delhi | ITS-3512,8.282,openings_per_seat=0.07
+State-trade pairs with the most surplus training capacity in 2030 (certified per opening),8,Maharashtra | ITS-3512,6.05,openings_per_seat=0.10
+State-trade pairs with the most surplus training capacity in 2030 (certified per opening),9,Telangana | ITS-3512,5.986,openings_per_seat=0.10
+State-trade pairs with the most surplus training capacity in 2030 (certified per opening),10,Tamil Nadu | ITS-2513,5.017,openings_per_seat=0.12
+State-trade pairs with the most surplus training capacity in 2030 (certified per opening),11,Tamil Nadu | ITS-2514,4.897,openings_per_seat=0.12
+State-trade pairs with the most surplus training capacity in 2030 (certified per opening),12,Gujarat | HLT-3221,4.716,openings_per_seat=0.13
+State-trade pairs with the most surplus training capacity in 2030 (certified per opening),13,Gujarat | ITS-2513,4.469,openings_per_seat=0.13
+State-trade pairs with the most surplus training capacity in 2030 (certified per opening),14,Kerala | MFG-7212,4.313,openings_per_seat=0.14
+State-trade pairs with the most surplus training capacity in 2030 (certified per opening),15,Gujarat | ITS-2514,4.282,openings_per_seat=0.14
+Districts with the highest Demand Index in 2030: Construction,1,Vijayanagar | Karnataka,99.98,
+Districts with the highest Demand Index in 2030: Construction,2,Jayashankar Bhupalapally | Telangana,99.972,
+Districts with the highest Demand Index in 2030: Construction,3,Gir Somnath | Gujarat,99.5,
+Districts with the highest Demand Index in 2030: Construction,4,Purulia | West Bengal,99.455,
+Districts with the highest Demand Index in 2030: Construction,5,Gadchiroli | Maharashtra,99.315,
+Districts with the highest Demand Index in 2030: Construction,6,Bahraich | Uttar Pradesh,99.202,
+Districts with the highest Demand Index in 2030: Construction,7,Cuddalore | Tamil Nadu,99.202,
+Districts with the highest Demand Index in 2030: Construction,8,West Delhi | Delhi,99.03,
+Districts with the highest Demand Index in 2030: Construction,9,Darjeeling | West Bengal,98.82,
+Districts with the highest Demand Index in 2030: Construction,10,Sivaganga | Tamil Nadu,98.807,
+Districts with the highest Demand Index in 2030: Healthcare,1,Vikarabad | Telangana,99.648,
+Districts with the highest Demand Index in 2030: Healthcare,2,Virudhunagar | Tamil Nadu,98.923,
+Districts with the highest Demand Index in 2030: Healthcare,3,Jayashankar Bhupalapally | Telangana,97.465,
+Districts with the highest Demand Index in 2030: Healthcare,4,Chamarajanagar | Karnataka,97.335,
+Districts with the highest Demand Index in 2030: Healthcare,5,Tirupattur | Tamil Nadu,96.855,
+Districts with the highest Demand Index in 2030: Healthcare,6,Aligarh | Uttar Pradesh,96.583,
+Districts with the highest Demand Index in 2030: Healthcare,7,Budaun | Uttar Pradesh,96.368,
+Districts with the highest Demand Index in 2030: Healthcare,8,Sangrur | Punjab,96.032,
+Districts with the highest Demand Index in 2030: Healthcare,9,Mancherial | Telangana,95.197,
+Districts with the highest Demand Index in 2030: Healthcare,10,Suryapet | Telangana,94.107,
+Districts with the highest Demand Index in 2030: IT-ITeS,1,Jangoan | Telangana,98.998,
+Districts with the highest Demand Index in 2030: IT-ITeS,2,Kalimpong | West Bengal,97.443,
+Districts with the highest Demand Index in 2030: IT-ITeS,3,Kasganj | Uttar Pradesh,97.323,
+Districts with the highest Demand Index in 2030: IT-ITeS,4,Ballari | Karnataka,97.283,
+Districts with the highest Demand Index in 2030: IT-ITeS,5,Gir Somnath | Gujarat,96.933,
+Districts with the highest Demand Index in 2030: IT-ITeS,6,The Dangs | Gujarat,96.392,
+Districts with the highest Demand Index in 2030: IT-ITeS,7,Barnala | Punjab,95.623,
+Districts with the highest Demand Index in 2030: IT-ITeS,8,Sri Muktsar Sahib | Punjab,93.69,
+Districts with the highest Demand Index in 2030: IT-ITeS,9,Kollam | Kerala,93.27,
+Districts with the highest Demand Index in 2030: IT-ITeS,10,Darjeeling | West Bengal,92.77,
+Districts with the highest Demand Index in 2030: Manufacturing,1,Barnala | Punjab,99.635,
+Districts with the highest Demand Index in 2030: Manufacturing,2,Malda | West Bengal,97.977,
+Districts with the highest Demand Index in 2030: Manufacturing,3,Basti | Uttar Pradesh,97.975,
+Districts with the highest Demand Index in 2030: Manufacturing,4,Pathanamthitta | Kerala,97.89,
+Districts with the highest Demand Index in 2030: Manufacturing,5,Lakhimpur Kheri | Uttar Pradesh,97.88,
+Districts with the highest Demand Index in 2030: Manufacturing,6,Rajanna Sircilla | Telangana,97.262,
+Districts with the highest Demand Index in 2030: Manufacturing,7,North Delhi | Delhi,97.217,
+Districts with the highest Demand Index in 2030: Manufacturing,8,Raigad | Maharashtra,97.072,
+Districts with the highest Demand Index in 2030: Manufacturing,9,Wanaparthy | Telangana,96.943,
+Districts with the highest Demand Index in 2030: Manufacturing,10,Gadchiroli | Maharashtra,96.793,
+Districts with the highest Demand Index in 2030: Textiles and Apparel,1,SAS Nagar (Mohali) | Punjab,99.58,
+Districts with the highest Demand Index in 2030: Textiles and Apparel,2,Pathanamthitta | Kerala,99.367,
+Districts with the highest Demand Index in 2030: Textiles and Apparel,3,Wanaparthy | Telangana,99.175,
+Districts with the highest Demand Index in 2030: Textiles and Apparel,4,Pune | Maharashtra,98.298,
+Districts with the highest Demand Index in 2030: Textiles and Apparel,5,Mancherial | Telangana,97.987,
+Districts with the highest Demand Index in 2030: Textiles and Apparel,6,New Delhi | Delhi,97.508,
+Districts with the highest Demand Index in 2030: Textiles and Apparel,7,Pilibhit | Uttar Pradesh,97.495,
+Districts with the highest Demand Index in 2030: Textiles and Apparel,8,Latur | Maharashtra,97.447,
+Districts with the highest Demand Index in 2030: Textiles and Apparel,9,Fazilka | Punjab,97.442,
+Districts with the highest Demand Index in 2030: Textiles and Apparel,10,Kalimpong | West Bengal,97.275,

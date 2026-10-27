@@ -120,3 +120,6 @@ data/v4/splits/
 data/v4/interim/
 # v4 fitted models (rebuilt by src/v4/evaluate.py and src/v4/forecast.py); the tuned settings and the result tables in reports/v4/evaluation are tracked
 models/v4/
+# v4 phase 6: series-level forecast tables and per-state shards are rebuilt by src/v4/forecast.py, demand_index.py, capacity.py and exports.py (listed with SHA-256 in data/v4/FORECAST_MANIFEST.json)
+data/v4/exports/*.parquet
+data/v4/exports/shards/

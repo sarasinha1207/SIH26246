@@ -73,17 +73,17 @@ def score(df, k, scaled):
     return e
 
 
-def _pool(by_h, origins_by_h, hh):
+def _pool(by_h, origins_by_h, hh, min_pool=MIN_POOL, min_origins=MIN_ORIGINS):
     """Scores of horizons hh-r .. hh+r with r grown from SMOOTH until the pool has MIN_POOL scores from MIN_ORIGINS different origins (long horizons have few origins)."""
     for r in range(SMOOTH, 60):
         hs = range(max(1, hh - r), min(60, hh + r) + 1)
         n = sum(len(by_h[x]) for x in hs)
-        if n >= MIN_POOL and len(set().union(*[origins_by_h[x] for x in hs])) >= MIN_ORIGINS:
+        if n >= min_pool and len(set().union(*[origins_by_h[x] for x in hs])) >= min_origins:
             break
     return np.concatenate([by_h[x] for x in hs]), r
 
 
-def calibrate(df, k, scheme, alpha=ALPHA):
+def calibrate(df, k, scheme, alpha=ALPHA, min_pool=MIN_POOL, min_origins=MIN_ORIGINS):
     """Table of quantiles of the scores by (group, horizon): columns group, horizon, lo, hi, n, radius (horizons pooled on each side)."""
     scaled, by = parse(scheme)
     e, g, h, o = score(df, k, scaled), group_key(df, by), df.horizon.to_numpy(), df.origin_idx.to_numpy()
@@ -97,9 +97,9 @@ def calibrate(df, k, scheme, alpha=ALPHA):
         eg, hg, og = e[m], h[m], o[m]
         by_h, origins_by_h = {x: eg[hg == x] for x in hs}, {x: set(np.unique(og[hg == x]).tolist()) for x in hs}
         for hh in hs:
-            pool, r = _pool(by_h, origins_by_h, hh)
-            if len(pool) < MIN_POOL:                                    # a small group: use every group at these horizons
-                pool, r = _pool(*everyone, hh)
+            pool, r = _pool(by_h, origins_by_h, hh, min_pool, min_origins)
+            if len(pool) < min_pool:                                    # a small group: use every group at these horizons
+                pool, r = _pool(*everyone, hh, min_pool, min_origins)
             rows.append((grp, hh, float(np.quantile(pool, alpha / 2)), float(np.quantile(pool, 1 - alpha / 2)), len(pool), r))
     return pd.DataFrame(rows, columns=["group", "horizon", "lo", "hi", "n", "radius"])
 
