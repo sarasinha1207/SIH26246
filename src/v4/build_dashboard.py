@@ -180,7 +180,7 @@ def main():
                  "manifest": {"forecast_origin": man["forecast_origin"], "generated_at_utc": man["generated_at_utc"], "deploy_fit": {k: man["inputs"]["deploy_fit"].get(k) for k in ("fit_targets_to", "left_out", "pairs_before", "pairs_after")}}},
         "groups": groups, "cal_series": series_cal, "cal_levels": level_cal, "capacity": capacity,
         "di_state_trade": year_di(dim, series, d, ["State_Name", "Trade_Code"]), "di_district_sector": year_di(dim, series, d, ["District_LGD_Code", "Sector_Name"]),
-        "rankings": pd.read_csv(ex / "rankings.csv").to_dict("records"), "coverage": coverage_figures(),
+        "rankings": pd.read_csv(ex / "rankings.csv").fillna("").to_dict("records"), "coverage": coverage_figures(),
     }
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "core.js").write_text("window.DASH4=" + jdump(core) + ";\n", encoding="utf-8")
@@ -192,10 +192,23 @@ def main():
              LETTER[r.V_confidence], LETTER[r.S_confidence]] for r in al.itertuples()]
     (OUT / "alerts.js").write_text("window.DASH4_ALERTS=" + jdump({"columns": ["type(0 shortage,1 oversupply)", "horizon(0=12,1=36,2=60)", "state", "district_lgd", "trade", "coverage_pct", "V", "S", "V_conf", "S_conf"], "rows": rows}) + ";\n", encoding="utf-8")
 
+    names_hi(dim)
     info = shard_docs(dim, fc, di, series, d, cap, confidence_letters(fc, dim))
     (OUT / "shards" / "index.json").write_text(json.dumps({"states": info}, indent=1), encoding="utf-8")
     shell()
     print({"core_kb": round((OUT / "core.js").stat().st_size / 1e3), "alerts_kb": round((OUT / "alerts.js").stat().st_size / 1e3), "alerts": len(rows), "shards_mb": round(sum(v["bytes"] for v in info.values()) / 1e6, 1)})
+
+
+def names_hi(dim):
+    """window.DASH4_HI: the Hindi names of the states, districts and trades the dashboard shows (the same dictionary as the public site, src/app/i18n_hi*.py)."""
+    import sys
+    sys.path.insert(0, str(C.ROOT / "src" / "app"))
+    import i18n
+    import i18n_hi
+    want = set(dim.State_Name) | set(dim.District_Name) | set(dim.Trade_Name)
+    missing = sorted(w for w in want if w not in i18n_hi.NAMES)
+    assert not missing, missing
+    (OUT / "names_hi.js").write_text("window.DASH4_HI=" + jdump({w: i18n_hi.NAMES[w] for w in sorted(want)}) + ";" + chr(10), encoding="utf-8")
 
 
 def shell():
@@ -205,9 +218,9 @@ def shell():
     import logo
 
     def ver(p):
-        return hashlib.sha256(Path(p).read_bytes()).hexdigest()[:10]
+        return hashlib.sha1(Path(p).read_bytes()).hexdigest()[:8]
     html = (Path(__file__).resolve().parent / "dashboard_shell.html").read_text(encoding="utf-8").replace("{LOGO}", logo.inline())
-    for token, path in (("{CSS}", APP / "dashboard.css"), ("{JS}", APP / "dashboard.js"), ("{CORE}", OUT / "core.js"), ("{ALERTS}", OUT / "alerts.js"),
+    for token, path in (("{CSS}", APP / "dashboard.css"), ("{JS}", APP / "dashboard.js"), ("{CORE}", OUT / "core.js"), ("{ALERTS}", OUT / "alerts.js"), ("{NAMES}", OUT / "names_hi.js"),
                         ("{CHATCSS}", C.ROOT / "app" / "assets" / "chat.css"), ("{CHATJS}", C.ROOT / "app" / "assets" / "chat.js")):
         html = html.replace(token, ver(path))
     (APP / "index.html").write_text(html, encoding="utf-8")

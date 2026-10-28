@@ -173,7 +173,7 @@ def test_the_shell_has_the_frame_the_four_filters_and_the_exports():
     for p in PAGES:
         assert f'data-page="{p}"' in h, p
     assert "{CSS}" not in h and "{JS}" not in h and "{CORE}" not in h and "{ALERTS}" not in h and "{LOGO}" not in h
-    assert re.search(r'data/core\.js\?v=[0-9a-f]{10}', h) and re.search(r'dashboard\.js\?v=[0-9a-f]{10}', h)
+    assert re.search(r'data/core\.js\?v=[0-9a-f]{8}', h) and re.search(r'dashboard\.js\?v=[0-9a-f]{8}', h)
     assert "Simulated data" in h and 'class="skip"' in h and 'aria-live="polite"' in h
 
 
@@ -204,6 +204,16 @@ def test_every_text_has_a_hindi_translation():
     assert not missing, missing
     plain = {"CSV", "JSON"}
     assert all(re.search(r"[ऀ-ॿ]", v) or k in plain for k, v in hi.items()), [k for k, v in hi.items() if not re.search(r"[ऀ-ॿ]", v) and k not in plain]
+
+
+def test_the_dashboard_has_a_hindi_name_for_every_state_district_and_trade():
+    t = (DATA / "names_hi.js").read_text(encoding="utf-8")
+    hi = json.loads(t[t.index("{"):t.rindex("}") + 1])
+    dim = pd.read_csv(C.DATA / "dim_series.csv")
+    for col in ("State_Name", "District_Name", "Trade_Name"):
+        for n in dim[col].unique():
+            assert re.search(r"[ऀ-ॿ]", hi.get(n, "")), n
+    assert 'src="data/names_hi.js' in shell()
 
 
 def test_the_files_the_browser_loads_stay_within_the_size_budget():

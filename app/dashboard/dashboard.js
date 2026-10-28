@@ -191,6 +191,21 @@
     "{0} months": "{0} महीने"
   };
   var t = function (s) { return LANG === "hi" && HI[s] ? HI[s] : s; };
+  var HIN = window.DASH4_HI || {};                                            // Hindi names of the states, districts and trades (the public site's dictionary)
+  /* In Hindi, names the page printed in English (a state, a district, a trade, "Kerala, Healthcare") are replaced in place after each draw. */
+  function localise(node) {
+    if (LANG !== "hi" || !node) return;
+    var w = document.createTreeWalker(node, NodeFilter.SHOW_TEXT, null), n, list = [];
+    while ((n = w.nextNode())) list.push(n);
+    var one = function (p) { return HIN[p] || HI[p] || null; };
+    list.forEach(function (x) {
+      var raw = x.nodeValue, tt = raw.trim();
+      if (!tt || /^[\d\s.,%+\-−]+$/.test(tt)) return;
+      var h = one(tt);
+      if (!h) { var parts = tt.split(", "), got = parts.map(function (p) { return one(p) || p; }); if (parts.length > 1 && parts.some(one)) h = got.join(", "); }
+      if (h) x.nodeValue = raw.replace(tt, h);
+    });
+  }
   var tf = function (s) { var a = Array.prototype.slice.call(arguments, 1); return t(s).replace(/\{(\d)\}/g, function (_, i) { return a[+i]; }); };
   var PAGES = {
     overview: ["Overview", "Where employment, vacancies and seekers are heading to 2030"], forecast: ["Forecast", "Five-year forecasts with 90% ranges"], index: ["Demand Index", "How strong hiring demand is, from 0 to 100"],
@@ -589,9 +604,9 @@
     var r = parse(), my = ++token; cur.page = r.page; cur.p = r.p; cur.csv = null;
     var meta = PAGES[r.page]; $("#page-title").textContent = t(meta[0]); $("#page-sub").textContent = t(meta[1]); document.title = t(meta[0]) + " | KaushalSetu";
     $$("#nav a").forEach(function (a) { a.setAttribute("aria-current", a.dataset.page === r.page ? "page" : "false"); a.href = url(a.dataset.page, {}); });
-    renderFilters(r.p);
+    renderFilters(r.p); localise($("#filters"));
     var view = $("#view"); hideTip(); view.innerHTML = '<p class="loading">' + t("Loading…") + "</p>";
-    Promise.resolve().then(function () { return render[r.page](r.p, view); }).then(function () { if (my === token) { $("#main").scrollTop = 0; } }).catch(function (e) { if (my === token) loadingErr(view, e); });
+    Promise.resolve().then(function () { return render[r.page](r.p, view); }).then(function () { if (my === token) { localise(view); $("#main").scrollTop = 0; } }).catch(function (e) { if (my === token) loadingErr(view, e); });
     document.body.classList.remove("sb-open"); $("#scrim").hidden = true;
   }
   function init() {

@@ -43,7 +43,7 @@ Have a Hindi speaker read the translation before launch. The Devanagari font (No
 ## The map
 `index.html#map` shows India with every district of the four states. The 56 project districts are coloured by sector, measure (employed workers, vacancies, job seekers, or openings per 100 job seekers) and months ahead (3, 6, 12); the other 52 districts of West Bengal and Tamil Nadu are outlined and marked "no forecast data". Select a state to zoom in; hover or tap a district for its numbers; the side panel ranks the highest and lowest five districts, and a table below lists all of them. Colours sort the districts into five equal groups.
 ```bash
-python src/app/build_map_data.py        # writes app/data/map_data.js (296 KB): district shapes, the faint India outline and the forecast values
+python src/v4/build_map_data.py        # writes app/data/map_data.js (about 830 KB): the 317 district shapes, the faint India outline and the forecast values at 12, 36 and 60 months
 ```
 It reads `data/dashboard/district_boundaries.geojson` (the 56 districts), `data/external/lgd_districts/LGD_Districts.parquet` (the rest of India, for the outline only; 22,178,335 bytes, SHA-256 `c205da56…`, from the bharatlas site; not in git) and `outputs/forecasts/origin_<month>/forecast_long.csv`. To fetch the parquet again:
 ```bash
@@ -57,10 +57,10 @@ Boundaries are simplified for orientation, not for survey use or as an authorita
 Model-driven: the dashboard shows nothing typed in. History comes from `panel_monthly.parquet`; forecasts, 90% ranges (`lo90` to `hi90`), confidence and typical test error are copied unrounded from `forecast_long.csv`; relative status, absolute context, change, precision and confidence are copied from `flags.csv`. The builder checks both files and the panel against the SHA-256 hashes in the forecast folder's `manifest.json`, checks that the history ends where the forecast starts (`last_observed`), and reads the absolute-context cuts off `flags.csv`. Alert and watch are the project's own flag classes (manifest: deciles at 10/90, watch classes at 30/70): the tightest or loosest decile is an *alert*, the tight or loose class next to it a *watch*, a lookup on `forecast_status`. Forecast ranges appear only when one district and one sector are selected. The dashboard is English only.
 
 ```bash
-python src/app/build_dashboard.py     # writes dashboard/data/dash_data.js (2 MB: 280 series, 190 months, forecasts, flags) and the page shell
-python tests/test_dashboard.py
+python src/v4/build_dashboard.py      # writes dashboard/data/core.js, alerts.js, names_hi.js and one shard per state (shards/<state>.json), and the page shell
+python tests/test_v4_dashboard.py
 ```
-`serve.py` rebuilds the shell when `dashboard.css`, `dashboard.js` or `src/app/dashboard/shell.html` change. Rerun `build_dashboard.py` after a new forecast; it picks the newest `outputs/forecasts/origin_*` folder, or pass one, e.g. `build_dashboard.py 2026-10`.
+`serve.py` rebuilds the shell when `dashboard.css`, `dashboard.js` or `src/v4/dashboard_shell.html` change. Rerun `build_dashboard.py` after a new forecast: it reads the phase 6 exports in `data/v4/exports/` (rebuilt by `src/v4/forecast.py`, `demand_index.py`, `capacity.py` and `exports.py`).
 
 ## The assistant
 A round chat button sits in the bottom-right corner of every public page and of the dashboard (`assets/chat.js`, `assets/chat.css`, one file for both). Two layers:
@@ -85,12 +85,12 @@ python tests/test_chat_proxy.py       # the Gemini proxy with Google stubbed: ke
 ## Where the numbers come from
 Every number comes from the project's outputs. Rebuild after a new forecast:
 ```bash
-python src/app/build_site_data.py        # writes app/data/site_data.js (hero example, coverage, test-period accuracy)
-python src/app/build_map_data.py         # writes app/data/map_data.js
+python src/v4/build_site_data.py        # writes app/data/site_data.js (hero example, headline numbers, test-period accuracy)
+python src/v4/build_map_data.py         # writes app/data/map_data.js
 python src/app/build_pages.py
 python tests/test_app.py                 # checks the site against the source files
 ```
-Edit `ORIGIN` in `src/app/build_site_data.py` and `src/app/build_map_data.py` when the forecast month changes.
+The forecast month and every figure come from the exports and `data/v4/FORECAST_MANIFEST.json`; nothing is typed into the builders.
 
 ## Before launch: things only you can fill in
 * **Contact address:** `feedback@lmis-demo.example` in each footer is a placeholder. Replace it.

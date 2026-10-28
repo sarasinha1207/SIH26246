@@ -23,8 +23,8 @@ def ver(rel):
 
 
 PAGES = [  # file, nav key, title, description, body file
-    ("index.html", "home", "KaushalSetu: Bridging Skills. Forecasting Futures.", "Twelve-month forecasts of employment, job vacancies and job seekers for 56 districts and five sectors, with honest ranges.", "index"),
-    ("about.html", "about", "About | KaushalSetu", "What KaushalSetu is, how monthly counts become twelve-month district forecasts, what the pilot covers and how the forecasting engine is built.", "about"),
+    ("index.html", "home", "KaushalSetu: Bridging Skills. Forecasting Futures.", "Five-year forecasts of employment, job vacancies and job seekers for 317 districts, five sectors and 25 trades, with honest ranges, a Demand Index and a capacity gap.", "index"),
+    ("about.html", "about", "About | KaushalSetu", "What KaushalSetu is, how monthly counts become five-year district and trade forecasts, what the pilot covers and how the forecasting engine is built.", "about"),
     ("resources.html", "res", "Resources | KaushalSetu", "The data behind the forecasts and where each part came from: the datasets, what the simulator was calibrated to, and what each column measures.", "resources"),
 ]
 
@@ -108,7 +108,7 @@ def footer(p, extra_scripts):
       <div><h4>Data</h4><ul><li><a href="{p}resources.html#datasets">Data sources</a></li><li><a href="{p}about.html#dataset">Dataset details</a></li><li><a href="{p}about.html#evaluation">Model evaluation</a></li></ul></div>
       <div><h4>Contact</h4><p><a href="mailto:feedback@lmis-demo.example" translate="no">feedback@lmis-demo.example</a></p><p>No login. This site sets no cookies and has no analytics. Your display choices stay on your device.</p></div>
     </div>
-    <div class="legal">Forecast for <span data-fill="meta.first_target">November 2026</span> to <span data-fill="meta.last_target">October 2027</span>, made from data up to <span data-fill="meta.origin_label">October 2026</span>.</div>
+    <div class="legal">Forecast for <span data-fill="meta.first_target">January 2026</span> to <span data-fill="meta.last_target">December 2030</span>, made from data up to <span data-fill="meta.origin_label">December 2025</span>.</div>
   </div>
 </footer>
 <button class="to-top" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>

@@ -14,6 +14,7 @@ var d={};try{d=JSON.parse(localStorage.getItem('lmis-dash')||'{}')}catch(e){}if(
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..800&family=Noto+Sans+Devanagari:wght@400..700&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..800&family=Noto+Sans+Devanagari:wght@400..700&display=swap"></noscript>
 <link rel="stylesheet" href="dashboard.css?v={CSS}">
+<link rel="stylesheet" href="../assets/chat.css?v={CHATCSS}">
 </head>
 <body>
 <a class="skip" href="#view" data-t="Skip to the page">Skip to the page</a>
@@ -69,6 +70,8 @@ var d={};try{d=JSON.parse(localStorage.getItem('lmis-dash')||'{}')}catch(e){}if(
 <div class="tip" id="tip" role="status" hidden></div>
 <script src="data/core.js?v={CORE}"></script>
 <script src="data/alerts.js?v={ALERTS}"></script>
+<script src="data/names_hi.js?v={NAMES}"></script>
 <script src="dashboard.js?v={JS}"></script>
+<script src="../assets/chat.js?v={CHATJS}"></script>
 </body>
 </html>
