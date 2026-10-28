@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-size="m" data-lang="en" data-motion="full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forecast API | KaushalSetu</title>
+<meta name="description" content="A read-only JSON API for the 2026 to 2030 forecasts, early-warning alerts, Demand Index and capacity gap of the KaushalSetu pilot, with the same filters as the dashboard. Simulated data.">
+<meta name="theme-color" content="#0A0E16">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<script>(function(){var h=document.documentElement,s={};try{s=JSON.parse(localStorage.getItem('lmis-display')||'{}')}catch(e){}
+h.dataset.theme=s.theme==='light'?'light':'dark';h.dataset.size=s.size||'m';var l=s.lang==='hi'?'hi':'en';h.dataset.lang=l;h.lang=l;
+h.dataset.motion=(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)?'reduced':'full';})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..800&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..800&display=swap"></noscript>
+<link rel="stylesheet" href="../assets/styles.css?v=684b29f3">
+<link rel="stylesheet" href="../assets/chat.css?v=a530a2d2">
+</head>
+<body>
+<a data-hi="मुख्य सामग्री पर जाएँ" class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <nav data-hi-aria="मुख्य" class="nav" aria-label="Main">
+      <a data-hi-aria="KaushalSetu का मुख्य पृष्ठ" class="brand" href="../index.html" aria-label="KaushalSetu home"><svg viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="9" fill="#0F2B63"/><rect x=".5" y=".5" width="33" height="33" rx="8.5" fill="none" stroke="#fff" stroke-opacity=".16"/><rect x="6.5" y="19" width="5.4" height="8.5" rx="1.6" fill="#8FB0FF"/><rect x="14.3" y="14" width="5.4" height="13.5" rx="1.6" fill="#8FB0FF"/><rect x="22.1" y="8.5" width="5.4" height="19" rx="1.6" fill="#8FB0FF" fill-opacity=".42"/><path d="M5.5 22.5C10 22 13 17.5 17 15S23.5 9.5 27.5 7" fill="none" stroke="#F2A93B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="27.5" cy="7" r="2.7" fill="#F2A93B"/></svg><span translate="no">Kaushal<b>Setu</b></span></a>
+      <ul class="nav-links" id="nav-links"><li><a data-hi="मुख्य पृष्ठ" href="../index.html">Home</a></li><li><a data-hi="परिचय" href="../about.html">About</a></li><li><a data-hi="संसाधन" href="../resources.html">Resources</a></li></ul>
+      <div class="nav-actions">
+        <div class="display">
+  <button data-hi-aria="प्रदर्शन विकल्प" class="display-btn" type="button" aria-expanded="false" aria-controls="display-panel" aria-label="Display options">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4v5M6 13v7M12 4v10M12 18v2M18 4v2M18 10v10" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="6" cy="11" r="2.4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="16" r="2.4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="8" r="2.4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+  </button>
+  <div data-hi-aria="प्रदर्शन विकल्प" class="display-panel" id="display-panel" role="group" aria-label="Display options" hidden>
+    <div data-hi="प्रदर्शन विकल्प" class="dp-title">Display options</div>
+    <div class="dp-row"><span data-hi="अक्षर का आकार" class="dp-label">Text size</span><div data-hi-aria="अक्षर का आकार" class="seg" role="group" aria-label="Text size">
+      <button data-hi-aria="छोटे अक्षर" type="button" data-size-step="-1" aria-label="Smaller text" translate="no">A&minus;</button><button data-hi-aria="सामान्य आकार" type="button" data-size-step="0" aria-label="Default text size" translate="no">A</button><button data-hi-aria="बड़े अक्षर" type="button" data-size-step="1" aria-label="Larger text" translate="no">A+</button></div></div>
+    <div class="dp-row"><span data-hi="थीम" class="dp-label">Theme</span><div data-hi-aria="थीम" class="seg" role="group" aria-label="Theme">
+      <button data-hi="हल्का" type="button" data-opt="theme" data-val="light">Light</button><button data-hi="गहरा" type="button" data-opt="theme" data-val="dark">Dark</button></div></div>
+    <div class="dp-row"><span data-hi="भाषा" class="dp-label">Language</span><div data-hi-aria="भाषा" class="seg" role="group" aria-label="Language">
+      <button type="button" data-opt="lang" data-val="en" translate="no">English</button><button type="button" data-opt="lang" data-val="hi" lang="hi" translate="no">हिन्दी</button></div></div>
+  </div>
+</div>
+        <a data-hi="डैशबोर्ड खोलें" class="btn small nav-cta" href="../dashboard/index.html">Open dashboard</a>
+        <button data-hi="मेनू" class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      </div>
+    </nav>
+  </div>
+  <div class="progress" aria-hidden="true"><i></i></div>
+</header>
+<main id="main">
+  <section class="page-head big" id="top">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="wrap">
+      <h1 data-hi="पूर्वानुमान API">Forecast API</h1>
+      <p data-hi="डैशबोर्ड वाली ही संख्याएँ, सादे JSON में।" class="lead">The same numbers as the dashboard, as plain JSON.</p>
+      <div class="hero-text">
+        <p data-hi="API केवल-पढ़ने योग्य और खुली है: न कुंजी, न लॉगिन। यह 2026 से 2030 के पूर्वानुमान, पूर्व-चेतावनियाँ, माँग सूचकांक और क्षमता अंतर देती है, डैशबोर्ड जैसे ही फ़िल्टर के साथ: राज्य, ज़िला, सेक्टर और ट्रेड।">The API is read-only and open: no key and no login. It serves the 2026 to 2030 forecasts, the early-warning alerts, the Demand Index and the capacity gap, with the same filters as the dashboard: state, district, sector and trade.</p>
+        <p data-hi="हर उत्तर बताता है कि डेटा &lt;strong&gt;सिम्युलेटेड&lt;/strong&gt; है। यह आधिकारिक आँकड़ों जैसा व्यवहार करता है पर किसी वास्तविक ज़िले का वर्णन नहीं करता, और यह आधिकारिक आँकड़ा नहीं है।">Every response says that the data is <strong>simulated</strong>. It behaves like official statistics but describes no real district, and it is not an official statistic.</p>
+      </div>
+      <ul class="hero-chips">
+        <li><b>5</b><span data-hi="एंडपॉइंट">endpoints</span></li>
+        <li><b>4</b><span data-hi="फ़िल्टर">filters</span></li>
+        <li><b>60</b><span data-hi="महीने आगे">months ahead</span></li>
+        <li><b>60</b><span data-hi="अनुरोध प्रति मिनट">requests a minute</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="endpoints">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 data-hi="एंडपॉइंट">Endpoints</h2>
+        <p data-hi="सभी GET अनुरोध हैं, इसी साइट पर, और JSON लौटाते हैं। पते में फ़िल्टर जोड़ें, जैसे &lt;code translate=&quot;no&quot;&gt;/api/forecast?state=Kerala&amp;amp;sector=Healthcare&lt;/code&gt;।">All are GET requests on this site and return JSON. Add the filters to the address, for example <code translate="no">/api/forecast?state=Kerala&amp;sector=Healthcare</code>.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="files res">
+          <thead><tr><th data-hi="पता">Address</th><th data-hi="यह क्या लौटाता है">What it returns</th><th data-hi="पैरामीटर">Parameters</th><th data-hi="आज़माएँ">Try it</th></tr></thead>
+          <tbody>
+            <tr><td translate="no"><code>/api/forecast</code></td><td data-hi="नियोजित कामगारों, रिक्तियों और पंजीकृत नौकरी चाहने वालों का पूर्वानुमान: हर अवधि के लिए बिंदु पूर्वानुमान, साथ में सामान्य और विस्तृत 90% दायरा।">Forecast of employed workers, job vacancies and registered job seekers: a point forecast with a usual and a wide 90% range for each horizon.</td><td translate="no"><code>state</code>, <code>district</code>, <code>sector</code>, <code>trade</code>, <code>measure</code>, <code>horizon</code>, <code>detail</code>, <code>limit</code>, <code>offset</code></td><td><a data-hi="केरल, स्वास्थ्य सेवा" class="ulink" href="../api/forecast?state=Kerala&amp;sector=Healthcare&amp;measure=E&amp;horizon=12,60">Kerala, Healthcare</a></td></tr>
+            <tr><td translate="no"><code>/api/flags</code></td><td data-hi="12, 36 या 60 महीने आगे की पूर्व-चेतावनियाँ, या किसी एक ज़िले और ट्रेड के लिए हर महीने का निशान।">Early-warning alerts 12, 36 or 60 months ahead, or the flag of every month for one district and trade.</td><td translate="no"><code>state</code>, <code>district</code>, <code>sector</code>, <code>trade</code>, <code>horizon</code>, <code>type</code>, <code>months</code>, <code>limit</code>, <code>offset</code></td><td><a data-hi="केरल, 12 महीने" class="ulink" href="../api/flags?state=Kerala&amp;horizon=12&amp;limit=5">Kerala, 12 months</a></td></tr>
+            <tr><td translate="no"><code>/api/demand-index</code></td><td data-hi="0 से 100 तक का माँग सूचकांक, 2016 से 2030 तक (दिसंबर के मान, या हर महीना)।">The Demand Index from 0 to 100, from 2016 to 2030 (December values, or every month).</td><td translate="no"><code>state</code>, <code>district</code>, <code>sector</code>, <code>trade</code>, <code>from</code>, <code>to</code>, <code>resolution</code></td><td><a data-hi="केरल, स्वास्थ्य सेवा" class="ulink" href="../api/demand-index?state=Kerala&amp;sector=Healthcare">Kerala, Healthcare</a></td></tr>
+            <tr><td translate="no"><code>/api/capacity-gap</code></td><td data-hi="प्रशिक्षण सीटों और अपेक्षित प्रमाणित प्रशिक्षुओं के सामने पूर्वानुमानित रिक्तियाँ, वर्ष के अनुसार।">Forecast openings against training seats and expected certified trainees, by year.</td><td translate="no"><code>state</code>, <code>district</code>, <code>sector</code>, <code>trade</code>, <code>year</code></td><td><a data-hi="निर्माण कार्य" class="ulink" href="../api/capacity-gap?sector=Construction">Construction</a></td></tr>
+            <tr><td translate="no"><code>/api/meta</code></td><td data-hi="मान्य राज्य, ज़िले (LGD कोड सहित), सेक्टर और ट्रेड, पूर्वानुमान का आधार माह और संख्याओं के पीछे की फ़ाइलों के चेकसम।">The valid states, districts (with LGD codes), sectors and trades, the forecast origin and the checksums of the files behind the numbers.</td><td data-hi="कुछ नहीं।">None.</td><td><a data-hi="सूचियाँ और चेकसम" class="ulink" href="../api/meta">Lists and checksums</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="parameters">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 data-hi="पैरामीटर">Parameters</h2>
+        <p data-hi="मान &lt;code translate=&quot;no&quot;&gt;/api/meta&lt;/code&gt; की सूचियों से जाँचे जाते हैं; अज्ञात या दोहराए गए पैरामीटर साफ़ संदेश के साथ अस्वीकार होते हैं।">Values are checked against the lists in <code translate="no">/api/meta</code>; unknown or repeated parameters are refused with a clear message.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="files res">
+          <thead><tr><th data-hi="पैरामीटर">Parameter</th><th data-hi="मान">Values</th></tr></thead>
+          <tbody>
+            <tr><td translate="no"><code>state</code></td><td data-hi="दस राज्यों के नामों में से एक, जैसे Kerala। अक्षरों के आकार से फ़र्क़ नहीं पड़ता।">One of the ten state names, for example Kerala. Not case sensitive.</td></tr>
+            <tr><td translate="no"><code>district</code></td><td data-hi="आधिकारिक LGD कोड, जैसे आगरा के लिए 118, या ज़िले का नाम। ज़िले से राज्य तय हो जाता है।">The official LGD code, for example 118 for Agra, or the district name. A district fixes the state.</td></tr>
+            <tr><td translate="no"><code>sector</code></td><td data-hi="पाँच सेक्टरों में से एक, जैसे IT-ITeS।">One of the five sectors, for example IT-ITeS.</td></tr>
+            <tr><td translate="no"><code>trade</code></td><td data-hi="HLT-2221 (नर्सिंग पेशेवर) जैसा ट्रेड कोड या उसका पूरा नाम। ट्रेड से सेक्टर तय हो जाता है।">A trade code such as HLT-2221 (nursing professionals) or its full name. A trade fixes the sector.</td></tr>
+            <tr><td translate="no"><code>measure</code></td><td data-hi="&lt;code&gt;E&lt;/code&gt; (नियोजित कामगार), &lt;code&gt;V&lt;/code&gt; (रिक्तियाँ), &lt;code&gt;S&lt;/code&gt; (पंजीकृत नौकरी चाहने वाले), कई हों तो कॉमा से अलग, या &lt;code&gt;all&lt;/code&gt; (डिफ़ॉल्ट)।"><code>E</code> (employed workers), <code>V</code> (job vacancies), <code>S</code> (registered job seekers), several separated by commas, or <code>all</code> (the default).</td></tr>
+            <tr><td translate="no"><code>horizon</code></td><td data-hi="1 से 60 तक आगे के महीने, कई हों तो कॉमा से अलग, या &lt;code&gt;all&lt;/code&gt;। डिफ़ॉल्ट 12, 36 और 60 है। फ़्लैग के लिए: 12, 36 या 60।">Months ahead from 1 to 60, several separated by commas, or <code>all</code>. The default is 12, 36 and 60. For flags: 12, 36 or 60.</td></tr>
+            <tr><td translate="no"><code>detail</code></td><td data-hi="&lt;code&gt;aggregate&lt;/code&gt; (डिफ़ॉल्ट: फ़िल्टर का एक कुल योग) या &lt;code&gt;series&lt;/code&gt; (हर ज़िला और ट्रेड श्रृंखला, &lt;code&gt;limit&lt;/code&gt; अधिकतम 200 और &lt;code&gt;offset&lt;/code&gt; के साथ)।"><code>aggregate</code> (the default: one total for the filters) or <code>series</code> (every district and trade series, with <code>limit</code> up to 200 and <code>offset</code>).</td></tr>
+            <tr><td translate="no"><code>type</code></td><td data-hi="फ़्लैग के लिए: &lt;code&gt;shortage&lt;/code&gt;, &lt;code&gt;oversupply&lt;/code&gt; या &lt;code&gt;all&lt;/code&gt;।">For flags: <code>shortage</code>, <code>oversupply</code> or <code>all</code>.</td></tr>
+            <tr><td translate="no"><code>from</code>, <code>to</code>, <code>resolution</code></td><td data-hi="माँग सूचकांक के लिए: 2026-12 जैसे महीने, और &lt;code&gt;annual&lt;/code&gt; (हर वर्ष का दिसंबर, डिफ़ॉल्ट) या &lt;code&gt;monthly&lt;/code&gt;।">For the Demand Index: months like 2026-12, and <code>annual</code> (December of each year, the default) or <code>monthly</code>.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="example">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 data-hi="उदाहरण">Example</h2>
+        <p data-hi="केरल के स्वास्थ्य सेवा सेक्टर में नियोजित कामगार, 12 और 60 महीने आगे। संख्याओं की जोड़ी के रूप में दिखा दायरा निचला और ऊपरी सिरा है।">Employed workers in Kerala's healthcare sector, 12 and 60 months ahead. A range shown as a pair of numbers is the lower and the upper end.</p>
+      </div>
+      <pre class="codeblock" tabindex="0" translate="no" aria-label="Example request and response"><code>GET /api/forecast?state=Kerala&amp;sector=Healthcare&amp;measure=E&amp;horizon=12,60
+
+{
+  "ok": true,
+  "data_simulated": true,
+  "forecast_origin": "2025-12",
+  "scope": { "state": "Kerala", "sector": "Healthcare", "district": null, "trade": null },
+  "level": "state_sector",
+  "last_observed": { "month": "2025-12", "employed_workers": 341477 },
+  "data": [
+    { "horizon": 12, "month": "2026-12",
+      "employed_workers": { "point": 355434, "usual_90": [331063, 359351], "wide_90": [333296, 389491] } },
+    { "horizon": 60, "month": "2030-12",
+      "employed_workers": { "point": 385297, "usual_90": [341202, 406679], "wide_90": [351674, 577815] } }
+  ]
+}</code></pre>
+    </div>
+  </section>
+
+  <section class="section alt" id="reading">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 data-hi="संख्याओं को कैसे पढ़ें">Reading the numbers</h2>
+      </div>
+      <div class="grid3">
+        <article class="card"><h3 data-hi="दो दायरे">Two ranges</h3><p data-hi="सामान्य दायरा 2010 से 2019 पर बना है; विस्तृत दायरा झटके वाले वर्ष 2020 से 2025 भी लेता है। कई श्रृंखलाओं के कुल योग के लिए, जैसे राज्य, विस्तृत दायरा पढ़ें: पास की श्रृंखलाओं की त्रुटियाँ साथ-साथ चलती हैं।">The usual range was calibrated on 2010 to 2019; the wide range also uses the shock years 2020 to 2025. For totals of many series, such as a state, read the wide range: errors of neighbouring series move together.</p></article>
+        <article class="card"><h3 data-hi="जहाँ दायरा नहीं है">Where there is no range</h3><p data-hi="भारत, किसी सेक्टर, ट्रेड, राज्य, सेक्टर सहित राज्य, सेक्टर सहित ज़िले और ट्रेड सहित ज़िले के लिए दायरा मिलता है। अन्य संयोजनों में यह खाना null होता है और एक टिप्पणी यह बताती है।">A range exists for India, a sector, a trade, a state, a state with a sector, a district with a sector, and a district with a trade. For other combinations the field is null and a note says so.</p></article>
+        <article class="card"><h3 data-hi="बिंदु जुड़ते हैं, दायरे नहीं">Points add up, ranges do not</h3><p data-hi="ट्रेडों के बिंदु पूर्वानुमान ठीक उनके सेक्टर के बराबर जुड़ते हैं, और सेक्टर राज्यों और भारत के। दायरे हर स्तर के लिए अलग से जाँचे गए हैं।">Point forecasts of the trades add up exactly to their sector, and sectors to states and India. Ranges are calibrated for each level separately.</p></article>
+        <article class="card"><h3 data-hi="सीटें स्थिर मानी गई हैं">Seats are held flat</h3><p data-hi="क्षमता अंतर हर वर्ष के लिए 2030 तक 2025-26 की स्वीकृत सीटें मानता है, यह एक मान्यता है, क्योंकि सीट योजनाओं का पूर्वानुमान नहीं होता।">The capacity gap uses the 2025 to 2026 sanctioned seats for every year to 2030, an assumption, because no seat plans are forecast.</p></article>
+        <article class="card"><h3 data-hi="नौकरी चाहने वाले सबसे कम भरोसेमंद हैं">Seekers are the least reliable</h3><p data-hi="नौकरी चाहने वालों के पूर्वानुमान और पाँचवाँ वर्ष सबसे कमज़ोर हैं। हर श्रृंखला के साथ हर बारह महीने के खंड का विश्वसनीयता लेबल भी होता है।">Job-seeker forecasts and the fifth year are the weakest. Each series also carries a confidence label for each twelve-month band.</p></article>
+        <article class="card"><h3 data-hi="डैशबोर्ड जैसा ही डेटा">Same data as the dashboard</h3><p data-hi="API वही फ़ाइलें पढ़ती है जो डैशबोर्ड लोड करता है, इसलिए वहाँ की संख्या और यहाँ की संख्या एक ही है, निकटतम व्यक्ति तक।">The API reads the files the dashboard loads, so a figure there and a figure here are the same figure, to the nearest person.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="limits">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 data-hi="सीमाएँ और त्रुटियाँ">Limits and errors</h2>
+      </div>
+      <div class="table-wrap">
+        <table class="files res">
+          <thead><tr><th data-hi="स्थिति">Status</th><th data-hi="कब">When</th></tr></thead>
+          <tbody>
+            <tr><td translate="no"><code>200</code></td><td data-hi="अनुरोध समझ लिया गया। उत्तर में &lt;code translate=&quot;no&quot;&gt;&quot;ok&quot;: true&lt;/code&gt; है।">The request was understood. The body has <code translate="no">"ok": true</code>.</td></tr>
+            <tr><td translate="no"><code>400</code></td><td data-hi="कोई पैरामीटर अज्ञात है, दोहराया गया है या उसका मान अमान्य है; संदेश बताता है कि कौन-सा।">A parameter is unknown, repeated or has an invalid value; the message says which.</td></tr>
+            <tr><td translate="no"><code>404</code></td><td data-hi="फ़िल्टर मान्य हैं पर किसी श्रृंखला से मेल नहीं खाते।">The filters are valid but match no series.</td></tr>
+            <tr><td translate="no"><code>405</code></td><td data-hi="API केवल GET स्वीकार करती है।">The API accepts GET only.</td></tr>
+            <tr><td translate="no"><code>429</code></td><td data-hi="एक पते से प्रति मिनट 60 से अधिक अनुरोध, या पूरी साइट की दैनिक सीमा। एक मिनट रुककर दोबारा कोशिश करें।">More than 60 requests a minute from one address, or the daily limit of the whole site. Wait a minute and try again.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p data-hi="उत्तर एक घंटे तक कैश हो सकते हैं। API कोई कुकी नहीं लगाती, आप क्या पूछते हैं इसका कोई रिकॉर्ड नहीं रखती, और किसी भी वेबसाइट से अनुरोध की अनुमति देती है, क्योंकि डेटा सार्वजनिक और केवल-पढ़ने योग्य है।" class="note" style="margin-top:14px">Responses may be cached for up to an hour. The API sets no cookies, keeps no record of what you ask, and allows requests from any website, since the data is public and read-only.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 data-hi="परिचय" class="foot-h">About</h2>
+        <p data-hi="कौशल को जोड़ना। भविष्य का पूर्वानुमान।" class="foot-tag">Bridging Skills. Forecasting Futures.</p>
+        <p data-hi="कौशल विकास एवं उद्यमिता मंत्रालय के लिए एआई-आधारित श्रम बाज़ार संबंधी जानकारी और कौशल की माँग-आपूर्ति के पूर्वानुमान का इंजन।">An AI-enabled labour market intelligence and skill demand-supply forecasting engine for the Ministry of Skill Development and Entrepreneurship.</p>
+        <p data-hi="इस साइट के सभी आँकड़े प्रदर्शन के लिए सिम्युलेटेड हैं। ये आधिकारिक सांख्यिकी नहीं हैं।">All figures on this site are simulated for demonstration. They are not official statistics.</p>
+      </div>
+      <div><h2 data-hi="पृष्ठ" class="foot-h">Pages</h2><ul><li><a data-hi="मुख्य पृष्ठ" href="../index.html">Home</a></li><li><a data-hi="परिचय" href="../about.html">About</a></li><li><a data-hi="संसाधन" href="../resources.html">Resources</a></li><li><a data-hi="डैशबोर्ड" href="../dashboard/index.html">Dashboard</a></li></ul></div>
+      <div><h2 data-hi="डेटा" class="foot-h">Data</h2><ul><li><a data-hi="डेटा के स्रोत" href="../resources.html#datasets">Data sources</a></li><li><a data-hi="डेटासेट का ब्यौरा" href="../about.html#dataset">Dataset details</a></li><li><a data-hi="मॉडल का मूल्यांकन" href="../about.html#evaluation">Model evaluation</a></li><li><a data-hi="पूर्वानुमान API" href="../docs/api.html">Forecast API</a></li></ul></div>
+      <div><h2 data-hi="संपर्क" class="foot-h">Contact</h2><p><a href="mailto:feedback@lmis-demo.example" translate="no">feedback@lmis-demo.example</a></p><p data-hi="कोई लॉगिन नहीं। यह साइट कोई कुकी नहीं लगाती और कोई एनालिटिक्स नहीं चलाती। आपके प्रदर्शन संबंधी चुनाव आपके अपने उपकरण में ही रहते हैं।">No login. This site sets no cookies and has no analytics. Your display choices stay on your device.</p></div>
+    </div>
+    <div data-hi="पूर्वानुमान &lt;span data-fill=&quot;meta.first_target&quot;&gt;January 2026&lt;/span&gt; से &lt;span data-fill=&quot;meta.last_target&quot;&gt;December 2030&lt;/span&gt; तक, &lt;span data-fill=&quot;meta.origin_label&quot;&gt;December 2025&lt;/span&gt; तक के डेटा से बनाया गया।" class="legal">Forecast for <span data-fill="meta.first_target">January 2026</span> to <span data-fill="meta.last_target">December 2030</span>, made from data up to <span data-fill="meta.origin_label">December 2025</span>.</div>
+  </div>
+</footer>
+<button data-hi-aria="ऊपर जाएँ" class="to-top" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+<div class="tip" id="tip" role="status" aria-live="polite" hidden></div>
+<script src="../assets/i18n-hi.js?v=5e3eb8f0"></script>
+<script src="../data/site_data.js?v=da7a97e1"></script>
+<script src="../assets/site.js?v=aa021c04"></script>
+<script src="../assets/chat.js?v=1071bcb3"></script>
+</body>
+</html>

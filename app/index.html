@@ -14,7 +14,7 @@ h.dataset.motion=(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..800&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..800&display=swap"></noscript>
-<link rel="stylesheet" href="assets/styles.css?v=106888f4">
+<link rel="stylesheet" href="assets/styles.css?v=684b29f3">
 <link rel="stylesheet" href="assets/chat.css?v=a530a2d2">
 </head>
 <body>
@@ -101,6 +101,7 @@ h.dataset.motion=(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce
           <div class="ctl"><span data-hi="सेक्टर" class="ctl-l">Sector</span><select id="map-sector"></select></div>
           <div class="ctl"><span data-hi="दिखाएँ" class="ctl-l">Show</span><div class="tabs" id="map-measure" role="tablist"></div></div>
           <div class="ctl"><span data-hi="कितने महीने आगे" class="ctl-l">Months ahead</span><div class="chip-row" id="map-h" role="group"></div></div>
+          <div class="ctl"><label data-hi="ज़िला खोजें" class="ctl-l" for="map-find">Find a district</label><select id="map-find"></select></div>
         </div>
         <div class="map-grid">
           <div class="map-left">
@@ -234,24 +235,24 @@ h.dataset.motion=(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <h4 data-hi="परिचय">About</h4>
+        <h2 data-hi="परिचय" class="foot-h">About</h2>
         <p data-hi="कौशल को जोड़ना। भविष्य का पूर्वानुमान।" class="foot-tag">Bridging Skills. Forecasting Futures.</p>
         <p data-hi="कौशल विकास एवं उद्यमिता मंत्रालय के लिए एआई-आधारित श्रम बाज़ार संबंधी जानकारी और कौशल की माँग-आपूर्ति के पूर्वानुमान का इंजन।">An AI-enabled labour market intelligence and skill demand-supply forecasting engine for the Ministry of Skill Development and Entrepreneurship.</p>
         <p data-hi="इस साइट के सभी आँकड़े प्रदर्शन के लिए सिम्युलेटेड हैं। ये आधिकारिक सांख्यिकी नहीं हैं।">All figures on this site are simulated for demonstration. They are not official statistics.</p>
       </div>
-      <div><h4 data-hi="पृष्ठ">Pages</h4><ul><li><a data-hi="मुख्य पृष्ठ" href="index.html">Home</a></li><li><a data-hi="परिचय" href="about.html">About</a></li><li><a data-hi="संसाधन" href="resources.html">Resources</a></li><li><a data-hi="डैशबोर्ड" href="dashboard/index.html">Dashboard</a></li></ul></div>
-      <div><h4 data-hi="डेटा">Data</h4><ul><li><a data-hi="डेटा के स्रोत" href="resources.html#datasets">Data sources</a></li><li><a data-hi="डेटासेट का ब्यौरा" href="about.html#dataset">Dataset details</a></li><li><a data-hi="मॉडल का मूल्यांकन" href="about.html#evaluation">Model evaluation</a></li></ul></div>
-      <div><h4 data-hi="संपर्क">Contact</h4><p><a href="mailto:feedback@lmis-demo.example" translate="no">feedback@lmis-demo.example</a></p><p data-hi="कोई लॉगिन नहीं। यह साइट कोई कुकी नहीं लगाती और कोई एनालिटिक्स नहीं चलाती। आपके प्रदर्शन संबंधी चुनाव आपके अपने उपकरण में ही रहते हैं।">No login. This site sets no cookies and has no analytics. Your display choices stay on your device.</p></div>
+      <div><h2 data-hi="पृष्ठ" class="foot-h">Pages</h2><ul><li><a data-hi="मुख्य पृष्ठ" href="index.html">Home</a></li><li><a data-hi="परिचय" href="about.html">About</a></li><li><a data-hi="संसाधन" href="resources.html">Resources</a></li><li><a data-hi="डैशबोर्ड" href="dashboard/index.html">Dashboard</a></li></ul></div>
+      <div><h2 data-hi="डेटा" class="foot-h">Data</h2><ul><li><a data-hi="डेटा के स्रोत" href="resources.html#datasets">Data sources</a></li><li><a data-hi="डेटासेट का ब्यौरा" href="about.html#dataset">Dataset details</a></li><li><a data-hi="मॉडल का मूल्यांकन" href="about.html#evaluation">Model evaluation</a></li><li><a data-hi="पूर्वानुमान API" href="docs/api.html">Forecast API</a></li></ul></div>
+      <div><h2 data-hi="संपर्क" class="foot-h">Contact</h2><p><a href="mailto:feedback@lmis-demo.example" translate="no">feedback@lmis-demo.example</a></p><p data-hi="कोई लॉगिन नहीं। यह साइट कोई कुकी नहीं लगाती और कोई एनालिटिक्स नहीं चलाती। आपके प्रदर्शन संबंधी चुनाव आपके अपने उपकरण में ही रहते हैं।">No login. This site sets no cookies and has no analytics. Your display choices stay on your device.</p></div>
     </div>
     <div data-hi="पूर्वानुमान &lt;span data-fill=&quot;meta.first_target&quot;&gt;January 2026&lt;/span&gt; से &lt;span data-fill=&quot;meta.last_target&quot;&gt;December 2030&lt;/span&gt; तक, &lt;span data-fill=&quot;meta.origin_label&quot;&gt;December 2025&lt;/span&gt; तक के डेटा से बनाया गया।" class="legal">Forecast for <span data-fill="meta.first_target">January 2026</span> to <span data-fill="meta.last_target">December 2030</span>, made from data up to <span data-fill="meta.origin_label">December 2025</span>.</div>
   </div>
 </footer>
 <button data-hi-aria="ऊपर जाएँ" class="to-top" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 <div class="tip" id="tip" role="status" aria-live="polite" hidden></div>
-<script src="assets/i18n-hi.js?v=5ca21849"></script>
+<script src="assets/i18n-hi.js?v=5e3eb8f0"></script>
 <script src="data/site_data.js?v=da7a97e1"></script>
 <script src="data/map_data.js?v=8d063de6"></script>
-<script src="assets/site.js?v=f452cb46"></script>
+<script src="assets/site.js?v=aa021c04"></script>
 <script src="assets/chat.js?v=1071bcb3"></script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 """Hindi text added in v4 phase 8 (317 districts, 25 trades, five-year forecasts, Demand Index, capacity gap).  Same layout as i18n_hi.py.
 Reviewed by the project team only: have a Hindi speaker read it before launch (district names are transliterations)."""
 PAGE = {
+    "Find a district": "ज़िला खोजें",
     "14 of 14": "14 में से 14",
     "2000 to 2009": "2000 से 2009",
     "2015 to 2025": "2015 से 2025",
@@ -179,6 +180,7 @@ PAGE = {
 }
 ATTR = {}
 JS = {
+    "Choose a district": "ज़िला चुनें",
     "Demand Index": "माँग सूचकांक",
     "All ten states": "सभी दस राज्य",
     "{n} districts in ten states": "दस राज्यों के {n} ज़िले",
@@ -439,4 +441,67 @@ NAMES = {
     "Weaving and Knitting Machine Operators": "बुनाई और निटिंग मशीन चालक",
     "Sewing Machine Operators": "सिलाई मशीन चालक",
 }
-TITLES = {}
+TITLES = {
+    "Forecast API | KaushalSetu": "पूर्वानुमान API | KaushalSetu",}
+
+
+# phase 9: the API page (docs/api.html) and the footer link
+PAGE.update({
+    "<code>E</code> (employed workers), <code>V</code> (job vacancies), <code>S</code> (registered job seekers), several separated by commas, or <code>all</code> (the default).": "<code>E</code> (नियोजित कामगार), <code>V</code> (रिक्तियाँ), <code>S</code> (पंजीकृत नौकरी चाहने वाले), कई हों तो कॉमा से अलग, या <code>all</code> (डिफ़ॉल्ट)।",
+    "<code>aggregate</code> (the default: one total for the filters) or <code>series</code> (every district and trade series, with <code>limit</code> up to 200 and <code>offset</code>).": "<code>aggregate</code> (डिफ़ॉल्ट: फ़िल्टर का एक कुल योग) या <code>series</code> (हर ज़िला और ट्रेड श्रृंखला, <code>limit</code> अधिकतम 200 और <code>offset</code> के साथ)।",
+    "A parameter is unknown, repeated or has an invalid value; the message says which.": "कोई पैरामीटर अज्ञात है, दोहराया गया है या उसका मान अमान्य है; संदेश बताता है कि कौन-सा।",
+    "A range exists for India, a sector, a trade, a state, a state with a sector, a district with a sector, and a district with a trade. For other combinations the field is null and a note says so.": "भारत, किसी सेक्टर, ट्रेड, राज्य, सेक्टर सहित राज्य, सेक्टर सहित ज़िले और ट्रेड सहित ज़िले के लिए दायरा मिलता है। अन्य संयोजनों में यह खाना null होता है और एक टिप्पणी यह बताती है।",
+    "A trade code such as HLT-2221 (nursing professionals) or its full name. A trade fixes the sector.": "HLT-2221 (नर्सिंग पेशेवर) जैसा ट्रेड कोड या उसका पूरा नाम। ट्रेड से सेक्टर तय हो जाता है।",
+    "Address": "पता",
+    "All are GET requests on this site and return JSON. Add the filters to the address, for example <code translate=\"no\">/api/forecast?state=Kerala&amp;sector=Healthcare</code>.": "सभी GET अनुरोध हैं, इसी साइट पर, और JSON लौटाते हैं। पते में फ़िल्टर जोड़ें, जैसे <code translate=\"no\">/api/forecast?state=Kerala&amp;sector=Healthcare</code>।",
+    "Early-warning alerts 12, 36 or 60 months ahead, or the flag of every month for one district and trade.": "12, 36 या 60 महीने आगे की पूर्व-चेतावनियाँ, या किसी एक ज़िले और ट्रेड के लिए हर महीने का निशान।",
+    "Employed workers in Kerala's healthcare sector, 12 and 60 months ahead. A range shown as a pair of numbers is the lower and the upper end.": "केरल के स्वास्थ्य सेवा सेक्टर में नियोजित कामगार, 12 और 60 महीने आगे। संख्याओं की जोड़ी के रूप में दिखा दायरा निचला और ऊपरी सिरा है।",
+    "Endpoints": "एंडपॉइंट",
+    "Every response says that the data is <strong>simulated</strong>. It behaves like official statistics but describes no real district, and it is not an official statistic.": "हर उत्तर बताता है कि डेटा <strong>सिम्युलेटेड</strong> है। यह आधिकारिक आँकड़ों जैसा व्यवहार करता है पर किसी वास्तविक ज़िले का वर्णन नहीं करता, और यह आधिकारिक आँकड़ा नहीं है।",
+    "Example": "उदाहरण",
+    "For flags: <code>shortage</code>, <code>oversupply</code> or <code>all</code>.": "फ़्लैग के लिए: <code>shortage</code>, <code>oversupply</code> या <code>all</code>।",
+    "For the Demand Index: months like 2026-12, and <code>annual</code> (December of each year, the default) or <code>monthly</code>.": "माँग सूचकांक के लिए: 2026-12 जैसे महीने, और <code>annual</code> (हर वर्ष का दिसंबर, डिफ़ॉल्ट) या <code>monthly</code>।",
+    "Forecast API": "पूर्वानुमान API",
+    "Forecast of employed workers, job vacancies and registered job seekers: a point forecast with a usual and a wide 90% range for each horizon.": "नियोजित कामगारों, रिक्तियों और पंजीकृत नौकरी चाहने वालों का पूर्वानुमान: हर अवधि के लिए बिंदु पूर्वानुमान, साथ में सामान्य और विस्तृत 90% दायरा।",
+    "Forecast openings against training seats and expected certified trainees, by year.": "प्रशिक्षण सीटों और अपेक्षित प्रमाणित प्रशिक्षुओं के सामने पूर्वानुमानित रिक्तियाँ, वर्ष के अनुसार।",
+    "Job-seeker forecasts and the fifth year are the weakest. Each series also carries a confidence label for each twelve-month band.": "नौकरी चाहने वालों के पूर्वानुमान और पाँचवाँ वर्ष सबसे कमज़ोर हैं। हर श्रृंखला के साथ हर बारह महीने के खंड का विश्वसनीयता लेबल भी होता है।",
+    "Kerala, 12 months": "केरल, 12 महीने",
+    "Kerala, Healthcare": "केरल, स्वास्थ्य सेवा",
+    "Limits and errors": "सीमाएँ और त्रुटियाँ",
+    "Lists and checksums": "सूचियाँ और चेकसम",
+    "Months ahead from 1 to 60, several separated by commas, or <code>all</code>. The default is 12, 36 and 60. For flags: 12, 36 or 60.": "1 से 60 तक आगे के महीने, कई हों तो कॉमा से अलग, या <code>all</code>। डिफ़ॉल्ट 12, 36 और 60 है। फ़्लैग के लिए: 12, 36 या 60।",
+    "More than 60 requests a minute from one address, or the daily limit of the whole site. Wait a minute and try again.": "एक पते से प्रति मिनट 60 से अधिक अनुरोध, या पूरी साइट की दैनिक सीमा। एक मिनट रुककर दोबारा कोशिश करें।",
+    "None.": "कुछ नहीं।",
+    "One of the five sectors, for example IT-ITeS.": "पाँच सेक्टरों में से एक, जैसे IT-ITeS।",
+    "One of the ten state names, for example Kerala. Not case sensitive.": "दस राज्यों के नामों में से एक, जैसे Kerala। अक्षरों के आकार से फ़र्क़ नहीं पड़ता।",
+    "Parameter": "पैरामीटर",
+    "Parameters": "पैरामीटर",
+    "Point forecasts of the trades add up exactly to their sector, and sectors to states and India. Ranges are calibrated for each level separately.": "ट्रेडों के बिंदु पूर्वानुमान ठीक उनके सेक्टर के बराबर जुड़ते हैं, और सेक्टर राज्यों और भारत के। दायरे हर स्तर के लिए अलग से जाँचे गए हैं।",
+    "Points add up, ranges do not": "बिंदु जुड़ते हैं, दायरे नहीं",
+    "Reading the numbers": "संख्याओं को कैसे पढ़ें",
+    "Responses may be cached for up to an hour. The API sets no cookies, keeps no record of what you ask, and allows requests from any website, since the data is public and read-only.": "उत्तर एक घंटे तक कैश हो सकते हैं। API कोई कुकी नहीं लगाती, आप क्या पूछते हैं इसका कोई रिकॉर्ड नहीं रखती, और किसी भी वेबसाइट से अनुरोध की अनुमति देती है, क्योंकि डेटा सार्वजनिक और केवल-पढ़ने योग्य है।",
+    "Same data as the dashboard": "डैशबोर्ड जैसा ही डेटा",
+    "Seekers are the least reliable": "नौकरी चाहने वाले सबसे कम भरोसेमंद हैं",
+    "The API accepts GET only.": "API केवल GET स्वीकार करती है।",
+    "The API is read-only and open: no key and no login. It serves the 2026 to 2030 forecasts, the early-warning alerts, the Demand Index and the capacity gap, with the same filters as the dashboard: state, district, sector and trade.": "API केवल-पढ़ने योग्य और खुली है: न कुंजी, न लॉगिन। यह 2026 से 2030 के पूर्वानुमान, पूर्व-चेतावनियाँ, माँग सूचकांक और क्षमता अंतर देती है, डैशबोर्ड जैसे ही फ़िल्टर के साथ: राज्य, ज़िला, सेक्टर और ट्रेड।",
+    "The API reads the files the dashboard loads, so a figure there and a figure here are the same figure, to the nearest person.": "API वही फ़ाइलें पढ़ती है जो डैशबोर्ड लोड करता है, इसलिए वहाँ की संख्या और यहाँ की संख्या एक ही है, निकटतम व्यक्ति तक।",
+    "The Demand Index from 0 to 100, from 2016 to 2030 (December values, or every month).": "0 से 100 तक का माँग सूचकांक, 2016 से 2030 तक (दिसंबर के मान, या हर महीना)।",
+    "The capacity gap uses the 2025 to 2026 sanctioned seats for every year to 2030, an assumption, because no seat plans are forecast.": "क्षमता अंतर हर वर्ष के लिए 2030 तक 2025-26 की स्वीकृत सीटें मानता है, यह एक मान्यता है, क्योंकि सीट योजनाओं का पूर्वानुमान नहीं होता।",
+    "The filters are valid but match no series.": "फ़िल्टर मान्य हैं पर किसी श्रृंखला से मेल नहीं खाते।",
+    "The official LGD code, for example 118 for Agra, or the district name. A district fixes the state.": "आधिकारिक LGD कोड, जैसे आगरा के लिए 118, या ज़िले का नाम। ज़िले से राज्य तय हो जाता है।",
+    "The request was understood. The body has <code translate=\"no\">\"ok\": true</code>.": "अनुरोध समझ लिया गया। उत्तर में <code translate=\"no\">\"ok\": true</code> है।",
+    "The same numbers as the dashboard, as plain JSON.": "डैशबोर्ड वाली ही संख्याएँ, सादे JSON में।",
+    "The usual range was calibrated on 2010 to 2019; the wide range also uses the shock years 2020 to 2025. For totals of many series, such as a state, read the wide range: errors of neighbouring series move together.": "सामान्य दायरा 2010 से 2019 पर बना है; विस्तृत दायरा झटके वाले वर्ष 2020 से 2025 भी लेता है। कई श्रृंखलाओं के कुल योग के लिए, जैसे राज्य, विस्तृत दायरा पढ़ें: पास की श्रृंखलाओं की त्रुटियाँ साथ-साथ चलती हैं।",
+    "The valid states, districts (with LGD codes), sectors and trades, the forecast origin and the checksums of the files behind the numbers.": "मान्य राज्य, ज़िले (LGD कोड सहित), सेक्टर और ट्रेड, पूर्वानुमान का आधार माह और संख्याओं के पीछे की फ़ाइलों के चेकसम।",
+    "Try it": "आज़माएँ",
+    "Two ranges": "दो दायरे",
+    "Values": "मान",
+    "Values are checked against the lists in <code translate=\"no\">/api/meta</code>; unknown or repeated parameters are refused with a clear message.": "मान <code translate=\"no\">/api/meta</code> की सूचियों से जाँचे जाते हैं; अज्ञात या दोहराए गए पैरामीटर साफ़ संदेश के साथ अस्वीकार होते हैं।",
+    "What it returns": "यह क्या लौटाता है",
+    "When": "कब",
+    "Where there is no range": "जहाँ दायरा नहीं है",
+    "endpoints": "एंडपॉइंट",
+    "filters": "फ़िल्टर",
+    "months ahead": "महीने आगे",
+    "requests a minute": "अनुरोध प्रति मिनट",
+})

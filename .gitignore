@@ -123,3 +123,6 @@ models/v4/
 # v4 phase 6: series-level forecast tables and per-state shards are rebuilt by src/v4/forecast.py, demand_index.py, capacity.py and exports.py (listed with SHA-256 in data/v4/FORECAST_MANIFEST.json)
 data/v4/exports/*.parquet
 data/v4/exports/shards/
+
+# v4 phase 9: the v3 dashboard data file is not loaded by the v4 dashboard; it stays on disk (the submitted version is the tag submitted-v1) but is no longer deployed
+app/dashboard/data/dash_data.js

@@ -109,6 +109,7 @@
     "Name": "नाम",
     "No calibrated 90% range exists for this combination of filters, so only the point forecast is drawn. Choose a sector, state, state with sector, or a district with a sector or trade for a range.": "फ़िल्टर के इस संयोजन के लिए कोई जाँचा हुआ 90% दायरा नहीं है, इसलिए केवल बिंदु पूर्वानुमान दिखाया गया है। दायरे के लिए सेक्टर, राज्य, सेक्टर सहित राज्य, या सेक्टर/ट्रेड सहित ज़िला चुनें।",
     "Open": "खोलें",
+    "Press Enter to filter": "फ़िल्टर करने के लिए Enter दबाएँ",
     "Openings per seat": "प्रति सीट रिक्तियाँ",
     "Oversupply": "अधिशेष",
     "Oversupply alert": "अधिशेष चेतावनी",
@@ -576,7 +577,7 @@
   render.data = function (p, view) {
     var cv = D.coverage, g = function (o, k) { return o[k] == null ? "–" : fmt(o[k] * 100, 0) + "%"; }, man = M.manifest, ap = cv.alert_precision_test;
     var pr = function (b, f) { var v = ap[b + "|" + f]; return v ? fmt(v[0] * 100, 0) + "% (" + v[1] + "×)" : "–"; };
-    var row = function (a, b) { return "<tr><td><b>" + a + "</b></td><td>" + b + "</td></tr>"; };
+    var row = function (a, b) { return '<tr><th scope="row">' + a + "</th><td>" + b + "</td></tr>"; };
     view.innerHTML = '<div class="grid g2"><section class="card"><div class="card-h"><div><h2>' + t("Coverage of the dataset") + '</h2></div></div><div class="tbl-wrap"><table class="tbl"><tbody>' + [
       [t("Series"), fmt(M.series) + " (" + STATES.length + " " + t("states") + ", " + DLIST.length + " " + t("districts") + ", " + SECTORS.length + " " + t("sectors") + ", " + TRADES.length + " " + t("trades") + ")"], [t("History"), "2000-01 – " + M.hist_core[1] + " (" + t("charts show from") + " " + M.hist_core[0] + ", " + t("districts from") + " " + M.hist_shard[0] + ")"],
       [t("Forecast"), ml(M.fc[0]) + " – " + ml(M.fc[1]) + " (60 " + t("months") + ", " + t("made from") + " " + ml(M.origin) + ")"], [t("Final models fitted on"), esc(String(man.deploy_fit.fit_targets_to)) + " (" + t("without the 2020-23 shock and recovery pairs") + ")"], [t("Built"), esc(man.generated_at_utc)]].map(function (r) { return row(r[0], r[1]); }).join("") + "</tbody></table></div></section>" +
@@ -599,6 +600,13 @@
     fd.innerHTML = '<option value="">' + t("All districts") + "</option>" + DLIST.filter(function (d) { return !p.state || d.s === p.state; }).map(function (d) { return '<option value="' + d.c + '">' + esc(d.n) + (p.state ? "" : " (" + d.s + ")") + "</option>"; }).join(""); fd.value = p.district || "";
   }
   function applyStatic() { $$("[data-t]").forEach(function (e) { e.textContent = t(e.dataset.t); }); $("#lang-label").textContent = LANG === "hi" ? "EN" : "हिं"; $("#tb-origin").textContent = t("Forecast from") + " " + ml(M.origin); $("#foot-origin").textContent = ml(M.origin); }
+  /* the rows that filter when clicked are reachable and operable from the keyboard: Tab to a row, Enter or Space to choose it */
+  function keyboardRows(node) {
+    $$("tr.click", node).forEach(function (tr) {
+      tr.tabIndex = 0; tr.setAttribute("title", t("Press Enter to filter"));
+      tr.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); tr.click(); } });
+    });
+  }
   var token = 0;
   function route() {
     var r = parse(), my = ++token; cur.page = r.page; cur.p = r.p; cur.csv = null;
@@ -606,7 +614,7 @@
     $$("#nav a").forEach(function (a) { a.setAttribute("aria-current", a.dataset.page === r.page ? "page" : "false"); a.href = url(a.dataset.page, {}); });
     renderFilters(r.p); localise($("#filters"));
     var view = $("#view"); hideTip(); view.innerHTML = '<p class="loading">' + t("Loading…") + "</p>";
-    Promise.resolve().then(function () { return render[r.page](r.p, view); }).then(function () { if (my === token) { localise(view); $("#main").scrollTop = 0; } }).catch(function (e) { if (my === token) loadingErr(view, e); });
+    Promise.resolve().then(function () { return render[r.page](r.p, view); }).then(function () { if (my === token) { keyboardRows(view); localise(view); $("#main").scrollTop = 0; } }).catch(function (e) { if (my === token) loadingErr(view, e); });
     document.body.classList.remove("sb-open"); $("#scrim").hidden = true;
   }
   function init() {

@@ -191,7 +191,7 @@ def test_about_page_sections_are_in_a_professional_order_with_no_repeated_headin
     assert ids == ["project", "timeline", "dataset", "principles", "engine", "measures", "evaluation", "limits"], ids       # project, overview, data, principles, architecture, measures, results, limits
     assert len(re.findall(r"<section", main)) == 8                                     # the hero is the "About the project" section
     heads = [re.sub(r"<[^>]+>", "", h) for h in re.findall(r"<h2[^>]*>(.*?)</h2>", main)]
-    assert heads == ["How it works", "Dataset used", "Model engine overview and core principles", "Machine learning engine and architecture", "Demand Index, capacity gap and early warnings",
+    assert heads == ["Forecasts", "Honest ranges", "Demand and capacity", "How it works", "Dataset used", "Model engine overview and core principles", "Machine learning engine and architecture", "Demand Index, capacity gap and early warnings",
                      "Model evaluation achievements", "What to keep in mind"], heads
     assert re.search(r"<h1[^>]*>About the project</h1>", main) and main.count("<h1") == 1 and "page-head big" in main
     assert 'class="eyebrow"' not in main and "In more detail" not in main                 # no label repeating a heading

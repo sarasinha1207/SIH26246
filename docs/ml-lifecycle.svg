@@ -1,138 +1,45 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 810" width="1500" height="810" font-family="Geist, Segoe UI, system-ui, sans-serif" role="img" aria-label="Machine learning lifecycle and how a forecast is made">
-<defs><marker id="ah" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9 z" fill="#8FB0FF"/></marker><radialGradient id="g1" cx="90%" cy="0%" r="65%"><stop offset="0" stop-color="#5B8DFF" stop-opacity=".20"/><stop offset="1" stop-color="#5B8DFF" stop-opacity="0"/></radialGradient><radialGradient id="g2" cx="0%" cy="100%" r="60%"><stop offset="0" stop-color="#F2A93B" stop-opacity=".10"/><stop offset="1" stop-color="#F2A93B" stop-opacity="0"/></radialGradient></defs>
-<rect width="1500" height="810" fill="#070C16"/><rect width="1500" height="810" fill="url(#g1)"/><rect width="1500" height="810" fill="url(#g2)"/>
-<text x="60" y="68" fill="#E8EEFB" font-size="32" font-weight="800">Machine learning lifecycle</text>
-<text x="60" y="98" fill="#93A1BD" font-size="16">From the problem statement to a monthly forecast, and how a forecast is made</text>
-<rect x="1000" y="58" width="14" height="14" rx="4" fill="#5B8DFF" fill-opacity=".25" stroke="#5B8DFF" stroke-width="2"/>
-<text x="1022" y="70" fill="#93A1BD" font-size="14">Approved</text>
-<rect x="1120" y="58" width="14" height="14" rx="4" fill="#F2A93B" fill-opacity=".25" stroke="#F2A93B" stroke-width="2"/>
-<text x="1142" y="70" fill="#93A1BD" font-size="14">Awaiting sign-off</text>
-<rect x="1300" y="58" width="14" height="14" rx="4" fill="#6B7A96" fill-opacity=".25" stroke="#6B7A96" stroke-width="2" stroke-dasharray="3 3"/>
-<text x="1322" y="70" fill="#93A1BD" font-size="14">Next</text>
-<text x="60" y="146" fill="#8FB0FF" font-size="13" font-weight="700" letter-spacing="2.2">THE LIFECYCLE</text>
-<rect x="60" y="168" width="244" height="112" rx="16" fill="#0E1626" stroke="#5B8DFF" stroke-opacity=".85" stroke-width="1.8"/>
-<rect x="60" y="168" width="244" height="112" rx="16" fill="#5B8DFF" fill-opacity=".05"/>
-<circle cx="94" cy="204" r="19" fill="#5B8DFF" fill-opacity=".2" stroke="#5B8DFF" stroke-width="1.8"/>
-<text x="94" y="210" text-anchor="middle" fill="#E8EEFB" font-size="17" font-weight="800">1</text>
-<text x="124" y="210" fill="#E8EEFB" font-size="17" font-weight="700">Problem definition</text>
-<text x="82" y="246" fill="#93A1BD" font-size="14">what to forecast and how good</text>
-<text x="82" y="266" fill="#93A1BD" font-size="14">is good</text>
-<line x1="309" y1="224" x2="338" y2="224" stroke="#8FB0FF" stroke-width="2.4" marker-end="url(#ah)"/>
-<rect x="344" y="168" width="244" height="112" rx="16" fill="#0E1626" stroke="#5B8DFF" stroke-opacity=".85" stroke-width="1.8"/>
-<rect x="344" y="168" width="244" height="112" rx="16" fill="#5B8DFF" fill-opacity=".05"/>
-<circle cx="378" cy="204" r="19" fill="#5B8DFF" fill-opacity=".2" stroke="#5B8DFF" stroke-width="1.8"/>
-<text x="378" y="210" text-anchor="middle" fill="#E8EEFB" font-size="17" font-weight="800">2</text>
-<text x="408" y="210" fill="#E8EEFB" font-size="17" font-weight="700">Data collection</text>
-<text x="366" y="246" fill="#93A1BD" font-size="14">district panel, sources,</text>
-<text x="366" y="266" fill="#93A1BD" font-size="14">checksums</text>
-<line x1="593" y1="224" x2="622" y2="224" stroke="#8FB0FF" stroke-width="2.4" marker-end="url(#ah)"/>
-<rect x="628" y="168" width="244" height="112" rx="16" fill="#0E1626" stroke="#5B8DFF" stroke-opacity=".85" stroke-width="1.8"/>
-<rect x="628" y="168" width="244" height="112" rx="16" fill="#5B8DFF" fill-opacity=".05"/>
-<circle cx="662" cy="204" r="19" fill="#5B8DFF" fill-opacity=".2" stroke="#5B8DFF" stroke-width="1.8"/>
-<text x="662" y="210" text-anchor="middle" fill="#E8EEFB" font-size="17" font-weight="800">3</text>
-<text x="692" y="210" fill="#E8EEFB" font-size="17" font-weight="700">Cleaning</text>
-<text x="650" y="246" fill="#93A1BD" font-size="14">validate, fix, process</text>
-<line x1="877" y1="224" x2="906" y2="224" stroke="#8FB0FF" stroke-width="2.4" marker-end="url(#ah)"/>
-<rect x="912" y="168" width="244" height="112" rx="16" fill="#0E1626" stroke="#5B8DFF" stroke-opacity=".85" stroke-width="1.8"/>
-<rect x="912" y="168" width="244" height="112" rx="16" fill="#5B8DFF" fill-opacity=".05"/>
-<circle cx="946" cy="204" r="19" fill="#5B8DFF" fill-opacity=".2" stroke="#5B8DFF" stroke-width="1.8"/>
-<text x="946" y="210" text-anchor="middle" fill="#E8EEFB" font-size="17" font-weight="800">4</text>
-<text x="976" y="210" fill="#E8EEFB" font-size="17" font-weight="700">Exploration</text>
-<text x="934" y="246" fill="#93A1BD" font-size="14">trends, shocks, seasonality</text>
-<line x1="1161" y1="224" x2="1190" y2="224" stroke="#8FB0FF" stroke-width="2.4" marker-end="url(#ah)"/>
-<rect x="1196" y="168" width="244" height="112" rx="16" fill="#0E1626" stroke="#5B8DFF" stroke-opacity=".85" stroke-width="1.8"/>
-<rect x="1196" y="168" width="244" height="112" rx="16" fill="#5B8DFF" fill-opacity=".05"/>
-<circle cx="1230" cy="204" r="19" fill="#5B8DFF" fill-opacity=".2" stroke="#5B8DFF" stroke-width="1.8"/>
-<text x="1230" y="210" text-anchor="middle" fill="#E8EEFB" font-size="17" font-weight="800">5</text>
-<text x="1260" y="210" fill="#E8EEFB" font-size="17" font-weight="700">Feature engineering</text>
-<text x="1218" y="246" fill="#93A1BD" font-size="14">leak-safe features, picked</text>
-<text x="1218" y="266" fill="#93A1BD" font-size="14">from 77</text>
-<rect x="60" y="340" width="244" height="112" rx="16" fill="#0E1626" stroke="#5B8DFF" stroke-opacity=".85" stroke-width="1.8"/>
-<rect x="60" y="340" width="244" height="112" rx="16" fill="#5B8DFF" fill-opacity=".05"/>
-<circle cx="94" cy="376" r="19" fill="#5B8DFF" fill-opacity=".2" stroke="#5B8DFF" stroke-width="1.8"/>
-<text x="94" y="382" text-anchor="middle" fill="#E8EEFB" font-size="17" font-weight="800">6</text>
-<text x="124" y="382" fill="#E8EEFB" font-size="17" font-weight="700">Model selection</text>
-<text x="82" y="418" fill="#93A1BD" font-size="14">XGBoost, LightGBM,</text>
-<text x="82" y="438" fill="#93A1BD" font-size="14">HistGradientBoosting</text>
-<line x1="309" y1="396" x2="338" y2="396" stroke="#8FB0FF" stroke-width="2.4" marker-end="url(#ah)"/>
-<rect x="344" y="340" width="244" height="112" rx="16" fill="#0E1626" stroke="#5B8DFF" stroke-opacity=".85" stroke-width="1.8"/>
-<rect x="344" y="340" width="244" height="112" rx="16" fill="#5B8DFF" fill-opacity=".05"/>
-<circle cx="378" cy="376" r="19" fill="#5B8DFF" fill-opacity=".2" stroke="#5B8DFF" stroke-width="1.8"/>
-<text x="378" y="382" text-anchor="middle" fill="#E8EEFB" font-size="17" font-weight="800">7</text>
-<text x="408" y="382" fill="#E8EEFB" font-size="17" font-weight="700">Training</text>
-<text x="366" y="418" fill="#93A1BD" font-size="14">15 models, 5 seeds per target</text>
-<line x1="593" y1="396" x2="622" y2="396" stroke="#8FB0FF" stroke-width="2.4" marker-end="url(#ah)"/>
-<rect x="628" y="340" width="244" height="112" rx="16" fill="#0E1626" stroke="#F2A93B" stroke-opacity=".85" stroke-width="1.8"/>
-<rect x="628" y="340" width="244" height="112" rx="16" fill="#F2A93B" fill-opacity=".05"/>
-<circle cx="662" cy="376" r="19" fill="#F2A93B" fill-opacity=".2" stroke="#F2A93B" stroke-width="1.8"/>
-<text x="662" y="382" text-anchor="middle" fill="#E8EEFB" font-size="17" font-weight="800">8</text>
-<text x="692" y="382" fill="#E8EEFB" font-size="17" font-weight="700">Evaluation &amp; tuning</text>
-<text x="650" y="418" fill="#93A1BD" font-size="14">one-shot test, noise floor</text>
-<line x1="877" y1="396" x2="906" y2="396" stroke="#8FB0FF" stroke-width="2.4" marker-end="url(#ah)"/>
-<rect x="912" y="340" width="244" height="112" rx="16" fill="#0E1626" stroke="#F2A93B" stroke-opacity=".85" stroke-width="1.8"/>
-<rect x="912" y="340" width="244" height="112" rx="16" fill="#F2A93B" fill-opacity=".05"/>
-<circle cx="946" cy="376" r="19" fill="#F2A93B" fill-opacity=".2" stroke="#F2A93B" stroke-width="1.8"/>
-<text x="946" y="382" text-anchor="middle" fill="#E8EEFB" font-size="17" font-weight="800">9</text>
-<text x="976" y="382" fill="#E8EEFB" font-size="17" font-weight="700">Deployment</text>
-<text x="934" y="418" fill="#93A1BD" font-size="14">monthly refit and forecast</text>
-<text x="934" y="438" fill="#93A1BD" font-size="14">files</text>
-<line x1="1161" y1="396" x2="1190" y2="396" stroke="#8FB0FF" stroke-width="2.4" marker-end="url(#ah)"/>
-<rect x="1196" y="340" width="244" height="112" rx="16" fill="#0E1626" stroke="#6B7A96" stroke-opacity=".85" stroke-width="1.8" stroke-dasharray="6 5"/>
-<rect x="1196" y="340" width="244" height="112" rx="16" fill="#6B7A96" fill-opacity=".05"/>
-<circle cx="1230" cy="376" r="19" fill="#6B7A96" fill-opacity=".2" stroke="#6B7A96" stroke-width="1.8"/>
-<text x="1230" y="382" text-anchor="middle" fill="#E8EEFB" font-size="17" font-weight="800">10</text>
-<text x="1260" y="382" fill="#E8EEFB" font-size="17" font-weight="700">Monitoring</text>
-<text x="1218" y="418" fill="#93A1BD" font-size="14">forecast vs actuals,</text>
-<text x="1218" y="438" fill="#93A1BD" font-size="14">retraining triggers</text>
-<path d="M1318.0 284 V308 H182.0 V332" fill="none" stroke="#8FB0FF" stroke-width="2.4" stroke-linejoin="round" marker-end="url(#ah)"/>
-<rect x="420.0" y="486" width="660" height="40" rx="20" fill="#0E1626" stroke="#F2A93B" stroke-opacity=".7" stroke-dasharray="5 5"/>
-<text x="750.0" y="511" text-anchor="middle" fill="#E8EEFB" font-size="15.5">Monitoring closes the loop: <tspan fill="#F2A93B" font-weight="700">new month → refit → forecast again</tspan></text>
-<text x="60" y="578" fill="#8FB0FF" font-size="13" font-weight="700" letter-spacing="2.2">HOW IT WORKS, EVERY MONTH</text>
-<rect x="60" y="604" width="200" height="130" rx="16" fill="#0E1626" stroke="#5B8DFF" stroke-opacity=".85" stroke-width="1.8"/>
-<rect x="78" y="604" width="36" height="3.5" rx="2" fill="#5B8DFF"/>
-<circle cx="90" cy="642" r="15" fill="#5B8DFF" fill-opacity=".2" stroke="#5B8DFF" stroke-width="1.6"/>
-<text x="90" y="647.5" text-anchor="middle" fill="#E8EEFB" font-size="14" font-weight="800">1</text>
-<text x="114" y="648" fill="#E8EEFB" font-size="17.5" font-weight="700">New data</text>
-<text x="80" y="684" fill="#93A1BD" font-size="14">panel up to the forecast</text>
-<text x="80" y="704" fill="#93A1BD" font-size="14">month</text>
-<line x1="265" y1="669" x2="290" y2="669" stroke="#8FB0FF" stroke-width="2.4" marker-end="url(#ah)"/>
-<rect x="296" y="604" width="200" height="130" rx="16" fill="#0E1626" stroke="#5B8DFF" stroke-opacity=".85" stroke-width="1.8"/>
-<rect x="314" y="604" width="36" height="3.5" rx="2" fill="#5B8DFF"/>
-<circle cx="326" cy="642" r="15" fill="#5B8DFF" fill-opacity=".2" stroke="#5B8DFF" stroke-width="1.6"/>
-<text x="326" y="647.5" text-anchor="middle" fill="#E8EEFB" font-size="14" font-weight="800">2</text>
-<text x="350" y="648" fill="#E8EEFB" font-size="17.5" font-weight="700">Features</text>
-<text x="316" y="684" fill="#93A1BD" font-size="14">history, season, sector;</text>
-<text x="316" y="704" fill="#93A1BD" font-size="14">no future data</text>
-<line x1="501" y1="669" x2="526" y2="669" stroke="#8FB0FF" stroke-width="2.4" marker-end="url(#ah)"/>
-<rect x="532" y="604" width="200" height="130" rx="16" fill="#0E1626" stroke="#F2A93B" stroke-opacity=".85" stroke-width="1.8"/>
-<rect x="550" y="604" width="36" height="3.5" rx="2" fill="#F2A93B"/>
-<circle cx="562" cy="642" r="15" fill="#F2A93B" fill-opacity=".2" stroke="#F2A93B" stroke-width="1.6"/>
-<text x="562" y="647.5" text-anchor="middle" fill="#E8EEFB" font-size="14" font-weight="800">3</text>
-<text x="586" y="648" fill="#E8EEFB" font-size="17.5" font-weight="700">Model</text>
-<text x="552" y="684" fill="#93A1BD" font-size="14">15 XGBoost models</text>
-<line x1="737" y1="669" x2="762" y2="669" stroke="#8FB0FF" stroke-width="2.4" marker-end="url(#ah)"/>
-<rect x="768" y="604" width="200" height="130" rx="16" fill="#0E1626" stroke="#F2A93B" stroke-opacity=".85" stroke-width="1.8"/>
-<rect x="786" y="604" width="36" height="3.5" rx="2" fill="#F2A93B"/>
-<circle cx="798" cy="642" r="15" fill="#F2A93B" fill-opacity=".2" stroke="#F2A93B" stroke-width="1.6"/>
-<text x="798" y="647.5" text-anchor="middle" fill="#E8EEFB" font-size="14" font-weight="800">4</text>
-<text x="822" y="648" fill="#E8EEFB" font-size="17.5" font-weight="700">Forecast</text>
-<text x="788" y="684" fill="#93A1BD" font-size="14">12 months ahead with a</text>
-<text x="788" y="704" fill="#93A1BD" font-size="14">90% range</text>
-<line x1="973" y1="669" x2="998" y2="669" stroke="#8FB0FF" stroke-width="2.4" marker-end="url(#ah)"/>
-<rect x="1004" y="604" width="200" height="130" rx="16" fill="#0E1626" stroke="#7FD1C7" stroke-opacity=".85" stroke-width="1.8"/>
-<rect x="1022" y="604" width="36" height="3.5" rx="2" fill="#7FD1C7"/>
-<circle cx="1034" cy="642" r="15" fill="#7FD1C7" fill-opacity=".2" stroke="#7FD1C7" stroke-width="1.6"/>
-<text x="1034" y="647.5" text-anchor="middle" fill="#E8EEFB" font-size="14" font-weight="800">5</text>
-<text x="1058" y="648" fill="#E8EEFB" font-size="17.5" font-weight="700">Early warning</text>
-<text x="1024" y="684" fill="#93A1BD" font-size="14">shortage and surplus</text>
-<text x="1024" y="704" fill="#93A1BD" font-size="14">flags, confidence</text>
-<line x1="1209" y1="669" x2="1234" y2="669" stroke="#8FB0FF" stroke-width="2.4" marker-end="url(#ah)"/>
-<rect x="1240" y="604" width="200" height="130" rx="16" fill="#0E1626" stroke="#C69BFF" stroke-opacity=".85" stroke-width="1.8"/>
-<rect x="1258" y="604" width="36" height="3.5" rx="2" fill="#C69BFF"/>
-<circle cx="1270" cy="642" r="15" fill="#C69BFF" fill-opacity=".2" stroke="#C69BFF" stroke-width="1.6"/>
-<text x="1270" y="647.5" text-anchor="middle" fill="#E8EEFB" font-size="14" font-weight="800">6</text>
-<text x="1294" y="648" fill="#E8EEFB" font-size="17.5" font-weight="700">Decision</text>
-<text x="1260" y="684" fill="#93A1BD" font-size="14">dashboard and CSV for</text>
-<text x="1260" y="704" fill="#93A1BD" font-size="14">planners</text>
-<text x="1440" y="784" text-anchor="end" fill="#64738F" font-size="13">All data is simulated · forecast origin October 2026</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" role="img" aria-labelledby="t d" font-family="Segoe UI, system-ui, Arial, sans-serif">
+  <title id="t">KaushalSetu model lifecycle</title>
+  <desc id="d">Ten steps from the simulated panel to the published forecast: features, ablation, tuning on 2010 to 2014, a one-shot test on 2015 to 2019, a one-shot stress test on 2020 to 2025, ranges and flags, the final fit, forecasts, Demand Index and capacity gap, and delivery with checks.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#2A64F5"/></marker>
+    <style>
+      .st { fill: #F4F7FD; stroke: #B9C8E6; stroke-width: 1.5; }
+      .lock { fill: #FFF3DC; stroke: #E39A1F; stroke-width: 1.8; }
+      .fin { fill: #E6EEFF; stroke: #2A64F5; stroke-width: 1.8; }
+      .n { fill: #2A64F5; font-size: 13px; font-weight: 800; }
+      .t { fill: #0B1B3A; font-size: 14px; font-weight: 650; }
+      .s { fill: #4A5878; font-size: 11.5px; }
+      .tl { stroke: #B9C8E6; stroke-width: 2; }
+      .tk { fill: #4A5878; font-size: 11.5px; font-weight: 600; }
+      line.ar { stroke: #2A64F5; stroke-width: 2; marker-end: url(#a); }
+    </style>
+  </defs>
+  <rect width="1000" height="560" fill="#ffffff"/>
+  <text x="30" y="40" class="t" style="font-size:22px">Model lifecycle</text>
+  <text x="30" y="62" class="s">Each window of time is used for one purpose. Amber boxes are opened once and never used to change anything.</text>
+
+  <rect class="st" x="30" y="90" width="170" height="104" rx="10"/><text class="n" x="44" y="112">1</text><text class="t" x="62" y="112">Data</text><text class="s" x="44" y="134">simulated panel, 312 months</text><text class="s" x="44" y="150">7,925 series, shocks marked</text><text class="s" x="44" y="166">trades add up to sectors</text>
+  <rect class="st" x="215" y="90" width="170" height="104" rx="10"/><text class="n" x="229" y="112">2</text><text class="t" x="247" y="112">Features</text><text class="s" x="229" y="134">119 candidates built only</text><text class="s" x="229" y="150">from data known at the</text><text class="s" x="229" y="166">forecast month; leak test</text>
+  <rect class="st" x="400" y="90" width="170" height="104" rx="10"/><text class="n" x="414" y="112">3</text><text class="t" x="432" y="112">Ablation</text><text class="s" x="414" y="134">82 inputs kept; identity</text><text class="s" x="414" y="150">inputs dropped (10.9% to</text><text class="s" x="414" y="166">4.5% error, employed)</text>
+  <rect class="st" x="585" y="90" width="170" height="104" rx="10"/><text class="n" x="599" y="112">4</text><text class="t" x="617" y="112">Tuning</text><text class="s" x="599" y="134">Optuna, 20 trials a measure,</text><text class="s" x="599" y="150">trees per horizon band;</text><text class="s" x="599" y="166">validation years only</text>
+  <rect class="lock" x="770" y="90" width="200" height="104" rx="10"/><text class="n" x="784" y="112">5</text><text class="t" x="802" y="112">One-shot test</text><text class="s" x="784" y="134">fit to 2014, scored once on</text><text class="s" x="784" y="150">2015 to 2019 against 3 simple</text><text class="s" x="784" y="166">baselines; 2 fresh worlds</text>
+
+  <rect class="lock" x="30" y="260" width="170" height="104" rx="10"/><text class="n" x="44" y="282">6</text><text class="t" x="62" y="282">Stress test</text><text class="s" x="44" y="304">fit to 2019, scored once on</text><text class="s" x="44" y="320">2020 to 2025: shocks the</text><text class="s" x="44" y="336">model cannot foresee</text>
+  <rect class="st" x="215" y="260" width="170" height="104" rx="10"/><text class="n" x="229" y="282">7</text><text class="t" x="247" y="282">Ranges, flags</text><text class="s" x="229" y="304">split-conformal ranges</text><text class="s" x="229" y="320">(usual and wide), labels,</text><text class="s" x="229" y="336">relative alerts and precision</text>
+  <rect class="fin" x="400" y="260" width="170" height="104" rx="10"/><text class="n" x="414" y="282">8</text><text class="t" x="432" y="282">Final fit</text><text class="s" x="414" y="304">all data to 2025-12, settings</text><text class="s" x="414" y="320">fixed; pairs reaching into the</text><text class="s" x="414" y="336">2020 to 2023 shock left out</text>
+  <rect class="fin" x="585" y="260" width="170" height="104" rx="10"/><text class="n" x="599" y="282">9</text><text class="t" x="617" y="282">Forecast</text><text class="s" x="599" y="304">60 months, trades reconciled;</text><text class="s" x="599" y="320">Demand Index and capacity</text><text class="s" x="599" y="336">gap; exports with SHA-256</text>
+  <rect class="fin" x="770" y="260" width="200" height="104" rx="10"/><text class="n" x="784" y="282">10</text><text class="t" x="808" y="282">Deliver and check</text><text class="s" x="784" y="304">dashboard, map, API, assistant,</text><text class="s" x="784" y="320">English and Hindi; tests, audit,</text><text class="s" x="784" y="336">size and speed budget</text>
+
+  <line class="ar" x1="200" y1="142" x2="213" y2="142"/><line class="ar" x1="385" y1="142" x2="398" y2="142"/><line class="ar" x1="570" y1="142" x2="583" y2="142"/><line class="ar" x1="755" y1="142" x2="768" y2="142"/>
+  <line class="ar" x1="200" y1="312" x2="213" y2="312"/><line class="ar" x1="385" y1="312" x2="398" y2="312"/><line class="ar" x1="570" y1="312" x2="583" y2="312"/><line class="ar" x1="755" y1="312" x2="768" y2="312"/>
+
+  <line class="tl" x1="40" y1="450" x2="960" y2="450"/>
+  <rect x="40" y="436" width="276" height="28" rx="6" fill="#DCE6FA"/><text class="tk" x="52" y="455">2000 to 2009: fit</text>
+  <rect x="316" y="436" width="138" height="28" rx="6" fill="#C5D6F7"/><text class="tk" x="326" y="455">2010 to 2014: tune</text>
+  <rect x="454" y="436" width="138" height="28" rx="6" fill="#F8D99A"/><text class="tk" x="462" y="455">2015 to 2019: test</text>
+  <rect x="592" y="436" width="166" height="28" rx="6" fill="#F8D99A"/><text class="tk" x="602" y="455">2020 to 2025: stress</text>
+  <rect x="758" y="436" width="202" height="28" rx="6" fill="#9DB8FF"/><text class="tk" x="770" y="455">2026 to 2030: forecast</text>
+  <text class="s" x="40" y="490">Split by calendar time, never at random. Validation scores are not an honest estimate (they were used to tune); the test years are calm by design.</text>
+  <text class="s" x="40" y="508">Seekers are the least reliable measure and the fifth year the loosest; the dashboard and the API say so beside the numbers.</text>
 </svg>

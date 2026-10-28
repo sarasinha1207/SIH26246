@@ -465,6 +465,23 @@
       var b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.dataset.h = h; b.textContent = plural(h);
       b.addEventListener("click", function () { mapSt.h = h; mapRender(); }); hs.appendChild(b);
     });
+    var find = $("#map-find");                                                 // the keyboard and screen-reader way to a district: every district is listed, by state
+    if (find) {
+      find.innerHTML = '<option value="">' + t("Choose a district") + "</option>";
+      M.states.forEach(function (st) {
+        var g = document.createElement("optgroup"); g.label = nm(st);
+        M.districts.filter(function (d) { return d.s === st; }).sort(function (a, b) { return a.n < b.n ? -1 : 1; }).forEach(function (d) { var o = document.createElement("option"); o.value = d.c; o.textContent = nm(d.n); g.appendChild(o); });
+        find.appendChild(g);
+      });
+      if (!find.dataset.bound) {
+        find.dataset.bound = "1";
+        find.addEventListener("change", function () {
+          var d = M.districts.filter(function (x) { return x.c === find.value; })[0];
+          if (!d) { mapSt.sel = null; mapRender(); return; }
+          mapSt.state = d.s; mapSt.sel = d.c; mapZoom(true); mapRender();
+        });
+      }
+    }
     sts.setAttribute("aria-label", t("State"));
     [["all", t("All ten states")]].concat(M.states.map(function (s) { return [s, nm(s)]; })).forEach(function (o) {
       var b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.dataset.s = o[0]; b.textContent = o[1];
@@ -525,6 +542,7 @@
       b.addEventListener("click", function () { var d = M.districts.filter(function (x) { return x.c === b.dataset.code; })[0]; if (mapSt.state === "all") { mapSt.state = d.s; mapZoom(true); } mapSt.sel = d.c; mapRender(); });
     });
     var clr = $("#map-clear"); if (clr) clr.addEventListener("click", function () { mapSt.sel = null; mapRender(); });
+    var fd = $("#map-find"); if (fd) fd.value = mapSt.sel || "";
     mapHL();
   }
   function mapInit() {

@@ -11,9 +11,13 @@ from pathlib import Path
 
 import pandas as pd
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import _guard  # noqa: E402
+
 ROOT = Path(__file__).resolve().parents[1]
 DASH = ROOT / "app" / "dashboard"
 FC = ROOT / "outputs" / "forecasts" / "origin_2026-10"
+_guard.skip_module_unless(DASH / "data" / "dash_data.js", why="the v3 dashboard data file is no longer deployed (git-ignored since v4 phase 9)")
 TARGETS = {"E": "Total_Employed_Workers", "V": "Active_Job_Vacancies", "S": "eShram_Registered_Seekers"}
 PAGES = ["overview", "demand", "supply", "gap", "ranking", "warnings", "data"]
 
