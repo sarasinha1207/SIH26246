@@ -109,6 +109,29 @@
     "Name": "नाम",
     "No calibrated 90% range exists for this combination of filters, so only the point forecast is drawn. Choose a sector, state, state with sector, or a district with a sector or trade for a range.": "फ़िल्टर के इस संयोजन के लिए कोई जाँचा हुआ 90% दायरा नहीं है, इसलिए केवल बिंदु पूर्वानुमान दिखाया गया है। दायरे के लिए सेक्टर, राज्य, सेक्टर सहित राज्य, या सेक्टर/ट्रेड सहित ज़िला चुनें।",
     "Open": "खोलें",
+    "Map": "मानचित्र",
+    "Districts and states on the map": "मानचित्र पर ज़िले और राज्य",
+    "Map of {0} districts coloured by {1}": "{0} ज़िलों का मानचित्र, {1} से रंगा हुआ",
+    "{0} now, {1} in {2} months": "अभी {0}, {2} महीने में {1}",
+    "Usual 90% range {0} to {1}": "सामान्य 90% दायरा {0} से {1}",
+    "{0} months ahead": "{0} महीने आगे",
+    "Dec 2025 and {0}": "दिसंबर 2025 और {0}",
+    "Change in {0}, Dec 2025 to {1}": "दिसंबर 2025 से {1} तक {0} में बदलाव",
+    "Demand Index in {0}": "{0} में माँग सूचकांक",
+    "Five equal groups of districts; click a district to choose it.": "ज़िलों के पाँच बराबर समूह; किसी ज़िले को चुनने के लिए उस पर क्लिक करें।",
+    "The map is by sector: the trade filter chooses its sector.": "मानचित्र सेक्टर के अनुसार है: ट्रेड फ़िल्टर उसका सेक्टर चुन लेता है।",
+    "Show the whole region again": "पूरा क्षेत्र फिर दिखाएँ",
+    "Open the Forecast page": "पूर्वानुमान पृष्ठ खोलें",
+    "Open the Capacity gap": "क्षमता अंतर खोलें",
+    "{0}: highest {1} ({2}), lowest {3} ({4}).": "{0}: सबसे ऊँचा {1} ({2}), सबसे नीचा {3} ({4})।",
+    "Now": "अभी",
+    "Highest districts": "सबसे ऊँचे ज़िले",
+    "Lowest districts": "सबसे नीचे के ज़िले",
+    "Where the alerts are": "चेतावनियाँ कहाँ हैं",
+    "Districts with the most alerts {0} months ahead": "{0} महीने आगे सबसे अधिक चेतावनियों वाले ज़िले",
+    "No alerts for these filters.": "इन फ़िल्टर के लिए कोई चेतावनी नहीं।",
+    "An alert marks a district-trade in the top or bottom tenth of its trade for forecast vacancies per seeker.": "चेतावनी उस ज़िला-ट्रेड को चिह्नित करती है जो प्रति नौकरी चाहने वाले पूर्वानुमानित रिक्तियों में अपने ट्रेड के शीर्ष या निचले दसवें हिस्से में है।",
+    "Click a row to choose a state": "राज्य चुनने के लिए पंक्ति पर क्लिक करें",
     "Press Enter to filter": "फ़िल्टर करने के लिए Enter दबाएँ",
     "Openings per seat": "प्रति सीट रिक्तियाँ",
     "Oversupply": "अधिशेष",
@@ -209,7 +232,7 @@
   }
   var tf = function (s) { var a = Array.prototype.slice.call(arguments, 1); return t(s).replace(/\{(\d)\}/g, function (_, i) { return a[+i]; }); };
   var PAGES = {
-    overview: ["Overview", "Where employment, vacancies and seekers are heading to 2030"], forecast: ["Forecast", "Five-year forecasts with 90% ranges"], index: ["Demand Index", "How strong hiring demand is, from 0 to 100"],
+    overview: ["Overview", "Where employment, vacancies and seekers are heading to 2030"], map: ["Map", "Districts and states on the map"], forecast: ["Forecast", "Five-year forecasts with 90% ranges"], index: ["Demand Index", "How strong hiring demand is, from 0 to 100"],
     capacity: ["Capacity gap", "Forecast openings against training seats"], ranking: ["Rankings", "Trades, states and districts compared"], warnings: ["Early warnings", "Districts forecast to be short of workers or in surplus"], data: ["Data and notes", "Method, limits and downloads"]
   };
   var TR = {}, TIX = {}, DNAME = {}, DSTATE = {}, DLIST = [];
@@ -590,6 +613,119 @@
     cur.csv = { name: "kaushalsetu_coverage", head: ["key", "coverage"], rows: Object.keys(cv.series).map(function (k) { return ["series|" + k, cv.series[k]]; }).concat(Object.keys(cv.aggregate).map(function (k) { return ["aggregate|" + k, cv.aggregate[k]]; })) };
     return Promise.resolve();
   };
+
+  /* ---------- the map page: 317 districts coloured by a measure, with the states, the districts and the alerts beside it ---------- */
+  var MAPP = null, MTI = { E: 0, V: 1, S: 2 };
+  function loadMap() {
+    if (window.MAP_DATA) return Promise.resolve(window.MAP_DATA);
+    if (!MAPP) MAPP = new Promise(function (res, rej) {
+      var s = document.createElement("script"); s.src = document.body.getAttribute("data-map");
+      s.onload = function () { res(window.MAP_DATA); }; s.onerror = function () { MAPP = null; rej(new Error("map data")); };
+      document.head.appendChild(s);
+    });
+    return MAPP;
+  }
+  /* one measure over a set of districts and sectors: totals now and at the horizon, the change, the usual 90% range (one sector only) and the Demand Index (employed-weighted) */
+  function mapVal(M, codes, k, h, sis) {
+    var j = M.horizons.indexOf(h), fi = 1 + j, now = 0, fc = 0, lo = 0, hi = 0, wn = 0, wf = 0, dn = 0, df = 0;
+    codes.forEach(function (c) {
+      var v = M.values[c];
+      sis.forEach(function (si) {
+        if (k === "D") { var e = v[si][0], d = v[si][3]; wn += e[0]; wf += e[fi]; dn += e[0] * d[0]; df += e[fi] * d[fi]; return; }
+        var a = v[si][MTI[k]]; now += a[0]; fc += a[fi]; lo += a[4 + 2 * j]; hi += a[5 + 2 * j];
+      });
+    });
+    if (k === "D") return { now: dn / wn, fc: df / wf, val: df / wf, lo: null, hi: null };
+    var one = sis.length === 1 && codes.length === 1;
+    return { now: now, fc: fc, val: (fc / now - 1) * 100, lo: one ? lo : null, hi: one ? hi : null };
+  }
+  var mapFill = function (k, c) { return "color-mix(in srgb, " + (k === "E" ? "var(--employed)" : k === "S" ? "var(--supply)" : "var(--demand)") + " " + [26, 44, 62, 82, 100][c] + "%, var(--surface))"; };
+  var mapFmt = function (k, v) { return k === "D" ? fmt(v, 1) : pct(v, 1); };
+  var mapName = function (k) { return k === "D" ? t("Demand Index") : t(NAMES[k]); };
+
+  function drawMap(box, M, rows, k, p, shown) {
+    box.innerHTML = "";
+    var svg = el("svg", { role: "img", "aria-label": tf("Map of {0} districts coloured by {1}", rows.length, mapName(k)) }, box);
+    el("path", { d: M.backdrop, class: "mbackdrop" }, svg);
+    var g = el("g", {}, svg), byCode = {};
+    rows.forEach(function (r) {
+      var d = r.d, q = el("path", { d: d.d, class: "mdist" + (p.state && p.state !== d.s ? " dim" : ""), style: "fill:" + mapFill(k, r.cls), "data-code": d.c }, g);
+      q.setAttribute("data-tip", "<b>" + esc(LANG === "hi" && HIN[d.n] ? HIN[d.n] : d.n) + "</b> · " + esc(LANG === "hi" && HIN[d.s] ? HIN[d.s] : d.s) + "<br>" + esc(mapName(k)) + ": <b>" + mapFmt(k, r.val) + "</b><br>" + (k === "D" ? tf("{0} now, {1} in {2} months", fmt(r.now, 1), fmt(r.fc, 1), shown.h) : tf("{0} now, {1} in {2} months", fmt(Math.round(r.now)), fmt(Math.round(r.fc)), shown.h)) +
+        (r.lo != null ? "<br>" + tf("Usual 90% range {0} to {1}", fmt(Math.round(r.lo)), fmt(Math.round(r.hi))) : ""));
+      q.addEventListener("click", function () { go({ district: p.district === d.c ? "" : d.c }); });
+      byCode[d.c] = q;
+    });
+    if (M.borders) el("path", { d: M.borders, class: "mborder" }, svg);
+    if (p.district && byCode[p.district]) el("path", { d: byCode[p.district].getAttribute("d"), class: "mhl" }, svg);
+    var labels = [];
+    M.states.forEach(function (s) {
+      var ds = M.districts.filter(function (d) { return d.s === s; }); if (!ds.length || (p.state && p.state !== s)) return;
+      var tx = el("text", { class: "mstate" }, svg); tx.textContent = LANG === "hi" && HIN[s] ? HIN[s] : s;
+      labels.push({ n: tx, x: ds.reduce(function (a, d) { return a + (d.bb[0] + d.bb[2]) / 2; }, 0) / ds.length, y: ds.reduce(function (a, d) { return a + (d.bb[1] + d.bb[3]) / 2; }, 0) / ds.length });
+    });
+    var vb = M.viewBox.slice();
+    if (p.state) {
+      var x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+      M.districts.filter(function (d) { return d.s === p.state; }).forEach(function (d) { x0 = Math.min(x0, d.bb[0]); y0 = Math.min(y0, d.bb[1]); x1 = Math.max(x1, d.bb[2]); y1 = Math.max(y1, d.bb[3]); });
+      var pad = Math.max(x1 - x0, y1 - y0) * 0.12; vb = [x0 - pad, y0 - pad, x1 - x0 + 2 * pad, y1 - y0 + 2 * pad];
+    }
+    var r = box.clientWidth > 0 && box.clientHeight > 0 ? box.clientWidth / box.clientHeight : 1, cx = vb[0] + vb[2] / 2, cy = vb[1] + vb[3] / 2, w = vb[2], hh = vb[3];
+    if (w / hh < r) w = hh * r; else hh = w / r;
+    svg.setAttribute("viewBox", [cx - w / 2, cy - hh / 2, w, hh].map(function (n) { return n.toFixed(1); }).join(" "));
+    var kx = Math.min(box.clientWidth / w, box.clientHeight / hh) || 1;
+    labels.forEach(function (l) { l.n.setAttribute("x", l.x.toFixed(1)); l.n.setAttribute("y", l.y.toFixed(1)); l.n.setAttribute("font-size", (11 / kx).toFixed(1)); l.n.setAttribute("stroke-width", (3 / kx).toFixed(1)); });
+  }
+
+  render.map = function (p, view) {
+    return loadMap().then(function (M) {
+      var k = ["E", "V", "S", "D"].indexOf(p.k) >= 0 ? p.k : "V", h = [12, 36, 60].indexOf(+p.h) >= 0 ? +p.h : 12;
+      var sis = p.sector ? [M.sectors.indexOf(p.sector)] : M.sectors.map(function (_, i) { return i; });
+      var rows = M.districts.map(function (d) { var r = mapVal(M, [d.c], k, h, sis); r.d = d; return r; });
+      var ord = rows.slice().sort(function (a, b) { return a.val - b.val; });
+      ord.forEach(function (r, i) { r.cls = Math.min(4, Math.floor(i * 5 / ord.length)); });
+      var scoped = rows.filter(function (r) { return (!p.state || r.d.s === p.state); }), codes = scoped.map(function (r) { return r.d.c; });
+      var sel = p.district ? rows.filter(function (r) { return r.d.c === p.district; })[0] : null;
+      var months = tf("{0} months ahead", h), tgt = ml(addM(M.origin, h));
+      var spans = [0, 1, 2, 3, 4].map(function (c) { var vs = ord.filter(function (r) { return r.cls === c; }).map(function (r) { return r.val; }); return [Math.min.apply(null, vs), Math.max.apply(null, vs)]; });
+      var legend = '<div class="ctx-legend">' + spans.map(function (s, c) { return '<span style="--c:' + mapFill(k, c) + '"><i></i>' + mapFmt(k, s[0]) + " → " + mapFmt(k, s[1]) + "</span>"; }).join("") + "</div>";
+      var chips = [["", t("All states")]].concat(M.states.map(function (s) { return [s, s]; }));
+      var four = ["E", "V", "S", "D"].map(function (kk) { var v = mapVal(M, sel ? [sel.d.c] : codes, kk, h, sis); return { k: kk, v: v }; });
+      var sumCard = '<section class="card"><div class="card-h"><div><h2>' + esc(sel ? sel.d.n + ", " + sel.d.s : (p.state || t("All states"))) + "</h2><p>" + esc(p.sector ? t(p.sector) : t("all sectors")) + " · " + esc(tf("Dec 2025 and {0}", tgt)) + "</p></div>" + (sel ? '<button class="chip-btn" type="button" data-clear="1">' + t("Show the whole region again") + "</button>" : "") + "</div>" +
+        table([["Measure"], ["Now", "num"], [tgt, "num"], ["Change", "num"]].concat(four[0].v.lo != null ? [["Usual 90% range", "num"]] : []), four.map(function (x) {
+          return "<tr><td>" + esc(mapName(x.k)) + '</td><td class="num">' + (x.k === "D" ? fmt(x.v.now, 1) : compact(x.v.now)) + '</td><td class="num">' + (x.k === "D" ? fmt(x.v.fc, 1) : compact(x.v.fc)) + '</td><td class="num">' + (x.k === "D" ? fmt(x.v.fc - x.v.now, 1) : dir(x.v.val)) + "</td>" + (four[0].v.lo != null ? '<td class="num">' + (x.v.lo != null ? compact(x.v.lo) + " – " + compact(x.v.hi) : "–") + "</td>" : "") + "</tr>";
+        })) + (sel ? '<p class="note"><a class="chip-btn" href="' + url("forecast", { district: sel.d.c }) + '">' + t("Open the Forecast page") + '</a> <a class="chip-btn" href="' + url("capacity", { district: sel.d.c }) + '">' + t("Open the Capacity gap") + "</a></p>" : "") + "</section>";
+      var srt = scoped.slice().sort(function (a, b) { return b.val - a.val; });
+      var line = function (r, i) { return '<tr class="click" data-district="' + r.d.c + '"><td class="num">' + (i + 1) + "</td><td>" + esc(r.d.n) + "</td><td>" + esc(r.d.s) + '</td><td class="num" ' + (k === "D" ? heat(r.val) : "") + ">" + mapFmt(k, r.val) + '</td><td class="num">' + (k === "D" ? fmt(r.now, 1) : compact(r.now)) + "</td></tr>"; };
+      var head = [["#", "num"], ["District"], ["State"], [k === "D" ? "Demand Index" : "Change", "num"], ["Now", "num"]];
+      var states = M.states.map(function (s) { var cs = M.districts.filter(function (d) { return d.s === s; }).map(function (d) { return d.c; }); return { s: s, v: mapVal(M, cs, k, h, sis) }; }).sort(function (a, b) { return b.v.val - a.v.val; });
+      var hz = [12, 36, 60].indexOf(h), A_ = alertsScope(p, hz), cnt = {};
+      A_.forEach(function (a) { var c = cnt[a[3]] = cnt[a[3]] || { s: 0, o: 0, st: STATES[a[2]] }; if (a[0] === 0) c.s++; else c.o++; });
+      var alertRows = Object.keys(cnt).map(function (c) { return { c: c, n: DNAME[c], st: cnt[c].st, s: cnt[c].s, o: cnt[c].o }; }).sort(function (a, b) { return (b.s + b.o) - (a.s + a.o) || (a.n < b.n ? -1 : 1); }).slice(0, 10);
+      view.innerHTML = scopeHead({ state: p.state, district: p.district, sector: p.sector, trade: p.trade }, segment("k", [["V", t("Vacancies")], ["E", t("Employed")], ["S", t("Seekers")], ["D", t("Demand Index")]], k, "Measure") + segment("h", [[12, tf("{0} months", 12)], [36, tf("{0} months", 36)], [60, tf("{0} months", 60)]], h, "Months ahead")) +
+        (p.trade ? '<p class="note">' + t("The map is by sector: the trade filter chooses its sector.") + "</p>" : "") +
+        '<div class="grid g-map"><section class="card"><div class="card-h"><div><h2>' + esc(mapName(k)) + "</h2><p>" + esc(k === "D" ? tf("Demand Index in {0}", tgt) : tf("Change in {0}, Dec 2025 to {1}", mapName(k).toLowerCase(), tgt)) + ". " + t("Five equal groups of districts; click a district to choose it.") + "</p></div></div>" +
+        '<div class="mapbox" id="mapbox"><div class="m-chips" role="group" aria-label="' + esc(t("State")) + '">' + chips.map(function (c) { return '<button type="button" data-st="' + esc(c[0]) + '" aria-pressed="' + ((p.state || "") === c[0]) + '">' + esc(c[1]) + "</button>"; }).join("") + '</div><div id="mapsvg"></div></div>' + legend +
+        '<p class="sr-only" id="map-sr"></p></section><div>' + sumCard + "</div></div>" +
+        '<div class="grid g2 mt"><section class="card"><div class="card-h"><div><h2>' + t("Highest districts") + "</h2><p>" + esc(p.state || t("All states")) + ", " + esc(months) + "</p></div></div>" + table(head, srt.slice(0, 10).map(line)) + "</section>" +
+        '<section class="card"><div class="card-h"><div><h2>' + t("Lowest districts") + "</h2><p>" + esc(p.state || t("All states")) + ", " + esc(months) + "</p></div></div>" + table(head, srt.slice(-10).reverse().map(function (r, i) { return line(r, srt.length - 1 - i); })) + "</section></div>" +
+        '<div class="grid g2 mt"><section class="card"><div class="card-h"><div><h2>' + t("States") + "</h2><p>" + t("Click a row to choose a state") + "</p></div></div>" + table([["State"], [k === "D" ? "Demand Index" : "Change", "num"], ["Now", "num"], [tgt, "num"]], states.map(function (x) {
+          return '<tr class="click' + (p.state === x.s ? " on" : "") + '" data-state="' + esc(x.s) + '"><td>' + esc(x.s) + '</td><td class="num" ' + (k === "D" ? heat(x.v.val) : "") + ">" + mapFmt(k, x.v.val) + '</td><td class="num">' + (k === "D" ? fmt(x.v.now, 1) : compact(x.v.now)) + '</td><td class="num">' + (k === "D" ? fmt(x.v.fc, 1) : compact(x.v.fc)) + "</td></tr>"; })) + "</section>" +
+        '<section class="card"><div class="card-h"><div><h2>' + t("Where the alerts are") + "</h2><p>" + esc(tf("Districts with the most alerts {0} months ahead", [12, 36, 60][hz])) + '</p></div><a class="chip-btn" href="' + url("warnings", { h: [12, 36, 60][hz] }) + '">' + t("Open") + "</a></div>" +
+        (alertRows.length ? table([["District"], ["State"], ["Shortage", "num"], ["Oversupply", "num"]], alertRows.map(function (r) { return '<tr class="click" data-district="' + r.c + '"><td>' + esc(r.n) + "</td><td>" + esc(r.st) + '</td><td class="num">' + r.s + '</td><td class="num">' + r.o + "</td></tr>"; })) : '<p class="note">' + t("No alerts for these filters.") + "</p>") +
+        '<p class="note">' + t("An alert marks a district-trade in the top or bottom tenth of its trade for forecast vacancies per seeker.") + "</p></section></div>";
+      var box = $("#mapsvg", view); box.style.cssText = "position:absolute;inset:0";
+      drawMap(box, M, rows, k, p, { h: h });
+      $("#map-sr", view).textContent = tf("{0}: highest {1} ({2}), lowest {3} ({4}).", mapName(k), srt[0].d.n, mapFmt(k, srt[0].val), srt[srt.length - 1].d.n, mapFmt(k, srt[srt.length - 1].val));
+      $$("[data-st]", view).forEach(function (b) { b.addEventListener("click", function () { go({ state: b.dataset.st, district: "" }); }); });
+      var clr = $("[data-clear]", view); if (clr) clr.addEventListener("click", function () { go({ district: "" }); });
+      bindSeg(view); bindRows(view);
+      cur.csv = { name: fname("map_" + k + "_" + h), head: ["district_lgd", "district", "state", "sector", "measure", "months_ahead", "now", "forecast", "change_pct"], rows: scoped.map(function (r) { return [r.d.c, r.d.n, r.d.s, p.sector || "all", k, h, +r.now.toFixed(2), +r.fc.toFixed(2), k === "D" ? "" : +r.val.toFixed(2)]; }) };
+    });
+  };
+  function alertsScope(p, hz) {
+    return window.DASH4_ALERTS.rows.filter(function (a) { var tr = TRADES[a[4]]; return a[1] === hz && (!p.state || STATES[a[2]] === p.state) && (!p.trade || tr.c === p.trade) && (!p.sector || tr.s === p.sector) && (!p.district || String(a[3]) === String(p.district)); });
+  }
+  var addM = function (ym, n) { var q = ym.split("-"), i = (+q[0]) * 12 + (+q[1] - 1) + n; return Math.floor(i / 12) + "-" + ("0" + ((i % 12) + 1)).slice(-2); };
 
   /* ---------- frame: filters, sidebar, router ---------- */
   function renderFilters(p) {

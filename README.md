@@ -31,15 +31,15 @@ The first submission (v3: 56 districts, twelve-month forecasts) is preserved at 
 * **Capacity gap**: forecast openings against sanctioned training seats (held flat, an assumption) and expected certified trainees, by year, trade, state and district, with a relative mismatch status.
 * **Early-warning alerts**: in each trade and month the top and bottom tenth of districts by forecast vacancies per seeker, with watches either side; their precision against persistence is reported.
 
-**Public website** (Home, About, Resources, API page): a map of all 317 districts (sector, measure, 12/36/60 months, a keyboard "find a district" list), a hero forecast chart, the method, the evaluation stated honestly (including the shock years), English and Hindi, light and dark themes, three text sizes, reduced-motion support.
+**Public website** (Home, About, Resources, API page): a map of all 317 districts with the state borders drawn (sector, measure, 12/36/60 months, a keyboard "find a district" list), a hero forecast chart, the method, the evaluation stated honestly (including the shock years), English and Hindi, light and dark themes, three text sizes, reduced-motion support.
 
-**Dashboard** (`app/dashboard/`): Overview, Forecast, Demand Index, Capacity gap, Rankings, Early warnings, and Data and notes; filters for sector, trade, state and district kept in the URL; two-band charts; CSV and JSON download of any table; data loaded per state on demand; English and Hindi (names included).
+**Dashboard** (`app/dashboard/`): Overview, Map (all 317 districts with state borders, the states, the highest and lowest districts and where the alerts are), Forecast, Demand Index, Capacity gap, Rankings, Early warnings, and Data and notes; filters for sector, trade, state and district kept in the URL; two-band charts; CSV and JSON download of any table; data loaded per state on demand; English and Hindi (names included).
 
 **Forecast API** (`/api/forecast`, `/flags`, `/demand-index`, `/capacity-gap`, `/meta`): GET only, filters as on the dashboard, no key; refuses bad input, rate limited, standard library only. Documented at `docs/api.html` on the site.
 
 **Assistant**: answers in the browser from the site's own data (totals, a district, ranges, Demand Index, capacity, alerts, rankings, definitions); optionally words answers with Google Gemini through a server route that keeps the key off the page.
 
-**Engineering**: every number on the site is built from the exports and checked against them; SHA-256 manifests; leak-safe splits by calendar time with the test and stress windows opened once; 252 automated tests; security headers; an accessibility audit script and fixes.
+**Engineering**: every number on the site is built from the exports and checked against them; SHA-256 manifests; leak-safe splits by calendar time with the test and stress windows opened once; 253 automated tests; security headers; an accessibility audit script and fixes.
 
 ## 3. Technology stack
 | Layer | Technology |
@@ -96,7 +96,7 @@ Employed workers 14.29% against 16.65% (14% closer), vacancies 20.57% against 24
 * Confidence labels fall from high to low for employed workers on the test years; for seekers the order is not reliable and the site says so.
 
 ## 6. Tests done and their overview
-**252 automated tests in 23 files.** Run any file with `python tests/<name>.py` (no pytest needed); tests that need git-ignored data skip with a message on a fresh clone.
+**253 automated tests in 23 files.** Run any file with `python tests/<name>.py` (no pytest needed); tests that need git-ignored data skip with a message on a fresh clone.
 
 | Area | Test file | Tests | What it proves |
 |---|---|---|---|

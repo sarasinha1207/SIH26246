@@ -18,7 +18,7 @@ import config as C  # noqa: E402
 DASH = ROOT / "app" / "dashboard"
 DATA = DASH / "data"
 EXPORTS = C.DATA / "exports"
-PAGES = ["overview", "forecast", "index", "capacity", "ranking", "warnings", "data"]
+PAGES = ["overview", "map", "forecast", "index", "capacity", "ranking", "warnings", "data"]
 
 _guard.skip_module_unless(DATA / "core.js", EXPORTS / "forecast_rollups.csv.gz", why="needs the v4 dashboard build (src/v4/build_dashboard.py) and the phase 6 exports")
 
@@ -221,6 +221,16 @@ def test_the_files_the_browser_loads_stay_within_the_size_budget():
     sizes = [p.stat().st_size for p in (DATA / "shards").glob("*.json") if p.name != "index.json"]
     assert len(sizes) == 10 and max(sizes) < 6e6 and sum(sizes) < 30e6
     assert (DASH / "dashboard.js").stat().st_size < 150e3 and (DASH / "dashboard.css").stat().st_size < 50e3
+
+
+def test_the_map_page_is_wired_to_the_map_data_and_the_state_borders():
+    js_ = js()
+    assert "render.map = " in js_ and "loadMap()" in js_ and 'getAttribute("data-map")' in js_ and "M.borders" in js_ and "mapVal(" in js_
+    assert re.search(r'<body data-map="\.\./data/map_data\.js\?v=[0-9a-f]{8}"', shell()) and 'data-page="map"' in shell()
+    t = (ROOT / "app" / "data" / "map_data.js").read_text(encoding="utf-8")
+    md = json.loads(t[t.index("{"):t.rindex("}") + 1])
+    assert md["borders"].startswith("M") and md["borders"].count("M") > 60 and len(md["districts"]) == 317
+    assert ".mborder" in (DASH / "dashboard.css").read_text(encoding="utf-8") and ".mborder" in (ROOT / "app" / "assets" / "styles.css").read_text(encoding="utf-8")
 
 
 def test_the_data_says_it_is_simulated_and_carries_the_hashes():

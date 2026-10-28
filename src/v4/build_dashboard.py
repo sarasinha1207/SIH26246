@@ -220,7 +220,7 @@ def shell():
     def ver(p):
         return hashlib.sha1(Path(p).read_bytes()).hexdigest()[:8]
     html = (Path(__file__).resolve().parent / "dashboard_shell.html").read_text(encoding="utf-8").replace("{LOGO}", logo.inline())
-    for token, path in (("{CSS}", APP / "dashboard.css"), ("{JS}", APP / "dashboard.js"), ("{CORE}", OUT / "core.js"), ("{ALERTS}", OUT / "alerts.js"), ("{NAMES}", OUT / "names_hi.js"),
+    for token, path in (("{CSS}", APP / "dashboard.css"), ("{JS}", APP / "dashboard.js"), ("{CORE}", OUT / "core.js"), ("{ALERTS}", OUT / "alerts.js"), ("{NAMES}", OUT / "names_hi.js"), ("{MAPDATA}", C.ROOT / "app" / "data" / "map_data.js"),
                         ("{CHATCSS}", C.ROOT / "app" / "assets" / "chat.css"), ("{CHATJS}", C.ROOT / "app" / "assets" / "chat.js")):
         html = html.replace(token, ver(path))
     (APP / "index.html").write_text(html, encoding="utf-8")

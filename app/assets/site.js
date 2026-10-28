@@ -430,6 +430,7 @@
       });
       mapEls.dist[d.c] = p;
     });
+    if (M.borders) el("path", { d: M.borders, class: "mborder" }, svg);               // the lines between the states, drawn over the district outlines
     mapEls.hl = el("path", { class: "mhl", d: "" }, svg);
     var names = {};
     M.districts.concat(M.others || []).forEach(function (d) { (names[d.s] = names[d.s] || []).push(d); });

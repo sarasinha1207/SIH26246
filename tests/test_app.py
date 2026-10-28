@@ -323,6 +323,7 @@ def test_map_data_matches_the_forecast_files_and_the_district_list():
     assert len({d["s"] for d in M["districts"]}) == 10 and M["others"] == [] and all(d["d"].startswith("M") and d["d"].endswith("z") for d in M["districts"])
     by = dd.set_index(dd.District_LGD_Code.astype(str)).State_Name
     assert all(by[d["c"]] == d["s"] for d in M["districts"])
+    assert M["borders"].startswith("M") and M["borders"].count("M") > 60                         # the lines between the states
     assert len(M["backdrop"]) > 50_000                                          # the faint outline of the rest of India
     assert len(M["values"]) == 317 and all(len(v) == 5 and all(len(x) == 4 for x in v[0][3:4]) and len(v[0][0]) == 10 for v in M["values"].values())
     rl = pd.read_csv(V4 / "exports" / "forecast_rollups.csv.gz", low_memory=False)

@@ -54,6 +54,87 @@ def ring_path(ring, tol_deg):
     return d + "z"
 
 
+def rdp(pts, tol):
+    """Douglas-Peucker on an open polyline (numpy array of lon, lat), iterative."""
+    n = len(pts)
+    if n < 3:
+        return pts
+    keep = np.zeros(n, bool)
+    keep[0] = keep[-1] = True
+    stack = [(0, n - 1)]
+    while stack:
+        a, b = stack.pop()
+        if b <= a + 1:
+            continue
+        p, q = pts[a], pts[b]
+        d = q - p
+        seg = pts[a + 1:b] - p
+        L = np.hypot(*d)
+        dist = np.hypot(*(seg - np.outer(np.clip(seg @ d / (L * L), 0, 1), d)).T) if L > 0 else np.hypot(*seg.T)
+        i = int(np.argmax(dist))
+        if dist[i] > tol:
+            m = a + 1 + i
+            keep[m] = True
+            stack += [(a, m), (m, b)]
+    return pts[keep]
+
+
+def borders(t, state_codes, tol=0.004):
+    """The lines that separate the project's states from each other and from the rest of India, as one SVG path string.
+
+    Edges (consecutive polygon vertices rounded to 0.0001 degree) are counted over all 785 districts of the LGD layer.  An edge is part of a state border when a project state lies on one
+    side and either nothing (the coast or the national border) or a district of another state lies on the other.  Edges are chained into polylines between junctions and simplified."""
+    import collections
+    occ, sides = collections.Counter(), collections.defaultdict(set)
+    for r in t.itertuples():
+        for poly in bb.parse_wkb(bytes(r.geometry)):
+            for ring in poly:
+                pts = [(round(float(x), 4), round(float(y), 4)) for x, y in ring]
+                for a, b in zip(pts, pts[1:]):
+                    if a != b:
+                        k = (min(a, b), max(a, b))
+                        occ[k] += 1
+                        sides[k].add(int(r.state_lgd))
+    edges = [k for k, n in occ.items() if (n == 1 and next(iter(sides[k])) in state_codes) or (len(sides[k]) >= 2 and sides[k] & state_codes)]
+    adj = collections.defaultdict(list)
+    for a, b in edges:
+        adj[a].append(b)
+        adj[b].append(a)
+    seen, out = set(), []
+
+    def walk(start, nxt):
+        line, prev, cur = [start], start, nxt
+        while True:
+            line.append(cur)
+            seen.add((min(prev, cur), max(prev, cur)))
+            if len(adj[cur]) != 2:
+                return line
+            n2 = [x for x in adj[cur] if x != prev and (min(cur, x), max(cur, x)) not in seen]
+            if not n2:
+                return line
+            prev, cur = cur, n2[0]
+
+    for node, nb in list(adj.items()):
+        if len(nb) != 2:
+            for x in nb:
+                if (min(node, x), max(node, x)) not in seen:
+                    out.append(walk(node, x))
+    for a, b in edges:                                                             # closed loops with no junction
+        if (min(a, b), max(a, b)) not in seen:
+            out.append(walk(a, b))
+    d = []
+    for line in out:
+        pts = rdp(np.array(line, float), tol)
+        if len(pts) < 2:
+            continue
+        xy = [project(lon, lat) for lon, lat in pts]
+        xy = [xy[0]] + [p for i, p in enumerate(xy[1:], 1) if p != xy[i - 1]]
+        if len(xy) < 2:
+            continue
+        d.append("M%d %d" % xy[0] + "l" + " ".join("%d %d" % (b[0] - a[0], b[1] - a[1]) for a, b in zip(xy, xy[1:])))
+    return "".join(d)
+
+
 def tolerance(area_deg2):
     return 0.0015 if area_deg2 < 0.05 else 0.003 if area_deg2 < 0.4 else 0.005
 
@@ -141,7 +222,7 @@ def main():
     pad = 400
     vb = [min(xs) - pad, min(ys) - pad, max(xs) - min(xs) + 2 * pad, max(ys) - min(ys) + 2 * pad]
     prov = json.loads(PROVENANCE.read_text(encoding="utf-8"))
-    data = {"viewBox": vb, "backdrop": "".join(back), "districts": districts, "others": [], "states": list(C.STATES), "sectors": list(C.SECTORS), "horizons": list(HORIZONS), "targets": ["E", "V", "S", "D"],
+    data = {"viewBox": vb, "backdrop": "".join(back), "borders": borders(t, set(C.STATES.values())), "districts": districts, "others": [], "states": list(C.STATES), "sectors": list(C.SECTORS), "horizons": list(HORIZONS), "targets": ["E", "V", "S", "D"],
             "layout": "values[code][sector_index][measure_index]: E, V, S = [last_observed, forecast_h1, forecast_h2, forecast_h3, lo_h1, hi_h1, lo_h2, hi_h2, lo_h3, hi_h3]; D (Demand Index) = [december_2025, h1, h2, h3]",
             "confidence": confidence(), "values": values(codes), "origin": C.ORIGIN,
             "source": {"credit": prov["source"]["credit"], "licence": prov["source"]["licence"], "sha256": hashlib.sha256(LGD.read_bytes()).hexdigest()}}

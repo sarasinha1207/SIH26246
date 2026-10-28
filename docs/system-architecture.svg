@@ -26,7 +26,7 @@
 
   <rect class="band" x="20" y="196" width="960" height="150" rx="14"/><text class="bl" x="34" y="216">DELIVERY, HOSTED ON VERCEL</text>
   <rect class="hi" x="40" y="228" width="200" height="100" rx="10"/><text class="t" x="56" y="254">Website</text><text class="s" x="56" y="274">home, about, resources</text><text class="s" x="56" y="292">map of 317 districts</text><text class="s" x="56" y="310">API page</text>
-  <rect class="hi" x="260" y="228" width="200" height="100" rx="10"/><text class="t" x="276" y="254">Dashboard</text><text class="s" x="276" y="274">7 pages, 4 filters</text><text class="s" x="276" y="292">CSV and JSON downloads</text><text class="s" x="276" y="310">state data loaded on demand</text>
+  <rect class="hi" x="260" y="228" width="200" height="100" rx="10"/><text class="t" x="276" y="254">Dashboard</text><text class="s" x="276" y="274">8 pages incl. map, 4 filters</text><text class="s" x="276" y="292">CSV and JSON downloads</text><text class="s" x="276" y="310">state data loaded on demand</text>
   <rect class="hi" x="480" y="228" width="200" height="100" rx="10"/><text class="t" x="496" y="254">Assistant</text><text class="s" x="496" y="274">answers in the browser</text><text class="s" x="496" y="292">/api/chat function</text><text class="s" x="496" y="310">optional Gemini wording</text>
   <rect class="hi" x="700" y="228" width="260" height="100" rx="10"/><text class="t" x="716" y="254">Forecast API</text><text class="s" x="716" y="274">/api/forecast, /flags, /demand-index,</text><text class="s" x="716" y="292">/capacity-gap, /meta: GET only,</text><text class="s" x="716" y="310">rate limited, standard library</text>
 

@@ -80,7 +80,7 @@
     { k: ["alert", "watch", "flag", "early warning", "early-warning", "warning", "decile", "percentile", "tightest", "loosest", "relative"], a: function () {
       return reply("In each trade and month, districts are ranked by forecast vacancies per registered seeker. The top tenth is a shortage alert and the bottom tenth an oversupply alert; the next fifteen per cent on either side is a watch. A flag is relative: it says which districts stand out, not that openings exceed seekers. In testing, alerts one to twelve months ahead were right about seven times in ten, against a base rate of one in ten.", { links: [dashLink("warnings", {}, "Open Early warnings")] }); } },
     { k: ["dashboard", "open the dash", "where can i see", "pages"], when: "pub", a: function () {
-      return reply("The dashboard has seven pages: Overview, Forecast, Demand Index, Capacity gap, Rankings, Early warnings, and Data and notes. Filters for sector, trade, state and district stay in the address, so any view can be shared, and every page can be downloaded as CSV or JSON.", { links: [site("dashboard/index.html", "Open the dashboard")] }); } },
+      return reply("The dashboard has eight pages: Overview, Map, Forecast, Demand Index, Capacity gap, Rankings, Early warnings, and Data and notes. Filters for sector, trade, state and district stay in the address, so any view can be shared, and every page can be downloaded as CSV or JSON.", { links: [site("dashboard/index.html", "Open the dashboard")] }); } },
     { k: ["data source", "where from", "where does the data", "dataset", "columns", "variables", "resource", "acquired", "download data"], when: "pub", a: function () {
       return reply("The Resources page lists the data behind the project and the websites it was modelled on, and the About page describes the dataset and its columns.", { links: [site("resources.html#datasets", "Data sources"), site("about.html#dataset", "Dataset details")] }); } },
     { k: ["language", "hindi", "text size", "font", "dark", "light", "theme", "display"], a: function () {
@@ -101,6 +101,7 @@
   /* ---------- the dashboard: questions answered from window.DASH4 and DASH4_ALERTS ---------- */
   var PAGE_HELP = {
     overview: "Employed workers, vacancies, job seekers and the Demand Index with their forecasts to 2030, a states table, the early-warning summary and a table of trades. Click a state or a trade to filter.",
+    map: "The 317 districts on a map, coloured by vacancies, employed workers, job seekers or the Demand Index 12, 36 or 60 months ahead, with the states, the highest and lowest districts and where the alerts are.",
     forecast: "Five-year forecasts of employed workers, vacancies or seekers with a usual and a wider 90% range, December values and a trade table.",
     index: "The Demand Index (0 to 100) over time, states by sector or trade, and the districts with the highest and lowest index in a sector.",
     capacity: "Forecast openings against training seats and expected certified trainees by year, and by trade or state.",
@@ -108,7 +109,7 @@
     warnings: "Every shortage and oversupply alert 12, 36 or 60 months ahead, with confidence labels, for the current filters.",
     data: "Coverage of the dataset, how often the ranges held in testing, how accurate the alerts were, definitions and the notes on limits."
   };
-  var PAGE_NAMES = { overview: ["overview", "home"], forecast: ["forecast"], index: ["demand index", "index"], capacity: ["capacity", "capacity gap"], ranking: ["rankings", "ranking"], warnings: ["warnings", "early warnings", "alerts page"], data: ["data and notes", "notes", "data page"] };
+  var PAGE_NAMES = { overview: ["overview", "home"], map: ["map"], forecast: ["forecast"], index: ["demand index", "index"], capacity: ["capacity", "capacity gap"], ranking: ["rankings", "ranking"], warnings: ["warnings", "early warnings", "alerts page"], data: ["data and notes", "notes", "data page"] };
 
   function hashState() {
     var h = (root.location ? root.location.hash : "").replace(/^#\/?/, ""), q = h.split("?"), p = {};

@@ -216,3 +216,13 @@ ul.plain { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; color: var(-
 .tbl tbody th { font: inherit; text-align: left; text-transform: none; letter-spacing: 0; color: inherit; padding: 9px 12px; vertical-align: top; }
 .tbl tbody tr.click:focus-visible { outline: 2px solid var(--demand); outline-offset: -2px; }
 .map-find { margin-top: 10px; }
+
+/* ---- v4: the map page ---- */
+.mborder { fill: none; stroke: color-mix(in srgb, var(--ink) 85%, transparent); stroke-width: 1.4; vector-effect: non-scaling-stroke; stroke-linejoin: round; pointer-events: none; }
+.mapbox { height: 560px; }
+.mapbox .m-chips { max-height: 96px; overflow: auto; }
+.mdist:hover { stroke: var(--ink); stroke-width: 1.4; }
+.mhl { stroke-width: 2.6; }
+@media (max-width: 900px) { .mapbox { height: 440px; } }
+
+.m-chips button { padding: 7px 11px; }
