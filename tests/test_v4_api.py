@@ -27,7 +27,7 @@ import _guard  # noqa: E402
 _guard.skip_module_unless(APP / "dashboard" / "data" / "core.js", EXP / "forecast_rollups.csv.gz", why="needs the v4 dashboard data and the phase 6 exports")
 import _v4api as A  # noqa: E402
 
-ENDPOINTS = ["forecast", "flags", "demand-index", "capacity-gap", "meta"]
+ENDPOINTS = ["forecast", "flags", "demand-index", "capacity-gap", "severity", "meta"]
 
 
 def call(endpoint, qs="", ip="10.0.0.1", method="GET", limiter=None):
@@ -99,6 +99,39 @@ def test_demand_index_and_capacity_gap_equal_the_exports():
     assert d["level"] == "series" and len(d["data"]) == 5 and d["data"][0]["seats"] > 0
     code, _, m = call("meta")
     assert len(m["districts"]) == 317 and len(m["trades"]) == 25 and len(m["states"]) == 10 and m["measures"]["E"] == "employed_workers" and m["files"]
+
+
+def test_severity_ranking_equals_the_capacity_tables_and_orders_correctly():
+    import math
+    cap = pd.read_csv(EXP / "capacity_gap_trade.csv")
+    code, _, d = call("severity", "level=trade&order=under&year=2030&limit=25")
+    assert code == 200 and d["total"] == 25 and d["data"][0]["rank"] == 1 and d["order"] == "under"
+    for r in d["data"]:
+        c = cap[(cap.Trade_Code == r["trade"]) & (cap.year == 2030)].iloc[0]
+        assert abs(r["certified_per_opening"] - c.supply_per_opening) < 1e-3 and abs(r["score"] - math.log(c.supply_per_opening)) < 2e-3 and abs(r["average_monthly_openings"] - c.avg_vacancies) < 0.2
+        assert r["direction"] == ("undersupply" if r["score"] < 0 else "oversupply") or r["severity"] == "balanced"
+        assert r["severity"] == next((n for n, v in A.core()["meta"]["severity_bands"] if abs(r["score"]) >= v), "balanced")
+    sc = [r["score"] for r in d["data"]]
+    assert sc == sorted(sc)
+    over = call("severity", "level=trade&order=over&limit=25")[2]["data"]
+    assert [r["score"] for r in over] == sorted([r["score"] for r in over], reverse=True) and {r["trade"] for r in over} == {r["trade"] for r in d["data"]}
+    big = call("severity", "level=trade&order=severity&limit=25")[2]["data"]
+    assert [abs(r["score"]) for r in big] == sorted([abs(r["score"]) for r in big], reverse=True)
+    st = pd.read_csv(EXP / "capacity_gap_state_trade.csv")
+    code, _, d = call("severity", "level=state_trade&sector=Construction&year=2026&limit=500")
+    assert d["total"] == 50 and all(abs(r["certified_per_opening"] - st[(st.State_Name == r["state"]) & (st.Trade_Code == r["trade"]) & (st.year == 2026)].supply_per_opening.iloc[0]) < 1e-3 for r in d["data"])
+    ser = pd.read_parquet(EXP / "capacity_series.parquet") if (EXP / "capacity_series.parquet").exists() else None
+    if ser is not None:
+        code, _, d = call("severity", "level=district_sector&sector=Healthcare&limit=500")
+        assert d["total"] == 317
+        r = d["data"][0]
+        g = ser[(ser.District_LGD_Code == r["district_lgd"]) & (ser.Sector_Name == "Healthcare") & (ser.year == 2030)]
+        assert abs(r["average_monthly_openings"] - g.avg_vacancies.sum()) < 0.2 and abs(r["seats"] - g.seats.sum()) < 1
+        code, _, d = call("severity", "level=district&state=Kerala&limit=100")
+        assert d["total"] == 14
+    code, _, d = call("severity", "level=series&state=Kerala&limit=3")
+    assert d["total"] == 14 * 25 or d["total"] > 300
+    assert call("severity", "level=series")[0] == 400 and call("severity", "level=district&trade=HLT-2221")[0] == 400 and call("severity", "order=sideways")[0] == 400 and call("severity", "year=2026,2027")[0] == 400
 
 
 # ---- what it refuses ----------------------------------------------------------------------------------------------------------------------------------
@@ -230,11 +263,11 @@ def test_the_api_page_documents_every_endpoint_and_parameter():
     for ep in ENDPOINTS:
         assert f"<code>/api/{ep}</code>" in main, ep
     src = (APP / "api" / "_v4api.py").read_text(encoding="utf-8")
-    for fn, name in (("api_forecast", "forecast"), ("api_flags", "flags"), ("api_demand_index", "demand-index"), ("api_capacity_gap", "capacity-gap")):
-        allowed = re.search(rf"def {fn}\(q\):\n    q = parse_query\(q, \(([^)]*)\)", src).group(1)
+    for fn, name in (("api_forecast", "forecast"), ("api_flags", "flags"), ("api_demand_index", "demand-index"), ("api_capacity_gap", "capacity-gap"), ("api_severity", "severity")):
+        allowed = re.search(rf'def {fn}\(q\):\n(?:    """.*\n)?    q = parse_query\(q, \(([^)]*)\)', src).group(1)
         for p in re.findall(r'"(\w+)"', allowed):
             assert f"<code>{p}</code>" in main, (name, p)                                   # every accepted parameter is documented
-    for p in ("measure", "horizon", "detail", "type", "resolution", "limit", "offset", "state", "district", "sector", "trade"):
+    for p in ("measure", "horizon", "detail", "type", "resolution", "limit", "offset", "state", "district", "sector", "trade", "level", "order", "year"):
         assert f"<code>{p}</code>" in main, p
     for status in ("200", "400", "404", "405", "429"):
         assert f"<code>{status}</code>" in main, status

@@ -6,11 +6,11 @@
       <h1>Forecast API</h1>
       <p class="lead">The same numbers as the dashboard, as plain JSON.</p>
       <div class="hero-text">
-        <p>The API is read-only and open: no key and no login. It serves the 2026 to 2030 forecasts, the early-warning alerts, the Demand Index and the capacity gap, with the same filters as the dashboard: state, district, sector and trade.</p>
+        <p>The API is read-only and open: no key and no login. It serves the 2026 to 2030 forecasts, the early-warning alerts, the Demand Index, the capacity gap and the severity ranking, with the same filters as the dashboard: state, district, sector and trade.</p>
         <p>Every response says that the data is <strong>simulated</strong>. It behaves like official statistics but describes no real district, and it is not an official statistic.</p>
       </div>
       <ul class="hero-chips">
-        <li><b>5</b><span>endpoints</span></li>
+        <li><b>6</b><span>endpoints</span></li>
         <li><b>4</b><span>filters</span></li>
         <li><b>60</b><span>months ahead</span></li>
         <li><b>60</b><span>requests a minute</span></li>
@@ -32,6 +32,7 @@
             <tr><td translate="no"><code>/api/flags</code></td><td>Early-warning alerts 12, 36 or 60 months ahead, or the flag of every month for one district and trade.</td><td translate="no"><code>state</code>, <code>district</code>, <code>sector</code>, <code>trade</code>, <code>horizon</code>, <code>type</code>, <code>months</code>, <code>limit</code>, <code>offset</code></td><td><a class="ulink" href="{P}api/flags?state=Kerala&amp;horizon=12&amp;limit=5">Kerala, 12 months</a></td></tr>
             <tr><td translate="no"><code>/api/demand-index</code></td><td>The Demand Index from 0 to 100, from 2016 to 2030 (December values, or every month).</td><td translate="no"><code>state</code>, <code>district</code>, <code>sector</code>, <code>trade</code>, <code>from</code>, <code>to</code>, <code>resolution</code></td><td><a class="ulink" href="{P}api/demand-index?state=Kerala&amp;sector=Healthcare">Kerala, Healthcare</a></td></tr>
             <tr><td translate="no"><code>/api/capacity-gap</code></td><td>Forecast openings against training seats and expected certified trainees, by year.</td><td translate="no"><code>state</code>, <code>district</code>, <code>sector</code>, <code>trade</code>, <code>year</code></td><td><a class="ulink" href="{P}api/capacity-gap?sector=Construction">Construction</a></td></tr>
+            <tr><td translate="no"><code>/api/severity</code></td><td>Trades and places ranked by how far trained supply is from the openings: a score, a band (severe, high, moderate, balanced) and the direction (undersupply or oversupply).</td><td translate="no"><code>state</code>, <code>district</code>, <code>sector</code>, <code>trade</code>, <code>level</code>, <code>year</code>, <code>order</code>, <code>limit</code>, <code>offset</code></td><td><a class="ulink" href="{P}api/severity?level=trade&amp;order=under&amp;limit=5">Most undersupplied trades</a></td></tr>
             <tr><td translate="no"><code>/api/meta</code></td><td>The valid states, districts (with LGD codes), sectors and trades, the forecast origin and the checksums of the files behind the numbers.</td><td>None.</td><td><a class="ulink" href="{P}api/meta">Lists and checksums</a></td></tr>
           </tbody>
         </table>
@@ -56,6 +57,7 @@
             <tr><td translate="no"><code>measure</code></td><td><code>E</code> (employed workers), <code>V</code> (job vacancies), <code>S</code> (registered job seekers), several separated by commas, or <code>all</code> (the default).</td></tr>
             <tr><td translate="no"><code>horizon</code></td><td>Months ahead from 1 to 60, several separated by commas, or <code>all</code>. The default is 12, 36 and 60. For flags: 12, 36 or 60.</td></tr>
             <tr><td translate="no"><code>detail</code></td><td><code>aggregate</code> (the default: one total for the filters) or <code>series</code> (every district and trade series, with <code>limit</code> up to 200 and <code>offset</code>).</td></tr>
+            <tr><td translate="no"><code>level</code>, <code>order</code>, <code>year</code></td><td>For severity: <code>level</code> is <code>trade</code> (the default), <code>state</code>, <code>state_trade</code>, <code>district</code>, <code>district_sector</code> or <code>series</code> (needs a state or a district); <code>order</code> is <code>under</code> (most undersupplied first, the default), <code>over</code> or <code>severity</code> (largest gap either way); <code>year</code> is one year from 2026 to 2030 (the default is 2030). For the capacity gap, <code>year</code> may be several years.</td></tr>
             <tr><td translate="no"><code>type</code></td><td>For flags: <code>shortage</code>, <code>oversupply</code> or <code>all</code>.</td></tr>
             <tr><td translate="no"><code>from</code>, <code>to</code>, <code>resolution</code></td><td>For the Demand Index: months like 2026-12, and <code>annual</code> (December of each year, the default) or <code>monthly</code>.</td></tr>
           </tbody>

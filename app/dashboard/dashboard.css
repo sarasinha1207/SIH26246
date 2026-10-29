@@ -226,3 +226,10 @@ ul.plain { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; color: var(-
 @media (max-width: 900px) { .mapbox { height: 440px; } }
 
 .m-chips button { padding: 7px 11px; }
+
+/* ---- v4: the severity ranking ---- */
+.sev { display: inline-block; width: 64px; height: 8px; margin-left: 8px; border-radius: 4px; background: var(--line); vertical-align: middle; overflow: hidden; }
+.sev i { display: block; height: 100%; background: var(--low); border-radius: 4px; }
+.sev i.over { background: var(--supply); }
+.seg-wrap { display: flex; flex-wrap: wrap; gap: 8px 14px; margin: 4px 0 12px; }
+.sub-h { font-size: 1.05rem; margin: 26px 0 12px; }

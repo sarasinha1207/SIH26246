@@ -109,6 +109,40 @@
     "Name": "नाम",
     "No calibrated 90% range exists for this combination of filters, so only the point forecast is drawn. Choose a sector, state, state with sector, or a district with a sector or trade for a range.": "फ़िल्टर के इस संयोजन के लिए कोई जाँचा हुआ 90% दायरा नहीं है, इसलिए केवल बिंदु पूर्वानुमान दिखाया गया है। दायरे के लिए सेक्टर, राज्य, सेक्टर सहित राज्य, या सेक्टर/ट्रेड सहित ज़िला चुनें।",
     "Open": "खोलें",
+    "Where trained supply and openings are furthest apart": "जहाँ प्रशिक्षित आपूर्ति और रिक्तियों में सबसे अधिक अंतर है",
+    "Severity ranking": "गंभीरता क्रम",
+    "Where trained supply is furthest from the openings, for the filters above. Undersupply: fewer people finish training in a year than there are openings. Oversupply: more.": "ऊपर के फ़िल्टर के लिए, जहाँ प्रशिक्षित आपूर्ति रिक्तियों से सबसे दूर है। कम आपूर्ति: एक वर्ष में रिक्तियों से कम लोग प्रशिक्षण पूरा करते हैं। अधिक आपूर्ति: अधिक लोग।",
+    "State and trade": "राज्य और ट्रेड",
+    "Districts": "ज़िले",
+    "District and sector": "ज़िला और सेक्टर",
+    "District and trade": "ज़िला और ट्रेड",
+    "Undersupplied first": "कम आपूर्ति पहले",
+    "Oversupplied first": "अधिक आपूर्ति पहले",
+    "Largest gap first": "सबसे बड़ा अंतर पहले",
+    "Rank": "क्रम",
+    "Order": "क्रमबद्ध",
+    "Rows": "पंक्तियाँ",
+    "Choose a state or a district in the filters to rank the district and trade series.": "ज़िला और ट्रेड श्रृंखलाओं का क्रम देखने के लिए फ़िल्टर में राज्य या ज़िला चुनें।",
+    "Nothing to rank for these filters. Clear the trade filter for district levels, and the district filter for trades.": "इन फ़िल्टर के लिए क्रम में रखने को कुछ नहीं है। ज़िला स्तर के लिए ट्रेड फ़िल्टर और ट्रेड के लिए ज़िला फ़िल्टर हटाएँ।",
+    "Score": "अंक",
+    "Severity": "गंभीरता",
+    "Openings": "रिक्तियाँ",
+    "Change since 2026": "2026 से बदलाव",
+    "Place": "स्थान",
+    "Showing {0} of {1}.": "{1} में से {0} दिखाई गई हैं।",
+    "Top 25": "शीर्ष 25",
+    "Top 100": "शीर्ष 100",
+    "All": "सभी",
+    "ln(expected certified per year ÷ average monthly openings of the year). Below 0 undersupply, above 0 oversupply. Severe: a ratio of 2 or more either way; high: 1.5; moderate: 1.25.": "ln(प्रति वर्ष अपेक्षित प्रमाणित ÷ उस वर्ष की औसत मासिक रिक्तियाँ)। 0 से कम पर कम आपूर्ति, 0 से अधिक पर अधिक आपूर्ति। गंभीर: दोनों ओर 2 या उससे अधिक का अनुपात; उच्च: 1.5; मध्यम: 1.25।",
+    "Seats are held flat at the 2025-26 level, and openings are a monthly stock against an annual flow, so read this as a ranking, not a count of unfilled places.": "सीटें 2025-26 के स्तर पर स्थिर मानी गई हैं, और रिक्तियाँ मासिक स्टॉक हैं जबकि प्रमाणन वार्षिक प्रवाह, इसलिए इसे क्रम के रूप में पढ़ें, खाली स्थानों की गिनती के रूप में नहीं।",
+    "Other rankings for all of India": "पूरे भारत के अन्य क्रम",
+    "Balanced": "संतुलित",
+    "Severe undersupply": "गंभीर कम आपूर्ति",
+    "High undersupply": "उच्च कम आपूर्ति",
+    "Moderate undersupply": "मध्यम कम आपूर्ति",
+    "Severe oversupply": "गंभीर अधिक आपूर्ति",
+    "High oversupply": "उच्च अधिक आपूर्ति",
+    "Moderate oversupply": "मध्यम अधिक आपूर्ति",
     "Map": "मानचित्र",
     "Districts and states on the map": "मानचित्र पर ज़िले और राज्य",
     "Map of {0} districts coloured by {1}": "{0} ज़िलों का मानचित्र, {1} से रंगा हुआ",
@@ -233,7 +267,7 @@
   var tf = function (s) { var a = Array.prototype.slice.call(arguments, 1); return t(s).replace(/\{(\d)\}/g, function (_, i) { return a[+i]; }); };
   var PAGES = {
     overview: ["Overview", "Where employment, vacancies and seekers are heading to 2030"], map: ["Map", "Districts and states on the map"], forecast: ["Forecast", "Five-year forecasts with 90% ranges"], index: ["Demand Index", "How strong hiring demand is, from 0 to 100"],
-    capacity: ["Capacity gap", "Forecast openings against training seats"], ranking: ["Rankings", "Trades, states and districts compared"], warnings: ["Early warnings", "Districts forecast to be short of workers or in surplus"], data: ["Data and notes", "Method, limits and downloads"]
+    capacity: ["Capacity gap", "Forecast openings against training seats"], ranking: ["Rankings", "Where trained supply and openings are furthest apart"], warnings: ["Early warnings", "Districts forecast to be short of workers or in surplus"], data: ["Data and notes", "Method, limits and downloads"]
   };
   var TR = {}, TIX = {}, DNAME = {}, DSTATE = {}, DLIST = [];
   TRADES.forEach(function (x, i) { TR[x.c] = x; TIX[x.c] = i; });
@@ -569,16 +603,80 @@
     });
   }
 
+  /* ---------- the severity ranking: trades and places in order of how far trained supply is from the openings ----------
+     score = ln(expected certified per year / average monthly openings of the year): below 0 undersupply, above 0 oversupply; bands from core.js (severity_bands) */
+  var SEV_LEVELS = [["trade", "Trades"], ["state", "States"], ["state_trade", "State and trade"], ["district", "Districts"], ["district_sector", "District and sector"], ["series", "District and trade"]];
+  function severityRows(p, level) {
+    var C = D.capacity, raw = [], keepT = function (code) { return (!p.trade || code === p.trade) && (!p.sector || TR[code].s === p.sector); };
+    var vac = function (rows) { return [2026, 2027, 2028, 2029, 2030].map(function (y) { return rows[y].avg_vacancies; }); };
+    var by = function (tab, keyf) { var o = {}; tab.forEach(function (r) { var k = keyf(r); (o[k] = o[k] || { rows: {}, r: r }).rows[r.year] = r; }); return o; };
+    if (level === "trade" && !p.state && !p.district) {
+      var g = by(C.trade, function (r) { return r.Trade_Code; });
+      Object.keys(g).forEach(function (c) { if (keepT(c)) raw.push({ name: TR[c].n, place: TR[c].s, at: { trade: c }, seats: g[c].rows[2026].seats, cert: g[c].rows[2026].expected_certified, vac: vac(g[c].rows) }); });
+    } else if (level === "state" && !p.district && !p.sector && !p.trade) {
+      var gs = by(C.state, function (r) { return r.State_Name; });
+      Object.keys(gs).forEach(function (st) { if (!p.state || p.state === st) raw.push({ name: st, place: "", at: { state: st }, seats: gs[st].rows[2026].seats, cert: gs[st].rows[2026].expected_certified, vac: vac(gs[st].rows) }); });
+    } else if (level === "state_trade" && !p.district) {
+      var gt = by(C.state_trade, function (r) { return r.State_Name + "|" + r.Trade_Code; });
+      Object.keys(gt).forEach(function (k) { var st = k.split("|")[0], c = k.split("|")[1]; if ((!p.state || p.state === st) && keepT(c)) raw.push({ name: TR[c].n, place: st, at: { state: st, trade: c }, seats: gt[k].rows[2026].seats, cert: gt[k].rows[2026].expected_certified, vac: vac(gt[k].rows) }); });
+    } else if ((level === "district" || level === "district_sector") && !p.trade) {
+      var agg = {};
+      Object.keys(D.severity_district_sector).forEach(function (k) {
+        var d = k.split("|")[0], sec = k.split("|")[1], v = D.severity_district_sector[k];
+        if ((p.state && DSTATE[d] !== p.state) || (p.district && d !== p.district) || (p.sector && sec !== p.sector)) return;
+        if (level === "district") { var a = agg[d] = agg[d] || { seats: 0, cert: 0, vac: [0, 0, 0, 0, 0] }; a.seats += v[0]; a.cert += v[1]; a.vac = a.vac.map(function (x, i) { return x + v[2 + i]; }); }
+        else agg[k] = { seats: v[0], cert: v[1], vac: v.slice(2), sec: sec, d: d };
+      });
+      Object.keys(agg).forEach(function (k) { var d = level === "district" ? k : agg[k].d; raw.push({ name: DNAME[d], place: level === "district" ? DSTATE[d] : DSTATE[d] + " · " + agg[k].sec, at: level === "district" ? { district: d } : { district: d, sector: agg[k].sec }, seats: agg[k].seats, cert: agg[k].cert, vac: agg[k].vac }); });
+    } else if (level === "series" && p.state) {
+      return shard(p.state).then(function (sh) {
+        var out = [];
+        sh.ids.forEach(function (_, i) { var c = TRADES[sh.t[i]].c, d = String(sh.d[i]); if ((p.district && d !== p.district) || !keepT(c)) return; out.push({ name: DNAME[d], place: TR[c].n, at: { district: d, trade: c }, seats: sh.cap.seats[i], cert: sh.cap.cert[i], vac: sh.cap.vac[i] }); });
+        return out;
+      });
+    }
+    return Promise.resolve(raw);
+  }
+  function scoreRows(raw, y) {
+    var bands = M.severity_bands, out = [];
+    raw.forEach(function (r) {
+      var v = r.vac[y - 2026]; if (!(v > 0) || !(r.vac[0] > 0)) return;
+      var ratio = Math.max(r.cert / v, 1e-3), sc = Math.log(ratio), a = Math.abs(sc), band = "balanced";
+      for (var i = 0; i < bands.length; i++) if (a >= bands[i][1]) { band = bands[i][0]; break; }
+      out.push(Object.assign({}, r, { v: v, ratio: ratio, score: sc, band: band, dir: band === "balanced" ? "balanced" : sc < 0 ? "under" : "over", s26: Math.log(Math.max(r.cert / r.vac[0], 1e-3)) }));
+    });
+    return out;
+  }
+
   render.ranking = function (p, view) {
+    var level = SEV_LEVELS.some(function (l) { return l[0] === p.sl; }) ? p.sl : "trade", order = ["under", "over", "severity"].indexOf(p.so) >= 0 ? p.so : "under", y = [2026, 2027, 2028, 2029, 2030].indexOf(+p.sy) >= 0 ? +p.sy : 2030, nShow = p.sn === "all" ? 1e9 : p.sn === "100" ? 100 : 25;
     var by = {}; D.rankings.forEach(function (r) { (by[r.ranking] = by[r.ranking] || []).push(r); });
     var keyName = function (k) { return k.split(" | ").map(function (q) { return TR[q] ? TR[q].n + " (" + q + ")" : q; }).join(", "); };
-    view.innerHTML = '<div class="grid g2">' + Object.keys(by).map(function (title) {
-      return '<section class="card"><div class="card-h"><div><h2 style="font-size:.98rem">' + esc(title) + "</h2></div></div>" +
-        table([["#", "num"], ["Name"], ["Value", "num"]], by[title].map(function (r) { return '<tr><td class="num">' + r.rank + "</td><td>" + esc(keyName(r.key)) + (r.detail ? "<br><small>" + esc(r.detail) + "</small>" : "") + '</td><td class="num">' + fmt(r.value, 2) + "</td></tr>"; })) + "</section>";
-    }).join("") + "</div><p class=\"note\">" + t("Rankings are computed once for all of India and do not follow the filters.") + "</p>";
-    cur.csv = { name: "kaushalsetu_rankings", head: ["ranking", "rank", "key", "value", "detail"], rows: D.rankings.map(function (r) { return [r.ranking, r.rank, r.key, r.value, r.detail]; }) };
-    return Promise.resolve();
+    return severityRows(p, level).then(function (raw) {
+      var rows = scoreRows(raw, y), key = { under: function (r) { return r.score; }, over: function (r) { return -r.score; }, severity: function (r) { return -Math.abs(r.score); } }[order];
+      rows.sort(function (a, b) { return key(a) - key(b) || (a.name < b.name ? -1 : 1); }); rows.forEach(function (r, i) { r.rank = i + 1; });
+      var need = level === "series" && !p.state, shown = rows.slice(0, nShow);
+      var pill = function (r) { return '<span class="pill ' + (r.dir === "under" ? "alert" : r.dir === "over" ? "s4" : "s2") + '">' + t(r.dir === "balanced" ? "Balanced" : cap1(r.band) + " " + (r.dir === "under" ? "undersupply" : "oversupply")) + "</span>"; };
+      var bar = function (r) { return '<span class="sev" aria-hidden="true"><i class="' + (r.dir === "over" ? "over" : "") + '" style="width:' + Math.min(100, Math.abs(r.score) / 2 * 100).toFixed(0) + '%"></i></span>'; };
+      var attrs = function (a) { return Object.keys(a).map(function (k) { return " data-" + k + '="' + esc(a[k]) + '"'; }).join(""); };
+      view.innerHTML = scopeHead(p, "") + '<section class="card"><div class="card-h"><div><h2>' + t("Severity ranking") + "</h2><p>" + t("Where trained supply is furthest from the openings, for the filters above. Undersupply: fewer people finish training in a year than there are openings. Oversupply: more.") + "</p></div></div>" +
+        '<div class="seg-wrap">' + segment("sl", SEV_LEVELS.map(function (l) { return [l[0], t(l[1])]; }), level, "Rank") + segment("so", [["under", t("Undersupplied first")], ["over", t("Oversupplied first")], ["severity", t("Largest gap first")]], order, "Order") +
+        segment("sy", [2026, 2027, 2028, 2029, 2030].map(function (x) { return [x, String(x)]; }), y, "Year") + "</div>" +
+        (need ? '<p class="note">' + t("Choose a state or a district in the filters to rank the district and trade series.") + "</p>" : (shown.length ? table([["#", "num"], ["Name"], ["Place"], ["Certified per opening", "num"], ["Score"], ["Severity"], ["Openings", "num"], ["Seats", "num"], ["Change since 2026", "num"]], shown.map(function (r) {
+          return '<tr class="click"' + attrs(r.at) + '><td class="num">' + r.rank + "</td><td>" + esc(r.name) + "</td><td>" + esc(r.place) + '</td><td class="num">' + fmt(r.ratio, 2) + '</td><td class="num">' + (r.score > 0 ? "+" : "−") + Math.abs(r.score).toFixed(2) + " " + bar(r) + "</td><td>" + pill(r) + '</td><td class="num">' + compact(r.v) + '</td><td class="num">' + compact(r.seats) + '</td><td class="num">' + ((r.score - r.s26) >= 0 ? "+" : "−") + Math.abs(r.score - r.s26).toFixed(2) + "</td></tr>"; })) : '<p class="note">' + t("Nothing to rank for these filters. Clear the trade filter for district levels, and the district filter for trades.") + "</p>")) +
+        (rows.length > shown.length ? '<p class="note">' + tf("Showing {0} of {1}.", shown.length, fmt(rows.length)) + "</p>" : "") +
+        segment("sn", [["25", t("Top 25")], ["100", t("Top 100")], ["all", t("All")]], p.sn === "all" ? "all" : p.sn === "100" ? "100" : "25", "Rows") +
+        '<p class="note"><b>' + t("Score") + ":</b> " + t("ln(expected certified per year ÷ average monthly openings of the year). Below 0 undersupply, above 0 oversupply. Severe: a ratio of 2 or more either way; high: 1.5; moderate: 1.25.") + " " + t("Seats are held flat at the 2025-26 level, and openings are a monthly stock against an annual flow, so read this as a ranking, not a count of unfilled places.") + "</p></section>" +
+        '<h2 class="sub-h">' + t("Other rankings for all of India") + '</h2><div class="grid g2">' + Object.keys(by).map(function (title) {
+          return '<section class="card"><div class="card-h"><div><h2 style="font-size:.98rem">' + esc(title) + "</h2></div></div>" +
+            table([["#", "num"], ["Name"], ["Value", "num"]], by[title].map(function (r) { return '<tr><td class="num">' + r.rank + "</td><td>" + esc(keyName(r.key)) + (r.detail ? "<br><small>" + esc(r.detail) + "</small>" : "") + '</td><td class="num">' + fmt(r.value, 2) + "</td></tr>"; })) + "</section>";
+        }).join("") + "</div>";
+      bindSeg(view); bindRows(view);
+      cur.csv = { name: fname("severity_" + level + "_" + y), head: ["rank", "name", "place", "level", "year", "seats", "average_monthly_openings", "expected_certified", "certified_per_opening", "score", "severity", "direction", "score_2026"],
+        rows: rows.map(function (r) { return [r.rank, r.name, r.place, level, y, r.seats, +r.v.toFixed(1), +r.cert.toFixed(1), +r.ratio.toFixed(3), +r.score.toFixed(3), r.band, r.dir === "under" ? "undersupply" : r.dir === "over" ? "oversupply" : "balanced", +r.s26.toFixed(3)]; }) };
+    });
   };
+  var cap1 = function (w) { return w.charAt(0).toUpperCase() + w.slice(1); };
 
   render.warnings = function (p, view) {
     var hzs = [12, 36, 60], hz = hzs.indexOf(+p.h) >= 0 ? hzs.indexOf(+p.h) : 0, ty = p.t === "0" || p.t === "1" ? +p.t : -1, all = alertsFor(p, hz), rows = all.filter(function (a) { return ty < 0 || a[0] === ty; });

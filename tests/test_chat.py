@@ -110,6 +110,17 @@ def test_dashboard_ranking_and_capacity_answers_equal_the_exports():
     assert f"({most.key})" in r[2]["list"][0], r[2]
 
 
+def test_severity_answers_equal_the_capacity_tables():
+    if not NODE:
+        return
+    cap = pd.read_csv(EXP / "capacity_gap_trade.csv")
+    c30 = cap[cap.year == 2030].sort_values("supply_per_opening")
+    r = ask("dash", ["Which trades are most undersupplied?", "most oversupplied trades"], {"page": "ranking", "p": {}})
+    assert f"{c30.iloc[0].supply_per_opening:,.2f} per opening" in r[0]["list"][0] and "severe undersupply" in r[0]["list"][0], r[0]["list"][0]
+    assert f"{c30.iloc[-1].supply_per_opening:,.2f} per opening" in r[1]["list"][0] and "oversupply" in r[1]["list"][0], r[1]["list"][0]
+    assert r[0]["links"][0]["href"].startswith("#/ranking")
+
+
 def test_dashboard_definitions_use_the_page_context():
     if not NODE:
         return

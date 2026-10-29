@@ -25,6 +25,9 @@ import pandas as pd
 import config as C
 
 SHORT, SURPLUS = -0.5, 0.5
+# Severity of a gap (the ranking of trades and places): score = ln(expected certified / average openings) = ln(certified per opening).  Below 0 the trained supply falls short of the openings
+# (undersupply), above 0 it exceeds them (oversupply).  The size of the score is banded by how far the ratio is from 1: at least 2 (or at most 1/2) severe, 1.5 high, 1.25 moderate, else balanced.
+SEVERITY_BANDS = (("severe", float(np.log(2))), ("high", float(np.log(1.5))), ("moderate", float(np.log(1.25))))
 YEARS = list(range(2026, 2031))
 AGG = {"series": ["Series_ID"], "state_sector": ["State_Name", "Sector_Name"], "state_trade": ["State_Name", "Trade_Code"], "state": ["State_Name"], "sector": ["Sector_Name"], "trade": ["Trade_Code"], "india": []}
 

@@ -75,6 +75,8 @@
       return reply("One XGBoost model per measure (employed workers, vacancies, job seekers) forecasts the change in the log of the level, with the number of months ahead as an input, for every horizon from 1 to 60 and averaged over three random starts. Its 82 inputs use only data known at the forecast date. Settings were tuned on 2010 to 2014 and scored once on 2015 to 2019 and once on 2020 to 2025. The five trades of a sector are reconciled so that totals add up.", { links: [site("about.html#engine", "Machine learning engine")] }); } },
     { k: ["demand index", "index", "0 to 100", "hiring demand"], a: function () {
       return reply("The Demand Index is a number from 0 to 100 for a district and trade in a month. It compares openings per worker (from vacancies, job-portal postings and the National Career Service) with the other districts of the same trade, plus a national level term so that it moves over the years. 50 is the median district at the 2018 to 2019 level; 84 is one standard deviation above and 16 one below. Forecast months use the forecast vacancies only.", { links: [dashLink("index", {}, "Open the Demand Index"), site("about.html#measures", "How it is built")] }); } },
+    { k: ["severity", "severe", "undersupply", "oversupply", "undersupplied", "oversupplied", "ranked by", "worst gap"], a: function () {
+      return reply("The severity ranking orders trades and places by how far trained supply is from the openings: score = ln(expected certified per year / average monthly openings). Below 0 is undersupply (fewer people finish training than there are openings), above 0 oversupply. Severe means a ratio of 2 or more either way, high 1.5, moderate 1.25. You can rank trades, states, state and trade, districts, district and sector, or district and trade, for any year to 2030, on the Rankings page or at /api/severity.", { links: [dashLink("ranking", {}, "Open the severity ranking"), site("about.html#measures", "How it is built")] }); } },
     { k: ["capacity", "seats", "certified", "training seats", "gap", "supply of trained"], a: function () {
       return reply("The capacity gap sets forecast openings for each year against the training seats sanctioned in 2025 to 2026, held flat because no seat plans are forecast, and the trainees expected to be certified (seats times the 2023 to 2025 certification rate). Seats fall short where a district's share of seats is under 0.6 times its share of openings in the trade, and exceed demand above 1.65 times. Read it as a ranking of where capacity is stretched.", { links: [dashLink("capacity", {}, "Open the Capacity gap"), site("about.html#measures", "How it is built")] }); } },
     { k: ["alert", "watch", "flag", "early warning", "early-warning", "warning", "decile", "percentile", "tightest", "loosest", "relative"], a: function () {
@@ -105,7 +107,7 @@
     forecast: "Five-year forecasts of employed workers, vacancies or seekers with a usual and a wider 90% range, December values and a trade table.",
     index: "The Demand Index (0 to 100) over time, states by sector or trade, and the districts with the highest and lowest index in a sector.",
     capacity: "Forecast openings against training seats and expected certified trainees by year, and by trade or state.",
-    ranking: "Rankings for all of India: trades with the fastest or slowest vacancy growth, where trained supply is most stretched or in surplus, and districts with the highest Demand Index per sector.",
+    ranking: "The severity ranking (trades, states, districts and district-trades ordered by how far trained supply is from the openings, filterable and downloadable) and fixed all-India lists: fastest and slowest vacancy growth, where trained supply is most stretched or in surplus, and the districts with the highest Demand Index per sector.",
     warnings: "Every shortage and oversupply alert 12, 36 or 60 months ahead, with confidence labels, for the current filters.",
     data: "Coverage of the dataset, how often the ranges held in testing, how accurate the alerts were, definitions and the notes on limits."
   };
@@ -231,6 +233,18 @@
       { links: [dashLink("capacity", urlFilters(e), "Open the Capacity gap")], src: "capacity_gap_*.csv" });
   }
 
+  /* the severity ranking: trades (or the trades of a state) by ln(expected certified per opening); below 0 undersupply, above 0 oversupply */
+  function severityReply(D, q, e, h) {
+    var C = D.capacity, y = h ? Math.min(2030, 2025 + Math.ceil(h / 12)) : 2030, over = any(q, ["oversuppl", "surplus", "too many"]), bands = D.meta.severity_bands;
+    var tab = e.state && !e.district ? C.state_trade.filter(function (r) { return r.State_Name === e.state; }) : C.trade;
+    var rows = tab.filter(function (r) { return r.year === y && (!e.sector || D.meta.trades.filter(function (x) { return x.c === r.Trade_Code; })[0].s === e.sector) && (!e.trade || r.Trade_Code === e.trade); })
+      .map(function (r) { var sc = Math.log(Math.max(r.supply_per_opening, 1e-3)), a = Math.abs(sc), b = "balanced"; for (var i = 0; i < bands.length; i++) if (a >= bands[i][1]) { b = bands[i][0]; break; } return { r: r, sc: sc, b: b }; })
+      .sort(function (a, b) { return over ? b.sc - a.sc : a.sc - b.sc; });
+    var name = function (r) { return D.meta.trades.filter(function (x) { return x.c === r.Trade_Code; })[0].n + (r.State_Name ? " (" + r.State_Name + ")" : ""); };
+    return reply((over ? "Most oversupplied" : "Most undersupplied") + " trades in " + y + (e.state ? " in " + e.state : "") + (e.sector ? ", " + e.sector : "") + " (certified trainees per opening; below 1 is undersupply):",
+      { list: rows.slice(0, 5).map(function (x, i) { return "#" + (i + 1) + " " + name(x.r) + ": " + fmt(x.r.supply_per_opening, 2) + " per opening, " + x.b + " " + (x.sc < 0 ? "undersupply" : "oversupply"); }), links: [dashLink("ranking", urlFilters(e), "Open the severity ranking")], src: "capacity_gap_trade.csv, capacity_gap_state_trade.csv" });
+  }
+
   function alertsReply(D, q, e, h) {
     var A = root.DASH4_ALERTS, hz = !h ? 0 : h <= 24 ? 0 : h <= 48 ? 1 : 2, hn = [12, 36, 60][hz], M = D.meta;
     var rows = A.rows.filter(function (r) { var tr = M.trades[r[4]]; return r[1] === hz && (!e.state || M.states[r[2]] === e.state) && (!e.district || String(r[3]) === e.district) && (!e.trade || tr.c === e.trade) && (!e.sector || tr.s === e.sector); });
@@ -271,6 +285,7 @@
     if (any(q, ["exit", "leave", "log out", "logout", "sign out", "close the dash"])) return reply("Use Exit in the top bar or the sidebar to return to the public site. There is no login.", {});
     if (!isDef && any(q, ["alert", "watch", "shortage", "oversupply", "warning", "flag", "risk"])) return alertsReply(D, q, e, h);
     if (!isDef && any(q, ["demand index", "hiring demand", "index of"])) return indexReply(D, e, h);
+    if (!isDef && any(q, ["undersuppl", "oversuppl", "severity", "severe", "most short"])) return severityReply(D, q, e, h);
     if (!isDef && any(q, ["stretched", "most surplus"])) return rankingReply(D, q, e);
     if (!isDef && any(q, ["capacity", "seats", "certified", "training seat", "trained"])) return capacityReply(D, e, h);
     if (!isDef && any(q, ["rank", "fastest", "slowest", "top ", "highest", "lowest", "worst", "best", "most ", "stretched", "growing"])) return rankingReply(D, q, e);

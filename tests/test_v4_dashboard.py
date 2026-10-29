@@ -233,6 +233,23 @@ def test_the_map_page_is_wired_to_the_map_data_and_the_state_borders():
     assert ".mborder" in (DASH / "dashboard.css").read_text(encoding="utf-8") and ".mborder" in (ROOT / "app" / "assets" / "styles.css").read_text(encoding="utf-8")
 
 
+def test_the_severity_ranking_uses_the_capacity_inputs_of_the_exports():
+    need(EXPORTS / "capacity_series.parquet")
+    cap = pd.read_parquet(EXPORTS / "capacity_series.parquet")
+    tab = core()["severity_district_sector"]
+    assert len(tab) == 317 * 5 and [b[0] for b in core()["meta"]["severity_bands"]] == ["severe", "high", "moderate"]
+    for key in ("118|Construction", "555|Healthcare", "7|IT-ITeS"):
+        if key not in tab:
+            continue
+        d, sec = key.split("|")
+        g = cap[(cap.District_LGD_Code == int(d)) & (cap.Sector_Name == sec)]
+        v = tab[key]
+        assert v[0] == g[g.year == 2026].seats.sum() and abs(v[1] - g[g.year == 2026].expected_certified.sum()) < 0.2
+        assert all(abs(v[2 + i] - g[g.year == 2026 + i].avg_vacancies.sum()) < 0.2 for i in range(5))
+    j = js()
+    assert "function severityRows" in j and "function scoreRows" in j and "Math.log(ratio)" in j and "severity_bands" in j and 'render.ranking' in j
+
+
 def test_the_data_says_it_is_simulated_and_carries_the_hashes():
     m = core()["meta"]
     assert m["simulated"] is True and m["series"] == C.n_series() and len(m["states"]) == 10 and len(m["districts"]) == 317 and len(m["trades"]) == 25

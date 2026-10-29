@@ -23,6 +23,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+import capacity as CAP
 import config as C
 import exports as EX
 import rollups as RU
@@ -155,6 +156,13 @@ def confidence_letters(fc, dim):
     return out
 
 
+def severity_table(cap):
+    """Capacity inputs of every district-sector for the severity ranking: [seats, expected certified a year, average monthly openings 2026 ... 2030]."""
+    first = cap[cap.year == 2026].groupby(["District_LGD_Code", "Sector_Name"])[["seats", "expected_certified"]].sum()
+    vac = cap.pivot_table(index=["District_LGD_Code", "Sector_Name"], columns="year", values="avg_vacancies", aggfunc="sum")
+    return {f"{d}|{s}": [int(first.loc[(d, s), "seats"]), round(float(first.loc[(d, s), "expected_certified"]), 1)] + [round(float(v), 1) for v in vac.loc[(d, s)]] for d, s in vac.index}
+
+
 def main():
     ex = C.DATA / "exports"
     dim = pd.read_csv(C.DATA / "dim_series.csv")
@@ -175,10 +183,10 @@ def main():
     core = {
         "meta": {"origin": C.ORIGIN, "hist_core": [str(C.MONTHS[HIST_FROM_CORE]), str(C.MONTHS[-1]), N_HIST_CORE], "hist_shard": [str(C.MONTHS[HIST_FROM_SHARD]), str(C.MONTHS[-1]), N_HIST_SHARD],
                  "fc": [str(C.FORECAST_MONTHS[0]), str(C.FORECAST_MONTHS[-1]), 60], "states": list(C.STATES), "sectors": list(C.SECTORS), "trades": trades, "districts": districts, "years": YEARS,
-                 "bands": BANDS, "flag_names": EX.FLAG_NAMES, "simulated": True, "series": int(len(dim)), "generated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                 "bands": BANDS, "severity_bands": [[n, round(v, 6)] for n, v in CAP.SEVERITY_BANDS], "flag_names": EX.FLAG_NAMES, "simulated": True, "series": int(len(dim)), "generated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
                  "files": {n: v["sha256"][:16] for n, v in man["files"].items() if "sha256" in v},
                  "manifest": {"forecast_origin": man["forecast_origin"], "generated_at_utc": man["generated_at_utc"], "deploy_fit": {k: man["inputs"]["deploy_fit"].get(k) for k in ("fit_targets_to", "left_out", "pairs_before", "pairs_after")}}},
-        "groups": groups, "cal_series": series_cal, "cal_levels": level_cal, "capacity": capacity,
+        "groups": groups, "cal_series": series_cal, "cal_levels": level_cal, "capacity": capacity, "severity_district_sector": severity_table(cap),
         "di_state_trade": year_di(dim, series, d, ["State_Name", "Trade_Code"]), "di_district_sector": year_di(dim, series, d, ["District_LGD_Code", "Sector_Name"]),
         "rankings": pd.read_csv(ex / "rankings.csv").fillna("").to_dict("records"), "coverage": coverage_figures(),
     }

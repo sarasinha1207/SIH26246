@@ -1,5 +1,5 @@
 """
-Forecast API, server side - a read-only JSON view of the v4 forecast: /api/forecast, /api/flags, /api/demand-index, /api/capacity-gap and /api/meta.
+Forecast API, server side - a read-only JSON view of the v4 forecast: /api/forecast, /api/flags, /api/demand-index, /api/capacity-gap, /api/severity and /api/meta.
 
 One module serves the five Vercel functions (app/api/forecast.py and its siblings) and the local server (src/app/serve.py).  Standard library only.
 Data: the files the dashboard already loads (app/dashboard/data/core.js, alerts.js and the per-state shards), so the API and the dashboard can never disagree.
@@ -18,7 +18,7 @@ import time
 from collections import deque
 from functools import lru_cache
 from http.server import BaseHTTPRequestHandler
-from math import exp
+from math import exp, log
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
@@ -359,7 +359,105 @@ def api_capacity_gap(q):
             "notes": ["Seats are the 2025-26 sanctioned seats, held flat to 2030 (an assumption: no seat plans are forecast).", "Below 1 certified per opening, fewer people finish training in a year than there are openings; read the ratios as a ranking of where capacity is stretched."]}
 
 
-ENDPOINTS = {"forecast": api_forecast, "flags": api_flags, "demand-index": api_demand_index, "capacity-gap": api_capacity_gap, "meta": api_meta}
+def api_severity(q):
+    """Trades and places ranked by how far trained supply is from the openings: score = ln(expected certified / average monthly openings) of a year."""
+    q = parse_query(q, ("state", "district", "sector", "trade", "level", "year", "order", "limit", "offset"))
+    s = scope(q)
+    C = core()
+    M = C["meta"]
+    level = q.get("level", "trade")
+    if level not in ("trade", "state", "state_trade", "district", "district_sector", "series"):
+        raise bad("level must be trade, state, state_trade, district, district_sector or series.")
+    year = int_list(q.get("year"), 2026, 2030, "year", (2030,))
+    if len(year) != 1:
+        raise bad("year must be one year from 2026 to 2030.")
+    y = year[0]
+    order = q.get("order", "under")
+    if order not in ("under", "over", "severity"):
+        raise bad("order must be under (most undersupplied first), over (most oversupplied first) or severity (largest gap either way first).")
+    limit, offset = paging(q, 25, 500)
+    bands = M["severity_bands"]
+    trades = {t["c"]: t for t in M["trades"]}
+    dn = {d[0]: (d[1], M["states"][d[2]]) for d in M["districts"]}
+    cap = C["capacity"]
+    raw = []                                                                               # (key fields, seats, expected certified, openings 2026..2030)
+
+    def keep_trade(code):
+        return (s["trade"] is None or code == s["trade"]) and (s["sector"] is None or trades[code]["s"] == s["sector"])
+
+    if level == "trade":
+        for code in trades:
+            if keep_trade(code) and s["state"] is None and s["district"] is None:
+                rows = {x["year"]: x for x in cap["trade"] if x["Trade_Code"] == code}
+                raw.append(({"trade": code, "name": trades[code]["n"], "sector": trades[code]["s"]}, rows[2026]["seats"], rows[2026]["expected_certified"], [rows[k]["avg_vacancies"] for k in range(2026, 2031)]))
+    elif level == "state":
+        for st in M["states"]:
+            if s["state"] in (None, st) and s["district"] is None and s["sector"] is None and s["trade"] is None:
+                rows = {x["year"]: x for x in cap["state"] if x["State_Name"] == st}
+                raw.append(({"state": st, "name": st}, rows[2026]["seats"], rows[2026]["expected_certified"], [rows[k]["avg_vacancies"] for k in range(2026, 2031)]))
+    elif level == "state_trade":
+        by = {}
+        for x in cap["state_trade"]:
+            by.setdefault((x["State_Name"], x["Trade_Code"]), {})[x["year"]] = x
+        for (st, code), rows in by.items():
+            if s["state"] in (None, st) and keep_trade(code) and s["district"] is None:
+                raw.append(({"state": st, "trade": code, "name": trades[code]["n"] + ", " + st, "sector": trades[code]["s"]}, rows[2026]["seats"], rows[2026]["expected_certified"], [rows[k]["avg_vacancies"] for k in range(2026, 2031)]))
+    elif level in ("district", "district_sector"):
+        if s["trade"] is not None:
+            raise bad("District levels use sectors: drop the trade filter, or use level=series with a state or district.")
+        agg = {}
+        for key, v in C["severity_district_sector"].items():
+            d, sec = key.split("|")
+            d = int(d)
+            if (s["state"] and dn[d][1] != s["state"]) or (s["district"] and d != s["district"]) or (s["sector"] and sec != s["sector"]):
+                continue
+            if level == "district":
+                a = agg.setdefault(d, [0, 0.0, [0.0] * 5])
+                a[0] += v[0]
+                a[1] += v[1]
+                a[2] = [x + z for x, z in zip(a[2], v[2:])]
+            else:
+                agg[(d, sec)] = [v[0], v[1], v[2:]]
+        for key, (seats, cert, vac) in agg.items():
+            d, sec = (key, None) if level == "district" else key
+            keys = {"district_lgd": d, "district": dn[d][0], "state": dn[d][1], "name": dn[d][0] if sec is None else dn[d][0] + ", " + sec}
+            if sec:
+                keys["sector"] = sec
+            raw.append((keys, seats, cert, vac))
+    else:                                                                                   # series: every district-trade of a state or a district
+        if s["state"] is None:
+            raise bad("level=series needs a state or a district.")
+        sh = shard(s["state"])
+        for i in range(len(sh["ids"])):
+            code = M["trades"][sh["t"][i]]["c"]
+            if (s["district"] is None or sh["d"][i] == s["district"]) and keep_trade(code):
+                d = sh["d"][i]
+                raw.append(({"series_id": sh["ids"][i], "district_lgd": d, "district": dn[d][0], "state": dn[d][1], "trade": code, "name": dn[d][0] + ", " + trades[code]["n"], "sector": trades[code]["s"]},
+                            sh["cap"]["seats"][i], sh["cap"]["cert"][i], sh["cap"]["vac"][i]))
+    out = []
+    for keys, seats, cert, vac in raw:
+        if vac[y - 2026] <= 0 or vac[0] <= 0:
+            continue
+        ratio = max(cert / vac[y - 2026], 1e-3)
+        score = log(ratio)
+        a = abs(score)
+        band = next((n for n, v in bands if a >= v), "balanced")
+        out.append({**keys, "year": y, "seats": seats, "average_monthly_openings": round(vac[y - 2026], 1), "expected_certified": round(cert, 1), "certified_per_opening": round(ratio, 3), "score": round(score, 3),
+                    "severity": band, "direction": "balanced" if band == "balanced" else "undersupply" if score < 0 else "oversupply", "score_2026": round(log(max(cert / vac[0], 1e-3)), 3)})
+    key = {"under": lambda r: r["score"], "over": lambda r: -r["score"], "severity": lambda r: -abs(r["score"])}[order]
+    out.sort(key=lambda r: (key(r), r["name"]))
+    if not out:
+        raise bad("No rows for that combination of level and filters.", "not_found", 404)
+    for i, r in enumerate(out, 1):
+        r["rank"] = i
+    return {"scope": name_of(s), "level": level, "year": y, "order": order, "total": len(out), "limit": limit, "offset": offset, "data": out[offset:offset + limit],
+            "definition": {"score": "ln(expected certified per year / average monthly openings of the year); below 0 undersupply, above 0 oversupply",
+                           "bands": {"severe": "ratio of 2 or more either way (1/2 or less)", "high": "1.5", "moderate": "1.25", "balanced": "less"}},
+            "notes": ["Seats are the 2025-26 sanctioned seats held flat to 2030; expected certified is seats times the 2023-2025 certification rate.",
+                      "Openings are a monthly stock and certified trainees an annual flow: read the scores as a ranking of where capacity is stretched, not as a count of unfilled places."]}
+
+
+ENDPOINTS = {"forecast": api_forecast, "flags": api_flags, "demand-index": api_demand_index, "capacity-gap": api_capacity_gap, "severity": api_severity, "meta": api_meta}
 
 
 # ---- protection and transport -----------------------------------------------------------------------------------------------------------------------
