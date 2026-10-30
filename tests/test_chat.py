@@ -121,6 +121,21 @@ def test_severity_answers_equal_the_capacity_tables():
     assert r[0]["links"][0]["href"].startswith("#/ranking")
 
 
+def test_questions_about_alerts_that_begin_or_end_point_to_the_changes_view():
+    if not NODE:
+        return
+    r = ask("dash", ["Which districts are entering the shortage tail?", "alerts leaving in Kerala 36 months"], {"page": "warnings", "p": {}})
+    assert "#/warnings?" in r[0]["links"][0]["href"] and "c=enter" in r[0]["links"][0]["href"] and "Entering an alert" in r[0]["text"], r[0]
+    assert "c=leave" in r[1]["links"][0]["href"] and "state=Kerala" in r[1]["links"][0]["href"] and "h=36" in r[1]["links"][0]["href"], r[1]
+
+
+def test_seat_questions_point_to_the_scenario():
+    if not NODE:
+        return
+    r = ask("dash", ["What if we add seats in construction?", "how many seats are needed"], {"page": "capacity", "p": {}})
+    assert all("Capacity gap page" in x["text"] and x["links"][0]["href"].startswith("#/capacity") for x in r), r
+
+
 def test_dashboard_definitions_use_the_page_context():
     if not NODE:
         return

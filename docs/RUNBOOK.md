@@ -1,5 +1,7 @@
 # Runbook: refresh, checks, deployment
 
+The method itself (what each number means and how it is computed) is in `docs/METHODOLOGY.md`; change it in the same commit as any change to a formula, threshold or window.
+
 Everything runs from the project root, with Python 3.13 and `requirements.txt` installed (xgboost 3.4.1, pandas 2.2.3, numpy 2.1.3). The data is simulated until a real source is connected; with real data step 1 becomes the ingestion job.
 
 ## A refresh in order
@@ -13,7 +15,7 @@ Everything runs from the project root, with Python 3.13 and `requirements.txt` i
 
 ## Deployment
 * Vercel project: Root Directory `app`, no framework, no build command. `app/vercel.json` sets the security headers, long caches for versioned scripts and styles, and for each function a time limit and the data it bundles (`dashboard/data/**` for the five forecast API functions).
-* Seven functions, all standard library only (`app/requirements.txt` lists no packages on purpose, so Vercel does not install the ML stack): `/api/chat` (needs `GEMINI_API_KEY` in the project's environment to switch Gemini on; set a spending cap in Google AI Studio too), and `/api/forecast`, `/api/flags`, `/api/demand-index`, `/api/capacity-gap`, `/api/severity`, `/api/meta` (settings `API_RATE_PER_MINUTE`, default 60, and `API_DAILY_CAP`, default 20000; the limits are in memory, per instance).
+* Eight functions, all standard library only (`app/requirements.txt` lists no packages on purpose, so Vercel does not install the ML stack): `/api/chat` (needs `GEMINI_API_KEY` in the project's environment to switch Gemini on; set a spending cap in Google AI Studio too), and `/api/forecast`, `/api/flags`, `/api/demand-index`, `/api/capacity-gap`, `/api/severity`, `/api/scenario`, `/api/meta` (settings `API_RATE_PER_MINUTE`, default 60, and `API_DAILY_CAP`, default 20000; the limits are in memory, per instance).
 * Budget (checked by `tests/test_v4_api.py`): the deployed folder under 60 MB (now about 24 MB, 7 MB compressed), no file over 6 MB, the first load of any page under 450 KB compressed, the largest state's data read in under 2 s cold, and a typical API call in under 50 ms.
 * The v3 dashboard data file (`app/dashboard/data/dash_data.js`) is git-ignored and not deployed; the submitted version is the tag `submitted-v1`.
 

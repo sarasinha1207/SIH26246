@@ -27,6 +27,10 @@
     "api/severity.py": {
       "maxDuration": 10,
       "includeFiles": "{dashboard/data/**,api/_v4api.py}"
+    },
+    "api/scenario.py": {
+      "maxDuration": 10,
+      "includeFiles": "{dashboard/data/**,api/_v4api.py}"
     }
   },
   "headers": [

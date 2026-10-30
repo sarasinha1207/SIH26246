@@ -109,6 +109,53 @@
     "Name": "नाम",
     "No calibrated 90% range exists for this combination of filters, so only the point forecast is drawn. Choose a sector, state, state with sector, or a district with a sector or trade for a range.": "फ़िल्टर के इस संयोजन के लिए कोई जाँचा हुआ 90% दायरा नहीं है, इसलिए केवल बिंदु पूर्वानुमान दिखाया गया है। दायरे के लिए सेक्टर, राज्य, सेक्टर सहित राज्य, या सेक्टर/ट्रेड सहित ज़िला चुनें।",
     "Open": "खोलें",
+    "Seat scenario": "सीट परिदृश्य",
+    "Change the seats and see what it does to the balance with the openings. The certification rate and the forecast openings stay as they are.": "सीटें बदलकर देखें कि रिक्तियों के साथ संतुलन पर इसका क्या असर पड़ता है। प्रमाणन दर और पूर्वानुमानित रिक्तियाँ जैसी हैं वैसी रहती हैं।",
+    "Change seats by (%)": "सीटों में बदलाव (%)",
+    "From year": "किस वर्ष से",
+    "Evaluate in": "किस वर्ष में आँकें",
+    "Target certified per opening": "लक्ष्य: प्रति रिक्ति प्रमाणित",
+    "Apply": "लागू करें",
+    "Reset": "रीसेट",
+    "{0}% from {1}": "{1} से {0}%",
+    "No change": "कोई बदलाव नहीं",
+    "All rows in {0}; below 1 is undersupply": "{0} में सभी पंक्तियाँ; 1 से कम का अर्थ कम आपूर्ति",
+    "Undersupplied rows": "कम आपूर्ति वाली पंक्तियाँ",
+    "Of {0} rows": "{0} पंक्तियों में से",
+    "Seats to add for the target": "लक्ष्य के लिए जोड़ने योग्य सीटें",
+    "Rows above the target could release {0}": "लक्ष्य से ऊपर की पंक्तियाँ {0} सीटें छोड़ सकती हैं",
+    "Seats in scenario": "परिदृश्य में सीटें",
+    "Certified per opening now → scenario": "प्रति रिक्ति प्रमाणित अभी → परिदृश्य",
+    "Severity now → scenario": "गंभीरता अभी → परिदृश्य",
+    "Seats for the target": "लक्ष्य के लिए सीटें",
+    "Nothing to show for these filters.": "इन फ़िल्टर के लिए दिखाने को कुछ नहीं है।",
+    "Download this scenario (CSV)": "यह परिदृश्य डाउनलोड करें (CSV)",
+    "Trades of the chosen state": "चुने हुए राज्य के ट्रेड",
+    "District and trade series of the chosen state": "चुने हुए राज्य की ज़िला और ट्रेड श्रृंखलाएँ",
+    "{0}, ranked by the scenario's score, most undersupplied first.": "{0}, परिदृश्य के अंक के अनुसार क्रमबद्ध, सबसे कम आपूर्ति पहले।",
+    "Seats for the target are the seats at which certified per opening reaches the target (openings of the year × target ÷ certification rate); the percentage is the change from today's seats. No delay is modelled between sanctioning a seat and a trainee being certified, and teaching capacity is not limited: read this as a planning ratio, not a forecast of placements.": "लक्ष्य के लिए सीटें वे सीटें हैं जिन पर प्रति रिक्ति प्रमाणित लक्ष्य तक पहुँचता है (वर्ष की रिक्तियाँ × लक्ष्य ÷ प्रमाणन दर); प्रतिशत आज की सीटों से बदलाव है। सीट स्वीकृत होने और प्रशिक्षु के प्रमाणित होने के बीच की देरी नहीं मानी गई है, और शिक्षण क्षमता सीमित नहीं है: इसे योजना अनुपात की तरह पढ़ें, नियुक्तियों के पूर्वानुमान की तरह नहीं।",
+    "At the horizon": "आगे के महीने पर",
+    "Entering an alert": "चेतावनी में प्रवेश",
+    "Leaving an alert": "चेतावनी से बाहर",
+    "View": "दृश्य",
+    "Entering the shortage tail": "कमी वाले छोर में प्रवेश",
+    "Entering the oversupply tail": "अधिशेष वाले छोर में प्रवेश",
+    "Leaving the shortage tail": "कमी वाले छोर से बाहर",
+    "Leaving the oversupply tail": "अधिशेष वाले छोर से बाहर",
+    "Entering shortage alert": "कमी की चेतावनी में प्रवेश",
+    "Leaving shortage alert": "कमी की चेतावनी से बाहर",
+    "Entering oversupply alert": "अधिशेष चेतावनी में प्रवेश",
+    "Leaving oversupply alert": "अधिशेष चेतावनी से बाहर",
+    "Not in an alert tail now, in it {0} months ahead": "अभी चेतावनी वाले छोर में नहीं, {0} महीने आगे उसमें",
+    "In an alert tail now, out of it {0} months ahead": "अभी चेतावनी वाले छोर में, {0} महीने आगे उससे बाहर",
+    "{0} series change status": "{0} श्रृंखलाओं की स्थिति बदलती है",
+    "For {0}, now (December 2025) against {1} months ahead": "{0} के लिए, अभी (दिसंबर 2025) बनाम {1} महीने आगे",
+    "Percentile now → then": "प्रतिशतक अभी → तब",
+    "Vacancies per 100 seekers now → then": "प्रति 100 नौकरी चाहने वाले रिक्तियाँ अभी → तब",
+    "First month in the tail": "छोर में पहला महीना",
+    "No changes for these filters.": "इन फ़िल्टर के लिए कोई बदलाव नहीं।",
+    "Most alerts persist: of the {0} shortage and {1} oversupply alerts now, {2} and {3} are out of the tail {4} months ahead (and as many have moved in).": "अधिकतर चेतावनियाँ बनी रहती हैं: अभी की {0} कमी और {1} अधिशेष चेतावनियों में से {4} महीने आगे क्रमशः {2} और {3} छोर से बाहर हो जाती हैं (और लगभग उतनी ही अंदर आ जाती हैं)।",
+    "Now means December 2025, from the actual vacancies and registered seekers, ranked among the districts of the trade like the forecasts. An alert tail is the top tenth (shortage) or the bottom tenth (oversupply). The forecast flags are relative: a series can leave a tail because others rose faster, not because it fell.": "'अभी' का अर्थ दिसंबर 2025 है, वास्तविक रिक्तियों और पंजीकृत नौकरी चाहने वालों से, पूर्वानुमानों की तरह ट्रेड के ज़िलों के बीच क्रमबद्ध। चेतावनी वाला छोर शीर्ष दसवाँ हिस्सा (कमी) या निचला दसवाँ हिस्सा (अधिशेष) है। पूर्वानुमान के निशान सापेक्ष हैं: कोई श्रृंखला इसलिए छोर छोड़ सकती है कि बाकी तेज़ी से बढ़े, इसलिए नहीं कि वह गिरी।",
     "Where trained supply and openings are furthest apart": "जहाँ प्रशिक्षित आपूर्ति और रिक्तियों में सबसे अधिक अंतर है",
     "Severity ranking": "गंभीरता क्रम",
     "Where trained supply is furthest from the openings, for the filters above. Undersupply: fewer people finish training in a year than there are openings. Oversupply: more.": "ऊपर के फ़िल्टर के लिए, जहाँ प्रशिक्षित आपूर्ति रिक्तियों से सबसे दूर है। कम आपूर्ति: एक वर्ष में रिक्तियों से कम लोग प्रशिक्षण पूरा करते हैं। अधिक आपूर्ति: अधिक लोग।",
@@ -585,8 +632,54 @@
         '<p class="note">' + t("Seats are held flat because no seat plans are forecast. Openings are a monthly stock and seats an annual flow, so read the ratios as a ranking of where capacity is stretched, not as a count of unfilled places.") + "</p>";
       bindRows(view);
       cur.csv = { name: fname("capacity"), head: ["year", "avg_openings", "seats", "expected_certified", "openings_per_seat", "certified_per_opening"], rows: rows.map(function (x) { return [x.year, x.avg_vacancies, x.seats, x.expected_certified, x.openings_per_seat, x.supply_per_opening]; }) };
+      return scenarioCard(p, view);
     });
   };
+    /* ---------- the seat scenario: multiply the seats from a year on and see the ratio, the severity and the seats a target needs ----------
+     certified(seats) = seats x the certification rate (unchanged); openings unchanged; seats needed for a target ratio T in year y = openings(y) x T / rate */
+  var bandOf = function (sc) { var a = Math.abs(sc), b = M.severity_bands; for (var i = 0; i < b.length; i++) if (a >= b[i][1]) return b[i][0]; return "balanced"; };
+  function scenarioCard(p, view) {
+    var level = p.district ? "series" : p.state ? "state_trade" : "trade", yrs = [2026, 2027, 2028, 2029, 2030];
+    var pct = Math.max(-90, Math.min(500, parseFloat(p.sc) || 0)), fy = yrs.indexOf(+p.sf) >= 0 ? +p.sf : 2026, y = yrs.indexOf(+p.sy) >= 0 ? +p.sy : 2030, tg = Math.max(0.2, Math.min(5, parseFloat(p.sr) || 1)), nShow = p.sn === "all" ? 1e9 : p.sn === "100" ? 100 : 25;
+    return severityRows(p, level).then(function (raw) {
+      var rows = [], k = 1 + pct / 100;
+      raw.forEach(function (r) {
+        var v = r.vac[y - 2026]; if (!(v > 0) || !(r.seats > 0)) return;
+        var seatsS = y >= fy ? r.seats * k : r.seats, rate = r.cert / r.seats, base = Math.max(r.cert / v, 1e-3), scn = Math.max(r.cert * seatsS / r.seats / v, 1e-3), need = v * tg / rate;
+        rows.push({ r: r, v: v, seats: r.seats, seatsS: seatsS, base: base, scn: scn, sb: Math.log(base), ss: Math.log(scn), need: need, dneed: need - r.seats, pneed: (need / r.seats - 1) * 100, bb: bandOf(Math.log(base)), bs: bandOf(Math.log(scn)) });
+      });
+      rows.sort(function (a, b) { return a.ss - b.ss || (a.r.name < b.r.name ? -1 : 1); });
+      var sum = function (f) { return rows.reduce(function (a, r) { return a + f(r); }, 0); }, V = sum(function (r) { return r.v; });
+      var tot = { seats: sum(function (r) { return r.seats; }), seatsS: sum(function (r) { return r.seatsS; }), base: sum(function (r) { return r.base * r.v; }) / V, scn: sum(function (r) { return r.scn * r.v; }) / V,
+        underB: rows.filter(function (r) { return r.sb < 0; }).length, underS: rows.filter(function (r) { return r.ss < 0; }).length, add: sum(function (r) { return Math.max(r.dneed, 0); }), release: sum(function (r) { return Math.max(-r.dneed, 0); }) };
+      var lbl = { trade: "Trades", state_trade: "Trades of the chosen state", series: "District and trade series of the chosen state" }[level];
+      var yopts = function (cur, id) { return '<select id="' + id + '">' + yrs.map(function (x) { return '<option value="' + x + '"' + (x === cur ? " selected" : "") + ">" + x + "</option>"; }).join("") + "</select>"; };
+      var pill = function (b, sc) { return '<span class="pill ' + (b === "balanced" ? "s2" : sc < 0 ? "alert" : "s4") + '">' + t(b === "balanced" ? "Balanced" : cap1(b) + " " + (sc < 0 ? "undersupply" : "oversupply")) + "</span>"; };
+      var shown = rows.slice(0, nShow), sg = function (x) { return (x >= 0 ? "+" : "−") + fmt(Math.abs(x), 0); };
+      var attrs = function (a) { return Object.keys(a).map(function (q) { return " data-" + q + '="' + esc(a[q]) + '"'; }).join(""); };
+      var html = '<section class="card mt" id="scenario"><div class="card-h"><div><h2>' + t("Seat scenario") + "</h2><p>" + t("Change the seats and see what it does to the balance with the openings. The certification rate and the forecast openings stay as they are.") + "</p></div></div>" +
+        '<div class="scn-form"><label><span>' + t("Change seats by (%)") + '</span><input type="number" id="sc-pct" min="-90" max="500" step="5" value="' + pct + '"></label><label><span>' + t("From year") + "</span>" + yopts(fy, "sc-from") + "</label><label><span>" + t("Evaluate in") + "</span>" + yopts(y, "sc-year") + '</label><label><span>' + t("Target certified per opening") +
+        '</span><input type="number" id="sc-target" min="0.2" max="5" step="0.1" value="' + tg + '"></label><button class="chip-btn primary" id="sc-apply" type="button">' + t("Apply") + '</button><button class="chip-btn" id="sc-reset" type="button">' + t("Reset") + "</button></div>" +
+        '<div class="grid g4">' + kpi(t("Seats"), "var(--employed)", compact(tot.seats) + " → " + compact(tot.seatsS), "<span>" + (pct ? tf("{0}% from {1}", (pct > 0 ? "+" : "−") + Math.abs(pct), fy) : t("No change")) + "</span>") +
+        kpi(t("Certified per opening"), "var(--supply)", fmt(tot.base, 2) + " → " + fmt(tot.scn, 2), "<span>" + tf("All rows in {0}; below 1 is undersupply", y) + "</span>") + kpi(t("Undersupplied rows"), "var(--low)", tot.underB + " → " + tot.underS, "<span>" + tf("Of {0} rows", fmt(rows.length)) + "</span>") +
+        kpi(t("Seats to add for the target"), "var(--demand)", compact(tot.add), "<span>" + tf("Rows above the target could release {0}", compact(tot.release)) + "</span>") + "</div>" +
+        (shown.length ? table([["#", "num"], ["Name"], ["Place"], ["Seats", "num"], ["Seats in scenario", "num"], ["Certified per opening now → scenario", "num"], ["Severity now → scenario"], ["Seats for the target", "num"]], shown.map(function (r, i) {
+          return '<tr class="click"' + attrs(r.r.at) + '><td class="num">' + (i + 1) + "</td><td>" + esc(r.r.name) + "</td><td>" + esc(r.r.place) + '</td><td class="num">' + compact(r.seats) + '</td><td class="num">' + compact(r.seatsS) + '</td><td class="num">' + fmt(r.base, 2) + " → " + fmt(r.scn, 2) + "</td><td>" + pill(r.bb, r.sb) + " → " + pill(r.bs, r.ss) + '</td><td class="num">' + compact(r.need) + " (" + sg(r.pneed) + "%)</td></tr>";
+        })) : '<p class="note">' + t("Nothing to show for these filters.") + "</p>") + (rows.length > shown.length ? '<p class="note">' + tf("Showing {0} of {1}.", shown.length, fmt(rows.length)) + "</p>" : "") +
+        segment("sn", [["25", t("Top 25")], ["100", t("Top 100")], ["all", t("All")]], p.sn === "all" ? "all" : p.sn === "100" ? "100" : "25", "Rows") + ' <button class="chip-btn" id="sc-csv" type="button">' + t("Download this scenario (CSV)") + "</button>" +
+        '<p class="note">' + tf("{0}, ranked by the scenario's score, most undersupplied first.", t(lbl)) + " " + t("Seats for the target are the seats at which certified per opening reaches the target (openings of the year × target ÷ certification rate); the percentage is the change from today's seats. No delay is modelled between sanctioning a seat and a trainee being certified, and teaching capacity is not limited: read this as a planning ratio, not a forecast of placements.") + "</p></section>";
+      var box = document.createElement("div"); box.innerHTML = html; view.appendChild(box);
+      var apply = function () { go({ sc: String(parseFloat($("#sc-pct", box).value) || 0), sf: $("#sc-from", box).value, sy: $("#sc-year", box).value, sr: String(parseFloat($("#sc-target", box).value) || 1) }); };
+      $("#sc-apply", box).addEventListener("click", apply);
+      $$("#sc-pct, #sc-target", box).forEach(function (i) { i.addEventListener("keydown", function (e) { if (e.key === "Enter") apply(); }); });
+      $("#sc-reset", box).addEventListener("click", function () { go({ sc: "", sf: "", sy: "", sr: "" }); });
+      $("#sc-csv", box).addEventListener("click", function () {
+        downloadCsv(fname("seat_scenario_" + y), ["rank", "name", "place", "level", "year", "seat_change_pct", "from_year", "target", "seats", "seats_in_scenario", "average_monthly_openings", "certified_per_opening", "certified_per_opening_in_scenario", "severity", "severity_in_scenario", "seats_needed_for_target", "seat_change_needed_pct"],
+          rows.map(function (r, i) { return [i + 1, r.r.name, r.r.place, level, y, pct, fy, tg, r.seats, +r.seatsS.toFixed(1), +r.v.toFixed(1), +r.base.toFixed(3), +r.scn.toFixed(3), r.bb, r.bs, +r.need.toFixed(1), +r.pneed.toFixed(1)]; }));
+      });
+      bindSeg(box); bindRows(box);
+    });
+  }
   function breakdownCap(p) {
     var C = D.capacity, y = function (r) { return r.year === 2030; }, row = function (name, attrs, r) { return '<tr class="click" ' + attrs + "><td>" + esc(name) + '</td><td class="num">' + compact(r.avg_vacancies) + '</td><td class="num">' + compact(r.seats) + '</td><td class="num">' + fmt(r.openings_per_seat, 2) + '</td><td class="num" ' + heat(Math.max(0, 100 - r.supply_per_opening * 50)) + ">" + fmt(r.supply_per_opening, 2) + "</td></tr>"; };
     var head = [["Name"], ["Avg. openings", "num"], ["Seats", "num"], ["Openings per seat", "num"], ["Certified per opening", "num"]];
@@ -678,13 +771,46 @@
   };
   var cap1 = function (w) { return w.charAt(0).toUpperCase() + w.slice(1); };
 
+  /* ---------- alerts that begin or end: the series that enter or leave an alert tail between now (December 2025, actual) and 12, 36 or 60 months ahead ---------- */
+  var TRP = null;
+  function loadTransitions() {
+    if (!TRP) TRP = fetch("data/transitions.json").then(function (r) { if (!r.ok) throw new Error("transitions " + r.status); return r.json(); }).catch(function (e) { TRP = null; throw e; });
+    return TRP;
+  }
+  function modeSeg(p) { return segment("c", [["", t("At the horizon")], ["enter", t("Entering an alert")], ["leave", t("Leaving an alert")]], p.c === "enter" || p.c === "leave" ? p.c : "", "View"); }
+  function renderChanges(p, view) {
+    var hzs = [12, 36, 60], hz = hzs.indexOf(+p.h) >= 0 ? hzs.indexOf(+p.h) : 0, ty = p.t === "0" || p.t === "1" ? +p.t : -1, mode = p.c;
+    return loadTransitions().then(function (T) {
+      var inScope = function (r) { var tr = TRADES[r[4]]; return r[1] === hz && (!p.state || STATES[r[2]] === p.state) && (!p.district || String(r[3]) === String(p.district)) && (!p.trade || tr.c === p.trade) && (!p.sector || tr.s === p.sector); };
+      var base = T.rows.filter(inScope), n = function (type) { return base.filter(function (r) { return r[0] === type; }).length; };
+      var rows = base.filter(function (r) { return (mode === "enter" ? r[0] % 2 === 0 : r[0] % 2 === 1) && (ty < 0 || (ty === 0 ? r[0] < 2 : r[0] >= 2)); });
+      rows.sort(function (a, b) { return mode === "enter" ? (a[7] - b[7]) || (Math.abs(b[6] - 50) - Math.abs(a[6] - 50)) : Math.abs(b[5] - 50) - Math.abs(a[5] - 50); });
+      var shown = rows.slice(0, 250), h = hzs[hz], kind = ["Entering shortage alert", "Leaving shortage alert", "Entering oversupply alert", "Leaving oversupply alert"];
+      var kp = function (type, color, label) { return kpi(t(label), color, n(type), "<span>" + (type % 2 === 0 ? tf("Not in an alert tail now, in it {0} months ahead", h) : tf("In an alert tail now, out of it {0} months ahead", h)) + "</span>"); };
+      var cs = T.counts, stay = function (name) { return cs[name + "|" + h]; };
+      var cell = function (r) { return '<tr class="click" data-district="' + r[3] + '" data-trade="' + TRADES[r[4]].c + '"><td><span class="pill ' + (r[0] < 2 ? "alert" : "s4") + '">' + t(kind[r[0]]) + "</span></td><td>" + esc(DNAME[r[3]]) + "</td><td>" + esc(STATES[r[2]]) + "</td><td>" + esc(TRADES[r[4]].n) +
+        '</td><td class="num">' + fmt(r[5], 0) + " → " + fmt(r[6], 0) + '</td><td class="num">' + (r[9] ? fmt(r[8] / r[9] * 100, 1) : "–") + " → " + (r[11] ? fmt(r[10] / r[11] * 100, 1) : "–") + '</td><td class="num">' + (r[7] ? ml(addM(M.fc[0], r[7] - 1)) : "–") + "</td></tr>"; };
+      view.innerHTML = '<div class="grid g4">' + kp(0, "var(--demand)", "Entering the shortage tail") + kp(2, "var(--low)", "Entering the oversupply tail") + kp(1, "var(--employed)", "Leaving the shortage tail") + kp(3, "var(--supply)", "Leaving the oversupply tail") + "</div>" +
+        '<section class="card mt"><div class="card-h"><div><h2>' + tf("{0} series change status", fmt(rows.length)) + "</h2><p>" + tf("For {0}, now (December 2025) against {1} months ahead", esc(scopeText(p)), h) + '</p></div><div style="display:flex;gap:8px;flex-wrap:wrap">' + modeSeg(p) +
+        segment("h", [[12, tf("{0} months", 12)], [36, tf("{0} months", 36)], [60, tf("{0} months", 60)]], h, "Months ahead") + segment("t", [["", t("Both")], ["0", t("Shortage")], ["1", t("Oversupply")]], ty < 0 ? "" : ty, "Type") + "</div></div>" +
+        (shown.length ? table([["Change"], ["District"], ["State"], ["Trade"], ["Percentile now → then", "num"], ["Vacancies per 100 seekers now → then", "num"], ["First month in the tail", "num"]], shown.map(cell)) : '<p class="note">' + t("No changes for these filters.") + "</p>") +
+        (rows.length > shown.length ? '<p class="note">' + tf("Showing the first {0} of {1}; the CSV has all of them.", shown.length, fmt(rows.length)) + "</p>" : "") +
+        '<p class="note">' + tf("Most alerts persist: of the {0} shortage and {1} oversupply alerts now, {2} and {3} are out of the tail {4} months ahead (and as many have moved in).", fmt(T.current.shortage), fmt(T.current.oversupply), fmt(stay("leave_shortage")), fmt(stay("leave_oversupply")), h) + " " +
+        t("Now means December 2025, from the actual vacancies and registered seekers, ranked among the districts of the trade like the forecasts. An alert tail is the top tenth (shortage) or the bottom tenth (oversupply). The forecast flags are relative: a series can leave a tail because others rose faster, not because it fell.") + "</p></section>";
+      bindSeg(view); bindRows(view);
+      cur.csv = { name: fname("alert_changes_" + mode + "_" + h + "m"), head: ["change", "months_ahead", "state", "district_lgd", "district", "trade", "percentile_now", "percentile_then", "vacancies_now", "seekers_now", "vacancies_then", "seekers_then", "first_month_in_tail"],
+        rows: rows.map(function (r) { return [kind[r[0]].toLowerCase(), h, STATES[r[2]], r[3], DNAME[r[3]], TRADES[r[4]].c, r[5], r[6], r[8], r[9], r[10], r[11], r[7] ? addM(M.fc[0], r[7] - 1) : ""]; }) };
+    });
+  }
+
   render.warnings = function (p, view) {
+    if (p.c === "enter" || p.c === "leave") return renderChanges(p, view);
     var hzs = [12, 36, 60], hz = hzs.indexOf(+p.h) >= 0 ? hzs.indexOf(+p.h) : 0, ty = p.t === "0" || p.t === "1" ? +p.t : -1, all = alertsFor(p, hz), rows = all.filter(function (a) { return ty < 0 || a[0] === ty; });
     rows.sort(function (a, b) { return (a[0] - b[0]) || (a[0] === 0 ? b[5] - a[5] : a[5] - b[5]); });
     var shown = rows.slice(0, 250), nS = all.filter(function (a) { return a[0] === 0; }).length;
     view.innerHTML = '<div class="grid g4">' + kpi(t("Shortage alerts"), "var(--demand)", nS, "<span>" + t("Highest forecast vacancies per seeker in the trade") + "</span>") + kpi(t("Oversupply alerts"), "var(--low)", all.length - nS, "<span>" + t("Lowest forecast vacancies per seeker in the trade") + "</span>") + "</div>" +
       '<section class="card mt"><div class="card-h"><div><h2>' + tf("{0} flagged series", fmt(rows.length)) + "</h2><p>" + tf("For {0}, {1} months ahead", esc(scopeText(p)), hzs[hz]) + '</p></div><div style="display:flex;gap:8px;flex-wrap:wrap">' +
-      segment("h", [[12, tf("{0} months", 12)], [36, tf("{0} months", 36)], [60, tf("{0} months", 60)]], hzs[hz], "Months ahead") + segment("t", [["", t("Both")], ["0", t("Shortage")], ["1", t("Oversupply")]], ty < 0 ? "" : ty, "Type") + "</div></div>" +
+      modeSeg(p) + segment("h", [[12, tf("{0} months", 12)], [36, tf("{0} months", 36)], [60, tf("{0} months", 60)]], hzs[hz], "Months ahead") + segment("t", [["", t("Both")], ["0", t("Shortage")], ["1", t("Oversupply")]], ty < 0 ? "" : ty, "Type") + "</div></div>" +
       table([["Alert"], ["District"], ["State"], ["Trade"], ["Vacancies per 100 seekers", "num"], ["Percentile", "num"], ["Confidence V", "num"], ["Confidence S", "num"]], shown.map(function (a) {
         var tr = TRADES[a[4]], cov = a[7] ? a[6] / a[7] * 100 : 0;
         return '<tr class="click" data-district="' + a[3] + '" data-trade="' + tr.c + '"><td><span class="pill ' + (a[0] === 0 ? "alert" : "s4") + '">' + t(a[0] === 0 ? "Shortage alert" : "Oversupply alert") + "</span></td><td>" + esc(DNAME[a[3]]) + "</td><td>" + esc(STATES[a[2]]) + "</td><td>" + esc(tr.n) + '</td><td class="num">' + fmt(cov, 1) + '</td><td class="num">' + fmt(a[5], 0) + '</td><td class="num">' + confChip(a[8]) + '</td><td class="num">' + confChip(a[9]) + "</td></tr>";

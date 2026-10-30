@@ -5,6 +5,7 @@ import functools
 import gzip
 import http.client
 import json
+import math
 import re
 import subprocess
 import shutil
@@ -27,7 +28,7 @@ import _guard  # noqa: E402
 _guard.skip_module_unless(APP / "dashboard" / "data" / "core.js", EXP / "forecast_rollups.csv.gz", why="needs the v4 dashboard data and the phase 6 exports")
 import _v4api as A  # noqa: E402
 
-ENDPOINTS = ["forecast", "flags", "demand-index", "capacity-gap", "severity", "meta"]
+ENDPOINTS = ["forecast", "flags", "demand-index", "capacity-gap", "severity", "scenario", "meta"]
 
 
 def call(endpoint, qs="", ip="10.0.0.1", method="GET", limiter=None):
@@ -132,6 +133,46 @@ def test_severity_ranking_equals_the_capacity_tables_and_orders_correctly():
     code, _, d = call("severity", "level=series&state=Kerala&limit=3")
     assert d["total"] == 14 * 25 or d["total"] > 300
     assert call("severity", "level=series")[0] == 400 and call("severity", "level=district&trade=HLT-2221")[0] == 400 and call("severity", "order=sideways")[0] == 400 and call("severity", "year=2026,2027")[0] == 400
+
+
+def test_alert_changes_in_the_api_equal_the_transitions_file():
+    t = json.loads((APP / "dashboard" / "data" / "transitions.json").read_text(encoding="utf-8"))
+    code, _, d = call("flags", "change=entering&horizon=12&limit=1000")
+    assert code == 200 and d["total"] == t["counts"]["enter_shortage|12"] + t["counts"]["enter_oversupply|12"] and d["alerts_now"] == t["current"]
+    assert all(r["change"] == "entering" and r["first_month_in_tail"] is not None and (r["percentile_at_horizon"] >= 90 or r["percentile_at_horizon"] <= 10) for r in d["data"])
+    assert all((r["percentile_now"] < 90) if r["alert"] == "shortage" else (r["percentile_now"] > 10) for r in d["data"])
+    code, _, d = call("flags", "change=leaving&horizon=36&type=oversupply&limit=1000")
+    assert d["total"] == t["counts"]["leave_oversupply|36"] and all(r["percentile_now"] <= 10 and r["percentile_at_horizon"] > 10 and r["first_month_in_tail"] is None for r in d["data"])
+    code, _, d = call("flags", "change=entering&state=Kerala&horizon=60&limit=1000")
+    assert d["total"] == sum(1 for r in t["rows"] if r[1] == 2 and r[0] % 2 == 0 and r[2] == 3)
+    for qs in ("change=sideways", "change=entering&horizon=7", "change=entering&months=3", "change=entering&type=both"):
+        assert call("flags", qs)[0] == 400, qs
+
+
+def test_seat_scenario_follows_its_formulas_and_refuses_bad_input():
+    code, _, base = call("scenario", "level=trade&seat_change=0&year=2030&limit=25")
+    code2, _, sev = call("severity", "level=trade&year=2030&limit=25")
+    assert code == 200 and base["summary"]["rows"] == 25
+    sv = {r["trade"]: r for r in sev["data"]}
+    for r in base["data"]:
+        assert r["certified_per_opening"] == r["certified_per_opening_in_scenario"] == sv[r["trade"]]["certified_per_opening"] and r["seats"] == r["seats_in_scenario"]
+    code, _, up = call("scenario", "level=trade&seat_change=100&from_year=2028&year=2030&limit=25")
+    for r in up["data"]:
+        b = [x for x in base["data"] if x["trade"] == r["trade"]][0]
+        assert abs(r["certified_per_opening_in_scenario"] - 2 * b["certified_per_opening"]) < 2e-3 and abs(r["seats_in_scenario"] - 2 * r["seats"]) < 0.2
+        assert abs(r["score_in_scenario"] - (r["score"] + math.log(2))) < 3e-3
+    code, _, early = call("scenario", "level=trade&seat_change=100&from_year=2030&year=2029&limit=25")                  # the change starts after the year evaluated: nothing changes
+    assert all(r["certified_per_opening"] == r["certified_per_opening_in_scenario"] for r in early["data"])
+    code, _, t = call("scenario", "level=trade&target=1.5&year=2030&limit=25")
+    for r in t["data"]:
+        assert abs(r["seats_needed_for_target"] - r["seats"] * 1.5 / r["certified_per_opening"]) < 0.5 + 0.01 * r["seats_needed_for_target"], r["trade"]
+        assert abs(r["seat_change_needed_pct"] - (r["seats_needed_for_target"] / r["seats"] - 1) * 100) < 0.2
+    needing = call("scenario", "level=trade&order=needed&limit=25")[2]["data"]
+    assert [abs(r["seat_change_needed_pct"]) for r in needing] == sorted([abs(r["seat_change_needed_pct"]) for r in needing], reverse=True)
+    assert call("scenario", "level=state_trade&sector=Construction&seat_change=50&limit=5")[2]["summary"]["rows"] == 50
+    assert call("scenario", "level=series&state=Kerala&limit=2")[2]["summary"]["rows"] > 300
+    for qs in ("seat_change=-95", "seat_change=501", "seat_change=abc", "target=0.1", "target=6", "from_year=2025", "from_year=2026,2027", "year=2031", "order=zzz", "level=series", "level=trade&bogus=1"):
+        assert call("scenario", qs)[0] == 400, qs
 
 
 # ---- what it refuses ----------------------------------------------------------------------------------------------------------------------------------
@@ -263,11 +304,11 @@ def test_the_api_page_documents_every_endpoint_and_parameter():
     for ep in ENDPOINTS:
         assert f"<code>/api/{ep}</code>" in main, ep
     src = (APP / "api" / "_v4api.py").read_text(encoding="utf-8")
-    for fn, name in (("api_forecast", "forecast"), ("api_flags", "flags"), ("api_demand_index", "demand-index"), ("api_capacity_gap", "capacity-gap"), ("api_severity", "severity")):
+    for fn, name in (("api_forecast", "forecast"), ("api_flags", "flags"), ("api_demand_index", "demand-index"), ("api_capacity_gap", "capacity-gap"), ("api_severity", "severity"), ("api_scenario", "scenario")):
         allowed = re.search(rf'def {fn}\(q\):\n(?:    """.*\n)?    q = parse_query\(q, \(([^)]*)\)', src).group(1)
         for p in re.findall(r'"(\w+)"', allowed):
             assert f"<code>{p}</code>" in main, (name, p)                                   # every accepted parameter is documented
-    for p in ("measure", "horizon", "detail", "type", "resolution", "limit", "offset", "state", "district", "sector", "trade", "level", "order", "year"):
+    for p in ("measure", "horizon", "detail", "type", "resolution", "limit", "offset", "state", "district", "sector", "trade", "level", "order", "year", "seat_change", "from_year", "target"):
         assert f"<code>{p}</code>" in main, p
     for status in ("200", "400", "404", "405", "429"):
         assert f"<code>{status}</code>" in main, status
@@ -318,6 +359,52 @@ def test_the_readme_counts_and_links_are_right():
         assert v in readme, v
     plan = (ROOT / "docs" / "v4-implementation-plan.md").read_text(encoding="utf-8")
     assert "### Phase 9:" in plan and "Result" in plan[plan.index("### Phase 9:"):plan.index("## Risks")]
+
+
+def test_the_methodology_document_quotes_the_exports_correctly():
+    doc = (ROOT / "docs" / "METHODOLOGY.md").read_text(encoding="utf-8")
+    ev = ROOT / "reports" / "v4" / "evaluation"
+    tm = pd.read_csv(ev / "test_metrics.csv")
+    sm = pd.read_csv(ev / "stress_metrics.csv")
+    for k, nm in (("E", "Employed workers"), ("V", "Job vacancies"), ("S", "Registered job seekers")):
+        g = tm[(tm.slice == "all") & (tm.band == "all horizons") & (tm.target == k)].iloc[0]
+        h = sm[(sm.slice == "all") & (sm.band == "all horizons") & (sm.target == k)].iloc[0]
+        row = [line for line in doc.splitlines() if line.startswith(f"| {nm} |") and "%" in line][-1]
+        cells = [c.strip() for c in row.strip("|").split("|")]
+        gain = f"{g.improvement_vs_best_baseline_pct:.1f}%".replace("-", "−")
+        sgain = f"{h.improvement_vs_best_baseline_pct:.1f}%".replace("-", "−")
+        assert cells == [nm, f"{g.wape_model:.2f}%", f"{g.wape_best_baseline:.2f}%", gain, f"{h.wape_model:.2f}%", f"{h.wape_best_baseline:.2f}%", sgain], (k, cells)
+    cv = pd.read_csv(ev / "interval_coverage.csv")
+    cv = cv[(cv.slice == "all") & (cv.calibration == "forward") & (cv.window == "test")].set_index("target").coverage
+    assert f"{round(100 * cv['E'])}% of employed-worker outcomes, {round(100 * cv['V'])}% of vacancies and {round(100 * cv['S'])}% of seekers" in doc
+    fp = pd.read_csv(ev / "flag_precision.csv")
+    fp = fp[(fp.window == "test") & (fp.volume == "all") & (fp.band == "1-12") & (fp.flag == "Shortage alert")].set_index("source").precision_decile
+    assert f"{100 * fp['model']:.1f}% against {100 * fp['persistence']:.1f}% for shortage alerts" in doc
+    tr = json.loads((APP / "dashboard" / "data" / "transitions.json").read_text(encoding="utf-8"))
+    assert f"of the {tr['current']['shortage']} shortage and {tr['current']['oversupply']} oversupply alerts now, {tr['counts']['leave_shortage|12']} and {tr['counts']['leave_oversupply|12']} are out of their tail 12 months ahead ({tr['counts']['leave_shortage|36']} and {tr['counts']['leave_oversupply|36']} at 36 months), and {tr['counts']['enter_shortage|12']} and {tr['counts']['enter_oversupply|12']} have moved in" in doc
+    chk = json.loads((ROOT / "reports" / "v4" / "forecast" / "demand_index_check.json").read_text(encoding="utf-8"))["v_only_vs_three_channels_by_year"]
+    corr = [v["correlation"] for v in chk.values()]
+    assert f"{min(corr):.2f} to {max(corr):.2f}" in doc and f"({chk['2025']['correlation']:.2f} in 2025)" in doc
+    assert 7.5 <= min(v["mean_abs_difference"] for v in chk.values()) and max(v["mean_abs_difference"] for v in chk.values()) <= 10.5 and "8 to 10 index points" in doc
+    best = json.loads((ev / "best_params.json").read_text(encoding="utf-8"))
+    for k, word in (("E", "employed"), ("V", "vacancies"), ("S", "seekers")):
+        assert f"{word} " + ", ".join(str(best[k]["trees_by_band"][b]) for b in ("1-12", "13-24", "25-36", "37-48", "49-60")) in doc, k
+    summ = json.loads((ev / "test_summary.json").read_text(encoding="utf-8"))
+    assert f"({len(summ['inputs'])} of 119 candidates)" in doc
+    sys.path.append(str(ROOT / "src" / "v4"))
+    import capacity as CAP
+    import early_warning as EW
+    assert f"percentile ≥ {EW.ALERT:g}" in doc and f"{EW.WATCH:g} to {EW.ALERT:g}" in doc and f"**High** up to {EW.HIGH_WAPE:g}%" in doc and f"**Medium** up to {EW.MEDIUM_WAPE:g}%" in doc
+    assert [n for n, _ in CAP.SEVERITY_BANDS] == ["severe", "high", "moderate"] and "severe at 2 (or ½) or more, high at 1.5, moderate at 1.25" in doc
+    assert abs(math.exp(CAP.SHORT) - 0.6) < 0.01 and abs(math.exp(CAP.SURPLUS) - 1.65) < 0.01 and "under 0.6 times" in doc and "over 1.65 times" in doc
+    for rel in re.findall(r"`((?:src|tests|docs|reports|data)/[A-Za-z0-9_./-]+)`", doc):
+        assert (ROOT / rel).exists() or rel.startswith("data/v4/exports/"), rel
+    ex = EXP / "demand_index.parquet"
+    if ex.exists():
+        dim = pd.read_csv(ROOT / "data" / "v4" / "dim_series.csv")
+        di = pd.read_parquet(ex)
+        row = int(dim.index[(dim.District_LGD_Code == 118) & (dim.Trade_Code == "CON-7111")][0])
+        assert abs(float(di[(di.series_row == row) & (di.month == "2025-12")].DI.iloc[0]) - 77.9) < 0.06 and "**77.9**" in doc
 
 
 # ---- accessibility checks that need no browser ------------------------------------------------------------------------------------------------------

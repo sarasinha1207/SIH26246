@@ -15,6 +15,7 @@ PAGES = ["index.html", "about.html", "resources.html"]           # the public pa
 FC = ROOT / "outputs" / "forecasts" / "origin_2026-10"
 V4 = ROOT / "data" / "v4"
 sys.path.insert(0, str(ROOT / "src" / "app"))
+sys.path.append(str(ROOT / "src" / "v4"))
 
 
 def data():
@@ -191,7 +192,7 @@ def test_about_page_sections_are_in_a_professional_order_with_no_repeated_headin
     assert ids == ["project", "timeline", "dataset", "principles", "engine", "measures", "evaluation", "limits"], ids       # project, overview, data, principles, architecture, measures, results, limits
     assert len(re.findall(r"<section", main)) == 8                                     # the hero is the "About the project" section
     heads = [re.sub(r"<[^>]+>", "", h) for h in re.findall(r"<h2[^>]*>(.*?)</h2>", main)]
-    assert heads == ["Forecasts", "Honest ranges", "Demand and capacity", "How it works", "Dataset used", "Model engine overview and core principles", "Machine learning engine and architecture", "Demand Index, capacity gap and early warnings",
+    assert heads == ["Forecasts", "Honest ranges", "Demand and capacity", "How it works", "Dataset used", "Model engine overview and core principles", "Machine learning engine and architecture", "Demand Index, capacity gap, severity and early warnings",
                      "Model evaluation achievements", "What to keep in mind"], heads
     assert re.search(r"<h1[^>]*>About the project</h1>", main) and main.count("<h1") == 1 and "page-head big" in main
     assert 'class="eyebrow"' not in main and "In more detail" not in main                 # no label repeating a heading
@@ -307,7 +308,7 @@ def test_dark_first_app_style_home_page_without_updates():
     assert "Smart India Hackathon" not in home[home.index("<main"):home.index("</main>")] and "map-details" not in home and "Show every district as a table" not in home    # no hero pill, no table under the map
     assert 'class="open"' not in home and 'eyebrow">Features' not in home and "The weak spot, stated plainly" not in home and 'class="callout"' not in home
     assert "twelve months early" not in home and "56 districts" not in home and 'data-count="280"' not in home and "280 district" not in home
-    assert 'id="features"' in home and home.count('<article class="card"><span class="icon-box">') == 12 and home.index('id="how"') < home.index('id="features"') < home.index("Measured, not asserted")
+    assert 'id="features"' in home and home.count('<article class="card"><span class="icon-box">') == 16 and home.index('id="how"') < home.index('id="features"') < home.index("Measured, not asserted")
     assert home.index('id="map"') < home.index('id="how"')                     # the map comes before the method
     assert len(re.findall(r'class="how-step( on)?"', home)) == 4 and len(re.findall(r'class="how-panel( on)?"', home)) == 4
     for n in ('data-count="10"', 'data-count="317"', 'data-count="7925"', 'data-count="60"'):
@@ -344,6 +345,23 @@ def test_map_data_matches_the_forecast_files_and_the_district_list():
         for k in "EVS":
             assert len(M["confidence"][s][k]) == 3 and all(w.split(" ")[0] in ("high", "medium", "low") for w in M["confidence"][s][k])
     assert M["source"]["licence"] == "CC0-1.0 / CC-BY-4.0" and M["origin"] == "2025-12"
+
+
+def test_the_public_pages_describe_the_newer_features():
+    home, about, res = read("index.html"), read("about.html"), read("resources.html")
+    sec = about[about.index('id="measures"'):about.index('id="evaluation"')]
+    assert sec.count('<article class="card">') == 6 and "Six readings" in sec
+    for needle in ("Severity ranking", "Seat scenarios", "Alerts that begin or end", "methodology document", 'href="docs/api.html"'):
+        assert needle in sec, needle
+    assert "ratio of 2 or more either way is severe, 1.5 high and 1.25 moderate" in sec                                  # the bands of capacity.py
+    import capacity as CAP
+    assert [n for n, _ in CAP.SEVERITY_BANDS] == ["severe", "high", "moderate"]
+    for needle in ("Severity ranking", "Seat scenarios", "Alerts that begin or end", "A read-only API", "state borders", "methodology document"):
+        assert needle in home, needle
+    assert "alerts that begin or end" in res and "severity ranking and seat scenarios" in res and 'href="docs/api.html"' in res and "methodology document" in res
+    assert "unless you test another number with a seat scenario" in about
+    for p in ("index.html", "about.html", "resources.html"):
+        assert read(p).count("data-hi=") > 30, p
 
 
 def test_hindi_text_is_complete_and_keeps_the_markup():

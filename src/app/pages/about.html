@@ -13,7 +13,7 @@
         <div class="grid1">
           <article class="card"><h2>Forecasts</h2><p>Sixty months ahead for 7,925 district and trade series, from January 2026 to December 2030.</p></article>
           <article class="card"><h2>Honest ranges</h2><p>A usual and a wider 90% range, a simple baseline to compare with and a confidence label beside every forecast.</p></article>
-          <article class="card"><h2>Demand and capacity</h2><p>A Demand Index from 0 to 100, a capacity gap against training seats, and early warnings for the tightest and loosest tenth of districts.</p></article>
+          <article class="card"><h2>Demand and capacity</h2><p>A Demand Index from 0 to 100, a capacity gap against training seats with seat scenarios, a severity ranking, and early warnings for the tightest and loosest tenth of districts.</p></article>
         </div>
       </div>
     </div>
@@ -158,13 +158,16 @@
   <section class="section alt" id="measures">
     <div class="wrap">
       <div class="sec-head">
-        <h2>Demand Index, capacity gap and early warnings</h2>
-        <p>Three readings built on the forecasts, each defined in a few lines so that it can be checked.</p>
+        <h2>Demand Index, capacity gap, severity and early warnings</h2>
+        <p>Six readings built on the forecasts, each defined in a few lines so that it can be checked. The full method, with a worked example, is written out in the project's methodology document, and every number is served by the <a class="ulink" href="docs/api.html">read-only API</a>.</p>
       </div>
       <div class="grid3">
         <article class="card"><h3>Demand Index</h3><p>A number from 0 to 100 for a district and trade in a month. It compares openings per worker, from vacancies, job-portal postings and the National Career Service, with the other districts of the same trade, and adds a national level term so that it moves over the years. 50 is the median district at the 2018 to 2019 level; forecast months use the forecast vacancies only.</p></article>
         <article class="card"><h3>Capacity gap</h3><p>Forecast openings for each year against the training seats sanctioned in 2025 to 2026, held flat, and the trainees expected to be certified, which is the seats times the 2023 to 2025 certification rate. Seats fall short where a district's share of seats is under 0.6 times its share of openings in the trade, and exceed demand above 1.65 times.</p></article>
         <article class="card"><h3>Early warnings</h3><p>In each trade and month, districts are ranked by forecast vacancies per registered seeker. The top tenth is a shortage alert and the bottom tenth an oversupply alert; the next fifteen per cent either side is a watch. The flag is relative: it says which districts stand out, not that openings exceed seekers.</p></article>
+        <article class="card"><h3>Severity ranking</h3><p>Score = the natural log of the trainees expected to be certified in a year divided by the average monthly openings. Below zero is undersupply and above zero oversupply; a ratio of 2 or more either way is severe, 1.5 high and 1.25 moderate. Trades, states, state and trade, districts, district and sector, and district and trade can be ranked for any year to 2030, within any filter.</p></article>
+        <article class="card"><h3>Seat scenarios</h3><p>Multiply the seats by a percentage from a chosen year and see the ratio and the severity before and after, and the seats needed to reach a target. The certification rate and the forecast openings stay as they are, and no delay is modelled between sanctioning a seat and certifying a trainee.</p></article>
+        <article class="card"><h3>Alerts that begin or end</h3><p>The actual tightness of December 2025 is compared with the forecast at 12, 36 or 60 months, to list the series that enter or leave an alert tail and the first month they are in it. Alerts mostly persist: about one in eight of today's is out of its tail after 12 months, and about as many move in.</p></article>
       </div>
     </div>
   </section>
@@ -206,7 +209,7 @@
       <div class="grid3">
         <article class="card"><h3>The data is simulated</h3><p>It behaves like official statistics but describes no real district, so no figure is an official statistic.</p></article>
         <article class="card"><h3>Totals need the wider range</h3><p>Errors of neighbouring series move together, so the usual range for a state or for India held only about six times in ten in calm years and almost never in the shock years. Totals show the wider range as well.</p></article>
-        <article class="card"><h3>Seats are held flat</h3><p>The capacity gap assumes today's seats for every year to 2030, and reads best as a ranking of where capacity is stretched rather than a count of unfilled places.</p></article>
+        <article class="card"><h3>Seats are held flat</h3><p>The capacity gap assumes today's seats for every year to 2030 unless you test another number with a seat scenario, and reads best as a ranking of where capacity is stretched rather than a count of unfilled places.</p></article>
         <article class="card"><h3>Long horizons are looser</h3><p>Forecasts beyond two years rest on how districts behaved before 2020, and seeker forecasts are the least reliable. Treat the fifth year as a direction, not a figure.</p></article>
         <article class="card"><h3>Ranges for some views are missing</h3><p>For combinations such as one trade across a state, no checked range exists, so only the forecast itself is drawn and the dashboard says so.</p></article>
         <article class="card"><h3>Shocks cannot be forecast</h3><p>A pandemic or a new registration drive would break the pattern the models learned. The wide range allows for some of it, not all.</p></article>

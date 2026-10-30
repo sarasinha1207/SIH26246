@@ -106,7 +106,7 @@
     map: "The 317 districts on a map, coloured by vacancies, employed workers, job seekers or the Demand Index 12, 36 or 60 months ahead, with the states, the highest and lowest districts and where the alerts are.",
     forecast: "Five-year forecasts of employed workers, vacancies or seekers with a usual and a wider 90% range, December values and a trade table.",
     index: "The Demand Index (0 to 100) over time, states by sector or trade, and the districts with the highest and lowest index in a sector.",
-    capacity: "Forecast openings against training seats and expected certified trainees by year, and by trade or state.",
+    capacity: "Forecast openings against training seats and expected certified trainees by year, and by trade or state, with a seat scenario: change the seats and see the ratio, the severity and the seats a target needs.",
     ranking: "The severity ranking (trades, states, districts and district-trades ordered by how far trained supply is from the openings, filterable and downloadable) and fixed all-India lists: fastest and slowest vacancy growth, where trained supply is most stretched or in surplus, and the districts with the highest Demand Index per sector.",
     warnings: "Every shortage and oversupply alert 12, 36 or 60 months ahead, with confidence labels, for the current filters.",
     data: "Coverage of the dataset, how often the ranges held in testing, how accurate the alerts were, definitions and the notes on limits."
@@ -120,7 +120,7 @@
   }
   function dashLink(page, f, label) {
     var parts = [];
-    ["sector", "trade", "state", "district", "k", "h", "t"].forEach(function (k) { if (f && f[k] !== "" && f[k] != null) parts.push(k + "=" + encodeURIComponent(f[k])); });
+    ["sector", "trade", "state", "district", "k", "h", "t", "c"].forEach(function (k) { if (f && f[k] !== "" && f[k] != null) parts.push(k + "=" + encodeURIComponent(f[k])); });
     return { label: label, href: (IS_DASH() ? "" : BASE + "dashboard/index.html") + "#/" + page + (parts.length ? "?" + parts.join("&") : "") };
   }
 
@@ -283,8 +283,15 @@
     if (any(q, ["download", "csv", "json", "export", "save"])) return reply("Use CSV or JSON above the page for the table you are looking at; both follow the current filters.", {});
     if (any(q, ["filter", "reset", "clear"])) return reply("The Sector, Trade, State and District filters sit above every page and are kept in the address, so a view can be shared. Reset filters clears all four.", {});
     if (any(q, ["exit", "leave", "log out", "logout", "sign out", "close the dash"])) return reply("Use Exit in the top bar or the sidebar to return to the public site. There is no login.", {});
+    if (!isDef && any(q, ["entering", "leaving", "newly flagged", "new alert", "about to become", "will become", "start to"])) {
+      var lv = any(q, ["leaving", "exit", "stop being"]) ? "leave" : "enter";
+      return reply("Alerts that begin or end are on the Early warnings page: choose Entering an alert or Leaving an alert, a horizon of 12, 36 or 60 months, and the filters. A series is entering when it is not in the top or bottom tenth of its trade now (December 2025, actual) but is at the horizon; leaving is the reverse. Most alerts persist: about one in eight of today's alerts is out of its tail 12 months ahead, and about as many move in.", { links: [dashLink("warnings", Object.assign(urlFilters(e), { c: lv, h: h ? [12, 36, 60][h <= 24 ? 0 : h <= 48 ? 1 : 2] : 12 }), "Open " + (lv === "enter" ? "entering" : "leaving") + " alerts")] });
+    }
     if (!isDef && any(q, ["alert", "watch", "shortage", "oversupply", "warning", "flag", "risk"])) return alertsReply(D, q, e, h);
     if (!isDef && any(q, ["demand index", "hiring demand", "index of"])) return indexReply(D, e, h);
+    if (any(q, ["scenario", "what if", "add seats", "more seats", "fewer seats", "seats needed", "how many seats", "increase seats", "reduce seats"])) {
+      return reply("The seat scenario is on the Capacity gap page, below the table: choose a percentage change in seats, the year it starts, the year to evaluate and a target for certified trainees per opening. It shows the ratio and the severity before and after, and the seats each trade or place would need to reach the target. The same is at /api/scenario. It assumes the certification rate and the forecast openings stay as they are, with no delay between sanctioning a seat and certifying a trainee.", { links: [dashLink("capacity", urlFilters(e), "Open the seat scenario")] });
+    }
     if (!isDef && any(q, ["undersuppl", "oversuppl", "severity", "severe", "most short"])) return severityReply(D, q, e, h);
     if (!isDef && any(q, ["stretched", "most surplus"])) return rankingReply(D, q, e);
     if (!isDef && any(q, ["capacity", "seats", "certified", "training seat", "trained"])) return capacityReply(D, e, h);

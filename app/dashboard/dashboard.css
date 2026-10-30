@@ -233,3 +233,9 @@ ul.plain { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; color: var(-
 .sev i.over { background: var(--supply); }
 .seg-wrap { display: flex; flex-wrap: wrap; gap: 8px 14px; margin: 4px 0 12px; }
 .sub-h { font-size: 1.05rem; margin: 26px 0 12px; }
+
+/* ---- v4: the seat scenario ---- */
+.scn-form { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: flex-end; margin: 6px 0 16px; }
+.scn-form label { display: grid; gap: 4px; }
+.scn-form label span { font: 600 .68rem var(--font); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); }
+.scn-form input { font: 550 .86rem var(--font); color: var(--ink); background: var(--surface-2); border: 1px solid var(--line); border-radius: 9px; padding: 8px 10px; width: 120px; }

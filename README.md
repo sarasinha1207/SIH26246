@@ -14,7 +14,7 @@ KaushalSetu is an AI-enabled labour market intelligence and skill demand-supply 
 - **Category**: Software
 - **Theme**: Miscellaneous
 
-The first submission (v3: 56 districts, twelve-month forecasts) is preserved at the git tag `submitted-v1`; this branch is the extended version (v4). The plan and the results of every phase are in `docs/v4-implementation-plan.md`.
+The first submission (v3: 56 districts, twelve-month forecasts) is preserved at the git tag `submitted-v1`; this branch is the extended version (v4). The plan and the results of every phase are in `docs/v4-implementation-plan.md`. The method, step by step, with the Demand Index formula, a worked example, the evaluation and the limits, is in `docs/METHODOLOGY.md`.
 
 ![System architecture](docs/system-architecture.svg)
 
@@ -30,17 +30,18 @@ The first submission (v3: 56 districts, twelve-month forecasts) is preserved at 
 * **Demand Index** (0 to 100) from vacancies, job-portal postings and National Career Service openings per worker, compared with the other districts of the same trade, with a national level term so that it moves over the years.
 * **Capacity gap**: forecast openings against sanctioned training seats (held flat, an assumption) and expected certified trainees, by year, trade, state and district, with a relative mismatch status.
 * **Severity ranking**: trades, states, state-trade pairs, districts, district-sectors and district-trades ranked by how far trained supply is from the openings (score = ln of certified per opening; severe, high, moderate, balanced; undersupply or oversupply), for any year to 2030, filterable, on the Rankings page and at `/api/severity`.
-* **Early-warning alerts**: in each trade and month the top and bottom tenth of districts by forecast vacancies per seeker, with watches either side; their precision against persistence is reported.
+* **Seat scenarios**: change the seats by a percentage from a chosen year (for a trade, a state's trades or a district's trades) and see the ratio and severity before and after and the seats needed to reach a target, on the Capacity gap page and at `/api/scenario`.
+* **Early-warning alerts**: in each trade and month the top and bottom tenth of districts by forecast vacancies per seeker, with watches either side; their precision against persistence is reported. The Early warnings page and `/api/flags?change=entering|leaving` also show which series **enter or leave** an alert tail between now and 12, 36 or 60 months ahead, and the first month a series is in the tail.
 
 **Public website** (Home, About, Resources, API page): a map of all 317 districts with the state borders drawn (sector, measure, 12/36/60 months, a keyboard "find a district" list), a hero forecast chart, the method, the evaluation stated honestly (including the shock years), English and Hindi, light and dark themes, three text sizes, reduced-motion support.
 
 **Dashboard** (`app/dashboard/`): Overview, Map (all 317 districts with state borders, the states, the highest and lowest districts and where the alerts are), Forecast, Demand Index, Capacity gap, Rankings, Early warnings, and Data and notes; filters for sector, trade, state and district kept in the URL; two-band charts; CSV and JSON download of any table; data loaded per state on demand; English and Hindi (names included).
 
-**Forecast API** (`/api/forecast`, `/flags`, `/demand-index`, `/capacity-gap`, `/severity`, `/meta`): GET only, filters as on the dashboard, no key; refuses bad input, rate limited, standard library only. Documented at `docs/api.html` on the site.
+**Forecast API** (`/api/forecast`, `/flags`, `/demand-index`, `/capacity-gap`, `/severity`, `/scenario`, `/meta`): GET only, filters as on the dashboard, no key; refuses bad input, rate limited, standard library only. Documented at `docs/api.html` on the site.
 
 **Assistant**: answers in the browser from the site's own data (totals, a district, ranges, Demand Index, capacity, alerts, rankings, definitions); optionally words answers with Google Gemini through a server route that keeps the key off the page.
 
-**Engineering**: every number on the site is built from the exports and checked against them; SHA-256 manifests; leak-safe splits by calendar time with the test and stress windows opened once; 256 automated tests; security headers; an accessibility audit script and fixes.
+**Engineering**: every number on the site is built from the exports and checked against them; SHA-256 manifests; leak-safe splits by calendar time with the test and stress windows opened once; 264 automated tests; security headers; an accessibility audit script and fixes.
 
 ## 3. Technology stack
 | Layer | Technology |
@@ -51,7 +52,7 @@ The first submission (v3: 56 districts, twelve-month forecasts) is preserved at 
 | Uncertainty | Split-conformal ranges on the log change, by horizon, with leave-one-window-out checks (own implementation) |
 | Front end | Hand-written HTML, CSS and JavaScript; SVG charts and map; Geist and Noto Sans Devanagari; no build tool or framework |
 | Internationalisation | English and Hindi via generated `data-hi` attributes (BeautifulSoup 4 at build time) and a names dictionary |
-| Backend | Python standard library `http.server` (local server); seven Vercel Python functions (`/api/chat` and the six forecast API routes) |
+| Backend | Python standard library `http.server` (local server); eight Vercel Python functions (`/api/chat` and the seven forecast API routes) |
 | AI assistant | Rule-based engine in the browser; Google Gemini REST API (optional, server-side key) |
 | Testing | Plain-Python test files (no framework needed; pytest also works); Node.js only to syntax-check and run the assistant engine |
 | Data formats | CSV, Parquet, JSON, GeoJSON, SVG |
@@ -97,7 +98,7 @@ Employed workers 14.29% against 16.65% (14% closer), vacancies 20.57% against 24
 * Confidence labels fall from high to low for employed workers on the test years; for seekers the order is not reliable and the site says so.
 
 ## 6. Tests done and their overview
-**256 automated tests in 23 files.** Run any file with `python tests/<name>.py` (no pytest needed); tests that need git-ignored data skip with a message on a fresh clone.
+**264 automated tests in 23 files.** Run any file with `python tests/<name>.py` (no pytest needed); tests that need git-ignored data skip with a message on a fresh clone.
 
 | Area | Test file | Tests | What it proves |
 |---|---|---|---|
@@ -183,6 +184,7 @@ python tests/test_chat.py
 ├── tests/                     23 test files, a shared guard helper, the assistant runner and the accessibility audit
 └── docs/
     ├── v4-implementation-plan.md   the plan and the result of every phase
+    ├── METHODOLOGY.md              the method: Demand Index, forecasting, ranges, flags, capacity gap, evaluation, limits
     ├── RUNBOOK.md                  refresh, checks, deployment, rollback
     ├── system-architecture.svg  ml-lifecycle.svg
     └── reference/ screenshots/     data dictionaries and the v3 screenshots

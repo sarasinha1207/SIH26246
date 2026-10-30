@@ -24,6 +24,7 @@ import numpy as np
 import pandas as pd
 
 import capacity as CAP
+import early_warning as EW
 import config as C
 import exports as EX
 import rollups as RU
@@ -163,6 +164,39 @@ def severity_table(cap):
     return {f"{d}|{s}": [int(first.loc[(d, s), "seats"]), round(float(first.loc[(d, s), "expected_certified"]), 1)] + [round(float(v), 1) for v in vac.loc[(d, s)]] for d, s in vac.index}
 
 
+def transitions(dim, series, fc):
+    """Which series enter or leave an alert tail between now (December 2025, the actual vacancies per registered seeker) and 12, 36 and 60 months ahead.
+
+    Percentiles are among the districts of the same trade, as for the forecast flags (forecast.py): ln(max(V, .5)) - ln(max(S, .5)).  Shortage tail: percentile >= 90; oversupply tail: <= 10.
+    enter_*: not in the tail now, in it at the horizon; leave_*: in it now, not at the horizon.  `first` is the first month (1..60) at which the series is in the tail."""
+    n0 = N_HIST_CORE
+    cur = np.log(np.maximum(series["V"][:, n0 - 1], 0.5)) - np.log(np.maximum(series["S"][:, n0 - 1], 0.5))
+    trade = dim.Trade_Code.to_numpy()
+    cur_p = (pd.DataFrame({"x": cur, "t": trade}).groupby("t").x.rank(pct=True) * 100).to_numpy()
+    fp = fc.pivot(index="series_row", columns="horizon", values="coverage_pct").sort_index().to_numpy(np.float64)
+    ALERT = EW.ALERT
+    types = ["enter_shortage", "leave_shortage", "enter_oversupply", "leave_oversupply"]
+    st = {s_: i for i, s_ in enumerate(C.STATES)}
+    tix = {c: i for i, c in enumerate(dict.fromkeys(dim.Trade_Code))}
+    short_now, over_now = cur_p >= ALERT, cur_p <= 100 - ALERT
+    rows, counts = [], {}
+    for hi, h in enumerate((12, 36, 60)):
+        p = fp[:, h - 1]
+        short_h, over_h = p >= ALERT, p <= 100 - ALERT
+        masks = {"enter_shortage": ~short_now & short_h, "leave_shortage": short_now & ~short_h, "enter_oversupply": ~over_now & over_h, "leave_oversupply": over_now & ~over_h}
+        for ti, name in enumerate(types):
+            idx = np.where(masks[name])[0]
+            counts[f"{name}|{h}"] = int(len(idx))
+            tail = (fp >= ALERT) if "shortage" in name else (fp <= 100 - ALERT)
+            for i in idx:
+                first = int(np.argmax(tail[i]) + 1) if name.startswith("enter") and tail[i].any() else 0
+                rows.append([ti, hi, st[dim.State_Name.iloc[i]], int(dim.District_LGD_Code.iloc[i]), tix[dim.Trade_Code.iloc[i]], round(float(cur_p[i]), 1), round(float(p[i]), 1), first,
+                             int(series["V"][i, n0 - 1]), int(series["S"][i, n0 - 1]), int(series["V"][i, n0 + h - 1]), int(series["S"][i, n0 + h - 1])])
+    return {"types": types, "horizons": [12, 36, 60], "columns": ["type", "horizon_index", "state", "district_lgd", "trade", "percentile_now", "percentile_at_horizon", "first_month_in_tail", "V_now", "S_now", "V_at_horizon", "S_at_horizon"],
+            "note": "percentile among the districts of the trade; shortage tail >= 90, oversupply tail <= 10; first_month_in_tail is the first forecast month (1-60) in the tail, 0 for a series that leaves a tail",
+            "current": {"shortage": int(short_now.sum()), "oversupply": int(over_now.sum())}, "counts": counts, "rows": rows}
+
+
 def main():
     ex = C.DATA / "exports"
     dim = pd.read_csv(C.DATA / "dim_series.csv")
@@ -201,6 +235,7 @@ def main():
     (OUT / "alerts.js").write_text("window.DASH4_ALERTS=" + jdump({"columns": ["type(0 shortage,1 oversupply)", "horizon(0=12,1=36,2=60)", "state", "district_lgd", "trade", "coverage_pct", "V", "S", "V_conf", "S_conf"], "rows": rows}) + ";\n", encoding="utf-8")
 
     names_hi(dim)
+    (OUT / "transitions.json").write_text(jdump(transitions(dim, series, fc)), encoding="utf-8")
     info = shard_docs(dim, fc, di, series, d, cap, confidence_letters(fc, dim))
     (OUT / "shards" / "index.json").write_text(json.dumps({"states": info}, indent=1), encoding="utf-8")
     shell()

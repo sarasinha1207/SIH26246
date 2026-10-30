@@ -275,7 +275,7 @@ def test_the_key_is_not_committed_and_the_deployment_files_are_in_place():
     assert req.exists() and not [l for l in req.read_text(encoding="utf-8").splitlines() if l.strip() and not l.lstrip().startswith("#")], "app/requirements.txt must list no packages"
     assert not (ROOT / "app" / "pyproject.toml").exists() and not (ROOT / "api").exists() and not (ROOT / "vercel.json").exists()
     cfg = json.loads((ROOT / "app" / "vercel.json").read_text(encoding="utf-8"))
-    assert set(cfg["functions"]) == {"api/chat.py"} | {f"api/{n}.py" for n in ("forecast", "flags", "demand-index", "capacity-gap", "severity", "meta")} and cfg["functions"]["api/chat.py"]["maxDuration"] <= 60      # the assistant and the read-only forecast API (phase 9)
+    assert set(cfg["functions"]) == {"api/chat.py"} | {f"api/{n}.py" for n in ("forecast", "flags", "demand-index", "capacity-gap", "severity", "scenario", "meta")} and cfg["functions"]["api/chat.py"]["maxDuration"] <= 60      # the assistant and the read-only forecast API (phase 9)
     assert "/api/chat" in (ROOT / "src" / "app" / "serve.py").read_text(encoding="utf-8")
 
 

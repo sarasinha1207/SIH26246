@@ -216,6 +216,39 @@ def test_the_dashboard_has_a_hindi_name_for_every_state_district_and_trade():
     assert 'src="data/names_hi.js' in shell()
 
 
+def test_alert_changes_equal_a_recomputation_from_the_state_files():
+    """Entering and leaving counts from transitions.json equal ranks recomputed from the tracked shards: actual V and S of December 2025 now, forecast percentiles at the horizon."""
+    t = json.loads((DATA / "transitions.json").read_text(encoding="utf-8"))
+    assert t["horizons"] == [12, 36, 60] and t["types"] == ["enter_shortage", "leave_shortage", "enter_oversupply", "leave_oversupply"] and (DATA / "transitions.json").stat().st_size < 150e3
+    trades = [x["c"] for x in core()["meta"]["trades"]]
+    recs = []
+    for st in C.STATES:
+        sh = json.loads((DATA / "shards" / (re.sub(r"[^a-z0-9]+", "-", st.lower()).strip("-") + ".json")).read_text(encoding="utf-8"))
+        for i in range(len(sh["ids"])):
+            recs.append({"trade": trades[sh["t"][i]], "d": sh["d"][i], "v": sh["hist"]["V"][i][-1], "s": sh["hist"]["S"][i][-1], "cov": sh["cov"][i]})
+    df = pd.DataFrame(recs)
+    df["cur"] = np.log(np.maximum(df.v, 0.5)) - np.log(np.maximum(df.s, 0.5))
+    df["cur_p"] = df.groupby("trade").cur.rank(pct=True) * 100
+    assert len(df) == C.n_series() and t["current"] == {"shortage": int((df.cur_p >= 90).sum()), "oversupply": int((df.cur_p <= 10).sum())}
+    for h in (12, 36, 60):
+        p = df["cov"].apply(lambda c: c[h - 1])
+        want = {"enter_shortage": int(((df.cur_p < 90) & (p >= 90)).sum()), "leave_shortage": int(((df.cur_p >= 90) & (p < 90)).sum()),
+                "enter_oversupply": int(((df.cur_p > 10) & (p <= 10)).sum()), "leave_oversupply": int(((df.cur_p <= 10) & (p > 10)).sum())}
+        assert {k: t["counts"][f"{k}|{h}"] for k in want} == want, h
+    assert len(t["rows"]) == sum(t["counts"].values())
+    for r in t["rows"][:50]:
+        assert (r[7] >= 1) == (r[0] % 2 == 0) and r[7] <= 60 and 0 <= r[5] <= 100 and 0 <= r[6] <= 100, r
+    j = js()
+    assert "function renderChanges" in j and 'p.c === "enter"' in j and "data/transitions.json" in j and "function modeSeg" in j
+
+
+def test_the_seat_scenario_card_uses_the_documented_formulas():
+    j = js()
+    assert "function scenarioCard" in j and "seatsS = y >= fy ? r.seats * k : r.seats" in j and "need = v * tg / rate" in j and "cert * seatsS / r.seats / v" in j
+    assert 'id="sc-apply"' in j and "downloadCsv(fname(\"seat_scenario_" in j and "return scenarioCard(p, view)" in j
+    assert "seat scenarios" in (ROOT / "docs" / "METHODOLOGY.md").read_text(encoding="utf-8").lower() or "Seat scenario." in (ROOT / "docs" / "METHODOLOGY.md").read_text(encoding="utf-8")
+
+
 def test_the_files_the_browser_loads_stay_within_the_size_budget():
     assert (DATA / "core.js").stat().st_size < 1.5e6 and (DATA / "alerts.js").stat().st_size < 3e5
     sizes = [p.stat().st_size for p in (DATA / "shards").glob("*.json") if p.name != "index.json"]

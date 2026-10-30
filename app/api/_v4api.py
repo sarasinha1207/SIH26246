@@ -1,5 +1,5 @@
 """
-Forecast API, server side - a read-only JSON view of the v4 forecast: /api/forecast, /api/flags, /api/demand-index, /api/capacity-gap, /api/severity and /api/meta.
+Forecast API, server side - a read-only JSON view of the v4 forecast: /api/forecast, /api/flags, /api/demand-index, /api/capacity-gap, /api/severity, /api/scenario and /api/meta.
 
 One module serves the five Vercel functions (app/api/forecast.py and its siblings) and the local server (src/app/serve.py).  Standard library only.
 Data: the files the dashboard already loads (app/dashboard/data/core.js, alerts.js and the per-state shards), so the API and the dashboard can never disagree.
@@ -54,6 +54,11 @@ def core():
 @lru_cache(maxsize=1)
 def alerts():
     return _js("alerts.js", "DASH4_ALERTS")
+
+
+@lru_cache(maxsize=1)
+def transitions():
+    return json.loads((DATA / "transitions.json").read_text(encoding="utf-8"))
 
 
 @lru_cache(maxsize=4)
@@ -260,10 +265,12 @@ def api_forecast(q):
 
 
 def api_flags(q):
-    q = parse_query(q, ("state", "district", "sector", "trade", "horizon", "type", "limit", "offset", "months"))
+    q = parse_query(q, ("state", "district", "sector", "trade", "horizon", "type", "limit", "offset", "months", "change"))
     s = scope(q)
     C = core()
     M = C["meta"]
+    if "change" in q:
+        return api_flag_changes(q, s)
     if s["district"] is not None and s["trade"] is not None:
         sh = shard(s["state"])
         i = [j for j in range(len(sh["ids"])) if sh["d"][j] == s["district"] and M["trades"][sh["t"][j]]["c"] == s["trade"]][0]
@@ -290,6 +297,101 @@ def api_flags(q):
     return {"scope": name_of(s), "horizon": int(hz), "month": add_month("2026-01", int(hz) - 1), "total": len(rows), "limit": limit, "offset": offset, "data": data,
             "notes": ["Alerts are series in the top (shortage) or bottom (oversupply) tenth of their trade in that month; the percentile is the position among the districts of the trade.",
                       "In testing, alerts one to twelve months ahead were right about seven times in ten, against a base rate of one in ten."]}
+
+
+def api_flag_changes(q, s):
+    """Series that enter or leave an alert tail between now (December 2025, actual) and 12, 36 or 60 months ahead."""
+    if q["change"] not in ("entering", "leaving"):
+        raise bad("change must be entering or leaving.")
+    if "months" in q:
+        raise bad("months goes with a district and a trade, not with change.")
+    hz = q.get("horizon", "12")
+    if not hz.isdigit() or int(hz) not in FLAG_HORIZONS:
+        raise bad("horizon must be 12, 36 or 60 with change.")
+    ty = q.get("type", "all")
+    if ty not in ("all", "shortage", "oversupply"):
+        raise bad("type must be all, shortage or oversupply.")
+    limit, offset = paging(q, 100, LIMIT["alerts"])
+    T, M = transitions(), core()["meta"]
+    hi = FLAG_HORIZONS.index(int(hz))
+    ent = q["change"] == "entering"
+    dn = {d[0]: d[1] for d in M["districts"]}
+    base = [r for r in T["rows"] if r[1] == hi and (s["state"] is None or M["states"][r[2]] == s["state"]) and (s["district"] is None or r[3] == s["district"]) and (s["trade"] is None or M["trades"][r[4]]["c"] == s["trade"])
+            and (s["sector"] is None or M["trades"][r[4]]["s"] == s["sector"])]
+    rows = [r for r in base if (r[0] % 2 == 0) == ent and (ty == "all" or (r[0] < 2) == (ty == "shortage"))]
+    rows.sort(key=lambda r: ((r[7], -abs(r[6] - 50)) if ent else (-abs(r[5] - 50), r[3])))
+    data = [{"change": q["change"], "alert": "shortage" if r[0] < 2 else "oversupply", "state": M["states"][r[2]], "district_lgd": r[3], "district": dn[r[3]], "trade": M["trades"][r[4]]["c"], "trade_name": M["trades"][r[4]]["n"],
+             "sector": M["trades"][r[4]]["s"], "percentile_now": r[5], "percentile_at_horizon": r[6], "first_month_in_tail": add_month("2026-01", r[7] - 1) if r[7] else None,
+             "job_vacancies_now": r[8], "registered_job_seekers_now": r[9], "job_vacancies_at_horizon": r[10], "registered_job_seekers_at_horizon": r[11]} for r in rows[offset:offset + limit]]
+    return {"scope": name_of(s), "horizon": int(hz), "month": add_month("2026-01", int(hz) - 1), "change": q["change"], "total": len(rows), "limit": limit, "offset": offset, "alerts_now": T["current"],
+            "counts_all_india": {k.split("|")[0]: v for k, v in T["counts"].items() if k.endswith("|" + hz)}, "data": data,
+            "notes": ["Now is December 2025 (actual vacancies and registered seekers); percentiles are among the districts of the same trade; the shortage tail is the top tenth (percentile 90 or more), the oversupply tail the bottom tenth (10 or less).",
+                      "Alerts are relative: a series can leave a tail because others rose faster. Most alerts persist: about one in eight leaves its tail within 12 months, and about as many enter."]}
+
+
+def api_scenario(q):
+    """What a change in seats does: seats multiplied from a year on, certification rate and openings unchanged; the severity score and the seats needed to reach a target ratio."""
+    q = parse_query(q, ("state", "district", "sector", "trade", "level", "year", "seat_change", "from_year", "target", "order", "limit", "offset"))
+    s = scope(q)
+    M = core()["meta"]
+    level = q.get("level", "trade")
+    if level not in ("trade", "state", "state_trade", "district", "district_sector", "series"):
+        raise bad("level must be trade, state, state_trade, district, district_sector or series.")
+    year = int_list(q.get("year"), 2026, 2030, "year", (2030,))
+    if len(year) != 1:
+        raise bad("year must be one year from 2026 to 2030.")
+    y = year[0]
+    try:
+        pct = float(q.get("seat_change", "0"))
+        target = float(q.get("target", "1"))
+    except ValueError:
+        raise bad("seat_change (percent) and target (certified per opening) must be numbers.")
+    if not -90 <= pct <= 500:
+        raise bad("seat_change must be between -90 and 500 (percent).")
+    if not 0.2 <= target <= 5:
+        raise bad("target must be between 0.2 and 5 certified per opening.")
+    fy = int_list(q.get("from_year"), 2026, 2030, "from_year", (2026,))
+    if len(fy) != 1:
+        raise bad("from_year must be one year from 2026 to 2030.")
+    order = q.get("order", "under")
+    if order not in ("under", "over", "severity", "needed"):
+        raise bad("order must be under, over, severity (by the scenario score) or needed (largest seat change needed first).")
+    limit, offset = paging(q, 25, 500)
+    bands = M["severity_bands"]
+    band = lambda sc: next((n for n, v in bands if abs(sc) >= v), "balanced")
+    k = 1 + pct / 100
+    out = []
+    for keys, seats, cert, vac in capacity_rows(level, s):
+        v = vac[y - 2026]
+        if v <= 0 or seats <= 0:
+            continue
+        seats_s = seats * k if y >= fy[0] else seats
+        cert_s = cert * seats_s / seats
+        rate = cert / seats
+        base = max(cert / v, 1e-3)
+        scn = max(cert_s / v, 1e-3)
+        need = v * target / rate
+        out.append({**keys, "year": y, "average_monthly_openings": round(v, 1), "seats": seats, "seats_in_scenario": round(seats_s, 1), "certified_per_opening": round(base, 3), "certified_per_opening_in_scenario": round(scn, 3),
+                    "score": round(log(base), 3), "score_in_scenario": round(log(scn), 3), "severity": band(log(base)), "severity_in_scenario": band(log(scn)),
+                    "seats_needed_for_target": round(need, 1), "seat_change_needed": round(need - seats, 1), "seat_change_needed_pct": round((need / seats - 1) * 100, 1)})
+    if not out:
+        raise bad("No rows for that combination of level and filters.", "not_found", 404)
+    key = {"under": lambda r: r["score_in_scenario"], "over": lambda r: -r["score_in_scenario"], "severity": lambda r: -abs(r["score_in_scenario"]), "needed": lambda r: -abs(r["seat_change_needed_pct"])}[order]
+    out.sort(key=lambda r: (key(r), r["name"]))
+    for i, r in enumerate(out, 1):
+        r["rank"] = i
+    tot = lambda f: sum(r[f] for r in out)
+    cert_b = sum(r["certified_per_opening"] * r["average_monthly_openings"] for r in out)
+    cert_s = sum(r["certified_per_opening_in_scenario"] * r["average_monthly_openings"] for r in out)
+    summary = {"rows": len(out), "seats": tot("seats"), "seats_in_scenario": round(tot("seats_in_scenario"), 1), "seats_needed_for_target": round(tot("seats_needed_for_target"), 1),
+               "certified_per_opening": round(cert_b / tot("average_monthly_openings"), 3), "certified_per_opening_in_scenario": round(cert_s / tot("average_monthly_openings"), 3),
+               "rows_undersupplied": sum(1 for r in out if r["score"] < 0), "rows_undersupplied_in_scenario": sum(1 for r in out if r["score_in_scenario"] < 0),
+               "rows_severe": sum(1 for r in out if r["severity"] == "severe"), "rows_severe_in_scenario": sum(1 for r in out if r["severity_in_scenario"] == "severe")}
+    return {"scope": name_of(s), "level": level, "year": y, "seat_change_percent": pct, "from_year": fy[0], "target_certified_per_opening": target, "order": order, "total": len(out), "limit": limit, "offset": offset,
+            "summary": summary, "data": out[offset:offset + limit],
+            "notes": ["Scenario: seats are multiplied by (1 + seat_change / 100) from from_year on; the certification rate (expected certified per seat) and the forecast openings stay as they are.",
+                      "seats_needed_for_target = openings of the year x target / certification rate; seat_change_needed is the difference from today's seats (it can be negative).",
+                      "No delay is modelled between sanctioning a seat and a trainee being certified, and seats are not limited by teaching capacity: read the result as a planning ratio, not a forecast of placements."]}
 
 
 def api_demand_index(q):
@@ -359,24 +461,10 @@ def api_capacity_gap(q):
             "notes": ["Seats are the 2025-26 sanctioned seats, held flat to 2030 (an assumption: no seat plans are forecast).", "Below 1 certified per opening, fewer people finish training in a year than there are openings; read the ratios as a ranking of where capacity is stretched."]}
 
 
-def api_severity(q):
-    """Trades and places ranked by how far trained supply is from the openings: score = ln(expected certified / average monthly openings) of a year."""
-    q = parse_query(q, ("state", "district", "sector", "trade", "level", "year", "order", "limit", "offset"))
-    s = scope(q)
+def capacity_rows(level, s):
+    """(key fields, seats, expected certified a year, average monthly openings 2026..2030) for the rows of a ranking level inside the filters."""
     C = core()
     M = C["meta"]
-    level = q.get("level", "trade")
-    if level not in ("trade", "state", "state_trade", "district", "district_sector", "series"):
-        raise bad("level must be trade, state, state_trade, district, district_sector or series.")
-    year = int_list(q.get("year"), 2026, 2030, "year", (2030,))
-    if len(year) != 1:
-        raise bad("year must be one year from 2026 to 2030.")
-    y = year[0]
-    order = q.get("order", "under")
-    if order not in ("under", "over", "severity"):
-        raise bad("order must be under (most undersupplied first), over (most oversupplied first) or severity (largest gap either way first).")
-    limit, offset = paging(q, 25, 500)
-    bands = M["severity_bands"]
     trades = {t["c"]: t for t in M["trades"]}
     dn = {d[0]: (d[1], M["states"][d[2]]) for d in M["districts"]}
     cap = C["capacity"]
@@ -434,6 +522,28 @@ def api_severity(q):
                 d = sh["d"][i]
                 raw.append(({"series_id": sh["ids"][i], "district_lgd": d, "district": dn[d][0], "state": dn[d][1], "trade": code, "name": dn[d][0] + ", " + trades[code]["n"], "sector": trades[code]["s"]},
                             sh["cap"]["seats"][i], sh["cap"]["cert"][i], sh["cap"]["vac"][i]))
+    return raw
+
+
+def api_severity(q):
+    """Trades and places ranked by how far trained supply is from the openings: score = ln(expected certified / average monthly openings) of a year."""
+    q = parse_query(q, ("state", "district", "sector", "trade", "level", "year", "order", "limit", "offset"))
+    s = scope(q)
+    C = core()
+    M = C["meta"]
+    level = q.get("level", "trade")
+    if level not in ("trade", "state", "state_trade", "district", "district_sector", "series"):
+        raise bad("level must be trade, state, state_trade, district, district_sector or series.")
+    year = int_list(q.get("year"), 2026, 2030, "year", (2030,))
+    if len(year) != 1:
+        raise bad("year must be one year from 2026 to 2030.")
+    y = year[0]
+    order = q.get("order", "under")
+    if order not in ("under", "over", "severity"):
+        raise bad("order must be under (most undersupplied first), over (most oversupplied first) or severity (largest gap either way first).")
+    limit, offset = paging(q, 25, 500)
+    bands = M["severity_bands"]
+    raw = capacity_rows(level, s)
     out = []
     for keys, seats, cert, vac in raw:
         if vac[y - 2026] <= 0 or vac[0] <= 0:
@@ -457,7 +567,7 @@ def api_severity(q):
                       "Openings are a monthly stock and certified trainees an annual flow: read the scores as a ranking of where capacity is stretched, not as a count of unfilled places."]}
 
 
-ENDPOINTS = {"forecast": api_forecast, "flags": api_flags, "demand-index": api_demand_index, "capacity-gap": api_capacity_gap, "severity": api_severity, "meta": api_meta}
+ENDPOINTS = {"forecast": api_forecast, "flags": api_flags, "demand-index": api_demand_index, "capacity-gap": api_capacity_gap, "severity": api_severity, "scenario": api_scenario, "meta": api_meta}
 
 
 # ---- protection and transport -----------------------------------------------------------------------------------------------------------------------
