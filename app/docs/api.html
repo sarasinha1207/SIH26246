@@ -23,7 +23,7 @@ h.dataset.motion=(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce
   <div class="wrap">
     <nav data-hi-aria="मुख्य" class="nav" aria-label="Main">
       <a data-hi-aria="KaushalSetu का मुख्य पृष्ठ" class="brand" href="../index.html" aria-label="KaushalSetu home"><svg viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="9" fill="#0F2B63"/><rect x=".5" y=".5" width="33" height="33" rx="8.5" fill="none" stroke="#fff" stroke-opacity=".16"/><rect x="6.5" y="19" width="5.4" height="8.5" rx="1.6" fill="#8FB0FF"/><rect x="14.3" y="14" width="5.4" height="13.5" rx="1.6" fill="#8FB0FF"/><rect x="22.1" y="8.5" width="5.4" height="19" rx="1.6" fill="#8FB0FF" fill-opacity=".42"/><path d="M5.5 22.5C10 22 13 17.5 17 15S23.5 9.5 27.5 7" fill="none" stroke="#F2A93B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="27.5" cy="7" r="2.7" fill="#F2A93B"/></svg><span translate="no">Kaushal<b>Setu</b></span></a>
-      <ul class="nav-links" id="nav-links"><li><a data-hi="मुख्य पृष्ठ" href="../index.html">Home</a></li><li><a data-hi="परिचय" href="../about.html">About</a></li><li><a data-hi="संसाधन" href="../resources.html">Resources</a></li></ul>
+      <ul class="nav-links" id="nav-links"><li><a data-hi="मुख्य पृष्ठ" href="../index.html">Home</a></li><li><a data-hi="परिचय" href="../about.html">About</a></li><li><a data-hi="कार्यप्रणाली" href="../docs/methodology.html">Methodology</a></li><li><a data-hi="संसाधन" href="../resources.html">Resources</a></li></ul>
       <div class="nav-actions">
         <div class="display">
   <button data-hi-aria="प्रदर्शन विकल्प" class="display-btn" type="button" aria-expanded="false" aria-controls="display-panel" aria-label="Display options">
@@ -55,7 +55,7 @@ h.dataset.motion=(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce
       <p data-hi="डैशबोर्ड वाली ही संख्याएँ, सादे JSON में।" class="lead">The same numbers as the dashboard, as plain JSON.</p>
       <div class="hero-text">
         <p data-hi="API केवल-पढ़ने योग्य और खुली है: न कुंजी, न लॉगिन। यह 2026 से 2030 के पूर्वानुमान, पूर्व-चेतावनियाँ, माँग सूचकांक, क्षमता अंतर, गंभीरता क्रम और सीट परिदृश्य देती है, डैशबोर्ड जैसे ही फ़िल्टर के साथ: राज्य, ज़िला, सेक्टर और ट्रेड।">The API is read-only and open: no key and no login. It serves the 2026 to 2030 forecasts, the early-warning alerts, the Demand Index, the capacity gap, the severity ranking and seat scenarios, with the same filters as the dashboard: state, district, sector and trade.</p>
-        <p data-hi="हर उत्तर बताता है कि डेटा &lt;strong&gt;सिम्युलेटेड&lt;/strong&gt; है। यह आधिकारिक आँकड़ों जैसा व्यवहार करता है पर किसी वास्तविक ज़िले का वर्णन नहीं करता, और यह आधिकारिक आँकड़ा नहीं है।">Every response says that the data is <strong>simulated</strong>. It behaves like official statistics but describes no real district, and it is not an official statistic.</p>
+        <p data-hi="हर उत्तर बताता है कि डेटा &lt;strong&gt;सिम्युलेटेड&lt;/strong&gt; है और कोई आधिकारिक आँकड़ा नहीं है।">Every response says that the data is <strong>simulated</strong> and not an official statistic.</p>
       </div>
       <ul class="hero-chips">
         <li><b>7</b><span data-hi="एंडपॉइंट">endpoints</span></li>
@@ -148,11 +148,7 @@ h.dataset.motion=(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce
         <h2 data-hi="संख्याओं को कैसे पढ़ें">Reading the numbers</h2>
       </div>
       <div class="grid3">
-        <article class="card"><h3 data-hi="दो दायरे">Two ranges</h3><p data-hi="सामान्य दायरा 2010 से 2019 पर बना है; विस्तृत दायरा झटके वाले वर्ष 2020 से 2025 भी लेता है। कई श्रृंखलाओं के कुल योग के लिए, जैसे राज्य, विस्तृत दायरा पढ़ें: पास की श्रृंखलाओं की त्रुटियाँ साथ-साथ चलती हैं।">The usual range was calibrated on 2010 to 2019; the wide range also uses the shock years 2020 to 2025. For totals of many series, such as a state, read the wide range: errors of neighbouring series move together.</p></article>
-        <article class="card"><h3 data-hi="जहाँ दायरा नहीं है">Where there is no range</h3><p data-hi="भारत, किसी सेक्टर, ट्रेड, राज्य, सेक्टर सहित राज्य, सेक्टर सहित ज़िले और ट्रेड सहित ज़िले के लिए दायरा मिलता है। अन्य संयोजनों में यह खाना null होता है और एक टिप्पणी यह बताती है।">A range exists for India, a sector, a trade, a state, a state with a sector, a district with a sector, and a district with a trade. For other combinations the field is null and a note says so.</p></article>
-        <article class="card"><h3 data-hi="बिंदु जुड़ते हैं, दायरे नहीं">Points add up, ranges do not</h3><p data-hi="ट्रेडों के बिंदु पूर्वानुमान ठीक उनके सेक्टर के बराबर जुड़ते हैं, और सेक्टर राज्यों और भारत के। दायरे हर स्तर के लिए अलग से जाँचे गए हैं।">Point forecasts of the trades add up exactly to their sector, and sectors to states and India. Ranges are calibrated for each level separately.</p></article>
-        <article class="card"><h3 data-hi="सीटें स्थिर मानी गई हैं">Seats are held flat</h3><p data-hi="क्षमता अंतर हर वर्ष के लिए 2030 तक 2025-26 की स्वीकृत सीटें मानता है, यह एक मान्यता है, क्योंकि सीट योजनाओं का पूर्वानुमान नहीं होता।">The capacity gap uses the 2025 to 2026 sanctioned seats for every year to 2030, an assumption, because no seat plans are forecast.</p></article>
-        <article class="card"><h3 data-hi="नौकरी चाहने वाले सबसे कम भरोसेमंद हैं">Seekers are the least reliable</h3><p data-hi="नौकरी चाहने वालों के पूर्वानुमान और पाँचवाँ वर्ष सबसे कमज़ोर हैं। हर श्रृंखला के साथ हर बारह महीने के खंड का विश्वसनीयता लेबल भी होता है।">Job-seeker forecasts and the fifth year are the weakest. Each series also carries a confidence label for each twelve-month band.</p></article>
+        <article class="card"><h3 data-hi="जहाँ दायरा नहीं है">Where there is no range</h3><p data-hi="जहाँ कोई जाँचा हुआ दायरा नहीं है, वहाँ क्षेत्र खाली (null) होता है और एक टिप्पणी यही बताती है। पूर्वानुमानों की अपनी सीमाएँ &lt;a class=&quot;ulink&quot; href=&quot;../about.html#limits&quot;&gt;परिचय&lt;/a&gt; पृष्ठ पर हैं।">Where no checked range exists, the field is null and a note says so. The limits of the forecasts themselves are on the <a class="ulink" href="../about.html#limits">About</a> page.</p></article>
         <article class="card"><h3 data-hi="डैशबोर्ड जैसा ही डेटा">Same data as the dashboard</h3><p data-hi="API वही फ़ाइलें पढ़ती है जो डैशबोर्ड लोड करता है, इसलिए वहाँ की संख्या और यहाँ की संख्या एक ही है, निकटतम व्यक्ति तक।">The API reads the files the dashboard loads, so a figure there and a figure here are the same figure, to the nearest person.</p></article>
       </div>
     </div>
@@ -189,8 +185,8 @@ h.dataset.motion=(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce
         <p data-hi="कौशल विकास एवं उद्यमिता मंत्रालय के लिए एआई-आधारित श्रम बाज़ार संबंधी जानकारी और कौशल की माँग-आपूर्ति के पूर्वानुमान का इंजन।">An AI-enabled labour market intelligence and skill demand-supply forecasting engine for the Ministry of Skill Development and Entrepreneurship.</p>
         <p data-hi="इस साइट के सभी आँकड़े प्रदर्शन के लिए सिम्युलेटेड हैं। ये आधिकारिक सांख्यिकी नहीं हैं।">All figures on this site are simulated for demonstration. They are not official statistics.</p>
       </div>
-      <div><h2 data-hi="पृष्ठ" class="foot-h">Pages</h2><ul><li><a data-hi="मुख्य पृष्ठ" href="../index.html">Home</a></li><li><a data-hi="परिचय" href="../about.html">About</a></li><li><a data-hi="संसाधन" href="../resources.html">Resources</a></li><li><a data-hi="डैशबोर्ड" href="../dashboard/index.html">Dashboard</a></li></ul></div>
-      <div><h2 data-hi="डेटा" class="foot-h">Data</h2><ul><li><a data-hi="डेटा के स्रोत" href="../resources.html#datasets">Data sources</a></li><li><a data-hi="डेटासेट का ब्यौरा" href="../about.html#dataset">Dataset details</a></li><li><a data-hi="मॉडल का मूल्यांकन" href="../about.html#evaluation">Model evaluation</a></li><li><a data-hi="पूर्वानुमान API" href="../docs/api.html">Forecast API</a></li></ul></div>
+      <div><h2 data-hi="पृष्ठ" class="foot-h">Pages</h2><ul><li><a data-hi="मुख्य पृष्ठ" href="../index.html">Home</a></li><li><a data-hi="परिचय" href="../about.html">About</a></li><li><a data-hi="कार्यप्रणाली" href="../docs/methodology.html">Methodology</a></li><li><a data-hi="संसाधन" href="../resources.html">Resources</a></li><li><a data-hi="डैशबोर्ड" href="../dashboard/index.html">Dashboard</a></li></ul></div>
+      <div><h2 data-hi="डेटा" class="foot-h">Data</h2><ul><li><a data-hi="डेटा के स्रोत" href="../resources.html#datasets">Data sources</a></li><li><a data-hi="डेटासेट का ब्यौरा" href="../resources.html#dataset">Dataset details</a></li><li><a data-hi="मॉडल का मूल्यांकन" href="../about.html#evaluation">Model evaluation</a></li><li><a data-hi="पूर्वानुमान API" href="../docs/api.html">Forecast API</a></li></ul></div>
       <div><h2 data-hi="संपर्क" class="foot-h">Contact</h2><p><a href="mailto:feedback@lmis-demo.example" translate="no">feedback@lmis-demo.example</a></p><p data-hi="कोई लॉगिन नहीं। यह साइट कोई कुकी नहीं लगाती और कोई एनालिटिक्स नहीं चलाती। आपके प्रदर्शन संबंधी चुनाव आपके अपने उपकरण में ही रहते हैं।">No login. This site sets no cookies and has no analytics. Your display choices stay on your device.</p></div>
     </div>
     <div data-hi="पूर्वानुमान &lt;span data-fill=&quot;meta.first_target&quot;&gt;January 2026&lt;/span&gt; से &lt;span data-fill=&quot;meta.last_target&quot;&gt;December 2030&lt;/span&gt; तक, &lt;span data-fill=&quot;meta.origin_label&quot;&gt;December 2025&lt;/span&gt; तक के डेटा से बनाया गया।" class="legal">Forecast for <span data-fill="meta.first_target">January 2026</span> to <span data-fill="meta.last_target">December 2030</span>, made from data up to <span data-fill="meta.origin_label">December 2025</span>.</div>
@@ -198,9 +194,9 @@ h.dataset.motion=(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce
 </footer>
 <button data-hi-aria="ऊपर जाएँ" class="to-top" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 <div class="tip" id="tip" role="status" aria-live="polite" hidden></div>
-<script src="../assets/i18n-hi.js?v=5e3eb8f0"></script>
+<script src="../assets/i18n-hi.js?v=13e4538c"></script>
 <script src="../data/site_data.js?v=da7a97e1"></script>
 <script src="../assets/site.js?v=60f24518"></script>
-<script src="../assets/chat.js?v=d57298b6"></script>
+<script src="../assets/chat.js?v=a4a46252"></script>
 </body>
 </html>

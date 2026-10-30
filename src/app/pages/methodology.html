@@ -1,0 +1,113 @@
+<main id="main">
+  <section class="page-head big" id="top">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="wrap">
+      <h1>Methodology</h1>
+      <p class="lead">How the Demand Index is built, how the doubt on each forecast is measured, and what would change with real data.</p>
+      <div class="hero-text">
+        <p>This page holds only what the other pages do not. The forecasting engine, the six readings and the test results are on <a class="ulink" href="{P}about.html">About</a>, the data and where it came from are on <a class="ulink" href="{P}resources.html">Resources</a>, and every number is served by the <a class="ulink" href="{P}docs/api.html">read-only API</a>.</p>
+        <p>Each step below can be checked against the dashboard. The full write-up, with the code behind every step, is the methodology document in the project's repository.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="demand-index">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>The Demand Index, step by step</h2>
+        <p>Several imperfect signals about hiring become one number for each district and trade. Only the signals that count openings are used.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="files res">
+          <thead><tr><th>Signal</th><th>Available from</th><th>In the index?</th></tr></thead>
+          <tbody>
+            <tr><td>Job vacancies</td><td>January 2000</td><td>Yes. The reference signal, and the only one in forecast months.</td></tr>
+            <tr><td>Job-portal postings</td><td>January 2000</td><td>Yes, in history. A share of all openings, and a growing one as hiring moves online.</td></tr>
+            <tr><td>National Career Service vacancies</td><td>July 2015</td><td>Yes, from its launch. Before it starts, it adds nothing.</td></tr>
+            <tr><td>Quarterly hiring survey</td><td>January 2009</td><td>No. An index relative to its own series cannot be compared between districts. It is a model input.</td></tr>
+            <tr><td>Labour-force survey estimate</td><td>July 2017</td><td>No. It measures employment, not demand. It is a model input.</td></tr>
+            <tr><td>Registered job seekers</td><td>January 2000</td><td>No. It is supply, not demand. It is forecast as a target.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="arch" style="margin-top:28px">
+        <article class="card"><span class="arch-n">1</span><h3>Openings per worker</h3><p>For each signal, the logarithm of the signal plus 1, divided by employed workers. Dividing removes the size of the district, the logarithm turns ratios into differences, and the plus 1 keeps empty cells defined.</p></article>
+        <article class="card"><span class="arch-n">2</span><h3>Position among peers</h3><p>That figure is standardised against its peers, the districts of that trade in the same month, to an average of 0 and a spread of 1. This removes any national shift, such as the portals' growing coverage or the launch of the National Career Service.</p></article>
+        <article class="card"><span class="arch-n">3</span><h3>Composite</h3><p>The average of the signals available, rescaled to a spread of 1 across the districts of the trade. A signal that has not started contributes nothing.</p></article>
+        <article class="card"><span class="arch-n">4</span><h3>National level</h3><p>Steps 2 and 3 are relative, so a trade whose demand rose everywhere would not move. A level term carries the trade's national openings per worker, measured from its 2018 to 2019 average in units of the district spread, so the index rises and falls over the years.</p></article>
+        <article class="card"><span class="arch-n">5</span><h3>The index</h3><p>100 times Φ of (composite plus level), where Φ is the normal distribution function. So 50 is the median district, 84 is one spread above it and 16 one below. It cannot leave 0 to 100.</p></article>
+        <article class="card"><span class="arch-n">6</span><h3>Forecast months and totals</h3><p>Forecast months use forecast vacancies and employed workers only, because the other signals measure the same openings and are not forecast. States, sectors, trades and India are averages of their series, weighted by employed workers.</p></article>
+      </div>
+
+      <h3 class="blk">Worked example: house builders in Agra, December 2025</h3>
+      <div class="table-wrap">
+        <table class="files res">
+          <thead><tr><th>Quantity</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>Employed workers</td><td>1,05,743</td></tr>
+            <tr><td>Vacancies, portal postings, National Career Service vacancies</td><td>1,434, 247 and 449</td></tr>
+            <tr><td>Position among the 317 districts of the trade (step 2)</td><td>+0.46 for vacancies, +0.85 for portals, +0.68 for the National Career Service</td></tr>
+            <tr><td>Average of the three, then the composite (step 3)</td><td>0.66, rescaled to 0.74</td></tr>
+            <tr><td>National level (step 4)</td><td>+0.03</td></tr>
+            <tr><td>The index (step 5)</td><td>100 × Φ(0.74 + 0.03) = <strong>77.9</strong>, in the upper quarter of districts for this trade</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="blk">What was checked</h3>
+      <div class="grid3">
+        <article class="card"><h3>Forecast months track the full index</h3><p>In every year from 2012 to 2025, the version that uses vacancies alone, as forecast months must, agrees with the three-signal index at 0.89 to 0.94 (0.93 in 2025), differing by 8 to 10 points on average.</p></article>
+        <article class="card"><h3>Scale and bounds</h3><p>Every value lies between 0 and 100, and before the level term every trade-month has an average of 0 and a spread of 1, checked by tests on synthetic data.</p></article>
+        <article class="card"><h3>Not checked</h3><p>Agreement with real hiring, because the data is simulated. The signals are weighted equally by choice, not estimated.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="doubt">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>How the doubt is measured</h2>
+        <p>The ranges and the confidence labels are described on the About page. This is how they are set.</p>
+      </div>
+      <div class="grid3">
+        <article class="card"><h3>A range from past errors</h3><p>For a forecast some months ahead, the 90% range adds the 5th and 95th percentile of earlier errors on the log change, for the same measure at one or two months either side, widened until at least 400 errors from 8 forecast dates are pooled. Only years the model had not seen are used, so the range does not shrink when the fit to past data improves.</p></article>
+        <article class="card"><h3>A range for each level</h3><p>Neighbouring series tend to miss in the same direction at once, so the range of a state or of India is not the sum of the ranges of its series. It is set from the errors of that level itself, for district and sector, state and sector, state, sector, trade and India.</p></article>
+        <article class="card"><h3>A label that must be earned</h3><p>For each measure, trade and twelve-month band, the average miss (WAPE) of earlier forecasts decides the label: high up to 8%, medium up to 20%, low above, and one level lower for a small series. A label is useful only if later error rises from high to low. It does for employed workers and vacancies, not reliably for job seekers.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="real-data">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Judgements, and what changes with real data</h2>
+        <p>Some choices are conventions rather than results, and they are listed so that they can be challenged. The limits of the numbers are on the About page.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="files res">
+          <thead><tr><th>Choice</th><th>What it is</th></tr></thead>
+          <tbody>
+            <tr><td>Thresholds</td><td>The flag percentiles, the label limits and the severity ratios are conventions, fixed before the test years were opened, not tuned.</td></tr>
+            <tr><td>Leaving out the shock</td><td>Leaving the 2020 to 2023 shock out of the final fit, as the About page describes, is a judgement about a simulated shock, not a tuned choice. Its side effect is lumpier job-seeker growth where the horizon passes 24 months.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="blk">With real data, in this order</h3>
+      <div class="table-wrap">
+        <table class="files res">
+          <thead><tr><th>Step</th><th>What to do</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Replace each simulated signal with its real extract: job portals, the National Career Service, the hiring survey, the labour-force survey and e-Shram, keeping the district and occupation codes.</td></tr>
+            <tr><td>2</td><td>Check that the signals' scales are still comparable after they are standardised within each trade.</td></tr>
+            <tr><td>3</td><td>Test the Demand Index against realised hiring.</td></tr>
+            <tr><td>4</td><td>Refit the models and run the one-shot test again on a period held out.</td></tr>
+            <tr><td>5</td><td>Replace the flat seats with sanctioned seat plans.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>

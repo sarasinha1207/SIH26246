@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-size="m" data-lang="en" data-motion="full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Methodology | KaushalSetu</title>
+<meta name="description" content="How the KaushalSetu Demand Index is built step by step with a worked example, how forecast ranges and confidence labels are set, which choices are judgements, and what would change with real data.">
+<meta name="theme-color" content="#0A0E16">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<script>(function(){var h=document.documentElement,s={};try{s=JSON.parse(localStorage.getItem('lmis-display')||'{}')}catch(e){}
+h.dataset.theme=s.theme==='light'?'light':'dark';h.dataset.size=s.size||'m';var l=s.lang==='hi'?'hi':'en';h.dataset.lang=l;h.lang=l;
+h.dataset.motion=(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)?'reduced':'full';})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..800&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..800&display=swap"></noscript>
+<link rel="stylesheet" href="../assets/styles.css?v=5f46b26a">
+<link rel="stylesheet" href="../assets/chat.css?v=a530a2d2">
+</head>
+<body>
+<a data-hi="मुख्य सामग्री पर जाएँ" class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <nav data-hi-aria="मुख्य" class="nav" aria-label="Main">
+      <a data-hi-aria="KaushalSetu का मुख्य पृष्ठ" class="brand" href="../index.html" aria-label="KaushalSetu home"><svg viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="9" fill="#0F2B63"/><rect x=".5" y=".5" width="33" height="33" rx="8.5" fill="none" stroke="#fff" stroke-opacity=".16"/><rect x="6.5" y="19" width="5.4" height="8.5" rx="1.6" fill="#8FB0FF"/><rect x="14.3" y="14" width="5.4" height="13.5" rx="1.6" fill="#8FB0FF"/><rect x="22.1" y="8.5" width="5.4" height="19" rx="1.6" fill="#8FB0FF" fill-opacity=".42"/><path d="M5.5 22.5C10 22 13 17.5 17 15S23.5 9.5 27.5 7" fill="none" stroke="#F2A93B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="27.5" cy="7" r="2.7" fill="#F2A93B"/></svg><span translate="no">Kaushal<b>Setu</b></span></a>
+      <ul class="nav-links" id="nav-links"><li><a data-hi="मुख्य पृष्ठ" href="../index.html">Home</a></li><li><a data-hi="परिचय" href="../about.html">About</a></li><li><a data-hi="कार्यप्रणाली" href="../docs/methodology.html" aria-current="page">Methodology</a></li><li><a data-hi="संसाधन" href="../resources.html">Resources</a></li></ul>
+      <div class="nav-actions">
+        <div class="display">
+  <button data-hi-aria="प्रदर्शन विकल्प" class="display-btn" type="button" aria-expanded="false" aria-controls="display-panel" aria-label="Display options">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4v5M6 13v7M12 4v10M12 18v2M18 4v2M18 10v10" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="6" cy="11" r="2.4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="16" r="2.4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="8" r="2.4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+  </button>
+  <div data-hi-aria="प्रदर्शन विकल्प" class="display-panel" id="display-panel" role="group" aria-label="Display options" hidden>
+    <div data-hi="प्रदर्शन विकल्प" class="dp-title">Display options</div>
+    <div class="dp-row"><span data-hi="अक्षर का आकार" class="dp-label">Text size</span><div data-hi-aria="अक्षर का आकार" class="seg" role="group" aria-label="Text size">
+      <button data-hi-aria="छोटे अक्षर" type="button" data-size-step="-1" aria-label="Smaller text" translate="no">A&minus;</button><button data-hi-aria="सामान्य आकार" type="button" data-size-step="0" aria-label="Default text size" translate="no">A</button><button data-hi-aria="बड़े अक्षर" type="button" data-size-step="1" aria-label="Larger text" translate="no">A+</button></div></div>
+    <div class="dp-row"><span data-hi="थीम" class="dp-label">Theme</span><div data-hi-aria="थीम" class="seg" role="group" aria-label="Theme">
+      <button data-hi="हल्का" type="button" data-opt="theme" data-val="light">Light</button><button data-hi="गहरा" type="button" data-opt="theme" data-val="dark">Dark</button></div></div>
+    <div class="dp-row"><span data-hi="भाषा" class="dp-label">Language</span><div data-hi-aria="भाषा" class="seg" role="group" aria-label="Language">
+      <button type="button" data-opt="lang" data-val="en" translate="no">English</button><button type="button" data-opt="lang" data-val="hi" lang="hi" translate="no">हिन्दी</button></div></div>
+  </div>
+</div>
+        <a data-hi="डैशबोर्ड खोलें" class="btn small nav-cta" href="../dashboard/index.html">Open dashboard</a>
+        <button data-hi="मेनू" class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      </div>
+    </nav>
+  </div>
+  <div class="progress" aria-hidden="true"><i></i></div>
+</header>
+<main id="main">
+  <section class="page-head big" id="top">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="wrap">
+      <h1 data-hi="कार्यप्रणाली">Methodology</h1>
+      <p data-hi="माँग सूचकांक कैसे बनता है, हर पूर्वानुमान पर संदेह कैसे मापा जाता है, और वास्तविक डेटा आने पर क्या बदलेगा।" class="lead">How the Demand Index is built, how the doubt on each forecast is measured, and what would change with real data.</p>
+      <div class="hero-text">
+        <p data-hi="इस पृष्ठ पर केवल वही है जो दूसरे पृष्ठों पर नहीं है। पूर्वानुमान इंजन, छह पाठ और परीक्षण के नतीजे &lt;a class=&quot;ulink&quot; href=&quot;../about.html&quot;&gt;परिचय&lt;/a&gt; पर हैं, डेटा और वह कहाँ से आया यह &lt;a class=&quot;ulink&quot; href=&quot;../resources.html&quot;&gt;संसाधन&lt;/a&gt; पर है, और हर संख्या &lt;a class=&quot;ulink&quot; href=&quot;../docs/api.html&quot;&gt;केवल-पढ़ने योग्य API&lt;/a&gt; से मिलती है।">This page holds only what the other pages do not. The forecasting engine, the six readings and the test results are on <a class="ulink" href="../about.html">About</a>, the data and where it came from are on <a class="ulink" href="../resources.html">Resources</a>, and every number is served by the <a class="ulink" href="../docs/api.html">read-only API</a>.</p>
+        <p data-hi="नीचे हर चरण की जाँच डैशबोर्ड से की जा सकती है। हर चरण के पीछे के कोड के साथ पूरा विवरण परियोजना के रिपॉज़िटरी में कार्यप्रणाली दस्तावेज़ है।">Each step below can be checked against the dashboard. The full write-up, with the code behind every step, is the methodology document in the project's repository.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="demand-index">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 data-hi="माँग सूचकांक, चरण-दर-चरण">The Demand Index, step by step</h2>
+        <p data-hi="रोज़गार के बारे में कई अधूरे संकेत मिलकर हर ज़िले और ट्रेड के लिए एक संख्या बनते हैं। केवल वही संकेत लिए जाते हैं जो रिक्तियों को गिनते हैं।">Several imperfect signals about hiring become one number for each district and trade. Only the signals that count openings are used.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="files res">
+          <thead><tr><th data-hi="संकेत">Signal</th><th data-hi="कब से उपलब्ध">Available from</th><th data-hi="क्या सूचकांक में है?">In the index?</th></tr></thead>
+          <tbody>
+            <tr><td data-hi="रिक्तियाँ">Job vacancies</td><td data-hi="जनवरी 2000">January 2000</td><td data-hi="हाँ। संदर्भ संकेत, और पूर्वानुमान-महीनों में एकमात्र।">Yes. The reference signal, and the only one in forecast months.</td></tr>
+            <tr><td data-hi="जॉब-पोर्टल पोस्टिंग">Job-portal postings</td><td data-hi="जनवरी 2000">January 2000</td><td data-hi="हाँ, इतिहास में। सभी रिक्तियों का एक हिस्सा, और भर्ती ऑनलाइन जाने के साथ बढ़ता हुआ।">Yes, in history. A share of all openings, and a growing one as hiring moves online.</td></tr>
+            <tr><td data-hi="राष्ट्रीय कॅरियर सेवा की रिक्तियाँ">National Career Service vacancies</td><td data-hi="जुलाई 2015">July 2015</td><td data-hi="हाँ, शुरू होने से। शुरू होने से पहले यह कुछ नहीं जोड़ता।">Yes, from its launch. Before it starts, it adds nothing.</td></tr>
+            <tr><td data-hi="तिमाही भर्ती सर्वेक्षण">Quarterly hiring survey</td><td data-hi="जनवरी 2009">January 2009</td><td data-hi="नहीं। अपनी ही श्रृंखला के सापेक्ष सूचकांक की तुलना ज़िलों के बीच नहीं हो सकती। यह मॉडल का इनपुट है।">No. An index relative to its own series cannot be compared between districts. It is a model input.</td></tr>
+            <tr><td data-hi="श्रम-बल सर्वेक्षण का अनुमान">Labour-force survey estimate</td><td data-hi="जुलाई 2017">July 2017</td><td data-hi="नहीं। यह रोज़गार मापता है, माँग नहीं। यह मॉडल का इनपुट है।">No. It measures employment, not demand. It is a model input.</td></tr>
+            <tr><td data-hi="पंजीकृत नौकरी चाहने वाले">Registered job seekers</td><td data-hi="जनवरी 2000">January 2000</td><td data-hi="नहीं। यह आपूर्ति है, माँग नहीं। इसका पूर्वानुमान लक्ष्य के रूप में किया जाता है।">No. It is supply, not demand. It is forecast as a target.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="arch" style="margin-top:28px">
+        <article class="card"><span class="arch-n">1</span><h3 data-hi="प्रति कामगार अवसर">Openings per worker</h3><p data-hi="हर संकेत के लिए, संकेत में 1 जोड़कर नियोजित कामगारों से भाग देने का लघुगणक। भाग देने से ज़िले का आकार हट जाता है, लघुगणक अनुपातों को अंतर में बदल देता है, और 1 जोड़ने से खाली खाने भी परिभाषित रहते हैं।">For each signal, the logarithm of the signal plus 1, divided by employed workers. Dividing removes the size of the district, the logarithm turns ratios into differences, and the plus 1 keeps empty cells defined.</p></article>
+        <article class="card"><span class="arch-n">2</span><h3 data-hi="साथियों के बीच स्थिति">Position among peers</h3><p data-hi="उस संख्या को उसके साथियों, यानी उसी महीने उस ट्रेड के ज़िलों, के सामने मानकीकृत किया जाता है, औसत 0 और फैलाव 1 पर। इससे कोई भी राष्ट्रीय बदलाव हट जाता है, जैसे पोर्टलों का बढ़ता दायरा या राष्ट्रीय कॅरियर सेवा का शुरू होना।">That figure is standardised against its peers, the districts of that trade in the same month, to an average of 0 and a spread of 1. This removes any national shift, such as the portals' growing coverage or the launch of the National Career Service.</p></article>
+        <article class="card"><span class="arch-n">3</span><h3 data-hi="संयुक्त अंक">Composite</h3><p data-hi="उपलब्ध संकेतों का औसत, जिसे ट्रेड के ज़िलों में 1 के फैलाव तक दोबारा पैमाने पर लाया जाता है। जो संकेत शुरू नहीं हुआ है वह कुछ नहीं जोड़ता।">The average of the signals available, rescaled to a spread of 1 across the districts of the trade. A signal that has not started contributes nothing.</p></article>
+        <article class="card"><span class="arch-n">4</span><h3 data-hi="राष्ट्रीय स्तर">National level</h3><p data-hi="चरण 2 और 3 सापेक्ष हैं, इसलिए जिस ट्रेड की माँग हर जगह बढ़ी हो वह नहीं हिलेगा। एक स्तर-पद ट्रेड के राष्ट्रीय प्रति कामगार अवसर को उसके 2018 से 2019 के औसत से, ज़िलों के फैलाव की इकाइयों में, मापकर जोड़ता है, ताकि सूचकांक वर्षों में ऊपर-नीचे हो।">Steps 2 and 3 are relative, so a trade whose demand rose everywhere would not move. A level term carries the trade's national openings per worker, measured from its 2018 to 2019 average in units of the district spread, so the index rises and falls over the years.</p></article>
+        <article class="card"><span class="arch-n">5</span><h3 data-hi="सूचकांक">The index</h3><p data-hi="100 गुणा Φ (संयुक्त अंक जमा स्तर), जहाँ Φ सामान्य वितरण फलन है। इसलिए 50 बीच का ज़िला है, 84 उससे एक फैलाव ऊपर और 16 एक फैलाव नीचे। यह 0 से 100 से बाहर नहीं जा सकता।">100 times Φ of (composite plus level), where Φ is the normal distribution function. So 50 is the median district, 84 is one spread above it and 16 one below. It cannot leave 0 to 100.</p></article>
+        <article class="card"><span class="arch-n">6</span><h3 data-hi="पूर्वानुमान के महीने और कुल">Forecast months and totals</h3><p data-hi="पूर्वानुमान के महीनों में केवल पूर्वानुमानित रिक्तियाँ और नियोजित कामगार लिए जाते हैं, क्योंकि बाकी संकेत उन्हीं रिक्तियों को मापते हैं और उनका पूर्वानुमान नहीं होता। राज्य, सेक्टर, ट्रेड और भारत अपनी श्रृंखलाओं के औसत हैं, नियोजित कामगारों से भारित।">Forecast months use forecast vacancies and employed workers only, because the other signals measure the same openings and are not forecast. States, sectors, trades and India are averages of their series, weighted by employed workers.</p></article>
+      </div>
+
+      <h3 data-hi="हल किया उदाहरण: आगरा के मकान निर्माता, दिसंबर 2025" class="blk">Worked example: house builders in Agra, December 2025</h3>
+      <div class="table-wrap">
+        <table class="files res">
+          <thead><tr><th data-hi="मात्रा">Quantity</th><th data-hi="मान">Value</th></tr></thead>
+          <tbody>
+            <tr><td data-hi="नियोजित कामगार">Employed workers</td><td>1,05,743</td></tr>
+            <tr><td data-hi="रिक्तियाँ, पोर्टल पोस्टिंग, राष्ट्रीय कॅरियर सेवा की रिक्तियाँ">Vacancies, portal postings, National Career Service vacancies</td><td data-hi="1,434, 247 और 449">1,434, 247 and 449</td></tr>
+            <tr><td data-hi="ट्रेड के 317 ज़िलों के बीच स्थिति (चरण 2)">Position among the 317 districts of the trade (step 2)</td><td data-hi="रिक्तियों के लिए +0.46, पोर्टलों के लिए +0.85, राष्ट्रीय कॅरियर सेवा के लिए +0.68">+0.46 for vacancies, +0.85 for portals, +0.68 for the National Career Service</td></tr>
+            <tr><td data-hi="तीनों का औसत, फिर संयुक्त अंक (चरण 3)">Average of the three, then the composite (step 3)</td><td data-hi="0.66, जो 0.74 में दोबारा पैमाने पर आता है">0.66, rescaled to 0.74</td></tr>
+            <tr><td data-hi="राष्ट्रीय स्तर (चरण 4)">National level (step 4)</td><td>+0.03</td></tr>
+            <tr><td data-hi="सूचकांक (चरण 5)">The index (step 5)</td><td data-hi="100 × Φ(0.74 + 0.03) = &lt;strong&gt;77.9&lt;/strong&gt;, इस ट्रेड के ज़िलों में ऊपरी चौथाई में">100 × Φ(0.74 + 0.03) = <strong>77.9</strong>, in the upper quarter of districts for this trade</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 data-hi="क्या जाँचा गया" class="blk">What was checked</h3>
+      <div class="grid3">
+        <article class="card"><h3 data-hi="पूर्वानुमान के महीने पूरे सूचकांक का साथ देते हैं">Forecast months track the full index</h3><p data-hi="2012 से 2025 के हर वर्ष में, केवल रिक्तियों वाला संस्करण, जैसा पूर्वानुमान के महीनों को करना पड़ता है, तीन-संकेत वाले सूचकांक से 0.89 से 0.94 पर सहमत है (2025 में 0.93), औसतन 8 से 10 अंक के अंतर के साथ।">In every year from 2012 to 2025, the version that uses vacancies alone, as forecast months must, agrees with the three-signal index at 0.89 to 0.94 (0.93 in 2025), differing by 8 to 10 points on average.</p></article>
+        <article class="card"><h3 data-hi="पैमाना और सीमाएँ">Scale and bounds</h3><p data-hi="हर मान 0 और 100 के बीच है, और स्तर-पद से पहले हर ट्रेड-महीने का औसत 0 और फैलाव 1 है, जिसे कृत्रिम डेटा पर परीक्षणों से जाँचा गया है।">Every value lies between 0 and 100, and before the level term every trade-month has an average of 0 and a spread of 1, checked by tests on synthetic data.</p></article>
+        <article class="card"><h3 data-hi="नहीं जाँचा गया">Not checked</h3><p data-hi="वास्तविक भर्ती से सहमति, क्योंकि डेटा सिम्युलेटेड है। संकेतों को बराबर भार चुनाव से दिया गया है, अनुमान से नहीं।">Agreement with real hiring, because the data is simulated. The signals are weighted equally by choice, not estimated.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="doubt">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 data-hi="संदेह कैसे मापा जाता है">How the doubt is measured</h2>
+        <p data-hi="दायरे और विश्वसनीयता लेबल परिचय पृष्ठ पर बताए गए हैं। यहाँ वह है कि वे कैसे तय होते हैं।">The ranges and the confidence labels are described on the About page. This is how they are set.</p>
+      </div>
+      <div class="grid3">
+        <article class="card"><h3 data-hi="पिछली त्रुटियों से बना दायरा">A range from past errors</h3><p data-hi="कुछ महीने आगे के पूर्वानुमान के लिए, 90% दायरा उसी माप की, एक या दो महीने इधर-उधर के, लघुगणक-परिवर्तन पर पहले की त्रुटियों के 5वें और 95वें प्रतिशतक को जोड़ता है, और तब तक चौड़ा किया जाता है जब तक 8 पूर्वानुमान-तिथियों की कम से कम 400 त्रुटियाँ इकट्ठी न हों। केवल वे वर्ष लिए जाते हैं जो मॉडल ने नहीं देखे थे, इसलिए पिछले डेटा से बेहतर मेल होने पर दायरा सिकुड़ता नहीं।">For a forecast some months ahead, the 90% range adds the 5th and 95th percentile of earlier errors on the log change, for the same measure at one or two months either side, widened until at least 400 errors from 8 forecast dates are pooled. Only years the model had not seen are used, so the range does not shrink when the fit to past data improves.</p></article>
+        <article class="card"><h3 data-hi="हर स्तर के लिए दायरा">A range for each level</h3><p data-hi="पड़ोसी श्रृंखलाएँ अक्सर एक साथ एक ही दिशा में चूकती हैं, इसलिए किसी राज्य या भारत का दायरा उसकी श्रृंखलाओं के दायरों का जोड़ नहीं है। यह उसी स्तर की अपनी त्रुटियों से बनता है: ज़िला और सेक्टर, राज्य और सेक्टर, राज्य, सेक्टर, ट्रेड और भारत।">Neighbouring series tend to miss in the same direction at once, so the range of a state or of India is not the sum of the ranges of its series. It is set from the errors of that level itself, for district and sector, state and sector, state, sector, trade and India.</p></article>
+        <article class="card"><h3 data-hi="कमाया जाने वाला लेबल">A label that must be earned</h3><p data-hi="हर माप, ट्रेड और बारह महीने के खंड के लिए, पहले के पूर्वानुमानों की औसत चूक (WAPE) लेबल तय करती है: 8% तक उच्च, 20% तक मध्यम, उससे ऊपर निम्न, और छोटी श्रृंखला के लिए एक स्तर नीचे। लेबल तभी उपयोगी है जब बाद की त्रुटि उच्च से निम्न की ओर बढ़े। नियोजित कामगारों और रिक्तियों के लिए ऐसा होता है, नौकरी चाहने वालों के लिए भरोसेमंद रूप से नहीं।">For each measure, trade and twelve-month band, the average miss (WAPE) of earlier forecasts decides the label: high up to 8%, medium up to 20%, low above, and one level lower for a small series. A label is useful only if later error rises from high to low. It does for employed workers and vacancies, not reliably for job seekers.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="real-data">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 data-hi="निर्णय, और वास्तविक डेटा आने पर क्या बदलेगा">Judgements, and what changes with real data</h2>
+        <p data-hi="कुछ चुनाव नतीजे नहीं, परंपराएँ हैं, और उन्हें गिनाया गया है ताकि उन पर सवाल उठाया जा सके। संख्याओं की सीमाएँ परिचय पृष्ठ पर हैं।">Some choices are conventions rather than results, and they are listed so that they can be challenged. The limits of the numbers are on the About page.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="files res">
+          <thead><tr><th data-hi="चुनाव">Choice</th><th data-hi="यह क्या है">What it is</th></tr></thead>
+          <tbody>
+            <tr><td data-hi="तय सीमाएँ">Thresholds</td><td data-hi="चेतावनी के प्रतिशतक, लेबल की सीमाएँ और गंभीरता के अनुपात परंपराएँ हैं, जो परीक्षण वर्ष खोलने से पहले तय की गईं, कसी नहीं गईं।">The flag percentiles, the label limits and the severity ratios are conventions, fixed before the test years were opened, not tuned.</td></tr>
+            <tr><td data-hi="झटके को छोड़ना">Leaving out the shock</td><td data-hi="2020 से 2023 के झटके को अंतिम फ़िट से बाहर रखना, जैसा परिचय पृष्ठ बताता है, एक सिम्युलेटेड झटके के बारे में निर्णय है, कसा हुआ चुनाव नहीं। इसका साइड इफ़ेक्ट यह है कि जहाँ अवधि 24 महीने पार करती है वहाँ नौकरी चाहने वालों की वृद्धि ऊबड़-खाबड़ हो जाती है।">Leaving the 2020 to 2023 shock out of the final fit, as the About page describes, is a judgement about a simulated shock, not a tuned choice. Its side effect is lumpier job-seeker growth where the horizon passes 24 months.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 data-hi="वास्तविक डेटा के साथ, इसी क्रम में" class="blk">With real data, in this order</h3>
+      <div class="table-wrap">
+        <table class="files res">
+          <thead><tr><th data-hi="चरण">Step</th><th data-hi="क्या करना है">What to do</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td data-hi="हर सिम्युलेटेड संकेत को उसके वास्तविक निकास से बदलें: जॉब पोर्टल, राष्ट्रीय कॅरियर सेवा, भर्ती सर्वेक्षण, श्रम-बल सर्वेक्षण और ई-श्रम, ज़िला और व्यवसाय कोड वही रखते हुए।">Replace each simulated signal with its real extract: job portals, the National Career Service, the hiring survey, the labour-force survey and e-Shram, keeping the district and occupation codes.</td></tr>
+            <tr><td>2</td><td data-hi="जाँचें कि हर ट्रेड के भीतर मानकीकरण के बाद भी संकेतों के पैमाने तुलनीय हैं।">Check that the signals' scales are still comparable after they are standardised within each trade.</td></tr>
+            <tr><td>3</td><td data-hi="माँग सूचकांक को वास्तविक भर्ती के सामने परखें।">Test the Demand Index against realised hiring.</td></tr>
+            <tr><td>4</td><td data-hi="मॉडल दोबारा फ़िट करें और रोके गए एक अवधि पर एक-बार का परीक्षण फिर चलाएँ।">Refit the models and run the one-shot test again on a period held out.</td></tr>
+            <tr><td>5</td><td data-hi="स्थिर सीटों को स्वीकृत सीट योजनाओं से बदलें।">Replace the flat seats with sanctioned seat plans.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2 data-hi="परिचय" class="foot-h">About</h2>
+        <p data-hi="कौशल को जोड़ना। भविष्य का पूर्वानुमान।" class="foot-tag">Bridging Skills. Forecasting Futures.</p>
+        <p data-hi="कौशल विकास एवं उद्यमिता मंत्रालय के लिए एआई-आधारित श्रम बाज़ार संबंधी जानकारी और कौशल की माँग-आपूर्ति के पूर्वानुमान का इंजन।">An AI-enabled labour market intelligence and skill demand-supply forecasting engine for the Ministry of Skill Development and Entrepreneurship.</p>
+        <p data-hi="इस साइट के सभी आँकड़े प्रदर्शन के लिए सिम्युलेटेड हैं। ये आधिकारिक सांख्यिकी नहीं हैं।">All figures on this site are simulated for demonstration. They are not official statistics.</p>
+      </div>
+      <div><h2 data-hi="पृष्ठ" class="foot-h">Pages</h2><ul><li><a data-hi="मुख्य पृष्ठ" href="../index.html">Home</a></li><li><a data-hi="परिचय" href="../about.html">About</a></li><li><a data-hi="कार्यप्रणाली" href="../docs/methodology.html">Methodology</a></li><li><a data-hi="संसाधन" href="../resources.html">Resources</a></li><li><a data-hi="डैशबोर्ड" href="../dashboard/index.html">Dashboard</a></li></ul></div>
+      <div><h2 data-hi="डेटा" class="foot-h">Data</h2><ul><li><a data-hi="डेटा के स्रोत" href="../resources.html#datasets">Data sources</a></li><li><a data-hi="डेटासेट का ब्यौरा" href="../resources.html#dataset">Dataset details</a></li><li><a data-hi="मॉडल का मूल्यांकन" href="../about.html#evaluation">Model evaluation</a></li><li><a data-hi="पूर्वानुमान API" href="../docs/api.html">Forecast API</a></li></ul></div>
+      <div><h2 data-hi="संपर्क" class="foot-h">Contact</h2><p><a href="mailto:feedback@lmis-demo.example" translate="no">feedback@lmis-demo.example</a></p><p data-hi="कोई लॉगिन नहीं। यह साइट कोई कुकी नहीं लगाती और कोई एनालिटिक्स नहीं चलाती। आपके प्रदर्शन संबंधी चुनाव आपके अपने उपकरण में ही रहते हैं।">No login. This site sets no cookies and has no analytics. Your display choices stay on your device.</p></div>
+    </div>
+    <div data-hi="पूर्वानुमान &lt;span data-fill=&quot;meta.first_target&quot;&gt;January 2026&lt;/span&gt; से &lt;span data-fill=&quot;meta.last_target&quot;&gt;December 2030&lt;/span&gt; तक, &lt;span data-fill=&quot;meta.origin_label&quot;&gt;December 2025&lt;/span&gt; तक के डेटा से बनाया गया।" class="legal">Forecast for <span data-fill="meta.first_target">January 2026</span> to <span data-fill="meta.last_target">December 2030</span>, made from data up to <span data-fill="meta.origin_label">December 2025</span>.</div>
+  </div>
+</footer>
+<button data-hi-aria="ऊपर जाएँ" class="to-top" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+<div class="tip" id="tip" role="status" aria-live="polite" hidden></div>
+<script src="../assets/i18n-hi.js?v=13e4538c"></script>
+<script src="../data/site_data.js?v=da7a97e1"></script>
+<script src="../assets/site.js?v=60f24518"></script>
+<script src="../assets/chat.js?v=a4a46252"></script>
+</body>
+</html>

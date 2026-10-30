@@ -99,11 +99,12 @@ def test_claims_in_the_text_match_the_evidence():
     ev = ev[(ev.slice == "all") & (ev.band == "all horizons")].set_index("target")
     for k in "EVS":
         assert a[k]["model"] == round(ev.loc[k, "wape_model"], 2) and a[k]["baseline"] == round(ev.loc[k, "wape_best_baseline"], 2)
-    home = read("index.html")
-    assert round(a["E"]["gain_pct"]) == 18 and '<b class="c-demand">18%</b>' in home
-    assert round(a["S"]["gain_pct"]) == 8 and '<b class="c-demand">8%</b>' in home
-    assert round(100 * cv["E"]) == 87 and '<b class="c-demand">87%</b>' in home and f"Vacancies {round(100 * cv['V'])}%, job seekers {round(100 * cv['S'])}%" in home
-    assert f"{a['E']['model']:.2f}% against {a['E']['baseline']:.2f}%" in home and f"{a['S']['model']:.2f}% against {a['S']['baseline']:.2f}%" in home
+    home, about = read("index.html"), read("about.html")
+    assert "c-demand" not in home and "Measured, not asserted" not in home                # the results are on the About page only
+    assert round(a["E"]["gain_pct"]) == 18 and '<b class="c-demand">18%</b>' in about
+    assert round(a["S"]["gain_pct"]) == 8 and '<b class="c-demand">8%</b>' in about
+    assert round(100 * cv["E"]) == 87 and '<b class="c-demand">87%</b>' in about and f"Job vacancies {round(100 * cv['V'])}% and job seekers {round(100 * cv['S'])}%" in about
+    assert f"{a['E']['model']:.2f}% against {a['E']['baseline']:.2f}%" in about and f"{a['S']['model']:.2f}% against {a['S']['baseline']:.2f}%" in about
     assert a["E"]["model"] < a["E"]["baseline"] and a["S"]["model"] < a["S"]["baseline"]
 
 
@@ -189,10 +190,10 @@ def test_about_page_sections_are_in_a_professional_order_with_no_repeated_headin
     html = read("about.html")
     main = html[html.index("<main"):html.index("</main>")]
     ids = re.findall(r'<section class="(?:section|page-head)[^"]*" id="([\w-]+)"', main)
-    assert ids == ["project", "timeline", "dataset", "principles", "engine", "measures", "evaluation", "limits"], ids       # project, overview, data, principles, architecture, measures, results, limits
-    assert len(re.findall(r"<section", main)) == 8                                     # the hero is the "About the project" section
+    assert ids == ["project", "timeline", "engine", "measures", "evaluation", "limits"], ids       # project, process, engine, measures, results, limits; the data is on Resources
+    assert len(re.findall(r"<section", main)) == 6                                     # the hero is the "About the project" section
     heads = [re.sub(r"<[^>]+>", "", h) for h in re.findall(r"<h2[^>]*>(.*?)</h2>", main)]
-    assert heads == ["Forecasts", "Honest ranges", "Demand and capacity", "How it works", "Dataset used", "Model engine overview and core principles", "Machine learning engine and architecture", "Demand Index, capacity gap, severity and early warnings",
+    assert heads == ["How it works", "Machine learning engine and architecture", "Demand Index, capacity gap, severity and early warnings",
                      "Model evaluation achievements", "What to keep in mind"], heads
     assert re.search(r"<h1[^>]*>About the project</h1>", main) and main.count("<h1") == 1 and "page-head big" in main
     assert 'class="eyebrow"' not in main and "In more detail" not in main                 # no label repeating a heading
@@ -200,23 +201,23 @@ def test_about_page_sections_are_in_a_professional_order_with_no_repeated_headin
         assert gone not in main, gone
     assert 'class="toc"' not in main and 'href="#' not in main                           # no jump links in the hero
     hero = main[:main.index('id="timeline"')]
-    assert hero.index("<h1") < hero.index('class="grid1"') and hero.count('class="lead"') == 1 and re.search(r'class="lead">\s*<h1', hero)   # cards sit beside the heading
+    assert hero.count('class="lead"') == 1 and re.search(r'class="lead">\s*<h1', hero) and 'class="grid1"' not in main      # the heading and two paragraphs; no summary cards repeating the sections
     assert main.count('class="tl-dot"') == 6 and 'class="timeline"' in main and "tl-scroll" in main        # the horizontal timeline
-    assert main.count('class="arch-n"') == 6 and 'class="step"' not in main
+    assert 'class="arch-n"' not in main and 'id="principles"' not in main and 'id="dataset"' not in main
     # the facts the page states come from the project's documents
     summ = json.loads((ROOT / "reports" / "v4" / "evaluation" / "test_summary.json").read_text(encoding="utf-8"))
     assert f"{len(summ['inputs'])} inputs" in main and "119 candidates" in main and "nine models in the final fit" in main
-    assert "475,500".replace(",", "") in main.replace(",", "") and "Trained on 2000 to 2009, tuned on 2010 to 2014, tested once on 2015 to 2019 and once on 2020 to 2025" in main
+    assert "2000 to 2009" in main and "tuned on 2010 to 2014" in main and "scored once on 2015 to 2019, then once on the shock years 2020 to 2025" in main
     assert "20 trials per measure" in main and "three random starts" in main
     tp = json.loads((ROOT / "reports" / "v4" / "evaluation" / "validation_summary.json").read_text(encoding="utf-8"))
     assert tp["fit_targets_to"] == "2009-12" and summ["fit_targets_to"] == "2014-12"
 
 
-def test_about_dataset_section_matches_the_project_data():
-    html = read("about.html")
-    sec = html[html.index('id="dataset"'):html.index('id="principles"')]
+def test_resources_dataset_details_match_the_project_data():
+    html = read("resources.html")
+    sec = html[html.index('id="dataset"'):html.index("</main>")]
     man = json.loads((V4 / "DATA_MANIFEST.json").read_text(encoding="utf-8"))
-    assert str(man["rows"]) in sec.replace(",", "") and ">312<" in sec and ">17<" in sec and "7,925" in sec and man["months"] == 312
+    assert str(man["rows"]) in html.replace(",", "") and "17 columns" in html and man["months"] == 312 and 'id="dataset"' not in read("about.html")
     import pyarrow.parquet as pq
     tp = V4 / "raw" / "trade_monthly_2000_2025.parquet"
     cols = pq.read_schema(tp).names if tp.exists() else None
@@ -268,12 +269,12 @@ def test_about_evaluation_figures_match_the_evaluation_outputs():
     assert round(fp.loc["Shortage alert", "lift_decile"]) == 7 and "7 times better than chance" in sec
 
 
-def test_resources_page_has_only_the_data_used_section_with_website_links():
+def test_resources_page_has_the_data_used_and_dataset_details_sections_with_website_links():
     html = read("resources.html")
     main = html[html.index("<main"):html.index("</main>")]
     ids = re.findall(r'<section class="section[^"]*" id="([\w-]+)"', main)
-    assert ids == ["datasets"], ids
-    assert re.findall(r"<h2[^>]*>(.*?)</h2>", main) == ["Data used"] and "calibrated from" not in main and "Variables" not in main and 'id="calibration"' not in main
+    assert ids == ["datasets", "dataset"], ids
+    assert re.findall(r"<h2[^>]*>(.*?)</h2>", main) == ["Data used", "Dataset details"] and "calibrated from" not in main and "Variables" not in main and 'id="calibration"' not in main
     for needle in ("Monthly district and trade panel", "Monthly district and sector table", "District catalogue", "Occupation list (NCO-2015)", "Sector to trade crosswalk", "District boundaries", "Forecasts, ranges, indexes and flags",
                    "bharatlas", "CC0 1.0 or CC BY 4.0", "Local Government Directory", "Census 2011", "24,72,600 rows and 17 columns", "4,94,520 rows and 8 columns", "3,447 occupations", "785 districts", "317 districts"):
         assert needle in main, needle
@@ -302,15 +303,17 @@ def test_dark_first_app_style_home_page_without_updates():
     home = read("index.html")
     for p in PAGES:
         assert 'data-theme="dark"' in read(p), p
-    for needle in ("Coverage map", "Why this exists", "From monthly counts to a five-year view", "Features of this website", "Measured, not asserted", "grid-bg", "cta-card", 'class="how"'):
+    for needle in ("Coverage map", "Why this exists", "Features of this website", "grid-bg", "cta-card"):
         assert needle in home, needle
+    for gone in ("From monthly counts to a five-year view", "Measured, not asserted", 'class="how"', "how-step"):                 # the process and the results are on About
+        assert gone not in home, gone
     assert "Updates" not in home and 'id="updates"' not in home
     assert "Smart India Hackathon" not in home[home.index("<main"):home.index("</main>")] and "map-details" not in home and "Show every district as a table" not in home    # no hero pill, no table under the map
     assert 'class="open"' not in home and 'eyebrow">Features' not in home and "The weak spot, stated plainly" not in home and 'class="callout"' not in home
     assert "twelve months early" not in home and "56 districts" not in home and 'data-count="280"' not in home and "280 district" not in home
-    assert 'id="features"' in home and home.count('<article class="card"><span class="icon-box">') == 16 and home.index('id="how"') < home.index('id="features"') < home.index("Measured, not asserted")
-    assert home.index('id="map"') < home.index('id="how"')                     # the map comes before the method
-    assert len(re.findall(r'class="how-step( on)?"', home)) == 4 and len(re.findall(r'class="how-panel( on)?"', home)) == 4
+    assert 'id="features"' in home and home.count('<article class="card"><span class="icon-box">') == 6 and home.index('id="map"') < home.index('id="features"')
+    for owned_elsewhere in ("Demand Index", "Capacity gap", "Severity ranking", "Seat scenarios", "Alerts that begin or end", "Confidence labels", "Early-warning flags"):
+        assert f"<h3>{owned_elsewhere}</h3>" not in home, owned_elsewhere
     for n in ('data-count="10"', 'data-count="317"', 'data-count="7925"', 'data-count="60"'):
         assert n in home, n
 
@@ -351,14 +354,14 @@ def test_the_public_pages_describe_the_newer_features():
     home, about, res = read("index.html"), read("about.html"), read("resources.html")
     sec = about[about.index('id="measures"'):about.index('id="evaluation"')]
     assert sec.count('<article class="card">') == 6 and "Six readings" in sec
-    for needle in ("Severity ranking", "Seat scenarios", "Alerts that begin or end", "methodology document", 'href="docs/api.html"'):
+    for needle in ("Severity ranking", "Seat scenarios", "Alerts that begin or end", 'href="docs/methodology.html"', 'href="docs/api.html"'):
         assert needle in sec, needle
     assert "ratio of 2 or more either way is severe, 1.5 high and 1.25 moderate" in sec                                  # the bands of capacity.py
     import capacity as CAP
     assert [n for n, _ in CAP.SEVERITY_BANDS] == ["severe", "high", "moderate"]
-    for needle in ("Severity ranking", "Seat scenarios", "Alerts that begin or end", "A read-only API", "state borders", "methodology document"):
+    for needle in ("A read-only API", "Dashboard", "state borders", 'href="docs/methodology.html"'):
         assert needle in home, needle
-    assert "alerts that begin or end" in res and "severity ranking and seat scenarios" in res and 'href="docs/api.html"' in res and "methodology document" in res
+    assert "alerts that begin or end" in res and "severity ranking and seat scenarios" in res and 'href="docs/api.html"' in res and 'href="docs/methodology.html"' in res
     assert "unless you test another number with a seat scenario" in about
     for p in ("index.html", "about.html", "resources.html"):
         assert read(p).count("data-hi=") > 30, p

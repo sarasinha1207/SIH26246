@@ -109,6 +109,44 @@
     "Name": "नाम",
     "No calibrated 90% range exists for this combination of filters, so only the point forecast is drawn. Choose a sector, state, state with sector, or a district with a sector or trade for a range.": "फ़िल्टर के इस संयोजन के लिए कोई जाँचा हुआ 90% दायरा नहीं है, इसलिए केवल बिंदु पूर्वानुमान दिखाया गया है। दायरे के लिए सेक्टर, राज्य, सेक्टर सहित राज्य, या सेक्टर/ट्रेड सहित ज़िला चुनें।",
     "Open": "खोलें",
+    "Endpoint": "एंडपॉइंट",
+    "Rows to return": "लौटाई जाने वाली पंक्तियाँ",
+    "12, 36 and 60": "12, 36 और 60",
+    "API": "API",
+    "All years": "सभी वर्ष",
+    "Build a request": "अनुरोध बनाएँ",
+    "Choose an endpoint and its options. The filters above set the state, district, sector and trade.": "एक एंडपॉइंट और उसके विकल्प चुनें। ऊपर के फ़िल्टर राज्य, ज़िला, सेक्टर और ट्रेड तय करते हैं।",
+    "Copied to the clipboard.": "क्लिपबोर्ड पर कॉपी हो गया।",
+    "Copy": "कॉपी करें",
+    "Current alerts": "मौजूदा चेतावनियाँ",
+    "Detail": "विवरण",
+    "District and trade series": "ज़िला और ट्रेड श्रृंखलाएँ",
+    "Each December": "हर दिसंबर",
+    "Entering a tail": "छोर में प्रवेश",
+    "Every month": "हर महीना",
+    "Every parameter, an example and the error codes are on the Forecast API page.": "हर पैरामीटर, एक उदाहरण और त्रुटि कोड पूर्वानुमान API पृष्ठ पर हैं।",
+    "Every series": "हर श्रृंखला",
+    "Filters: {0}": "फ़िल्टर: {0}",
+    "Forecast API": "पूर्वानुमान API",
+    "Largest gap either way": "दोनों ओर सबसे बड़ा अंतर",
+    "Leaving a tail": "छोर से बाहर",
+    "Level": "स्तर",
+    "Months ahead": "कितने महीने आगे",
+    "Most oversupplied first": "सबसे अधिक आपूर्ति पहले",
+    "Most undersupplied first": "सबसे कम आपूर्ति पहले",
+    "No key is needed; up to 60 requests a minute. Every response says that the data is simulated.": "किसी कुंजी की ज़रूरत नहीं; एक मिनट में 60 अनुरोध तक। हर उत्तर बताता है कि डेटा सिम्युलेटेड है।",
+    "One total": "एक कुल",
+    "Open in a new tab": "नए टैब में खोलें",
+    "Press Run to fetch the request above.": "ऊपर का अनुरोध भेजने के लिए चलाएँ दबाएँ।",
+    "Resolution": "विभाजन",
+    "Response": "उत्तर",
+    "Run": "चलाएँ",
+    "Running…": "चल रहा है…",
+    "Select the address above to copy it.": "कॉपी करने के लिए ऊपर का पता चुनें।",
+    "Shortened to the first {0} characters; open the request for the whole response.": "पहले {0} अक्षरों तक छोटा किया गया; पूरा उत्तर देखने के लिए अनुरोध खोलें।",
+    "The request could not be sent. Open the dashboard from a server that also serves the API.": "अनुरोध नहीं भेजा जा सका। डैशबोर्ड ऐसे सर्वर से खोलें जो API भी देता हो।",
+    "This endpoint takes no filters.": "यह एंडपॉइंट कोई फ़िल्टर नहीं लेता।",
+    "Type": "प्रकार",
     "Seat scenario": "सीट परिदृश्य",
     "Change the seats and see what it does to the balance with the openings. The certification rate and the forecast openings stay as they are.": "सीटें बदलकर देखें कि रिक्तियों के साथ संतुलन पर इसका क्या असर पड़ता है। प्रमाणन दर और पूर्वानुमानित रिक्तियाँ जैसी हैं वैसी रहती हैं।",
     "Change seats by (%)": "सीटों में बदलाव (%)",
@@ -314,7 +352,7 @@
   var tf = function (s) { var a = Array.prototype.slice.call(arguments, 1); return t(s).replace(/\{(\d)\}/g, function (_, i) { return a[+i]; }); };
   var PAGES = {
     overview: ["Overview", "Where employment, vacancies and seekers are heading to 2030"], map: ["Map", "Districts and states on the map"], forecast: ["Forecast", "Five-year forecasts with 90% ranges"], index: ["Demand Index", "How strong hiring demand is, from 0 to 100"],
-    capacity: ["Capacity gap", "Forecast openings against training seats"], ranking: ["Rankings", "Where trained supply and openings are furthest apart"], warnings: ["Early warnings", "Districts forecast to be short of workers or in surplus"], data: ["Data and notes", "Method, limits and downloads"]
+    capacity: ["Capacity gap", "Forecast openings against training seats"], ranking: ["Rankings", "Where trained supply and openings are furthest apart"], warnings: ["Early warnings", "Districts forecast to be short of workers or in surplus"], data: ["Data and notes", "Method, limits and downloads"], api: ["API", "Fetch these numbers as JSON, with the filters above"]
   };
   var TR = {}, TIX = {}, DNAME = {}, DSTATE = {}, DLIST = [];
   TRADES.forEach(function (x, i) { TR[x.c] = x; TIX[x.c] = i; });
@@ -835,6 +873,90 @@
       '<section class="card mt"><div class="card-h"><div><h2>' + t("Alert accuracy in testing") + "</h2><p>" + t("Share of alerts that were in the true top or bottom 10% (and how many times better than chance), 2015-19, 1-12 months ahead") + "</p></div></div>" + table([["Alert"], ["Right", "num"]], [["Shortage alert"], ["Oversupply alert"]].map(function (f) { return "<tr><td>" + t(f[0]) + '</td><td class="num">' + pr("1-12", f[0]) + "</td></tr>"; })) + "</section>" +
       '<section class="card mt"><div class="card-h"><div><h2>' + t("Downloads") + "</h2><p>" + t("CSV and JSON of the page you are on use the current filters. Series-level files for all 7,925 series are in the export folder.") + '</p></div></div><div class="dl-row"><a class="chip-btn primary" style="margin-left:0" href="' + url("forecast", {}) + '">' + t("Forecast page") + '</a> <a class="chip-btn primary" style="margin-left:0" href="' + url("warnings", {}) + '">' + t("Alerts page") + "</a></div></section>";
     cur.csv = { name: "kaushalsetu_coverage", head: ["key", "coverage"], rows: Object.keys(cv.series).map(function (k) { return ["series|" + k, cv.series[k]]; }).concat(Object.keys(cv.aggregate).map(function (k) { return ["aggregate|" + k, cv.aggregate[k]]; })) };
+    return Promise.resolve();
+  };
+
+  /* ---------- the API page: build a request from the current filters, run it and read the JSON ----------
+     The parameters of every endpoint are documented on the public Forecast API page; this page is the tool, not a second copy of the documentation. */
+  var API_YEARS = [["2026", "2026"], ["2027", "2027"], ["2028", "2028"], ["2029", "2029"], ["2030", "2030"]];
+  var API_LEVELS = [["trade", "Trades"], ["state", "States"], ["state_trade", "State and trade"], ["district", "Districts"], ["district_sector", "District and sector"], ["series", "District and trade series"]];
+  var API_EPS = {
+    forecast: { limit: "series", opts: [
+      { k: "measure", l: "Measure", d: "all", o: [["all", "All"], ["E", "Employed workers"], ["V", "Job vacancies"], ["S", "Registered job seekers"]] },
+      { k: "horizon", l: "Months ahead", d: "12,36,60", o: [["12,36,60", "12, 36 and 60"], ["12", "12"], ["36", "36"], ["60", "60"], ["all", "Every month"]] },
+      { k: "detail", l: "Detail", d: "aggregate", o: [["aggregate", "One total"], ["series", "Every series"]] }] },
+    flags: { limit: true, opts: [
+      { k: "horizon", l: "Months ahead", d: "12", o: [["12", "12"], ["36", "36"], ["60", "60"]] },
+      { k: "type", l: "Type", d: "all", o: [["all", "Both"], ["shortage", "Shortage"], ["oversupply", "Oversupply"]] },
+      { k: "change", l: "Change", d: "", o: [["", "Current alerts"], ["entering", "Entering a tail"], ["leaving", "Leaving a tail"]] }] },
+    "demand-index": { opts: [{ k: "resolution", l: "Resolution", d: "annual", o: [["annual", "Each December"], ["monthly", "Every month"]] }] },
+    "capacity-gap": { opts: [{ k: "year", l: "Year", d: "", o: [["", "All years"]].concat(API_YEARS) }] },
+    severity: { limit: true, opts: [
+      { k: "level", l: "Level", d: "trade", o: API_LEVELS },
+      { k: "order", l: "Order", d: "under", o: [["under", "Most undersupplied first"], ["over", "Most oversupplied first"], ["severity", "Largest gap either way"]] },
+      { k: "year", l: "Year", d: "2030", o: API_YEARS }] },
+    scenario: { limit: true, opts: [
+      { k: "level", l: "Level", d: "trade", o: API_LEVELS },
+      { k: "year", l: "Year", d: "2030", o: API_YEARS },
+      { k: "seat_change", l: "Change seats by (%)", d: "20", always: true, n: [-90, 500, 5] },
+      { k: "from_year", l: "From year", d: "2026", always: true, o: API_YEARS },
+      { k: "target", l: "Target certified per opening", d: "1", always: true, n: [0.2, 5, 0.1] }] },
+    meta: { opts: [] }
+  };
+  var APIST = { v: {} };
+  render.api = function (p, view) {
+    var ep = API_EPS[p.e] ? p.e : "forecast", cfg = API_EPS[ep];
+    if (cfg.opts.length && cfg.opts[0].k === "level") cfg.opts[0].d = p.district ? "series" : p.state ? "state_trade" : "trade";      // the levels that exist for the chosen filters
+    var  vals = APIST.v[ep] = APIST.v[ep] || {}, MAX = 12000;
+    var scope = ep === "meta" ? [] : ["state", "district", "sector", "trade"].filter(function (k) { return p[k]; }).map(function (k) { return [k, p[k]]; });
+    var get = function (o) { return vals[o.k] != null ? vals[o.k] : o.d; };
+    var wantsLimit = function () { return cfg.limit === true || (cfg.limit === "series" && get(cfg.opts[2]) === "series"); };
+    var query = function () {
+      var q = scope.slice();
+      cfg.opts.forEach(function (o) { var v = get(o); if (o.always || String(v) !== String(o.d)) q.push([o.k, v]); });
+      if (wantsLimit()) q.push(["limit", vals.limit != null ? vals.limit : 5]);
+      return q;
+    };
+    var rel = function () { var q = query(); return "../api/" + ep + (q.length ? "?" + q.map(function (kv) { return kv[0] + "=" + encodeURIComponent(kv[1]).replace(/%2C/g, ","); }).join("&") : ""); };
+    var abs = function () { try { return new URL(rel(), location.href).href; } catch (e) { return rel(); } };
+    var field = function (id, label, ctl) { return '<label for="' + id + '"><span>' + t(label) + "</span>" + ctl + "</label>"; };
+    var ctls = cfg.opts.map(function (o) {
+      var id = "api-o-" + o.k, v = get(o);
+      if (o.n) return field(id, o.l, '<input type="number" id="' + id + '" data-k="' + o.k + '" min="' + o.n[0] + '" max="' + o.n[1] + '" step="' + o.n[2] + '" value="' + esc(v) + '">');
+      return field(id, o.l, '<select id="' + id + '" data-k="' + o.k + '">' + o.o.map(function (x) { return '<option value="' + esc(x[0]) + '"' + (String(x[0]) === String(v) ? " selected" : "") + ">" + esc(t(x[1])) + "</option>"; }).join("") + "</select>");
+    }).join("") + (wantsLimit() ? field("api-o-limit", "Rows to return", '<input type="number" id="api-o-limit" data-k="limit" min="1" max="200" step="1" value="' + esc(vals.limit != null ? vals.limit : 5) + '">') : "");
+    var epSel = field("api-ep", "Endpoint", '<select id="api-ep" translate="no">' + Object.keys(API_EPS).map(function (k) { return '<option value="' + k + '"' + (k === ep ? " selected" : "") + ">/api/" + k + "</option>"; }).join("") + "</select>");
+    view.innerHTML = '<section class="card"><div class="card-h"><div><h2>' + t("Build a request") + "</h2><p>" + t("Choose an endpoint and its options. The filters above set the state, district, sector and trade.") + '</p></div></div>' +
+      '<div class="scn-form">' + epSel + ctls + "</div>" +
+      '<p class="note api-scope">' + (ep === "meta" ? t("This endpoint takes no filters.") : tf("Filters: {0}", esc(scopeText(p)))) + "</p>" +
+      '<div class="api-bar"><code class="api-url" id="api-url" translate="no"></code><button class="chip-btn" id="api-copy" type="button">' + t("Copy") + '</button><a class="chip-btn" id="api-open" target="_blank" rel="noopener">' + t("Open in a new tab") + '</a><button class="chip-btn primary" id="api-run" type="button">' + t("Run") + "</button></div></section>" +
+      '<section class="card mt"><div class="card-h"><div><h2>' + t("Response") + '</h2><p id="api-status" role="status" aria-live="polite"></p></div></div><pre class="api-out" id="api-out" tabindex="0" translate="no" aria-label="' + esc(t("Response")) + '"></pre></section>' +
+      '<p class="note">' + t("Every parameter, an example and the error codes are on the Forecast API page.") + ' <a class="ulink" href="../docs/api.html">' + t("Forecast API") + "</a> · " + t("No key is needed; up to 60 requests a minute. Every response says that the data is simulated.") + "</p>";
+    var status = $("#api-status", view), out = $("#api-out", view);
+    var refresh = function () {
+      $("#api-url", view).textContent = abs(); $("#api-open", view).href = rel();
+      cur.csv = { name: fname("api_request"), head: ["endpoint", "request"], rows: [["/api/" + ep, abs()]] };
+    };
+    var stale = function () { status.textContent = t("Press Run to fetch the request above."); out.textContent = ""; };
+    var run = function () {
+      var t0 = performance.now();
+      status.textContent = t("Running…"); out.textContent = "";
+      fetch(rel(), { headers: { Accept: "application/json" } }).then(function (r) { return r.text().then(function (txt) { return { r: r, txt: txt }; }); }).then(function (x) {
+        var ms = Math.round(performance.now() - t0), shown = x.txt, js = null;
+        try { js = JSON.parse(x.txt); shown = JSON.stringify(js, null, 2); } catch (e) { /* not JSON: show it as it came */ }
+        out.textContent = shown.length > MAX ? shown.slice(0, MAX) + "\n…" : shown;
+        status.textContent = x.r.status + " · " + ms + " ms · " + fmt(x.txt.length / 1024, 1) + " KB" + (x.r.ok ? "" : " · " + ((js && js.message) || "")) + (shown.length > MAX ? " · " + tf("Shortened to the first {0} characters; open the request for the whole response.", fmt(MAX)) : "");
+      }).catch(function () { status.textContent = t("The request could not be sent. Open the dashboard from a server that also serves the API."); });
+    };
+    $("#api-ep", view).addEventListener("change", function (e) { go({ e: e.target.value }); });
+    $$("[data-k]", view).forEach(function (c) { c.addEventListener("change", function () { vals[c.dataset.k] = c.value; if (cfg.limit === "series" && c.dataset.k === "detail") { render.api(p, view); return; } refresh(); stale(); }); });
+    $("#api-run", view).addEventListener("click", run);
+    $("#api-copy", view).addEventListener("click", function () {
+      var done = function () { status.textContent = t("Copied to the clipboard."); }, text = abs();
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, function () { status.textContent = t("Select the address above to copy it."); });
+      else status.textContent = t("Select the address above to copy it.");
+    });
+    refresh(); run();
     return Promise.resolve();
   };
 

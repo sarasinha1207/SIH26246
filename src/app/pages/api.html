@@ -7,7 +7,7 @@
       <p class="lead">The same numbers as the dashboard, as plain JSON.</p>
       <div class="hero-text">
         <p>The API is read-only and open: no key and no login. It serves the 2026 to 2030 forecasts, the early-warning alerts, the Demand Index, the capacity gap, the severity ranking and seat scenarios, with the same filters as the dashboard: state, district, sector and trade.</p>
-        <p>Every response says that the data is <strong>simulated</strong>. It behaves like official statistics but describes no real district, and it is not an official statistic.</p>
+        <p>Every response says that the data is <strong>simulated</strong> and not an official statistic.</p>
       </div>
       <ul class="hero-chips">
         <li><b>7</b><span>endpoints</span></li>
@@ -100,11 +100,7 @@
         <h2>Reading the numbers</h2>
       </div>
       <div class="grid3">
-        <article class="card"><h3>Two ranges</h3><p>The usual range was calibrated on 2010 to 2019; the wide range also uses the shock years 2020 to 2025. For totals of many series, such as a state, read the wide range: errors of neighbouring series move together.</p></article>
-        <article class="card"><h3>Where there is no range</h3><p>A range exists for India, a sector, a trade, a state, a state with a sector, a district with a sector, and a district with a trade. For other combinations the field is null and a note says so.</p></article>
-        <article class="card"><h3>Points add up, ranges do not</h3><p>Point forecasts of the trades add up exactly to their sector, and sectors to states and India. Ranges are calibrated for each level separately.</p></article>
-        <article class="card"><h3>Seats are held flat</h3><p>The capacity gap uses the 2025 to 2026 sanctioned seats for every year to 2030, an assumption, because no seat plans are forecast.</p></article>
-        <article class="card"><h3>Seekers are the least reliable</h3><p>Job-seeker forecasts and the fifth year are the weakest. Each series also carries a confidence label for each twelve-month band.</p></article>
+        <article class="card"><h3>Where there is no range</h3><p>Where no checked range exists, the field is null and a note says so. The limits of the forecasts themselves are on the <a class="ulink" href="{P}about.html#limits">About</a> page.</p></article>
         <article class="card"><h3>Same data as the dashboard</h3><p>The API reads the files the dashboard loads, so a figure there and a figure here are the same figure, to the nearest person.</p></article>
       </div>
     </div>

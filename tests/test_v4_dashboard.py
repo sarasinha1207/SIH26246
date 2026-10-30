@@ -18,7 +18,7 @@ import config as C  # noqa: E402
 DASH = ROOT / "app" / "dashboard"
 DATA = DASH / "data"
 EXPORTS = C.DATA / "exports"
-PAGES = ["overview", "map", "forecast", "index", "capacity", "ranking", "warnings", "data"]
+PAGES = ["overview", "map", "forecast", "index", "capacity", "ranking", "warnings", "data", "api"]
 
 _guard.skip_module_unless(DATA / "core.js", EXPORTS / "forecast_rollups.csv.gz", why="needs the v4 dashboard build (src/v4/build_dashboard.py) and the phase 6 exports")
 
@@ -202,7 +202,7 @@ def test_every_text_has_a_hindi_translation():
     keys -= {"Loading…"}
     missing = sorted(k for k in keys if json.dumps(k, ensure_ascii=False)[1:-1] not in hi)
     assert not missing, missing
-    plain = {"CSV", "JSON"}
+    plain = {"CSV", "JSON", "API"}
     assert all(re.search(r"[ऀ-ॿ]", v) or k in plain for k, v in hi.items()), [k for k, v in hi.items() if not re.search(r"[ऀ-ॿ]", v) and k not in plain]
 
 

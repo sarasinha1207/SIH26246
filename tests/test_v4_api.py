@@ -15,6 +15,7 @@ import time
 import unittest
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -277,7 +278,7 @@ def test_the_deployment_stays_within_its_size_and_speed_budget():
     assert total < 60e6, total / 1e6                                                      # well under the platform's upload limit
     assert max(p.stat().st_size for p in files) < 6e6
     gz = lambda p: len(gzip.compress(p.read_bytes(), 6))
-    for page, budget in (("index.html", 450e3), ("about.html", 100e3), ("resources.html", 100e3), ("docs/api.html", 100e3), ("dashboard/index.html", 450e3)):
+    for page, budget in (("index.html", 450e3), ("about.html", 100e3), ("resources.html", 100e3), ("docs/api.html", 100e3), ("docs/methodology.html", 100e3), ("dashboard/index.html", 450e3)):
         h = (APP / page).read_text(encoding="utf-8")
         parts = [APP / page] + [(APP / page).parent / m.split("?")[0] for m in re.findall(r'(?:src|href)="([^"]+\\.(?:js|css))(?:\\?[^"]*)?"', h) if not m.startswith("http")]
         assert sum(gz(p) for p in parts) < budget, (page, sum(gz(p) for p in parts))
@@ -407,10 +408,112 @@ def test_the_methodology_document_quotes_the_exports_correctly():
         assert abs(float(di[(di.series_row == row) & (di.month == "2025-12")].DI.iloc[0]) - 77.9) < 0.06 and "**77.9**" in doc
 
 
+# ---- the methodology page -------------------------------------------------------------------------------------------------------------------------------
+def method_page():
+    return (APP / "docs" / "methodology.html").read_text(encoding="utf-8")
+
+
+def test_the_methodology_page_is_built_linked_and_in_hindi():
+    import i18n
+    import i18n_hi
+    h = method_page()
+    assert ">Methodology</h1>" in h and h.count("data-hi=") > 60
+    src = (ROOT / "src" / "app" / "pages" / "methodology.html").read_text(encoding="utf-8").replace("{P}", "../")
+    items, _ = i18n.units(src)
+    assert not [k for _, k in items if k not in i18n_hi.PAGE]
+    for rel in ("index.html", "about.html", "resources.html", "docs/api.html", "docs/methodology.html"):                  # reachable from every page's footer
+        t = (APP / rel).read_text(encoding="utf-8")
+        assert 'href="' + ("../" if "/" in rel else "") + 'docs/methodology.html">Methodology</a>' in t, rel
+    assert 'docs/methodology.html' in (APP / "about.html").read_text(encoding="utf-8") and 'docs/methodology.html#real-data' in (APP / "about.html").read_text(encoding="utf-8")
+    assert 'docs/methodology.html' in (APP / "resources.html").read_text(encoding="utf-8") and 'docs/methodology.html' in (APP / "index.html").read_text(encoding="utf-8")
+    for href in re.findall(r'(?:href|src)="([^"#?]+)', h):
+        assert href.startswith(("http", "mailto:")) or (APP / "docs" / href).exists(), href
+
+
+def test_each_idea_lives_on_one_page_only():
+    """No heading or sentence is shared by two of the five public pages, and no two share more than a few eight-word runs (a pointer such as "served by the read-only API" is allowed)."""
+    import itertools
+    import i18n
+    pages = ("index.html", "about.html", "resources.html", "docs/methodology.html", "docs/api.html")
+    body = lambda t: t[t.index("<main"):t.index("</main>")]                                                           # the shared header and footer repeat by design
+    units = {p: {k for _, k in i18n.units(body((APP / p).read_text(encoding="utf-8")))[0]} for p in pages}
+    words = lambda text: re.findall(r"[a-z0-9']+", re.sub(r"<[^>]+>", " ", text.lower()))
+    runs = {p: {" ".join(w[i:i + 8]) for k in units[p] for w in [words(k)] for i in range(len(w) - 7)} for p in pages}
+    for a, b in itertools.combinations(pages, 2):
+        shared = [k for k in units[a] & units[b] if len(k.split()) > 3]
+        assert not shared, (a, b, shared[:2])
+        assert len(runs[a] & runs[b]) <= 10, (a, b, len(runs[a] & runs[b]), sorted(runs[a] & runs[b])[:3])
+    assert len(re.findall(r"<section", method_page())) == 4                                                              # the heading and three sections, no more
+    home, about, res = [(APP / p).read_text(encoding="utf-8") for p in ("index.html", "about.html", "resources.html")]
+    assert "bharatlas" not in home and "bharatlas" in res and 'id="principles"' not in about and 'id="dataset"' in res
+
+
+def test_the_methodology_page_quotes_the_exports_and_the_code_correctly():
+    h = method_page()
+    sys.path.append(str(ROOT / "src" / "v4"))
+    import capacity as CAP
+    import demand_index as DIX
+    import early_warning as EW
+    import intervals as IV
+    flat = re.sub(r"<[^>]+>", "", h)
+    chk = json.loads((ROOT / "reports" / "v4" / "forecast" / "demand_index_check.json").read_text(encoding="utf-8"))["v_only_vs_three_channels_by_year"]
+    corr = [v["correlation"] for v in chk.values()]
+    assert f"{min(corr):.2f} to {max(corr):.2f} ({chk['2025']['correlation']:.2f} in 2025)" in flat
+    assert min(chk) == "2012" and max(chk) == "2025" and "In every year from 2012 to 2025" in flat
+    assert 7.5 <= min(v["mean_abs_difference"] for v in chk.values()) and max(v["mean_abs_difference"] for v in chk.values()) <= 10.5 and "8 to 10 points" in flat
+    assert DIX.REF == (216, 239) and "2018 to 2019" in flat
+    assert f"at least {IV.MIN_POOL} errors from {IV.MIN_ORIGINS} forecast dates" in flat
+    assert "The flag percentiles, the label limits and the severity ratios are conventions" in flat
+    assert f"high up to {EW.HIGH_WAPE:g}%, medium up to {EW.MEDIUM_WAPE:g}%" in flat
+    # the worked example, recomputed from the simulated panel and the index export
+    dim = pd.read_csv(ROOT / "data" / "v4" / "dim_series.csv")
+    row = int(dim.index[(dim.District_LGD_Code == 118) & (dim.Trade_Code == "CON-7111")][0])
+    di = pd.read_parquet(EXP / "demand_index.parquet")
+    assert abs(float(di[(di.series_row == row) & (di.month == "2025-12")].DI.iloc[0]) - 77.9) < 0.06 and "<strong>77.9</strong>" in h
+    pn = pd.read_parquet(ROOT / "data" / "v4" / "raw" / "trade_monthly_2000_2025.parquet")
+    pn = pn[pn.Series_ID.str.endswith("-CON-7111") & (pn.Date.astype(str).str[:7] == "2025-12")]
+    assert len(pn) == 317
+    mine = pn.Series_ID == "118-CON-7111"
+    me = pn[mine].iloc[0]
+    assert (int(me.Total_Employed_Workers), int(me.Active_Job_Vacancies), int(me.Sig_Portal_Postings), int(me.Sig_NCS_Vacancies)) == (105743, 1434, 247, 449)
+    assert "1,05,743" in h and "1,434, 247 and 449" in h
+    z = []
+    for col in ("Active_Job_Vacancies", "Sig_Portal_Postings", "Sig_NCS_Vacancies"):
+        x = np.log((pn[col] + 1) / pn.Total_Employed_Workers)
+        z.append(float((x[mine].iloc[0] - x.mean()) / x.std(ddof=0)))
+    for v, label in zip(z, ("+0.46 for vacancies", "+0.85 for portals", "+0.68 for the National Career Service")):
+        assert f"{v:+.2f}" == label.split(" ")[0], (z, label)
+        assert label in flat
+    assert f"{np.mean(z):.2f}, rescaled to 0.74" in flat
+
+
+# ---- the API page of the dashboard ------------------------------------------------------------------------------------------------------------------------
+def test_the_dashboard_api_page_offers_only_endpoints_and_values_the_api_accepts():
+    js = (APP / "dashboard" / "dashboard.js").read_text(encoding="utf-8")
+    shell = (ROOT / "src" / "v4" / "dashboard_shell.html").read_text(encoding="utf-8")
+    assert 'data-page="api"' in shell and "render.api = " in js and 'api: ["API"' in js
+    assert 'href="../docs/api.html"' in js and "fetch(rel()" in js and 'out.innerHTML' not in js          # the response is shown as text, never as markup
+    node = shutil.which("node")
+    if not node:
+        raise unittest.SkipTest("node is not installed")
+    block = js[js.index("var API_YEARS"):js.index("var APIST")]
+    out = subprocess.run([node, "-e", block + "; console.log(JSON.stringify(API_EPS))"], capture_output=True, text=True, check=True).stdout
+    eps = json.loads(out)
+    assert set(eps) == set(A.ENDPOINTS), set(eps) ^ set(A.ENDPOINTS)
+    for ep, cfg in eps.items():
+        for o in cfg["opts"]:
+            values = [v for v, _ in o["o"]] if "o" in o else [o["n"][0], o["d"], o["n"][1]]
+            assert str(o["d"]) in [str(v) for v in values] or "n" in o, (ep, o["k"])
+            for v in values:
+                qs = "state=Kerala&" + "level=state_trade&" * (o["k"] != "level" and "level" in [x["k"] for x in cfg["opts"]]) + f"{o['k']}={v}"
+                code, _, d = call(ep, qs + ("&limit=3" if cfg.get("limit") else ""))
+                assert code in (200, 404), (ep, qs, code, d)                                                          # 404 only for a valid request that matches nothing; never a refused parameter
+
+
 # ---- accessibility checks that need no browser ------------------------------------------------------------------------------------------------------
 def test_pages_have_a_language_a_skip_link_landmarks_and_ordered_headings():
     from bs4 import BeautifulSoup
-    for rel in ("index.html", "about.html", "resources.html", "docs/api.html", "dashboard/index.html"):
+    for rel in ("index.html", "about.html", "resources.html", "docs/api.html", "docs/methodology.html", "dashboard/index.html"):
         soup = BeautifulSoup((APP / rel).read_text(encoding="utf-8"), "html.parser")
         assert soup.html.get("lang") and soup.title and soup.title.string.strip(), rel
         assert soup.find("a", class_="skip") and soup.find("main") or soup.find(id="main") or soup.find(id="view"), rel

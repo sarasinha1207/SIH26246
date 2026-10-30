@@ -238,4 +238,10 @@ ul.plain { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; color: var(-
 .scn-form { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: flex-end; margin: 6px 0 16px; }
 .scn-form label { display: grid; gap: 4px; }
 .scn-form label span { font: 600 .68rem var(--font); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); }
-.scn-form input { font: 550 .86rem var(--font); color: var(--ink); background: var(--surface-2); border: 1px solid var(--line); border-radius: 9px; padding: 8px 10px; width: 120px; }
+.scn-form select, .scn-form input { font: 550 .86rem var(--font); color: var(--ink); background: var(--surface-2); border: 1px solid var(--line); border-radius: 9px; padding: 8px 10px; width: 120px; }
+.api-bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 6px 0 4px; }
+.api-url { flex: 1 1 320px; min-width: 0; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-2); font: 500 .8rem ui-monospace, "Cascadia Mono", Consolas, monospace; overflow-wrap: anywhere; }
+.api-out { margin: 0; max-height: 440px; overflow: auto; padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-2); font: 500 .78rem/1.55 ui-monospace, "Cascadia Mono", Consolas, monospace; white-space: pre; }
+.api-out:focus-visible { outline: 2px solid var(--demand); outline-offset: 2px; }
+.api-scope { margin: 0 0 10px; }
+.scn-form select { font: 550 .86rem var(--font); color: var(--ink); background: var(--surface-2); border: 1px solid var(--line); border-radius: 9px; padding: 8px 10px; min-width: 120px; max-width: 100%; }

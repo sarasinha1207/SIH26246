@@ -13,6 +13,18 @@ KaushalSetu is an AI-enabled labour market intelligence and skill demand-supply 
 - **Ministry / Department**: Ministry of Skill Development and Entrepreneurship (MSDE)
 - **Category**: Software
 - **Theme**: Miscellaneous
+- **Team name**: Versec0ders
+- **Team ID**: 168356
+- **Members**:
+
+| Member Name | Role | Key Contributions | Contact |
+|---|---|---|---|
+| Divya | Team Leader | <contribution> | divyasin58@gmail.com  |
+| Sara Sinha | Member | <contribution> | sara.sinha.100@gmail.com |
+| Rishabh Kumar Singh | Member | <contribution> | rishabhkumarsingh1112@gmail.com  |
+| Vyomsoni | Member | <contribution> | svyom21@gmail.com |
+| Ayush Kumar Gupta | Member | <contribution> | ayushkumargupta018@gmail.com |
+| Shubham Raj | Member | <contribution> | Shubham748856@gmail.com |
 
 The first submission (v3: 56 districts, twelve-month forecasts) is preserved at the git tag `submitted-v1`; this branch is the extended version (v4). The plan and the results of every phase are in `docs/v4-implementation-plan.md`. The method, step by step, with the Demand Index formula, a worked example, the evaluation and the limits, is in `docs/METHODOLOGY.md`.
 
@@ -41,7 +53,7 @@ The first submission (v3: 56 districts, twelve-month forecasts) is preserved at 
 
 **Assistant**: answers in the browser from the site's own data (totals, a district, ranges, Demand Index, capacity, alerts, rankings, definitions); optionally words answers with Google Gemini through a server route that keeps the key off the page.
 
-**Engineering**: every number on the site is built from the exports and checked against them; SHA-256 manifests; leak-safe splits by calendar time with the test and stress windows opened once; 264 automated tests; security headers; an accessibility audit script and fixes.
+**Engineering**: every number on the site is built from the exports and checked against them; SHA-256 manifests; leak-safe splits by calendar time with the test and stress windows opened once; 268 automated tests; security headers; an accessibility audit script and fixes.
 
 ## 3. Technology stack
 | Layer | Technology |
@@ -98,7 +110,7 @@ Employed workers 14.29% against 16.65% (14% closer), vacancies 20.57% against 24
 * Confidence labels fall from high to low for employed workers on the test years; for seekers the order is not reliable and the site says so.
 
 ## 6. Tests done and their overview
-**264 automated tests in 23 files.** Run any file with `python tests/<name>.py` (no pytest needed); tests that need git-ignored data skip with a message on a fresh clone.
+**268 automated tests in 23 files.** Run any file with `python tests/<name>.py` (no pytest needed); tests that need git-ignored data skip with a message on a fresh clone.
 
 | Area | Test file | Tests | What it proves |
 |---|---|---|---|
@@ -129,7 +141,7 @@ pip install -r requirements.txt
 ```bash
 python src/app/serve.py
 ```
-Website `http://localhost:8080` · Dashboard `http://localhost:8080/dashboard/index.html` · API `http://localhost:8080/api/meta` · API page `http://localhost:8080/docs/api.html`
+Website `http://localhost:8080` · Dashboard `http://localhost:8080/dashboard/index.html` · API `http://localhost:8080/api/meta` · API page `http://localhost:8080/docs/api.html` · Methodology page `http://localhost:8080/docs/methodology.html`
 
 **Enable the Gemini assistant (optional)**
 ```bash
@@ -168,7 +180,7 @@ python tests/test_chat.py
 ├── requirements.txt           Python dependencies (the deployed functions need none)
 ├── .env.example               copy to .env and add GEMINI_API_KEY (the real .env is git-ignored)
 ├── app/                       the website, dashboard and API: deploy this folder (Vercel Root Directory)
-│   ├── index.html  about.html  resources.html  docs/api.html
+│   ├── index.html  about.html  resources.html  docs/api.html  docs/methodology.html
 │   ├── vercel.json            security and cache headers, function limits and bundled data
 │   ├── api/                   chat.py (assistant), forecast.py, flags.py, demand-index.py, capacity-gap.py, meta.py and _v4api.py (shared code)
 │   ├── assets/                styles, scripts, logo, favicon, Hindi text
@@ -201,7 +213,7 @@ python tests/test_chat.py
 * **Wider coverage.** More states and trades; a scheduled monthly job that refits, forecasts, rebuilds and publishes with an alert if a check fails.
 
 ## 10. References
-**Data and statistics sources** (the simulator is calibrated to these where verifiable; see the Resources page)
+**Data and statistics sources**
 1. Ministry of Statistics and Programme Implementation, *Periodic Labour Force Survey (PLFS)*, <https://mospi.gov.in/>
 2. Office of the Registrar General and Census Commissioner, India, *Census of India 2011*, <https://censusindia.gov.in/>
 3. Ministry of Labour and Employment, *e-Shram portal*, <https://labour.gov.in/>
@@ -210,8 +222,6 @@ python tests/test_chat.py
 6. NASSCOM, *IT-BPM sector workforce figures*, <https://nasscom.in/>
 7. District boundary geometry: Bharat Atlas, <https://bharatlas.com/> (simplified for display; licence recorded in `app/data/map_data.js`)
 
-**Methods**
-8. Chen, T. and Guestrin, C. (2016). *XGBoost: A Scalable Tree Boosting System.* Proceedings of the 22nd ACM SIGKDD Conference.
-9. Akiba, T., Sano, S., Yanase, T., Ohta, T. and Koyama, M. (2019). *Optuna: A Next-generation Hyperparameter Optimization Framework.* KDD 2019.
-10. Vovk, V., Gammerman, A. and Shafer, G. (2005). *Algorithmic Learning in a Random World* (conformal prediction); Angelopoulos, A. N. and Bates, S. (2021). *A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification.* arXiv:2107.07511.
-11. Gibbs, I. and Candes, E. (2021). *Adaptive Conformal Inference Under Distribution Shift.* NeurIPS 2021 (considered; the final ranges are calibrated by window, see the plan).
+**Methods**    
+8. Vovk, V., Gammerman, A. and Shafer, G. (2005). *Algorithmic Learning in a Random World* (conformal prediction); Angelopoulos, A. N. and Bates, S. (2021). *A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification.* arXiv:2107.07511.  
+9. Gibbs, I. and Candes, E. (2021). *Adaptive Conformal Inference Under Distribution Shift.* NeurIPS 2021 (considered; the final ranges are calibrated by window, see the plan).  
