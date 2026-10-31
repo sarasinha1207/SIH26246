@@ -1,49 +1,157 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 640" role="img" aria-labelledby="t d" font-family="Segoe UI, system-ui, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 961" width="1200" height="961" role="img" aria-labelledby="t d">
   <title id="t">KaushalSetu system architecture</title>
   <desc id="d">Simulated data flows up through the ML engine and the export pipeline into data files served by Vercel to the website, the dashboard, the assistant and the read-only forecast API, which users read.</desc>
   <defs>
-    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#2A64F5"/></marker>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#071A4A"/><stop offset=".55" stop-color="#0E3A9A"/><stop offset="1" stop-color="#1B62E0"/>
+    </linearGradient>
+    <radialGradient id="glow" cx=".88" cy=".08" r=".6">
+      <stop offset="0" stop-color="#6FA8FF" stop-opacity=".45"/><stop offset="1" stop-color="#6FA8FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx=".05" cy=".95" r=".5">
+      <stop offset="0" stop-color="#3C7BFF" stop-opacity=".35"/><stop offset="1" stop-color="#3C7BFF" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.1" fill="#FFFFFF" fill-opacity=".09"/></pattern>
+    <filter id="sh" x="-10%" y="-10%" width="120%" height="140%"><feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#020B26" flood-opacity=".38"/></filter>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 1L9 5L0 9z" fill="#CFE2FF"/></marker>
     <style>
-      .box { fill: #F4F7FD; stroke: #B9C8E6; stroke-width: 1.5; }
-      .hi { fill: #E6EEFF; stroke: #2A64F5; stroke-width: 1.8; }
-      .warm { fill: #FFF3DC; stroke: #E39A1F; stroke-width: 1.5; }
-      .t { fill: #0B1B3A; font-size: 15px; font-weight: 650; }
-      .s { fill: #4A5878; font-size: 12.5px; }
-      .l { fill: #2A64F5; font-size: 12px; font-weight: 600; }
-      .band { fill: none; stroke: #B9C8E6; stroke-dasharray: 5 5; stroke-width: 1.2; }
-      .bl { fill: #4A5878; font-size: 11.5px; letter-spacing: .08em; font-weight: 700; }
-      line, path.ar { stroke: #2A64F5; stroke-width: 2; fill: none; marker-end: url(#a); }
+      text { font-family: Segoe UI, Inter, system-ui, -apple-system, Arial, sans-serif; }
+      .title { fill: #FFFFFF; font-size: 32px; font-weight: 750; letter-spacing: -.01em; }
+      .sub { fill: #BCD3FF; font-size: 15px; }
+      .chip { fill: #FFFFFF; fill-opacity: .14; stroke: #FFFFFF; stroke-opacity: .28; }
+      .chiptxt { fill: #E3EDFF; font-size: 11.5px; font-weight: 700; letter-spacing: .12em; }
+      .band { fill: #FFFFFF; fill-opacity: .07; stroke: #FFFFFF; stroke-opacity: .22; stroke-width: 1.2; }
+      .card { fill: #FFFFFF; filter: url(#sh); }
+      .ct { fill: #0B1B3A; font-size: 16.5px; font-weight: 700; }
+      .cs { fill: #43547A; font-size: 13px; }
+      .arrow { stroke: #CFE2FF; stroke-width: 2.4; fill: none; marker-end: url(#ah); stroke-linecap: round; }
+      .foot { fill: #BCD3FF; font-size: 13px; }
     </style>
   </defs>
-  <rect width="1000" height="640" fill="#ffffff"/>
-  <text x="30" y="40" class="t" style="font-size:22px">System architecture</text>
-  <text x="30" y="62" class="s">Data flows upwards. All data is simulated.</text>
-
-  <rect class="band" x="20" y="80" width="960" height="92" rx="14"/><text class="bl" x="34" y="100">PEOPLE</text>
-  <rect class="box" x="60" y="108" width="270" height="52" rx="10"/><text class="t" x="80" y="132">Planners and skill councils</text><text class="s" x="80" y="150">state units, training providers</text>
-  <rect class="box" x="360" y="108" width="270" height="52" rx="10"/><text class="t" x="380" y="132">The public</text><text class="s" x="380" y="150">English or Hindi, phone or desktop</text>
-  <rect class="box" x="660" y="108" width="270" height="52" rx="10"/><text class="t" x="680" y="132">Other systems</text><text class="s" x="680" y="150">read-only JSON, no key</text>
-
-  <rect class="band" x="20" y="196" width="960" height="150" rx="14"/><text class="bl" x="34" y="216">DELIVERY, HOSTED ON VERCEL</text>
-  <rect class="hi" x="40" y="228" width="200" height="100" rx="10"/><text class="t" x="56" y="254">Website</text><text class="s" x="56" y="274">home, about, resources</text><text class="s" x="56" y="292">map of 317 districts</text><text class="s" x="56" y="310">API page</text>
-  <rect class="hi" x="260" y="228" width="200" height="100" rx="10"/><text class="t" x="276" y="254">Dashboard</text><text class="s" x="276" y="274">8 pages incl. map, 4 filters</text><text class="s" x="276" y="292">CSV and JSON downloads</text><text class="s" x="276" y="310">state data loaded on demand</text>
-  <rect class="hi" x="480" y="228" width="200" height="100" rx="10"/><text class="t" x="496" y="254">Assistant</text><text class="s" x="496" y="274">answers in the browser</text><text class="s" x="496" y="292">/api/chat function</text><text class="s" x="496" y="310">optional Gemini wording</text>
-  <rect class="hi" x="700" y="228" width="260" height="100" rx="10"/><text class="t" x="716" y="254">Forecast API</text><text class="s" x="716" y="274">/api/forecast, /flags, /demand-index,</text><text class="s" x="716" y="292">/capacity-gap, /meta: GET only,</text><text class="s" x="716" y="310">rate limited, standard library</text>
-
-  <rect class="band" x="20" y="370" width="960" height="92" rx="14"/><text class="bl" x="34" y="390">DATA FILES THE SITE READS (BUILT FROM THE EXPORTS, CHECKSUMS IN THE MANIFEST)</text>
-  <rect class="box" x="40" y="400" width="210" height="50" rx="10"/><text class="t" x="56" y="422">core.js, alerts.js</text><text class="s" x="56" y="440">groups, ranges, capacity, rankings</text>
-  <rect class="box" x="270" y="400" width="210" height="50" rx="10"/><text class="t" x="286" y="422">10 state shards</text><text class="s" x="286" y="440">7,925 series, points and flags</text>
-  <rect class="box" x="500" y="400" width="210" height="50" rx="10"/><text class="t" x="516" y="422">map and site data</text><text class="s" x="516" y="440">317 shapes, headline numbers</text>
-  <rect class="box" x="730" y="400" width="230" height="50" rx="10"/><text class="t" x="746" y="422">Hindi names and text</text><text class="s" x="746" y="440">states, districts, trades, pages</text>
-
-  <rect class="band" x="20" y="486" width="960" height="136" rx="14"/><text class="bl" x="34" y="506">BUILD PIPELINE (PYTHON)</text>
-  <rect class="warm" x="40" y="518" width="210" height="88" rx="10"/><text class="t" x="56" y="542">Simulated panel</text><text class="s" x="56" y="562">2000 to 2025, 7,925 series</text><text class="s" x="56" y="580">317 districts, 25 trades</text><text class="s" x="56" y="598">LGD codes, NCO-2015</text>
-  <rect class="warm" x="270" y="518" width="250" height="88" rx="10"/><text class="t" x="286" y="542">ML engine</text><text class="s" x="286" y="562">XGBoost, direct, 1 to 60 months</text><text class="s" x="286" y="580">conformal ranges, confidence labels</text><text class="s" x="286" y="598">Demand Index, capacity gap, flags</text>
-  <rect class="warm" x="540" y="518" width="210" height="88" rx="10"/><text class="t" x="556" y="542">Exports</text><text class="s" x="556" y="562">roll-ups, alerts, rankings</text><text class="s" x="556" y="580">capacity tables, manifest</text><text class="s" x="556" y="598">SHA-256 of every file</text>
-  <rect class="warm" x="770" y="518" width="190" height="88" rx="10"/><text class="t" x="786" y="542">Builders</text><text class="s" x="786" y="562">dashboard, map, site data,</text><text class="s" x="786" y="580">pages, Hindi text</text><text class="s" x="786" y="598">and their tests</text>
-
-  <line x1="250" y1="562" x2="268" y2="562"/><line x1="520" y1="562" x2="538" y2="562"/><line x1="750" y1="562" x2="768" y2="562"/>
-  <line x1="145" y1="484" x2="145" y2="464"/><line x1="375" y1="484" x2="375" y2="464"/><line x1="605" y1="484" x2="605" y2="464"/><line x1="845" y1="484" x2="845" y2="464"/>
-  <line x1="140" y1="368" x2="140" y2="348"/><line x1="360" y1="368" x2="360" y2="348"/><line x1="580" y1="368" x2="580" y2="348"/><line x1="830" y1="368" x2="830" y2="348"/>
-  <line x1="195" y1="194" x2="195" y2="174"/><line x1="495" y1="194" x2="495" y2="174"/><line x1="795" y1="194" x2="795" y2="174"/>
+  <rect width="1200" height="961" fill="url(#bg)"/>
+  <rect width="1200" height="961" fill="url(#dots)"/>
+  <rect width="1200" height="961" fill="url(#glow)"/>
+  <rect width="1200" height="961" fill="url(#glow2)"/>
+  <text x="40" y="58" class="title">System architecture</text>
+  <text x="40" y="86" class="sub">Data flows upwards, from the Python build pipeline to the people who use the site. All data is simulated.</text>
+  <rect class="band" x="40" y="116" width="1120" height="142" rx="18"/>
+  <rect class="chip" x="60" y="130" width="80" height="26" rx="13"/>
+  <text class="chiptxt" x="73" y="147.5">PEOPLE</text>
+  <g><rect class="card" x="64" y="168" width="344" height="72" rx="13"/>
+  <rect x="64" y="168" width="344" height="5" rx="2.5" fill="#5B8DEF"/>
+  <text class="ct" x="82" y="199">Planners and skill councils</text>
+  <text class="cs" x="82" y="222">state units, training providers</text>
+  </g>
+  <g><rect class="card" x="428" y="168" width="344" height="72" rx="13"/>
+  <rect x="428" y="168" width="344" height="5" rx="2.5" fill="#5B8DEF"/>
+  <text class="ct" x="446" y="199">The public</text>
+  <text class="cs" x="446" y="222">English or Hindi, phone or desktop</text>
+  </g>
+  <g><rect class="card" x="792" y="168" width="344" height="72" rx="13"/>
+  <rect x="792" y="168" width="344" height="5" rx="2.5" fill="#5B8DEF"/>
+  <text class="ct" x="810" y="199">Other systems</text>
+  <text class="cs" x="810" y="222">read-only JSON, no key</text>
+  </g>
+  <rect class="band" x="40" y="298" width="1120" height="180" rx="18"/>
+  <rect class="chip" x="60" y="312" width="246" height="26" rx="13"/>
+  <text class="chiptxt" x="73" y="329.5">DELIVERY, HOSTED ON VERCEL</text>
+  <g><rect class="card" x="64" y="350" width="250" height="110" rx="13"/>
+  <rect x="64" y="350" width="250" height="5" rx="2.5" fill="#1F5BEA"/>
+  <text class="ct" x="82" y="381">Website</text>
+  <text class="cs" x="82" y="404">Home, About, Methodology,</text>
+  <text class="cs" x="82" y="423">Resources, map of 317 districts</text>
+  <text class="cs" x="82" y="442">English and Hindi</text>
+  </g>
+  <g><rect class="card" x="334" y="350" width="240" height="110" rx="13"/>
+  <rect x="334" y="350" width="240" height="5" rx="2.5" fill="#1F5BEA"/>
+  <text class="ct" x="352" y="381">Dashboard</text>
+  <text class="cs" x="352" y="404">9 pages, including map and API</text>
+  <text class="cs" x="352" y="423">4 filters, CSV and JSON</text>
+  <text class="cs" x="352" y="442">state data loaded on demand</text>
+  </g>
+  <g><rect class="card" x="594" y="350" width="220" height="110" rx="13"/>
+  <rect x="594" y="350" width="220" height="5" rx="2.5" fill="#1F5BEA"/>
+  <text class="ct" x="612" y="381">Assistant</text>
+  <text class="cs" x="612" y="404">answers in the browser</text>
+  <text class="cs" x="612" y="423">/api/chat function</text>
+  <text class="cs" x="612" y="442">optional Gemini wording</text>
+  </g>
+  <g><rect class="card" x="834" y="350" width="302" height="110" rx="13"/>
+  <rect x="834" y="350" width="302" height="5" rx="2.5" fill="#1F5BEA"/>
+  <text class="ct" x="852" y="381">Forecast API</text>
+  <text class="cs" x="852" y="404">7 read-only endpoints (GET only)</text>
+  <text class="cs" x="852" y="423">forecast, flags, demand-index,</text>
+  <text class="cs" x="852" y="442">capacity-gap, severity, scenario, meta</text>
+  </g>
+  <rect class="band" x="40" y="518" width="1120" height="161" rx="18"/>
+  <rect class="chip" x="60" y="532" width="503" height="26" rx="13"/>
+  <text class="chiptxt" x="73" y="549.5">DATA FILES THE SITE READS, WITH CHECKSUMS IN THE MANIFEST</text>
+  <g><rect class="card" x="64" y="570" width="253" height="91" rx="13"/>
+  <rect x="64" y="570" width="253" height="5" rx="2.5" fill="#2A9DF4"/>
+  <text class="ct" x="82" y="601">core.js, alerts.js</text>
+  <text class="cs" x="82" y="624">groups, ranges, capacity,</text>
+  <text class="cs" x="82" y="643">rankings</text>
+  </g>
+  <g><rect class="card" x="337" y="570" width="253" height="91" rx="13"/>
+  <rect x="337" y="570" width="253" height="5" rx="2.5" fill="#2A9DF4"/>
+  <text class="ct" x="355" y="601">10 state shards</text>
+  <text class="cs" x="355" y="624">7,925 series, points</text>
+  <text class="cs" x="355" y="643">and flags</text>
+  </g>
+  <g><rect class="card" x="610" y="570" width="253" height="91" rx="13"/>
+  <rect x="610" y="570" width="253" height="5" rx="2.5" fill="#2A9DF4"/>
+  <text class="ct" x="628" y="601">Map and site data</text>
+  <text class="cs" x="628" y="624">317 shapes,</text>
+  <text class="cs" x="628" y="643">headline numbers</text>
+  </g>
+  <g><rect class="card" x="883" y="570" width="253" height="91" rx="13"/>
+  <rect x="883" y="570" width="253" height="5" rx="2.5" fill="#2A9DF4"/>
+  <text class="ct" x="901" y="601">Hindi names and text</text>
+  <text class="cs" x="901" y="624">states, districts, trades,</text>
+  <text class="cs" x="901" y="643">pages</text>
+  </g>
+  <rect class="band" x="40" y="719" width="1120" height="180" rx="18"/>
+  <rect class="chip" x="60" y="733" width="221" height="26" rx="13"/>
+  <text class="chiptxt" x="73" y="750.5">BUILD PIPELINE (PYTHON)</text>
+  <g><rect class="card" x="64" y="771" width="240" height="110" rx="13"/>
+  <rect x="64" y="771" width="240" height="5" rx="2.5" fill="#F2A31B"/>
+  <text class="ct" x="82" y="802">Simulated panel</text>
+  <text class="cs" x="82" y="825">2000 to 2025, 7,925 series</text>
+  <text class="cs" x="82" y="844">317 districts, 25 trades</text>
+  <text class="cs" x="82" y="863">LGD codes, NCO-2015</text>
+  </g>
+  <g><rect class="card" x="324" y="771" width="290" height="110" rx="13"/>
+  <rect x="324" y="771" width="290" height="5" rx="2.5" fill="#F2A31B"/>
+  <text class="ct" x="342" y="802">ML engine</text>
+  <text class="cs" x="342" y="825">XGBoost, direct, 1 to 60 months</text>
+  <text class="cs" x="342" y="844">conformal ranges, confidence labels</text>
+  <text class="cs" x="342" y="863">Demand Index, capacity gap, flags</text>
+  </g>
+  <g><rect class="card" x="634" y="771" width="270" height="110" rx="13"/>
+  <rect x="634" y="771" width="270" height="5" rx="2.5" fill="#F2A31B"/>
+  <text class="ct" x="652" y="802">Exports</text>
+  <text class="cs" x="652" y="825">roll-ups, alerts, rankings</text>
+  <text class="cs" x="652" y="844">capacity tables, manifest</text>
+  <text class="cs" x="652" y="863">SHA-256 of every file</text>
+  </g>
+  <g><rect class="card" x="924" y="771" width="212" height="110" rx="13"/>
+  <rect x="924" y="771" width="212" height="5" rx="2.5" fill="#F2A31B"/>
+  <text class="ct" x="942" y="802">Builders</text>
+  <text class="cs" x="942" y="825">dashboard, map, site data,</text>
+  <text class="cs" x="942" y="844">pages, Hindi text</text>
+  <text class="cs" x="942" y="863">and their tests</text>
+  </g>
+  <path class="arrow" d="M189 292V264"/>
+  <path class="arrow" d="M454 292V264"/>
+  <path class="arrow" d="M704 292V264"/>
+  <path class="arrow" d="M985 292V264"/>
+  <path class="arrow" d="M190 512V484"/>
+  <path class="arrow" d="M464 512V484"/>
+  <path class="arrow" d="M736 512V484"/>
+  <path class="arrow" d="M1010 512V484"/>
+  <path class="arrow" d="M184 713V685"/>
+  <path class="arrow" d="M469 713V685"/>
+  <path class="arrow" d="M769 713V685"/>
+  <path class="arrow" d="M1030 713V685"/>
+  <text class="foot" x="40" y="943">KaushalSetu (SIH26246) · AI-enabled labour market intelligence and skill demand-supply forecasting · simulated data, not official statistics</text>
 </svg>

@@ -17,18 +17,21 @@ KaushalSetu is an AI-enabled labour market intelligence and skill demand-supply 
 - **Team ID**: 168356
 - **Members**:
 
+<div align="center">
+
 | Member Name | Role | Key Contributions | Contact |
-|---|---|---|---|
-| Divya | Team Leader | <contribution> | divyasin58@gmail.com  |
-| Sara Sinha | Member | <contribution> | sara.sinha.100@gmail.com |
-| Rishabh Kumar Singh | Member | <contribution> | rishabhkumarsingh1112@gmail.com  |
-| Vyomsoni | Member | <contribution> | svyom21@gmail.com |
-| Ayush Kumar Gupta | Member | <contribution> | ayushkumargupta018@gmail.com |
-| Shubham Raj | Member | <contribution> | Shubham748856@gmail.com |
+|:---|:---|:---|:---|
+| Divya | Team Leader | Planning, task split, progress tracking and final review | divyasin58@gmail.com  |
+| Sara Sinha | AI/ML Engineer | XGBoost forecasting, tuning, ranges and confidence labels, evaluation, Demand Index | sara.sinha.100@gmail.com |
+| Rishabh Kumar Singh | AI/ML Engineer | 	Forecast model, testing on unseen years, forecast ranges and confidence labels. | rishabhkumarsingh1112@gmail.com  |
+| Vyom Soni | Backend Engineer | Data pipeline, exports, read-only API, assistant function, deployment config | svyom21@gmail.com |
+| Shubham Raj | Frontend Engineer | Website, dashboard, map, charts, Hindi, accessibility | Shubham748856@gmail.com |
+| Ayush Kumar Gupta | Data and Quality | Simulated data, district catalogue, tests, documents | ayushkumargupta018@gmail.com |
 
-The first submission (v3: 56 districts, twelve-month forecasts) is preserved at the git tag `submitted-v1`; this branch is the extended version (v4). The plan and the results of every phase are in `docs/v4-implementation-plan.md`. The method, step by step, with the Demand Index formula, a worked example, the evaluation and the limits, is in `docs/METHODOLOGY.md`.
+</div>
 
-![System architecture](docs/system-architecture.svg)
+![KaushalSetu home page](docs/screenshots/Home.png)
+
 
 ## 1. Why we built this and who benefits
 **Why.** Training seats are sanctioned months or years ahead, but labour demand shifts month by month and varies sharply between districts and trades. Planners need to see *where* demand and supply are moving apart *early enough to act*, and how far to trust each number. Most tools give a point estimate; KaushalSetu gives the range (usual and wide), the confidence, the baseline it must beat, and the limits.
@@ -55,9 +58,17 @@ The first submission (v3: 56 districts, twelve-month forecasts) is preserved at 
 
 **Engineering**: every number on the site is built from the exports and checked against them; SHA-256 manifests; leak-safe splits by calendar time with the test and stress windows opened once; 268 automated tests; security headers; an accessibility audit script and fixes.
 
+![Dashboard](docs/screenshots/Dashboard-1.png)
+
+![Dashboard](docs/screenshots/Dashboard-2.png)
+
+
 ## 3. Technology stack
+
+<div align="center">
+
 | Layer | Technology |
-|---|---|
+|:---|:---|
 | Language | Python 3.12+ (tested on 3.13); JavaScript (no framework) |
 | Data and numerics | pandas 2.2, NumPy 2.1, SciPy 1.14, PyArrow 20 (Parquet), joblib |
 | Machine learning | **XGBoost 3.4** (final models, direct multi-horizon), **Optuna 4.1** (tuning), LightGBM and scikit-learn (earlier model comparison) |
@@ -69,11 +80,15 @@ The first submission (v3: 56 districts, twelve-month forecasts) is preserved at 
 | Testing | Plain-Python test files (no framework needed; pytest also works); Node.js only to syntax-check and run the assistant engine |
 | Data formats | CSV, Parquet, JSON, GeoJSON, SVG |
 
+</div>
+
 ## 4. Overview of the dataset
 The modelling dataset is a **simulated** monthly panel (`src/v4/generate.py`, seed 42), keyed by official LGD district codes and NCO-2015 occupation codes.
 
+<div align="center">
+
 | Item | Detail |
-|---|---|
+|:---|:---|
 | Panel | `data/v4/raw/trade_monthly_2000_2025.parquet`: 24,72,600 rows x 17 columns (git-ignored, rebuilt by the generator; hashes in `data/v4/DATA_MANIFEST.json`) |
 | Series | 7,925 = 317 districts x 25 trades; 312 months (January 2000 to December 2025) |
 | Geography | Delhi 11, Gujarat 33, Karnataka 31, Kerala 14, Maharashtra 36, Punjab 23, Tamil Nadu 38, Telangana 33, Uttar Pradesh 75, West Bengal 23 districts; 785-district LGD boundary layer for the map |
@@ -83,21 +98,28 @@ The modelling dataset is a **simulated** monthly panel (`src/v4/generate.py`, se
 | Known structure | COVID shock (2020-2023), the e-Shram registration ramp from August 2021, seasonality, sector and district differences |
 | Windows | Fit to 2009, tune 2010-2014, test 2015-2019 (opened once), stress 2020-2025 (opened once), final fit to 2025-12, forecast 2026-2030 |
 
+</div>
+
 The data dictionary is `data/v4/DATA_DICTIONARY.csv`; the sources and what the simulator was calibrated to are on the Resources page.
 
 ## 5. ML model and its evaluation metrics
-![Model lifecycle](docs/ml-lifecycle.svg)
+![Model lifecycle: ten steps from the simulated panel to the published forecast, and which years are used for fitting, tuning, the one-shot test, the stress test and the forecast](docs/ml-lifecycle.png)
 
 **Model.** One XGBoost model per target; the number of months ahead (1 to 60) is an input and the target is the change in the log level; three seeds averaged; 82 inputs chosen from 119 candidates (dropping inputs that identify one district or sector cut the validation error of employed workers from 10.9% to 4.5%); trees per twelve-month horizon band chosen on the validation years. The final fit uses all data to December 2025 and leaves out the training pairs that reach into the 2020-2023 shock and recovery (a first fit on all pairs repeated that jump as if it were a normal month: seekers x3.8 by 2030).
 
 **Evaluation.** Metric: WAPE (lower is better), against the best of three simple forecasts (no change, seasonal naive, damped trend).
 
 ### Test years 2015-2019 (opened once), all horizons
+
+<div align="center">
+
 | Target | Model WAPE | Best simple forecast | Closer | Bias |
-|---|---|---|---|---|
+|:---|:---|:---|:---|:---|
 | Employed workers | **4.64%** | 5.65% | **17.8%** | +2.3% |
 | Registered job seekers | **16.15%** | 17.63% | **8.4%** | -14.8% |
 | Job vacancies | **13.14%** | 13.61% | **3.5%** | +5.8% |
+
+</div>
 
 Employed workers beat the baseline at every horizon (4% at 1-12 months, 30% at 49-60). Seekers are 3.7% worse in the first year and 23% better in the fifth; vacancies are better to 48 months and 3% worse at 49-60. On two fresh simulated worlds (no refit): employed 4.61% and 4.60% against 5.61% and 5.55%.
 
@@ -112,8 +134,10 @@ Employed workers 14.29% against 16.65% (14% closer), vacancies 20.57% against 24
 ## 6. Tests done and their overview
 **268 automated tests in 23 files.** Run any file with `python tests/<name>.py` (no pytest needed); tests that need git-ignored data skip with a message on a fresh clone.
 
+<div align="center">
+
 | Area | Test file | Tests | What it proves |
-|---|---|---|---|
+|:---|:---|:---|:---|
 | v4 data | `test_v4_config.py`, `test_v4_catalog.py`, `test_v4_data.py` | 6, 7, 14 | Scope constants, the district catalogue and the simulated panel (adding up, shocks, manifests) |
 | v4 features, models | `test_v4_features.py`, `test_v4_models.py` | 11, 9 | No look-ahead; model library, windows and one-shot locks |
 | v4 intervals, flags | `test_v4_intervals.py` | 15 | Coverage, pooling, relative flags, confidence labels |
@@ -123,6 +147,8 @@ Employed workers 14.29% against 16.65% (14% closer), vacancies 20.57% against 24
 | Website | `test_app.py` | 20 | Links, numbers equal the evaluation tables, map data equals the roll-ups, complete Hindi, reproducible build |
 | Assistant | `test_chat.py`, `test_chat_proxy.py` | 8, 13 | Answers equal the exports; no network use beyond one route; key only in a header; limits and fallbacks |
 | v3 pipeline (kept) | `test_dashboard.py`, `test_dashboard_pack.py`, `test_deployment.py`, `test_processed_panel.py`, `test_eda_outputs.py`, `test_features.py`, `test_models.py`, `test_splits.py`, `test_training.py`, `test_evaluation.py`, `test_phase8_addendum.py` | 9, 7, 8, 15, 7, 13, 8, 6, 13, 10, 7 | The submitted v3 pipeline still holds (the v3 dashboard tests skip once its data file is gone) |
+
+</div>
 
 The accessibility audit that needs a browser is `tests/a11y_audit.js`: paste it into the console of any page (both themes, both languages); every list it returns should be empty.
 
@@ -198,7 +224,7 @@ python tests/test_chat.py
     ├── v4-implementation-plan.md   the plan and the result of every phase
     ├── METHODOLOGY.md              the method: Demand Index, forecasting, ranges, flags, capacity gap, evaluation, limits
     ├── RUNBOOK.md                  refresh, checks, deployment, rollback
-    ├── system-architecture.svg  ml-lifecycle.svg
+    ├── system-architecture.png  ml-lifecycle.png  (and the .svg sources)
     └── reference/ screenshots/     data dictionaries and the v3 screenshots
 ```
 **Kept on your machine, not in the repository** (listed in `.gitignore`): the large generated data (`data/v4/raw`, `interim`, `processed`, `splits`), fitted models (`models/v4`), the series-level export tables and per-state exports in `data/v4/exports`, the v3 dashboard data file, earlier versions, `Archived/`, `backups/` and the local `.env`.
@@ -223,5 +249,5 @@ python tests/test_chat.py
 7. District boundary geometry: Bharat Atlas, <https://bharatlas.com/> (simplified for display; licence recorded in `app/data/map_data.js`)
 
 **Methods**    
-8. Vovk, V., Gammerman, A. and Shafer, G. (2005). *Algorithmic Learning in a Random World* (conformal prediction); Angelopoulos, A. N. and Bates, S. (2021). *A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification.* arXiv:2107.07511.  
-9. Gibbs, I. and Candes, E. (2021). *Adaptive Conformal Inference Under Distribution Shift.* NeurIPS 2021 (considered; the final ranges are calibrated by window, see the plan).  
+1. Vovk, V., Gammerman, A. and Shafer, G. (2005). *Algorithmic Learning in a Random World* (conformal prediction); Angelopoulos, A. N. and Bates, S. (2021). *A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification.* arXiv:2107.07511.  
+2. Gibbs, I. and Candes, E. (2021). *Adaptive Conformal Inference Under Distribution Shift.* NeurIPS 2021 (considered; the final ranges are calibrated by window, see the plan).  

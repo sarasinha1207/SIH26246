@@ -356,7 +356,7 @@ def test_the_readme_counts_and_links_are_right():
         assert (ROOT / rel).exists(), rel
     for f in files:                                                                       # every test file is named in the table
         assert f.name in readme or f.stem.replace("test_", "") in readme, f.name
-    for v in ("317", "7,925", "24,72,600", "4.64%", "16.15%", "13.14%", "87%", "submitted-v1"):
+    for v in ("317", "7,925", "24,72,600", "4.64%", "16.15%", "13.14%", "87%"):
         assert v in readme, v
     plan = (ROOT / "docs" / "v4-implementation-plan.md").read_text(encoding="utf-8")
     assert "### Phase 9:" in plan and "Result" in plan[plan.index("### Phase 9:"):plan.index("## Risks")]

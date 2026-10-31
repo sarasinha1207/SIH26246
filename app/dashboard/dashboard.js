@@ -109,6 +109,8 @@
     "Name": "नाम",
     "No calibrated 90% range exists for this combination of filters, so only the point forecast is drawn. Choose a sector, state, state with sector, or a district with a sector or trade for a range.": "फ़िल्टर के इस संयोजन के लिए कोई जाँचा हुआ 90% दायरा नहीं है, इसलिए केवल बिंदु पूर्वानुमान दिखाया गया है। दायरे के लिए सेक्टर, राज्य, सेक्टर सहित राज्य, या सेक्टर/ट्रेड सहित ज़िला चुनें।",
     "Open": "खोलें",
+    "By sector": "सेक्टर के अनुसार",
+    "Click a row to choose a sector": "सेक्टर चुनने के लिए पंक्ति पर क्लिक करें",
     "Endpoint": "एंडपॉइंट",
     "Rows to return": "लौटाई जाने वाली पंक्तियाँ",
     "12, 36 and 60": "12, 36 और 60",
@@ -1040,6 +1042,10 @@
         table([["Measure"], ["Now", "num"], [tgt, "num"], ["Change", "num"]].concat(four[0].v.lo != null ? [["Usual 90% range", "num"]] : []), four.map(function (x) {
           return "<tr><td>" + esc(mapName(x.k)) + '</td><td class="num">' + (x.k === "D" ? fmt(x.v.now, 1) : compact(x.v.now)) + '</td><td class="num">' + (x.k === "D" ? fmt(x.v.fc, 1) : compact(x.v.fc)) + '</td><td class="num">' + (x.k === "D" ? fmt(x.v.fc - x.v.now, 1) : dir(x.v.val)) + "</td>" + (four[0].v.lo != null ? '<td class="num">' + (x.v.lo != null ? compact(x.v.lo) + " – " + compact(x.v.hi) : "–") + "</td>" : "") + "</tr>";
         })) + (sel ? '<p class="note"><a class="chip-btn" href="' + url("forecast", { district: sel.d.c }) + '">' + t("Open the Forecast page") + '</a> <a class="chip-btn" href="' + url("capacity", { district: sel.d.c }) + '">' + t("Open the Capacity gap") + "</a></p>" : "") + "</section>";
+      var secCard = '<section class="card mt"><div class="card-h"><div><h2>' + t("By sector") + "</h2><p>" + t("Click a row to choose a sector") + "</p></div></div>" + table([["Sector"], [k === "D" ? "Demand Index" : "Change", "num"], ["Now", "num"], [tgt, "num"]], M.sectors.map(function (sn, i) {
+        var v = mapVal(M, sel ? [sel.d.c] : codes, k, h, [i]);
+        return '<tr class="click' + (p.sector === sn ? " on" : "") + '" data-sector="' + esc(sn) + '"><td>' + esc(t(sn)) + '</td><td class="num" ' + (k === "D" ? heat(v.val) : "") + ">" + mapFmt(k, v.val) + '</td><td class="num">' + (k === "D" ? fmt(v.now, 1) : compact(v.now)) + '</td><td class="num">' + (k === "D" ? fmt(v.fc, 1) : compact(v.fc)) + "</td></tr>";
+      })) + "</section>";
       var srt = scoped.slice().sort(function (a, b) { return b.val - a.val; });
       var line = function (r, i) { return '<tr class="click" data-district="' + r.d.c + '"><td class="num">' + (i + 1) + "</td><td>" + esc(r.d.n) + "</td><td>" + esc(r.d.s) + '</td><td class="num" ' + (k === "D" ? heat(r.val) : "") + ">" + mapFmt(k, r.val) + '</td><td class="num">' + (k === "D" ? fmt(r.now, 1) : compact(r.now)) + "</td></tr>"; };
       var head = [["#", "num"], ["District"], ["State"], [k === "D" ? "Demand Index" : "Change", "num"], ["Now", "num"]];
@@ -1051,7 +1057,7 @@
         (p.trade ? '<p class="note">' + t("The map is by sector: the trade filter chooses its sector.") + "</p>" : "") +
         '<div class="grid g-map"><section class="card"><div class="card-h"><div><h2>' + esc(mapName(k)) + "</h2><p>" + esc(k === "D" ? tf("Demand Index in {0}", tgt) : tf("Change in {0}, Dec 2025 to {1}", mapName(k).toLowerCase(), tgt)) + ". " + t("Five equal groups of districts; click a district to choose it.") + "</p></div></div>" +
         '<div class="mapbox" id="mapbox"><div class="m-chips" role="group" aria-label="' + esc(t("State")) + '">' + chips.map(function (c) { return '<button type="button" data-st="' + esc(c[0]) + '" aria-pressed="' + ((p.state || "") === c[0]) + '">' + esc(c[1]) + "</button>"; }).join("") + '</div><div id="mapsvg"></div></div>' + legend +
-        '<p class="sr-only" id="map-sr"></p></section><div>' + sumCard + "</div></div>" +
+        '<p class="sr-only" id="map-sr"></p></section><div>' + sumCard + secCard + "</div></div>" +
         '<div class="grid g2 mt"><section class="card"><div class="card-h"><div><h2>' + t("Highest districts") + "</h2><p>" + esc(p.state || t("All states")) + ", " + esc(months) + "</p></div></div>" + table(head, srt.slice(0, 10).map(line)) + "</section>" +
         '<section class="card"><div class="card-h"><div><h2>' + t("Lowest districts") + "</h2><p>" + esc(p.state || t("All states")) + ", " + esc(months) + "</p></div></div>" + table(head, srt.slice(-10).reverse().map(function (r, i) { return line(r, srt.length - 1 - i); })) + "</section></div>" +
         '<div class="grid g2 mt"><section class="card"><div class="card-h"><div><h2>' + t("States") + "</h2><p>" + t("Click a row to choose a state") + "</p></div></div>" + table([["State"], [k === "D" ? "Demand Index" : "Change", "num"], ["Now", "num"], [tgt, "num"]], states.map(function (x) {
