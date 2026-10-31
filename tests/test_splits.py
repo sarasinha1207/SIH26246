@@ -13,6 +13,8 @@ for sub in ("common", "features", "splits"):
 import splits as sp  # noqa: E402
 import make_splits as ms  # noqa: E402
 from data_access import load_panel  # noqa: E402
+from _guard import skip_module_unless  # noqa: E402
+skip_module_unless(ROOT / "data" / "splits" / "train.parquet", ROOT / "data" / "processed" / "panel_monthly.parquet", why="the v3 split files are rebuilt from the v3 data, which is kept on disk but is not in the repository")
 
 MAN = json.load(open(sp.MANIFEST))
 KEY = ["Series_ID", "origin_idx", "horizon"]

@@ -627,33 +627,34 @@ def respond(endpoint, qs, ip="", method="GET", limiter=None, now=None):
         return 500, {**h, "Cache-Control": "no-store"}, json.dumps({"ok": False, "error": "server_error", "message": "The data could not be read."}).encode()
 
 
-def make_handler(endpoint):
-    class handler(BaseHTTPRequestHandler):
-        """Vercel's Python runtime loads this class for every request to /api/<endpoint>."""
+class EndpointMixin:
+    """The request handling shared by the endpoint files: each file defines `class handler(BaseHTTPRequestHandler, EndpointMixin)` with its own `endpoint`,
+    the same shape as api/chat.py, which is the form Vercel's Python runtime is documented to load."""
 
-        def _go(self, method):
-            u = urlparse(self.path)
-            ip = (self.headers.get("X-Forwarded-For") or self.client_address[0]).split(",")[0].strip()
-            code, headers, body = respond(endpoint, u.query, ip, method)
-            self.send_response(code)
-            for k, v in headers.items():
-                self.send_header(k, v)
-            self.send_header("Content-Length", str(len(body)))
-            self.end_headers()
-            if body:
-                self.wfile.write(body)
+    endpoint = None
 
-        def do_GET(self):
-            self._go("GET")
+    def _go(self, method):
+        u = urlparse(self.path)
+        ip = (self.headers.get("X-Forwarded-For") or self.client_address[0]).split(",")[0].strip()
+        code, headers, body = respond(self.endpoint, u.query, ip, method)
+        self.send_response(code)
+        for k, v in headers.items():
+            self.send_header(k, v)
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        if body:
+            self.wfile.write(body)
 
-        def do_OPTIONS(self):
-            self._go("OPTIONS")
+    def do_GET(self):
+        self._go("GET")
 
-        def do_POST(self):
-            self._go("POST")
+    def do_OPTIONS(self):
+        self._go("OPTIONS")
 
-        do_PUT = do_DELETE = do_PATCH = do_POST
+    def do_POST(self):
+        self._go("POST")
 
-        def log_message(self, fmt, *args):                       # the platform keeps its own request log; nothing a visitor asked is written here
-            pass
-    return handler
+    do_PUT = do_DELETE = do_PATCH = do_POST
+
+    def log_message(self, fmt, *args):                       # the platform keeps its own request log; nothing a visitor asked is written here
+        pass

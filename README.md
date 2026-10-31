@@ -56,7 +56,7 @@ KaushalSetu is an AI-enabled labour market intelligence and skill demand-supply 
 
 **Assistant**: answers in the browser from the site's own data (totals, a district, ranges, Demand Index, capacity, alerts, rankings, definitions); optionally words answers with Google Gemini through a server route that keeps the key off the page.
 
-**Engineering**: every number on the site is built from the exports and checked against them; SHA-256 manifests; leak-safe splits by calendar time with the test and stress windows opened once; 268 automated tests; security headers; an accessibility audit script and fixes.
+**Engineering**: every number on the site is built from the exports and checked against them; SHA-256 manifests; leak-safe splits by calendar time with the test and stress windows opened once; 269 automated tests; security headers; an accessibility audit script and fixes.
 
 ![Dashboard](docs/screenshots/Dashboard-1.png)
 
@@ -132,7 +132,7 @@ Employed workers 14.29% against 16.65% (14% closer), vacancies 20.57% against 24
 * Confidence labels fall from high to low for employed workers on the test years; for seekers the order is not reliable and the site says so.
 
 ## 6. Tests done and their overview
-**268 automated tests in 23 files.** Run any file with `python tests/<name>.py` (no pytest needed); tests that need git-ignored data skip with a message on a fresh clone.
+**269 automated tests in 23 files.** Run any file with `python tests/<name>.py` (no pytest needed); tests that need git-ignored data skip with a message on a fresh clone.
 
 <div align="center">
 

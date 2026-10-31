@@ -13,7 +13,8 @@ sys.path.insert(0, str(ROOT / "src" / "common"))
 sys.path.insert(0, str(ROOT / "src" / "features"))
 from data_access import load_panel  # noqa: E402
 import engineering as en  # noqa: E402
-from _guard import read_doc  # noqa: E402
+from _guard import read_doc, skip_module_unless  # noqa: E402
+skip_module_unless(ROOT / "data" / "processed" / "panel_monthly.parquet", why="the v3 data is kept on disk but is no longer in the repository (git-ignored since the clean-up; the submitted version is the tag submitted-v1)")
 
 PANEL = load_panel("monthly")
 D = en.PanelData(PANEL)

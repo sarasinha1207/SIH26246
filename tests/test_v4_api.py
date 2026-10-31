@@ -259,7 +259,7 @@ def test_vercel_config_registers_every_api_function_with_its_data():
         f = APP / "api" / f"{name}.py"
         assert f.exists(), name
         src = f.read_text(encoding="utf-8")
-        assert f'handler = _v4api.make_handler("{name}")' in src and "import" in src
+        assert "class handler(BaseHTTPRequestHandler, _v4api.EndpointMixin):" in src and f'endpoint = "{name}"' in src and "import" in src      # the same shape as api/chat.py
         c = cfg["functions"][f"api/{name}.py"]
         assert c["maxDuration"] <= 10 and "dashboard/data/**" in c["includeFiles"] and "_v4api.py" in c["includeFiles"], name
     lib = (APP / "api" / "_v4api.py").read_text(encoding="utf-8")
@@ -292,6 +292,36 @@ def test_the_deployment_stays_within_its_size_and_speed_budget():
     for _ in range(20):
         call("forecast", "state=Kerala&sector=Healthcare")
     assert (time.time() - t) / 20 < 0.05
+
+
+def test_each_api_file_answers_a_request_through_its_handler_class():
+    """What Vercel does: load the file, take its `handler` class, serve a request with it."""
+    import importlib.util
+    import http.server
+    queries = {"forecast": "state=Kerala&limit=1", "flags": "state=Kerala&horizon=12&limit=1", "demand-index": "state=Kerala", "capacity-gap": "state=Kerala",
+               "severity": "level=trade&limit=1", "scenario": "level=trade&seat_change=20&limit=1", "meta": ""}
+    assert set(queries) == set(ENDPOINTS)
+    for name, qs in queries.items():
+        spec = importlib.util.spec_from_file_location("fn_" + name.replace("-", "_"), APP / "api" / f"{name}.py")
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        assert issubclass(mod.handler, http.server.BaseHTTPRequestHandler) and mod.handler.endpoint == name
+        srv = http.server.HTTPServer(("127.0.0.1", 0), mod.handler)
+        th = threading.Thread(target=srv.serve_forever, daemon=True)
+        th.start()
+        try:
+            conn = http.client.HTTPConnection("127.0.0.1", srv.server_address[1], timeout=20)
+            conn.request("GET", f"/api/{name}" + (f"?{qs}" if qs else ""))
+            r = conn.getresponse()
+            body = json.loads(r.read())
+            assert r.status == 200 and body["ok"] is True, (name, r.status, body)
+            conn.request("POST", f"/api/{name}")
+            r2 = conn.getresponse()
+            r2.read()
+            assert r2.status == 405, (name, r2.status)                                                                 # read-only
+        finally:
+            srv.shutdown()
+            srv.server_close()
 
 
 # ---- the API page ---------------------------------------------------------------------------------------------------------------------------------------
@@ -465,7 +495,9 @@ def test_the_methodology_page_quotes_the_exports_and_the_code_correctly():
     assert f"at least {IV.MIN_POOL} errors from {IV.MIN_ORIGINS} forecast dates" in flat
     assert "The flag percentiles, the label limits and the severity ratios are conventions" in flat
     assert f"high up to {EW.HIGH_WAPE:g}%, medium up to {EW.MEDIUM_WAPE:g}%" in flat
-    # the worked example, recomputed from the simulated panel and the index export
+    # the worked example, recomputed from the simulated panel and the index export (both are rebuilt from the seed and are not in the repository)
+    if not (EXP / "demand_index.parquet").exists() or not (ROOT / "data" / "v4" / "raw" / "trade_monthly_2000_2025.parquet").exists():
+        raise unittest.SkipTest("the simulated panel and the index export are not in this clone; rebuild them with the commands in the README")
     dim = pd.read_csv(ROOT / "data" / "v4" / "dim_series.csv")
     row = int(dim.index[(dim.District_LGD_Code == 118) & (dim.Trade_Code == "CON-7111")][0])
     di = pd.read_parquet(EXP / "demand_index.parquet")
