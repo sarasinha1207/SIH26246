@@ -335,16 +335,17 @@
     go(0, false);
   }
 
-  /* ---------- the map: 56 districts, five sectors, three measures ---------- */
+  /* ---------- the map: 317 districts, five sectors, four measures ---------- */
   var mapSt = { si: -1, k: "V", h: 12, state: "all", sel: null, hover: null }, mapEls = null, mapVB = null;
-  var TI = { E: 0, V: 1, S: 2 };
+  var TI = { E: 0, V: 1, S: 2, D: 3 };
   function mapValue(code) {
     var v = M.values[code], j = M.horizons.indexOf(mapSt.h), fi = 1 + j, lo = 4 + 2 * j, hi = 5 + 2 * j;
     var sis = mapSt.si < 0 ? M.sectors.map(function (_, i) { return i; }) : [mapSt.si];
     function sum(ti, idx) { return sis.reduce(function (a, si) { return a + v[si][ti][idx]; }, 0); }
-    if (mapSt.k === "R") {
-      var nowR = 100 * sum(1, 0) / sum(2, 0), fcR = 100 * sum(1, fi) / sum(2, fi);
-      return { val: fcR, now: nowR, fc: fcR };
+    if (mapSt.k === "D") {                                           // the Demand Index of the chosen sectors, weighted by employed workers
+      var wn = 0, wf = 0, dn = 0, df = 0;
+      sis.forEach(function (si) { var e = v[si][0], d = v[si][3]; wn += e[0]; wf += e[fi]; dn += e[0] * d[0]; df += e[fi] * d[fi]; });
+      return { val: df / wf, now: dn / wn, fc: df / wf };
     }
     var ti = TI[mapSt.k], now = sum(ti, 0), fc = sum(ti, fi);
     var r = { val: (fc / now - 1) * 100, now: now, fc: fc };
@@ -352,22 +353,25 @@
     return r;
   }
   function mapFill(cls) {
-    if (mapSt.k === "R") return ["var(--supply)", "color-mix(in srgb, var(--supply) 55%, var(--surface))", "color-mix(in srgb, var(--ink-2) 40%, var(--surface))", "color-mix(in srgb, var(--demand) 55%, var(--surface))", "var(--demand)"][cls];
-    var base = mapSt.k === "E" ? "var(--employed)" : mapSt.k === "V" ? "var(--demand)" : "var(--supply)";
+    var base = mapSt.k === "E" ? "var(--employed)" : mapSt.k === "S" ? "var(--supply)" : "var(--demand)";
     return "color-mix(in srgb, " + base + " " + [30, 48, 66, 84, 100][cls] + "%, var(--surface))";
   }
-  var mapFmt = function (v) { return mapSt.k === "R" ? fmt(v, 1) : sign(v, 1); };
-  var mapMeasureName = function () { return mapSt.k === "R" ? t("Openings per 100 job seekers") : nameOf(mapSt.k); };
+  var mapFmt = function (v) { return mapSt.k === "D" ? fmt(v, 1) : sign(v, 1); };
+  var mapMeasureName = function () { return mapSt.k === "D" ? t("Demand Index") : nameOf(mapSt.k); };
   var mapSectorName = function () { return mapSt.si < 0 ? t("All sectors") : nm(M.sectors[mapSt.si]); };
-  function mapConf() {
-    if (mapSt.k === "R") return t("low");
-    if (mapSt.si >= 0) return t(M.confidence[M.sectors[mapSt.si]][mapSt.k]);
-    return mapSt.k === "E" ? t("high") : mapSt.k === "V" ? t("low") : t("medium (low for IT-ITeS)");
+  function mapConf() {                                             // the label most trades carry for this measure and horizon (the Demand Index follows the vacancy forecast)
+    var j = M.horizons.indexOf(mapSt.h), k = mapSt.k === "D" ? "V" : mapSt.k;
+    var word = function (sec) { return M.confidence[sec][k][j]; };
+    var label = function (w) { return t(w.split(" ")[0]) + (w.indexOf("varies") >= 0 ? " (" + t("varies by trade") + ")" : ""); };
+    if (mapSt.si >= 0) return label(word(M.sectors[mapSt.si]));
+    var set = {}; M.sectors.forEach(function (sec) { set[word(sec)] = 1; });
+    var ks = Object.keys(set);
+    return ks.length === 1 ? label(ks[0]) : t("varies by sector");
   }
   function mapTip(d, r) {
     var tgt = longDate(mlabelLong(addMonths(M.origin, mapSt.h)));
     var s = "<b>" + nm(d.n) + "</b> · " + nm(d.s) + "<br>" + mapMeasureName() + " (" + mapSectorName() + "): <b>" + mapFmt(r.val) + "</b>";
-    if (mapSt.k === "R") s += "<br>" + t("{a} now, {b} in {m}", { a: fmt(r.now, 1), b: fmt(r.fc, 1), m: tgt });
+    if (mapSt.k === "D") s += "<br>" + t("{a} now, {b} in {m}", { a: fmt(r.now, 1), b: fmt(r.fc, 1), m: tgt });
     else s += "<br>" + t("{a} now, {b} in {m}", { a: fmt(Math.round(r.now)), b: fmt(Math.round(r.fc)), m: tgt });
     if (r.lo != null) s += "<br>" + t("90% range: {a} to {b}", { a: fmt(Math.round(r.lo)), b: fmt(Math.round(r.hi)) });
     return s + "<br>" + t("Confidence: {c}", { c: mapConf() });
@@ -426,6 +430,7 @@
       });
       mapEls.dist[d.c] = p;
     });
+    if (M.borders) el("path", { d: M.borders, class: "mborder" }, svg);               // the lines between the states, drawn over the district outlines
     mapEls.hl = el("path", { class: "mhl", d: "" }, svg);
     var names = {};
     M.districts.concat(M.others || []).forEach(function (d) { (names[d.s] = names[d.s] || []).push(d); });
@@ -452,7 +457,7 @@
     sel.value = String(mapSt.si);
     if (!sel.dataset.bound) { sel.dataset.bound = "1"; sel.addEventListener("change", function () { mapSt.si = +sel.value; mapRender(); }); }
     meas.setAttribute("aria-label", t("Show"));
-    [["E", nameOf("E")], ["V", nameOf("V")], ["S", nameOf("S")], ["R", t("Openings per seeker")]].forEach(function (o) {
+    [["E", nameOf("E")], ["V", nameOf("V")], ["S", nameOf("S")], ["D", t("Demand Index")]].forEach(function (o) {
       var b = document.createElement("button"); b.type = "button"; b.className = "tab"; b.setAttribute("role", "tab"); b.dataset.k = o[0]; b.textContent = o[1];
       b.addEventListener("click", function () { mapSt.k = o[0]; mapRender(); }); meas.appendChild(b);
     });
@@ -461,8 +466,25 @@
       var b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.dataset.h = h; b.textContent = plural(h);
       b.addEventListener("click", function () { mapSt.h = h; mapRender(); }); hs.appendChild(b);
     });
+    var find = $("#map-find");                                                 // the keyboard and screen-reader way to a district: every district is listed, by state
+    if (find) {
+      find.innerHTML = '<option value="">' + t("Choose a district") + "</option>";
+      M.states.forEach(function (st) {
+        var g = document.createElement("optgroup"); g.label = nm(st);
+        M.districts.filter(function (d) { return d.s === st; }).sort(function (a, b) { return a.n < b.n ? -1 : 1; }).forEach(function (d) { var o = document.createElement("option"); o.value = d.c; o.textContent = nm(d.n); g.appendChild(o); });
+        find.appendChild(g);
+      });
+      if (!find.dataset.bound) {
+        find.dataset.bound = "1";
+        find.addEventListener("change", function () {
+          var d = M.districts.filter(function (x) { return x.c === find.value; })[0];
+          if (!d) { mapSt.sel = null; mapRender(); return; }
+          mapSt.state = d.s; mapSt.sel = d.c; mapZoom(true); mapRender();
+        });
+      }
+    }
     sts.setAttribute("aria-label", t("State"));
-    [["all", t("All four states")]].concat(["Maharashtra", "Delhi", "West Bengal", "Tamil Nadu"].map(function (s) { return [s, nm(s)]; })).forEach(function (o) {
+    [["all", t("All ten states")]].concat(M.states.map(function (s) { return [s, nm(s)]; })).forEach(function (o) {
       var b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.dataset.s = o[0]; b.textContent = o[1];
       b.addEventListener("click", function () { mapSt.state = o[0]; mapSt.sel = null; mapZoom(true); mapRender(); }); sts.appendChild(b);
     });
@@ -486,28 +508,28 @@
       e.p.classList.toggle("dim", mapSt.state !== "all" && e.o.s !== mapSt.state);
     });
     $$(".mstate", $("#map-svg")).forEach(function (tx) { var s = Object.keys(mapEls.state).filter(function (k) { return mapEls.state[k] === tx; })[0]; tx.textContent = nm(s); tx.style.display = mapSt.state === "all" || mapSt.state === s ? "" : "none"; });
-    $("#map-svg").setAttribute("aria-label", t("Map of the 56 districts, coloured by {m} for {s}, {n} ahead", { m: mapMeasureName(), s: mapSectorName(), n: plural(mapSt.h) }));
+    $("#map-svg").setAttribute("aria-label", t("Map of the {c} districts, coloured by {m} for {s}, {n} ahead", { c: M.districts.length, m: mapMeasureName(), s: mapSectorName(), n: plural(mapSt.h) }));
     // legend: the value range of each fifth
     var lg = $("#map-legend"), ranges = [];
     for (var c = 0; c < 5; c++) { var vs = order.filter(function (r) { return r.cls === c; }).map(function (r) { return r.val; }); ranges.push([Math.min.apply(null, vs), Math.max.apply(null, vs)]); }
     lg.innerHTML = '<div class="lg-t">' + t("{m}, {n} ahead. Five equal groups of districts, lowest to highest", { m: mapMeasureName(), n: plural(mapSt.h) }) + '</div><div class="lg-row">' +
-      ranges.map(function (r, c) { return '<span class="lg"><i style="background:' + mapFill(c) + '"></i>' + mapFmt(r[0]) + " → " + mapFmt(r[1]) + "</span>"; }).join("") + '<span class="lg"><i class="lg-none"></i>' + t("Other districts of these states: no forecast data") + "</span></div>";
+      ranges.map(function (r, c) { return '<span class="lg"><i style="background:' + mapFill(c) + '"></i>' + mapFmt(r[0]) + " → " + mapFmt(r[1]) + "</span>"; }).join("") + "</div>";
     // side panel
     var inReg = rows.filter(function (r) { return mapSt.state === "all" || r.d.s === mapSt.state; });
     var tgt = longDate(mlabelLong(addMonths(M.origin, mapSt.h)));
     var side = $("#map-side"), sel = mapSt.sel && rows.filter(function (r) { return r.d.c === mapSt.sel; })[0], html = "";
     if (sel) {
       html += '<div class="map-sum"><div class="lbl">' + nm(sel.d.n) + " · " + nm(sel.d.s) + '</div><span class="big">' + mapFmt(sel.val) + '</span><p class="sub">' + mapMeasureName() + ", " + mapSectorName() + '</p><p class="sub">' +
-        (mapSt.k === "R" ? t("{a} now, {b} in {m}", { a: fmt(sel.now, 1), b: fmt(sel.fc, 1), m: tgt }) : t("{a} now, {b} in {m}", { a: fmt(Math.round(sel.now)), b: fmt(Math.round(sel.fc)), m: tgt })) +
+        (mapSt.k === "D" ? t("{a} now, {b} in {m}", { a: fmt(sel.now, 1), b: fmt(sel.fc, 1), m: tgt }) : t("{a} now, {b} in {m}", { a: fmt(Math.round(sel.now)), b: fmt(Math.round(sel.fc)), m: tgt })) +
         (sel.lo != null ? "<br>" + t("90% range: {a} to {b}", { a: fmt(Math.round(sel.lo)), b: fmt(Math.round(sel.hi)) }) : "") + "<br>" + t("Confidence: {c}", { c: mapConf() }) + "</p>" +
         '<p class="sub"><button type="button" class="ulink" id="map-clear">' + t("Show the whole region again") + "</button></p></div>";
     } else {
-      var now = 0, fc = 0, nowV = 0, nowS = 0, fcV = 0, fcS = 0;
+      var now = 0, fc = 0, wn = 0, wf = 0, dn = 0, df = 0, j = 1 + M.horizons.indexOf(mapSt.h);
       inReg.forEach(function (r) {
-        if (mapSt.k === "R") { var sis = mapSt.si < 0 ? M.sectors.map(function (_, i) { return i; }) : [mapSt.si], j = 1 + M.horizons.indexOf(mapSt.h); sis.forEach(function (si) { var v = M.values[r.d.c][si]; nowV += v[1][0]; nowS += v[2][0]; fcV += v[1][j]; fcS += v[2][j]; }); } else { now += r.now; fc += r.fc; }
+        if (mapSt.k === "D") { var sis = mapSt.si < 0 ? M.sectors.map(function (_, i) { return i; }) : [mapSt.si]; sis.forEach(function (si) { var e = M.values[r.d.c][si][0], d = M.values[r.d.c][si][3]; wn += e[0]; wf += e[j]; dn += e[0] * d[0]; df += e[j] * d[j]; }); } else { now += r.now; fc += r.fc; }
       });
-      var region = mapSt.state === "all" ? t("{n} districts in four states", { n: inReg.length }) : t("{n} districts in {s}", { n: inReg.length, s: nm(mapSt.state) });
-      if (mapSt.k === "R") html += '<div class="map-sum"><div class="lbl">' + region + '</div><span class="big">' + fmt(100 * fcV / fcS, 1) + '</span><p class="sub">' + mapMeasureName() + ", " + mapSectorName() + '</p><p class="sub">' + t("{a} now, {b} in {m}", { a: fmt(100 * nowV / nowS, 1), b: fmt(100 * fcV / fcS, 1), m: tgt }) + "</p></div>";
+      var region = mapSt.state === "all" ? t("{n} districts in ten states", { n: inReg.length }) : t("{n} districts in {s}", { n: inReg.length, s: nm(mapSt.state) });
+      if (mapSt.k === "D") html += '<div class="map-sum"><div class="lbl">' + region + '</div><span class="big">' + fmt(df / wf, 1) + '</span><p class="sub">' + mapMeasureName() + ", " + mapSectorName() + '</p><p class="sub">' + t("{a} now, {b} in {m}", { a: fmt(dn / wn, 1), b: fmt(df / wf, 1), m: tgt }) + "</p></div>";
       else html += '<div class="map-sum"><div class="lbl">' + region + '</div><span class="big">' + sign((fc / now - 1) * 100, 1) + '</span><p class="sub">' + mapMeasureName() + ", " + mapSectorName() + '</p><p class="sub">' + t("{a} now, {b} in {m}", { a: fmt(Math.round(now)), b: fmt(Math.round(fc)), m: tgt }) + "</p></div>";
     }
     var srt = inReg.slice().sort(function (a, b) { return b.val - a.val; });
@@ -521,6 +543,7 @@
       b.addEventListener("click", function () { var d = M.districts.filter(function (x) { return x.c === b.dataset.code; })[0]; if (mapSt.state === "all") { mapSt.state = d.s; mapZoom(true); } mapSt.sel = d.c; mapRender(); });
     });
     var clr = $("#map-clear"); if (clr) clr.addEventListener("click", function () { mapSt.sel = null; mapRender(); });
+    var fd = $("#map-find"); if (fd) fd.value = mapSt.sel || "";
     mapHL();
   }
   function mapInit() {

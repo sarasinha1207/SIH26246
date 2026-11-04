@@ -16,6 +16,8 @@ from _guard import read_doc  # noqa: E402
 
 ORIGIN = "2026-10"
 OUT = ROOT / "outputs" / "forecasts" / f"origin_{ORIGIN}"
+from _guard import skip_module_unless  # noqa: E402
+skip_module_unless(OUT / "forecast_long.csv", ROOT / "models" / "deployed", why="the v3 data is kept on disk but is no longer in the repository (git-ignored since the clean-up; the submitted version is the tag submitted-v1)")
 MODELS = ROOT / "models" / "deployed" / f"origin_{ORIGIN}"
 L = pd.read_csv(OUT / "forecast_long.csv", dtype={"district_lgd_code": str})
 W = pd.read_csv(OUT / "flags.csv", dtype={"district_lgd_code": str})

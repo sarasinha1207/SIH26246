@@ -111,4 +111,29 @@ backups/
 
 # NOTE: *.csv, *.json and data/ used to be ignored wholesale, which hid configs, manifests, reports and
 # model inputs that must be committed. Only the large regenerable files above are ignored now.
-# Never ignore: app/ (the website), outputs/forecasts/origin_*/forecast_long.csv, flags.csv and manifest.json.
+# Never ignore: app/ (the website). The v3 forecast files (outputs/forecasts) are ignored now: the v4 website reads app/ only.
+
+# ---- v4 (10 states, 25 trades, 2000-2025): large generated data is rebuilt from the seed; manifests and the district list are tracked ----
+data/v4/raw/
+data/v4/processed/
+data/v4/splits/
+data/v4/interim/
+# v4 fitted models (rebuilt by src/v4/evaluate.py and src/v4/forecast.py); the tuned settings and the result tables in reports/v4/evaluation are tracked
+models/v4/
+# v4 phase 6: series-level forecast tables and per-state shards are rebuilt by src/v4/forecast.py, demand_index.py, capacity.py and exports.py (listed with SHA-256 in data/v4/FORECAST_MANIFEST.json)
+data/v4/exports/*.parquet
+data/v4/exports/shards/
+
+# v4 phase 9: the v3 dashboard data file is not loaded by the v4 dashboard; it stays on disk (the submitted version is the tag submitted-v1) but is no longer deployed
+app/dashboard/data/dash_data.js
+
+# ---- v3 data and models: the submitted version is the tag submitted-v1; the v4 website and API read app/ only ----
+# kept on disk, no longer in the repository (about 65 MB): the v3 raw tables, the v3 processed panel and dashboard pack, the v3 models and the v3 forecast files
+data/raw/lmis_district_monthly_2011_2026.csv
+data/raw/lmis_district_quarterly_2011_2026.csv
+data/processed/*
+!data/processed/.gitkeep
+data/dashboard/
+models/xgboost_v3/
+models/deployed/
+outputs/forecasts/

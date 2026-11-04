@@ -8,6 +8,8 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 PACK = ROOT / "data" / "dashboard"
+from _guard import skip_module_unless  # noqa: E402
+skip_module_unless(PACK / "monthly_metrics_2011_2024.csv", why="the v3 data is kept on disk but is no longer in the repository (git-ignored since the clean-up; the submitted version is the tag submitted-v1)")
 M = pd.read_csv(PACK / "monthly_metrics_2011_2024.csv", dtype={"district_lgd_code": str})
 MAN = json.load(open(PACK / "data_pack_manifest.json"))
 

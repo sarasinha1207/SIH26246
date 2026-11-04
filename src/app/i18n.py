@@ -14,6 +14,14 @@ from pathlib import Path
 from bs4 import BeautifulSoup, Tag, NavigableString, Comment
 
 import i18n_hi
+import i18n_hi_v4
+
+# the v4 text (phase 8) is added to the v3 dictionary and, where the English is the same, replaces it
+i18n_hi.PAGE.update(i18n_hi_v4.PAGE)
+i18n_hi.JS.update(i18n_hi_v4.JS)
+i18n_hi.NAMES.update(i18n_hi_v4.NAMES)
+i18n_hi.ATTR.update(i18n_hi_v4.ATTR)
+i18n_hi.TITLES.update(i18n_hi_v4.TITLES)
 
 SKIP = {"script", "style", "svg", "noscript", "head", "title", "meta", "link", "template"}
 FORM = {"select", "input", "textarea"}

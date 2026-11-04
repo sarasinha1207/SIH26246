@@ -8,6 +8,8 @@ import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
+from _guard import skip_module_unless  # noqa: E402
+skip_module_unless(ROOT / "data" / "processed" / "panel_monthly.parquet", why="the v3 data is kept on disk but is no longer in the repository (git-ignored since the clean-up; the submitted version is the tag submitted-v1)")
 RAW, PROC = ROOT / "data" / "raw", ROOT / "data" / "processed"
 LGD = {"State_LGD_Code": str, "District_LGD_Code": str}
 

@@ -1,0 +1,203 @@
+{
+  "generated_at_utc": "2026-11-01T04:32:55+00:00",
+  "forecast_origin": "2025-12",
+  "forecast_months": [
+    "2026-01",
+    "2030-12"
+  ],
+  "series": 7925,
+  "rows_per_series": 60,
+  "data_simulated": true,
+  "files": {
+    "forecast_rollups.csv.gz": {
+      "rows": 100560,
+      "bytes": 4278951,
+      "sha256": "0634624edbf9670ad9e1a75b71cc4e1ddcdb53e0e3fbc2ae05ce8cf320584930"
+    },
+    "capacity_gap_india.csv": {
+      "rows": 5,
+      "bytes": 344,
+      "sha256": "a27a8fc2ac73b6ff1c9d1c241533a4eb987a8bc1283491ce53e52c1c8cf0d08a"
+    },
+    "capacity_gap_sector.csv": {
+      "rows": 25,
+      "bytes": 1700,
+      "sha256": "0597ec13b319284fa9c94f04d0d24aa29d6692ac0ed3ba35b8db44a129a3fdd5"
+    },
+    "capacity_gap_series.csv.gz": {
+      "rows": 39625,
+      "bytes": 791820,
+      "sha256": "c5149de7f56ba6353c43a992794d0c3c3b7a4edd135858c2325aa7ae8d718fca"
+    },
+    "capacity_gap_state.csv": {
+      "rows": 50,
+      "bytes": 3046,
+      "sha256": "d9f028a743188ff3821e61215b3551c217ffb00fd7c34d9fa13f117c1dcc115d"
+    },
+    "capacity_gap_state_sector.csv": {
+      "rows": 250,
+      "bytes": 17634,
+      "sha256": "bcd43f121a3e64317f32fd67d595802b39b1df43285fba122ef34f2acb336b6d"
+    },
+    "capacity_gap_state_trade.csv": {
+      "rows": 1250,
+      "bytes": 79535,
+      "sha256": "a1ff6379af07fe7bb4ec3106f5535816fd5270ceddc180e639b970b5c3769622"
+    },
+    "capacity_gap_trade.csv": {
+      "rows": 125,
+      "bytes": 7234,
+      "sha256": "e365202dd6d6bf10bf9af37832f82bc57d13c9aa79e1286fb483717affdee405"
+    },
+    "flag_alerts.csv": {
+      "rows": 4728,
+      "bytes": 699816,
+      "sha256": "fdb2f7edffabacd8de5518831f3a5778b61b6bfae6091dfa9968b1e5c9497cbf"
+    },
+    "rankings.csv": {
+      "rows": 110,
+      "bytes": 12739,
+      "sha256": "57f5199d356a74c2df09e2a30e1ad945ffc92b37a5847f3874a9f6469ffa6ede"
+    },
+    "forecast_series.parquet": {
+      "rows": 475500,
+      "bytes": 15400701,
+      "sha256": "0994e7052d1e251dc0219e0823fdbeaaee626ccf8b74353247384c138af53a97",
+      "tracked": false
+    },
+    "demand_index.parquet": {
+      "rows": 1426500,
+      "bytes": 3727833,
+      "sha256": "9a9650f061593303de93dd783535120f1151481516e2ced6a397e2abf907aa0b",
+      "tracked": false
+    }
+  },
+  "shards": {
+    "Delhi": {
+      "file": "delhi.json",
+      "series": 275,
+      "bytes": 973046
+    },
+    "Gujarat": {
+      "file": "gujarat.json",
+      "series": 825,
+      "bytes": 2926151
+    },
+    "Karnataka": {
+      "file": "karnataka.json",
+      "series": 775,
+      "bytes": 2745765
+    },
+    "Kerala": {
+      "file": "kerala.json",
+      "series": 350,
+      "bytes": 1233432
+    },
+    "Maharashtra": {
+      "file": "maharashtra.json",
+      "series": 900,
+      "bytes": 3313048
+    },
+    "Punjab": {
+      "file": "punjab.json",
+      "series": 575,
+      "bytes": 1955623
+    },
+    "Tamil Nadu": {
+      "file": "tamil-nadu.json",
+      "series": 950,
+      "bytes": 3450791
+    },
+    "Telangana": {
+      "file": "telangana.json",
+      "series": 825,
+      "bytes": 2742332
+    },
+    "Uttar Pradesh": {
+      "file": "uttar-pradesh.json",
+      "series": 1875,
+      "bytes": 6762360
+    },
+    "West Bengal": {
+      "file": "west-bengal.json",
+      "series": 575,
+      "bytes": 2094513
+    }
+  },
+  "inputs": {
+    "panel_content_sha256": "6116a12df227ab0e07b99fe7a7364c0f4b17a2b46606574ad056675d7c336954",
+    "best_params_sha256": "771160b964f4fc1c9c29b71b0d624d2ddf076bc07006469a9830469ab69cd73c",
+    "interval_calibration_sha256": "dae353b29877725db9f8f03481e3e3bd569cfece2bc87d45f6ce1f375a4722aa",
+    "aggregate_interval_calibration_sha256": "3c53ca602bd6a1ce50e57a89669fbabf1c8be3a1b90a9eb7690d8be38022f474",
+    "confidence_cells_sha256": "4236e91b1904d361c09c79fe6a71c1e15c6193d4e71122eab0acdb95fdb55e0f",
+    "deploy_fit": {
+      "fit_targets_to": "2025-12",
+      "left_out": "pairs with origin up to 2023-12 and target from 2020-03",
+      "pairs_before": 1255,
+      "pairs_after": 927,
+      "fit_rows": 7346475,
+      "inputs": "see deploy_fit.json",
+      "seeds": [
+        11,
+        22,
+        33
+      ],
+      "models": {
+        "E": {
+          "files": [
+            "E_seed11_4d90b33a78.json",
+            "E_seed22_4d90b33a78.json",
+            "E_seed33_4d90b33a78.json"
+          ],
+          "trees_by_band": {
+            "1-12": 400,
+            "13-24": 250,
+            "25-36": 200,
+            "37-48": 100,
+            "49-60": 100
+          }
+        },
+        "V": {
+          "files": [
+            "V_seed11_e034579cde.json",
+            "V_seed22_e034579cde.json",
+            "V_seed33_e034579cde.json"
+          ],
+          "trees_by_band": {
+            "1-12": 100,
+            "13-24": 100,
+            "25-36": 100,
+            "37-48": 150,
+            "49-60": 150
+          }
+        },
+        "S": {
+          "files": [
+            "S_seed11_4d2fb1824f.json",
+            "S_seed22_4d2fb1824f.json",
+            "S_seed33_4d2fb1824f.json"
+          ],
+          "trees_by_band": {
+            "1-12": 250,
+            "13-24": 250,
+            "25-36": 250,
+            "37-48": 400,
+            "49-60": 400
+          }
+        }
+      },
+      "seconds": 3655
+    },
+    "deploy_models_sha256": {
+      "E_seed11_4d90b33a78.json": "6513688668b3925bbc967db84b2991ae793b5643b889632840fee8f32a91faff",
+      "E_seed22_4d90b33a78.json": "eccb70ff04ae594f6667f8db82701e184fb55970106701368354ab56c4031a01",
+      "E_seed33_4d90b33a78.json": "676b9961393ff43c19e182f3b9d35da35ed8350fe503e04ecfdfc19f69064584",
+      "S_seed11_4d2fb1824f.json": "86ffc6c1b54baed2c931a2777c5b9d2fbaee62c06b4514b3e72105e0d56d8db6",
+      "S_seed22_4d2fb1824f.json": "1a4139c86a7b9f50e1ebc4ec4adf6f2e23f79e68978fd394b422156d7625a020",
+      "S_seed33_4d2fb1824f.json": "8c8faadc6b58210ceb74fb2690d504a80e7fbff57ddf04b35fed2808953c4ef9",
+      "V_seed11_e034579cde.json": "e315495735b447cc7eb460720a060eb867b62b67b3907d6092280c975e2ae2bc",
+      "V_seed22_e034579cde.json": "4a1b34a969e9090105023747b2a4159ff7c0e0b35bb7e87bbb510770965cf6bb",
+      "V_seed33_e034579cde.json": "50c3ca09de02f65f1ddf72c49ee3e5cbd7d816cb86aad515e1a17fd042a3104b"
+    }
+  }
+}

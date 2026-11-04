@@ -25,7 +25,8 @@ SITE = ROOT / "app"
 SRC = Path(__file__).resolve().parent
 sys.path.insert(0, str(SITE / "api"))
 import chat as chat_proxy  # noqa: E402,E501   (app/api/chat.py: the same file Vercel runs at /api/chat)
-DASH_WATCH = [SRC / "logo.py", SRC / "dashboard" / "shell.html", SITE / "dashboard" / "dashboard.css", SITE / "dashboard" / "dashboard.js", SITE / "dashboard" / "data" / "dash_data.js", SITE / "assets" / "chat.js", SITE / "assets" / "chat.css"]
+import _v4api as forecast_api  # noqa: E402     (app/api/_v4api.py: the code behind /api/forecast, /api/flags, /api/demand-index, /api/capacity-gap and /api/meta)
+DASH_WATCH = [SRC / "logo.py", ROOT / "src" / "v4" / "dashboard_shell.html", SITE / "dashboard" / "dashboard.css", SITE / "dashboard" / "dashboard.js", SITE / "dashboard" / "data" / "core.js", SITE / "dashboard" / "data" / "alerts.js"]
 WATCH = [SRC / "logo.py", *SRC.glob("pages/*.html"), SRC / "build_pages.py", SRC / "i18n.py", SRC / "i18n_hi.py", SITE / "assets" / "styles.css", SITE / "assets" / "site.js", SITE / "assets" / "chat.js", SITE / "assets" / "chat.css"]
 
 
@@ -61,11 +62,30 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         path = self.path.split("?")[0]
         if path.rstrip("/") == "/api/chat":
             return self._json(200, chat_proxy.status())
+        if path.startswith("/api/") and path[5:].rstrip("/") in forecast_api.ENDPOINTS:
+            code, headers, body = forecast_api.respond(path[5:].rstrip("/"), self.path.partition("?")[2], self.client_address[0], "GET")
+            self.send_response(code)
+            for k, v in headers.items():
+                self.send_header(k, v)
+            self.send_header("Content-Length", str(len(body)))
+            super().end_headers()
+            self.wfile.write(body)
+            return
         if path.endswith(".py"):                      # source files are not part of the site (Vercel does not serve them either)
             return self.send_error(404)
         super().do_GET()
 
     def do_POST(self):
+        path = self.path.split("?")[0].rstrip("/")
+        if path.startswith("/api/") and path[5:] in forecast_api.ENDPOINTS:                     # the forecast API is read-only
+            code, headers, body = forecast_api.respond(path[5:], "", self.client_address[0], "POST")
+            self.send_response(code)
+            for k, v in headers.items():
+                self.send_header(k, v)
+            self.send_header("Content-Length", str(len(body)))
+            super().end_headers()
+            self.wfile.write(body)
+            return
         if self.path.split("?")[0].rstrip("/") != "/api/chat":
             return self._json(404, {"ok": False, "error": "not_found"})
         n = min(int(self.headers.get("Content-Length") or 0), chat_proxy.LIMIT["body"] + 1)

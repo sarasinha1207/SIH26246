@@ -1,0 +1,226 @@
+window,calibration,calibrated_on,scheme,target,slice,value,rows,coverage,mean_width_log,mean_width_pct,interval_score
+test,forward,validation,h_sector,E,all,all,3209625,0.8656,0.1684,18.4318,0.2381
+test,forward,validation,h_sector,E,band,1-12,903450,0.8828,0.1172,12.4503,0.1599
+test,forward,validation,h_sector,E,band,13-24,713250,0.8535,0.1638,17.8254,0.2382
+test,forward,validation,h_sector,E,band,25-36,570600,0.8557,0.1875,20.6477,0.2695
+test,forward,validation,h_sector,E,band,37-48,570600,0.866,0.2015,22.3304,0.2811
+test,forward,validation,h_sector,E,band,49-60,451725,0.8623,0.2121,23.6284,0.3001
+test,forward,validation,h_sector,E,sector,Construction,641925,0.8646,0.1641,17.9112,0.2312
+test,forward,validation,h_sector,E,sector,Healthcare,641925,0.8887,0.1623,17.7035,0.2144
+test,forward,validation,h_sector,E,sector,IT-ITeS,641925,0.9005,0.1945,21.5597,0.2507
+test,forward,validation,h_sector,E,sector,Manufacturing,641925,0.8746,0.1603,17.4701,0.2173
+test,forward,validation,h_sector,E,sector,Textiles and Apparel,641925,0.7996,0.1607,17.5143,0.2768
+test,forward,validation,h_sector,E,volume,low,1708695,0.8624,0.1728,18.9668,0.2476
+test,forward,validation,h_sector,E,volume,normal,1500930,0.8692,0.1633,17.8227,0.2272
+test,forward,validation,h_sector,E,shock_window,calm window,475500,0.9038,0.1246,13.3047,0.1567
+test,forward,validation,h_sector,E,shock_window,touches a shock,2734125,0.8589,0.176,19.3234,0.2522
+test,forward,validation,h_sector,V,all,all,3209625,0.8488,0.4898,63.6304,0.7353
+test,forward,validation,h_sector,V,band,1-12,903450,0.8898,0.392,48.2106,0.5233
+test,forward,validation,h_sector,V,band,13-24,713250,0.8492,0.4967,64.429,0.7322
+test,forward,validation,h_sector,V,band,25-36,570600,0.8291,0.5299,69.9304,0.824
+test,forward,validation,h_sector,V,band,37-48,570600,0.8298,0.5434,72.2132,0.8505
+test,forward,validation,h_sector,V,band,49-60,451725,0.8155,0.5561,74.4099,0.9063
+test,forward,validation,h_sector,V,sector,Construction,641925,0.8846,0.4863,63.0123,0.643
+test,forward,validation,h_sector,V,sector,Healthcare,641925,0.897,0.4692,60.3052,0.5988
+test,forward,validation,h_sector,V,sector,IT-ITeS,641925,0.8726,0.5324,70.6801,0.7579
+test,forward,validation,h_sector,V,sector,Manufacturing,641925,0.8555,0.4781,61.6912,0.684
+test,forward,validation,h_sector,V,sector,Textiles and Apparel,641925,0.7345,0.483,62.4634,0.9926
+test,forward,validation,h_sector,V,volume,low,1708695,0.8406,0.4964,64.7339,0.7722
+test,forward,validation,h_sector,V,volume,normal,1500930,0.8582,0.4822,62.3742,0.6932
+test,forward,validation,h_sector,V,shock_window,calm window,475500,0.8887,0.4086,50.7891,0.5477
+test,forward,validation,h_sector,V,shock_window,touches a shock,2734125,0.8419,0.5039,65.8637,0.7679
+test,forward,validation,h,S,all,all,3209625,0.6392,0.3551,42.8597,0.9969
+test,forward,validation,h,S,band,1-12,903450,0.7878,0.2764,31.9049,0.5118
+test,forward,validation,h,S,band,13-24,713250,0.6354,0.3543,42.5263,0.9894
+test,forward,validation,h,S,band,25-36,570600,0.5079,0.3875,47.3345,1.3972
+test,forward,validation,h,S,band,37-48,570600,0.5438,0.4018,49.4518,1.3216
+test,forward,validation,h,S,band,49-60,451725,0.6344,0.4142,51.3162,1.0634
+test,forward,validation,h,S,sector,Construction,641925,0.5834,0.3551,42.8597,1.1084
+test,forward,validation,h,S,sector,Healthcare,641925,0.5991,0.3551,42.8597,1.0634
+test,forward,validation,h,S,sector,IT-ITeS,641925,0.878,0.3551,42.8597,0.4785
+test,forward,validation,h,S,sector,Manufacturing,641925,0.5996,0.3551,42.8597,1.0703
+test,forward,validation,h,S,sector,Textiles and Apparel,641925,0.5359,0.3551,42.8597,1.2641
+test,forward,validation,h,S,volume,low,1708695,0.6969,0.3551,42.8597,0.8614
+test,forward,validation,h,S,volume,normal,1500930,0.5735,0.3551,42.8597,1.1513
+test,forward,validation,h,S,shock_window,calm window,475500,0.8912,0.2886,33.5798,0.3717
+test,forward,validation,h,S,shock_window,touches a shock,2734125,0.5954,0.3667,44.4735,1.1057
+stress,forward,validation+test,h_sector,E,all,all,3851550,0.3109,0.1731,18.9985,1.8129
+stress,forward,validation+test,h_sector,E,band,1-12,1093650,0.5873,0.1201,12.7807,0.5463
+stress,forward,validation+test,h_sector,E,band,13-24,903450,0.3601,0.1707,18.6259,1.1186
+stress,forward,validation+test,h_sector,E,band,25-36,713250,0.1795,0.1938,21.3977,2.0658
+stress,forward,validation+test,h_sector,E,band,37-48,570600,0.1002,0.2068,22.9868,2.9524
+stress,forward,validation+test,h_sector,E,band,49-60,570600,0.0784,0.2192,24.5188,3.8846
+stress,forward,validation+test,h_sector,E,sector,Construction,770310,0.2278,0.1696,18.5652,2.6087
+stress,forward,validation+test,h_sector,E,sector,Healthcare,770310,0.5319,0.1639,17.8931,0.6558
+stress,forward,validation+test,h_sector,E,sector,IT-ITeS,770310,0.2699,0.1919,21.2739,1.8612
+stress,forward,validation+test,h_sector,E,sector,Manufacturing,770310,0.253,0.1655,18.0802,2.0017
+stress,forward,validation+test,h_sector,E,sector,Textiles and Apparel,770310,0.272,0.1748,19.1802,1.9372
+stress,forward,validation+test,h_sector,E,volume,low,2050434,0.3259,0.1765,19.401,1.6777
+stress,forward,validation+test,h_sector,E,volume,normal,1801116,0.2939,0.1694,18.5403,1.9669
+stress,forward,validation+test,h_sector,E,shock_window,calm window,824200,0.5606,0.1401,15.0997,0.4743
+stress,forward,validation+test,h_sector,E,shock_window,touches a shock,3027350,0.243,0.1821,20.06,2.1774
+stress,forward,validation+test,h_sector,V,all,all,3851550,0.66,0.5052,66.3191,1.7467
+stress,forward,validation+test,h_sector,V,band,1-12,1093650,0.7868,0.3941,48.5385,0.968
+stress,forward,validation+test,h_sector,V,band,13-24,903450,0.6912,0.514,67.2933,1.4752
+stress,forward,validation+test,h_sector,V,band,25-36,713250,0.6141,0.5544,74.1943,1.9577
+stress,forward,validation+test,h_sector,V,band,37-48,570600,0.5945,0.5663,76.303,2.1783
+stress,forward,validation+test,h_sector,V,band,49-60,570600,0.4904,0.5816,79.0282,2.9738
+stress,forward,validation+test,h_sector,V,sector,Construction,770310,0.4983,0.4872,63.2077,3.0949
+stress,forward,validation+test,h_sector,V,sector,Healthcare,770310,0.8639,0.4695,60.3161,0.6765
+stress,forward,validation+test,h_sector,V,sector,IT-ITeS,770310,0.5883,0.5374,71.6541,1.8276
+stress,forward,validation+test,h_sector,V,sector,Manufacturing,770310,0.6589,0.4911,63.8869,1.561
+stress,forward,validation+test,h_sector,V,sector,Textiles and Apparel,770310,0.6905,0.5407,72.5306,1.5736
+stress,forward,validation+test,h_sector,V,volume,low,2050434,0.6737,0.5118,67.4382,1.5996
+stress,forward,validation+test,h_sector,V,volume,normal,1801116,0.6444,0.4976,65.045,1.9142
+stress,forward,validation+test,h_sector,V,shock_window,calm window,824200,0.8586,0.4399,55.7788,0.6653
+stress,forward,validation+test,h_sector,V,shock_window,touches a shock,3027350,0.6059,0.5229,69.1887,2.0411
+stress,forward,validation+test,h,S,all,all,3851550,0.3646,0.4418,56.1794,5.6776
+stress,forward,validation+test,h,S,band,1-12,1093650,0.6434,0.3105,36.5561,1.3503
+stress,forward,validation+test,h,S,band,13-24,903450,0.4675,0.4471,56.4305,3.6151
+stress,forward,validation+test,h,S,band,25-36,713250,0.2571,0.5145,67.2778,6.8988
+stress,forward,validation+test,h,S,band,37-48,570600,0.122,0.5242,68.9197,9.3004
+stress,forward,validation+test,h,S,band,49-60,570600,0.0445,0.5115,66.7799,12.0879
+stress,forward,validation+test,h,S,sector,Construction,770310,0.2603,0.4418,56.1794,11.1663
+stress,forward,validation+test,h,S,sector,Healthcare,770310,0.3768,0.4418,56.1794,4.0441
+stress,forward,validation+test,h,S,sector,IT-ITeS,770310,0.4779,0.4418,56.1794,1.6669
+stress,forward,validation+test,h,S,sector,Manufacturing,770310,0.4057,0.4418,56.1794,3.4725
+stress,forward,validation+test,h,S,sector,Textiles and Apparel,770310,0.3024,0.4418,56.1794,8.0383
+stress,forward,validation+test,h,S,volume,low,2050434,0.3897,0.4418,56.1794,4.548
+stress,forward,validation+test,h,S,volume,normal,1801116,0.3361,0.4418,56.1794,6.9636
+stress,forward,validation+test,h,S,shock_window,calm window,396250,0.8663,0.3284,39.1637,0.4675
+stress,forward,validation+test,h,S,shock_window,touches a shock,3455300,0.3071,0.4548,58.1308,6.2751
+validation,leave_one_window_out,test+stress,h_sector,E,all,all,3209625,0.9316,0.3446,43.4566,0.3798
+validation,leave_one_window_out,test+stress,h_sector,E,band,1-12,903450,0.9458,0.17,18.6123,0.1887
+validation,leave_one_window_out,test+stress,h_sector,E,band,13-24,713250,0.939,0.2837,33.0802,0.3124
+validation,leave_one_window_out,test+stress,h_sector,E,band,25-36,570600,0.9324,0.3825,47.3176,0.4182
+validation,leave_one_window_out,test+stress,h_sector,E,band,37-48,570600,0.9199,0.4731,61.9512,0.5202
+validation,leave_one_window_out,test+stress,h_sector,E,band,49-60,451725,0.9048,0.5792,81.2906,0.6424
+validation,leave_one_window_out,test+stress,h_sector,E,sector,Construction,641925,0.9589,0.4468,60.4559,0.4657
+validation,leave_one_window_out,test+stress,h_sector,E,sector,Healthcare,641925,0.8667,0.2138,24.1082,0.2876
+validation,leave_one_window_out,test+stress,h_sector,E,sector,IT-ITeS,641925,0.9201,0.336,41.0894,0.3749
+validation,leave_one_window_out,test+stress,h_sector,E,sector,Manufacturing,641925,0.9305,0.3516,44.02,0.3881
+validation,leave_one_window_out,test+stress,h_sector,E,sector,Textiles and Apparel,641925,0.9816,0.3746,47.6096,0.3827
+validation,leave_one_window_out,test+stress,h_sector,E,volume,low,1708695,0.9201,0.3304,41.0612,0.3729
+validation,leave_one_window_out,test+stress,h_sector,E,volume,normal,1500930,0.9446,0.3607,46.1837,0.3876
+validation,leave_one_window_out,test+stress,h_sector,E,shock_window,calm window,1743500,0.9303,0.2719,32.2366,0.304
+validation,leave_one_window_out,test+stress,h_sector,E,shock_window,touches a shock,1466125,0.933,0.4309,56.7994,0.4699
+validation,leave_one_window_out,test+stress,h_sector,V,all,all,3209625,0.955,0.7056,108.386,0.7606
+validation,leave_one_window_out,test+stress,h_sector,V,band,1-12,903450,0.9466,0.4814,62.8196,0.539
+validation,leave_one_window_out,test+stress,h_sector,V,band,13-24,713250,0.9586,0.7011,104.5757,0.7518
+validation,leave_one_window_out,test+stress,h_sector,V,band,25-36,570600,0.9602,0.7866,123.1728,0.8384
+validation,leave_one_window_out,test+stress,h_sector,V,band,37-48,570600,0.9565,0.8137,129.7646,0.8711
+validation,leave_one_window_out,test+stress,h_sector,V,band,49-60,451725,0.9573,0.9221,159.852,0.9796
+validation,leave_one_window_out,test+stress,h_sector,V,sector,Construction,641925,0.9607,0.8607,146.7453,0.9067
+validation,leave_one_window_out,test+stress,h_sector,V,sector,Healthcare,641925,0.9145,0.4936,64.2424,0.5981
+validation,leave_one_window_out,test+stress,h_sector,V,sector,IT-ITeS,641925,0.9735,0.8061,127.1014,0.8492
+validation,leave_one_window_out,test+stress,h_sector,V,sector,Manufacturing,641925,0.9556,0.6507,94.7824,0.6974
+validation,leave_one_window_out,test+stress,h_sector,V,sector,Textiles and Apparel,641925,0.9705,0.7168,109.0582,0.7515
+validation,leave_one_window_out,test+stress,h_sector,V,volume,low,1708695,0.9528,0.7042,107.3766,0.7665
+validation,leave_one_window_out,test+stress,h_sector,V,volume,normal,1500930,0.9574,0.7071,109.5351,0.7538
+validation,leave_one_window_out,test+stress,h_sector,V,shock_window,calm window,1743500,0.9521,0.6369,93.0431,0.694
+validation,leave_one_window_out,test+stress,h_sector,V,shock_window,touches a shock,1466125,0.9584,0.7872,126.6315,0.8397
+validation,leave_one_window_out,test+stress,h,S,all,all,3209625,0.9576,1.1758,263.0543,1.2122
+validation,leave_one_window_out,test+stress,h,S,band,1-12,903450,0.9337,0.52,70.1259,0.57
+validation,leave_one_window_out,test+stress,h,S,band,13-24,713250,0.9519,1.0289,181.9734,1.0728
+validation,leave_one_window_out,test+stress,h,S,band,25-36,570600,0.9587,1.4394,323.7639,1.4796
+validation,leave_one_window_out,test+stress,h,S,band,37-48,570600,0.9741,1.6348,413.5758,1.66
+validation,leave_one_window_out,test+stress,h,S,band,49-60,451725,0.9922,1.8068,510.1158,1.8135
+validation,leave_one_window_out,test+stress,h,S,sector,Construction,641925,0.9547,1.1758,263.0543,1.2146
+validation,leave_one_window_out,test+stress,h,S,sector,Healthcare,641925,0.9653,1.1758,263.0543,1.2039
+validation,leave_one_window_out,test+stress,h,S,sector,IT-ITeS,641925,0.9419,1.1758,263.0543,1.2281
+validation,leave_one_window_out,test+stress,h,S,sector,Manufacturing,641925,0.9585,1.1758,263.0543,1.2116
+validation,leave_one_window_out,test+stress,h,S,sector,Textiles and Apparel,641925,0.9676,1.1758,263.0543,1.203
+validation,leave_one_window_out,test+stress,h,S,volume,low,1708695,0.957,1.1758,263.0543,1.2128
+validation,leave_one_window_out,test+stress,h,S,volume,normal,1500930,0.9583,1.1758,263.0543,1.2116
+validation,leave_one_window_out,test+stress,h,S,shock_window,calm window,1743500,0.9508,0.9548,184.2264,0.9954
+validation,leave_one_window_out,test+stress,h,S,shock_window,touches a shock,1466125,0.9656,1.4387,356.7957,1.4701
+test,leave_one_window_out,validation+stress,h_sector,E,all,all,3209625,0.8483,0.3309,41.3791,0.4266
+test,leave_one_window_out,validation+stress,h_sector,E,band,1-12,903450,0.9089,0.1622,17.664,0.1999
+test,leave_one_window_out,validation+stress,h_sector,E,band,13-24,713250,0.8237,0.2667,30.7961,0.3709
+test,leave_one_window_out,validation+stress,h_sector,E,band,25-36,570600,0.8025,0.3635,44.4591,0.4992
+test,leave_one_window_out,validation+stress,h_sector,E,band,37-48,570600,0.8388,0.4592,59.5414,0.5723
+test,leave_one_window_out,validation+stress,h_sector,E,band,49-60,451725,0.8359,0.5666,78.6867,0.6921
+test,leave_one_window_out,validation+stress,h_sector,E,sector,Construction,641925,0.8452,0.428,57.4641,0.522
+test,leave_one_window_out,validation+stress,h_sector,E,sector,Healthcare,641925,0.9202,0.2223,25.2592,0.2594
+test,leave_one_window_out,validation+stress,h_sector,E,sector,IT-ITeS,641925,0.8394,0.3208,38.7247,0.4283
+test,leave_one_window_out,validation+stress,h_sector,E,sector,Manufacturing,641925,0.888,0.3452,43.2045,0.4076
+test,leave_one_window_out,validation+stress,h_sector,E,sector,Textiles and Apparel,641925,0.7487,0.3383,42.2429,0.5157
+test,leave_one_window_out,validation+stress,h_sector,E,volume,low,1708695,0.8369,0.3168,38.9906,0.4244
+test,leave_one_window_out,validation+stress,h_sector,E,volume,normal,1500930,0.8613,0.347,44.0981,0.429
+test,leave_one_window_out,validation+stress,h_sector,E,shock_window,calm window,475500,0.9238,0.1785,19.696,0.2085
+test,leave_one_window_out,validation+stress,h_sector,E,shock_window,touches a shock,2734125,0.8352,0.3574,45.15,0.4645
+test,leave_one_window_out,validation+stress,h_sector,V,all,all,3209625,0.8388,0.658,97.6677,0.9588
+test,leave_one_window_out,validation+stress,h_sector,V,band,1-12,903450,0.9292,0.4744,61.6757,0.5611
+test,leave_one_window_out,validation+stress,h_sector,V,band,13-24,713250,0.8656,0.6648,97.6484,0.8858
+test,leave_one_window_out,validation+stress,h_sector,V,band,25-36,570600,0.81,0.7249,110.0878,1.0834
+test,leave_one_window_out,validation+stress,h_sector,V,band,37-48,570600,0.7789,0.7383,112.5109,1.1862
+test,leave_one_window_out,validation+stress,h_sector,V,band,49-60,451725,0.7279,0.8286,135.244,1.4252
+test,leave_one_window_out,validation+stress,h_sector,V,sector,Construction,641925,0.8665,0.8208,135.3378,1.0405
+test,leave_one_window_out,validation+stress,h_sector,V,sector,Healthcare,641925,0.9077,0.4911,63.8274,0.6086
+test,leave_one_window_out,validation+stress,h_sector,V,sector,IT-ITeS,641925,0.9189,0.7801,121.3467,0.9379
+test,leave_one_window_out,validation+stress,h_sector,V,sector,Manufacturing,641925,0.8116,0.5932,82.9269,0.9146
+test,leave_one_window_out,validation+stress,h_sector,V,sector,Textiles and Apparel,641925,0.6894,0.6049,84.8995,1.2926
+test,leave_one_window_out,validation+stress,h_sector,V,volume,low,1708695,0.8424,0.6603,97.6553,0.9706
+test,leave_one_window_out,validation+stress,h_sector,V,volume,normal,1500930,0.8348,0.6554,97.6817,0.9455
+test,leave_one_window_out,validation+stress,h_sector,V,shock_window,calm window,475500,0.9232,0.5053,67.4925,0.6045
+test,leave_one_window_out,validation+stress,h_sector,V,shock_window,touches a shock,2734125,0.8241,0.6846,102.9155,1.0205
+test,leave_one_window_out,validation+stress,h,S,all,all,3209625,0.9931,1.1953,270.0944,1.1997
+test,leave_one_window_out,validation+stress,h,S,band,1-12,903450,0.9828,0.5341,72.7292,0.5444
+test,leave_one_window_out,validation+stress,h,S,band,13-24,713250,0.996,1.0546,189.3916,1.0575
+test,leave_one_window_out,validation+stress,h,S,band,25-36,570600,0.9981,1.4681,336.2951,1.4696
+test,leave_one_window_out,validation+stress,h,S,band,37-48,570600,0.9977,1.6567,424.7835,1.6587
+test,leave_one_window_out,validation+stress,h,S,band,49-60,451725,0.9972,1.8121,513.2314,1.8144
+test,leave_one_window_out,validation+stress,h,S,sector,Construction,641925,0.9947,1.1953,270.0944,1.1984
+test,leave_one_window_out,validation+stress,h,S,sector,Healthcare,641925,0.9967,1.1953,270.0944,1.197
+test,leave_one_window_out,validation+stress,h,S,sector,IT-ITeS,641925,0.9831,1.1953,270.0944,1.2075
+test,leave_one_window_out,validation+stress,h,S,sector,Manufacturing,641925,0.9958,1.1953,270.0944,1.1978
+test,leave_one_window_out,validation+stress,h,S,sector,Textiles and Apparel,641925,0.9955,1.1953,270.0944,1.1979
+test,leave_one_window_out,validation+stress,h,S,volume,low,1708695,0.9914,1.1953,270.0944,1.201
+test,leave_one_window_out,validation+stress,h,S,volume,normal,1500930,0.9951,1.1953,270.0944,1.1983
+test,leave_one_window_out,validation+stress,h,S,shock_window,calm window,475500,0.9773,0.6174,91.1146,0.6318
+test,leave_one_window_out,validation+stress,h,S,shock_window,touches a shock,2734125,0.9959,1.2958,301.2213,1.2985
+stress,leave_one_window_out,validation+test,h_sector,E,all,all,3851550,0.3109,0.1731,18.9985,1.8129
+stress,leave_one_window_out,validation+test,h_sector,E,band,1-12,1093650,0.5873,0.1201,12.7807,0.5463
+stress,leave_one_window_out,validation+test,h_sector,E,band,13-24,903450,0.3601,0.1707,18.6259,1.1186
+stress,leave_one_window_out,validation+test,h_sector,E,band,25-36,713250,0.1795,0.1938,21.3977,2.0658
+stress,leave_one_window_out,validation+test,h_sector,E,band,37-48,570600,0.1002,0.2068,22.9868,2.9524
+stress,leave_one_window_out,validation+test,h_sector,E,band,49-60,570600,0.0784,0.2192,24.5188,3.8846
+stress,leave_one_window_out,validation+test,h_sector,E,sector,Construction,770310,0.2278,0.1696,18.5652,2.6087
+stress,leave_one_window_out,validation+test,h_sector,E,sector,Healthcare,770310,0.5319,0.1639,17.8931,0.6558
+stress,leave_one_window_out,validation+test,h_sector,E,sector,IT-ITeS,770310,0.2699,0.1919,21.2739,1.8612
+stress,leave_one_window_out,validation+test,h_sector,E,sector,Manufacturing,770310,0.253,0.1655,18.0802,2.0017
+stress,leave_one_window_out,validation+test,h_sector,E,sector,Textiles and Apparel,770310,0.272,0.1748,19.1802,1.9372
+stress,leave_one_window_out,validation+test,h_sector,E,volume,low,2050434,0.3259,0.1765,19.401,1.6777
+stress,leave_one_window_out,validation+test,h_sector,E,volume,normal,1801116,0.2939,0.1694,18.5403,1.9669
+stress,leave_one_window_out,validation+test,h_sector,E,shock_window,calm window,824200,0.5606,0.1401,15.0997,0.4743
+stress,leave_one_window_out,validation+test,h_sector,E,shock_window,touches a shock,3027350,0.243,0.1821,20.06,2.1774
+stress,leave_one_window_out,validation+test,h_sector,V,all,all,3851550,0.66,0.5052,66.3191,1.7467
+stress,leave_one_window_out,validation+test,h_sector,V,band,1-12,1093650,0.7868,0.3941,48.5385,0.968
+stress,leave_one_window_out,validation+test,h_sector,V,band,13-24,903450,0.6912,0.514,67.2933,1.4752
+stress,leave_one_window_out,validation+test,h_sector,V,band,25-36,713250,0.6141,0.5544,74.1943,1.9577
+stress,leave_one_window_out,validation+test,h_sector,V,band,37-48,570600,0.5945,0.5663,76.303,2.1783
+stress,leave_one_window_out,validation+test,h_sector,V,band,49-60,570600,0.4904,0.5816,79.0282,2.9738
+stress,leave_one_window_out,validation+test,h_sector,V,sector,Construction,770310,0.4983,0.4872,63.2077,3.0949
+stress,leave_one_window_out,validation+test,h_sector,V,sector,Healthcare,770310,0.8639,0.4695,60.3161,0.6765
+stress,leave_one_window_out,validation+test,h_sector,V,sector,IT-ITeS,770310,0.5883,0.5374,71.6541,1.8276
+stress,leave_one_window_out,validation+test,h_sector,V,sector,Manufacturing,770310,0.6589,0.4911,63.8869,1.561
+stress,leave_one_window_out,validation+test,h_sector,V,sector,Textiles and Apparel,770310,0.6905,0.5407,72.5306,1.5736
+stress,leave_one_window_out,validation+test,h_sector,V,volume,low,2050434,0.6737,0.5118,67.4382,1.5996
+stress,leave_one_window_out,validation+test,h_sector,V,volume,normal,1801116,0.6444,0.4976,65.045,1.9142
+stress,leave_one_window_out,validation+test,h_sector,V,shock_window,calm window,824200,0.8586,0.4399,55.7788,0.6653
+stress,leave_one_window_out,validation+test,h_sector,V,shock_window,touches a shock,3027350,0.6059,0.5229,69.1887,2.0411
+stress,leave_one_window_out,validation+test,h,S,all,all,3851550,0.3646,0.4418,56.1794,5.6776
+stress,leave_one_window_out,validation+test,h,S,band,1-12,1093650,0.6434,0.3105,36.5561,1.3503
+stress,leave_one_window_out,validation+test,h,S,band,13-24,903450,0.4675,0.4471,56.4305,3.6151
+stress,leave_one_window_out,validation+test,h,S,band,25-36,713250,0.2571,0.5145,67.2778,6.8988
+stress,leave_one_window_out,validation+test,h,S,band,37-48,570600,0.122,0.5242,68.9197,9.3004
+stress,leave_one_window_out,validation+test,h,S,band,49-60,570600,0.0445,0.5115,66.7799,12.0879
+stress,leave_one_window_out,validation+test,h,S,sector,Construction,770310,0.2603,0.4418,56.1794,11.1663
+stress,leave_one_window_out,validation+test,h,S,sector,Healthcare,770310,0.3768,0.4418,56.1794,4.0441
+stress,leave_one_window_out,validation+test,h,S,sector,IT-ITeS,770310,0.4779,0.4418,56.1794,1.6669
+stress,leave_one_window_out,validation+test,h,S,sector,Manufacturing,770310,0.4057,0.4418,56.1794,3.4725
+stress,leave_one_window_out,validation+test,h,S,sector,Textiles and Apparel,770310,0.3024,0.4418,56.1794,8.0383
+stress,leave_one_window_out,validation+test,h,S,volume,low,2050434,0.3897,0.4418,56.1794,4.548
+stress,leave_one_window_out,validation+test,h,S,volume,normal,1801116,0.3361,0.4418,56.1794,6.9636
+stress,leave_one_window_out,validation+test,h,S,shock_window,calm window,396250,0.8663,0.3284,39.1637,0.4675
+stress,leave_one_window_out,validation+test,h,S,shock_window,touches a shock,3455300,0.3071,0.4548,58.1308,6.2751

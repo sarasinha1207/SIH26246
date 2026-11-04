@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>About | KaushalSetu</title>
-<meta name="description" content="What KaushalSetu is, how monthly counts become twelve-month district forecasts, what the pilot covers and how the forecasting engine is built.">
+<meta name="description" content="What KaushalSetu is, how monthly counts become five-year district and trade forecasts, what the pilot covers and how the forecasting engine is built.">
 <meta name="theme-color" content="#0A0E16">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <script>(function(){var h=document.documentElement,s={};try{s=JSON.parse(localStorage.getItem('lmis-display')||'{}')}catch(e){}
@@ -14,7 +14,7 @@ h.dataset.motion=(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..800&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..800&display=swap"></noscript>
-<link rel="stylesheet" href="assets/styles.css?v=106888f4">
+<link rel="stylesheet" href="assets/styles.css?v=5f46b26a">
 <link rel="stylesheet" href="assets/chat.css?v=a530a2d2">
 </head>
 <body>
@@ -23,7 +23,7 @@ h.dataset.motion=(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce
   <div class="wrap">
     <nav data-hi-aria="मुख्य" class="nav" aria-label="Main">
       <a data-hi-aria="KaushalSetu का मुख्य पृष्ठ" class="brand" href="index.html" aria-label="KaushalSetu home"><svg viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="9" fill="#0F2B63"/><rect x=".5" y=".5" width="33" height="33" rx="8.5" fill="none" stroke="#fff" stroke-opacity=".16"/><rect x="6.5" y="19" width="5.4" height="8.5" rx="1.6" fill="#8FB0FF"/><rect x="14.3" y="14" width="5.4" height="13.5" rx="1.6" fill="#8FB0FF"/><rect x="22.1" y="8.5" width="5.4" height="19" rx="1.6" fill="#8FB0FF" fill-opacity=".42"/><path d="M5.5 22.5C10 22 13 17.5 17 15S23.5 9.5 27.5 7" fill="none" stroke="#F2A93B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="27.5" cy="7" r="2.7" fill="#F2A93B"/></svg><span translate="no">Kaushal<b>Setu</b></span></a>
-      <ul class="nav-links" id="nav-links"><li><a data-hi="मुख्य पृष्ठ" href="index.html">Home</a></li><li><a data-hi="परिचय" href="about.html" aria-current="page">About</a></li><li><a data-hi="संसाधन" href="resources.html">Resources</a></li></ul>
+      <ul class="nav-links" id="nav-links"><li><a data-hi="मुख्य पृष्ठ" href="index.html">Home</a></li><li><a data-hi="परिचय" href="about.html" aria-current="page">About</a></li><li><a data-hi="कार्यप्रणाली" href="docs/methodology.html">Methodology</a></li><li><a data-hi="संसाधन" href="resources.html">Resources</a></li></ul>
       <div class="nav-actions">
         <div class="display">
   <button data-hi-aria="प्रदर्शन विकल्प" class="display-btn" type="button" aria-expanded="false" aria-controls="display-panel" aria-label="Display options">
@@ -46,24 +46,15 @@ h.dataset.motion=(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce
   </div>
   <div class="progress" aria-hidden="true"><i></i></div>
 </header>
-
 <main id="main">
   <section class="page-head big" id="project">
     <div class="grid-bg" aria-hidden="true"></div>
     <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
     <div class="wrap">
-      <div class="split rev hero-split">
-        <div class="lead">
-          <h1 data-hi="परियोजना के बारे में">About the project</h1>
-          <p data-hi="KaushalSetu कौशल विकास एवं उद्यमिता मंत्रालय (MSDE) के लिए एआई-आधारित श्रम बाज़ार संबंधी जानकारी और कौशल की माँग-आपूर्ति के पूर्वानुमान का इंजन है।">KaushalSetu is an AI-enabled labour market intelligence and skill demand-supply forecasting engine for the Ministry of Skill Development and Entrepreneurship (MSDE).</p>
-          <p data-hi="भारत हर साल लाखों उम्मीदवारों को प्रशिक्षित करता है, लेकिन प्रशिक्षण की क्षमता अक्सर किसी ज़िले और सेक्टर में नियोक्ताओं की ज़रूरत से मेल नहीं खाती। योजनाकारों को प्रायः तभी पता चलता है जब प्लेसमेंट के परिणाम आते हैं। यह परियोजना हर ज़िले और सेक्टर के लिए रोज़गार, रिक्तियों और पंजीकृत नौकरी चाहने वालों का बारह महीने आगे का पूर्वानुमान बनाती है, हर संख्या पर दायरे और विश्वसनीयता-चिह्न के साथ, ताकि मेल न बैठने से पहले ही सीटों, शिविरों और केंद्रों की योजना बनाई जा सके।">India trains lakhs of candidates every year, but training capacity is often out of step with what employers need in a district and sector. Planners usually find out only after placement results arrive. This project forecasts employment, job vacancies and registered job seekers for every district and sector, twelve months ahead, with a range and a confidence label on every number, so that seats, camps and centres can be planned before a mismatch appears.</p>
-          <p data-hi="इस साइट के आँकड़े आधिकारिक सांख्यिकी की तरह व्यवहार करने के लिए &lt;strong&gt;सिम्युलेट&lt;/strong&gt; किए गए हैं। वे दिखाते हैं कि विधि कैसे काम करती है, यह नहीं कि किसी असली ज़िले में क्या हो रहा है।">The figures on this site are <strong>simulated</strong> to behave like official statistics. They show how the method works, not what is happening in any real district.</p>
-        </div>
-        <div class="grid1">
-          <article class="card"><h3 data-hi="पूर्वानुमान">Forecasts</h3><p data-hi="280 ज़िला-सेक्टर श्रृंखलाओं के लिए बारह महीने आगे के पूर्वानुमान, हर महीने अद्यतन।">Twelve months ahead for 280 district and sector series, refreshed every month.</p></article>
-          <article class="card"><h3 data-hi="ईमानदार दायरे">Honest ranges</h3><p data-hi="हर पूर्वानुमान के साथ 90% दायरा, एक सरल आधार-रेखा और एक विश्वसनीयता-चिह्न।">A 90% range, a simple baseline and a confidence label beside every forecast.</p></article>
-          <article class="card"><h3 data-hi="पूर्व चेतावनियाँ">Early warnings</h3><p data-hi="ज़िलों को उनके सेक्टर के भीतर क्रम दिया जाता है, और सबसे तंग तथा सबसे ढीले दसवें हिस्से पर निशान लगाया जाता है।">Districts are ranked within their sector, and the tightest and loosest tenth are flagged.</p></article>
-        </div>
+      <div class="lead">
+        <h1 data-hi="परियोजना के बारे में">About the project</h1>
+        <p data-hi="KaushalSetu कौशल विकास एवं उद्यमिता मंत्रालय (MSDE) के लिए एआई-आधारित श्रम बाज़ार संबंधी जानकारी और कौशल की माँग-आपूर्ति के पूर्वानुमान का इंजन है।">KaushalSetu is an AI-enabled labour market intelligence and skill demand-supply forecasting engine for the Ministry of Skill Development and Entrepreneurship (MSDE).</p>
+        <p data-hi="यह हर ज़िले और ट्रेड के लिए रोज़गार, रिक्तियों और पंजीकृत नौकरी चाहने वालों का पाँच वर्ष आगे तक पूर्वानुमान देता है, हर संख्या पर एक दायरे और विश्वसनीयता लेबल के साथ, और पूर्वानुमानित रिक्तियों को उपलब्ध प्रशिक्षण सीटों के सामने रखता है, ताकि सीटें, शिविर और ध्यान वहाँ जा सकें जहाँ उनकी ज़रूरत है।">It forecasts employment, job vacancies and registered job seekers for every district and trade, five years ahead, with a range and a confidence label on every number, and sets the forecast openings against the training seats on offer, so that seats, camps and attention can go where they are needed.</p>
       </div>
     </div>
   </section>
@@ -72,98 +63,20 @@ h.dataset.motion=(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce
     <div class="wrap">
       <div class="sec-head">
         <h2 data-hi="यह कैसे काम करता है">How it works</h2>
-        <p data-hi="एक मासिक चक्र, कच्ची गिनती से प्रकाशित पूर्वानुमान तक।">One monthly cycle, from raw counts to published forecasts.</p>
+        <p data-hi="कच्ची गिनतियों से प्रकाशित पूर्वानुमानों तक।">From raw counts to published forecasts.</p>
       </div>
       <div class="tl-scroll">
         <div class="timeline">
           <div class="tl-line" aria-hidden="true"><i class="tl-fill"></i></div>
           <ol class="tl-steps">
-            <li style="--i:0"><span class="tl-dot">1</span><span data-hi="जनवरी 2011 से" class="tl-when">From January 2011</span><h3 data-hi="संग्रह">Collect</h3><p data-hi="280 ज़िला-सेक्टर श्रृंखलाओं के लिए नियोजित कामगारों, रिक्तियों और पंजीकृत नौकरी चाहने वालों की मासिक गिनती।">Monthly counts of employed workers, vacancies and registered job seekers, for 280 district and sector series.</p></li>
-            <li style="--i:1"><span class="tl-dot">2</span><span data-hi="किसी भी उपयोग से पहले" class="tl-when">Before any use</span><h3 data-hi="जाँच">Check</h3><p data-hi="गिनतियों में अंतराल और त्रुटियों की जाँच की जाती है। कोविड और ई-श्रम की शुरुआत जैसी झटके वाली अवधियों पर निशान लगाया जाता है, ताकि वे मॉडल को भ्रमित न कर सकें।">Counts are audited for gaps and errors. Shock periods such as COVID and the e-Shram launch are marked so they cannot mislead the model.</p></li>
-            <li style="--i:2"><span class="tl-dot">3</span><span data-hi="2011 से 2022 की शुरुआत" class="tl-when">2011 to early 2022</span><h3 data-hi="सीखना">Learn</h3><p data-hi="मॉडल हाल की चाल, सेक्टर के रुझान और मौसमी पैटर्न सीखता है, केवल वही जानकारी लेकर जो हर पूर्वानुमान की तारीख पर ज्ञात थी।">The model learns recent movement, sector trends and seasonal patterns, using only what was known at each forecast date.</p></li>
-            <li style="--i:3"><span class="tl-dot">4</span><span data-hi="2023 से 2026" class="tl-when">2023 to 2026</span><h3 data-hi="परीक्षण">Test</h3><p data-hi="इसे ऐसे महीनों पर जाँचा जाता है जो उसने कभी नहीं देखे, ऐसे सरल पूर्वानुमानों के मुक़ाबले जिन्हें किसी मॉडल की ज़रूरत नहीं।">It is scored on months it has never seen, against simple forecasts that need no model.</p></li>
-            <li style="--i:4"><span class="tl-dot">5</span><span data-hi="अगले 12 महीने" class="tl-when">Next 12 months</span><h3 data-hi="पूर्वानुमान">Forecast</h3><p data-hi="हर श्रृंखला का पूर्वानुमान एक से बारह महीने आगे तक बनता है, 90% दायरे और विश्वसनीयता-चिह्न के साथ।">Each series is forecast one to twelve months ahead, with a 90% range and a confidence label.</p></li>
-            <li style="--i:5"><span class="tl-dot">6</span><span data-hi="हर महीने" class="tl-when">Every month</span><h3 data-hi="निशान और अद्यतन">Flag and refresh</h3><p data-hi="ज़िलों को क्रम और निशान दिए जाते हैं, फ़ाइलें प्रकाशित होती हैं, और चक्र सबसे नए महीने के साथ दोहराया जाता है।">Districts are ranked and flagged, the files are published, and the cycle repeats with the newest month.</p></li>
+            <li style="--i:0"><span class="tl-dot">1</span><span data-hi="जनवरी 2000 से" class="tl-when">From January 2000</span><h3 data-hi="संग्रह">Collect</h3><p data-hi="नियोजित कामगारों, रिक्तियों और पंजीकृत नौकरी चाहने वालों की मासिक गिनतियाँ, 7,925 ज़िला और ट्रेड श्रृंखलाओं के लिए।">Monthly counts of employed workers, vacancies and registered job seekers, for 7,925 district and trade series.</p></li>
+            <li style="--i:1"><span class="tl-dot">2</span><span data-hi="किसी भी उपयोग से पहले" class="tl-when">Before any use</span><h3 data-hi="जाँच">Check</h3><p data-hi="गिनतियों में कमियों और गलतियों की जाँच की जाती है, और किसी सेक्टर के पाँच ट्रेड उस सेक्टर के बराबर जुड़ने वाले बनाए जाते हैं। कोविड और ई-श्रम की शुरुआत जैसे झटके वाले दौर चिह्नित किए जाते हैं ताकि वे मॉडल को भटका न सकें।">Counts are audited for gaps and errors, and the five trades of a sector are made to add up to the sector. Shock periods such as COVID and the e-Shram launch are marked so they cannot mislead the model.</p></li>
+            <li style="--i:2"><span class="tl-dot">3</span><span data-hi="2000 से 2009" class="tl-when">2000 to 2009</span><h3 data-hi="सीखना">Learn</h3><p data-hi="मॉडल हाल की चाल, रुझान और मौसमी पैटर्न सीखता है, केवल वही उपयोग करते हुए जो हर पूर्वानुमान तिथि पर ज्ञात था। सेटिंग्स 2010 से 2014 पर ट्यून की जाती हैं।">The model learns recent movement, trends and seasonal patterns, using only what was known at each forecast date. Settings are tuned on 2010 to 2014.</p></li>
+            <li style="--i:3"><span class="tl-dot">4</span><span data-hi="2015 से 2025" class="tl-when">2015 to 2025</span><h3 data-hi="परीक्षण">Test</h3><p data-hi="इसे एक बार 2015 से 2019 पर, फिर एक बार झटके वाले वर्षों 2020 से 2025 पर, ऐसे सरल पूर्वानुमानों के सामने जाँचा जाता है जिन्हें मॉडल नहीं चाहिए।">It is scored once on 2015 to 2019, then once on the shock years 2020 to 2025, against simple forecasts that need no model.</p></li>
+            <li style="--i:4"><span class="tl-dot">5</span><span data-hi="अगले 60 महीने" class="tl-when">Next 60 months</span><h3 data-hi="पूर्वानुमान">Forecast</h3><p data-hi="हर श्रृंखला का एक से साठ महीने आगे पूर्वानुमान, दो 90% दायरों और एक विश्वसनीयता लेबल के साथ।">Each series is forecast one to sixty months ahead, with two 90% ranges and a confidence label.</p></li>
+            <li style="--i:5"><span class="tl-dot">6</span><span data-hi="हर पूर्वानुमान माह के लिए" class="tl-when">For every forecast month</span><h3 data-hi="सूचकांक, निशान और तुलना">Index, flag and compare</h3><p data-hi="माँग सूचकांक और क्षमता अंतर निकाले जाते हैं, ज़िलों को क्रमबद्ध और चिह्नित किया जाता है, और फ़ाइलें चेकसम के साथ प्रकाशित होती हैं।">The Demand Index and the capacity gap are computed, districts are ranked and flagged, and the files are published with checksums.</p></li>
           </ol>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="dataset">
-    <div class="wrap">
-      <div class="sec-head">
-        <h2 data-hi="उपयोग किया गया डेटासेट">Dataset used</h2>
-        <p data-hi="हर ज़िले, सेक्टर और महीने की एक पंक्ति वाला एक मासिक पैनल। इसे आधिकारिक सांख्यिकी की तरह व्यवहार करने के लिए सिम्युलेट किया गया है; हर हिस्सा कहाँ से आया, यह &lt;a class=&quot;ulink&quot; href=&quot;resources.html#datasets&quot;&gt;संसाधन&lt;/a&gt; पृष्ठ पर दिया है।">One monthly panel with a row for every district, sector and month. It is simulated to behave like official statistics; where each part came from is listed on the <a class="ulink" href="resources.html#datasets">Resources</a> page.</p>
-      </div>
-      <div class="stats-grid four">
-        <div class="fact"><b>53,760</b><span data-hi="पंक्तियाँ, हर ज़िले, सेक्टर और महीने की एक">rows, one per district, sector and month</span></div>
-        <div class="fact"><b>41</b><span data-hi="कॉलम, पहचान से लेकर जनसांख्यिकी तक">columns, from identity to demographics</span></div>
-        <div class="fact"><b>192</b><span data-hi="महीने, जनवरी 2011 से दिसंबर 2026">months, January 2011 to December 2026</span></div>
-        <div class="fact"><b>280</b><span data-hi="श्रृंखलाएँ: 56 ज़िले और पाँच सेक्टर">series: 56 districts and five sectors</span></div>
-      </div>
-
-      <h3 data-hi="राज्य" class="blk">States</h3>
-      <div class="table-wrap">
-        <table class="files res">
-          <thead><tr><th data-hi="राज्य">State</th><th data-hi="पूर्वानुमान वाले ज़िले">Districts forecast</th><th data-hi="डेटा में शामिल ज़िले">Districts in the data</th></tr></thead>
-          <tbody>
-            <tr><td data-hi="महाराष्ट्र">Maharashtra</td><td data-hi="36 में से 36">36 of 36</td><td data-hi="सभी 36, मुंबई शहर और पुणे से लेकर नागपुर और गढ़चिरौली तक।">All 36, from Mumbai City and Pune to Nagpur and Gadchiroli.</td></tr>
-            <tr><td data-hi="दिल्ली">Delhi</td><td data-hi="11 में से 11">11 of 11</td><td data-hi="सभी 11, नई दिल्ली और मध्य दिल्ली से लेकर शाहदरा तक।">All 11, from New Delhi and Central Delhi to Shahdara.</td></tr>
-            <tr><td data-hi="पश्चिम बंगाल">West Bengal</td><td data-hi="23 में से 5">5 of 23</td><td data-hi="कोलकाता, उत्तर 24 परगना, दक्षिण 24 परगना, हावड़ा और हुगली।">Kolkata, North 24 Parganas, South 24 Parganas, Howrah and Hooghly.</td></tr>
-            <tr><td data-hi="तमिलनाडु">Tamil Nadu</td><td data-hi="38 में से 4">4 of 38</td><td data-hi="चेन्नई, तिरुवल्लूर, कांचीपुरम और चेंगलपट्टू।">Chennai, Tiruvallur, Kanchipuram and Chengalpattu.</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3 data-hi="सेक्टर" class="blk">Sectors</h3>
-      <div class="table-wrap">
-        <table class="files res">
-          <thead><tr><th data-hi="सेक्टर">Sector</th><th data-hi="उद्योग प्रभाग (NIC)">Industry divisions (NIC)</th><th data-hi="मुख्य व्यवसाय (NCO-2015)">Anchor occupation (NCO-2015)</th></tr></thead>
-          <tbody>
-            <tr><td data-hi="विनिर्माण">Manufacturing</td><td data-hi="प्रभाग 10 से 12 और 15 से 33">Divisions 10 to 12 and 15 to 33</td><td data-hi="धातु कार्य मशीन टूल सेटर और ऑपरेटर">Metal working machine tool setters and operators</td></tr>
-            <tr><td data-hi="निर्माण कार्य">Construction</td><td data-hi="प्रभाग 41 से 43">Divisions 41 to 43</td><td data-hi="गृह निर्माता">House builders</td></tr>
-            <tr><td data-hi="आईटी-आईटीईएस">IT-ITeS</td><td data-hi="प्रभाग 62 और 63">Divisions 62 and 63</td><td data-hi="सिस्टम विश्लेषक">System analysts</td></tr>
-            <tr><td data-hi="स्वास्थ्य सेवा">Healthcare</td><td data-hi="प्रभाग 86">Division 86</td><td data-hi="सामान्य चिकित्सक">Generalist medical practitioners</td></tr>
-            <tr><td data-hi="वस्त्र एवं परिधान">Textiles and Apparel</td><td data-hi="प्रभाग 13 और 14">Divisions 13 and 14</td><td data-hi="सिलाई मशीन ऑपरेटर">Sewing machine operators</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3 data-hi="कॉलम" class="blk">Columns</h3>
-      <div class="table-wrap">
-        <table class="files res">
-          <thead><tr><th data-hi="समूह">Group</th><th data-hi="कॉलम">Columns</th><th data-hi="इनमें क्या है">What they hold</th></tr></thead>
-          <tbody>
-            <tr><td data-hi="स्थान">Place</td><td translate="no"><code>State_Name</code>, <code>State_LGD_Code</code>, <code>District_Name</code>, <code>District_LGD_Code</code></td><td data-hi="राज्य और ज़िला, उनके आधिकारिक स्थानीय सरकार निर्देशिका कोड के साथ।">The state and district, with their official Local Government Directory codes.</td></tr>
-            <tr><td data-hi="समय">Time</td><td translate="no"><code>Timestamp</code>, <code>Timestamp_Month</code>, <code>Timestamp_Quarter</code>, <code>Year</code>, <code>Month</code></td><td data-hi="हर पंक्ति का महीना, जनवरी 2011 से दिसंबर 2026 तक।">The month of each row, from January 2011 to December 2026.</td></tr>
-            <tr><td data-hi="सेक्टर">Sector</td><td translate="no"><code>Sector_Name</code>, <code>NIC_Code</code>, <code>NCO_Code</code>, <code>NSQF_Level</code></td><td data-hi="सेक्टर, उसके उद्योग प्रभाग, उसका मुख्य व्यवसाय कोड और योग्यता के स्तर।">The sector, its industry divisions, its anchor occupation code and the qualification levels.</td></tr>
-            <tr><td data-hi="पूर्वानुमान किसका होता है">What is forecast</td><td translate="no"><code>Total_Employed_Workers</code>, <code>Active_Job_Vacancies</code>, <code>eShram_Registered_Seekers</code></td><td data-hi="काम कर रहे लोग, खुले रोज़गार, और काम की तलाश में पंजीकृत लोग।">People in work, open jobs, and people registered as seeking work.</td></tr>
-            <tr><td data-hi="अर्थव्यवस्था">Economy</td><td translate="no"><code>Avg_Monthly_Wage_INR</code>, <code>Unemployment_Rate_Pct</code>, <code>District_Total_Population_Est</code></td><td data-hi="रुपयों में औसत मज़दूरी, बेरोज़गारी दर और ज़िले की जनसंख्या।">Average wage in rupees, the unemployment rate and the district's population.</td></tr>
-            <tr><td data-hi="प्रशिक्षण">Training</td><td translate="no"><code>Training_Seats_Sanctioned</code>, <code>Trainees_Certified_Monthly</code></td><td data-hi="औपचारिक प्रशिक्षण क्षमता और हर महीने प्रमाणित होने वाले लोगों की संख्या।">Formal training capacity and the number of people certified each month.</td></tr>
-            <tr><td data-hi="कौन काम करता है">Who works</td><td translate="no"><code>Male_</code>, <code>Female_</code> and <code>Transgender_Employed_Count</code>, age and education counts and their shares</td><td data-hi="नियोजित कामगारों का लिंग, आयु वर्ग (15 से 24, 25 से 54, 55 और उससे अधिक) और शिक्षा के अनुसार विभाजन, प्राथमिक से कम से लेकर स्नातक और उससे ऊपर तक।">Employed workers split by gender, age group (15 to 24, 25 to 54, 55 and over) and education, from below primary to graduate and above.</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <section class="section alt" id="principles">
-    <div class="wrap">
-      <div class="sec-head">
-        <h2 data-hi="मॉडल इंजन का अवलोकन और मूल सिद्धांत">Model engine overview and core principles</h2>
-        <p data-hi="इंजन ऐसा बनाया गया है कि उस पर उतना ही भरोसा किया जाए जितना उसने अर्जित किया है। वह हर ज़िले और सेक्टर के लिए तीन माप का पूर्वानुमान लगाता है, और उसे ऐसे महीनों पर सरल आधार-रेखाओं के मुक़ाबले परखा जाता है जो उसने कभी नहीं देखे। ये सिद्धांत हर चुनाव को आकार देते हैं।">The engine is built to be believed only as far as it has earned. It forecasts three measures for every district and sector, and it is judged against simple baselines on months it has never seen. These principles shape every choice.</p>
-      </div>
-      <div class="grid3">
-        <article class="card"><h3 data-hi="भविष्य में कभी न झाँकें">Never peek at the future</h3><p data-hi="हर फ़ीचर पूर्वानुमान की तारीख पर उपलब्ध डेटा का ही उपयोग करता है। एक परीक्षण पूर्वानुमान के महीने पर डेटा को काट देता है, फ़ीचर दोबारा बनाता है और जाँचता है कि वे वही हैं।">Every feature uses data available at the forecast date. A test cuts the data at the forecast month, rebuilds the features and checks they are unchanged.</p></article>
-        <article class="card"><h3 data-hi="अनदेखे महीनों पर परखें">Judge on unseen months</h3><p data-hi="वैधीकरण और परीक्षण कैलेंडर के समय के अनुसार बाँटे गए हैं। अंतिम परीक्षण अवधि एक ही बार खोली गई, और उसके बाद कुछ नहीं बदला गया।">Validation and testing are split by calendar time. The final test period was opened once, and nothing was changed afterwards.</p></article>
-        <article class="card"><h3 data-hi="किसी सरल चीज़ से तुलना करें">Compare with something simple</h3><p data-hi="हर संख्या के बगल में एक आधार-रेखा पूर्वानुमान रहता है, ताकि कोई भी देख सके कि मॉडल कितना जोड़ता है, और कहाँ कम जोड़ता है।">A baseline forecast sits beside every number, so anyone can see how much the model adds, and where it adds little.</p></article>
-        <article class="card"><h3 data-hi="अनिश्चितता दिखाएँ">Show the doubt</h3><p data-hi="हर पूर्वानुमान के साथ 90% दायरा और विश्वसनीयता-चिह्न होता है, उच्च, मध्यम या निम्न, जो परीक्षण से अर्जित है।">Every forecast carries a 90% range and a confidence label, high, medium or low, earned in testing.</p></article>
-        <article class="card"><h3 data-hi="ज़िलों को उनके समकक्षों से तौलें">Judge districts against peers</h3><p data-hi="चेतावनियाँ उसी महीने उसी सेक्टर के सापेक्ष होती हैं, और हर एक के साथ एक निरपेक्ष पाठ भी होता है कि रिक्तियाँ सचमुच नौकरी चाहने वालों से अधिक हैं या नहीं।">Flags are relative to the same sector in the same month, and each carries an absolute reading of whether openings really exceed seekers.</p></article>
-        <article class="card"><h3 data-hi="कमज़ोरी साफ़ बताएँ">Say where it is weak</h3><p data-hi="रिक्तियों के पूर्वानुमान और पूर्व-चेतावनी के निशान आधार-रेखा से बहुत कम बेहतर हैं, इसलिए दोनों को निम्न विश्वसनीयता का चिह्न दिया गया है।">Vacancy forecasts and early-warning flags add little over the baseline, so both are marked low confidence.</p></article>
-        <article class="card"><h3 data-hi="पुनरुत्पादन योग्य बनें">Be reproducible</h3><p data-hi="तय रैंडम सीड, दर्ज सेटिंग और फ़ाइलों के चेकसम का अर्थ है कि दोबारा चलाने पर वही पूर्वानुमान मिलते हैं।">Fixed random seeds, recorded settings and file checksums mean a rerun gives identical forecasts.</p></article>
-        <article class="card"><h3 data-hi="ताज़ा बने रहें">Stay current</h3><p data-hi="हर महीने नया डेटा जुड़ता है, घोषित सेटिंग दोबारा फ़िट होती हैं, और पिछले पूर्वानुमानों को जो हुआ उससे जाँचा जाता है।">Each month adds the newest data, refits the declared settings and scores earlier forecasts against what happened.</p></article>
-        <article class="card"><h3 data-hi="डेटा के बारे में ईमानदार रहें">Keep the data honest</h3><p data-hi="डेटा सिम्युलेटेड है, और हर पृष्ठ यह बताता है। परिणाम दिखाते हैं कि विधि कैसे काम करती है, यह नहीं कि असली आँकड़ों पर वह कैसे काम करेगी।">The data is simulated, and every page says so. Results show how the method works, not how it would work on real statistics.</p></article>
       </div>
     </div>
   </section>
@@ -172,58 +85,84 @@ h.dataset.motion=(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce
     <div class="wrap">
       <div class="sec-head">
         <h2 data-hi="मशीन लर्निंग इंजन और संरचना">Machine learning engine and architecture</h2>
-        <p data-hi="छह चरण मासिक पैनल को पूर्वानुमान में बदलते हैं। हर चरण केवल वही पढ़ता है जो उससे पहले के चरण ने बनाया।">Six stages turn the monthly panel into forecasts. Each stage reads only what the stage before it produced.</p>
-      </div>
-      <div class="arch">
-        <article class="card"><span class="arch-n">1</span><h3 data-hi="डेटा">Data</h3><p data-hi="280 श्रृंखलाओं का मासिक पैनल: नियोजित कामगार, रिक्तियाँ और पंजीकृत नौकरी चाहने वाले, साथ में मज़दूरी, बेरोज़गारी, प्रशिक्षण सीटें और जनसांख्यिकी।">A monthly panel of 280 series: employed workers, vacancies and registered job seekers, with wages, unemployment, training seats and demographics.</p></article>
-        <article class="card"><span class="arch-n">2</span><h3 data-hi="फ़ीचर">Features</h3><p data-hi="हाल की चाल, हाल के औसत की तुलना में स्तर, मौसमी पैटर्न, रिक्ति-से-नौकरी चाहने वाले अनुपात, सेक्टर के रुझान और कैलेंडर, सब कुछ केवल पूर्वानुमान के महीने तक के डेटा से बना।">Recent movement, level against the recent average, seasonal patterns, vacancy-to-seeker ratios, sector trends and calendar, all built only from data up to the forecast month.</p></article>
-        <article class="card"><span class="arch-n">3</span><h3 data-hi="मॉडल">Models</h3><p data-hi="XGBoost, ग्रेडिएंट-बूस्टेड पेड़ों की एक विधि। हर माप के लिए एक मॉडल हाल के स्तर से बदलाव का पूर्वानुमान 1 से 12 महीने की हर अवधि के लिए लगाता है, जिसका पाँच रैंडम आरंभों पर औसत लिया जाता है।">XGBoost, a gradient-boosted tree method. One model per measure forecasts the change from a recent level for every horizon from 1 to 12 months, averaged over five random starts.</p></article>
-        <article class="card"><span class="arch-n">4</span><h3 data-hi="मिश्रण">Blend</h3><p data-hi="जहाँ पहले का वैधीकरण दिखाता है कि यह मदद करता है, वहाँ पूर्वानुमान को एक सरल आधार-रेखा, अंतिम मान और सामान्य मौसमी बदलाव, के साथ मिलाया जाता है।">Where earlier validation showed it helps, the forecast is blended with a simple baseline, last value plus the usual seasonal shift.</p></article>
-        <article class="card"><span class="arch-n">5</span><h3 data-hi="दायरे">Ranges</h3><p data-hi="हर पूर्वानुमान को 90% दायरा मिलता है: नियोजित कामगारों और रिक्तियों के लिए वैधीकरण की त्रुटियों से तय, और नौकरी चाहने वालों के लिए अनुकूली, जो हाल की त्रुटियों का अनुसरण करता है।">Every forecast gets a 90% range, fixed from validation errors for employed workers and vacancies, and adaptive for job seekers, following recent errors.</p></article>
-        <article class="card"><span class="arch-n">6</span><h3 data-hi="निशान और फ़ाइलें">Flags and files</h3><p data-hi="ज़िलों को उनके सेक्टर के भीतर क्रम दिया जाता है और उन पर निशान लगाया जाता है। हर श्रृंखला के लिए पूर्वानुमान, दायरा, आधार-रेखा, विश्वसनीयता-चिह्न और चेतावनी की फ़ाइलें लिखी जाती हैं।">Districts are ranked within their sector and flagged. The forecast, range, baseline, confidence label and flag files are written for every series.</p></article>
+        <p data-hi="तीनों मापों में से हर एक के लिए एक मॉडल, जिसे उन वर्षों पर सरल पूर्वानुमानों के सामने परखा गया जो उसने कभी नहीं देखे। इसे उतना ही भरोसेमंद माना जाना चाहिए जितना इसने कमाया है, और हर इनपुट केवल वही इस्तेमाल करता है जो पूर्वानुमान की तिथि पर ज्ञात था।">One model for each of the three measures, judged against simple forecasts on years it never saw. It is built to be believed only as far as it has earned, and every input uses only what was known at the forecast date.</p>
       </div>
       <div class="table-wrap spec">
         <table class="files">
           <thead><tr><th data-hi="भाग">Part</th><th data-hi="यह क्या है">What it is</th></tr></thead>
           <tbody>
-            <tr><td data-hi="एल्गोरिदम">Algorithm</td><td data-hi="XGBoost हिस्टोग्राम पेड़। तीन माप, हर एक के पाँच रैंडम आरंभ: हर बार 15 मॉडल।">XGBoost histogram trees. Three measures, five random starts each: 15 models per run.</td></tr>
-            <tr><td data-hi="फ़ीचर">Features</td><td data-hi="हर मॉडल केवल वे फ़ीचर लेता है जिन्होंने परीक्षण में अपनी जगह बनाई: नियोजित कामगारों के लिए 36, रिक्तियों के लिए 29 और नौकरी चाहने वालों के लिए 68, जो 77 उम्मीदवारों में से चुने गए।">Each model uses only the features that earned their place in testing: 36 for employed workers, 29 for vacancies and 68 for job seekers, chosen from 77 candidates.</td></tr>
-            <tr><td data-hi="प्रशिक्षण और परीक्षण">Training and testing</td><td data-hi="जनवरी 2011 से फ़रवरी 2022 तक प्रशिक्षित, मार्च से दिसंबर 2022 में ट्यून किया गया, और जनवरी 2023 से दिसंबर 2026 पर एक ही बार परखा गया। विभाजन कैलेंडर के समय के अनुसार है, कभी यादृच्छिक नहीं।">Trained on January 2011 to February 2022, tuned on March to December 2022, tested once on January 2023 to December 2026. The split is by calendar time, never random.</td></tr>
-            <tr><td data-hi="ट्यूनिंग">Tuning</td><td data-hi="सीखने के वर्षों के भीतर रोलिंग-ऑरिजिन फ़ोल्ड पर आँकी गई TPE खोज (Optuna), जिसमें सीखने की दर, पेड़ का आकार, दंड और नमूनाकरण शामिल हैं। नई सेटिंग ने पुरानी की जगह तभी ली जब वह स्पष्ट रूप से बेहतर थी।">A TPE search (Optuna) over learning rate, tree size, penalties and sampling, scored on rolling-origin folds inside the training years. A new setting replaced the old only if it was clearly better.</td></tr>
+            <tr><td data-hi="एल्गोरिदम">Algorithm</td><td data-hi="XGBoost हिस्टोग्राम पेड़। तीन माप, हर एक के तीन यादृच्छिक आरंभ: अंतिम फ़िट में नौ मॉडल। हर एक स्तर के लघुगणक में बदलाव का पूर्वानुमान लगाता है, कितने महीने आगे यह इनपुट के रूप में लेकर, 1 से 60 तक की हर अवधि के लिए।">XGBoost histogram trees. Three measures, three random starts each: nine models in the final fit. Each forecasts the change in the log of the level, with the number of months ahead as an input, for every horizon from 1 to 60.</td></tr>
+            <tr><td data-hi="इनपुट">Inputs</td><td data-hi="119 उम्मीदवारों में से सत्यापन वर्षों पर परखकर चुने गए 82 इनपुट: हाल की गति, हाल के औसत के सामने स्तर, अस्थिरता, रिक्ति और नौकरी चाहने वालों की दरें, प्रशिक्षण और वेतन अनुपात और माँग के स्रोत। किसी एक ज़िले या सेक्टर की पहचान कराने वाले इनपुट हटाने से नियोजित कामगारों की सत्यापन त्रुटि 10.9% से 4.5% रह गई, क्योंकि वे पेड़ों को श्रृंखला के बजाय अवधि रटने देते थे। एक परीक्षण पूर्वानुमान के महीने पर डेटा काटता है, इनपुट दोबारा बनाता है और जाँचता है कि वे बदले नहीं हैं।">82 inputs, chosen from 119 candidates by testing on the validation years: recent movement, level against the recent average, volatility, vacancy and seeker rates, training and wage ratios and the demand channels. Dropping the inputs that identify a single district or sector cut the validation error for employed workers from 10.9% to 4.5%, because they let the trees memorise the period instead of the series. A test cuts the data at the forecast month, rebuilds the inputs and checks they are unchanged.</td></tr>
+            <tr><td data-hi="ट्यूनिंग">Tuning</td><td data-hi="TPE खोज (Optuna), हर माप के लिए 20 प्रयास, लर्निंग रेट, पेड़ के आकार, दंड और नमूने पर, केवल वैलिडेशन वर्षों पर जाँची गई। बारह महीनों के हर अवधि-खंड के लिए पेड़ों की संख्या भी वहीं चुनी गई।">A TPE search (Optuna), 20 trials per measure, over learning rate, tree size, penalties and sampling, scored on the validation years only. The number of trees for each twelve-month band of horizons is chosen there too.</td></tr>
             <tr><td data-hi="त्रुटि का माप">Error measure</td><td data-hi="WAPE: चूकों के कुल आकार को वास्तविक मानों के कुल आकार से भाग देने पर मिलता है। जितना कम, उतना बेहतर।">WAPE, the total size of the misses divided by the total size of the actual values. Lower is better.</td></tr>
-            <tr><td data-hi="मासिक अद्यतन">Monthly refresh</td><td data-hi="घोषित सेटिंग को नवीनतम महीने तक के पूरे इतिहास पर दोबारा फ़िट किया जाता है, बिना कुछ नया ट्यून किए।">The declared settings are refitted on all history up to the newest month, with nothing re-tuned.</td></tr>
-            <tr><td data-hi="हर बार का परिणाम">Output per run</td><td data-hi="10,080 पूर्वानुमान पंक्तियाँ (280 श्रृंखलाएँ, 3 माप, 12 अवधियाँ) और 3,360 चेतावनी पंक्तियाँ। दोबारा चलाने पर वही फ़ाइलें मिलती हैं, और हर फ़ाइल के साथ एक चेकसम है।">10,080 forecast rows (280 series, 3 measures, 12 horizons) and 3,360 flag rows. Rerunning gives identical files, and every file carries a checksum.</td></tr>
+            <tr><td data-hi="अंतिम फ़िट">Final fit</td><td data-hi="घोषित सेटिंग्स को दिसंबर 2025 तक के सारे डेटा पर दोबारा फ़िट किया जाता है, कुछ भी दोबारा ट्यून नहीं होता। 2020 से 2023 के झटके और सुधार तक पहुँचने वाले प्रशिक्षण जोड़े छोड़ दिए जाते हैं, ताकि पूर्वानुमान उस उछाल को सामान्य महीने की तरह न दोहराएँ।">The declared settings are refitted on all data to December 2025, with nothing re-tuned. The training pairs that reach into the 2020 to 2023 shock and recovery are left out, so the forecasts do not repeat that jump as if it were a normal month.</td></tr>
+            <tr><td data-hi="मिलान">Reconcile</td><td data-hi="किसी ज़िले और सेक्टर के पाँच ट्रेड ठीक सेक्टर के पूर्वानुमान के बराबर जुड़ने वाले बनाए जाते हैं, ताकि हर स्तर के कुल योग मेल खाएँ।">The five trades of a district and sector are made to add up exactly to the sector forecast, so totals at every level agree.</td></tr>
+            <tr><td data-hi="दायरे">Ranges</td><td data-hi="हर पूर्वानुमान को दो 90% दायरे मिलते हैं, जो उसी अवधि की पिछली त्रुटियों से तय होते हैं: एक सामान्य, 2010 से 2019 से, और एक चौड़ा, जो झटके वाले वर्ष भी लेता है। वे कैसे तय होते हैं यह &lt;a class=&quot;ulink&quot; href=&quot;docs/methodology.html#doubt&quot;&gt;कार्यप्रणाली&lt;/a&gt; पृष्ठ पर है।">Every forecast gets two 90% ranges, set from past errors for the same horizon: a usual one from 2010 to 2019 and a wider one that also uses the shock years. How they are set is on the <a class="ulink" href="docs/methodology.html#doubt">Methodology</a> page.</td></tr>
           </tbody>
         </table>
       </div>
     </div>
   </section>
 
-  <section class="section alt" id="evaluation">
+  <section class="section alt" id="measures">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 data-hi="माँग सूचकांक, क्षमता अंतर, गंभीरता और पूर्व चेतावनी">Demand Index, capacity gap, severity and early warnings</h2>
+        <p data-hi="पूर्वानुमानों पर बने छह पाठ, हर एक को कुछ पंक्तियों में परिभाषित किया गया है ताकि उसकी जाँच हो सके। माँग सूचकांक कैसे बनता है, एक हल किए उदाहरण के साथ, यह &lt;a class=&quot;ulink&quot; href=&quot;docs/methodology.html&quot;&gt;कार्यप्रणाली&lt;/a&gt; पृष्ठ पर चरण-दर-चरण लिखा है, और हर संख्या &lt;a class=&quot;ulink&quot; href=&quot;docs/api.html&quot;&gt;केवल-पढ़ने योग्य API&lt;/a&gt; से मिलती है।">Six readings built on the forecasts, each defined in a few lines so that it can be checked. The Demand Index is built step by step, with a worked example, on the <a class="ulink" href="docs/methodology.html">Methodology</a> page, and every number is served by the <a class="ulink" href="docs/api.html">read-only API</a>.</p>
+      </div>
+      <div class="grid3">
+        <article class="card"><h3 data-hi="माँग सूचकांक">Demand Index</h3><p data-hi="किसी ज़िले और ट्रेड के लिए किसी महीने की 0 से 100 तक की संख्या। यह रिक्तियों, जॉब-पोर्टल पोस्टिंग और राष्ट्रीय कॅरियर सेवा से प्रति कामगार शुरुआती अवसरों की तुलना उसी ट्रेड के बाकी ज़िलों से करती है, और ट्रेड के राष्ट्रीय स्तर के साथ वर्षों में बदलती है। 50, 2018 से 2019 के स्तर पर बीच का ज़िला है।">A number from 0 to 100 for a district and trade in a month. It compares openings per worker, from vacancies, job-portal postings and the National Career Service, with the other districts of the same trade, and moves over the years with the trade's national level. 50 is the median district at the 2018 to 2019 level.</p></article>
+        <article class="card"><h3 data-hi="क्षमता अंतर">Capacity gap</h3><p data-hi="हर वर्ष की पूर्वानुमानित रिक्तियाँ 2025-26 में स्वीकृत प्रशिक्षण सीटों के सामने, जिन्हें स्थिर रखा गया है, और प्रमाणित होने की अपेक्षा वाले प्रशिक्षु, यानी सीटें × 2023 से 2025 की प्रमाणन दर। जहाँ ट्रेड में ज़िले की सीटों का हिस्सा रिक्तियों के हिस्से के 0.6 गुना से कम हो वहाँ सीटें कम पड़ती हैं, और 1.65 गुना से अधिक हो तो माँग से अधिक हैं।">Forecast openings for each year against the training seats sanctioned in 2025 to 2026, held flat, and the trainees expected to be certified, which is the seats times the 2023 to 2025 certification rate. Seats fall short where a district's share of seats is under 0.6 times its share of openings in the trade, and exceed demand above 1.65 times.</p></article>
+        <article class="card"><h3 data-hi="पूर्व चेतावनियाँ">Early warnings</h3><p data-hi="हर ट्रेड और महीने में ज़िलों को प्रति पंजीकृत नौकरी चाहने वाले पूर्वानुमानित रिक्तियों के अनुसार क्रमबद्ध किया जाता है। शीर्ष दसवाँ हिस्सा कमी की चेतावनी और निचला दसवाँ हिस्सा अधिशेष की चेतावनी है; दोनों ओर के अगले पंद्रह प्रतिशत निगरानी हैं। निशान सापेक्ष है: यह बताता है कि कौन-से ज़िले अलग दिखते हैं, यह नहीं कि रिक्तियाँ नौकरी चाहने वालों से अधिक हैं।">In each trade and month, districts are ranked by forecast vacancies per registered seeker. The top tenth is a shortage alert and the bottom tenth an oversupply alert; the next fifteen per cent either side is a watch. The flag is relative: it says which districts stand out, not that openings exceed seekers.</p></article>
+        <article class="card"><h3 data-hi="गंभीरता क्रम">Severity ranking</h3><p data-hi="अंक = एक वर्ष में प्रमाणित होने की अपेक्षा वाले प्रशिक्षुओं को औसत मासिक रिक्तियों से भाग देकर उसका प्राकृतिक लघुगणक। शून्य से कम का अर्थ कम आपूर्ति और शून्य से अधिक का अधिक आपूर्ति; दोनों ओर 2 या उससे अधिक का अनुपात गंभीर, 1.5 उच्च और 1.25 मध्यम है। ट्रेड, राज्य, राज्य और ट्रेड, ज़िले, ज़िला और सेक्टर, तथा ज़िला और ट्रेड को 2030 तक किसी भी वर्ष के लिए, किसी भी फ़िल्टर में, क्रमबद्ध किया जा सकता है।">Score = the natural log of the trainees expected to be certified in a year divided by the average monthly openings. Below zero is undersupply and above zero oversupply; a ratio of 2 or more either way is severe, 1.5 high and 1.25 moderate. Trades, states, state and trade, districts, district and sector, and district and trade can be ranked for any year to 2030, within any filter.</p></article>
+        <article class="card"><h3 data-hi="सीट परिदृश्य">Seat scenarios</h3><p data-hi="किसी वर्ष से सीटों को एक प्रतिशत से गुणा करें और पहले और बाद का अनुपात और गंभीरता देखें, और लक्ष्य तक पहुँचने के लिए चाहिए सीटें। प्रमाणन दर और पूर्वानुमानित रिक्तियाँ जैसी हैं वैसी रहती हैं, और सीट स्वीकृत होने तथा प्रशिक्षु के प्रमाणित होने के बीच कोई देरी नहीं मानी गई है।">Multiply the seats by a percentage from a chosen year and see the ratio and the severity before and after, and the seats needed to reach a target. The certification rate and the forecast openings stay as they are, and no delay is modelled between sanctioning a seat and certifying a trainee.</p></article>
+        <article class="card"><h3 data-hi="चेतावनियाँ जो शुरू या खत्म होती हैं">Alerts that begin or end</h3><p data-hi="दिसंबर 2025 की वास्तविक तंगी की तुलना 12, 36 या 60 महीने के पूर्वानुमान से की जाती है, ताकि उन श्रृंखलाओं की सूची बने जो चेतावनी वाले छोर में प्रवेश करती हैं या उससे बाहर जाती हैं, और जिस पहले महीने वे उसमें होती हैं। चेतावनियाँ अधिकतर बनी रहती हैं: आज की लगभग आठ में से एक 12 महीने बाद अपने छोर से बाहर होती है, और लगभग उतनी ही अंदर आ जाती हैं।">The actual tightness of December 2025 is compared with the forecast at 12, 36 or 60 months, to list the series that enter or leave an alert tail and the first month they are in it. Alerts mostly persist: about one in eight of today's is out of its tail after 12 months, and about as many move in.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="evaluation">
     <div class="wrap">
       <div class="sec-head">
         <h2 data-hi="मॉडल मूल्यांकन की उपलब्धियाँ">Model evaluation achievements</h2>
-        <p data-hi="हर आँकड़ा परीक्षण अवधि, जनवरी 2023 से दिसंबर 2026, का है: ऐसे महीने जो मॉडल ने कभी नहीं देखे, और जिन्हें सबसे अच्छे सरल पूर्वानुमान के मुक़ाबले परखा गया। परीक्षण अवधि एक ही बार खोली गई।">Every figure comes from the test period, January 2023 to December 2026: months the model never saw, scored against the best simple forecast. The test period was opened once.</p>
+        <p data-hi="परीक्षण वर्ष 2015 से 2019 और झटके वाले वर्ष 2020 से 2025 हर एक को सेटिंग्स तय होने के बाद एक बार खोला गया और तीन सरल पूर्वानुमानों में सबसे अच्छे के सामने जाँचा गया। त्रुटियाँ एक से साठ महीने आगे पर औसत की गई हैं।">The test years 2015 to 2019 and the shock years 2020 to 2025 were each opened once, after the settings were fixed, and scored against the best of three simple forecasts. Errors are averaged over one to sixty months ahead.</p>
       </div>
       <div class="grid3">
-        <article class="card evidence"><b class="c-demand">29%</b><span data-hi="नियोजित कामगारों के लिए सर्वश्रेष्ठ सरल पूर्वानुमान की तुलना में सच के अधिक निकट।">closer to the truth than the best simple forecast for employed workers.</span><small data-hi="त्रुटि 1.75%, जबकि 2.46%; परियोजना की 2% की सीमा के भीतर।">Error of 1.75% against 2.46%, inside the project's 2% limit.</small></article>
-        <article class="card evidence"><b class="c-demand">15%</b><span data-hi="पंजीकृत नौकरी चाहने वालों के लिए आधार-रेखा की तुलना में अधिक निकट।">closer than the baseline for registered job seekers.</span><small data-hi="त्रुटि 5.69%, जबकि 6.69%; और दो नए सिम्युलेटेड डेटासेट पर लगभग 6.0%।">Error of 5.69% against 6.69%, and about 6.0% on two fresh simulated datasets.</small></article>
-        <article class="card evidence"><b class="c-demand">91%</b><span data-hi="नौकरी चाहने वालों के वास्तविक आँकड़े 90% दायरे के भीतर रहे।">of job seeker outcomes fell inside the 90% range.</span><small data-hi="नियोजित कामगारों में 93%, और रिक्तियों में बारह महीने आगे लगभग 90%।">Employed workers 93%, and vacancies about 90% twelve months ahead.</small></article>
-        <article class="card evidence"><b data-hi="280 में से 280" class="c-demand">280 of 280</b><span data-hi="श्रृंखलाओं का पूर्वानुमान, हर माप और आगे के हर महीने के लिए।">series forecast, for every measure and every month ahead.</span><small data-hi="कोई ज़िला, सेक्टर या महीना छोड़ा नहीं गया। दोबारा चलाने पर वही फ़ाइलें मिलती हैं।">No district, sector or month skipped. Rerunning gives identical files.</small></article>
-        <article class="card evidence"><b data-hi="कोई ओवरफ़िट नहीं" class="c-demand">No overfit</b><span data-hi="दो नए सिम्युलेटेड डेटासेट पर, जिन्हें मॉडल ने कभी नहीं देखा था।">on two fresh simulated datasets the models had never seen.</span><small data-hi="नियोजित कामगारों के लिए 1.73% और 1.68%, जबकि मूल परीक्षण में 1.75%, बिना दोबारा फ़िट किए या ट्यून किए।">Employed workers 1.73% and 1.68%, against 1.75% on the original test, with no refit or tuning.</small></article>
-        <article class="card evidence"><b class="c-demand">1.55&times;</b><span data-hi="नियोजित कामगारों के लिए सर्वश्रेष्ठ संभव त्रुटि का गुना।">the best possible error for employed workers.</span><small data-hi="1.75%, जबकि सर्वश्रेष्ठ संभव 1.13% है, यानी उस ऑरेकल की त्रुटि जो सिम्युलेटर को ठीक-ठीक जानता था।">1.75% against a floor of 1.13%, the error of an oracle that knew the simulator exactly.</small></article>
+        <article class="card evidence"><b class="c-demand">18%</b><span data-hi="नियोजित कामगारों के लिए सर्वश्रेष्ठ सरल पूर्वानुमान की तुलना में सच के अधिक निकट।">closer to the truth than the best simple forecast for employed workers.</span><small data-hi="त्रुटि 4.64%, आधार रेखा 5.65%, और हर अवधि पर बेहतर: पहले वर्ष में 4% और पाँचवें में 30%।">Error of 4.64% against 5.65%, and better at every horizon, by 4% in the first year and 30% in the fifth.</small></article>
+        <article class="card evidence"><b class="c-demand">8%</b><span data-hi="पंजीकृत नौकरी चाहने वालों के लिए आधार-रेखा की तुलना में अधिक निकट।">closer than the baseline for registered job seekers.</span><small data-hi="त्रुटि 16.15%, आधार रेखा 17.63%। पहले दो वर्षों में आधार रेखा से थोड़ी खराब, चौथे और पाँचवें वर्ष में 15 से 23% बेहतर।">Error of 16.15% against 17.63%. Slightly worse than the baseline in the first two years, 15 to 23% better in years four and five.</small></article>
+        <article class="card evidence"><b class="c-demand">87%</b><span data-hi="नियोजित कामगारों के नतीजे सामान्य 90% दायरे के भीतर रहे।">of employed-worker outcomes fell inside the usual 90% range.</span><small data-hi="रिक्तियाँ 85% और नौकरी चाहने वाले 64%: चाहने वालों का दायरा बहुत संकरा है, इसीलिए विस्तृत दायरा भी दिखाया जाता है।">Job vacancies 85% and job seekers 64%: the range for seekers is too narrow, which is why the wider range is shown too.</small></article>
+        <article class="card evidence"><b class="c-demand">72%</b><span data-hi="कमी की चेतावनियाँ वास्तव में शीर्ष दसवें हिस्से में थीं, संयोग से 7 गुना बेहतर।">of shortage alerts really were in the top tenth, 7 times better than chance.</span><small data-hi="अधिक आपूर्ति की चेतावनियाँ 71%। परीक्षण वर्षों में, एक से बारह महीने आगे। आज की तंगी से ही, बिना किसी पूर्वानुमान के, चिह्नित करने पर 71% कमी की चेतावनियाँ सही निकलती हैं, इसलिए इसका अधिकांश हिस्सा इस बात से आता है कि तंगी बनी रहती है।">Oversupply alerts 71%. One to twelve months ahead, on the test years. Flagging from today's tightness alone, with no forecast, gets 71% of shortage alerts right, so most of this is tightness persisting.</small></article>
+        <article class="card evidence"><b data-hi="झटके वाले वर्ष" class="c-demand">Shock years</b><span data-hi="का पूर्वानुमान नहीं था, और साइट यह कहती है।">were not foreseen, and the site says so.</span><small data-hi="2020 से 2025 में नियोजित कामगारों के लिए मॉडल आधार रेखा से फिर भी 14% करीब थे, पर पंजीकृत नौकरी चाहने वालों की उछाल का पूर्वानुमान 41% कम रहा।">In 2020 to 2025 employed workers were still 14% closer than the baseline, but the models under-forecast the jump in registered job seekers by 41%.</small></article>
+        <article class="card evidence"><b data-hi="संयोग नहीं" class="c-demand">Not luck</b><span data-hi="दो नए सिम्युलेटेड डेटासेट पर, जिन्हें मॉडल ने कभी नहीं देखा था।">on two fresh simulated datasets the models had never seen.</span><small data-hi="नियोजित कामगार 4.61% और 4.60%, जबकि आधार रेखा 5.61% और 5.55%, बिना दोबारा फ़िट या ट्यूनिंग के।">Employed workers 4.61% and 4.60%, against 5.61% and 5.55% for the baseline, with no refit or tuning.</small></article>
       </div>
       <div class="table-wrap spec">
         <table class="files res">
-          <thead><tr><th data-hi="माप">Measure</th><th data-hi="हमारा पूर्वानुमान">Our forecast</th><th data-hi="सबसे अच्छा सरल पूर्वानुमान">Best simple forecast</th><th data-hi="सर्वश्रेष्ठ संभव">Best possible</th><th data-hi="आधार-रेखा से कितना निकट">Closer than baseline</th><th data-hi="विश्वसनीयता-चिह्न">Confidence label</th></tr></thead>
+          <thead><tr><th data-hi="माप">Measure</th><th data-hi="हमारा पूर्वानुमान">Our forecast</th><th data-hi="सबसे अच्छा सरल पूर्वानुमान">Best simple forecast</th><th data-hi="आधार-रेखा से कितना निकट">Closer than baseline</th><th data-hi="औसत झुकाव">Average bias</th><th data-hi="विश्वसनीयता-चिह्न">Confidence label</th></tr></thead>
           <tbody>
-            <tr><td data-hi="नियोजित कामगार">Employed workers</td><td>1.75%</td><td>2.46%</td><td>1.13%</td><td>29%</td><td data-hi="उच्च">High</td></tr>
-            <tr><td data-hi="पंजीकृत नौकरी चाहने वाले">Registered job seekers</td><td>5.69%</td><td>6.69%</td><td>4.73%</td><td>15%</td><td data-hi="मध्यम">Medium</td></tr>
-            <tr><td data-hi="रिक्तियाँ">Job vacancies</td><td>9.16%</td><td>9.44%</td><td>6.74%</td><td>3%</td><td data-hi="निम्न">Low</td></tr>
+            <tr><td data-hi="नियोजित कामगार">Employed workers</td><td>4.64%</td><td>5.65%</td><td>17.8%</td><td>+2.3%</td><td data-hi="अधिकतर उच्च">Mostly high</td></tr>
+            <tr><td data-hi="पंजीकृत नौकरी चाहने वाले">Registered job seekers</td><td>16.15%</td><td>17.63%</td><td>8.4%</td><td>&minus;14.8%</td><td data-hi="अधिकतर मध्यम">Mostly medium</td></tr>
+            <tr><td data-hi="रिक्तियाँ">Job vacancies</td><td>13.14%</td><td>13.61%</td><td>3.5%</td><td>+5.8%</td><td data-hi="मध्यम या निम्न">Medium or low</td></tr>
           </tbody>
         </table>
       </div>
-      <p data-hi="एक से बारह महीने आगे की औसत चूक (WAPE, जितनी कम उतनी बेहतर)। नौकरी चाहने वालों के लिए वह रूप लिया गया है जो सरल आधार-रेखा के साथ मिलाया गया है। सर्वश्रेष्ठ संभव त्रुटि एक ऐसी सीमा है जिसे इस सिम्युलेटेड डेटा पर कोई भी पूर्वानुमान नहीं हरा सकता। रिक्तियाँ आधार-रेखा से बहुत कम बेहतर हैं, इसलिए उन पर निम्न विश्वसनीयता का चिह्न है।" class="note" style="margin-top:14px">Average miss (WAPE, lower is better) over one to twelve months ahead. Job seekers use the version blended with the simple baseline. The best possible error is a floor that no forecast can beat on this simulated data. Job vacancies add little over the baseline, so they carry a low confidence label.</p>
+      <p data-hi="परीक्षण वर्षों 2015-2019 पर औसत चूक (WAPE, जितना कम उतना अच्छा), एक से साठ महीने आगे। झुकाव औसत अधिक या कम पूर्वानुमान है। रिक्तियाँ आधार रेखा पर कम ही जोड़ती हैं और पाँचवें वर्ष में उससे थोड़ी खराब हैं, इसलिए उन्हें सबसे निचले लेबल मिलते हैं। परीक्षण वर्ष जानबूझकर शांत हैं; झटके वाले वर्ष अलग बताए गए हैं और नौकरी चाहने वालों के लिए मॉडल वहाँ आधार रेखा से बेहतर नहीं हैं।" class="note" style="margin-top:14px">Average miss (WAPE, lower is better) on the test years 2015 to 2019, one to sixty months ahead. Bias is the average over- or under-forecast. Job vacancies add little over the baseline and are slightly worse than it in the fifth year, so they carry the lowest labels. The test years are calm by design; the shock years are reported separately and the models do not beat the baseline there for job seekers.</p>
+    </div>
+  </section>
+
+  <section class="section alt" id="limits">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 data-hi="ध्यान में रखने योग्य बातें">What to keep in mind</h2>
+        <p data-hi="सीमाएँ साफ़ शब्दों में, ताकि संख्याओं को वैसे ही पढ़ा जाए जैसी वे हैं। इनके पीछे के निर्णय &lt;a class=&quot;ulink&quot; href=&quot;docs/methodology.html#real-data&quot;&gt;कार्यप्रणाली&lt;/a&gt; पृष्ठ पर हैं।">Limits stated plainly, so that the numbers are read as they deserve. The judgements behind them are on the <a class="ulink" href="docs/methodology.html#real-data">Methodology</a> page.</p>
+      </div>
+      <div class="grid3">
+        <article class="card"><h3 data-hi="डेटा सिम्युलेटेड है">The data is simulated</h3><p data-hi="यह आधिकारिक आँकड़ों जैसा व्यवहार करता है पर किसी वास्तविक ज़िले का वर्णन नहीं करता, इसलिए कोई भी संख्या आधिकारिक आँकड़ा नहीं है।">It behaves like official statistics but describes no real district, so no figure is an official statistic.</p></article>
+        <article class="card"><h3 data-hi="कुल योगों के लिए विस्तृत दायरा चाहिए">Totals need the wider range</h3><p data-hi="पास की श्रृंखलाओं की त्रुटियाँ साथ-साथ चलती हैं, इसलिए किसी राज्य या भारत के लिए सामान्य दायरा शांत वर्षों में दस में केवल छह बार सही रहा और झटके वाले वर्षों में लगभग कभी नहीं। कुल योगों के साथ विस्तृत दायरा भी दिखाया जाता है।">Errors of neighbouring series move together, so the usual range for a state or for India held only about six times in ten in calm years and almost never in the shock years. Totals show the wider range as well.</p></article>
+        <article class="card"><h3 data-hi="सीटें स्थिर मानी गई हैं">Seats are held flat</h3><p data-hi="क्षमता अंतर 2030 तक हर वर्ष के लिए आज की सीटें मानता है, जब तक आप सीट परिदृश्य से कोई और संख्या न आज़माएँ, और इसे खाली स्थानों की गिनती के बजाय इस क्रम के रूप में पढ़ना बेहतर है कि क्षमता कहाँ तनी हुई है।">The capacity gap assumes today's seats for every year to 2030 unless you test another number with a seat scenario, and reads best as a ranking of where capacity is stretched rather than a count of unfilled places.</p></article>
+        <article class="card"><h3 data-hi="लंबी अवधि ढीली है">Long horizons are looser</h3><p data-hi="दो वर्ष से आगे के पूर्वानुमान 2020 से पहले ज़िलों के व्यवहार पर टिके हैं, और नौकरी चाहने वालों के पूर्वानुमान सबसे कम भरोसेमंद हैं। पाँचवें वर्ष को आँकड़ा नहीं, दिशा समझें।">Forecasts beyond two years rest on how districts behaved before 2020, and seeker forecasts are the least reliable. Treat the fifth year as a direction, not a figure.</p></article>
+        <article class="card"><h3 data-hi="कुछ दृश्यों के लिए दायरे नहीं हैं">Ranges for some views are missing</h3><p data-hi="किसी राज्य में एक ट्रेड जैसे संयोजनों के लिए कोई जाँचा हुआ दायरा नहीं है, इसलिए केवल पूर्वानुमान ही खींचा जाता है और डैशबोर्ड यह बताता है।">For combinations such as one trade across a state, no checked range exists, so only the forecast itself is drawn and the dashboard says so.</p></article>
+        <article class="card"><h3 data-hi="झटकों का पूर्वानुमान नहीं हो सकता">Shocks cannot be forecast</h3><p data-hi="कोई महामारी या नया पंजीकरण अभियान उस पैटर्न को तोड़ देगा जो मॉडलों ने सीखा है। विस्तृत दायरा उसका कुछ हिस्सा ही समेटता है, पूरा नहीं।">A pandemic or a new registration drive would break the pattern the models learned. The wide range allows for some of it, not all.</p></article>
+      </div>
     </div>
   </section>
 </main>
@@ -232,23 +171,23 @@ h.dataset.motion=(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <h4 data-hi="परिचय">About</h4>
+        <h2 data-hi="परिचय" class="foot-h">About</h2>
         <p data-hi="कौशल को जोड़ना। भविष्य का पूर्वानुमान।" class="foot-tag">Bridging Skills. Forecasting Futures.</p>
         <p data-hi="कौशल विकास एवं उद्यमिता मंत्रालय के लिए एआई-आधारित श्रम बाज़ार संबंधी जानकारी और कौशल की माँग-आपूर्ति के पूर्वानुमान का इंजन।">An AI-enabled labour market intelligence and skill demand-supply forecasting engine for the Ministry of Skill Development and Entrepreneurship.</p>
         <p data-hi="इस साइट के सभी आँकड़े प्रदर्शन के लिए सिम्युलेटेड हैं। ये आधिकारिक सांख्यिकी नहीं हैं।">All figures on this site are simulated for demonstration. They are not official statistics.</p>
       </div>
-      <div><h4 data-hi="पृष्ठ">Pages</h4><ul><li><a data-hi="मुख्य पृष्ठ" href="index.html">Home</a></li><li><a data-hi="परिचय" href="about.html">About</a></li><li><a data-hi="संसाधन" href="resources.html">Resources</a></li><li><a data-hi="डैशबोर्ड" href="dashboard/index.html">Dashboard</a></li></ul></div>
-      <div><h4 data-hi="डेटा">Data</h4><ul><li><a data-hi="डेटा के स्रोत" href="resources.html#datasets">Data sources</a></li><li><a data-hi="डेटासेट का ब्यौरा" href="about.html#dataset">Dataset details</a></li><li><a data-hi="मॉडल का मूल्यांकन" href="about.html#evaluation">Model evaluation</a></li></ul></div>
-      <div><h4 data-hi="संपर्क">Contact</h4><p><a href="mailto:feedback@lmis-demo.example" translate="no">feedback@lmis-demo.example</a></p><p data-hi="कोई लॉगिन नहीं। यह साइट कोई कुकी नहीं लगाती और कोई एनालिटिक्स नहीं चलाती। आपके प्रदर्शन संबंधी चुनाव आपके अपने उपकरण में ही रहते हैं।">No login. This site sets no cookies and has no analytics. Your display choices stay on your device.</p></div>
+      <div><h2 data-hi="पृष्ठ" class="foot-h">Pages</h2><ul><li><a data-hi="मुख्य पृष्ठ" href="index.html">Home</a></li><li><a data-hi="परिचय" href="about.html">About</a></li><li><a data-hi="कार्यप्रणाली" href="docs/methodology.html">Methodology</a></li><li><a data-hi="संसाधन" href="resources.html">Resources</a></li><li><a data-hi="डैशबोर्ड" href="dashboard/index.html">Dashboard</a></li></ul></div>
+      <div><h2 data-hi="डेटा" class="foot-h">Data</h2><ul><li><a data-hi="डेटा के स्रोत" href="resources.html#datasets">Data sources</a></li><li><a data-hi="डेटासेट का ब्यौरा" href="resources.html#dataset">Dataset details</a></li><li><a data-hi="मॉडल का मूल्यांकन" href="about.html#evaluation">Model evaluation</a></li><li><a data-hi="पूर्वानुमान API" href="docs/api.html">Forecast API</a></li></ul></div>
+      <div><h2 data-hi="संपर्क" class="foot-h">Contact</h2><p><a href="mailto:feedback@lmis-demo.example" translate="no">feedback@lmis-demo.example</a></p><p data-hi="कोई लॉगिन नहीं। यह साइट कोई कुकी नहीं लगाती और कोई एनालिटिक्स नहीं चलाती। आपके प्रदर्शन संबंधी चुनाव आपके अपने उपकरण में ही रहते हैं।">No login. This site sets no cookies and has no analytics. Your display choices stay on your device.</p></div>
     </div>
-    <div data-hi="पूर्वानुमान &lt;span data-fill=&quot;meta.first_target&quot;&gt;November 2026&lt;/span&gt; से &lt;span data-fill=&quot;meta.last_target&quot;&gt;October 2027&lt;/span&gt; तक, &lt;span data-fill=&quot;meta.origin_label&quot;&gt;October 2026&lt;/span&gt; तक के डेटा से बनाया गया।" class="legal">Forecast for <span data-fill="meta.first_target">November 2026</span> to <span data-fill="meta.last_target">October 2027</span>, made from data up to <span data-fill="meta.origin_label">October 2026</span>.</div>
+    <div data-hi="पूर्वानुमान &lt;span data-fill=&quot;meta.first_target&quot;&gt;January 2026&lt;/span&gt; से &lt;span data-fill=&quot;meta.last_target&quot;&gt;December 2030&lt;/span&gt; तक, &lt;span data-fill=&quot;meta.origin_label&quot;&gt;December 2025&lt;/span&gt; तक के डेटा से बनाया गया।" class="legal">Forecast for <span data-fill="meta.first_target">January 2026</span> to <span data-fill="meta.last_target">December 2030</span>, made from data up to <span data-fill="meta.origin_label">December 2025</span>.</div>
   </div>
 </footer>
 <button data-hi-aria="ऊपर जाएँ" class="to-top" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 <div class="tip" id="tip" role="status" aria-live="polite" hidden></div>
-<script src="assets/i18n-hi.js?v=4fc83cf7"></script>
-<script src="data/site_data.js?v=a57a3df9"></script>
-<script src="assets/site.js?v=dcb14fa0"></script>
-<script src="assets/chat.js?v=be241a8d"></script>
+<script src="assets/i18n-hi.js?v=13e4538c"></script>
+<script src="data/site_data.js?v=da7a97e1"></script>
+<script src="assets/site.js?v=60f24518"></script>
+<script src="assets/chat.js?v=a4a46252"></script>
 </body>
 </html>

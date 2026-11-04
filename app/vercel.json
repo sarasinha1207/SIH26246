@@ -3,6 +3,34 @@
   "functions": {
     "api/chat.py": {
       "maxDuration": 30
+    },
+    "api/forecast.py": {
+      "maxDuration": 10,
+      "includeFiles": "{dashboard/data/**,api/_v4api.py}"
+    },
+    "api/flags.py": {
+      "maxDuration": 10,
+      "includeFiles": "{dashboard/data/**,api/_v4api.py}"
+    },
+    "api/demand-index.py": {
+      "maxDuration": 10,
+      "includeFiles": "{dashboard/data/**,api/_v4api.py}"
+    },
+    "api/capacity-gap.py": {
+      "maxDuration": 10,
+      "includeFiles": "{dashboard/data/**,api/_v4api.py}"
+    },
+    "api/meta.py": {
+      "maxDuration": 10,
+      "includeFiles": "{dashboard/data/**,api/_v4api.py}"
+    },
+    "api/severity.py": {
+      "maxDuration": 10,
+      "includeFiles": "{dashboard/data/**,api/_v4api.py}"
+    },
+    "api/scenario.py": {
+      "maxDuration": 10,
+      "includeFiles": "{dashboard/data/**,api/_v4api.py}"
     }
   },
   "headers": [

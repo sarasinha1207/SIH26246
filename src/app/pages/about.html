@@ -1,21 +1,12 @@
-
 <main id="main">
   <section class="page-head big" id="project">
     <div class="grid-bg" aria-hidden="true"></div>
     <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
     <div class="wrap">
-      <div class="split rev hero-split">
-        <div class="lead">
-          <h1>About the project</h1>
-          <p>KaushalSetu is an AI-enabled labour market intelligence and skill demand-supply forecasting engine for the Ministry of Skill Development and Entrepreneurship (MSDE).</p>
-          <p>India trains lakhs of candidates every year, but training capacity is often out of step with what employers need in a district and sector. Planners usually find out only after placement results arrive. This project forecasts employment, job vacancies and registered job seekers for every district and sector, twelve months ahead, with a range and a confidence label on every number, so that seats, camps and centres can be planned before a mismatch appears.</p>
-          <p>The figures on this site are <strong>simulated</strong> to behave like official statistics. They show how the method works, not what is happening in any real district.</p>
-        </div>
-        <div class="grid1">
-          <article class="card"><h3>Forecasts</h3><p>Twelve months ahead for 280 district and sector series, refreshed every month.</p></article>
-          <article class="card"><h3>Honest ranges</h3><p>A 90% range, a simple baseline and a confidence label beside every forecast.</p></article>
-          <article class="card"><h3>Early warnings</h3><p>Districts are ranked within their sector, and the tightest and loosest tenth are flagged.</p></article>
-        </div>
+      <div class="lead">
+        <h1>About the project</h1>
+        <p>KaushalSetu is an AI-enabled labour market intelligence and skill demand-supply forecasting engine for the Ministry of Skill Development and Entrepreneurship (MSDE).</p>
+        <p>It forecasts employment, job vacancies and registered job seekers for every district and trade, five years ahead, with a range and a confidence label on every number, and sets the forecast openings against the training seats on offer, so that seats, camps and attention can go where they are needed.</p>
       </div>
     </div>
   </section>
@@ -24,98 +15,20 @@
     <div class="wrap">
       <div class="sec-head">
         <h2>How it works</h2>
-        <p>One monthly cycle, from raw counts to published forecasts.</p>
+        <p>From raw counts to published forecasts.</p>
       </div>
       <div class="tl-scroll">
         <div class="timeline">
           <div class="tl-line" aria-hidden="true"><i class="tl-fill"></i></div>
           <ol class="tl-steps">
-            <li style="--i:0"><span class="tl-dot">1</span><span class="tl-when">From January 2011</span><h3>Collect</h3><p>Monthly counts of employed workers, vacancies and registered job seekers, for 280 district and sector series.</p></li>
-            <li style="--i:1"><span class="tl-dot">2</span><span class="tl-when">Before any use</span><h3>Check</h3><p>Counts are audited for gaps and errors. Shock periods such as COVID and the e-Shram launch are marked so they cannot mislead the model.</p></li>
-            <li style="--i:2"><span class="tl-dot">3</span><span class="tl-when">2011 to early 2022</span><h3>Learn</h3><p>The model learns recent movement, sector trends and seasonal patterns, using only what was known at each forecast date.</p></li>
-            <li style="--i:3"><span class="tl-dot">4</span><span class="tl-when">2023 to 2026</span><h3>Test</h3><p>It is scored on months it has never seen, against simple forecasts that need no model.</p></li>
-            <li style="--i:4"><span class="tl-dot">5</span><span class="tl-when">Next 12 months</span><h3>Forecast</h3><p>Each series is forecast one to twelve months ahead, with a 90% range and a confidence label.</p></li>
-            <li style="--i:5"><span class="tl-dot">6</span><span class="tl-when">Every month</span><h3>Flag and refresh</h3><p>Districts are ranked and flagged, the files are published, and the cycle repeats with the newest month.</p></li>
+            <li style="--i:0"><span class="tl-dot">1</span><span class="tl-when">From January 2000</span><h3>Collect</h3><p>Monthly counts of employed workers, vacancies and registered job seekers, for 7,925 district and trade series.</p></li>
+            <li style="--i:1"><span class="tl-dot">2</span><span class="tl-when">Before any use</span><h3>Check</h3><p>Counts are audited for gaps and errors, and the five trades of a sector are made to add up to the sector. Shock periods such as COVID and the e-Shram launch are marked so they cannot mislead the model.</p></li>
+            <li style="--i:2"><span class="tl-dot">3</span><span class="tl-when">2000 to 2009</span><h3>Learn</h3><p>The model learns recent movement, trends and seasonal patterns, using only what was known at each forecast date. Settings are tuned on 2010 to 2014.</p></li>
+            <li style="--i:3"><span class="tl-dot">4</span><span class="tl-when">2015 to 2025</span><h3>Test</h3><p>It is scored once on 2015 to 2019, then once on the shock years 2020 to 2025, against simple forecasts that need no model.</p></li>
+            <li style="--i:4"><span class="tl-dot">5</span><span class="tl-when">Next 60 months</span><h3>Forecast</h3><p>Each series is forecast one to sixty months ahead, with two 90% ranges and a confidence label.</p></li>
+            <li style="--i:5"><span class="tl-dot">6</span><span class="tl-when">For every forecast month</span><h3>Index, flag and compare</h3><p>The Demand Index and the capacity gap are computed, districts are ranked and flagged, and the files are published with checksums.</p></li>
           </ol>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="dataset">
-    <div class="wrap">
-      <div class="sec-head">
-        <h2>Dataset used</h2>
-        <p>One monthly panel with a row for every district, sector and month. It is simulated to behave like official statistics; where each part came from is listed on the <a class="ulink" href="resources.html#datasets">Resources</a> page.</p>
-      </div>
-      <div class="stats-grid four">
-        <div class="fact"><b>53,760</b><span>rows, one per district, sector and month</span></div>
-        <div class="fact"><b>41</b><span>columns, from identity to demographics</span></div>
-        <div class="fact"><b>192</b><span>months, January 2011 to December 2026</span></div>
-        <div class="fact"><b>280</b><span>series: 56 districts and five sectors</span></div>
-      </div>
-
-      <h3 class="blk">States</h3>
-      <div class="table-wrap">
-        <table class="files res">
-          <thead><tr><th>State</th><th>Districts forecast</th><th>Districts in the data</th></tr></thead>
-          <tbody>
-            <tr><td>Maharashtra</td><td>36 of 36</td><td>All 36, from Mumbai City and Pune to Nagpur and Gadchiroli.</td></tr>
-            <tr><td>Delhi</td><td>11 of 11</td><td>All 11, from New Delhi and Central Delhi to Shahdara.</td></tr>
-            <tr><td>West Bengal</td><td>5 of 23</td><td>Kolkata, North 24 Parganas, South 24 Parganas, Howrah and Hooghly.</td></tr>
-            <tr><td>Tamil Nadu</td><td>4 of 38</td><td>Chennai, Tiruvallur, Kanchipuram and Chengalpattu.</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3 class="blk">Sectors</h3>
-      <div class="table-wrap">
-        <table class="files res">
-          <thead><tr><th>Sector</th><th>Industry divisions (NIC)</th><th>Anchor occupation (NCO-2015)</th></tr></thead>
-          <tbody>
-            <tr><td>Manufacturing</td><td>Divisions 10 to 12 and 15 to 33</td><td>Metal working machine tool setters and operators</td></tr>
-            <tr><td>Construction</td><td>Divisions 41 to 43</td><td>House builders</td></tr>
-            <tr><td>IT-ITeS</td><td>Divisions 62 and 63</td><td>System analysts</td></tr>
-            <tr><td>Healthcare</td><td>Division 86</td><td>Generalist medical practitioners</td></tr>
-            <tr><td>Textiles and Apparel</td><td>Divisions 13 and 14</td><td>Sewing machine operators</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3 class="blk">Columns</h3>
-      <div class="table-wrap">
-        <table class="files res">
-          <thead><tr><th>Group</th><th>Columns</th><th>What they hold</th></tr></thead>
-          <tbody>
-            <tr><td>Place</td><td translate="no"><code>State_Name</code>, <code>State_LGD_Code</code>, <code>District_Name</code>, <code>District_LGD_Code</code></td><td>The state and district, with their official Local Government Directory codes.</td></tr>
-            <tr><td>Time</td><td translate="no"><code>Timestamp</code>, <code>Timestamp_Month</code>, <code>Timestamp_Quarter</code>, <code>Year</code>, <code>Month</code></td><td>The month of each row, from January 2011 to December 2026.</td></tr>
-            <tr><td>Sector</td><td translate="no"><code>Sector_Name</code>, <code>NIC_Code</code>, <code>NCO_Code</code>, <code>NSQF_Level</code></td><td>The sector, its industry divisions, its anchor occupation code and the qualification levels.</td></tr>
-            <tr><td>What is forecast</td><td translate="no"><code>Total_Employed_Workers</code>, <code>Active_Job_Vacancies</code>, <code>eShram_Registered_Seekers</code></td><td>People in work, open jobs, and people registered as seeking work.</td></tr>
-            <tr><td>Economy</td><td translate="no"><code>Avg_Monthly_Wage_INR</code>, <code>Unemployment_Rate_Pct</code>, <code>District_Total_Population_Est</code></td><td>Average wage in rupees, the unemployment rate and the district's population.</td></tr>
-            <tr><td>Training</td><td translate="no"><code>Training_Seats_Sanctioned</code>, <code>Trainees_Certified_Monthly</code></td><td>Formal training capacity and the number of people certified each month.</td></tr>
-            <tr><td>Who works</td><td translate="no"><code>Male_</code>, <code>Female_</code> and <code>Transgender_Employed_Count</code>, age and education counts and their shares</td><td>Employed workers split by gender, age group (15 to 24, 25 to 54, 55 and over) and education, from below primary to graduate and above.</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <section class="section alt" id="principles">
-    <div class="wrap">
-      <div class="sec-head">
-        <h2>Model engine overview and core principles</h2>
-        <p>The engine is built to be believed only as far as it has earned. It forecasts three measures for every district and sector, and it is judged against simple baselines on months it has never seen. These principles shape every choice.</p>
-      </div>
-      <div class="grid3">
-        <article class="card"><h3>Never peek at the future</h3><p>Every feature uses data available at the forecast date. A test cuts the data at the forecast month, rebuilds the features and checks they are unchanged.</p></article>
-        <article class="card"><h3>Judge on unseen months</h3><p>Validation and testing are split by calendar time. The final test period was opened once, and nothing was changed afterwards.</p></article>
-        <article class="card"><h3>Compare with something simple</h3><p>A baseline forecast sits beside every number, so anyone can see how much the model adds, and where it adds little.</p></article>
-        <article class="card"><h3>Show the doubt</h3><p>Every forecast carries a 90% range and a confidence label, high, medium or low, earned in testing.</p></article>
-        <article class="card"><h3>Judge districts against peers</h3><p>Flags are relative to the same sector in the same month, and each carries an absolute reading of whether openings really exceed seekers.</p></article>
-        <article class="card"><h3>Say where it is weak</h3><p>Vacancy forecasts and early-warning flags add little over the baseline, so both are marked low confidence.</p></article>
-        <article class="card"><h3>Be reproducible</h3><p>Fixed random seeds, recorded settings and file checksums mean a rerun gives identical forecasts.</p></article>
-        <article class="card"><h3>Stay current</h3><p>Each month adds the newest data, refits the declared settings and scores earlier forecasts against what happened.</p></article>
-        <article class="card"><h3>Keep the data honest</h3><p>The data is simulated, and every page says so. Results show how the method works, not how it would work on real statistics.</p></article>
       </div>
     </div>
   </section>
@@ -124,58 +37,84 @@
     <div class="wrap">
       <div class="sec-head">
         <h2>Machine learning engine and architecture</h2>
-        <p>Six stages turn the monthly panel into forecasts. Each stage reads only what the stage before it produced.</p>
-      </div>
-      <div class="arch">
-        <article class="card"><span class="arch-n">1</span><h3>Data</h3><p>A monthly panel of 280 series: employed workers, vacancies and registered job seekers, with wages, unemployment, training seats and demographics.</p></article>
-        <article class="card"><span class="arch-n">2</span><h3>Features</h3><p>Recent movement, level against the recent average, seasonal patterns, vacancy-to-seeker ratios, sector trends and calendar, all built only from data up to the forecast month.</p></article>
-        <article class="card"><span class="arch-n">3</span><h3>Models</h3><p>XGBoost, a gradient-boosted tree method. One model per measure forecasts the change from a recent level for every horizon from 1 to 12 months, averaged over five random starts.</p></article>
-        <article class="card"><span class="arch-n">4</span><h3>Blend</h3><p>Where earlier validation showed it helps, the forecast is blended with a simple baseline, last value plus the usual seasonal shift.</p></article>
-        <article class="card"><span class="arch-n">5</span><h3>Ranges</h3><p>Every forecast gets a 90% range, fixed from validation errors for employed workers and vacancies, and adaptive for job seekers, following recent errors.</p></article>
-        <article class="card"><span class="arch-n">6</span><h3>Flags and files</h3><p>Districts are ranked within their sector and flagged. The forecast, range, baseline, confidence label and flag files are written for every series.</p></article>
+        <p>One model for each of the three measures, judged against simple forecasts on years it never saw. It is built to be believed only as far as it has earned, and every input uses only what was known at the forecast date.</p>
       </div>
       <div class="table-wrap spec">
         <table class="files">
           <thead><tr><th>Part</th><th>What it is</th></tr></thead>
           <tbody>
-            <tr><td>Algorithm</td><td>XGBoost histogram trees. Three measures, five random starts each: 15 models per run.</td></tr>
-            <tr><td>Features</td><td>Each model uses only the features that earned their place in testing: 36 for employed workers, 29 for vacancies and 68 for job seekers, chosen from 77 candidates.</td></tr>
-            <tr><td>Training and testing</td><td>Trained on January 2011 to February 2022, tuned on March to December 2022, tested once on January 2023 to December 2026. The split is by calendar time, never random.</td></tr>
-            <tr><td>Tuning</td><td>A TPE search (Optuna) over learning rate, tree size, penalties and sampling, scored on rolling-origin folds inside the training years. A new setting replaced the old only if it was clearly better.</td></tr>
+            <tr><td>Algorithm</td><td>XGBoost histogram trees. Three measures, three random starts each: nine models in the final fit. Each forecasts the change in the log of the level, with the number of months ahead as an input, for every horizon from 1 to 60.</td></tr>
+            <tr><td>Inputs</td><td>82 inputs, chosen from 119 candidates by testing on the validation years: recent movement, level against the recent average, volatility, vacancy and seeker rates, training and wage ratios and the demand channels. Dropping the inputs that identify a single district or sector cut the validation error for employed workers from 10.9% to 4.5%, because they let the trees memorise the period instead of the series. A test cuts the data at the forecast month, rebuilds the inputs and checks they are unchanged.</td></tr>
+            <tr><td>Tuning</td><td>A TPE search (Optuna), 20 trials per measure, over learning rate, tree size, penalties and sampling, scored on the validation years only. The number of trees for each twelve-month band of horizons is chosen there too.</td></tr>
             <tr><td>Error measure</td><td>WAPE, the total size of the misses divided by the total size of the actual values. Lower is better.</td></tr>
-            <tr><td>Monthly refresh</td><td>The declared settings are refitted on all history up to the newest month, with nothing re-tuned.</td></tr>
-            <tr><td>Output per run</td><td>10,080 forecast rows (280 series, 3 measures, 12 horizons) and 3,360 flag rows. Rerunning gives identical files, and every file carries a checksum.</td></tr>
+            <tr><td>Final fit</td><td>The declared settings are refitted on all data to December 2025, with nothing re-tuned. The training pairs that reach into the 2020 to 2023 shock and recovery are left out, so the forecasts do not repeat that jump as if it were a normal month.</td></tr>
+            <tr><td>Reconcile</td><td>The five trades of a district and sector are made to add up exactly to the sector forecast, so totals at every level agree.</td></tr>
+            <tr><td>Ranges</td><td>Every forecast gets two 90% ranges, set from past errors for the same horizon: a usual one from 2010 to 2019 and a wider one that also uses the shock years. How they are set is on the <a class="ulink" href="docs/methodology.html#doubt">Methodology</a> page.</td></tr>
           </tbody>
         </table>
       </div>
     </div>
   </section>
 
-  <section class="section alt" id="evaluation">
+  <section class="section alt" id="measures">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Demand Index, capacity gap, severity and early warnings</h2>
+        <p>Six readings built on the forecasts, each defined in a few lines so that it can be checked. The Demand Index is built step by step, with a worked example, on the <a class="ulink" href="docs/methodology.html">Methodology</a> page, and every number is served by the <a class="ulink" href="docs/api.html">read-only API</a>.</p>
+      </div>
+      <div class="grid3">
+        <article class="card"><h3>Demand Index</h3><p>A number from 0 to 100 for a district and trade in a month. It compares openings per worker, from vacancies, job-portal postings and the National Career Service, with the other districts of the same trade, and moves over the years with the trade's national level. 50 is the median district at the 2018 to 2019 level.</p></article>
+        <article class="card"><h3>Capacity gap</h3><p>Forecast openings for each year against the training seats sanctioned in 2025 to 2026, held flat, and the trainees expected to be certified, which is the seats times the 2023 to 2025 certification rate. Seats fall short where a district's share of seats is under 0.6 times its share of openings in the trade, and exceed demand above 1.65 times.</p></article>
+        <article class="card"><h3>Early warnings</h3><p>In each trade and month, districts are ranked by forecast vacancies per registered seeker. The top tenth is a shortage alert and the bottom tenth an oversupply alert; the next fifteen per cent either side is a watch. The flag is relative: it says which districts stand out, not that openings exceed seekers.</p></article>
+        <article class="card"><h3>Severity ranking</h3><p>Score = the natural log of the trainees expected to be certified in a year divided by the average monthly openings. Below zero is undersupply and above zero oversupply; a ratio of 2 or more either way is severe, 1.5 high and 1.25 moderate. Trades, states, state and trade, districts, district and sector, and district and trade can be ranked for any year to 2030, within any filter.</p></article>
+        <article class="card"><h3>Seat scenarios</h3><p>Multiply the seats by a percentage from a chosen year and see the ratio and the severity before and after, and the seats needed to reach a target. The certification rate and the forecast openings stay as they are, and no delay is modelled between sanctioning a seat and certifying a trainee.</p></article>
+        <article class="card"><h3>Alerts that begin or end</h3><p>The actual tightness of December 2025 is compared with the forecast at 12, 36 or 60 months, to list the series that enter or leave an alert tail and the first month they are in it. Alerts mostly persist: about one in eight of today's is out of its tail after 12 months, and about as many move in.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="evaluation">
     <div class="wrap">
       <div class="sec-head">
         <h2>Model evaluation achievements</h2>
-        <p>Every figure comes from the test period, January 2023 to December 2026: months the model never saw, scored against the best simple forecast. The test period was opened once.</p>
+        <p>The test years 2015 to 2019 and the shock years 2020 to 2025 were each opened once, after the settings were fixed, and scored against the best of three simple forecasts. Errors are averaged over one to sixty months ahead.</p>
       </div>
       <div class="grid3">
-        <article class="card evidence"><b class="c-demand">29%</b><span>closer to the truth than the best simple forecast for employed workers.</span><small>Error of 1.75% against 2.46%, inside the project's 2% limit.</small></article>
-        <article class="card evidence"><b class="c-demand">15%</b><span>closer than the baseline for registered job seekers.</span><small>Error of 5.69% against 6.69%, and about 6.0% on two fresh simulated datasets.</small></article>
-        <article class="card evidence"><b class="c-demand">91%</b><span>of job seeker outcomes fell inside the 90% range.</span><small>Employed workers 93%, and vacancies about 90% twelve months ahead.</small></article>
-        <article class="card evidence"><b class="c-demand">280 of 280</b><span>series forecast, for every measure and every month ahead.</span><small>No district, sector or month skipped. Rerunning gives identical files.</small></article>
-        <article class="card evidence"><b class="c-demand">No overfit</b><span>on two fresh simulated datasets the models had never seen.</span><small>Employed workers 1.73% and 1.68%, against 1.75% on the original test, with no refit or tuning.</small></article>
-        <article class="card evidence"><b class="c-demand">1.55&times;</b><span>the best possible error for employed workers.</span><small>1.75% against a floor of 1.13%, the error of an oracle that knew the simulator exactly.</small></article>
+        <article class="card evidence"><b class="c-demand">18%</b><span>closer to the truth than the best simple forecast for employed workers.</span><small>Error of 4.64% against 5.65%, and better at every horizon, by 4% in the first year and 30% in the fifth.</small></article>
+        <article class="card evidence"><b class="c-demand">8%</b><span>closer than the baseline for registered job seekers.</span><small>Error of 16.15% against 17.63%. Slightly worse than the baseline in the first two years, 15 to 23% better in years four and five.</small></article>
+        <article class="card evidence"><b class="c-demand">87%</b><span>of employed-worker outcomes fell inside the usual 90% range.</span><small>Job vacancies 85% and job seekers 64%: the range for seekers is too narrow, which is why the wider range is shown too.</small></article>
+        <article class="card evidence"><b class="c-demand">72%</b><span>of shortage alerts really were in the top tenth, 7 times better than chance.</span><small>Oversupply alerts 71%. One to twelve months ahead, on the test years. Flagging from today's tightness alone, with no forecast, gets 71% of shortage alerts right, so most of this is tightness persisting.</small></article>
+        <article class="card evidence"><b class="c-demand">Shock years</b><span>were not foreseen, and the site says so.</span><small>In 2020 to 2025 employed workers were still 14% closer than the baseline, but the models under-forecast the jump in registered job seekers by 41%.</small></article>
+        <article class="card evidence"><b class="c-demand">Not luck</b><span>on two fresh simulated datasets the models had never seen.</span><small>Employed workers 4.61% and 4.60%, against 5.61% and 5.55% for the baseline, with no refit or tuning.</small></article>
       </div>
       <div class="table-wrap spec">
         <table class="files res">
-          <thead><tr><th>Measure</th><th>Our forecast</th><th>Best simple forecast</th><th>Best possible</th><th>Closer than baseline</th><th>Confidence label</th></tr></thead>
+          <thead><tr><th>Measure</th><th>Our forecast</th><th>Best simple forecast</th><th>Closer than baseline</th><th>Average bias</th><th>Confidence label</th></tr></thead>
           <tbody>
-            <tr><td>Employed workers</td><td>1.75%</td><td>2.46%</td><td>1.13%</td><td>29%</td><td>High</td></tr>
-            <tr><td>Registered job seekers</td><td>5.69%</td><td>6.69%</td><td>4.73%</td><td>15%</td><td>Medium</td></tr>
-            <tr><td>Job vacancies</td><td>9.16%</td><td>9.44%</td><td>6.74%</td><td>3%</td><td>Low</td></tr>
+            <tr><td>Employed workers</td><td>4.64%</td><td>5.65%</td><td>17.8%</td><td>+2.3%</td><td>Mostly high</td></tr>
+            <tr><td>Registered job seekers</td><td>16.15%</td><td>17.63%</td><td>8.4%</td><td>&minus;14.8%</td><td>Mostly medium</td></tr>
+            <tr><td>Job vacancies</td><td>13.14%</td><td>13.61%</td><td>3.5%</td><td>+5.8%</td><td>Medium or low</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="note" style="margin-top:14px">Average miss (WAPE, lower is better) over one to twelve months ahead. Job seekers use the version blended with the simple baseline. The best possible error is a floor that no forecast can beat on this simulated data. Job vacancies add little over the baseline, so they carry a low confidence label.</p>
+      <p class="note" style="margin-top:14px">Average miss (WAPE, lower is better) on the test years 2015 to 2019, one to sixty months ahead. Bias is the average over- or under-forecast. Job vacancies add little over the baseline and are slightly worse than it in the fifth year, so they carry the lowest labels. The test years are calm by design; the shock years are reported separately and the models do not beat the baseline there for job seekers.</p>
+    </div>
+  </section>
+
+  <section class="section alt" id="limits">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>What to keep in mind</h2>
+        <p>Limits stated plainly, so that the numbers are read as they deserve. The judgements behind them are on the <a class="ulink" href="docs/methodology.html#real-data">Methodology</a> page.</p>
+      </div>
+      <div class="grid3">
+        <article class="card"><h3>The data is simulated</h3><p>It behaves like official statistics but describes no real district, so no figure is an official statistic.</p></article>
+        <article class="card"><h3>Totals need the wider range</h3><p>Errors of neighbouring series move together, so the usual range for a state or for India held only about six times in ten in calm years and almost never in the shock years. Totals show the wider range as well.</p></article>
+        <article class="card"><h3>Seats are held flat</h3><p>The capacity gap assumes today's seats for every year to 2030 unless you test another number with a seat scenario, and reads best as a ranking of where capacity is stretched rather than a count of unfilled places.</p></article>
+        <article class="card"><h3>Long horizons are looser</h3><p>Forecasts beyond two years rest on how districts behaved before 2020, and seeker forecasts are the least reliable. Treat the fifth year as a direction, not a figure.</p></article>
+        <article class="card"><h3>Ranges for some views are missing</h3><p>For combinations such as one trade across a state, no checked range exists, so only the forecast itself is drawn and the dashboard says so.</p></article>
+        <article class="card"><h3>Shocks cannot be forecast</h3><p>A pandemic or a new registration drive would break the pattern the models learned. The wide range allows for some of it, not all.</p></article>
+      </div>
     </div>
   </section>
 </main>

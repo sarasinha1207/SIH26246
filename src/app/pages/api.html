@@ -1,0 +1,129 @@
+<main id="main">
+  <section class="page-head big" id="top">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="wrap">
+      <h1>Forecast API</h1>
+      <p class="lead">The same numbers as the dashboard, as plain JSON.</p>
+      <div class="hero-text">
+        <p>The API is read-only and open: no key and no login. It serves the 2026 to 2030 forecasts, the early-warning alerts, the Demand Index, the capacity gap, the severity ranking and seat scenarios, with the same filters as the dashboard: state, district, sector and trade.</p>
+        <p>Every response says that the data is <strong>simulated</strong> and not an official statistic.</p>
+      </div>
+      <ul class="hero-chips">
+        <li><b>7</b><span>endpoints</span></li>
+        <li><b>4</b><span>filters</span></li>
+        <li><b>60</b><span>months ahead</span></li>
+        <li><b>60</b><span>requests a minute</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="endpoints">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Endpoints</h2>
+        <p>All are GET requests on this site and return JSON. Add the filters to the address, for example <code translate="no">/api/forecast?state=Kerala&amp;sector=Healthcare</code>.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="files res">
+          <thead><tr><th>Address</th><th>What it returns</th><th>Parameters</th><th>Try it</th></tr></thead>
+          <tbody>
+            <tr><td translate="no"><code>/api/forecast</code></td><td>Forecast of employed workers, job vacancies and registered job seekers: a point forecast with a usual and a wide 90% range for each horizon.</td><td translate="no"><code>state</code>, <code>district</code>, <code>sector</code>, <code>trade</code>, <code>measure</code>, <code>horizon</code>, <code>detail</code>, <code>limit</code>, <code>offset</code></td><td><a class="ulink" href="{P}api/forecast?state=Kerala&amp;sector=Healthcare&amp;measure=E&amp;horizon=12,60">Kerala, Healthcare</a></td></tr>
+            <tr><td translate="no"><code>/api/flags</code></td><td>Early-warning alerts 12, 36 or 60 months ahead, or the flag of every month for one district and trade.</td><td translate="no"><code>state</code>, <code>district</code>, <code>sector</code>, <code>trade</code>, <code>horizon</code>, <code>type</code>, <code>change</code>, <code>months</code>, <code>limit</code>, <code>offset</code></td><td><a class="ulink" href="{P}api/flags?state=Kerala&amp;horizon=12&amp;limit=5">Kerala, 12 months</a></td></tr>
+            <tr><td translate="no"><code>/api/demand-index</code></td><td>The Demand Index from 0 to 100, from 2016 to 2030 (December values, or every month).</td><td translate="no"><code>state</code>, <code>district</code>, <code>sector</code>, <code>trade</code>, <code>from</code>, <code>to</code>, <code>resolution</code></td><td><a class="ulink" href="{P}api/demand-index?state=Kerala&amp;sector=Healthcare">Kerala, Healthcare</a></td></tr>
+            <tr><td translate="no"><code>/api/capacity-gap</code></td><td>Forecast openings against training seats and expected certified trainees, by year.</td><td translate="no"><code>state</code>, <code>district</code>, <code>sector</code>, <code>trade</code>, <code>year</code></td><td><a class="ulink" href="{P}api/capacity-gap?sector=Construction">Construction</a></td></tr>
+            <tr><td translate="no"><code>/api/severity</code></td><td>Trades and places ranked by how far trained supply is from the openings: a score, a band (severe, high, moderate, balanced) and the direction (undersupply or oversupply).</td><td translate="no"><code>state</code>, <code>district</code>, <code>sector</code>, <code>trade</code>, <code>level</code>, <code>year</code>, <code>order</code>, <code>limit</code>, <code>offset</code></td><td><a class="ulink" href="{P}api/severity?level=trade&amp;order=under&amp;limit=5">Most undersupplied trades</a></td></tr>
+            <tr><td translate="no"><code>/api/scenario</code></td><td>A seat scenario: seats multiplied from a year on, with the ratio, the severity band and the seats needed to reach a target, row by row and in total.</td><td translate="no"><code>state</code>, <code>district</code>, <code>sector</code>, <code>trade</code>, <code>level</code>, <code>year</code>, <code>seat_change</code>, <code>from_year</code>, <code>target</code>, <code>order</code>, <code>limit</code>, <code>offset</code></td><td><a class="ulink" href="{P}api/scenario?level=trade&amp;seat_change=50&amp;from_year=2027&amp;limit=5">Seats up 50% from 2027</a></td></tr>
+            <tr><td translate="no"><code>/api/meta</code></td><td>The valid states, districts (with LGD codes), sectors and trades, the forecast origin and the checksums of the files behind the numbers.</td><td>None.</td><td><a class="ulink" href="{P}api/meta">Lists and checksums</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="parameters">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Parameters</h2>
+        <p>Values are checked against the lists in <code translate="no">/api/meta</code>; unknown or repeated parameters are refused with a clear message.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="files res">
+          <thead><tr><th>Parameter</th><th>Values</th></tr></thead>
+          <tbody>
+            <tr><td translate="no"><code>state</code></td><td>One of the ten state names, for example Kerala. Not case sensitive.</td></tr>
+            <tr><td translate="no"><code>district</code></td><td>The official LGD code, for example 118 for Agra, or the district name. A district fixes the state.</td></tr>
+            <tr><td translate="no"><code>sector</code></td><td>One of the five sectors, for example IT-ITeS.</td></tr>
+            <tr><td translate="no"><code>trade</code></td><td>A trade code such as HLT-2221 (nursing professionals) or its full name. A trade fixes the sector.</td></tr>
+            <tr><td translate="no"><code>measure</code></td><td><code>E</code> (employed workers), <code>V</code> (job vacancies), <code>S</code> (registered job seekers), several separated by commas, or <code>all</code> (the default).</td></tr>
+            <tr><td translate="no"><code>horizon</code></td><td>Months ahead from 1 to 60, several separated by commas, or <code>all</code>. The default is 12, 36 and 60. For flags: 12, 36 or 60.</td></tr>
+            <tr><td translate="no"><code>detail</code></td><td><code>aggregate</code> (the default: one total for the filters) or <code>series</code> (every district and trade series, with <code>limit</code> up to 200 and <code>offset</code>).</td></tr>
+            <tr><td translate="no"><code>seat_change</code>, <code>from_year</code>, <code>target</code></td><td>For the scenario: <code>seat_change</code> is a percentage from -90 to 500 applied to the seats from <code>from_year</code> on (default 0), and <code>target</code> is the certified per opening to plan for (0.2 to 5, default 1). The certification rate and the forecast openings are unchanged; <code>order</code> may also be <code>needed</code>.</td></tr>
+            <tr><td translate="no"><code>level</code>, <code>order</code>, <code>year</code></td><td>For severity: <code>level</code> is <code>trade</code> (the default), <code>state</code>, <code>state_trade</code>, <code>district</code>, <code>district_sector</code> or <code>series</code> (needs a state or a district); <code>order</code> is <code>under</code> (most undersupplied first, the default), <code>over</code> or <code>severity</code> (largest gap either way); <code>year</code> is one year from 2026 to 2030 (the default is 2030). For the capacity gap, <code>year</code> may be several years.</td></tr>
+            <tr><td translate="no"><code>type</code></td><td>For flags: <code>shortage</code>, <code>oversupply</code> or <code>all</code>.</td></tr>
+            <tr><td translate="no"><code>change</code></td><td>For flags: <code>entering</code> or <code>leaving</code> lists the series that enter or leave an alert tail between now (December 2025, actual) and the <code>horizon</code> of 12, 36 or 60 months, with the percentile now and then and the first month in the tail.</td></tr>
+            <tr><td translate="no"><code>from</code>, <code>to</code>, <code>resolution</code></td><td>For the Demand Index: months like 2026-12, and <code>annual</code> (December of each year, the default) or <code>monthly</code>.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="example">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Example</h2>
+        <p>Employed workers in Kerala's healthcare sector, 12 and 60 months ahead. A range shown as a pair of numbers is the lower and the upper end.</p>
+      </div>
+      <pre class="codeblock" tabindex="0" translate="no" aria-label="Example request and response"><code>GET /api/forecast?state=Kerala&amp;sector=Healthcare&amp;measure=E&amp;horizon=12,60
+
+{
+  "ok": true,
+  "data_simulated": true,
+  "forecast_origin": "2025-12",
+  "scope": { "state": "Kerala", "sector": "Healthcare", "district": null, "trade": null },
+  "level": "state_sector",
+  "last_observed": { "month": "2025-12", "employed_workers": 341477 },
+  "data": [
+    { "horizon": 12, "month": "2026-12",
+      "employed_workers": { "point": 355434, "usual_90": [331063, 359351], "wide_90": [333296, 389491] } },
+    { "horizon": 60, "month": "2030-12",
+      "employed_workers": { "point": 385297, "usual_90": [341202, 406679], "wide_90": [351674, 577815] } }
+  ]
+}</code></pre>
+    </div>
+  </section>
+
+  <section class="section alt" id="reading">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Reading the numbers</h2>
+      </div>
+      <div class="grid3">
+        <article class="card"><h3>Where there is no range</h3><p>Where no checked range exists, the field is null and a note says so. The limits of the forecasts themselves are on the <a class="ulink" href="{P}about.html#limits">About</a> page.</p></article>
+        <article class="card"><h3>Same data as the dashboard</h3><p>The API reads the files the dashboard loads, so a figure there and a figure here are the same figure, to the nearest person.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="limits">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Limits and errors</h2>
+      </div>
+      <div class="table-wrap">
+        <table class="files res">
+          <thead><tr><th>Status</th><th>When</th></tr></thead>
+          <tbody>
+            <tr><td translate="no"><code>200</code></td><td>The request was understood. The body has <code translate="no">"ok": true</code>.</td></tr>
+            <tr><td translate="no"><code>400</code></td><td>A parameter is unknown, repeated or has an invalid value; the message says which.</td></tr>
+            <tr><td translate="no"><code>404</code></td><td>The filters are valid but match no series.</td></tr>
+            <tr><td translate="no"><code>405</code></td><td>The API accepts GET only.</td></tr>
+            <tr><td translate="no"><code>429</code></td><td>More than 60 requests a minute from one address, or the daily limit of the whole site. Wait a minute and try again.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note" style="margin-top:14px">Responses may be cached for up to an hour. The API sets no cookies, keeps no record of what you ask, and allows requests from any website, since the data is public and read-only.</p>
+    </div>
+  </section>
+</main>

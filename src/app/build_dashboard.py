@@ -146,14 +146,13 @@ def build_data():
 
 
 def shell():
-    """The page shell, with the stylesheet and scripts versioned by content so a changed file is never served stale."""
-    def ver(p):
-        return hashlib.sha1(p.read_bytes()).hexdigest()[:8]
-    html = (SRC / "dashboard" / "shell.html").read_text(encoding="utf-8").replace("{LOGO}", logo.inline())
-    for token, path in (("{CSS}", OUT / "dashboard.css"), ("{JS}", OUT / "dashboard.js"), ("{DATA}", OUT / "data" / "dash_data.js"), ("{MAP}", ROOT / "app" / "data" / "map_data.js"),
-                        ("{CHATCSS}", ROOT / "app" / "assets" / "chat.css"), ("{CHATJS}", ROOT / "app" / "assets" / "chat.js")):
-        html = html.replace(token, ver(path))
-    (OUT / "index.html").write_text(html, encoding="utf-8")
+    """The dashboard page shell is the v4 one (src/v4/dashboard_shell.html, built by src/v4/build_dashboard.py); this keeps serve.py's live rebuild pointing at it."""
+    import importlib.util
+    sys.path.insert(0, str(ROOT / "src" / "v4"))
+    spec = importlib.util.spec_from_file_location("build_dashboard_v4", ROOT / "src" / "v4" / "build_dashboard.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    mod.shell()
 
 
 def main():

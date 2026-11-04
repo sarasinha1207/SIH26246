@@ -1,0 +1,289 @@
+window,source,volume,band,flag,flagged,base_rate_decile,precision_decile,precision_quartile,lift_decile,recall_decile_alert_or_watch
+test,model,all,1-12,Shortage alert,91200,0.101,0.7237,0.9672,7.1623,0.9665
+test,model,all,1-12,Shortage watch,136800,0.101,0.1625,0.6897,1.6082,0.9665
+test,model,all,1-12,Oversupply watch,136800,0.098,0.1636,0.6897,1.6703,0.9621
+test,model,all,1-12,Oversupply alert,88350,0.098,0.7103,0.9618,7.2518,0.9621
+test,persistence,all,1-12,Shortage alert,91260,0.101,0.7066,0.9583,6.9931,0.9584
+test,persistence,all,1-12,Shortage watch,136619,0.101,0.1684,0.6743,1.6663,0.9584
+test,persistence,all,1-12,Oversupply watch,136575,0.098,0.1665,0.6744,1.7001,0.9518
+test,persistence,all,1-12,Oversupply alert,88461,0.098,0.6951,0.9514,7.0962,0.9518
+test,model,all,13-24,Shortage alert,72000,0.101,0.6474,0.9239,6.4091,0.9207
+test,model,all,13-24,Shortage watch,107999,0.101,0.1826,0.6192,1.8081,0.9207
+test,model,all,13-24,Oversupply watch,108000,0.0979,0.1866,0.6209,1.9051,0.9172
+test,model,all,13-24,Oversupply alert,69750,0.0979,0.6297,0.9191,6.4298,0.9172
+test,persistence,all,13-24,Shortage alert,72040,0.101,0.6097,0.8958,6.0362,0.8947
+test,persistence,all,13-24,Shortage watch,107859,0.101,0.1904,0.5912,1.8848,0.8947
+test,persistence,all,13-24,Oversupply watch,107777,0.0979,0.1877,0.5942,1.917,0.888
+test,persistence,all,13-24,Oversupply alert,69830,0.0979,0.5985,0.8919,6.1111,0.888
+test,model,all,25-36,Shortage alert,57600,0.101,0.6222,0.906,6.1595,0.9041
+test,model,all,25-36,Shortage watch,86400,0.101,0.1883,0.6024,1.8644,0.9041
+test,model,all,25-36,Oversupply watch,86400,0.098,0.1898,0.598,1.9378,0.8956
+test,model,all,25-36,Oversupply alert,55800,0.098,0.6032,0.8969,6.1575,0.8956
+test,persistence,all,25-36,Shortage alert,57641,0.101,0.5774,0.868,5.7158,0.8689
+test,persistence,all,25-36,Shortage watch,86284,0.101,0.1948,0.5716,1.928,0.8689
+test,persistence,all,25-36,Oversupply watch,86244,0.098,0.1935,0.572,1.9755,0.8594
+test,persistence,all,25-36,Oversupply alert,55842,0.098,0.5614,0.8572,5.7307,0.8594
+test,model,all,37-48,Shortage alert,57600,0.101,0.6186,0.9019,6.123,0.8947
+test,model,all,37-48,Shortage watch,86400,0.101,0.1845,0.5934,1.8268,0.8947
+test,model,all,37-48,Oversupply watch,86400,0.098,0.1914,0.5861,1.9532,0.8902
+test,model,all,37-48,Oversupply alert,55800,0.098,0.5957,0.8931,6.0786,0.8902
+test,persistence,all,37-48,Shortage alert,57644,0.101,0.5682,0.8592,5.6246,0.8558
+test,persistence,all,37-48,Shortage watch,86260,0.101,0.1922,0.5641,1.9022,0.8558
+test,persistence,all,37-48,Oversupply watch,86252,0.098,0.1923,0.5575,1.9626,0.8427
+test,persistence,all,37-48,Oversupply alert,55850,0.098,0.5466,0.8434,5.5782,0.8427
+test,model,all,49-60,Shortage alert,45600,0.1011,0.6225,0.9054,6.1591,0.904
+test,model,all,49-60,Shortage watch,68400,0.1011,0.1884,0.5979,1.8644,0.904
+test,model,all,49-60,Oversupply watch,68400,0.098,0.1863,0.5703,1.9009,0.8819
+test,model,all,49-60,Oversupply alert,44175,0.098,0.5953,0.8961,6.0752,0.8819
+test,persistence,all,49-60,Shortage alert,45643,0.1011,0.5704,0.8593,5.6432,0.862
+test,persistence,all,49-60,Shortage watch,68269,0.1011,0.1952,0.5635,1.931,0.862
+test,persistence,all,49-60,Oversupply watch,68261,0.098,0.1875,0.533,1.913,0.8303
+test,persistence,all,49-60,Oversupply alert,44273,0.098,0.5411,0.8466,5.5219,0.8303
+test,model,all,all horizons,Shortage alert,324000,0.101,0.6558,0.9264,6.4907,0.9237
+test,model,all,all horizons,Shortage watch,485999,0.101,0.1791,0.6285,1.7731,0.9237
+test,model,all,all horizons,Oversupply watch,486000,0.098,0.1815,0.6229,1.8528,0.9162
+test,model,all,all horizons,Oversupply alert,313875,0.098,0.6368,0.9193,6.5004,0.9162
+test,persistence,all,all horizons,Shortage alert,324228,0.101,0.6183,0.8968,6.1201,0.8965
+test,persistence,all,all horizons,Shortage watch,485291,0.101,0.186,0.6024,1.8406,0.8965
+test,persistence,all,all horizons,Oversupply watch,485109,0.098,0.1836,0.5977,1.8739,0.8847
+test,persistence,all,all horizons,Oversupply alert,314256,0.098,0.6018,0.8875,6.143,0.8847
+test,model,normal,1-12,Shortage alert,61088,0.1426,0.7292,0.9671,5.1142,0.9681
+test,model,normal,1-12,Shortage watch,79333,0.1426,0.1736,0.6917,1.2175,0.9681
+test,model,normal,1-12,Oversupply watch,47825,0.0623,0.1637,0.6711,2.6276,0.951
+test,model,normal,1-12,Oversupply alert,25569,0.0623,0.6726,0.9485,10.7991,0.951
+test,persistence,normal,1-12,Shortage alert,60238,0.1426,0.718,0.9595,5.036,0.9601
+test,persistence,normal,1-12,Shortage watch,78380,0.1426,0.1861,0.6866,1.305,0.9601
+test,persistence,normal,1-12,Oversupply watch,48790,0.0623,0.154,0.6397,2.4723,0.943
+test,persistence,normal,1-12,Oversupply alert,26342,0.0623,0.6567,0.9371,10.5444,0.943
+test,model,normal,13-24,Shortage alert,48574,0.1422,0.6542,0.927,4.5996,0.9235
+test,model,normal,13-24,Shortage watch,62806,0.1422,0.1916,0.6195,1.3471,0.9235
+test,model,normal,13-24,Oversupply watch,37435,0.0614,0.1854,0.6006,3.0187,0.8982
+test,model,normal,13-24,Oversupply alert,20272,0.0614,0.5653,0.8884,9.2041,0.8982
+test,persistence,normal,13-24,Shortage alert,48053,0.1422,0.6217,0.8993,4.3715,0.8969
+test,persistence,normal,13-24,Shortage watch,61768,0.1422,0.2051,0.6033,1.4424,0.8969
+test,persistence,normal,13-24,Oversupply watch,38006,0.0614,0.1706,0.5494,2.7771,0.8672
+test,persistence,normal,13-24,Oversupply alert,21416,0.0614,0.5268,0.8534,8.5771,0.8672
+test,model,normal,25-36,Shortage alert,39196,0.1413,0.6254,0.9073,4.427,0.9141
+test,model,normal,25-36,Shortage watch,50402,0.1413,0.1973,0.5996,1.3963,0.9141
+test,model,normal,25-36,Oversupply watch,29866,0.0608,0.1786,0.5674,2.9366,0.861
+test,model,normal,25-36,Oversupply alert,16097,0.0608,0.5365,0.861,8.8231,0.861
+test,persistence,normal,25-36,Shortage alert,38852,0.1413,0.5873,0.8731,4.1572,0.8798
+test,persistence,normal,25-36,Shortage watch,49350,0.1413,0.2096,0.5778,1.4839,0.8798
+test,persistence,normal,25-36,Oversupply watch,30159,0.0608,0.1684,0.5214,2.769,0.8259
+test,persistence,normal,25-36,Oversupply alert,17482,0.0608,0.4761,0.8016,7.8296,0.8259
+test,model,normal,37-48,Shortage alert,39291,0.1411,0.6182,0.9002,4.3797,0.9028
+test,model,normal,37-48,Shortage watch,50269,0.1411,0.1932,0.5926,1.3688,0.9028
+test,model,normal,37-48,Oversupply watch,30039,0.0599,0.1765,0.5526,2.9491,0.8439
+test,model,normal,37-48,Oversupply alert,15583,0.0599,0.5246,0.8524,8.7654,0.8439
+test,persistence,normal,37-48,Shortage alert,38956,0.1411,0.5756,0.861,4.0782,0.8652
+test,persistence,normal,37-48,Shortage watch,49094,0.1411,0.207,0.573,1.4667,0.8652
+test,persistence,normal,37-48,Oversupply watch,30571,0.0599,0.1612,0.498,2.6939,0.8058
+test,persistence,normal,37-48,Oversupply alert,17626,0.0599,0.4504,0.7777,7.5257,0.8058
+test,model,normal,49-60,Shortage alert,31160,0.1422,0.6232,0.8996,4.3816,0.9131
+test,model,normal,49-60,Shortage watch,39877,0.1422,0.201,0.5951,1.4132,0.9131
+test,model,normal,49-60,Oversupply watch,24156,0.0608,0.1755,0.5318,2.8889,0.8302
+test,model,normal,49-60,Oversupply alert,12040,0.0608,0.5328,0.8615,8.7691,0.8302
+test,persistence,normal,49-60,Shortage alert,30679,0.1422,0.5807,0.8561,4.0822,0.8701
+test,persistence,normal,49-60,Shortage watch,38534,0.1422,0.2162,0.5813,1.5198,0.8701
+test,persistence,normal,49-60,Oversupply watch,24256,0.0608,0.1512,0.4655,2.4888,0.7898
+test,persistence,normal,49-60,Oversupply alert,14040,0.0608,0.4608,0.7939,7.5832,0.7898
+test,model,normal,all horizons,Shortage alert,219309,0.142,0.6591,0.9259,4.6426,0.9293
+test,model,normal,all horizons,Shortage watch,282687,0.142,0.1892,0.628,1.3325,0.9293
+test,model,normal,all horizons,Oversupply watch,169321,0.0612,0.1751,0.5963,2.8614,0.8878
+test,model,normal,all horizons,Oversupply alert,89561,0.0612,0.5793,0.8908,9.4687,0.8878
+test,persistence,normal,all horizons,Shortage alert,216778,0.142,0.6282,0.8983,4.4251,0.9024
+test,persistence,normal,all horizons,Shortage watch,277126,0.142,0.2024,0.6139,1.4258,0.9024
+test,persistence,normal,all horizons,Oversupply watch,171782,0.0612,0.1611,0.5491,2.6328,0.8601
+test,persistence,normal,all horizons,Oversupply alert,96906,0.0612,0.5295,0.8444,8.6547,0.8601
+test,model,low,1-12,Shortage alert,30112,0.0646,0.7125,0.9674,11.0378,0.9635
+test,model,low,1-12,Shortage watch,57467,0.0646,0.1472,0.687,2.28,0.9635
+test,model,low,1-12,Oversupply watch,88975,0.1293,0.1636,0.6998,1.2653,0.9668
+test,model,low,1-12,Oversupply alert,62781,0.1293,0.7257,0.9673,5.6131,0.9668
+test,persistence,low,1-12,Shortage alert,31022,0.0646,0.6844,0.9559,10.6017,0.9549
+test,persistence,low,1-12,Shortage watch,58239,0.0646,0.1445,0.6579,2.2389,0.9549
+test,persistence,low,1-12,Oversupply watch,87785,0.1293,0.1735,0.6938,1.342,0.9556
+test,persistence,low,1-12,Oversupply alert,62119,0.1293,0.7114,0.9575,5.5022,0.9556
+test,model,low,13-24,Shortage alert,23426,0.0648,0.6334,0.9174,9.7722,0.9154
+test,model,low,13-24,Shortage watch,45193,0.0648,0.1702,0.6186,2.6258,0.9154
+test,model,low,13-24,Oversupply watch,70565,0.13,0.1872,0.6317,1.4398,0.9251
+test,model,low,13-24,Oversupply alert,49478,0.13,0.6561,0.9317,5.0463,0.9251
+test,persistence,low,13-24,Shortage alert,23987,0.0648,0.5858,0.8888,9.0369,0.8904
+test,persistence,low,13-24,Shortage watch,46091,0.0648,0.1706,0.575,2.6325,0.8904
+test,persistence,low,13-24,Oversupply watch,69771,0.13,0.1971,0.6186,1.516,0.8966
+test,persistence,low,13-24,Oversupply alert,48414,0.13,0.6302,0.909,4.8473,0.8966
+test,model,low,25-36,Shortage alert,18404,0.0657,0.6154,0.9032,9.373,0.8852
+test,model,low,25-36,Shortage watch,35998,0.0657,0.1758,0.6064,2.678,0.8852
+test,model,low,25-36,Oversupply watch,56534,0.1306,0.1958,0.6142,1.4991,0.9097
+test,model,low,25-36,Oversupply alert,39703,0.1306,0.6303,0.9115,4.8258,0.9097
+test,persistence,low,25-36,Shortage alert,18789,0.0657,0.5569,0.8576,8.4821,0.8485
+test,persistence,low,25-36,Shortage watch,36934,0.0657,0.1749,0.5633,2.6637,0.8485
+test,persistence,low,25-36,Oversupply watch,56085,0.1306,0.2071,0.5991,1.5854,0.8731
+test,persistence,low,25-36,Oversupply alert,38360,0.1306,0.6003,0.8825,4.5962,0.8731
+test,model,low,37-48,Shortage alert,18309,0.0658,0.6195,0.9056,9.4164,0.8795
+test,model,low,37-48,Shortage watch,36131,0.0658,0.1725,0.5946,2.6223,0.8795
+test,model,low,37-48,Oversupply watch,56361,0.1315,0.1993,0.604,1.5159,0.9087
+test,model,low,37-48,Oversupply alert,40217,0.1315,0.6232,0.9088,4.7392,0.9087
+test,persistence,low,37-48,Shortage alert,18688,0.0658,0.5529,0.8552,8.4039,0.838
+test,persistence,low,37-48,Shortage watch,37166,0.0658,0.1726,0.5523,2.6233,0.838
+test,persistence,low,37-48,Oversupply watch,55681,0.1315,0.2094,0.5901,1.5923,0.8574
+test,persistence,low,37-48,Oversupply alert,38224,0.1315,0.591,0.8737,4.4943,0.8574
+test,model,low,49-60,Shortage alert,14440,0.0649,0.6209,0.9181,9.5662,0.8866
+test,model,low,49-60,Shortage watch,28523,0.0649,0.1708,0.6018,2.6321,0.8866
+test,model,low,49-60,Oversupply watch,44244,0.1307,0.1921,0.5914,1.4701,0.9031
+test,model,low,49-60,Oversupply alert,32135,0.1307,0.6187,0.909,4.7342,0.9031
+test,persistence,low,49-60,Shortage alert,14964,0.0649,0.5493,0.8657,8.4621,0.8465
+test,persistence,low,49-60,Shortage watch,29735,0.0649,0.168,0.5403,2.5876,0.8465
+test,persistence,low,49-60,Oversupply watch,44005,0.1307,0.2074,0.5701,1.5871,0.8468
+test,persistence,low,49-60,Oversupply alert,30233,0.1307,0.5784,0.8711,4.4256,0.8468
+test,model,low,all horizons,Shortage alert,104691,0.0651,0.6488,0.9273,9.9703,0.9129
+test,model,low,all horizons,Shortage watch,203312,0.0651,0.1652,0.6291,2.5384,0.9129
+test,model,low,all horizons,Oversupply watch,316679,0.1303,0.185,0.6371,1.4197,0.928
+test,model,low,all horizons,Oversupply alert,224314,0.1303,0.6598,0.9307,5.0644,0.928
+test,persistence,low,all horizons,Shortage alert,107450,0.0651,0.5984,0.8937,9.1949,0.8853
+test,persistence,low,all horizons,Shortage watch,208165,0.0651,0.164,0.5871,2.5208,0.8853
+test,persistence,low,all horizons,Oversupply watch,313327,0.1303,0.1959,0.6243,1.5038,0.8948
+test,persistence,low,all horizons,Oversupply alert,217350,0.1303,0.634,0.9067,4.8668,0.8948
+stress,model,all,1-12,Shortage alert,110400,0.101,0.7186,0.9671,7.116,0.9642
+stress,model,all,1-12,Shortage watch,165600,0.101,0.164,0.6869,1.6235,0.9642
+stress,model,all,1-12,Oversupply watch,165600,0.0979,0.1647,0.6684,1.6822,0.9581
+stress,model,all,1-12,Oversupply alert,106950,0.0979,0.7041,0.9607,7.1924,0.9581
+stress,persistence,all,1-12,Shortage alert,110451,0.101,0.7021,0.9583,6.9521,0.9572
+stress,persistence,all,1-12,Shortage watch,165502,0.101,0.1702,0.6751,1.6855,0.9572
+stress,persistence,all,1-12,Oversupply watch,165312,0.0979,0.1689,0.659,1.7253,0.9499
+stress,persistence,all,1-12,Oversupply alert,107062,0.0979,0.6891,0.9501,7.039,0.9499
+stress,model,all,13-24,Shortage alert,91200,0.101,0.6376,0.9192,6.3127,0.9167
+stress,model,all,13-24,Shortage watch,136799,0.101,0.1864,0.609,1.8455,0.9167
+stress,model,all,13-24,Oversupply watch,136800,0.0979,0.1852,0.5905,1.893,0.902
+stress,model,all,13-24,Oversupply alert,88350,0.0979,0.6158,0.9084,6.2926,0.902
+stress,persistence,all,13-24,Shortage alert,91241,0.101,0.6114,0.8993,6.0534,0.8991
+stress,persistence,all,13-24,Shortage watch,136711,0.101,0.192,0.592,1.9014,0.8991
+stress,persistence,all,13-24,Oversupply watch,136573,0.0979,0.191,0.577,1.9515,0.883
+stress,persistence,all,13-24,Oversupply alert,88464,0.0979,0.5876,0.8844,6.0045,0.883
+stress,model,all,25-36,Shortage alert,72000,0.101,0.6064,0.8935,6.0053,0.8933
+stress,model,all,25-36,Shortage watch,108000,0.101,0.1914,0.5821,1.896,0.8933
+stress,model,all,25-36,Oversupply watch,108000,0.0978,0.1912,0.5658,1.9546,0.8739
+stress,model,all,25-36,Oversupply alert,69750,0.0978,0.5783,0.878,5.9102,0.8739
+stress,persistence,all,25-36,Shortage alert,72042,0.101,0.5755,0.8681,5.6997,0.8687
+stress,persistence,all,25-36,Shortage watch,107935,0.101,0.1955,0.5631,1.936,0.8687
+stress,persistence,all,25-36,Oversupply watch,107772,0.0978,0.193,0.5492,1.973,0.8488
+stress,persistence,all,25-36,Oversupply alert,69852,0.0978,0.5501,0.8495,5.6227,0.8488
+stress,model,all,37-48,Shortage alert,57600,0.101,0.5892,0.8827,5.8359,0.8817
+stress,model,all,37-48,Shortage watch,86400,0.101,0.1951,0.5727,1.932,0.8817
+stress,model,all,37-48,Oversupply watch,86400,0.0979,0.1975,0.5595,2.0182,0.8607
+stress,model,all,37-48,Oversupply alert,55800,0.0979,0.5555,0.8514,5.6766,0.8607
+stress,persistence,all,37-48,Shortage alert,57628,0.101,0.56,0.8554,5.5464,0.8578
+stress,persistence,all,37-48,Shortage watch,86359,0.101,0.1986,0.5562,1.9669,0.8578
+stress,persistence,all,37-48,Oversupply watch,86234,0.0979,0.1952,0.5412,1.9944,0.8337
+stress,persistence,all,37-48,Oversupply alert,55893,0.0979,0.5318,0.8277,5.4342,0.8337
+stress,model,all,49-60,Shortage alert,57601,0.101,0.5879,0.8833,5.8223,0.8793
+stress,model,all,49-60,Shortage watch,86398,0.101,0.1945,0.564,1.9257,0.8793
+stress,model,all,49-60,Oversupply watch,86400,0.0978,0.2064,0.5573,2.109,0.8514
+stress,model,all,49-60,Oversupply alert,55800,0.0978,0.5323,0.8366,5.4405,0.8514
+stress,persistence,all,49-60,Shortage alert,57614,0.101,0.5586,0.856,5.5319,0.8571
+stress,persistence,all,49-60,Shortage watch,86406,0.101,0.1991,0.5464,1.9717,0.8571
+stress,persistence,all,49-60,Oversupply watch,86124,0.0978,0.1995,0.5313,2.0394,0.8159
+stress,persistence,all,49-60,Oversupply alert,55930,0.0978,0.5072,0.8116,5.1833,0.8159
+stress,model,all,all horizons,Shortage alert,388801,0.101,0.6403,0.9173,6.3406,0.9151
+stress,model,all,all horizons,Shortage watch,583197,0.101,0.1834,0.6141,1.8165,0.9151
+stress,model,all,all horizons,Oversupply watch,583200,0.0979,0.1855,0.5985,1.8951,0.8991
+stress,model,all,all horizons,Oversupply alert,376650,0.0979,0.6126,0.8985,6.2599,0.8991
+stress,persistence,all,all horizons,Shortage alert,388976,0.101,0.6151,0.8974,6.0907,0.8976
+stress,persistence,all,all horizons,Shortage watch,582913,0.101,0.1885,0.5982,1.8666,0.8976
+stress,persistence,all,all horizons,Oversupply watch,582015,0.0979,0.187,0.583,1.9106,0.8784
+stress,persistence,all,all horizons,Oversupply alert,377201,0.0979,0.5893,0.8774,6.0213,0.8784
+stress,model,normal,1-12,Shortage alert,69614,0.1341,0.724,0.967,5.3979,0.9673
+stress,model,normal,1-12,Shortage watch,91909,0.1341,0.1736,0.6845,1.2939,0.9673
+stress,model,normal,1-12,Oversupply watch,63198,0.0688,0.1577,0.6488,2.2912,0.9451
+stress,model,normal,1-12,Oversupply alert,34205,0.0688,0.6812,0.9538,9.8974,0.9451
+stress,persistence,normal,1-12,Shortage alert,69171,0.1341,0.7106,0.9595,5.2981,0.9603
+stress,persistence,normal,1-12,Shortage watch,91683,0.1341,0.1824,0.6766,1.3599,0.9603
+stress,persistence,normal,1-12,Oversupply watch,63344,0.0688,0.1574,0.636,2.2871,0.9366
+stress,persistence,normal,1-12,Oversupply alert,34549,0.0688,0.6656,0.9429,9.671,0.9366
+stress,model,normal,13-24,Shortage alert,58394,0.1336,0.6402,0.9165,4.7901,0.9237
+stress,model,normal,13-24,Shortage watch,76716,0.1336,0.1926,0.598,1.4409,0.9237
+stress,model,normal,13-24,Oversupply watch,51555,0.0697,0.1832,0.5697,2.6263,0.8694
+stress,model,normal,13-24,Oversupply alert,27274,0.0697,0.5931,0.8919,8.5027,0.8694
+stress,persistence,normal,13-24,Shortage alert,57787,0.1336,0.6173,0.8973,4.6187,0.906
+stress,persistence,normal,13-24,Shortage watch,76202,0.1336,0.2032,0.5875,1.5204,0.906
+stress,persistence,normal,13-24,Oversupply watch,51834,0.0697,0.1816,0.5521,2.603,0.8505
+stress,persistence,normal,13-24,Oversupply alert,27888,0.0697,0.5612,0.8628,8.0461,0.8505
+stress,model,normal,25-36,Shortage alert,46780,0.132,0.6043,0.8875,4.5778,0.9038
+stress,model,normal,25-36,Shortage watch,60992,0.132,0.1889,0.5643,1.4312,0.9038
+stress,model,normal,25-36,Oversupply watch,40086,0.0719,0.1987,0.5538,2.7617,0.8212
+stress,model,normal,25-36,Oversupply alert,20687,0.0719,0.5675,0.8666,7.8889,0.8212
+stress,persistence,normal,25-36,Shortage alert,46323,0.132,0.5799,0.8652,4.3929,0.8811
+stress,persistence,normal,25-36,Shortage watch,60756,0.132,0.1964,0.5536,1.4875,0.8811
+stress,persistence,normal,25-36,Oversupply watch,40340,0.0719,0.1914,0.5297,2.6606,0.7894
+stress,persistence,normal,25-36,Oversupply alert,21160,0.0719,0.5302,0.8297,7.3703,0.7894
+stress,model,normal,37-48,Shortage alert,38158,0.1309,0.5804,0.873,4.4341,0.9001
+stress,model,normal,37-48,Shortage watch,49204,0.1309,0.1888,0.5501,1.4425,0.9001
+stress,model,normal,37-48,Oversupply watch,31483,0.0734,0.2108,0.5579,2.8709,0.7927
+stress,model,normal,37-48,Oversupply alert,15977,0.0734,0.5568,0.8456,7.5825,0.7927
+stress,persistence,normal,37-48,Shortage alert,37325,0.1309,0.5569,0.8487,4.2547,0.8754
+stress,persistence,normal,37-48,Shortage watch,48879,0.1309,0.2002,0.5457,1.5297,0.8754
+stress,persistence,normal,37-48,Oversupply watch,31827,0.0734,0.1965,0.5268,2.6764,0.7622
+stress,persistence,normal,37-48,Oversupply alert,16659,0.0734,0.521,0.8094,7.0947,0.7622
+stress,model,normal,49-60,Shortage alert,38504,0.1302,0.5797,0.8735,4.4521,0.9063
+stress,model,normal,49-60,Shortage watch,49992,0.1302,0.1834,0.5367,1.4084,0.9063
+stress,model,normal,49-60,Oversupply watch,30587,0.0729,0.2174,0.5544,2.9842,0.781
+stress,model,normal,49-60,Oversupply alert,15748,0.0729,0.5418,0.8413,7.4365,0.781
+stress,persistence,normal,49-60,Shortage alert,37552,0.1302,0.5583,0.8493,4.288,0.8821
+stress,persistence,normal,49-60,Shortage watch,49436,0.1302,0.1958,0.5323,1.5041,0.8821
+stress,persistence,normal,49-60,Oversupply watch,31254,0.0729,0.1967,0.5151,2.7005,0.7454
+stress,persistence,normal,49-60,Oversupply alert,16397,0.0729,0.5088,0.8061,6.9831,0.7454
+stress,model,normal,all horizons,Shortage alert,251450,0.1326,0.6384,0.9119,4.8157,0.9266
+stress,model,normal,all horizons,Shortage watch,328813,0.1326,0.1846,0.5994,1.3927,0.9266
+stress,model,normal,all horizons,Oversupply watch,216909,0.0709,0.1875,0.586,2.644,0.856
+stress,model,normal,all horizons,Oversupply alert,113891,0.0709,0.6027,0.8924,8.5011,0.856
+stress,persistence,normal,all horizons,Shortage alert,248158,0.1326,0.6183,0.8941,4.6644,0.9091
+stress,persistence,normal,all horizons,Shortage watch,326956,0.1326,0.1945,0.5916,1.4675,0.9091
+stress,persistence,normal,all horizons,Oversupply watch,218599,0.0709,0.1807,0.5633,2.5491,0.8332
+stress,persistence,normal,all horizons,Oversupply alert,116653,0.0709,0.5734,0.8649,8.0875,0.8332
+stress,model,low,1-12,Shortage alert,40786,0.0719,0.7094,0.9673,9.8702,0.9591
+stress,model,low,1-12,Shortage watch,73691,0.0719,0.152,0.6898,2.1147,0.9591
+stress,model,low,1-12,Oversupply watch,102402,0.1234,0.169,0.6805,1.3691,0.9644
+stress,model,low,1-12,Oversupply alert,72745,0.1234,0.7149,0.9639,5.7917,0.9644
+stress,persistence,low,1-12,Shortage alert,41280,0.0719,0.6877,0.9563,9.5684,0.952
+stress,persistence,low,1-12,Shortage watch,73819,0.0719,0.1551,0.6734,2.1576,0.952
+stress,persistence,low,1-12,Oversupply watch,101968,0.1234,0.176,0.6733,1.4262,0.9564
+stress,persistence,low,1-12,Oversupply alert,72513,0.1234,0.7003,0.9535,5.6734,0.9564
+stress,model,low,13-24,Shortage alert,32806,0.0723,0.6329,0.9242,8.7518,0.9053
+stress,model,low,13-24,Shortage watch,60083,0.0723,0.1785,0.6231,2.4683,0.9053
+stress,model,low,13-24,Oversupply watch,85245,0.1226,0.1865,0.603,1.5218,0.9183
+stress,model,low,13-24,Oversupply alert,61076,0.1226,0.6259,0.9158,5.1076,0.9183
+stress,persistence,low,13-24,Shortage alert,33454,0.0723,0.6012,0.9028,8.3132,0.8878
+stress,persistence,low,13-24,Shortage watch,60509,0.0723,0.178,0.5978,2.461,0.8878
+stress,persistence,low,13-24,Oversupply watch,84739,0.1226,0.1967,0.5922,1.6053,0.8992
+stress,persistence,low,13-24,Oversupply alert,60576,0.1226,0.5997,0.8943,4.8938,0.8992
+stress,model,low,25-36,Shortage alert,25220,0.0737,0.6102,0.9047,8.2783,0.8768
+stress,model,low,25-36,Shortage watch,47008,0.0737,0.1947,0.6052,2.6414,0.8768
+stress,model,low,25-36,Oversupply watch,67914,0.1206,0.1869,0.5729,1.5494,0.9016
+stress,model,low,25-36,Oversupply alert,49063,0.1206,0.5828,0.8828,4.8327,0.9016
+stress,persistence,low,25-36,Shortage alert,25719,0.0737,0.5676,0.8734,7.7005,0.8492
+stress,persistence,low,25-36,Shortage watch,47179,0.0737,0.1944,0.5754,2.6368,0.8492
+stress,persistence,low,25-36,Oversupply watch,67432,0.1206,0.194,0.5608,1.6089,0.8799
+stress,persistence,low,25-36,Oversupply alert,48692,0.1206,0.5588,0.8581,4.6337,0.8799
+stress,model,low,37-48,Shortage alert,19442,0.0747,0.6067,0.9017,8.1227,0.8533
+stress,model,low,37-48,Shortage watch,37196,0.0747,0.2034,0.6026,2.7227,0.8533
+stress,model,low,37-48,Oversupply watch,54917,0.1193,0.1899,0.5605,1.5913,0.8975
+stress,model,low,37-48,Oversupply alert,39823,0.1193,0.555,0.8537,4.6514,0.8975
+stress,persistence,low,37-48,Shortage alert,20303,0.0747,0.5658,0.8678,7.5752,0.8309
+stress,persistence,low,37-48,Shortage watch,37480,0.0747,0.1965,0.5699,2.6306,0.8309
+stress,persistence,low,37-48,Oversupply watch,54407,0.1193,0.1944,0.5496,1.629,0.8724
+stress,persistence,low,37-48,Oversupply alert,39234,0.1193,0.5364,0.8354,4.4954,0.8724
+stress,model,low,49-60,Shortage alert,19097,0.0753,0.6046,0.903,8.028,0.8384
+stress,model,low,49-60,Shortage watch,36406,0.0753,0.2097,0.6014,2.7841,0.8384
+stress,model,low,49-60,Oversupply watch,55813,0.1198,0.2003,0.559,1.672,0.889
+stress,model,low,49-60,Oversupply alert,40052,0.1198,0.5286,0.8347,4.4125,0.889
+stress,persistence,low,49-60,Shortage alert,20062,0.0753,0.5592,0.8685,7.4248,0.8192
+stress,persistence,low,49-60,Shortage watch,36970,0.0753,0.2035,0.5652,2.7018,0.8192
+stress,persistence,low,49-60,Oversupply watch,54870,0.1198,0.2011,0.5405,1.679,0.8535
+stress,persistence,low,49-60,Oversupply alert,39533,0.1198,0.5065,0.8139,4.2281,0.8535
+stress,model,low,all horizons,Shortage alert,137351,0.0732,0.6438,0.9273,8.7898,0.8969
+stress,model,low,all horizons,Shortage watch,254384,0.0732,0.1819,0.633,2.4836,0.8969
+stress,model,low,all horizons,Oversupply watch,366291,0.1216,0.1843,0.606,1.516,0.9212
+stress,model,low,all horizons,Oversupply alert,262759,0.1216,0.6169,0.9012,5.0754,0.9212
+stress,persistence,low,all horizons,Shortage alert,140818,0.0732,0.6093,0.9032,8.3191,0.8794
+stress,persistence,low,all horizons,Shortage watch,255957,0.0732,0.1808,0.6067,2.4682,0.8794
+stress,persistence,low,all horizons,Oversupply watch,363416,0.1216,0.1907,0.5949,1.5692,0.9016
+stress,persistence,low,all horizons,Oversupply alert,260548,0.1216,0.5964,0.883,4.9064,0.9016

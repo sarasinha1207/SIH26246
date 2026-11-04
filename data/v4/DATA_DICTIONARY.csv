@@ -1,0 +1,36 @@
+Table,Column,Type,Unit,Description
+trade_monthly,Series_ID,string,,District LGD code + trade code (for example 489-MFG-7223); one series per district and trade
+trade_monthly,Date,date,month,First day of the month; 2000-01 to 2025-12 (312 months)
+trade_monthly,Total_Employed_Workers,int32,persons,Employed workers in the trade (target E). Adds up to the sector count in the sector table
+trade_monthly,Active_Job_Vacancies,int32,openings,Open vacancies in the trade (target V)
+trade_monthly,eShram_Registered_Seekers,int32,persons,Registered job seekers in the trade (target S); the e-Shram ramp-up starts in August 2021
+trade_monthly,Training_Seats_Sanctioned,int32,seats,Annual training capacity sanctioned for the trade; a stock fixed for the financial year
+trade_monthly,Trainees_Certified_Monthly,int32,persons,Trainees certified in the month (can be 0)
+trade_monthly,Avg_Monthly_Wage_INR,int32,rupees,Average monthly wage
+trade_monthly,Unemployment_Rate_Pct,float32,percent,Unemployment rate of the district-sector (the same for the five trades of a sector)
+trade_monthly,District_Total_Population_Est,int32,persons,Projected district population (Census 2011 grown at the district rate)
+trade_monthly,Female_Share_Pct,float32,percent,Female share of the trade's workers
+trade_monthly,Edu_Graduate_and_Above_Pct,float32,percent,Share of workers who are graduates or above
+trade_monthly,Age_15_24_Pct,float32,percent,Share of workers aged 15 to 24
+trade_monthly,Sig_Portal_Postings,float32,postings,Source channel 1: job-portal postings; a share of all openings that rises with online hiring; leads the opening by a month
+trade_monthly,Sig_Hiring_Survey_Index,float32,index (2010-2019 = 100),Source channel 2: quarterly hiring survey; one reading per quarter held until the next; from 2009-01
+trade_monthly,Sig_NCS_Vacancies,float32,openings,Source channel 3: vacancies listed on the National Career Service portal; from 2015-07
+trade_monthly,Sig_Labour_Survey_Employment,float32,persons,Source channel 4: employment estimate from a labour-force survey (quarterly); noisier for small series; from 2017-07
+sector_monthly,District_LGD_Code,int32,,Official LGD district code
+sector_monthly,Sector_Name,string,,One of the five sectors
+sector_monthly,Date,date,month,As above
+sector_monthly,Total_Employed_Workers,int32,persons,District-sector count; the five trades add up to it exactly
+sector_monthly,Active_Job_Vacancies,int32,openings,As above
+sector_monthly,eShram_Registered_Seekers,int32,persons,As above
+sector_monthly,Training_Seats_Sanctioned,int32,seats,As above
+sector_monthly,Trainees_Certified_Monthly,int32,persons,As above
+dim_series,Series_ID,string,,Key of the trade table
+dim_series,District_LGD_Code,int,,Official LGD district code
+dim_series,District_Name,string,,Display name
+dim_series,State_Name,string,,One of the ten states
+dim_series,Econ_Tier,string,,One of 16 economic tiers of the district
+dim_series,Sector_Name,string,,One of the five sectors
+dim_series,Sector_Code,string,,MFG, CON, ITS, HLT or TXT
+dim_series,Trade_Code,string,,Sector code + NCO-2015 family code (for example MFG-7223)
+dim_series,NCO_Code,int,,NCO-2015 family code of the trade
+dim_series,Trade_Name,string,,NCO-2015 title of the trade
